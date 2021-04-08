@@ -1,34 +1,45 @@
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import * as React from 'react';
-import { ColorSchemeName } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { ImageProps } from 'react-native';
+import { BottomTabBarOptions, BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { BottomNavigation, BottomNavigationTab, Icon } from '@ui-kitten/components';
 
-import NotFoundScreen from '../screens/NotFoundScreen';
-import { RootStackParamList } from '../types';
-import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
+import { NotFoundScreen, Recipes, TabTwoScreen } from '../screens';
 
-// If you are not familiar with React Navigation, we recommend going through the
-// "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
-export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
-  return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <RootNavigator />
-    </NavigationContainer>
-  );
-}
+const { Navigator, Screen } = createBottomTabNavigator();
 
-// A root stack navigator is often used for displaying modals on top of all other content
-// Read more here: https://reactnavigation.org/docs/modal
-const Stack = createStackNavigator<RootStackParamList>();
+const RecipeGalleryIcon = (props?: Partial<ImageProps>) => <Icon {...props} name='home-outline' />;
+const AddRecipeIcon = (props?: Partial<ImageProps>) => <Icon {...props} name='plus-circle-outline' />;
+
+const BottomTabBar = ({ navigation, state }: BottomTabBarProps<BottomTabBarOptions>) => (
+  <BottomNavigation
+    selectedIndex={state.index}
+    onSelect={(index) => navigation.navigate(state.routeNames[index])}
+  >
+    <BottomNavigationTab title='Home' icon={RecipeGalleryIcon} />
+    <BottomNavigationTab title='Add Recipe' icon={AddRecipeIcon} />
+  </BottomNavigation>
+);
 
 function RootNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Root" component={BottomTabNavigator} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-    </Stack.Navigator>
+    <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
+      <Screen name="Root" component={Recipes} />
+      <Screen name="TabTwo" component={TabTwoScreen} />
+      <Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+    </Navigator>
+  );
+}
+
+// If you are not familiar with React Navigation, we recommend going through the
+// "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
+export default function Navigation() {
+  return (
+    <NavigationContainer
+      linking={LinkingConfiguration}
+    >
+      <RootNavigator />
+    </NavigationContainer>
   );
 }

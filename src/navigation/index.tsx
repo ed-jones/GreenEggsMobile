@@ -4,7 +4,6 @@ import { ImageProps } from 'react-native';
 import { BottomTabBarOptions, BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigation, BottomNavigationTab, Icon } from '@ui-kitten/components';
 
-import LinkingConfiguration from './LinkingConfiguration';
 import { NotFoundScreen, Recipes, TabTwoScreen } from '../screens';
 
 const { Navigator, Screen } = createBottomTabNavigator();
@@ -36,9 +35,7 @@ function RootNavigator() {
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
 export default function Navigation() {
   return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-    >
+    <NavigationContainer>
       <RootNavigator />
     </NavigationContainer>
   );

@@ -15,8 +15,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
-console.log(process.env.API_URI);
-
 export default function App() {
   const isLoadingComplete = useCachedResources();
 

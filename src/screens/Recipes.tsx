@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { RefreshControl, ScrollView, StyleSheet } from 'react-native';
 import {
   Card, List, Text, Layout, TopNavigation, Spinner,
 } from '@ui-kitten/components';
-import { gql, useQuery } from '@apollo/client';
+import { gql, NetworkStatus, useQuery } from '@apollo/client';
+import { GetRecipes_allRecipes } from '../types/graphql'
 
 import { GET_RECIPES } from '../graphql/queries';
 
@@ -16,15 +17,15 @@ const styles = StyleSheet.create({
   },
 });
 
-const RecipeCard = ({ item }: { item: any; index: number; }) => (
+const RecipeCard = ({ recipe }: { recipe: GetRecipes_allRecipes }) => (
   <Card style={styles.card}>
-    <Text category="h1">{item.title}</Text>
-    <Text>{item.description}</Text>
+    <Text category="h1">{recipe.title}</Text>
+    <Text>{recipe.description}</Text>
   </Card>
 );
 
 export default function Recipes() {
-  const { loading, error, data } = useQuery(GET_RECIPES);
+  const { loading, error, data, refetch, networkStatus } = useQuery(GET_RECIPES);
 
   if (loading) return <Spinner />;
   if (error) return <Text>`Error! ${error.message}`</Text>;
@@ -34,9 +35,9 @@ export default function Recipes() {
       <TopNavigation
         title='Recipes'
       />
-      <Layout>
-        <List data={data.allRecipes} renderItem={RecipeCard} />
-      </Layout>
+      <ScrollView refreshControl={<RefreshControl refreshing={loading} onRefresh={refetch} />}>
+        {data.allRecipes.map((recipe: GetRecipes_allRecipes) => <RecipeCard key={recipe.title} recipe={recipe}/>)}
+      </ScrollView>
     </>
   );
 }

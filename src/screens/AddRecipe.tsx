@@ -1,19 +1,8 @@
 import React, { useState } from 'react';
 import { TopNavigation, Input, Button } from '@ui-kitten/components';
-import { StyleSheet } from 'react-native';
-
 import { gql, useMutation } from '@apollo/client';
 
-const ADD_RECIPE = gql`
-  mutation addRecipe($recipe: AddRecipeInput!) {
-    addRecipe(recipe: $recipe) {
-      data {
-        title
-        description
-      }
-    }
-  }
-`;
+import { ADD_RECIPE } from '../graphql/mutations';
 
 export default function AddRecipeScreen() {
   const [state, setState] = useState({

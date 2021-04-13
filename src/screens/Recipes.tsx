@@ -3,17 +3,9 @@ import { StyleSheet } from 'react-native';
 import {
   Card, List, Text, Layout, TopNavigation,
 } from '@ui-kitten/components';
-
 import { gql, useQuery } from '@apollo/client';
 
-const GET_RECIPES = gql`
-  query GetRecipes {
-    allRecipes {
-      title
-      description
-    }
-  }
-`;
+import { GET_RECIPES } from '../graphql/queries';
 
 const styles = StyleSheet.create({
   button: {

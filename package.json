@@ -6,7 +6,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "update-graphql": "./scripts/updategraphql.sh http://localhost:4000/"
   },
   "jest": {
     "preset": "jest-expo"

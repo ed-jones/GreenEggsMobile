@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { TopNavigation, Input, Button } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
 import { gql, useMutation } from '@apollo/client';
 
 const ADD_RECIPE = gql`

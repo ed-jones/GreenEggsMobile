@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import {
-  Card, List, Text, Layout, TopNavigation,
+  Card, List, Text, Layout, TopNavigation, Spinner,
 } from '@ui-kitten/components';
 import { gql, useQuery } from '@apollo/client';
 
@@ -26,7 +26,7 @@ const RecipeCard = ({ item }: { item: any; index: number; }) => (
 export default function Recipes() {
   const { loading, error, data } = useQuery(GET_RECIPES);
 
-  if (loading) return <Text>'Loading...'</Text>;
+  if (loading) return <Spinner />;
   if (error) return <Text>`Error! ${error.message}`</Text>;
 
   return (

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import {
-  Card, List, Text, Layout,
+  Card, List, Text, Layout, TopNavigation,
 } from '@ui-kitten/components';
 
 import { gql, useQuery } from '@apollo/client';
@@ -38,8 +38,13 @@ export default function Recipes() {
   if (error) return <Text>`Error! ${error.message}`</Text>;
 
   return (
-    <Layout>
-      <List data={data.allRecipes} renderItem={RecipeCard} />
-    </Layout>
+    <>
+      <TopNavigation
+        title='Recipes'
+      />
+      <Layout>
+        <List data={data.allRecipes} renderItem={RecipeCard} />
+      </Layout>
+    </>
   );
 }

@@ -1,38 +1,56 @@
-import { TopNavigation } from '@ui-kitten/components';
-import * as React from 'react';
+import React, { useState } from 'react';
+import { TopNavigation, Input, Button } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import { gql, useMutation } from '@apollo/client';
+
+const ADD_RECIPE = gql`
+  mutation addRecipe($recipe: AddRecipeInput!) {
+    addRecipe(recipe: $recipe) {
+      data {
+        title
+        description
+      }
+    }
+  }
+`;
 
 export default function AddRecipeScreen() {
+  const [state, setState] = useState({
+    title: '',
+    description: '',
+  });
+
+  const [addRecipe] = useMutation(ADD_RECIPE, {
+    onCompleted: () => {
+      setState({
+        title: '',
+        description: '',
+      });
+    },
+    variables: { recipe: state },
+  });
+
   return (
     <>
       <TopNavigation
-        title='Eva Application'
+        title='Add Recipe'
       />
-      <View style={styles.container}>
-        <Text style={styles.title}>Tab Two</Text>
-        <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-        <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
-      </View>
+      <Input 
+        label='Title'
+        value={state.title}
+        onChangeText={nextValue => setState({ ...state, title: nextValue })}
+      />
+      <Input 
+        label='Description'
+        value={state.description}
+        onChangeText={nextValue => setState({ ...state, description: nextValue })}
+      />
+      <Button onPress={() => addRecipe()}>
+        Add Recipe
+      </Button>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});

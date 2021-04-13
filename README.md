@@ -1,15 +1,28 @@
 # Green Eggs (Mobile)
 
-## Useful Commands
+## Dev Setup
 
-Start expo server: `yarn start`
+Create a .env file in the root directory with the following contents (obviously substituting with the host IP address running the green-eggs-api):
+```
+API_URI=http://your-host-ip:4000/
+```
+Then run:
 
-Build for Android: `yarn android`
+```
+yarn install
+yarn start
+```
 
-Build for iOS: `yarn ios`
+Scan the QR code with Expo Go (Android) or Camera (iOS)
 
-Build for Web: `yarn web`
+## Production Setup (wip)
 
-Eject: `yarn eject`
+Android: `yarn android`
+
+iOS: `yarn ios`
+
+Web: `yarn web`
+
+## Testing
 
 Run tests: `yarn test`

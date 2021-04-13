@@ -9,6 +9,14 @@ import Navigation from './navigation';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: process.env.API_URI,
+  cache: new InMemoryCache()
+});
+
+console.log(process.env.API_URI);
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -18,7 +26,7 @@ export default function App() {
     return null;
   } else {
     return (
-      <>
+      <ApolloProvider client={client}>
         <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider {...eva} theme={eva.light}>
           <SafeAreaProvider>
@@ -26,7 +34,7 @@ export default function App() {
             <StatusBar />
           </SafeAreaProvider>
         </ApplicationProvider>
-      </>
+      </ApolloProvider>
     );
   }
 }

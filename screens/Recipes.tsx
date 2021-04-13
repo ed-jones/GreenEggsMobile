@@ -4,29 +4,16 @@ import {
   Card, List, Text, Layout,
 } from '@ui-kitten/components';
 
-interface IRecipe {
-  title: string;
-  ingredients: string[];
-}
+import { gql, useQuery } from '@apollo/client';
 
-const Recipes: IRecipe[] = [
-  {
-    title: 'Fruit Salad',
-    ingredients: ['Kiwi Fruit', 'Orange', 'Peach', 'Strawberry'],
-  },
-  {
-    title: 'Greek Salad',
-    ingredients: [
-      'Tomato',
-      'Cucumber',
-      'Onion',
-      'Feta',
-      'Olives',
-      'Oregano',
-      'Olive Oil',
-    ],
-  },
-];
+const GET_RECIPES = gql`
+  query GetRecipes {
+    allRecipes {
+      title
+      description
+    }
+  }
+`;
 
 const styles = StyleSheet.create({
   button: {
@@ -37,17 +24,22 @@ const styles = StyleSheet.create({
   },
 });
 
-const RecipeCard = ({ item }: { item: IRecipe; index: number; }) => (
+const RecipeCard = ({ item }: { item: any; index: number; }) => (
   <Card style={styles.card}>
     <Text category="h1">{item.title}</Text>
-    <List data={item.ingredients} renderItem={(props) => <Text>{props.item}</Text>} />
+    <Text>{item.description}</Text>
   </Card>
 );
 
-export default function TabOneScreen() {
+export default function Recipes() {
+  const { loading, error, data } = useQuery(GET_RECIPES);
+
+  if (loading) return <Text>'Loading...'</Text>;
+  if (error) return <Text>`Error! ${error.message}`</Text>;
+
   return (
     <Layout>
-      <List data={Recipes} renderItem={RecipeCard} />
+      <List data={data.allRecipes} renderItem={RecipeCard} />
     </Layout>
   );
 }

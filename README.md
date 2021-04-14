@@ -9,8 +9,8 @@ API_URI=http://your-host-ip:4000/
 Then run:
 
 ```
-yarn install
-yarn start
+docker-compose up -d
+docker-compose run expo yarn install
 ```
 
 Scan the QR code with Expo Go (Android) or Camera (iOS)

@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  expo:
+    image: node:15.14.0-alpine3.10
+    command: sh -c "yarn start"
+    ports:
+      - 19000:19000
+      - 19001:19001
+      - 19002:19002
+    working_dir: /app
+    volumes:
+      - ./:/app

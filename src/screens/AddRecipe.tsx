@@ -38,7 +38,7 @@ export default function AddRecipeScreen() {
   return (
     <>
       <TopNavigation
-        title='Add Recipe'
+        title='Make Recipe'
       />
       <Input 
         label='Title'

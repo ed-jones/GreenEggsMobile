@@ -4,10 +4,10 @@ import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import { StatusBar } from 'react-native';
 
 import useCachedResources from './src/hooks/useCachedResources';
 import Navigation from './src/navigation';
+import Theme from './src/theme/theme.json';
 
 const client = new ApolloClient({
   uri: process.env.API_URI,
@@ -23,7 +23,7 @@ export default function App() {
     return (
       <ApolloProvider client={client}>
         <IconRegistry icons={EvaIconsPack} />
-        <ApplicationProvider {...eva} theme={eva.light}>
+        <ApplicationProvider {...eva} theme={{...eva.light, ...Theme}}>
           <SafeAreaProvider>
             <Navigation />
           </SafeAreaProvider>

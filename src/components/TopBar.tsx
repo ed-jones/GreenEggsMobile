@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon, Input } from '@ui-kitten/components';
-import { StyleSheet, View, Image, StatusBar } from 'react-native';
-import Logo512 from '../../assets/images/logo512.png'
+import { StyleSheet, View, Image } from 'react-native';
+import Logo512 from '../assets/images/logo512.png'
 
 const styles = StyleSheet.create({
   topNavigation: {

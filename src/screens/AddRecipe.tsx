@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { TopNavigation, Input, Button } from '@ui-kitten/components';
+import { Input, Button } from '@ui-kitten/components';
 import { useMutation } from '@apollo/client';
 import { View, ToastAndroid } from 'react-native';
 
 import { RecipeInput, addRecipe, addRecipeVariables } from '../types/graphql'
 import { ADD_RECIPE } from '../graphql/mutations';
 import { RecipeFragment } from '../graphql/fragments';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 const EmptyRecipeInput: RecipeInput = {
   title: '',
@@ -45,7 +44,7 @@ export default function AddRecipeScreen() {
   });
 
   return (
-    <View>
+    <View style={{padding: 16}}>
       <Input 
         label='Title'
         placeholder='Greek Salad'

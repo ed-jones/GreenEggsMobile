@@ -5,7 +5,7 @@ import { Avatar, Icon, Text } from '@ui-kitten/components';
 const styles = StyleSheet.create({
   view: {
     flexDirection: 'row',
-    padding: 10,
+    padding: 14,
     alignItems: 'center',
     justifyContent: 'space-between',
   },

@@ -6,7 +6,7 @@ import LabelledIcon from '../LabelledIcon';
 
 const styles = StyleSheet.create({
   view: {
-    padding: 10,
+    padding: 14,
   },
   recipeTitle: {
     fontWeight: 'bold',

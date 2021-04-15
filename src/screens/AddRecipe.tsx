@@ -2,23 +2,26 @@ import React, { useState } from 'react';
 import { TopNavigation, Input, Button } from '@ui-kitten/components';
 import { useMutation } from '@apollo/client';
 
-import { AddRecipeInput, addRecipe, addRecipeVariables } from '../types/graphql'
+import { RecipeInput, addRecipe, addRecipeVariables } from '../types/graphql'
 import { ADD_RECIPE } from '../graphql/mutations';
 import { RecipeFragment } from '../graphql/fragments';
 
-const EmptyRecipeInput: AddRecipeInput = {
+const EmptyRecipeInput: RecipeInput = {
   title: '',
   description: '',
+  servingCount: 0,
+  timeEstimate: '1200000',
+  previewURI: '',
 }
 
 export default function AddRecipeScreen() {
-  const [state, setState] = useState<AddRecipeInput>(EmptyRecipeInput);
+  const [state, setState] = useState<RecipeInput>(EmptyRecipeInput);
 
   const [addRecipeMutation] = useMutation<addRecipe, addRecipeVariables>(ADD_RECIPE, {
     update: (cache, { data }) => {
       cache.modify({
         fields: {
-          allRecipes(existingRecipes = []) {
+          recipes(existingRecipes = []) {
             const newObject = cache.writeFragment({
               data: data?.addRecipe.data,
               fragment: RecipeFragment,

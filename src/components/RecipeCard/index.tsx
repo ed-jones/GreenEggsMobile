@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Image, View } from 'react-native';
 import { Card } from '@ui-kitten/components';
 
-import { GetRecipes_allRecipes } from '../../types/graphql'
+import { Recipes_recipes } from '../../types/graphql'
 import RecipeCardHeader from './RecipeCardHeader';
 import RecipeCardFooter from './RecipeCardFooter';
 
@@ -23,17 +23,21 @@ const styles = StyleSheet.create({
   }
 });
 
-const RecipeCard = ({ recipe }: { recipe: GetRecipes_allRecipes }) => (
+const RecipeCard = ({ recipe }: { recipe: Recipes_recipes }) => (
   <Card
     appearance='filled'
     style={styles.card}
-    header={RecipeCardHeader}
-    footer={RecipeCardFooter}
+    header={() => (
+      <RecipeCardHeader {...recipe.submittedBy}/>
+    )}
+    footer={() => (
+      <RecipeCardFooter {...recipe} />
+    )}
   >
     <View style={styles.imageContainer}>
       <Image
         style={styles.image}
-        source={{uri: 'https://www.tasteofhome.com/wp-content/uploads/2018/01/Fluffy-Scrambled-Eggs_exps12235_SD143206C04_08_3bC_RMS.jpg'}}
+        source={{uri: recipe.previewURI}}
       />
     </View>
   </Card>

@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { Text } from '@ui-kitten/components';
 
 import LabelledIcon from '../LabelledIcon';
+import { Recipes_recipes } from '../../types/graphql';
 
 const styles = StyleSheet.create({
   view: {
@@ -22,15 +23,38 @@ const styles = StyleSheet.create({
   }
 });
 
-const RecipeCardFooter = () => (
+export interface IRecipeCardFooterProps extends Partial<Recipes_recipes> {
+  title: string;
+  description: string;
+  commentCount: number;
+  likeCount: number;
+  createdAt: string;
+  servingCount: number;
+  timeEstimate: string;
+}
+
+function convertTimeEstimate(timeEstimate: string): string {
+  const minuteEstimate = new Date(Number(timeEstimate)).getMinutes();
+  if (minuteEstimate < 60) {
+    return `${minuteEstimate} mins`;
+  } else if (minuteEstimate === 60) {
+    return "1 hour";
+  } else {
+    return `${Math.floor(minuteEstimate/60)} hours`;
+  }
+}
+
+const RecipeCardFooter = (
+  {title, description, commentCount, likeCount, servingCount, timeEstimate}: IRecipeCardFooterProps
+) => (
   <View style={styles.view}>
-    <Text category='h1' style={styles.recipeTitle}>Betty's Scrambled Eggs</Text>
-    <Text category='s1' style={styles.recipeDescription}>You can scramble my eggs, Betty</Text>
+    <Text category='h1' style={styles.recipeTitle}>{title}</Text>
+    <Text category='s1' style={styles.recipeDescription}>{description}</Text>
     <View style={styles.labelledIcons}>
-      <LabelledIcon label="20 mins" iconName="clock-outline"/>
-      <LabelledIcon label="2" iconName="person-outline"/>
-      <LabelledIcon label="54" iconName="heart-outline"/>
-      <LabelledIcon label="3" iconName="message-square-outline"/>
+      <LabelledIcon label={convertTimeEstimate(timeEstimate)} iconName="clock-outline"/>
+      <LabelledIcon label={String(servingCount)} iconName="person-outline"/>
+      <LabelledIcon label={String(likeCount)} iconName="heart-outline"/>
+      <LabelledIcon label={String(commentCount)} iconName="message-square-outline"/>
     </View>
   </View>
 );

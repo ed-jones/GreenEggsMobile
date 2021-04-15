@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Avatar, Icon, Text } from '@ui-kitten/components';
+import { Recipes_recipes_submittedBy } from '../../types/graphql';
+import NoAvatar from '../../assets/images/noavatar.jpg';
 
 const styles = StyleSheet.create({
   view: {
@@ -27,15 +29,21 @@ const styles = StyleSheet.create({
   }
 });
 
-const RecipeCardHeader = () => (
+export interface IRecipeCardHeaderProps extends Partial<Recipes_recipes_submittedBy> {
+  avatarURI?: string | null;
+  firstName: string;
+  lastName: string;
+}
+
+const RecipeCardHeader = ({ avatarURI, firstName, lastName }: IRecipeCardHeaderProps) => (
   <View style={styles.view}>
     <View style={styles.leftElements}>
       <Avatar
         size='tiny'
-        source={{uri: 'https://userstock.io/data/wp-content/uploads/2017/09/jason-blackeye-223584-1024x849.jpg'}}
+        source={avatarURI ? {uri: avatarURI} : NoAvatar}
         style={styles.avatar}
       />
-      <Text style={styles.username}>Betty Phat</Text>
+      <Text style={styles.username}>{`${firstName} ${lastName}`}</Text>
     </View>
     <View style={styles.rightElements}>
       <Icon style={styles.ellipsisIcon} name='more-horizontal' />

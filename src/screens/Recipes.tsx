@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { RefreshControl, ScrollView, StyleSheet } from 'react-native';
+import { RefreshControl, ScrollView } from 'react-native';
 import {
-  Text, TopNavigation, Spinner,
+  Text, TopNavigation,
 } from '@ui-kitten/components';
 import { useQuery } from '@apollo/client';
 import { Recipes_recipes } from '../types/graphql'

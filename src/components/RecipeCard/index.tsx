@@ -8,7 +8,8 @@ import RecipeCardFooter from './RecipeCardFooter';
 
 const styles = StyleSheet.create({
   card: {
-    margin: 12,
+    marginHorizontal: 16,
+    marginTop: 16,
     borderRadius: 12,
   },
   imageContainer: {

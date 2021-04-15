@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { TopNavigation, Input, Button } from '@ui-kitten/components';
 import { useMutation } from '@apollo/client';
+import { View, ToastAndroid } from 'react-native';
 
 import { RecipeInput, addRecipe, addRecipeVariables } from '../types/graphql'
 import { ADD_RECIPE } from '../graphql/mutations';
 import { RecipeFragment } from '../graphql/fragments';
-import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const EmptyRecipeInput: RecipeInput = {
   title: '',
@@ -17,6 +18,9 @@ const EmptyRecipeInput: RecipeInput = {
 
 export default function AddRecipeScreen() {
   const [state, setState] = useState<RecipeInput>(EmptyRecipeInput);
+  const showToast = () => {
+    ToastAndroid.show('Recipe Submitted', ToastAndroid.SHORT);
+  }
 
   const [addRecipeMutation] = useMutation<addRecipe, addRecipeVariables>(ADD_RECIPE, {
     update: (cache, { data }) => {
@@ -35,15 +39,13 @@ export default function AddRecipeScreen() {
     },
     onCompleted: () => {
       setState(EmptyRecipeInput);
+      showToast();
     },
     variables: { recipe: state },
   });
 
   return (
     <View>
-      <TopNavigation
-        title='Add Recipe'
-      />
       <Input 
         label='Title'
         placeholder='Greek Salad'

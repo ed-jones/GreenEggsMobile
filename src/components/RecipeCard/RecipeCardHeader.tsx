@@ -13,6 +13,8 @@ const styles = StyleSheet.create({
   },
   leftElements: {
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   rightElements: {
     flexDirection: 'row',
@@ -24,8 +26,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   ellipsisIcon: {
-    width: 16,
-    height: 16,
+    width: 24,
+    height: 24,
   }
 });
 
@@ -39,7 +41,7 @@ const RecipeCardHeader = ({ avatarURI, firstName, lastName }: IRecipeCardHeaderP
   <View style={styles.view}>
     <View style={styles.leftElements}>
       <Avatar
-        size='tiny'
+        size='small'
         source={avatarURI ? {uri: avatarURI} : NoAvatar}
         style={styles.avatar}
       />

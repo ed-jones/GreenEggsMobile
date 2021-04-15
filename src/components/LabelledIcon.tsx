@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   icon: {
-    width: 16,
-    height: 16,
+    width: 24,
+    height: 24,
     marginRight: 8,
   }
 });

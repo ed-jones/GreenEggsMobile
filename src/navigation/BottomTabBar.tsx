@@ -1,19 +1,44 @@
 import React from 'react';
 import { BottomTabBarOptions, BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { BottomNavigation, BottomNavigationTab, Icon } from '@ui-kitten/components';
-import { ImageProps } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-const RecipeGalleryIcon = (props?: Partial<ImageProps>) => <Icon {...props} name='home-outline' />;
-const AddRecipeIcon = (props?: Partial<ImageProps>) => <Icon {...props} name='plus-circle-outline' />;
+const styles = StyleSheet.create({
+  primary: {
+    height: 64,
+    width: 64,
+  },
+  secondary: {
+    height: 32,
+    width: 32,
+  },
+  navbar: {
+    paddingVertical: 8,
+  }
+});
 
+enum IconStyle {
+  Primary = 'primary',
+  Secondary = 'secondary',
+}
+
+const BottomNavigationIcon = ({name, iconStyle}: { name: string, iconStyle: IconStyle }) => (
+  <Icon style={styles[iconStyle]} name={name} fill='#A36F3F' />
+)
 
 const BottomTabBar = ({ navigation, state }: BottomTabBarProps<BottomTabBarOptions>) => (
   <BottomNavigation
     selectedIndex={state.index}
     onSelect={(index) => navigation.navigate(state.routeNames[index])}
+    appearance='noIndicator'
+    style={styles.navbar}
+    indicatorStyle={{backgroundColor: '#FFAA00', height: 4}}
   >
-    <BottomNavigationTab icon={RecipeGalleryIcon} />
-    <BottomNavigationTab icon={AddRecipeIcon} />
+    <BottomNavigationTab icon={() => <BottomNavigationIcon name='home-outline' iconStyle={IconStyle.Secondary}/>} />
+    <BottomNavigationTab icon={() => <BottomNavigationIcon name='bell-outline' iconStyle={IconStyle.Secondary}/>} />
+    <BottomNavigationTab icon={() => <BottomNavigationIcon name='plus-circle-outline' iconStyle={IconStyle.Primary}/>} />
+    <BottomNavigationTab icon={() => <BottomNavigationIcon name='bookmark-outline' iconStyle={IconStyle.Secondary}/>} />
+    <BottomNavigationTab icon={() => <BottomNavigationIcon name='person-outline' iconStyle={IconStyle.Secondary}/>} />
   </BottomNavigation>
 );
 

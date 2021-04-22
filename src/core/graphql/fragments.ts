@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const UserFragment = gql`
   fragment UserFragment on User {
@@ -27,4 +27,3 @@ export const RecipeFragment = gql`
   }
   ${UserFragment}
 `;
-

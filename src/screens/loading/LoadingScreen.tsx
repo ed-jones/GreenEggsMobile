@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 
 const LoadingScreen = () => (
   <View style={styles.container}>
-    <Spinner/>
+    <Spinner />
   </View>
 );
 

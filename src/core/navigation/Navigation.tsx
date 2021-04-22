@@ -11,7 +11,7 @@ export default function Navigation() {
   return (
     <NavigationContainer>
       <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
-        <Screen name="Home" component={Home}/>
+        <Screen name="Home" component={Home} />
         <Screen name="Notifications" component={NotFoundScreen} options={{ title: 'Oops!' }} />
         <Screen name="AddRecipe" component={AddRecipe} />
         <Screen name="Bookmarks" component={NotFoundScreen} options={{ title: 'Oops!' }} />

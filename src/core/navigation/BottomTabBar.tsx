@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
   navbar: {
     paddingVertical: 8,
-  }
+  },
 });
 
 enum IconStyle {
@@ -22,22 +22,22 @@ enum IconStyle {
   Secondary = 'secondary',
 }
 
-const BottomNavigationIcon = ({name, iconStyle}: { name: string, iconStyle: IconStyle }) => (
-  <Icon style={styles[iconStyle]} name={name} fill='#A36F3F' />
-)
+const BottomNavigationIcon = ({ name, iconStyle }: { name: string, iconStyle: IconStyle }) => (
+  <Icon style={styles[iconStyle]} name={name} fill="#A36F3F" />
+);
 
 const BottomTabBar = ({ navigation, state }: BottomTabBarProps<BottomTabBarOptions>) => (
   <BottomNavigation
     selectedIndex={state.index}
     onSelect={(index) => navigation.navigate(state.routeNames[index])}
-    appearance='noIndicator'
+    appearance="noIndicator"
     style={styles.navbar}
   >
-    <BottomNavigationTab icon={() => <BottomNavigationIcon name='home-outline' iconStyle={IconStyle.Secondary}/>} />
-    <BottomNavigationTab icon={() => <BottomNavigationIcon name='bell-outline' iconStyle={IconStyle.Secondary}/>} />
-    <BottomNavigationTab icon={() => <BottomNavigationIcon name='plus-circle-outline' iconStyle={IconStyle.Primary}/>} />
-    <BottomNavigationTab icon={() => <BottomNavigationIcon name='bookmark-outline' iconStyle={IconStyle.Secondary}/>} />
-    <BottomNavigationTab icon={() => <BottomNavigationIcon name='person-outline' iconStyle={IconStyle.Secondary}/>} />
+    <BottomNavigationTab icon={() => <BottomNavigationIcon name="home-outline" iconStyle={IconStyle.Secondary} />} />
+    <BottomNavigationTab icon={() => <BottomNavigationIcon name="bell-outline" iconStyle={IconStyle.Secondary} />} />
+    <BottomNavigationTab icon={() => <BottomNavigationIcon name="plus-circle-outline" iconStyle={IconStyle.Primary} />} />
+    <BottomNavigationTab icon={() => <BottomNavigationIcon name="bookmark-outline" iconStyle={IconStyle.Secondary} />} />
+    <BottomNavigationTab icon={() => <BottomNavigationIcon name="person-outline" iconStyle={IconStyle.Secondary} />} />
   </BottomNavigation>
 );
 

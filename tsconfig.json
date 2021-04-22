@@ -12,8 +12,8 @@
     "resolveJsonModule": true,
     "strict": true,
     "paths": {
-      "@green-eggs/*": [
-        "./src/*"
+      "@greeneggs/*": [
+        "src/*"
       ],
     }
   },

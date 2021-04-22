@@ -12,18 +12,17 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     marginRight: 8,
-  }
+  },
 });
-
 
 interface ILabelledIconProps {
   iconName: string;
   label: string;
 }
 
-const LabelledIcon = ({iconName, label}: ILabelledIconProps) => (
+const LabelledIcon = ({ iconName, label }: ILabelledIconProps) => (
   <View style={styles.view}>
-    <Icon style={styles.icon} name={iconName} fill='black'/>
+    <Icon style={styles.icon} name={iconName} fill="black" />
     <Text>{label}</Text>
   </View>
 );

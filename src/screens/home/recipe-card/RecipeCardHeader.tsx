@@ -23,12 +23,12 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   username: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   ellipsisIcon: {
     width: 24,
     height: 24,
-  }
+  },
 });
 
 export interface IRecipeCardHeaderProps extends Partial<Recipes_recipes_submittedBy> {
@@ -41,14 +41,14 @@ const RecipeCardHeader = ({ avatarURI, firstName, lastName }: IRecipeCardHeaderP
   <View style={styles.view}>
     <View style={styles.leftElements}>
       <Avatar
-        size='small'
-        source={avatarURI ? {uri: avatarURI} : noavatar}
+        size="small"
+        source={avatarURI ? { uri: avatarURI } : noavatar}
         style={styles.avatar}
       />
       <Text style={styles.username}>{`${firstName} ${lastName}`}</Text>
     </View>
     <View style={styles.rightElements}>
-      <Icon style={styles.ellipsisIcon} name='more-horizontal' fill='black'/>
+      <Icon style={styles.ellipsisIcon} name="more-horizontal" fill="black" />
     </View>
   </View>
 );

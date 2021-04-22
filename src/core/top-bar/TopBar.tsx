@@ -2,7 +2,7 @@ import React from 'react';
 import { Icon, Input } from '@ui-kitten/components';
 import { StyleSheet, View, Image } from 'react-native';
 
-import logo512 from '../logo/logo512.png'
+import logo512 from '../logo/logo512.png';
 
 const styles = StyleSheet.create({
   topNavigation: {
@@ -29,8 +29,11 @@ const styles = StyleSheet.create({
 const TopBar = () => (
   <View style={styles.topNavigation}>
     <Image source={logo512} style={styles.logo} />
-    <Input placeholder='Search Recipe' size='large' style={styles.search} accessoryLeft={(props) => 
-      <Icon style={styles.icon} name='search' {...props} />}
+    <Input
+      placeholder="Search Recipe"
+      size="large"
+      style={styles.search}
+      accessoryLeft={(props) => <Icon style={styles.icon} name="search" {...props} />}
     />
   </View>
 );

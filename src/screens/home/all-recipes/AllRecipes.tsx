@@ -8,13 +8,17 @@ import { Queries } from '../../../core';
 import LoadingScreen from '../../loading/LoadingScreen';
 import RecipeCard from '../recipe-card/RecipeCard';
 
+const CardVerticalMargin = 20;
+const CardHorizontalMargin = 24;
+
 const styles = StyleSheet.create({
-  card: {
-    marginTop: 16,
+  firstCard: {
+    marginTop: CardVerticalMargin,
   },
-  container: {
-    paddingHorizontal: 24,
-  }
+  card: {
+    marginBottom: CardVerticalMargin,
+    marginHorizontal: CardHorizontalMargin,
+  },
 });
 
 export default function Recipes() {
@@ -24,8 +28,12 @@ export default function Recipes() {
   if (error) return <Text>`Error! ${error.message}`</Text>;
 
   return (
-    <ScrollView style={styles.container} refreshControl={<RefreshControl refreshing={loading} onRefresh={refetch} />}>
-      {data.recipes.map((recipe: Recipes_recipes) => <View key={recipe.id} style={styles.card}><RecipeCard recipe={recipe}/></View>)}
+    <ScrollView refreshControl={<RefreshControl refreshing={loading} onRefresh={refetch} />}>
+      {data.recipes.map((recipe: Recipes_recipes, i: number) => (
+        <View key={recipe.id} style={i===0 ? { ...styles.firstCard, ...styles.card } : styles.card}>
+          <RecipeCard recipe={recipe}/>
+        </View>
+      ))}
     </ScrollView>
   );
 }

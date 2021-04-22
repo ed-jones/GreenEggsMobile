@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Avatar, Icon, Text } from '@ui-kitten/components';
-import { Recipes_recipes_submittedBy } from '../../../types/graphql';
-import { noavatar } from '../../../core';
+import { Recipes_recipes_submittedBy } from '@greeneggs/types/graphql';
+import { noavatar } from '@greeneggs/core';
 
 const styles = StyleSheet.create({
   view: {

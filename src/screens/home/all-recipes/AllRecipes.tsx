@@ -4,9 +4,9 @@ import {
 } from 'react-native';
 import { Text } from '@ui-kitten/components';
 import { useQuery } from '@apollo/client';
+import { Recipes_recipes } from '@greeneggs/types/graphql';
+import { Queries } from '@greeneggs/core';
 
-import { Recipes_recipes } from '../../../types/graphql';
-import { Queries } from '../../../core';
 import LoadingScreen from '../../loading/LoadingScreen';
 import RecipeCard from '../recipe-card/RecipeCard';
 

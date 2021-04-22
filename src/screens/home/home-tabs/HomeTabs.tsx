@@ -20,15 +20,20 @@ const TopTabBar = ({ navigation, state }: MaterialTopTabBarProps) => (
   </TabBar>
 );
 
-export const HomeTabs = () => (
-  <NavigationContainer independent>
-    <Navigator tabBar={(props: MaterialTopTabBarProps) => <TopTabBar {...props} />}>
-      <Screen name="NEWS FEED" component={AllRecipes} />
-      <Screen name="TRENDING" component={AllRecipes} />
-      <Screen name="CATEGORIES" component={AllRecipes} />
-      <Screen name="MY RECIPES" component={AllRecipes} />
-    </Navigator>
-  </NavigationContainer>
-);
-
-export default HomeTabs;
+export default function HomeTabs() {
+  return (
+    <NavigationContainer independent>
+      <Navigator
+        tabBar={(props: MaterialTopTabBarProps) => (
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          <TopTabBar {...props} />
+        )}
+      >
+        <Screen name="NEWS FEED" component={AllRecipes} />
+        <Screen name="TRENDING" component={AllRecipes} />
+        <Screen name="CATEGORIES" component={AllRecipes} />
+        <Screen name="MY RECIPES" component={AllRecipes} />
+      </Navigator>
+    </NavigationContainer>
+  );
+}

@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
 const TopBar = () => (
   <View style={styles.topNavigation}>
     <Image source={logo512} style={styles.logo} />
-    <Input placeholder='Search Recipe' size='large' style={styles.search} accessoryLeft={() => 
-      <Icon style={styles.icon} name='search'/>}
+    <Input placeholder='Search Recipe' size='large' style={styles.search} accessoryLeft={(props) => 
+      <Icon style={styles.icon} name='search' {...props} />}
     />
   </View>
 );

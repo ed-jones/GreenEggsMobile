@@ -14,7 +14,7 @@ export { default as Navigation } from './navigation/Navigation';
 
 export { noavatar } from './no-avatar/noavatar.jpg';
 
-export { default as RecipeTabs } from '../screens/home/recipe-tabs/RecipeTabs';
+export { default as RecipeTabs } from '../screens/home/home-tabs/HomeTabs';
 
 export { default as TopBar } from './top-bar/TopBar';
 

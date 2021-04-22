@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   search: {
-    marginRight: 100,
+    marginRight: 16,
+    flex: 1,
   },
 });
 

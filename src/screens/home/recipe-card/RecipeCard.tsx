@@ -3,6 +3,7 @@ import { StyleSheet, Image, View } from 'react-native';
 import { Card } from '@ui-kitten/components';
 
 import { Recipes_recipes } from '../../../types/graphql'
+import { imagenotfound } from '../../../core';
 import RecipeCardHeader from './RecipeCardHeader';
 import RecipeCardFooter from './RecipeCardFooter';
 
@@ -36,7 +37,7 @@ const RecipeCard = ({ recipe }: { recipe: Recipes_recipes }) => (
     <View style={styles.imageContainer}>
       <Image
         style={styles.image}
-        source={{uri: recipe.previewURI}}
+        source={recipe.previewURI ? {uri: recipe.previewURI} : imagenotfound}
       />
     </View>
   </Card>

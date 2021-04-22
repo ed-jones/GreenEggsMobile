@@ -10,6 +10,8 @@ export { default as LabelledIcon } from './labelled-icon/LabelledIcon';
 
 export { logo512 } from './logo/logo512.png';
 
+export { imagenotfound } from './image-not-found/imagenotfound.jpg';
+
 export { default as Navigation } from './navigation/Navigation';
 
 export { noavatar } from './no-avatar/noavatar.jpg';

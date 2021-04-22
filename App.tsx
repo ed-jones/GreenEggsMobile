@@ -8,6 +8,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import useCachedResources from './src/core/use-cached-resources/useCachedResources';
 import Navigation from './src/core/navigation/Navigation';
 import Theme from './src/theme/theme.json';
+import HomeTabs from './src/screens/home/home-tabs/HomeTabs';
 
 const client = new ApolloClient({
   uri: process.env.API_URI,

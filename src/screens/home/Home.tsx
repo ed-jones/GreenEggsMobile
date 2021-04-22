@@ -4,11 +4,14 @@ import TopBar from '../../core/top-bar/TopBar';
 import HomeTabs from './home-tabs/HomeTabs';
 
 const Home = () => (
-  <SafeAreaView>
+  // <SafeAreaView>
+  //   
+  <>
     <StatusBar backgroundColor='#FFECB4' barStyle='dark-content'/>
     <TopBar/>
     <HomeTabs/>
-  </SafeAreaView>
+    </>
+  // </SafeAreaView>
 );
 
 export default Home;

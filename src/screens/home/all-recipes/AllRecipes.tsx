@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   container: {
-    marginHorizontal: 24,
+    paddingHorizontal: 24,
   }
 });
 
@@ -25,7 +25,7 @@ export default function Recipes() {
 
   return (
     <ScrollView style={styles.container} refreshControl={<RefreshControl refreshing={loading} onRefresh={refetch} />}>
-      {data.recipes.map((recipe: Recipes_recipes) => <View style={styles.card}><RecipeCard key={recipe.id} recipe={recipe}/></View>)}
+      {data.recipes.map((recipe: Recipes_recipes) => <View key={recipe.id} style={styles.card}><RecipeCard recipe={recipe}/></View>)}
     </ScrollView>
   );
 }

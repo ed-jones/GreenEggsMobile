@@ -2,8 +2,8 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text } from '@ui-kitten/components';
 
-import LabelledIcon from '../LabelledIcon';
-import { Recipes_recipes } from '../../types/graphql';
+import LabelledIcon from '../../../core/labelled-icon/LabelledIcon';
+import { Recipes_recipes } from '../../../types/graphql';
 
 const styles = StyleSheet.create({
   view: {

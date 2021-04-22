@@ -2,8 +2,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { NotFoundScreen, AddRecipe } from '../screens';
-import { RecipeTabs } from '../components';
+import { NotFoundScreen, AddRecipe } from '../../screens';
+import { RecipeTabs } from '..';
 import BottomTabBar from './BottomTabBar';
 
 const { Navigator, Screen } = createBottomTabNavigator();

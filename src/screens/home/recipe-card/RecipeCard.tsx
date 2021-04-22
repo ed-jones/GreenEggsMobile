@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Image, View } from 'react-native';
 import { Card } from '@ui-kitten/components';
 
-import { Recipes_recipes } from '../../types/graphql'
+import { Recipes_recipes } from '../../../types/graphql'
 import RecipeCardHeader from './RecipeCardHeader';
 import RecipeCardFooter from './RecipeCardFooter';
 

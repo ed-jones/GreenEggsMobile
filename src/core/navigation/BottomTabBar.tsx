@@ -1,7 +1,7 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import { BottomTabBarOptions, BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { BottomNavigation, BottomNavigationTab, Icon } from '@ui-kitten/components';
-import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   primary: {

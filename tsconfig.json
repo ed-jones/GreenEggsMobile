@@ -10,6 +10,14 @@
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "strict": true
-  }
+    "strict": true,
+    "paths": {
+      "@green-eggs/*": [
+        "./src/*"
+      ],
+    }
+  },
+  "include": [
+    "src"
+  ]
 }

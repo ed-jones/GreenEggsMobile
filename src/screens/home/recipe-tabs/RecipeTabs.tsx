@@ -1,8 +1,8 @@
 import React from 'react';
 import { Tab, TabView, Text } from '@ui-kitten/components';
-import { Recipes } from '../screens';
+import { Recipes } from '../..';
 import { SafeAreaView, StatusBar } from 'react-native';
-import TopBar from './TopBar';
+import TopBar from '../../../core/top-bar/TopBar';
 
 const RecipeTabs = () => {
 

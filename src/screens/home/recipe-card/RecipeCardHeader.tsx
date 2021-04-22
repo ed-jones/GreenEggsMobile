@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Avatar, Icon, Text } from '@ui-kitten/components';
-import { Recipes_recipes_submittedBy } from '../../types/graphql';
-import NoAvatar from '../../assets/images/noavatar.jpg';
+import { Recipes_recipes_submittedBy } from '../../../types/graphql';
+import { noavatar } from '../../../core';
 
 const styles = StyleSheet.create({
   view: {
@@ -42,7 +42,7 @@ const RecipeCardHeader = ({ avatarURI, firstName, lastName }: IRecipeCardHeaderP
     <View style={styles.leftElements}>
       <Avatar
         size='small'
-        source={avatarURI ? {uri: avatarURI} : NoAvatar}
+        source={avatarURI ? {uri: avatarURI} : noavatar}
         style={styles.avatar}
       />
       <Text style={styles.username}>{`${firstName} ${lastName}`}</Text>

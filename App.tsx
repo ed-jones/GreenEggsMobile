@@ -5,8 +5,8 @@ import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
-import useCachedResources from './src/hooks/useCachedResources';
-import Navigation from './src/navigation';
+import useCachedResources from './src/core/use-cached-resources/useCachedResources';
+import Navigation from './src/core/navigation/Navigation';
 import Theme from './src/theme/theme.json';
 
 const client = new ApolloClient({

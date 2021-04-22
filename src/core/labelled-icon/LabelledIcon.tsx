@@ -23,7 +23,7 @@ interface ILabelledIconProps {
 
 const LabelledIcon = ({iconName, label}: ILabelledIconProps) => (
   <View style={styles.view}>
-    <Icon style={styles.icon} name={iconName}/>
+    <Icon style={styles.icon} name={iconName} fill='black'/>
     <Text>{label}</Text>
   </View>
 );

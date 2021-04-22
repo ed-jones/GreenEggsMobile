@@ -48,7 +48,7 @@ const RecipeCardHeader = ({ avatarURI, firstName, lastName }: IRecipeCardHeaderP
       <Text style={styles.username}>{`${firstName} ${lastName}`}</Text>
     </View>
     <View style={styles.rightElements}>
-      <Icon style={styles.ellipsisIcon} name='more-horizontal' />
+      <Icon style={styles.ellipsisIcon} name='more-horizontal' fill='black'/>
     </View>
   </View>
 );

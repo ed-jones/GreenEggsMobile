@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
@@ -8,7 +9,6 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import useCachedResources from './src/core/use-cached-resources/useCachedResources';
 import Navigation from './src/core/navigation/Navigation';
 import Theme from './src/theme/theme.json';
-import HomeTabs from './src/screens/home/home-tabs/HomeTabs';
 
 const client = new ApolloClient({
   uri: process.env.API_URI,
@@ -24,6 +24,7 @@ export default function App() {
     return (
       <ApolloProvider client={client}>
         <IconRegistry icons={EvaIconsPack} />
+        <StatusBar backgroundColor='#FFECB4' barStyle='dark-content'/>
         <ApplicationProvider {...eva} theme={{...eva.light, ...Theme}}>
           <SafeAreaProvider>
             <Navigation />

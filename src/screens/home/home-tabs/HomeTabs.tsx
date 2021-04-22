@@ -1,6 +1,5 @@
 import React from 'react';
 import AllRecipes from '../all-recipes/AllRecipes';
-import useTabIndex from './useTabIndex';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator, MaterialTopTabBarProps } from '@react-navigation/material-top-tabs';
 import { TabBar, Tab, } from '@ui-kitten/components';

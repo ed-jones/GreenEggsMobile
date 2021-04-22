@@ -6,11 +6,13 @@
       "dom",
       "esnext"
     ],
+    "target": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "strict": true,
+    "baseUrl": ".",
     "paths": {
       "@greeneggs/*": [
         "src/*"
@@ -18,6 +20,6 @@
     }
   },
   "include": [
-    "src"
+    "src", 
   ]
 }

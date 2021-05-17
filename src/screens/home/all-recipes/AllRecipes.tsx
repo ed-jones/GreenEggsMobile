@@ -32,9 +32,7 @@ export default function Recipes() {
   if (error) {
     return (
       <Text>
-        `Error! $
-        {error.message}
-        `
+        Error! {error.message}
       </Text>
     );
   }

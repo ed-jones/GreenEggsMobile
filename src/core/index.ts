@@ -25,4 +25,4 @@ export { default as useCachedResources } from './use-cached-resources/useCachedR
 
 export { Icons };
 
-export { default as useForm } from './useForm/useForm';
+export { default as useForm, IForm } from './useForm/useForm';

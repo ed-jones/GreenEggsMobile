@@ -1,7 +1,17 @@
 import { Fragments, Mutations, useForm } from '@greeneggs/core';
 import { addRecipe, addRecipeVariables, RecipeInput } from '@greeneggs/types/graphql';
 
-const useRecipeForm = () => useForm<RecipeInput, addRecipe, addRecipeVariables>(Mutations.LOGIN, {
+const EmptyRecipeForm: addRecipeVariables = {
+  recipe: {
+    title: '',
+    description: '',
+    servingCount: 0,
+    timeEstimate: '',
+    previewURI: '',
+  }
+}
+
+const useRecipeForm = () => useForm<RecipeInput, addRecipe, addRecipeVariables>(Mutations.LOGIN, EmptyRecipeForm, {
   update: (cache, { data }) => {
     cache.modify({
       fields: {

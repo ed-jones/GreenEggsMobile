@@ -2,31 +2,28 @@ import { DocumentNode, MutationHookOptions, useMutation } from '@apollo/client';
 import { useState } from 'react';
 import { ToastAndroid } from 'react-native';
 
-export function emptyFormFactory<MutationVariables>(): MutationVariables {
-  return { } as MutationVariables;
-}
-
 export type IForm<InputType> = [
   state: InputType,
-  setFormField: (field: string, value: string) => void,
+  setFormField: (field: string, value: string | number | null) => void,
   mutation: () => void,
 ];
 
 export default function useForm<
   InputType,
   MutationType,
-  MutationVariables extends { [key: string]: InputType | any },
+  MutationVariables extends Record<keyof MutationVariables, InputType>,
 >(
   Mutation: DocumentNode,
+  defaultInput: MutationVariables,
   options?: MutationHookOptions<MutationType, MutationVariables>,
-  defaultInput: MutationVariables = emptyFormFactory<MutationVariables>(),
-) {
+): IForm<InputType> {
   const [state, setState] = useState<MutationVariables>(defaultInput);
 
-  const setFormField = (field: string, value: string) => {
+  const setFormField = (field: string, value: string | number | null) => {
     setState({
       ...state,
       [Object.keys(state)[0]]: {
+        ...state[Object.keys(state)[0] as keyof MutationVariables],
         [field]: value,
       },
     });
@@ -44,5 +41,5 @@ export default function useForm<
     ...options,
   });
 
-  return [state, setFormField, mutation];
+  return [state[Object.keys(state)[0] as keyof MutationVariables], setFormField, mutation];
 }

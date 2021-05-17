@@ -4,6 +4,32 @@ import { Input, Button } from '@ui-kitten/components';
 
 import useRecipeForm from './useRecipeForm';
 
+function numberToString(number: number | null): string {
+  if (number === NaN) {
+    return '';
+  }
+  if (number === 0) {
+    return '0';
+  }
+  if (number === null) {
+    return '';
+  }
+  if (String(number) === "NaN") {
+    return '';
+  }
+  return String(number);
+}
+
+function stringToNumber(string: string): number | null {
+  if (string === '') {
+    return null;
+  }
+  if (Number(string) == NaN) {
+    return 0;
+  }
+  return Number(string);
+}
+
 export default function AddRecipe() {
   const [recipeForm, setRecipeForm, submitRecipeForm] = useRecipeForm();
 
@@ -24,8 +50,9 @@ export default function AddRecipe() {
       <Input
         label="Serves"
         placeholder="4"
-        value={String(recipeForm.servingCount)}
-        onChangeText={(nextValue) => setRecipeForm('servingCount', nextValue)}
+        keyboardType="numeric"
+        value={numberToString(recipeForm.servingCount)}
+        onChangeText={(nextValue) => setRecipeForm('servingCount', stringToNumber(nextValue))}
       />
       <Input
         label="Time Estimate"

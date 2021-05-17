@@ -7,7 +7,7 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 import useCachedResources from './src/core/use-cached-resources/useCachedResources';
-import Navigation from './src/core/navigation/Navigation';
+import Welcome from './src/core/navigation/Navigation';
 import Theme from './src/theme/theme.json';
 
 const client = new ApolloClient({
@@ -27,7 +27,7 @@ export default function App() {
         <StatusBar backgroundColor='#FFECB4' barStyle='dark-content'/>
         <ApplicationProvider {...eva} theme={{...eva.light, ...Theme}}>
           <SafeAreaProvider>
-            <Navigation />
+            <Welcome />
           </SafeAreaProvider>
         </ApplicationProvider>
       </ApolloProvider>

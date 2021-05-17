@@ -12,3 +12,17 @@ export const ADD_RECIPE = gql`
   }
   ${Fragments.RecipeFragment}
 `;
+
+export const LOGIN = gql`
+  mutation login($loginDetails: LoginInput!) {
+    login(loginDetails: $loginDetails) {
+      data {
+        token
+      }
+      error {
+        message
+      }
+    }
+  }
+  ${Fragments.UserFragment}
+`;

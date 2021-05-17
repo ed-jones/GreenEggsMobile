@@ -49,6 +49,39 @@ export interface addRecipeVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: login
+// ====================================================
+
+export interface login_login_data {
+  __typename: "AuthResultData";
+  token: string;
+}
+
+export interface login_login_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface login_login {
+  __typename: "AuthResult";
+  data: login_login_data | null;
+  error: login_login_error | null;
+}
+
+export interface login {
+  login: login_login;
+}
+
+export interface loginVariables {
+  loginDetails: LoginInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: Recipes
 // ====================================================
 
@@ -137,6 +170,11 @@ export interface RecipeFragment {
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+export interface LoginInput {
+  email: string;
+  password: string;
+}
 
 export interface RecipeInput {
   title: string;

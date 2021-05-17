@@ -32,7 +32,7 @@ export interface addRecipe_addRecipe_data {
 
 export interface addRecipe_addRecipe {
   __typename: "RecipeResult";
-  data: addRecipe_addRecipe_data;
+  data: addRecipe_addRecipe_data | null;
 }
 
 export interface addRecipe {

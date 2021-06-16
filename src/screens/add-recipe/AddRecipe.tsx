@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import { Input, Button } from '@ui-kitten/components';
 
 import useRecipeForm from './useRecipeForm';
+import { TimePicker } from '@greeneggs/core';
 
 function numberToString(number: number | null): string {
   if (number === NaN) {
@@ -32,6 +33,7 @@ function stringToNumber(string: string): number | null {
 
 export default function AddRecipe() {
   const [recipeForm, setRecipeForm, submitRecipeForm] = useRecipeForm();
+  const [timePickerOpen, setTimePickerOpen] = useState<boolean>(false);
 
   return (
     <View style={{ padding: 16 }}>
@@ -54,11 +56,12 @@ export default function AddRecipe() {
         value={numberToString(recipeForm.servingCount)}
         onChangeText={(nextValue) => setRecipeForm('servingCount', stringToNumber(nextValue))}
       />
+      <Button onPress={() => setTimePickerOpen(true)}>Open Time Picker</Button>
+      <TimePicker />
       <Input
         label="Time Estimate"
         placeholder="12000"
         value={recipeForm.timeEstimate}
-        onChangeText={(nextValue) => setRecipeForm('timeEstimate', nextValue)}
       />
       <Input
         label="Image"

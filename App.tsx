@@ -32,7 +32,7 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <IconRegistry icons={EvaIconsPack} />
-      <StatusBar backgroundColor="#F7F9FC" barStyle="dark-content" />
+      <StatusBar backgroundColor="transparent" barStyle="dark-content" />
       <ApplicationProvider
         {...eva}
         theme={{ ...eva.light, ...Theme }}

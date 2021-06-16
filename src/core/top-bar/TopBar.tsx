@@ -6,7 +6,7 @@ import logo512 from '../logo/logo512.png';
 
 const styles = StyleSheet.create({
   topNavigation: {
-    backgroundColor: '#F7F9FC',
+    backgroundColor: 'transparent',
     padding: 16,
     flexDirection: 'row',
     alignItems: 'center',

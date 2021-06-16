@@ -8,8 +8,6 @@ const { Navigator, Screen } = createMaterialTopTabNavigator();
 
 const TopTabBar = ({ navigation, state }: MaterialTopTabBarProps) => (
   <TabBar
-    indicatorStyle={{ backgroundColor: '#2E3A59', height: 2 }}
-    style={{ backgroundColor: 'transparent', margin: 8 }}
     selectedIndex={state.index}
     onSelect={(index) => navigation.navigate(state.routeNames[index])}
   >

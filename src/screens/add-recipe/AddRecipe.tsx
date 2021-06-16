@@ -56,7 +56,7 @@ export default function AddRecipe() {
         value={numberToString(recipeForm.servingCount)}
         onChangeText={(nextValue) => setRecipeForm('servingCount', stringToNumber(nextValue))}
       />
-      <Button onPress={() => setTimePickerOpen(true)}>Open Time Picker</Button>
+      <Button onPress={() => setTimePickerOpen(true)}>OPEN TIME PICKER</Button>
       <TimePicker />
       <Input
         label="Time Estimate"
@@ -70,7 +70,7 @@ export default function AddRecipe() {
         onChangeText={(nextValue) => setRecipeForm('previewURI', nextValue)}
       />
       <Button onPress={submitRecipeForm}>
-        Add Recipe
+        ADD RECIPE
       </Button>
     </View>
   );

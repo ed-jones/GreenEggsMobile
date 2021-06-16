@@ -25,6 +25,7 @@ export default function useCachedResources() {
           'Lato-Regular': require('../../assets/fonts/Lato-Regular.ttf'),
           'Lato-Thin': require('../../assets/fonts/Lato-Thin.ttf'),
           'Lato-ThinItalic': require('../../assets/fonts/Lato-ThinItalic.ttf'),
+          'Lato-SemiBold': require('../../assets/fonts/Lato-SemiBold.ttf'),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

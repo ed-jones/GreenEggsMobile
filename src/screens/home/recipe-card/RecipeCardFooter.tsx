@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  labelledIconGroup: {
+    flexDirection: 'row',
+  }
 });
 
 export interface IRecipeCardFooterProps extends Partial<Recipes_recipes> {
@@ -36,7 +39,8 @@ function convertTimeEstimate(timeEstimate: string): string {
   const minuteEstimate = new Date(Number(timeEstimate)).getMinutes();
   if (minuteEstimate < 60) {
     return `${minuteEstimate} mins`;
-  } if (minuteEstimate === 60) {
+  }
+  if (minuteEstimate === 60) {
     return '1 hour';
   }
   return `${Math.floor(minuteEstimate / 60)} hours`;
@@ -44,17 +48,27 @@ function convertTimeEstimate(timeEstimate: string): string {
 
 const RecipeCardFooter = (
   {
-    title, description, commentCount, likeCount, servingCount, timeEstimate,
+    title, description, commentCount, likeCount, timeEstimate,
   }: IRecipeCardFooterProps,
 ) => (
   <View style={styles.view}>
-    <Text category="h1" style={styles.recipeTitle}>{title}</Text>
-    <Text category="s1" style={styles.recipeDescription}>{description}</Text>
     <View style={styles.labelledIcons}>
-      <LabelledIcon label={convertTimeEstimate(timeEstimate)} iconName="clock-outline" />
-      <LabelledIcon label={String(servingCount)} iconName="person-outline" />
-      <LabelledIcon label={String(likeCount)} iconName="heart-outline" />
-      <LabelledIcon label={String(commentCount)} iconName="message-square-outline" />
+      <View>
+        <Text category="h1" style={styles.recipeTitle}>{title}</Text>
+        <Text category="s1" style={styles.recipeDescription}>{description}</Text>
+      </View>
+      <View style={styles.labelledIconGroup}>
+        <Text>16 hours ago</Text>
+      </View>
+    </View>
+    <View style={styles.labelledIcons}>
+      <View style={styles.labelledIconGroup}>
+        <LabelledIcon label={convertTimeEstimate(timeEstimate)} iconName="clock-outline" />
+      </View>
+      <View style={styles.labelledIconGroup}>
+        <LabelledIcon label={String(likeCount)} iconName="heart-outline" />
+        <LabelledIcon label={String(commentCount)} iconName="message-square-outline" />
+      </View>
     </View>
   </View>
 );

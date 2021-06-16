@@ -10,6 +10,7 @@ import { setContext } from '@apollo/client/link/context';
 import useCachedResources from './src/core/use-cached-resources/useCachedResources';
 import Welcome from './src/core/navigation/Navigation';
 import Theme from './src/theme/theme.json';
+import Mapping from './src/theme/mapping.json';
 
 const client = new ApolloClient({
   uri: process.env.API_URI,
@@ -31,8 +32,12 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <IconRegistry icons={EvaIconsPack} />
-      <StatusBar backgroundColor="#FFECB4" barStyle="dark-content" />
-      <ApplicationProvider {...eva} theme={{ ...eva.light, ...Theme }}>
+      <StatusBar backgroundColor="#F7F9FC" barStyle="dark-content" />
+      <ApplicationProvider
+        {...eva}
+        theme={{ ...eva.light, ...Theme }}
+        customMapping={Mapping}
+      >
         <SafeAreaProvider>
           <Welcome />
         </SafeAreaProvider>

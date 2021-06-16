@@ -23,7 +23,7 @@ enum IconStyle {
 }
 
 const BottomNavigationIcon = ({ name, iconStyle }: { name: string, iconStyle: IconStyle }) => (
-  <Icon style={styles[iconStyle]} name={name} fill="#A36F3F" />
+  <Icon style={styles[iconStyle]} name={name} fill={iconStyle===IconStyle.Primary?"#046D68":"#2E3A59"} />
 );
 
 const BottomTabBar = ({ navigation, state }: BottomTabBarProps<BottomTabBarOptions>) => (

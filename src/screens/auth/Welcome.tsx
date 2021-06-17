@@ -64,13 +64,14 @@ const Welcome = ({ navigation }: any) => (
         <Button
           style={styles.button}
           onPress={() => navigation.navigate('Signup')}
+          status="success"
         >
           CREATE ACCOUNT
         </Button>
         <Button
           style={styles.button}
           onPress={() => navigation.navigate('Home')}
-          status="success"
+          status="basic"
         >
           CONTINUE AS GUEST
         </Button>

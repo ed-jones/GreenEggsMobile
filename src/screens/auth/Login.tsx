@@ -6,14 +6,26 @@ import {
 import { Icons } from '@greeneggs/core';
 
 import useLoginForm from './useLoginForm';
+import { setContext } from '@apollo/client/link/context';
 
 const Login = ({ navigation }: any) => {
-  const [loginForm, setLoginForm, submitLoginForm] = useLoginForm();
+  const [loginForm, setLoginForm, [submitLoginForm]] = useLoginForm();
 
   const navigateBack = () => {
     navigation.goBack();
   };
 
+  async function handleLoginFormSubmit() {
+    const result = await submitLoginForm();
+    if (!result.errors) {
+      setContext((_request, _previousContext) => ({
+        headers: { 
+          authorization: result.data?.login.data?.token
+        },
+      }));
+    }
+  }
+  
   return (
     <View>
       <TopNavigation
@@ -31,9 +43,7 @@ const Login = ({ navigation }: any) => {
         value={loginForm.password}
         onChangeText={(nextValue) => setLoginForm('password', nextValue)}
       />
-      <Button onPress={submitLoginForm}>LOGIN</Button>
-      <Text>OR</Text>
-      <Button>CREATE NEW ACCOUNT</Button>
+      <Button onPress={handleLoginFormSubmit}>LOGIN</Button>
     </View>
   );
 };

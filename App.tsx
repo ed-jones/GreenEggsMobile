@@ -23,12 +23,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-setContext((_request, _previousContext) => ({
-  headers: { 
-    authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA3Zjc5YTdkLTYyMzMtNGZhMy1iM2UxLWI0MjU1NGFkMDc0NiIsImZpcnN0TmFtZSI6IkpvaG4iLCJsYXN0TmFtZSI6IlNtaXRoIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwicGFzc3dvcmQiOiIkMmEkMTAkQ25jOU9hMXdaR2hWeHV4WC9pdVZidWlXNlVEREI4d091NkhOcXlSNjJwZXAxUC9IYzYwTVMiLCJhdmF0YXJVUkkiOm51bGwsInZlcmlmaWVkIjpmYWxzZSwiaWF0IjoxNjIzODM2NDMxfQ.IQSAEXZeIFGivWQPVhVv55E4yZlibYSh_dfjR6_2jKk'
-  },
-}));
-
 const Stack = createStackNavigator();
 
 export default function App() {

@@ -24,5 +24,4 @@ export const LOGIN = gql`
       }
     }
   }
-  ${Fragments.UserFragment}
 `;

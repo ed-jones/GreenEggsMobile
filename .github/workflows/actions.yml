@@ -8,6 +8,7 @@ on:
 env:
   NODE_VERSION: "15.14.0"
   EXPO_VERSION: "4.x"
+  API_URI: ${{ secrets.API_URI }}
 
 jobs:
   build-and-deploy:
@@ -41,6 +42,5 @@ jobs:
           expo-version: ${{ env.EXPO_VERSION }}
           expo-username: ${{ secrets.EXPO_CLI_USERNAME }}
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
-          API_URI: ${{ secrets.API_URI }}
       - name: Publish to Expo
         run: expo publish

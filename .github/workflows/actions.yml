@@ -41,5 +41,6 @@ jobs:
           expo-version: ${{ env.EXPO_VERSION }}
           expo-username: ${{ secrets.EXPO_CLI_USERNAME }}
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
+          API_URI: ${{ secrets.API_URI }}
       - run: yarn install
       - run: expo publish

@@ -35,11 +35,11 @@ jobs:
           yarn test
           popd
 
-      - name: Publish to Expo ${{ env.EXPO_VERSION }}
+      - name: Setup Expo ${{ env.EXPO_VERSION }}
         uses: expo/expo-github-action@v5
         with:
           expo-version: ${{ env.EXPO_VERSION }}
           expo-username: ${{ secrets.EXPO_CLI_USERNAME }}
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
           API_URI: ${{ secrets.API_URI }}
-        run: expo publish
+      - run: expo publish

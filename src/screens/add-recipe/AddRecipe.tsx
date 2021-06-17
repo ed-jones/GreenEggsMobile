@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 });
 
 export default function AddRecipe() {
-  // const [recipeForm, setRecipeForm, submitRecipeForm] = useRecipeForm();
+  const [recipeForm, setRecipeForm, submitRecipeForm] = useRecipeForm();
   const Steps: Step[] = [
     {title: "Ingredients", component: <AddRecipeIngredients/>},
     {title: "Directions", component: <AddRecipeDirections/>},
@@ -65,10 +65,12 @@ export default function AddRecipe() {
       <TopNavigation title="Create Recipe" alignment="center"/>
       <View style={styles.view}>
         <Stepper index={index} length={length} currentStep={currentStep.title} nextStep={nextStep?.title}/>
-        {currentStep.component}
+      </View>
+      {currentStep.component}
+      <View style={styles.view}>
         <View style={styles.buttonGroup}>
           {isStart ? null : <Button onPress={previous}>Previous</Button>}
-          {isEnd ? null : <Button onPress={next}>Next</Button>}
+          {isEnd ? <Button onPress={submitRecipeForm}>Publish</Button> : <Button onPress={next}>Next</Button>}
         </View>
       </View>
     </>

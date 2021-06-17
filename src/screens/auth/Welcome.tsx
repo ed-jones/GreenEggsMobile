@@ -41,6 +41,12 @@ const styles = StyleSheet.create({
   view: {
     backgroundColor: "#F7F9FC",
     height: "100%"
+  },
+  centerText: {
+    textAlign: "center"
+  },
+  boldText: {
+    fontWeight: "bold"
   }
 });
 
@@ -76,10 +82,10 @@ const Welcome = ({ navigation }: any) => (
           CONTINUE AS GUEST
         </Button>
       </View>
-      <View>
-        <Text>Already have an account?</Text>
-        <Text style={{fontWeight: "bold"}} onPress={() => navigation.navigate('Login')}>Login</Text>
-      </View>
+      <Text style={styles.centerText}>
+        Already have an account?&nbsp;
+        <Text style={styles.boldText} onPress={() => navigation.navigate('Login')}>Login</Text>
+      </Text>
     </View>
     {/* <Text>OR CONTINUE WITH</Text>
     <Button>GOOGLE</Button>

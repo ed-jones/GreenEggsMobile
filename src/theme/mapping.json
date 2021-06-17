@@ -1,9 +1,9 @@
 {
     "strict": {
         "text-font-family": "Lato-Regular",
-        "text-heading-1-font-size": 36,
+        "text-heading-1-font-size": 48,
         "text-heading-1-font-weight": "800",
-        "text-heading-1-font-family": "Lato-Bold",
+        "text-heading-1-font-family": "RobotoSlab-Medium",
         "text-heading-2-font-size": 32,
         "text-heading-2-font-weight": "800",
         "text-heading-2-font-family": "Lato-Bold",

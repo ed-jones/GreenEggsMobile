@@ -4,6 +4,7 @@ import { Text, Button } from '@ui-kitten/components';
 import Logo from '../../assets/images/icon.png';
 import Banner from '../../assets/images/banner.jpg';
 import { LinearGradient } from 'expo-linear-gradient';
+import { StatusBar } from 'expo-status-bar';
 
 const styles = StyleSheet.create({
   logo: {
@@ -52,6 +53,7 @@ const styles = StyleSheet.create({
 
 const Welcome = ({ navigation }: any) => (
   <View style={styles.view}>
+    <StatusBar style="light" />
     <View style={styles.bannerContainer}>
       <ImageBackground source={Banner} style={styles.banner}>
         <LinearGradient

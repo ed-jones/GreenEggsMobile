@@ -7,5 +7,5 @@ export const Settings = (props: any) => (
 );
 
 export const Back = (props: any) => (
-  <Icon {...props} name="arrow-back" />
+  <Icon {...props} name="chevron-left-outline" />
 );

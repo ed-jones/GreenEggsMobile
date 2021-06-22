@@ -74,5 +74,5 @@
   "color-danger-transparent-400": "rgba(219, 74, 35, 0.32)",
   "color-danger-transparent-500": "rgba(219, 74, 35, 0.4)",
   "color-danger-transparent-600": "rgba(219, 74, 35, 0.48)",
-  "text-primary-color": "#2E3A59",
+  "text-primary-color": "#2E3A59"
 }

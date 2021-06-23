@@ -72,7 +72,8 @@ const Login = ({ navigation }: any) => {
   async function handleLoginFormSubmit() {
     const result = await submitLoginForm();
     const token = result.data?.login.data?.token;
-    if (token) {
+    const error = result.data?.login.error;
+    if (token && !error) {
       setContext((_request, _previousContext) => ({
         headers: { 
           authorization: token
@@ -108,11 +109,18 @@ const Login = ({ navigation }: any) => {
         <Input
           label="EMAIL"
           value={loginForm.email}
+          textContentType="emailAddress"
+          autoCompleteType="email"
+          autoCapitalize="none"
+          autoFocus
           onChangeText={(nextValue) => setLoginForm('email', nextValue)}
         />
         <Input
           label="PASSWORD"
           value={loginForm.password}
+          textContentType="password"
+          autoCompleteType="password"
+          secureTextEntry
           onChangeText={(nextValue) => setLoginForm('password', nextValue)}
         />
         <Text category="p2" style={styles.forgotPassword}>Forgot Password?</Text>

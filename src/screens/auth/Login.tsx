@@ -17,9 +17,11 @@ const styles = StyleSheet.create({
   logo: {
     width: 48,
     height: 48,
+    margin: 10
   },
   form: {
     padding: 10,
+    height: "100%"
   },
   gradient: {
     position: "absolute",
@@ -30,6 +32,7 @@ const styles = StyleSheet.create({
   },
   bannerContainer: {
     height: "25%",
+    justifyContent: "center"
   },
   bannerContent: {
     alignItems: "center",
@@ -42,11 +45,21 @@ const styles = StyleSheet.create({
   },
   view: {
     backgroundColor: "#F7F9FC",
-    height: "100%"
+  },
+  logoText: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   centerText: {
     textAlign: "center",
   },
+  forgotPassword: {
+    fontWeight: "bold",
+    textAlign: "right",
+    paddingTop: 8,
+    paddingBottom: 10,
+  }
 });
 
 const Login = ({ navigation }: any) => {
@@ -84,10 +97,10 @@ const Login = ({ navigation }: any) => {
             style={{backgroundColor: "transparent", paddingTop: insets.top}}
             accessoryLeft={() => <TopNavigationAction icon={Icons.Back} onPress={navigateBack}/>}
           />
-          <Text category="h1" style={styles.centerText}>
+          <View style={styles.logoText}>
+            <Text category="h1">Green Eggs</Text>
             <Image source={Logo} style={styles.logo}/>
-            Green Eggs
-          </Text>
+          </View>
           <Text style={styles.centerText} category="s1">Log in to view and share recipes with your friends</Text>
         </ImageBackground>
       </View>
@@ -102,6 +115,7 @@ const Login = ({ navigation }: any) => {
           value={loginForm.password}
           onChangeText={(nextValue) => setLoginForm('password', nextValue)}
         />
+        <Text category="p2" style={styles.forgotPassword}>Forgot Password?</Text>
         <Button onPress={handleLoginFormSubmit}>LOGIN</Button>
       </View>
     </View>

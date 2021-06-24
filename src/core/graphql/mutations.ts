@@ -25,3 +25,16 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const SIGNUP = gql`
+  mutation signup($signupDetails: SignupInput!) {
+    signup(signupDetails: $signupDetails) {
+      data {
+        token
+      }
+      error {
+        message
+      }
+    }
+  }
+`;

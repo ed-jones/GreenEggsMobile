@@ -1,15 +1,18 @@
 import { Mutations, useForm } from '@greeneggs/core';
 import {
-  login, loginVariables, LoginInput,
+  signup, signupVariables, SignupInput,
 } from '@greeneggs/types/graphql';
 
-const EmptyLoginForm: loginVariables = {
-  loginDetails: {
+const EmptySignupForm: signupVariables = {
+  signupDetails: {
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
+    confirmPassword: ''
   }
 }
 
-const useLoginForm = () => useForm<LoginInput, login, loginVariables>(Mutations.LOGIN, EmptyLoginForm);
+const useSignupForm = () => useForm<SignupInput, signup, signupVariables>(Mutations.SIGNUP, EmptySignupForm);
 
-export default useLoginForm;
+export default useSignupForm;

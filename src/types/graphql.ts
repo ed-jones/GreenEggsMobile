@@ -82,6 +82,39 @@ export interface loginVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: signup
+// ====================================================
+
+export interface signup_signup_data {
+  __typename: "AuthResultData";
+  token: string;
+}
+
+export interface signup_signup_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface signup_signup {
+  __typename: "AuthResult";
+  data: signup_signup_data | null;
+  error: signup_signup_error | null;
+}
+
+export interface signup {
+  signup: signup_signup;
+}
+
+export interface signupVariables {
+  signupDetails: SignupInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: Recipes
 // ====================================================
 
@@ -182,6 +215,14 @@ export interface RecipeInput {
   servingCount: number;
   timeEstimate: string;
   previewURI: string;
+}
+
+export interface SignupInput {
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  confirmPassword: string;
 }
 
 //==============================================================

@@ -3,7 +3,7 @@ import { View, StyleSheet, ImageBackground, Image, SafeAreaView } from 'react-na
 import {
   Text, Button, TopNavigation, TopNavigationAction, Input,
 } from '@ui-kitten/components';
-import { Icons } from '@greeneggs/core';
+import { Icons, IForm } from '@greeneggs/core';
 import useLoginForm from './useLoginForm';
 import { setContext } from '@apollo/client/link/context';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -12,7 +12,6 @@ import Logo from '../../assets/images/icon.png';
 import Banner from '../../assets/images/banner.jpg';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaInsetsContext, useSafeAreaInsets } from 'react-native-safe-area-context';
-import AuthPageTemplate from './AuthPageTemplate';
 
 const styles = StyleSheet.create({
   logo: {
@@ -63,46 +62,43 @@ const styles = StyleSheet.create({
   }
 });
 
-const Login = ({ navigation }: any) => {
-  const [loginForm, setLoginForm, [submitLoginForm]] = useLoginForm();
+interface IAuthPageTemplateProps {
+  navigation: any;
+  children: React.ReactNode;
+}
 
-  async function handleLoginFormSubmit() {
-    const result = await submitLoginForm();
-    const token = result.data?.login.data?.token;
-    const error = result.data?.login.error;
-    if (token && !error) {
-      setContext((_request, _previousContext) => ({
-        headers: { 
-          authorization: token
-        },
-      }));
-      navigation.navigate('Home');
-    }
-  }
+const AuthPageTemplate = ({ navigation, children }: IAuthPageTemplateProps) => {
+
+  const navigateBack = () => {
+    navigation.goBack();
+  };
+  const insets = useSafeAreaInsets();
   
   return (
-    <AuthPageTemplate navigation={navigation}>
-      <Input
-        label="EMAIL"
-        value={loginForm.email}
-        textContentType="emailAddress"
-        autoCompleteType="email"
-        autoCapitalize="none"
-        autoFocus
-        onChangeText={(nextValue) => setLoginForm('email', nextValue)}
-      />
-      <Input
-        label="PASSWORD"
-        value={loginForm.password}
-        textContentType="password"
-        autoCompleteType="password"
-        secureTextEntry
-        onChangeText={(nextValue) => setLoginForm('password', nextValue)}
-      />
-      <Text category="p2" style={styles.forgotPassword}>Forgot Password?</Text>
-      <Button onPress={handleLoginFormSubmit}>LOGIN</Button>
-    </AuthPageTemplate>
+    <View style={styles.view}>
+      <StatusBar style="dark" />
+      <View style={styles.bannerContainer}>
+        <ImageBackground source={Banner} style={styles.banner}>
+          <LinearGradient
+            colors={['rgba(247, 249, 252,0.5)', 'rgba(247, 249, 252,1)']}
+            style={styles.gradient}
+          />
+          <TopNavigation
+            style={{backgroundColor: "transparent", paddingTop: insets.top}}
+            accessoryLeft={() => <TopNavigationAction icon={Icons.Back} onPress={navigateBack}/>}
+          />
+          <View style={styles.logoText}>
+            <Text category="h1">Green Eggs</Text>
+            <Image source={Logo} style={styles.logo}/>
+          </View>
+          <Text style={styles.centerText} category="s1">Log in to view and share recipes with your friends</Text>
+        </ImageBackground>
+      </View>
+      <View style={styles.form}>
+        {children}
+      </View>
+    </View>
   );
 };
 
-export default Login;
+export default AuthPageTemplate;

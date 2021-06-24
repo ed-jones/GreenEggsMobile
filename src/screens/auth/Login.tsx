@@ -81,7 +81,7 @@ const Login = ({ navigation }: any) => {
   }
   
   return (
-    <AuthPageTemplate navigation={navigation}>
+    <AuthPageTemplate navigation={navigation} message="Log in to view and share recipes with your friends">
       <Input
         label="EMAIL"
         value={loginForm.email}

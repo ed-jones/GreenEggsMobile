@@ -64,10 +64,11 @@ const styles = StyleSheet.create({
 
 interface IAuthPageTemplateProps {
   navigation: any;
+  message: string;
   children: React.ReactNode;
 }
 
-const AuthPageTemplate = ({ navigation, children }: IAuthPageTemplateProps) => {
+const AuthPageTemplate = ({ navigation, message, children }: IAuthPageTemplateProps) => {
 
   const navigateBack = () => {
     navigation.goBack();
@@ -91,7 +92,7 @@ const AuthPageTemplate = ({ navigation, children }: IAuthPageTemplateProps) => {
             <Text category="h1">Green Eggs</Text>
             <Image source={Logo} style={styles.logo}/>
           </View>
-          <Text style={styles.centerText} category="s1">Log in to view and share recipes with your friends</Text>
+          <Text style={styles.centerText} category="s1">{message}</Text>
         </ImageBackground>
       </View>
       <View style={styles.form}>

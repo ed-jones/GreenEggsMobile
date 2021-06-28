@@ -18,7 +18,6 @@ export default function useForm<
 >(
   Mutation: DocumentNode,
   mutationVariableName: string,
-  errorMessage: string,
   options?: MutationHookOptions<MutationType, MutationVariables>,
   reactHookFormProps?: UseFormProps<InputType>
 ): IForm<InputType, MutationType, MutationVariables> {

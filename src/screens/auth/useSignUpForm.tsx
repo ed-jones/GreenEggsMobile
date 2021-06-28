@@ -13,6 +13,6 @@ const EmptySignupForm: signupVariables = {
   }
 }
 
-const useSignupForm = () => useForm<SignupInput, signup, signupVariables>(Mutations.SIGNUP, EmptySignupForm);
+const useSignupForm = () => useForm<SignupInput, signup, signupVariables>(Mutations.SIGNUP, "signupDetails");
 
 export default useSignupForm;

@@ -1,16 +1,16 @@
 import React from 'react';
 
-import { Button, Input, Text } from '@ui-kitten/components';
+import { Button, Input } from '@ui-kitten/components';
 
 import useSignupForm from './useSignUpForm';
 import AuthPageTemplate from './AuthPageTemplate';
 import { setContext } from '@apollo/client/link/context';
 
 const Signup = ({ navigation }: any) => {
-  const [signupForm, setSignupForm, [submitSignupForm]] = useSignupForm();
+  const {formFields, setFormField, submitForm} = useSignupForm();
 
   async function handleSignupFormSubmit() {
-    const result = await submitSignupForm();
+    const result = await submitForm();
     const token = result.data?.signup.data?.token;
     const error = result.data?.signup.error;
     if (token && !error) {
@@ -27,44 +27,44 @@ const Signup = ({ navigation }: any) => {
     <AuthPageTemplate navigation={navigation} message="Sign up to view and share recipes with your friends">
       <Input
         label="FIRST NAME"
-        value={signupForm.firstName}
+        value={formFields.firstName}
         textContentType="givenName"
         autoCompleteType="name"
         autoCapitalize="words"
         autoFocus
-        onChangeText={(nextValue) => setSignupForm('firstName', nextValue)}
+        onChangeText={(nextValue) => setFormField('firstName', nextValue)}
       />
       <Input
         label="LAST NAME"
-        value={signupForm.lastName}
+        value={formFields.lastName}
         textContentType="familyName"
         autoCompleteType="name"
         autoCapitalize="words"
-        onChangeText={(nextValue) => setSignupForm('lastName', nextValue)}
+        onChangeText={(nextValue) => setFormField('lastName', nextValue)}
       />
       <Input
         label="EMAIL"
-        value={signupForm.email}
+        value={formFields.email}
         textContentType="emailAddress"
         autoCompleteType="email"
         autoCapitalize="none"
-        onChangeText={(nextValue) => setSignupForm('email', nextValue)}
+        onChangeText={(nextValue) => setFormField('email', nextValue)}
       />
       <Input
         label="PASSWORD"
-        value={signupForm.password}
+        value={formFields.password}
         textContentType="password"
         autoCompleteType="password"
         secureTextEntry
-        onChangeText={(nextValue) => setSignupForm('password', nextValue)}
+        onChangeText={(nextValue) => setFormField('password', nextValue)}
       />
       <Input
         label="CONFIRM PASSWORD"
-        value={signupForm.confirmPassword}
+        value={formFields.confirmPassword}
         textContentType="password"
         autoCompleteType="password"
         secureTextEntry
-        onChangeText={(nextValue) => setSignupForm('confirmPassword', nextValue)}
+        onChangeText={(nextValue) => setFormField('confirmPassword', nextValue)}
       />
       <Button onPress={handleSignupFormSubmit}>SIGN UP</Button>
     </AuthPageTemplate>

@@ -1,48 +1,33 @@
-import { DocumentNode, MutationHookOptions, MutationTuple, useMutation } from '@apollo/client';
+import { DocumentNode, FetchResult, MutationFunctionOptions, MutationHookOptions, MutationResult, MutationTuple, useMutation } from '@apollo/client';
 import { useState } from 'react';
-import { ToastAndroid } from 'react-native';
+import { Path, SubmitErrorHandler, SubmitHandler, useForm as useReactHookForm, UseFormHandleSubmit, UseFormProps, UseFormReturn } from 'react-hook-form';
 
-type SetFormField = (field: string, value: string | number | null) => void;
+export interface IForm<InputType, MutationType, MutationVariables> extends UseFormReturn<InputType> {
+  formResult: MutationResult<MutationType>;
+  submitForm: (options?: MutationFunctionOptions<MutationType, MutationVariables> | undefined) => Promise<FetchResult<MutationType>>
+}
 
-export type IForm<InputType, MutationType, MutationVariables> = [
-  formFields: InputType,
-  setFormField: SetFormField,
-  result: MutationTuple<MutationType, MutationVariables>
-];
-
+/*
+ *  Custom hook that combines the functionality of react-hook-form
+ *  with type safe apollo mutations
+ */
 export default function useForm<
   InputType,
   MutationType,
   MutationVariables extends Record<keyof MutationVariables, InputType>,
 >(
   Mutation: DocumentNode,
-  defaultInput: MutationVariables,
+  mutationVariableName: string,
+  errorMessage: string,
   options?: MutationHookOptions<MutationType, MutationVariables>,
+  reactHookFormProps?: UseFormProps<InputType>
 ): IForm<InputType, MutationType, MutationVariables> {
-  const [state, setState] = useState<MutationVariables>(defaultInput);
+  const reactHookForm = useReactHookForm<InputType>(reactHookFormProps);
 
-  const setFormField: SetFormField = (field, value) => {
-    setState({
-      ...state,
-      [Object.keys(state)[0]]: {
-        ...state[Object.keys(state)[0] as keyof MutationVariables],
-        [field]: value,
-      },
-    });
-  };
-
-  const result = useMutation<MutationType, MutationVariables>(Mutation, {
-    onCompleted: () => {
-      setState(defaultInput);
-      ToastAndroid.show('Form Submitted', ToastAndroid.SHORT);
-    },
-    onError: ({ message }) => {
-      ToastAndroid.show(message, ToastAndroid.SHORT);
-    },
-    variables: state,
+  const [submitForm, formResult] = useMutation<MutationType, MutationVariables>(Mutation, {
+    variables: { [mutationVariableName]: reactHookForm.getValues() } as unknown as MutationVariables,
     ...options,
   });
 
-  const formFields = state[Object.keys(state)[0] as keyof MutationVariables] as InputType;
-  return [formFields, setFormField, result];
+  return {...reactHookForm, formResult, submitForm};
 }

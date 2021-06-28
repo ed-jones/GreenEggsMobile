@@ -3,13 +3,6 @@ import {
   login, loginVariables, LoginInput,
 } from '@greeneggs/types/graphql';
 
-const EmptyLoginForm: loginVariables = {
-  loginDetails: {
-    email: '',
-    password: '',
-  }
-}
-
-const useLoginForm = () => useForm<LoginInput, login, loginVariables>(Mutations.LOGIN, EmptyLoginForm);
+const useLoginForm = () => useForm<LoginInput, login, loginVariables>(Mutations.LOGIN, "loginDetails", "Incorrect email or password");
 
 export default useLoginForm;

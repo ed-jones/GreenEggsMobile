@@ -63,7 +63,7 @@ const Recipe = ({ route, navigation }: any) => {
           header={() => (
             <View style={styles.cardSection}>
               <Text category="h5">{data.recipe.title}</Text>
-              <Text category="s1">A healthy and delicious meal</Text>
+              <Text category="s1">{data.recipe.subtitle}</Text>
               <LabelledIcon label={convertTimeEstimate(data.recipe.timeEstimate)} iconName="clock-outline" />
             </View>
           )}

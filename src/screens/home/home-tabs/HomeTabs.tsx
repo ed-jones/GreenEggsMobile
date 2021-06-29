@@ -3,6 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator, MaterialTopTabBarProps } from '@react-navigation/material-top-tabs';
 import { TabBar, Tab } from '@ui-kitten/components';
 import AllRecipes from '../all-recipes/AllRecipes';
+import { createStackNavigator } from '@react-navigation/stack';
+import Recipe from '@greeneggs/screens/recipe/Recipe';
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 
@@ -17,7 +19,9 @@ const TopTabBar = ({ navigation, state }: MaterialTopTabBarProps) => (
   </TabBar>
 );
 
-export default function HomeTabs() {
+const Stack = createStackNavigator();
+
+export default function HomeTabs({ navigation }: any) {
   return (
     <NavigationContainer independent>
       <Navigator
@@ -26,7 +30,7 @@ export default function HomeTabs() {
           <TopTabBar {...props} />
         )}
       >
-        <Screen name="NEWS FEED" component={AllRecipes} />
+        <Screen name="NEWS FEED" component={() => <AllRecipes navigation={navigation} />}/>
         <Screen name="TRENDING" component={AllRecipes} />
         <Screen name="CATEGORIES" component={AllRecipes} />
         <Screen name="MY RECIPES" component={AllRecipes} />

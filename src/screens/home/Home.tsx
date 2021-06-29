@@ -2,10 +2,10 @@ import React from 'react';
 import { TopBar } from '@greeneggs/core';
 import HomeTabs from './home-tabs/HomeTabs';
 
-const Home = () => (
+const Home = ({ navigation }: any) => (
   <>
     <TopBar />
-    <HomeTabs />
+    <HomeTabs navigation={navigation}/>
   </>
 );
 

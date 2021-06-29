@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Recipes() {
+export default function Recipes({ navigation }: any) {
   const {
     loading, error, data, refetch,
   } = useQuery<recipes>(Queries.GET_RECIPES);
@@ -44,7 +44,7 @@ export default function Recipes() {
           key={recipe.id}
           style={i === 0 ? { ...styles.firstCard, ...styles.card } : styles.card}
         >
-          <RecipeCard recipe={recipe} />
+          <RecipeCard recipe={recipe} onPress={() => navigation.navigate("Recipe")}/>
         </View>
       ))}
     </ScrollView>

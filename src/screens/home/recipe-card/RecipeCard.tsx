@@ -22,7 +22,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const RecipeCard = ({ recipe }: { recipe: recipes_recipes }) => (
+interface IRecipeCard {
+  recipe: recipes_recipes;
+  onPress: () => void;
+}
+
+const RecipeCard = ({ recipe, onPress }: IRecipeCard) => (
   <Card
     appearance="filled"
     style={styles.card}
@@ -34,6 +39,7 @@ const RecipeCard = ({ recipe }: { recipe: recipes_recipes }) => (
       // eslint-disable-next-line react/jsx-props-no-spreading
       <RecipeCardFooter {...recipe} />
     )}
+    onPress={onPress}
   >
     <View style={styles.imageContainer}>
       <Image

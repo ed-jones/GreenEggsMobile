@@ -43,7 +43,9 @@ const styles = StyleSheet.create({
   },
   tags: {
     flexDirection: "row",
-    marginVertical: 10
+  },
+  heading: {
+    marginVertical: 16
   },
   gradient: {
     position: "absolute",
@@ -146,7 +148,7 @@ const Recipe = ({ route, navigation }: any) => {
             <Icons.Warning fill="#DB4A23" style={{width: 48, height: 48, marginRight: 10}}/>
             <Text>This recipe is unsuitable for those with allergies to Eggs, Milk and Gluten.</Text>
           </View>
-          <Text category="h5">
+          <Text category="h5" style={styles.heading}>
             Categories
           </Text>
           <View style={styles.tags}>
@@ -154,19 +156,28 @@ const Recipe = ({ route, navigation }: any) => {
             <Text category="label" appearance="alternative" style={styles.tag}>BREAKFAST</Text>
             <Text category="label" appearance="alternative" style={styles.tag}>DINNER</Text>
           </View>
-          <Text category="h5">
+          <Text category="h5" style={styles.heading}>
             Ingredients
           </Text>
           <View style={{marginHorizontal: -16}}>
-            <ListItem title="Flour" />
-            <ListItem title="Butter" />
-            <ListItem title="Turmeric" />
+            <ListItem title="Flour"  accessoryRight={() => (
+              <Text category="label" style={{marginRight: 10}}>150 GRAMS</Text>
+            )}/>
+            <ListItem title="Butter"  accessoryRight={() => (
+              <Text category="label" style={{marginRight: 10}}>2.8 OUNCES</Text>
+            )}/>
+            <ListItem title="Turmeric" description="Optional" accessoryRight={() => (
+              <Text category="label" style={{marginRight: 10}}>1 PINCH</Text>
+            )}/>
             <ViewMore onPress={() => null} />
           </View>
-          <Text category="h5">
+          <Text category="h5" style={styles.heading}>
             Directions
           </Text>
-          <Text category="h5">
+          <View>
+
+          </View>
+          <Text category="h5" style={styles.heading}>
             Top Comments
           </Text>
         </View>

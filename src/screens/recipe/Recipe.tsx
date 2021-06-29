@@ -1,14 +1,16 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { ImageBackground, SafeAreaView, View, StyleSheet } from 'react-native';
+import { ImageBackground, SafeAreaView, View, StyleSheet, ScrollView } from 'react-native';
 import { Icons, LabelledIcon, Queries } from '@greeneggs/core';
-import { Avatar, Card, ListElement, ListItem, Spinner, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
+import { Avatar, Card, ListElement, ListItem, Spinner, Text, TopNavigation, TopNavigationAction, Layout } from '@ui-kitten/components';
 import { recipe, recipeVariables } from '@greeneggs/types/graphql';
 import { convertTimeEstimate } from '@greeneggs/core/convertTimeEstimate/convertTimeEstimate';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { noavatar } from '@greeneggs/core';
 import ViewMore from '@greeneggs/core/view-more/ViewMore';
+import ParallaxHeader from '@fabfit/react-native-parallax-header';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const styles = StyleSheet.create({
   coverPhoto: {
@@ -16,9 +18,6 @@ const styles = StyleSheet.create({
     height: undefined,
     aspectRatio: 1 / 1,
     resizeMode: 'cover',
-  },
-  detailsCard: {
-    marginTop: -80,
   },
   content: {
     padding: 16
@@ -45,7 +44,14 @@ const styles = StyleSheet.create({
   tags: {
     flexDirection: "row",
     marginVertical: 10
-  }
+  },
+  gradient: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: "100%",
+  },
 });
 
 const Recipe = ({ route, navigation }: any) => {
@@ -75,76 +81,97 @@ const Recipe = ({ route, navigation }: any) => {
   }
 
   return (
-    <View>
-      <StatusBar style="dark" />
-      <ImageBackground
-        source={{ uri: data.recipe.previewURI }}
-        style={styles.coverPhoto}
-      >
+    <ParallaxHeader
+      maxHeight={300}
+      minHeight={64}
+      renderOverlay={() => (
         <TopNavigation
-          style={{backgroundColor: "transparent", paddingTop: insets.top}}
+          style={{backgroundColor: "transparent", paddingTop: insets.top, alignItems: "flex-start"}}
           accessoryLeft={() => <TopNavigationAction icon={Icons.Back} onPress={navigateBack}/>}
         />
-      </ImageBackground>
-      <View style={styles.content}>
-        <Card
-          style={styles.detailsCard}
-          header={() => (
-            <View style={{...styles.cardSection, ...styles.row}}>
-              <View>
-                <Text category="h5">{data.recipe.title}</Text>
-                <Text category="s1">{data.recipe.subtitle}</Text>
-              </View>
-              <LabelledIcon label={convertTimeEstimate(data.recipe.timeEstimate)} iconName="clock-outline" />
-            </View>
-          )}
-          footer={() => (
-            <View style={styles.cardSection} >
-              <Text numberOfLines={2}>{data.recipe.description}</Text>
-              <ViewMore onPress={navigateToDescription} />
-            </View>
-          )}
+      )}
+      renderHeader={() => (
+        <ImageBackground
+          source={{ uri: data.recipe.previewURI }}
+          style={styles.coverPhoto}
         >
-          <View style={styles.row}>
+          <LinearGradient
+            colors={['rgba(247, 249, 252,0.4)', 'rgba(247, 249, 252,0)']}
+            style={styles.gradient}
+          />
+        </ImageBackground>
+      )}
+    >
+      <StatusBar style="dark" />
+      <ScrollView>          
+        <View style={styles.content}>
+          <Card
+            header={() => (
+              <View style={{...styles.cardSection, ...styles.row}}>
+                <View>
+                  <Text category="h5">{data.recipe.title}</Text>
+                  <Text category="s1">{data.recipe.subtitle}</Text>
+                </View>
+                <LabelledIcon label={convertTimeEstimate(data.recipe.timeEstimate)} iconName="clock-outline" />
+              </View>
+            )}
+            footer={() => (
+              <View style={styles.cardSection} >
+                <Text numberOfLines={2}>{data.recipe.description}</Text>
+                <ViewMore 
+                  style={{paddingHorizontal: 0, marginTop: 8}}
+                  onPress={navigateToDescription}
+                />
+              </View>
+            )}
+          >
             <View style={styles.row}>
-              <Avatar
-                size="small"
-                source={data.recipe.submittedBy.avatarURI ? { uri: data.recipe.submittedBy.avatarURI } : noavatar}
-                style={styles.avatar}
-              />
-              <Text>
-                {`${data.recipe.submittedBy.firstName} ${data.recipe.submittedBy.lastName}`}
-              </Text>
+              <View style={styles.row}>
+                <Avatar
+                  size="small"
+                  source={data.recipe.submittedBy.avatarURI ? { uri: data.recipe.submittedBy.avatarURI } : noavatar}
+                  style={styles.avatar}
+                />
+                <Text>
+                  {`${data.recipe.submittedBy.firstName} ${data.recipe.submittedBy.lastName}`}
+                </Text>
+              </View>
+              <View style={styles.row}>
+                <LabelledIcon label={String(data?.recipe.likeCount)} iconName="heart-outline" />
+                <LabelledIcon label={String(data?.recipe.commentCount)} iconName="message-square-outline" />
+              </View>
             </View>
-            <View style={styles.row}>
-              <LabelledIcon label={String(data?.recipe.likeCount)} iconName="heart-outline" />
-              <LabelledIcon label={String(data?.recipe.commentCount)} iconName="message-square-outline" />
-            </View>
+          </Card>
+          <View style={{flexDirection: "row", alignItems: "center", paddingVertical: 16, paddingRight: 64}}>
+            <Icons.Warning fill="#DB4A23" style={{width: 48, height: 48, marginRight: 10}}/>
+            <Text>This recipe is unsuitable for those with allergies to Eggs, Milk and Gluten.</Text>
           </View>
-        </Card>
-        <View style={{flexDirection: "row", alignItems: "center", paddingVertical: 16, paddingRight: 64}}>
-          <Icons.Warning fill="#DB4A23" style={{width: 48, height: 48, marginRight: 10}}/>
-          <Text>This recipe is unsuitable for those with allergies to Eggs, Milk and Gluten.</Text>
+          <Text category="h5">
+            Categories
+          </Text>
+          <View style={styles.tags}>
+            <Text category="label" appearance="alternative" style={styles.tag}>LUNCH</Text>
+            <Text category="label" appearance="alternative" style={styles.tag}>BREAKFAST</Text>
+            <Text category="label" appearance="alternative" style={styles.tag}>DINNER</Text>
+          </View>
+          <Text category="h5">
+            Ingredients
+          </Text>
+          <View style={{marginHorizontal: -16}}>
+            <ListItem title="Flour" />
+            <ListItem title="Butter" />
+            <ListItem title="Turmeric" />
+            <ViewMore onPress={() => null} />
+          </View>
+          <Text category="h5">
+            Directions
+          </Text>
+          <Text category="h5">
+            Top Comments
+          </Text>
         </View>
-        <Text category="h5">
-          Categories
-        </Text>
-        <View style={styles.tags}>
-          <Text category="label" appearance="alternative" style={styles.tag}>LUNCH</Text>
-          <Text category="label" appearance="alternative" style={styles.tag}>BREAKFAST</Text>
-          <Text category="label" appearance="alternative" style={styles.tag}>DINNER</Text>
-        </View>
-        <Text category="h5">
-          Ingredients
-        </Text>
-        <Text category="h5">
-          Directions
-        </Text>
-        <Text category="h5">
-          Top Comments
-        </Text>
-      </View>
-    </View>
+      </ScrollView>
+    </ParallaxHeader>
   )
 }
 

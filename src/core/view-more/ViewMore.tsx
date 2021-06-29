@@ -1,17 +1,12 @@
 import React from 'react';
-import { ListItem } from '@ui-kitten/components';
+import { ListItem, ListItemProps } from '@ui-kitten/components';
 import { Down } from '../icons/Icons';
 
-interface IViewMore {
-  onPress: () => void;
-}
-
-const ViewMore = ({ onPress }: IViewMore) => (
+const ViewMore = (props: ListItemProps) => (
   <ListItem
-    style={{marginTop: 8, paddingLeft: 0, paddingRight: 0}}
-    onPress={onPress}
     accessoryRight={Down}
     title="View More"
+    {...props}
   />
 );
 

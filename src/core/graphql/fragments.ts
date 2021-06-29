@@ -14,6 +14,7 @@ export const RecipeFragment = gql`
   fragment RecipeFragment on Recipe {
     id
     title
+    subtitle
     description
     submittedBy {
       ...UserFragment

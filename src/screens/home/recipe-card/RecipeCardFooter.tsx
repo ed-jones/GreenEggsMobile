@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 
 export interface IRecipeCardFooterProps extends Partial<recipes_recipes> {
   title: string;
-  description: string;
+  subtitle: string;
   commentCount: number;
   likeCount: number;
   createdAt: string;
@@ -38,14 +38,14 @@ export interface IRecipeCardFooterProps extends Partial<recipes_recipes> {
 
 const RecipeCardFooter = (
   {
-    title, description, commentCount, likeCount, timeEstimate,
+    title, subtitle, commentCount, likeCount, timeEstimate,
   }: IRecipeCardFooterProps,
 ) => (
   <View style={styles.view}>
     <View style={styles.labelledIcons}>
       <View>
         <Text category="h1" style={styles.recipeTitle}>{title}</Text>
-        <Text category="s1" style={styles.recipeDescription}>{description}</Text>
+        <Text category="s1" style={styles.recipeDescription}>{subtitle}</Text>
       </View>
       <View style={styles.labelledIconGroup}>
         <Text>16 hours ago</Text>

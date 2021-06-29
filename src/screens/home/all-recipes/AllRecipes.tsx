@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { Text } from '@ui-kitten/components';
 import { useQuery } from '@apollo/client';
-import { recipes, recipes_recipes } from '@greeneggs/types/graphql';
+import { recipes } from '@greeneggs/types/graphql';
 import { Queries } from '@greeneggs/core';
 
 import LoadingScreen from '../../loading/LoadingScreen';
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 
 export default function Recipes({ navigation }: any) {
   const {
-    loading, error, data, refetch,
+    loading, error, data, refetch
   } = useQuery<recipes>(Queries.GET_RECIPES);
 
   if (loading) return <LoadingScreen />;

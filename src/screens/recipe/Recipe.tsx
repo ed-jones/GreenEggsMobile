@@ -46,7 +46,7 @@ const Recipe = ({ route, navigation }: any) => {
 
 
   return (
-    <SafeAreaView>
+    <View>
       <StatusBar style="dark" />
       <ImageBackground
         source={{ uri: data.recipe.previewURI }}
@@ -82,7 +82,7 @@ const Recipe = ({ route, navigation }: any) => {
           </View>
         </Card>
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 

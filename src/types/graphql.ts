@@ -20,6 +20,7 @@ export interface addRecipe_addRecipe_data {
   __typename: "Recipe";
   id: string;
   title: string;
+  subtitle: string;
   description: string;
   submittedBy: addRecipe_addRecipe_data_submittedBy;
   commentCount: number;
@@ -131,6 +132,7 @@ export interface recipes_recipes {
   __typename: "Recipe";
   id: string;
   title: string;
+  subtitle: string;
   description: string;
   submittedBy: recipes_recipes_submittedBy;
   commentCount: number;
@@ -167,6 +169,7 @@ export interface recipe_recipe {
   __typename: "Recipe";
   id: string;
   title: string;
+  subtitle: string;
   description: string;
   submittedBy: recipe_recipe_submittedBy;
   commentCount: number;
@@ -225,6 +228,7 @@ export interface RecipeFragment {
   __typename: "Recipe";
   id: string;
   title: string;
+  subtitle: string;
   description: string;
   submittedBy: RecipeFragment_submittedBy;
   commentCount: number;
@@ -251,6 +255,7 @@ export interface LoginInput {
 
 export interface RecipeInput {
   title: string;
+  subtitle: string;
   description: string;
   servingCount: number;
   timeEstimate: string;

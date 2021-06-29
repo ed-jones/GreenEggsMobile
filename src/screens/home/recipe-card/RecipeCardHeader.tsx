@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Avatar, Icon, Text } from '@ui-kitten/components';
-import { Recipes_recipes_submittedBy } from '@greeneggs/types/graphql';
+import { recipes_recipes_submittedBy } from '@greeneggs/types/graphql';
 import { noavatar } from '@greeneggs/core';
 
 const styles = StyleSheet.create({
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export interface IRecipeCardHeaderProps extends Partial<Recipes_recipes_submittedBy> {
+export interface IRecipeCardHeaderProps extends Partial<recipes_recipes_submittedBy> {
   avatarURI?: string | null;
   firstName: string;
   lastName: string;

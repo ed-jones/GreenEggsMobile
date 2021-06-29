@@ -2,7 +2,8 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text } from '@ui-kitten/components';
 import { LabelledIcon } from '@greeneggs/core';
-import { Recipes_recipes } from '@greeneggs/types/graphql';
+import { recipes_recipes } from '@greeneggs/types/graphql';
+import { convertTimeEstimate } from '@greeneggs/core/convertTimeEstimate/convertTimeEstimate';
 
 const styles = StyleSheet.create({
   view: {
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export interface IRecipeCardFooterProps extends Partial<Recipes_recipes> {
+export interface IRecipeCardFooterProps extends Partial<recipes_recipes> {
   title: string;
   description: string;
   commentCount: number;
@@ -33,17 +34,6 @@ export interface IRecipeCardFooterProps extends Partial<Recipes_recipes> {
   createdAt: string;
   servingCount: number;
   timeEstimate: string;
-}
-
-function convertTimeEstimate(timeEstimate: string): string {
-  const minuteEstimate = new Date(Number(timeEstimate)).getMinutes();
-  if (minuteEstimate < 60) {
-    return `${minuteEstimate} mins`;
-  }
-  if (minuteEstimate === 60) {
-    return '1 hour';
-  }
-  return `${Math.floor(minuteEstimate / 60)} hours`;
 }
 
 const RecipeCardFooter = (

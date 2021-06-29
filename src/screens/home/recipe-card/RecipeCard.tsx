@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Image, View } from 'react-native';
 import { Card } from '@ui-kitten/components';
-import { Recipes_recipes } from '@greeneggs/types/graphql';
+import { recipes_recipes } from '@greeneggs/types/graphql';
 import { imagenotfound } from '@greeneggs/core';
 import RecipeCardHeader from './RecipeCardHeader';
 import RecipeCardFooter from './RecipeCardFooter';
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const RecipeCard = ({ recipe }: { recipe: Recipes_recipes }) => (
+const RecipeCard = ({ recipe }: { recipe: recipes_recipes }) => (
   <Card
     appearance="filled"
     style={styles.card}

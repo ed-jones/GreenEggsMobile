@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { Text } from '@ui-kitten/components';
 import { useQuery } from '@apollo/client';
-import { Recipes_recipes } from '@greeneggs/types/graphql';
+import { recipes, recipes_recipes } from '@greeneggs/types/graphql';
 import { Queries } from '@greeneggs/core';
 
 import LoadingScreen from '../../loading/LoadingScreen';
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 export default function Recipes() {
   const {
     loading, error, data, refetch,
-  } = useQuery(Queries.GET_RECIPES);
+  } = useQuery<recipes>(Queries.GET_RECIPES);
 
   if (loading) return <LoadingScreen />;
   if (error) {
@@ -39,7 +39,7 @@ export default function Recipes() {
 
   return (
     <ScrollView refreshControl={<RefreshControl refreshing={loading} onRefresh={refetch} />}>
-      {data.recipes.map((recipe: Recipes_recipes, i: number) => (
+      {data?.recipes.map((recipe, i: number) => (
         <View
           key={recipe.id}
           style={i === 0 ? { ...styles.firstCard, ...styles.card } : styles.card}

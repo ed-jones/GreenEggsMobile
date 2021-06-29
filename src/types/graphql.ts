@@ -115,10 +115,10 @@ export interface signupVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: Recipes
+// GraphQL query operation: recipes
 // ====================================================
 
-export interface Recipes_recipes_submittedBy {
+export interface recipes_recipes_submittedBy {
   __typename: "User";
   id: string;
   firstName: string;
@@ -127,12 +127,12 @@ export interface Recipes_recipes_submittedBy {
   avatarURI: string | null;
 }
 
-export interface Recipes_recipes {
+export interface recipes_recipes {
   __typename: "Recipe";
   id: string;
   title: string;
   description: string;
-  submittedBy: Recipes_recipes_submittedBy;
+  submittedBy: recipes_recipes_submittedBy;
   commentCount: number;
   likeCount: number;
   createdAt: string;
@@ -141,8 +141,48 @@ export interface Recipes_recipes {
   previewURI: string;
 }
 
-export interface Recipes {
-  recipes: Recipes_recipes[];
+export interface recipes {
+  recipes: recipes_recipes[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: recipe
+// ====================================================
+
+export interface recipe_recipe_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  avatarURI: string | null;
+}
+
+export interface recipe_recipe {
+  __typename: "Recipe";
+  id: string;
+  title: string;
+  description: string;
+  submittedBy: recipe_recipe_submittedBy;
+  commentCount: number;
+  likeCount: number;
+  createdAt: string;
+  servingCount: number;
+  timeEstimate: string;
+  previewURI: string;
+}
+
+export interface recipe {
+  recipe: recipe_recipe;
+}
+
+export interface recipeVariables {
+  recipeId: string;
 }
 
 /* tslint:disable */

@@ -19,22 +19,17 @@ const TopTabBar = ({ navigation, state }: MaterialTopTabBarProps) => (
   </TabBar>
 );
 
-const Stack = createStackNavigator();
-
-export default function HomeTabs({ navigation }: any) {
+export default function HomeTabs() {
   return (
-    <NavigationContainer independent>
-      <Navigator
-        tabBar={(props: MaterialTopTabBarProps) => (
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          <TopTabBar {...props} />
-        )}
-      >
-        <Screen name="NEWS FEED" component={() => <AllRecipes navigation={navigation} />}/>
-        <Screen name="TRENDING" component={AllRecipes} />
-        <Screen name="CATEGORIES" component={AllRecipes} />
-        <Screen name="MY RECIPES" component={AllRecipes} />
-      </Navigator>
-    </NavigationContainer>
+    <Navigator
+      tabBar={(props: MaterialTopTabBarProps) => (
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        <TopTabBar {...props} />
+      )}
+    >
+      <Screen name="NEWS FEED" component={AllRecipes} />
+      <Screen name="TRENDING" component={AllRecipes} />
+      <Screen name="CATEGORIES" component={AllRecipes} />
+    </Navigator>
   );
 }

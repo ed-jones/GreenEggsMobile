@@ -1,10 +1,12 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { ImageBackground, SafeAreaView, View, StyleSheet } from 'react-native';
-import { LabelledIcon, Queries } from '@greeneggs/core';
-import { Card, Spinner, Text } from '@ui-kitten/components';
+import { Icons, LabelledIcon, Queries } from '@greeneggs/core';
+import { Card, Spinner, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
 import { recipe, recipeVariables } from '@greeneggs/types/graphql';
 import { convertTimeEstimate } from '@greeneggs/core/convertTimeEstimate/convertTimeEstimate';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StatusBar } from 'expo-status-bar';
 
 const styles = StyleSheet.create({
   coverPhoto: {
@@ -24,22 +26,37 @@ const styles = StyleSheet.create({
   }
 });
 
-const Recipe = () => {
+const Recipe = ({ route, navigation }: any) => {
+  const { recipeId } = route.params;
+
   const {
     loading, error, data
   } = useQuery<recipe, recipeVariables>(Queries.GET_RECIPE, {
-    variables: { recipeId: "399e8870-75b9-4703-a795-f8715c0b2b81"}
+    variables: { recipeId }
   });
+
+  const navigateBack = () => {
+    navigation.goBack();
+  };
+
+  const insets = useSafeAreaInsets();
 
   if (loading || !data) return <Spinner />
   if (error) return <Text>{error.message}</Text>
 
+
   return (
     <SafeAreaView>
+      <StatusBar style="dark" />
       <ImageBackground
         source={{ uri: data.recipe.previewURI }}
         style={styles.coverPhoto}
-      />
+      >
+        <TopNavigation
+          style={{backgroundColor: "transparent", paddingTop: insets.top}}
+          accessoryLeft={() => <TopNavigationAction icon={Icons.Back} onPress={navigateBack}/>}
+        />
+      </ImageBackground>
       <View style={styles.content}>
         <Card
           style={styles.detailsCard}

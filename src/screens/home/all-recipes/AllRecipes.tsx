@@ -44,7 +44,7 @@ export default function Recipes({ navigation }: any) {
           key={recipe.id}
           style={i === 0 ? { ...styles.firstCard, ...styles.card } : styles.card}
         >
-          <RecipeCard recipe={recipe} onPress={() => navigation.navigate("Recipe")}/>
+          <RecipeCard recipe={recipe} onPress={() => navigation.navigate("Recipe", { recipeId: recipe.id })}/>
         </View>
       ))}
     </ScrollView>

@@ -9,3 +9,7 @@ export const Settings = (props: any) => (
 export const Back = (props: any) => (
   <Icon {...props} name="chevron-left-outline" />
 );
+
+export const Down = (props: any) => (
+  <Icon {...props} name="chevron-down-outline" />
+);

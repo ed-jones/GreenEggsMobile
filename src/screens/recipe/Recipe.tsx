@@ -8,6 +8,7 @@ import { convertTimeEstimate } from '@greeneggs/core/convertTimeEstimate/convert
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { noavatar } from '@greeneggs/core';
+import ViewMore from '@greeneggs/core/view-more/ViewMore';
 
 const styles = StyleSheet.create({
   coverPhoto: {
@@ -33,6 +34,18 @@ const styles = StyleSheet.create({
   avatar: {
     marginRight: 10,
   },
+  tag: {
+    borderRadius: 16,
+    marginRight: 6,
+    marginVertical: 4,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    backgroundColor: '#8F9BB3',
+  },
+  tags: {
+    flexDirection: "row",
+    marginVertical: 10
+  }
 });
 
 const Recipe = ({ route, navigation }: any) => {
@@ -88,12 +101,7 @@ const Recipe = ({ route, navigation }: any) => {
           footer={() => (
             <View style={styles.cardSection} >
               <Text numberOfLines={2}>{data.recipe.description}</Text>
-              <ListItem
-                style={{marginTop: 8, paddingLeft: 0, paddingRight: 0}}
-                onPress={navigateToDescription}
-                accessoryRight={Icons.Down}
-                title="View More"
-              />
+              <ViewMore onPress={navigateToDescription} />
             </View>
           )}
         >
@@ -114,6 +122,27 @@ const Recipe = ({ route, navigation }: any) => {
             </View>
           </View>
         </Card>
+        <View style={{flexDirection: "row", alignItems: "center", paddingVertical: 16, paddingRight: 64}}>
+          <Icons.Warning fill="#DB4A23" style={{width: 48, height: 48, marginRight: 10}}/>
+          <Text>This recipe is unsuitable for those with allergies to Eggs, Milk and Gluten.</Text>
+        </View>
+        <Text category="h5">
+          Categories
+        </Text>
+        <View style={styles.tags}>
+          <Text category="label" appearance="alternative" style={styles.tag}>LUNCH</Text>
+          <Text category="label" appearance="alternative" style={styles.tag}>BREAKFAST</Text>
+          <Text category="label" appearance="alternative" style={styles.tag}>DINNER</Text>
+        </View>
+        <Text category="h5">
+          Ingredients
+        </Text>
+        <Text category="h5">
+          Directions
+        </Text>
+        <Text category="h5">
+          Top Comments
+        </Text>
       </View>
     </View>
   )

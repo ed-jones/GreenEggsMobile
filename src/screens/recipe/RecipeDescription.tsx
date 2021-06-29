@@ -37,7 +37,7 @@ const RecipeDescription = (
         header={() => (
           <View style={styles.cardElement}>
             <Text category="h6">{title}</Text>
-            <Text category="s1">{`${submittedBy.firstName} ${submittedBy.lastName}`}</Text>
+            <Text category="s1">{`Created by ${submittedBy.firstName} ${submittedBy.lastName}`}</Text>
           </View>
         )}
         footer={() => (

@@ -13,3 +13,7 @@ export const Back = (props: any) => (
 export const Down = (props: any) => (
   <Icon {...props} name="chevron-down-outline" />
 );
+
+export const Warning = (props: any) => (
+  <Icon {...props} name="alert-triangle" />
+);

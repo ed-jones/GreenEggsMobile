@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { ImageBackground, SafeAreaView, View, StyleSheet, ScrollView } from 'react-native';
 import { Icons, LabelledIcon, Queries } from '@greeneggs/core';
-import { Avatar, Card, ListElement, ListItem, Spinner, Text, TopNavigation, TopNavigationAction, Layout } from '@ui-kitten/components';
+import { Avatar, Card, ListElement, ListItem, Spinner, Text, TopNavigation, TopNavigationAction, Layout, Divider } from '@ui-kitten/components';
 import { recipe, recipeVariables } from '@greeneggs/types/graphql';
 import { convertTimeEstimate } from '@greeneggs/core/convertTimeEstimate/convertTimeEstimate';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -180,6 +180,26 @@ const Recipe = ({ route, navigation }: any) => {
           <Text category="h5" style={styles.heading}>
             Top Comments
           </Text>
+          <View style={{marginHorizontal: -16}}>
+            <ListItem>
+              <View style={{flexDirection: "column", padding: 10}}>
+                <Text numberOfLines={2} style={{marginBottom: 16}}>
+                  Wow, I really enjoyed this recipe! If you liked this one you should check out my quiche recipe. I’ve done something similar but changed a couple of things.
+                </Text>
+                <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+                  <View>
+                    <Text style={{fontWeight: "bold"}}>Bobby Rutherford</Text>
+                  </View>
+                  <View style={{flexDirection: "row"}}>
+                    <LabelledIcon label="10" iconName="heart-outline" />
+                    <LabelledIcon label="Reply" iconName="undo-outline" />
+                  </View>
+                </View>
+              </View>
+            </ListItem>
+            <Divider />
+            <ViewMore onPress={() => null} />
+          </View>
         </View>
       </ScrollView>
     </ParallaxHeader>

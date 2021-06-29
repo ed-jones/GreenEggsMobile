@@ -76,7 +76,7 @@ const AuthPageTemplate = ({ navigation, message, children }: IAuthPageTemplatePr
   const insets = useSafeAreaInsets();
   
   return (
-    <View style={styles.view}>
+    <View style={{...styles.view, paddingBottom: insets.bottom}}>
       <StatusBar style="dark" />
       <View style={styles.bannerContainer}>
         <ImageBackground source={Banner} style={styles.banner}>

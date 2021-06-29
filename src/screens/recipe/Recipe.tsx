@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { ImageBackground, SafeAreaView, View, StyleSheet, ScrollView } from 'react-native';
+import { ImageBackground, Image, SafeAreaView, View, StyleSheet, ScrollView } from 'react-native';
 import { Icons, LabelledIcon, Queries } from '@greeneggs/core';
 import { Avatar, Card, ListElement, ListItem, Spinner, Text, TopNavigation, TopNavigationAction, Layout, Divider } from '@ui-kitten/components';
 import { recipe, recipeVariables } from '@greeneggs/types/graphql';
@@ -11,6 +11,8 @@ import { noavatar } from '@greeneggs/core';
 import ViewMore from '@greeneggs/core/view-more/ViewMore';
 import ParallaxHeader from '@fabfit/react-native-parallax-header';
 import { LinearGradient } from 'expo-linear-gradient';
+import Carousel from 'react-native-snap-carousel';
+import { Dimensions } from 'react-native';
 
 const styles = StyleSheet.create({
   coverPhoto: {
@@ -174,8 +176,27 @@ const Recipe = ({ route, navigation }: any) => {
           <Text category="h5" style={styles.heading}>
             Directions
           </Text>
-          <View>
-
+          <View style={{marginHorizontal: -16}}>
+            <Carousel 
+              sliderWidth={Dimensions.get('window').width}
+              itemWidth={Dimensions.get('window').width*0.8}
+              data={[1, 2, 3, 4, 5]}
+              renderItem={({ index }) => (
+                <Card
+                  header={() => (
+                    <Image
+                      style={{height: undefined, width: "100%", aspectRatio: 1 / 1}}
+                      source={{ uri: "https://reviewed-com-res.cloudinary.com/image/fetch/s--lm7imI2e--/b_white,c_limit,cs_srgb,f_auto,fl_progressive.strip_profile,g_center,q_auto,w_792/https://reviewed-production.s3.amazonaws.com/attachment/98c2ea086c2d4ccc/Preheat_ovens_2.png"}}
+                    />
+                  )}
+                  footer={() => (
+                    <Text style={{margin: 16}}>Preheat oven to 375 degrees F (190 degrees C).</Text>
+                  )}
+                >
+                  <Text category="h6">{`${index+1}. Preheat Oven`}</Text>
+                </Card>
+              )}
+            />
           </View>
           <Text category="h5" style={styles.heading}>
             Top Comments

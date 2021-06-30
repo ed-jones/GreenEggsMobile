@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 });
 
 export default function AddRecipe() {
-  const [recipeForm, setRecipeForm, submitRecipeForm] = useRecipeForm();
+  // const [recipeForm, setRecipeForm, submitRecipeForm] = useRecipeForm();
   const Steps: Step[] = [
     {title: "Ingredients", component: <AddRecipeIngredients/>},
     {title: "Directions", component: <AddRecipeDirections/>},
@@ -70,7 +70,7 @@ export default function AddRecipe() {
       <View style={styles.view}>
         <View style={styles.buttonGroup}>
           {isStart ? null : <Button onPress={previous}>Previous</Button>}
-          {isEnd ? <Button onPress={submitRecipeForm}>Publish</Button> : <Button onPress={next}>Next</Button>}
+          {isEnd ? <Button onPress={() =>  null}>Publish</Button> : <Button onPress={next}>Next</Button>}
         </View>
       </View>
     </>

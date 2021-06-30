@@ -1,10 +1,7 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator, MaterialTopTabBarProps } from '@react-navigation/material-top-tabs';
 import { TabBar, Tab } from '@ui-kitten/components';
 import AllRecipes from '../all-recipes/AllRecipes';
-import { createStackNavigator } from '@react-navigation/stack';
-import Recipe from '@greeneggs/screens/recipe/Recipe';
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 

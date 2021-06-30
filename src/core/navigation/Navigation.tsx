@@ -9,7 +9,7 @@ const { Navigator, Screen } = createBottomTabNavigator();
 
 export default function Navigation() {
   return (
-    <NavigationContainer>
+    <NavigationContainer independent>
       <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
         <Screen name="Home" component={Home} />
         <Screen name="Notifications" component={NotFoundScreen} options={{ title: 'Oops!' }} />

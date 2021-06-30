@@ -20,6 +20,7 @@ import Mapping from "./src/theme/mapping.json";
 import { SafeAreaView } from "react-native";
 import Recipe from "@greeneggs/screens/recipe/Recipe";
 import RecipeDescription from "@greeneggs/screens/recipe/RecipeDescription";
+import { Navigation } from "@greeneggs/core";
 
 const client = new ApolloClient({
   uri: process.env.API_URI,
@@ -47,7 +48,7 @@ export default function App() {
             <Stack.Screen name="Welcome" component={Welcome} />
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Signup" component={Signup} />
-            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Home" component={Navigation} />
             <Stack.Screen name="Recipe" component={Recipe} />
             <Stack.Screen name="RecipeDescription" component={RecipeDescription} />
           </Stack.Navigator>

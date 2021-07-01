@@ -23,3 +23,5 @@ export const Warning = (props: any) => (
 export const Publish = (props: any) => (
   <Icon {...props} name="upload-outline" />
 );
+
+export const Add = (props: any) => <Icon {...props} name="plus-outline" />;

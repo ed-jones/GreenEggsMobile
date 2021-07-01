@@ -2,6 +2,8 @@ import React from "react";
 import { Divider, Input, List, ListItem, Text } from "@ui-kitten/components";
 import { ScrollView } from "react-native";
 import { addRecipeStyles, RecipeForm } from "./AddRecipe";
+import { Icons } from "@greeneggs/core";
+import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
 
 const Directions = [
   {
@@ -29,13 +31,10 @@ const AddRecipeDirections = ({ form }: IAddRecipeDirections) => (
     <List
       data={Directions}
       renderItem={({ item }) => (
-        <>
-          <ListItem title={item.title} description={item.description} />
-          <Divider />
-        </>
+        <ListItem title={item.title} description={item.description} />
       )}
     />
-    <ListItem title="Add Step" />
+    <AddListItem label="ADD STEP" />
   </ScrollView>
 );
 

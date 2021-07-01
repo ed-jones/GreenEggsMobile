@@ -2,6 +2,7 @@ import React from "react";
 import { Divider, Input, List, ListItem, Text } from "@ui-kitten/components";
 import { ScrollView } from "react-native";
 import { addRecipeStyles, RecipeForm } from "./AddRecipe";
+import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
 
 const Categories = [
   {
@@ -47,11 +48,10 @@ const AddRecipeCategories = ({ form }: IAddRecipeCategories) => (
       renderItem={({ item }) => (
         <>
           <ListItem title={item.title} />
-          <Divider />
         </>
       )}
     />
-    <ListItem title="Add Category" />
+    <AddListItem label="ADD CATEGORY" />
     <Text
       category="h5"
       style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}
@@ -63,11 +63,10 @@ const AddRecipeCategories = ({ form }: IAddRecipeCategories) => (
       renderItem={({ item }) => (
         <>
           <ListItem title={item.title} />
-          <Divider />
         </>
       )}
     />
-    <ListItem title="Add Diet" />
+    <AddListItem label="ADD DIET" />
     <Text
       category="h5"
       style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}
@@ -79,11 +78,10 @@ const AddRecipeCategories = ({ form }: IAddRecipeCategories) => (
       renderItem={({ item }) => (
         <>
           <ListItem title={item.title} />
-          <Divider />
         </>
       )}
     />
-    <ListItem title="Add Allergy" />
+    <AddListItem label="ADD ALLERGY" />
   </ScrollView>
 );
 

@@ -12,6 +12,7 @@ import ControlledInput, {
 import { IForm } from "@greeneggs/core";
 import { ScrollView } from "react-native-gesture-handler";
 import { addRecipeStyles, RecipeForm } from "./AddRecipe";
+import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
 
 const Ingredients = [
   {
@@ -60,7 +61,7 @@ const CreateRecipeIngredients = ({ form }: ICreateRecipeIngredients) => (
         </>
       )}
     />
-    <ListItem title="Add Ingredient" />
+    <AddListItem label="ADD INGREDIENT" />
   </ScrollView>
 );
 

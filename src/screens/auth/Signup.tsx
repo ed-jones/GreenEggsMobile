@@ -19,8 +19,7 @@ const styles = StyleSheet.create({
 });
 
 const Signup = ({ navigation }: any) => {
-  const { formResult, handleSubmit, control, submitForm, getValues } =
-    useSignupForm();
+  const { formResult, handleSubmit, control, submitForm } = useSignupForm();
 
   async function handleSignupFormSubmit() {
     const result = await submitForm();
@@ -41,6 +40,7 @@ const Signup = ({ navigation }: any) => {
       navigation={navigation}
       message="Sign up to view and share recipes with your friends"
     >
+      {/* FIRST NAME */}
       <ControlledInput<SignupInput>
         controllerProps={{
           control,
@@ -55,6 +55,7 @@ const Signup = ({ navigation }: any) => {
         submitError={formResult.data?.signup.error}
         type={InputType.FIRSTNAME}
       />
+      {/* LAST NAME */}
       <ControlledInput<SignupInput>
         controllerProps={{
           control,
@@ -68,9 +69,9 @@ const Signup = ({ navigation }: any) => {
         submitError={formResult.data?.signup.error}
         type={InputType.LASTNAME}
       />
+      {/* EMAIL */}
       <ControlledInput<SignupInput>
         inputProps={{
-          autoFocus: true,
           style: styles.input,
         }}
         controllerProps={{
@@ -81,6 +82,7 @@ const Signup = ({ navigation }: any) => {
         submitError={formResult.data?.signup.error}
         type={InputType.EMAIL}
       />
+      {/* PASSWORD */}
       <ControlledInput<SignupInput>
         inputProps={{
           style: styles.input,
@@ -94,6 +96,7 @@ const Signup = ({ navigation }: any) => {
         submitError={formResult.data?.signup.error}
         type={InputType.PASSWORD}
       />
+      {/* CONFIRM PASSWORD */}
       <ControlledInput<SignupInput>
         inputProps={{
           style: styles.input,

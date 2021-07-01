@@ -134,7 +134,7 @@ const ControlledInput = <
         <Input
           onBlur={onBlur}
           onChangeText={onChange}
-          value={String(value)}
+          value={value && String(value)}
           status={error || !!submitError ? "danger" : undefined}
           caption={submitError ? submitError.message : error?.message}
           {...{ ...inputTypeDefaultProps.inputProps, ...inputProps }}

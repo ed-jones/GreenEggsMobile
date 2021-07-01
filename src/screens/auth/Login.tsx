@@ -53,15 +53,6 @@ const Login = ({ navigation }: any) => {
           name: "email",
           defaultValue: "",
           control,
-          rules: {
-            maxLength: { value: 100, message: "Must be under 100 characters" },
-            required: { value: true, message: "This field is required" },
-            pattern: {
-              value:
-                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-              message: "Not an email address",
-            },
-          },
         }}
         submitError={formResult.data?.login.error}
         type={InputType.EMAIL}
@@ -74,11 +65,6 @@ const Login = ({ navigation }: any) => {
           name: "password",
           defaultValue: "",
           control,
-          rules: {
-            maxLength: { value: 100, message: "Must be under 100 characters" },
-            minLength: { value: 4, message: "Must be over 4 characters" },
-            required: { value: true, message: "This field is required" },
-          },
         }}
         submitError={formResult.data?.login.error}
         type={InputType.PASSWORD}

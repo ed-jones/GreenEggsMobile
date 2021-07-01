@@ -176,7 +176,9 @@ const ControlledInput = <
               : onChange(e)
           }
           value={
-            type === InputType.NUMERIC ? numberToString(value) : String(value)
+            type === InputType.NUMERIC
+              ? (value && numberToString(value)) || ""
+              : (value && String(value)) || ""
           }
           status={error || !!submitError ? "danger" : undefined}
           caption={submitError ? submitError.message : error?.message}

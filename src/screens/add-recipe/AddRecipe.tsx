@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { Input, Button, TopNavigation, Layout } from "@ui-kitten/components";
+import {
+  Input,
+  Button,
+  TopNavigation,
+  Layout,
+  Spinner,
+} from "@ui-kitten/components";
 
 import useRecipeForm from "./useRecipeForm";
 import { Icons, IForm, TimePicker } from "@greeneggs/core";
@@ -33,7 +39,7 @@ export const addRecipeStyles = StyleSheet.create({
 
 export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>;
 
-export default function AddRecipe() {
+export default function AddRecipe({ navigation }: any) {
   const recipeForm = useRecipeForm();
   const Steps: Step[] = [
     {
@@ -54,6 +60,12 @@ export default function AddRecipe() {
 
   const steps = useSteps(Steps);
   const insets = useSafeAreaInsets();
+
+  const onSubmit = async () => {
+    const result = await recipeForm.submitForm();
+    navigation.navigate("Home");
+  };
+
   return (
     <>
       <View style={{ ...addRecipeStyles.view, marginTop: insets.top }}>
@@ -69,8 +81,12 @@ export default function AddRecipe() {
         <View style={addRecipeStyles.buttonGroup}>
           {steps.isEnd ? (
             <Button
-              onPress={recipeForm.handleSubmit(recipeForm.submitForm)}
-              accessoryRight={Icons.Publish}
+              onPress={recipeForm.handleSubmit(onSubmit)}
+              accessoryRight={
+                recipeForm.formResult.loading
+                  ? () => <Spinner size="small" status="control" />
+                  : Icons.Publish
+              }
             >
               Publish
             </Button>

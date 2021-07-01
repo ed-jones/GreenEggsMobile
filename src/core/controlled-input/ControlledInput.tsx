@@ -1,12 +1,16 @@
 import React from "react";
-import { Controller, ControllerProps } from "react-hook-form";
+import { Controller, ControllerProps, RegisterOptions } from "react-hook-form";
 import { Input, InputProps } from "@ui-kitten/components";
 import { ErrorFragment } from "@greeneggs/types/graphql";
 
+// Data types that can be used by this component
+// Includes form validation, styling and other behaviour
 export enum InputType {
   TEXT = "Text",
   EMAIL = "Email",
   PASSWORD = "Password",
+  FIRSTNAME = "FirstName",
+  LASTNAME = "LastName",
 }
 
 export interface IControlledInput<FieldValues> {
@@ -15,6 +19,17 @@ export interface IControlledInput<FieldValues> {
   submitError?: ErrorFragment | null;
   type: InputType;
 }
+
+// This object exists in order to reuse common form validation rules
+export const Rules: Record<
+  string,
+  Omit<RegisterOptions, "valueAsNumber" | "valueAsDate" | "setValueAs">
+> = {
+  REQUIRED: { required: { value: true, message: "This field is required" } },
+  UNDER100CHARS: {
+    maxLength: { value: 100, message: "Must be under 100 characters" },
+  },
+};
 
 // This is the interface for the object for default props for each input type
 // Name and render fields are omitted as they are always already defined
@@ -39,8 +54,8 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
     },
     controllerProps: {
       rules: {
-        maxLength: { value: 100, message: "Must be under 100 characters" },
-        required: { value: true, message: "This field is required" },
+        ...Rules.REQUIRED,
+        ...Rules.UNDER100CHARS,
         pattern: {
           value:
             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -49,7 +64,14 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       },
     },
   },
-  Text: {},
+  Text: {
+    controllerProps: {
+      rules: {
+        ...Rules.REQUIRED,
+        ...Rules.UNDER100CHARS,
+      },
+    },
+  },
   Password: {
     inputProps: {
       label: "PASSWORD",
@@ -59,13 +81,40 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
     },
     controllerProps: {
       rules: {
-        maxLength: { value: 100, message: "Must be under 100 characters" },
+        ...Rules.REQUIRED,
+        ...Rules.UNDER100CHARS,
         minLength: { value: 4, message: "Must be over 4 characters" },
-        required: { value: true, message: "This field is required" },
       },
     },
   },
+  FirstName: {
+    controllerProps: {
+      rules: {
+        ...Rules.REQUIRED,
+        ...Rules.UNDER100CHARS,
+      },
+    },
+    inputProps: {
+      textContentType: "givenName",
+      autoCompleteType: "name",
+      autoCapitalize: "words",
+    },
+  },
+  LastName: {
+    controllerProps: {
+      rules: {
+        ...Rules.REQUIRED,
+        ...Rules.UNDER100CHARS,
+      },
+    },
+    inputProps: {
+      textContentType: "familyName",
+      autoCompleteType: "name",
+      autoCapitalize: "words",
+    },
+  },
 });
+
 const ControlledInput = <
   FieldValues extends Record<keyof FieldValues, string | number>
 >({

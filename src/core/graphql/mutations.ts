@@ -9,11 +9,12 @@ export const ADD_RECIPE = gql`
         ...RecipeFragment
       }
       error {
-        message
+        ...ErrorFragment
       }
     }
   }
   ${Fragments.RecipeFragment}
+  ${Fragments.ErrorFragment}
 `;
 
 export const LOGIN = gql`
@@ -23,10 +24,11 @@ export const LOGIN = gql`
         token
       }
       error {
-        message
+        ...ErrorFragment
       }
     }
   }
+  ${Fragments.ErrorFragment}
 `;
 
 export const SIGNUP = gql`
@@ -36,8 +38,9 @@ export const SIGNUP = gql`
         token
       }
       error {
-        message
+        ...ErrorFragment
       }
     }
   }
+  ${Fragments.ErrorFragment}
 `;

@@ -28,3 +28,9 @@ export const RecipeFragment = gql`
   }
   ${UserFragment}
 `;
+
+export const ErrorFragment = gql`
+  fragment ErrorFragment on Error {
+    message
+  }
+`;

@@ -1,6 +1,7 @@
 import React from "react";
 import { Controller, ControllerProps } from "react-hook-form";
 import { Input, InputProps } from "@ui-kitten/components";
+import { ErrorFragment } from "@greeneggs/types/graphql";
 
 export enum InputType {
   TEXT = "Text",
@@ -11,7 +12,7 @@ export enum InputType {
 export interface IControlledInput<FieldValues> {
   controllerProps: Omit<ControllerProps<FieldValues>, "render">;
   inputProps?: InputProps;
-  submitError: boolean;
+  submitError?: ErrorFragment | null;
   type: InputType;
 }
 
@@ -51,8 +52,8 @@ const ControlledInput = <
           onBlur={onBlur}
           onChangeText={onChange}
           value={String(value)}
-          status={error || submitError ? "danger" : undefined}
-          caption={error?.message}
+          status={error || !!submitError ? "danger" : undefined}
+          caption={submitError ? submitError.message : error?.message}
           {...{ ...inputTypeDefaultProps, ...inputProps }}
         />
       )}

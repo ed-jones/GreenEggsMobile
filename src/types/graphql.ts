@@ -250,6 +250,20 @@ export interface RecipeFragment {
 // @generated
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL fragment: ErrorFragment
+// ====================================================
+
+export interface ErrorFragment {
+  __typename: "Error";
+  message: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================

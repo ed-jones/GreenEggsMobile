@@ -1,7 +1,45 @@
 import React from "react";
-import { Controller, ControllerProps, RegisterOptions } from "react-hook-form";
+import {
+  Controller,
+  ControllerProps,
+  Path,
+  PathValue,
+  RegisterOptions,
+} from "react-hook-form";
 import { Input, InputProps } from "@ui-kitten/components";
 import { ErrorFragment } from "@greeneggs/types/graphql";
+
+// Function that converts JS numbers to strings in a way
+// that avoids NaN, undefined, etc.
+function numberToString<FieldValues>(
+  number: PathValue<FieldValues, Path<FieldValues>>
+): string {
+  if (number === NaN) {
+    return "";
+  }
+  if (number === 0) {
+    return "0";
+  }
+  if (number === null) {
+    return "";
+  }
+  if (String(number) === "NaN") {
+    return "";
+  }
+  return String(number);
+}
+
+// Function that converts string input to numbers in a
+// way that avoids NaN, undefined, etc.
+function stringToNumber(string: string): number | null {
+  if (string === "") {
+    return null;
+  }
+  if (Number(string) == NaN) {
+    return 0;
+  }
+  return Number(string);
+}
 
 // Data types that can be used by this component
 // Includes form validation, styling and other behaviour
@@ -11,6 +49,7 @@ export enum InputType {
   PASSWORD = "Password",
   FIRSTNAME = "FirstName",
   LASTNAME = "LastName",
+  NUMERIC = "Numeric",
 }
 
 export interface IControlledInput<FieldValues> {
@@ -64,14 +103,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       },
     },
   },
-  Text: {
-    controllerProps: {
-      rules: {
-        ...Rules.REQUIRED,
-        ...Rules.UNDER100CHARS,
-      },
-    },
-  },
+  Text: {},
   Password: {
     inputProps: {
       label: "PASSWORD",
@@ -113,6 +145,11 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       autoCapitalize: "words",
     },
   },
+  Numeric: {
+    inputProps: {
+      keyboardType: "numeric",
+    },
+  },
 });
 
 const ControlledInput = <
@@ -133,8 +170,14 @@ const ControlledInput = <
       }) => (
         <Input
           onBlur={onBlur}
-          onChangeText={onChange}
-          value={value && String(value)}
+          onChangeText={(e) =>
+            type === InputType.NUMERIC
+              ? onChange(stringToNumber(e))
+              : onChange(e)
+          }
+          value={
+            type === InputType.NUMERIC ? numberToString(value) : String(value)
+          }
           status={error || !!submitError ? "danger" : undefined}
           caption={submitError ? submitError.message : error?.message}
           {...{ ...inputTypeDefaultProps.inputProps, ...inputProps }}

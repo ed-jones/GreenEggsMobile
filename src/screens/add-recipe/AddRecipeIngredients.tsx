@@ -31,9 +31,14 @@ const CreateRecipeIngredients = ({ form }: ICreateRecipeIngredients) => (
   <>
     <ControlledInput<RecipeInput>
       controllerProps={{ name: "servingCount", control: form.control }}
-      inputProps={{ label: "SERVES", placeholder: "4 people", autoFocus: true }}
+      inputProps={{
+        label: "SERVES",
+        placeholder: "4",
+        autoFocus: true,
+        defaultValue: "0",
+      }}
       submitError={form.formResult.data?.addRecipe.error}
-      type={InputType.TEXT}
+      type={InputType.NUMERIC}
     />
     <Text category="h6">Ingredients</Text>
     <List

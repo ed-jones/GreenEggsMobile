@@ -12,32 +12,6 @@ import Stepper from "./Stepper";
 import { useSteps, Step } from "./useSteps";
 import PublishRecipe from "./PublishRecipe";
 
-function numberToString(number: number | null): string {
-  if (number === NaN) {
-    return "";
-  }
-  if (number === 0) {
-    return "0";
-  }
-  if (number === null) {
-    return "";
-  }
-  if (String(number) === "NaN") {
-    return "";
-  }
-  return String(number);
-}
-
-function stringToNumber(string: string): number | null {
-  if (string === "") {
-    return null;
-  }
-  if (Number(string) == NaN) {
-    return 0;
-  }
-  return Number(string);
-}
-
 const styles = StyleSheet.create({
   view: {
     padding: 14,

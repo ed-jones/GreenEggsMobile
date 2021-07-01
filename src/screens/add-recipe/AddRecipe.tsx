@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { Input, Button, TopNavigation } from "@ui-kitten/components";
+import { Input, Button, TopNavigation, Layout } from "@ui-kitten/components";
 
 import useRecipeForm from "./useRecipeForm";
-import { TimePicker } from "@greeneggs/core";
+import { Icons, IForm, TimePicker } from "@greeneggs/core";
 import AddRecipeIngredients from "./AddRecipeIngredients";
 import AddRecipeDirections from "./AddRecipeDirections";
 import AddRecipeCategories from "./AddRecipeCategories";
@@ -11,16 +11,27 @@ import AddRecipeDetails from "./AddRecipeDetails";
 import Stepper from "./Stepper";
 import { useSteps, Step } from "./useSteps";
 import PublishRecipe from "./PublishRecipe";
+import {
+  addRecipe,
+  addRecipeVariables,
+  RecipeInput,
+} from "@greeneggs/types/graphql";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-const styles = StyleSheet.create({
+export const addRecipeStyles = StyleSheet.create({
   view: {
-    padding: 14,
+    padding: 16,
   },
   buttonGroup: {
-    flexDirection: "row",
+    flexDirection: "row-reverse",
     justifyContent: "space-between",
   },
+  heading: {
+    paddingVertical: 16,
+  },
 });
+
+export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>;
 
 export default function AddRecipe() {
   const recipeForm = useRecipeForm();
@@ -29,18 +40,23 @@ export default function AddRecipe() {
       title: "Ingredients",
       component: <AddRecipeIngredients form={recipeForm} />,
     },
-    { title: "Directions", component: <AddRecipeDirections /> },
-    { title: "Categories", component: <AddRecipeCategories /> },
-    { title: "Details", component: <AddRecipeDetails /> },
-    { title: "Publish", component: <PublishRecipe /> },
+    {
+      title: "Directions",
+      component: <AddRecipeDirections form={recipeForm} />,
+    },
+    {
+      title: "Categories",
+      component: <AddRecipeCategories form={recipeForm} />,
+    },
+    { title: "Details", component: <AddRecipeDetails form={recipeForm} /> },
+    { title: "Publish", component: <PublishRecipe form={recipeForm} /> },
   ];
 
   const steps = useSteps(Steps);
-
+  const insets = useSafeAreaInsets();
   return (
     <>
-      <TopNavigation title="Create Recipe" alignment="center" />
-      <View style={styles.view}>
+      <View style={{ ...addRecipeStyles.view, marginTop: insets.top }}>
         <Stepper
           index={steps.index}
           length={steps.length}
@@ -49,58 +65,30 @@ export default function AddRecipe() {
         />
       </View>
       {steps.currentStep.component}
-      <View style={styles.view}>
-        <View style={styles.buttonGroup}>
-          {steps.isStart ? null : (
-            <Button onPress={steps.previous}>Previous</Button>
-          )}
+      <View style={addRecipeStyles.view}>
+        <View style={addRecipeStyles.buttonGroup}>
           {steps.isEnd ? (
-            <Button onPress={recipeForm.handleSubmit(recipeForm.submitForm)}>
+            <Button
+              onPress={recipeForm.handleSubmit(recipeForm.submitForm)}
+              accessoryRight={Icons.Publish}
+            >
               Publish
             </Button>
           ) : (
-            <Button onPress={steps.next}>Next</Button>
+            <Button
+              onPress={recipeForm.handleSubmit(steps.next)}
+              accessoryRight={Icons.Forward}
+            >
+              Next
+            </Button>
+          )}
+          {steps.isStart ? null : (
+            <Button onPress={steps.previous} accessoryLeft={Icons.Back}>
+              Previous
+            </Button>
           )}
         </View>
       </View>
     </>
   );
-}
-
-{
-  /* <Input
-    label="Title"
-    placeholder="Greek Salad"
-    value={recipeForm.title}
-    onChangeText={(nextValue) => setRecipeForm('title', nextValue)}
-  />
-  <Input
-    label="Description"
-    placeholder="A popular salad in Greek cuisine."
-    value={recipeForm.description}
-    onChangeText={(nextValue) => setRecipeForm('description', nextValue)}
-  />
-  <Input
-    label="Serves"
-    placeholder="4"
-    keyboardType="numeric"
-    value={numberToString(recipeForm.servingCount)}
-    onChangeText={(nextValue) => setRecipeForm('servingCount', stringToNumber(nextValue))}
-  />
-  <Button onPress={() => setTimePickerOpen(true)}>OPEN TIME PICKER</Button>
-  <TimePicker />
-  <Input
-    label="Time Estimate"
-    placeholder="12000"
-    value={recipeForm.timeEstimate}
-  />
-  <Input
-    label="Image"
-    placeholder="http://website.com/image.jpg"
-    value={recipeForm.previewURI}
-    onChangeText={(nextValue) => setRecipeForm('previewURI', nextValue)}
-  />
-  <Button onPress={submitRecipeForm}>
-    ADD RECIPE
-  </Button> */
 }

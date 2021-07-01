@@ -11,6 +11,7 @@ import ControlledInput, {
 } from "@greeneggs/core/controlled-input/ControlledInput";
 import { IForm } from "@greeneggs/core";
 import { ScrollView } from "react-native-gesture-handler";
+import { addRecipeStyles, RecipeForm } from "./AddRecipe";
 
 const Ingredients = [
   {
@@ -24,22 +25,13 @@ const Ingredients = [
   },
 ];
 
-const styles = StyleSheet.create({
-  view: {
-    padding: 16,
-  },
-  heading: {
-    paddingVertical: 16,
-  },
-});
-
 interface ICreateRecipeIngredients {
-  form: IForm<RecipeInput, addRecipe, addRecipeVariables>;
+  form: RecipeForm;
 }
 
 const CreateRecipeIngredients = ({ form }: ICreateRecipeIngredients) => (
   <ScrollView>
-    <View style={styles.view}>
+    <View style={addRecipeStyles.view}>
       <ControlledInput<RecipeInput>
         controllerProps={{ name: "servingCount", control: form.control }}
         inputProps={{
@@ -50,7 +42,7 @@ const CreateRecipeIngredients = ({ form }: ICreateRecipeIngredients) => (
         submitError={form.formResult.data?.addRecipe.error}
         type={InputType.NUMERIC}
       />
-      <Text category="h5" style={styles.heading}>
+      <Text category="h5" style={addRecipeStyles.heading}>
         Ingredients
       </Text>
     </View>

@@ -8,6 +8,9 @@ export const ADD_RECIPE = gql`
       data {
         ...RecipeFragment
       }
+      error {
+        message
+      }
     }
   }
   ${Fragments.RecipeFragment}

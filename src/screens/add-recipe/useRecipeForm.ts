@@ -4,6 +4,7 @@ import { addRecipe, addRecipeVariables, RecipeInput } from '@greeneggs/types/gra
 const EmptyRecipeForm: addRecipeVariables = {
   recipe: {
     title: '',
+    subtitle: '',
     description: '',
     servingCount: 0,
     timeEstimate: '',
@@ -11,7 +12,7 @@ const EmptyRecipeForm: addRecipeVariables = {
   }
 }
 
-const useRecipeForm = () => useForm<RecipeInput, addRecipe, addRecipeVariables>(Mutations.LOGIN, EmptyRecipeForm, {
+const useRecipeForm = () => useForm<RecipeInput, addRecipe, addRecipeVariables>(Mutations.LOGIN, 'recioe', {
   update: (cache, { data }) => {
     cache.modify({
       fields: {

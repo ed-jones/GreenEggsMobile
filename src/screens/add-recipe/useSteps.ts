@@ -5,7 +5,7 @@ export interface Step {
     component: React.ReactNode;
 }
 
-type ISteps = [
+type ISteps = {
     currentStep: Step,
     nextStep: Step | undefined,
     previous: () => void,
@@ -14,7 +14,7 @@ type ISteps = [
     isEnd: boolean,
     index: number,
     length: number,
-]
+};
 
 export function useSteps(steps: Step[]): ISteps {
     const [index, setIndex] = useState<number>(0);
@@ -32,5 +32,5 @@ export function useSteps(steps: Step[]): ISteps {
         if (index > 0) setIndex(index - 1);
     }
 
-    return [currentStep, nextStep, next, previous, isStart, isEnd, index, length];
+    return {currentStep, nextStep, next, previous, isStart, isEnd, index, length};
 }

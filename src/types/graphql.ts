@@ -31,9 +31,15 @@ export interface addRecipe_addRecipe_data {
   previewURI: string;
 }
 
+export interface addRecipe_addRecipe_error {
+  __typename: "Error";
+  message: string;
+}
+
 export interface addRecipe_addRecipe {
   __typename: "RecipeResult";
   data: addRecipe_addRecipe_data | null;
+  error: addRecipe_addRecipe_error | null;
 }
 
 export interface addRecipe {

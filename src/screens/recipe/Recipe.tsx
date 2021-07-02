@@ -23,6 +23,7 @@ import {
 } from "@ui-kitten/components";
 import { recipe, recipeVariables } from "@greeneggs/types/graphql";
 import { convertTimeEstimate } from "@greeneggs/core/convertTimeEstimate/convertTimeEstimate";
+import Alert from "@greeneggs/core/alert/Alert";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { noavatar } from "@greeneggs/core";
@@ -184,23 +185,10 @@ const Recipe = ({ route, navigation }: any) => {
               </View>
             </View>
           </Card>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              paddingVertical: 16,
-              paddingRight: 64,
-            }}
-          >
-            <Icons.Warning
-              fill="#DB4A23"
-              style={{ width: 48, height: 48, marginRight: 10 }}
-            />
-            <Text>
-              This recipe is unsuitable for those with allergies to Eggs, Milk
-              and Gluten.
-            </Text>
-          </View>
+          <Alert
+            alertType="danger"
+            message="This recipe is unsuitable for those with allergies to Eggs, Milk and Gluten."
+          />
           <Text category="h5" style={styles.heading}>
             Categories
           </Text>

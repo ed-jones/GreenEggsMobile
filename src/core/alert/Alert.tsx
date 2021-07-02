@@ -5,7 +5,7 @@ import { Icon, IconProps, Text } from "@ui-kitten/components";
 type AlertType = "danger" | "warning" | "info" | "success";
 
 interface IAlert {
-  alertType: AlertType;
+  type: AlertType;
   message: string;
 }
 
@@ -16,7 +16,7 @@ const IconNameFromAlertType: Record<AlertType, IconProps> = {
   success: { name: "checkmark-circle-2", fill: "#10C485" },
 };
 
-const Alert = ({ alertType, message }: IAlert) => (
+const Alert = ({ type, message }: IAlert) => (
   <View
     style={{
       flexDirection: "row",
@@ -27,7 +27,7 @@ const Alert = ({ alertType, message }: IAlert) => (
   >
     <Icon
       style={{ width: 48, height: 48, marginRight: 10 }}
-      {...IconNameFromAlertType[alertType]}
+      {...IconNameFromAlertType[type]}
     />
     <Text>{message}</Text>
   </View>

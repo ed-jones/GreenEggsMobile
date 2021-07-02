@@ -7,15 +7,6 @@ import { recipe_recipe } from "@greeneggs/types/graphql";
 import { Text, Card, Avatar } from "@ui-kitten/components";
 
 const styles = StyleSheet.create({
-  coverPhoto: {
-    width: "100%",
-    height: undefined,
-    aspectRatio: 1 / 1,
-    resizeMode: "cover",
-  },
-  content: {
-    padding: 16,
-  },
   cardSection: {
     padding: 16,
   },
@@ -26,27 +17,6 @@ const styles = StyleSheet.create({
   },
   avatar: {
     marginRight: 10,
-  },
-  tag: {
-    borderRadius: 16,
-    marginRight: 6,
-    marginVertical: 4,
-    paddingVertical: 4,
-    paddingHorizontal: 8,
-    backgroundColor: "#8F9BB3",
-  },
-  tags: {
-    flexDirection: "row",
-  },
-  heading: {
-    marginVertical: 16,
-  },
-  gradient: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    height: "100%",
   },
 });
 

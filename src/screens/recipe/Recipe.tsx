@@ -3,30 +3,24 @@ import { useQuery } from "@apollo/client";
 import {
   ImageBackground,
   Image,
-  SafeAreaView,
   View,
   StyleSheet,
   ScrollView,
 } from "react-native";
 import { Icons, LabelledIcon, Queries } from "@greeneggs/core";
 import {
-  Avatar,
   Card,
-  ListElement,
   ListItem,
   Spinner,
   Text,
   TopNavigation,
   TopNavigationAction,
-  Layout,
   Divider,
 } from "@ui-kitten/components";
 import { recipe, recipeVariables } from "@greeneggs/types/graphql";
-import { convertTimeEstimate } from "@greeneggs/core/convertTimeEstimate/convertTimeEstimate";
 import Alert from "@greeneggs/core/alert/Alert";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import { noavatar } from "@greeneggs/core";
 import ViewMore from "@greeneggs/core/view-more/ViewMore";
 import ParallaxHeader from "@fabfit/react-native-parallax-header";
 import { LinearGradient } from "expo-linear-gradient";
@@ -129,7 +123,7 @@ const Recipe = ({ route, navigation }: any) => {
         <View style={styles.content}>
           <RecipeDetailsCard {...data.recipe} navigation={navigation} />
           <Alert
-            alertType="danger"
+            type="danger"
             message="This recipe is unsuitable for those with allergies to Eggs, Milk and Gluten."
           />
           <Text category="h5" style={styles.heading}>

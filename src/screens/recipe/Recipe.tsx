@@ -27,6 +27,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Carousel from "react-native-snap-carousel";
 import { Dimensions } from "react-native";
 import RecipeDetailsCard from "./RecipeDetailsCard";
+import Tags from "../../core/tags/Tags";
 
 const styles = StyleSheet.create({
   coverPhoto: {
@@ -48,17 +49,6 @@ const styles = StyleSheet.create({
   },
   avatar: {
     marginRight: 10,
-  },
-  tag: {
-    borderRadius: 16,
-    marginRight: 6,
-    marginVertical: 4,
-    paddingVertical: 4,
-    paddingHorizontal: 8,
-    backgroundColor: "#8F9BB3",
-  },
-  tags: {
-    flexDirection: "row",
   },
   heading: {
     marginVertical: 16,
@@ -129,17 +119,13 @@ const Recipe = ({ route, navigation }: any) => {
           <Text category="h5" style={styles.heading}>
             Categories
           </Text>
-          <View style={styles.tags}>
-            <Text category="label" appearance="alternative" style={styles.tag}>
-              LUNCH
-            </Text>
-            <Text category="label" appearance="alternative" style={styles.tag}>
-              BREAKFAST
-            </Text>
-            <Text category="label" appearance="alternative" style={styles.tag}>
-              DINNER
-            </Text>
-          </View>
+          <Tags
+            tags={[
+              { name: "BREAKFAST", onPress: () => null },
+              { name: "LUNCH", onPress: () => null },
+              { name: "DINNER", onPress: () => null },
+            ]}
+          />
           <Text category="h5" style={styles.heading}>
             Ingredients
           </Text>

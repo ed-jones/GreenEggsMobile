@@ -28,6 +28,7 @@ import Carousel from "react-native-snap-carousel";
 import { Dimensions } from "react-native";
 import RecipeDetailsCard from "./RecipeDetailsCard";
 import Tags from "../../core/tags/Tags";
+import IngredientListItem from "@greeneggs/core/ingredient-list-item/IngredientListItem";
 
 const styles = StyleSheet.create({
   coverPhoto: {
@@ -130,30 +131,27 @@ const Recipe = ({ route, navigation }: any) => {
             Ingredients
           </Text>
           <View style={{ marginHorizontal: -16 }}>
-            <ListItem
-              title="Flour"
-              accessoryRight={() => (
-                <Text category="label" style={{ marginRight: 10 }}>
-                  150 GRAMS
-                </Text>
-              )}
+            <IngredientListItem
+              ingredient={{
+                name: "Flour",
+                quantity: 150,
+                unit: "GRAMS",
+              }}
             />
-            <ListItem
-              title="Butter"
-              accessoryRight={() => (
-                <Text category="label" style={{ marginRight: 10 }}>
-                  2.8 OUNCES
-                </Text>
-              )}
+            <IngredientListItem
+              ingredient={{
+                name: "Butter",
+                quantity: 2.8,
+                unit: "OUNCES",
+              }}
             />
-            <ListItem
-              title="Turmeric"
-              description="Optional"
-              accessoryRight={() => (
-                <Text category="label" style={{ marginRight: 10 }}>
-                  1 PINCH
-                </Text>
-              )}
+            <IngredientListItem
+              ingredient={{
+                name: "Turmeric",
+                quantity: 1,
+                unit: "PINCH",
+                descriptor: "Optional",
+              }}
             />
             <Divider />
             <ViewMore onPress={() => null} />

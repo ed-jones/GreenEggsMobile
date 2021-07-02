@@ -32,6 +32,7 @@ import ParallaxHeader from "@fabfit/react-native-parallax-header";
 import { LinearGradient } from "expo-linear-gradient";
 import Carousel from "react-native-snap-carousel";
 import { Dimensions } from "react-native";
+import RecipeDetailsCard from "./RecipeDetailsCard";
 
 const styles = StyleSheet.create({
   coverPhoto: {
@@ -95,15 +96,6 @@ const Recipe = ({ route, navigation }: any) => {
   if (loading || !data) return <Spinner />;
   if (error) return <Text>{error.message}</Text>;
 
-  const navigateToDescription = () => {
-    navigation.navigate("RecipeDescription", {
-      description: data.recipe.description,
-      createdAt: data.recipe.createdAt,
-      title: data.recipe.title,
-      submittedBy: data.recipe.submittedBy,
-    });
-  };
-
   return (
     <ParallaxHeader
       maxHeight={300}
@@ -135,56 +127,7 @@ const Recipe = ({ route, navigation }: any) => {
       <StatusBar style="dark" />
       <ScrollView>
         <View style={styles.content}>
-          <Card
-            header={() => (
-              <View style={{ ...styles.cardSection, ...styles.row }}>
-                <View>
-                  <Text category="h5">{data.recipe.title}</Text>
-                  <Text category="s1">{data.recipe.subtitle}</Text>
-                </View>
-                <LabelledIcon
-                  label={convertTimeEstimate(data.recipe.timeEstimate)}
-                  iconName="clock-outline"
-                />
-              </View>
-            )}
-            footer={() => (
-              <View style={styles.cardSection}>
-                <Text numberOfLines={2}>{data.recipe.description}</Text>
-                <ViewMore
-                  style={{ paddingHorizontal: 0, marginTop: 8 }}
-                  onPress={navigateToDescription}
-                />
-              </View>
-            )}
-          >
-            <View style={styles.row}>
-              <View style={styles.row}>
-                <Avatar
-                  size="small"
-                  source={
-                    data.recipe.submittedBy.avatarURI
-                      ? { uri: data.recipe.submittedBy.avatarURI }
-                      : noavatar
-                  }
-                  style={styles.avatar}
-                />
-                <Text>
-                  {`${data.recipe.submittedBy.firstName} ${data.recipe.submittedBy.lastName}`}
-                </Text>
-              </View>
-              <View style={styles.row}>
-                <LabelledIcon
-                  label={String(data?.recipe.likeCount)}
-                  iconName="heart-outline"
-                />
-                <LabelledIcon
-                  label={String(data?.recipe.commentCount)}
-                  iconName="message-square-outline"
-                />
-              </View>
-            </View>
-          </Card>
+          <RecipeDetailsCard {...data.recipe} navigation={navigation} />
           <Alert
             alertType="danger"
             message="This recipe is unsuitable for those with allergies to Eggs, Milk and Gluten."

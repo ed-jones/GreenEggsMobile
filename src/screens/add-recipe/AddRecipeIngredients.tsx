@@ -13,16 +13,21 @@ import { IForm } from "@greeneggs/core";
 import { ScrollView } from "react-native-gesture-handler";
 import { addRecipeStyles, RecipeForm } from "./AddRecipe";
 import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
+import IngredientListItem, {
+  IIngredient,
+} from "@greeneggs/core/ingredient-list-item/IngredientListItem";
 
-const Ingredients = [
+const Ingredients: IIngredient[] = [
   {
-    title: "Carrot",
-    description: "Finely chopped",
-    quantity: "5 cups",
+    name: "Carrot",
+    descriptor: "Finely chopped",
+    quantity: 5,
+    unit: "CUPS",
   },
   {
-    title: "Baked Beans",
-    quantity: "1 Tin",
+    name: "Baked Beans",
+    quantity: 1,
+    unit: "TIN",
   },
 ];
 
@@ -49,17 +54,7 @@ const CreateRecipeIngredients = ({ form }: ICreateRecipeIngredients) => (
     </View>
     <List
       data={Ingredients}
-      renderItem={({ item }) => (
-        <>
-          <ListItem
-            title={item.title}
-            description={item.description}
-            accessoryRight={() => (
-              <Text category="label">{item.quantity.toUpperCase()}</Text>
-            )}
-          />
-        </>
-      )}
+      renderItem={({ item }) => <IngredientListItem ingredient={item} />}
     />
     <AddListItem label="ADD INGREDIENT" />
   </ScrollView>

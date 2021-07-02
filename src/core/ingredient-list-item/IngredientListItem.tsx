@@ -3,7 +3,7 @@ import { ListItem, Text } from "@ui-kitten/components";
 
 // TEMPORARY
 // REPLACE WITH GRAPHQL GENERATED TYPE
-interface IRecipe {
+export interface IIngredient {
   name: string;
   descriptor?: string;
   quantity: number;
@@ -11,7 +11,7 @@ interface IRecipe {
 }
 
 interface IIngredientListItem {
-  ingredient: IRecipe;
+  ingredient: IIngredient;
 }
 
 const IngredientListItem = ({ ingredient }: IIngredientListItem) => (

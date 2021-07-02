@@ -1,28 +1,46 @@
-import React from 'react';
-import { useQuery } from '@apollo/client';
-import { ImageBackground, Image, SafeAreaView, View, StyleSheet, ScrollView } from 'react-native';
-import { Icons, LabelledIcon, Queries } from '@greeneggs/core';
-import { Avatar, Card, ListElement, ListItem, Spinner, Text, TopNavigation, TopNavigationAction, Layout, Divider } from '@ui-kitten/components';
-import { recipe, recipeVariables } from '@greeneggs/types/graphql';
-import { convertTimeEstimate } from '@greeneggs/core/convertTimeEstimate/convertTimeEstimate';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { StatusBar } from 'expo-status-bar';
-import { noavatar } from '@greeneggs/core';
-import ViewMore from '@greeneggs/core/view-more/ViewMore';
-import ParallaxHeader from '@fabfit/react-native-parallax-header';
-import { LinearGradient } from 'expo-linear-gradient';
-import Carousel from 'react-native-snap-carousel';
-import { Dimensions } from 'react-native';
+import React from "react";
+import { useQuery } from "@apollo/client";
+import {
+  ImageBackground,
+  Image,
+  SafeAreaView,
+  View,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
+import { Icons, LabelledIcon, Queries } from "@greeneggs/core";
+import {
+  Avatar,
+  Card,
+  ListElement,
+  ListItem,
+  Spinner,
+  Text,
+  TopNavigation,
+  TopNavigationAction,
+  Layout,
+  Divider,
+} from "@ui-kitten/components";
+import { recipe, recipeVariables } from "@greeneggs/types/graphql";
+import { convertTimeEstimate } from "@greeneggs/core/convertTimeEstimate/convertTimeEstimate";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
+import { noavatar } from "@greeneggs/core";
+import ViewMore from "@greeneggs/core/view-more/ViewMore";
+import ParallaxHeader from "@fabfit/react-native-parallax-header";
+import { LinearGradient } from "expo-linear-gradient";
+import Carousel from "react-native-snap-carousel";
+import { Dimensions } from "react-native";
 
 const styles = StyleSheet.create({
   coverPhoto: {
-    width: '100%',
+    width: "100%",
     height: undefined,
     aspectRatio: 1 / 1,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   content: {
-    padding: 16
+    padding: 16,
   },
   cardSection: {
     padding: 16,
@@ -30,7 +48,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     marginRight: 10,
@@ -41,13 +59,13 @@ const styles = StyleSheet.create({
     marginVertical: 4,
     paddingVertical: 4,
     paddingHorizontal: 8,
-    backgroundColor: '#8F9BB3',
+    backgroundColor: "#8F9BB3",
   },
   tags: {
     flexDirection: "row",
   },
   heading: {
-    marginVertical: 16
+    marginVertical: 16,
   },
   gradient: {
     position: "absolute",
@@ -61,28 +79,29 @@ const styles = StyleSheet.create({
 const Recipe = ({ route, navigation }: any) => {
   const { recipeId } = route.params;
 
-  const {
-    loading, error, data
-  } = useQuery<recipe, recipeVariables>(Queries.GET_RECIPE, {
-    variables: { recipeId }
-  });
+  const { loading, error, data } = useQuery<recipe, recipeVariables>(
+    Queries.GET_RECIPE,
+    {
+      variables: { recipeId },
+    }
+  );
 
   const navigateBack = () => {
     navigation.goBack();
   };
   const insets = useSafeAreaInsets();
 
-  if (loading || !data) return <Spinner />
-  if (error) return <Text>{error.message}</Text>
+  if (loading || !data) return <Spinner />;
+  if (error) return <Text>{error.message}</Text>;
 
   const navigateToDescription = () => {
     navigation.navigate("RecipeDescription", {
       description: data.recipe.description,
       createdAt: data.recipe.createdAt,
       title: data.recipe.title,
-      submittedBy: data.recipe.submittedBy
-    })
-  }
+      submittedBy: data.recipe.submittedBy,
+    });
+  };
 
   return (
     <ParallaxHeader
@@ -90,8 +109,14 @@ const Recipe = ({ route, navigation }: any) => {
       minHeight={64}
       renderOverlay={() => (
         <TopNavigation
-          style={{backgroundColor: "transparent", paddingTop: insets.top, alignItems: "flex-start"}}
-          accessoryLeft={() => <TopNavigationAction icon={Icons.Back} onPress={navigateBack}/>}
+          style={{
+            backgroundColor: "transparent",
+            paddingTop: insets.top,
+            alignItems: "flex-start",
+          }}
+          accessoryLeft={() => (
+            <TopNavigationAction icon={Icons.Back} onPress={navigateBack} />
+          )}
         />
       )}
       renderHeader={() => (
@@ -100,30 +125,33 @@ const Recipe = ({ route, navigation }: any) => {
           style={styles.coverPhoto}
         >
           <LinearGradient
-            colors={['rgba(247, 249, 252,0.4)', 'rgba(247, 249, 252,0)']}
+            colors={["rgba(247, 249, 252,0.4)", "rgba(247, 249, 252,0)"]}
             style={styles.gradient}
           />
         </ImageBackground>
       )}
     >
       <StatusBar style="dark" />
-      <ScrollView>          
+      <ScrollView>
         <View style={styles.content}>
           <Card
             header={() => (
-              <View style={{...styles.cardSection, ...styles.row}}>
+              <View style={{ ...styles.cardSection, ...styles.row }}>
                 <View>
                   <Text category="h5">{data.recipe.title}</Text>
                   <Text category="s1">{data.recipe.subtitle}</Text>
                 </View>
-                <LabelledIcon label={convertTimeEstimate(data.recipe.timeEstimate)} iconName="clock-outline" />
+                <LabelledIcon
+                  label={convertTimeEstimate(data.recipe.timeEstimate)}
+                  iconName="clock-outline"
+                />
               </View>
             )}
             footer={() => (
-              <View style={styles.cardSection} >
+              <View style={styles.cardSection}>
                 <Text numberOfLines={2}>{data.recipe.description}</Text>
-                <ViewMore 
-                  style={{paddingHorizontal: 0, marginTop: 8}}
+                <ViewMore
+                  style={{ paddingHorizontal: 0, marginTop: 8 }}
                   onPress={navigateToDescription}
                 />
               </View>
@@ -133,7 +161,11 @@ const Recipe = ({ route, navigation }: any) => {
               <View style={styles.row}>
                 <Avatar
                   size="small"
-                  source={data.recipe.submittedBy.avatarURI ? { uri: data.recipe.submittedBy.avatarURI } : noavatar}
+                  source={
+                    data.recipe.submittedBy.avatarURI
+                      ? { uri: data.recipe.submittedBy.avatarURI }
+                      : noavatar
+                  }
                   style={styles.avatar}
                 />
                 <Text>
@@ -141,59 +173,109 @@ const Recipe = ({ route, navigation }: any) => {
                 </Text>
               </View>
               <View style={styles.row}>
-                <LabelledIcon label={String(data?.recipe.likeCount)} iconName="heart-outline" />
-                <LabelledIcon label={String(data?.recipe.commentCount)} iconName="message-square-outline" />
+                <LabelledIcon
+                  label={String(data?.recipe.likeCount)}
+                  iconName="heart-outline"
+                />
+                <LabelledIcon
+                  label={String(data?.recipe.commentCount)}
+                  iconName="message-square-outline"
+                />
               </View>
             </View>
           </Card>
-          <View style={{flexDirection: "row", alignItems: "center", paddingVertical: 16, paddingRight: 64}}>
-            <Icons.Warning fill="#DB4A23" style={{width: 48, height: 48, marginRight: 10}}/>
-            <Text>This recipe is unsuitable for those with allergies to Eggs, Milk and Gluten.</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              paddingVertical: 16,
+              paddingRight: 64,
+            }}
+          >
+            <Icons.Warning
+              fill="#DB4A23"
+              style={{ width: 48, height: 48, marginRight: 10 }}
+            />
+            <Text>
+              This recipe is unsuitable for those with allergies to Eggs, Milk
+              and Gluten.
+            </Text>
           </View>
           <Text category="h5" style={styles.heading}>
             Categories
           </Text>
           <View style={styles.tags}>
-            <Text category="label" appearance="alternative" style={styles.tag}>LUNCH</Text>
-            <Text category="label" appearance="alternative" style={styles.tag}>BREAKFAST</Text>
-            <Text category="label" appearance="alternative" style={styles.tag}>DINNER</Text>
+            <Text category="label" appearance="alternative" style={styles.tag}>
+              LUNCH
+            </Text>
+            <Text category="label" appearance="alternative" style={styles.tag}>
+              BREAKFAST
+            </Text>
+            <Text category="label" appearance="alternative" style={styles.tag}>
+              DINNER
+            </Text>
           </View>
           <Text category="h5" style={styles.heading}>
             Ingredients
           </Text>
-          <View style={{marginHorizontal: -16}}>
-            <ListItem title="Flour"  accessoryRight={() => (
-              <Text category="label" style={{marginRight: 10}}>150 GRAMS</Text>
-            )}/>
-            <ListItem title="Butter"  accessoryRight={() => (
-              <Text category="label" style={{marginRight: 10}}>2.8 OUNCES</Text>
-            )}/>
-            <ListItem title="Turmeric" description="Optional" accessoryRight={() => (
-              <Text category="label" style={{marginRight: 10}}>1 PINCH</Text>
-            )}/>
+          <View style={{ marginHorizontal: -16 }}>
+            <ListItem
+              title="Flour"
+              accessoryRight={() => (
+                <Text category="label" style={{ marginRight: 10 }}>
+                  150 GRAMS
+                </Text>
+              )}
+            />
+            <ListItem
+              title="Butter"
+              accessoryRight={() => (
+                <Text category="label" style={{ marginRight: 10 }}>
+                  2.8 OUNCES
+                </Text>
+              )}
+            />
+            <ListItem
+              title="Turmeric"
+              description="Optional"
+              accessoryRight={() => (
+                <Text category="label" style={{ marginRight: 10 }}>
+                  1 PINCH
+                </Text>
+              )}
+            />
+            <Divider />
             <ViewMore onPress={() => null} />
           </View>
           <Text category="h5" style={styles.heading}>
             Directions
           </Text>
-          <View style={{marginHorizontal: -16}}>
-            <Carousel 
-              sliderWidth={Dimensions.get('window').width}
-              itemWidth={Dimensions.get('window').width*0.8}
+          <View style={{ marginHorizontal: -16 }}>
+            <Carousel
+              sliderWidth={Dimensions.get("window").width}
+              itemWidth={Dimensions.get("window").width * 0.8}
               data={[1, 2, 3, 4, 5]}
               renderItem={({ index }) => (
                 <Card
                   header={() => (
                     <Image
-                      style={{height: undefined, width: "100%", aspectRatio: 1 / 1}}
-                      source={{ uri: "https://reviewed-com-res.cloudinary.com/image/fetch/s--lm7imI2e--/b_white,c_limit,cs_srgb,f_auto,fl_progressive.strip_profile,g_center,q_auto,w_792/https://reviewed-production.s3.amazonaws.com/attachment/98c2ea086c2d4ccc/Preheat_ovens_2.png"}}
+                      style={{
+                        height: undefined,
+                        width: "100%",
+                        aspectRatio: 1 / 1,
+                      }}
+                      source={{
+                        uri: "https://reviewed-com-res.cloudinary.com/image/fetch/s--lm7imI2e--/b_white,c_limit,cs_srgb,f_auto,fl_progressive.strip_profile,g_center,q_auto,w_792/https://reviewed-production.s3.amazonaws.com/attachment/98c2ea086c2d4ccc/Preheat_ovens_2.png",
+                      }}
                     />
                   )}
                   footer={() => (
-                    <Text style={{margin: 16}}>Preheat oven to 375 degrees F (190 degrees C).</Text>
+                    <Text style={{ margin: 16 }}>
+                      Preheat oven to 375 degrees F (190 degrees C).
+                    </Text>
                   )}
                 >
-                  <Text category="h6">{`${index+1}. Preheat Oven`}</Text>
+                  <Text category="h6">{`${index + 1}. Preheat Oven`}</Text>
                 </Card>
               )}
             />
@@ -201,17 +283,25 @@ const Recipe = ({ route, navigation }: any) => {
           <Text category="h5" style={styles.heading}>
             Top Comments
           </Text>
-          <View style={{marginHorizontal: -16}}>
+          <View style={{ marginHorizontal: -16 }}>
             <ListItem>
-              <View style={{flexDirection: "column", padding: 10}}>
-                <Text numberOfLines={2} style={{marginBottom: 16}}>
-                  Wow, I really enjoyed this recipe! If you liked this one you should check out my quiche recipe. I’ve done something similar but changed a couple of things.
+              <View style={{ flexDirection: "column", padding: 10 }}>
+                <Text numberOfLines={2} style={{ marginBottom: 16 }}>
+                  Wow, I really enjoyed this recipe! If you liked this one you
+                  should check out my quiche recipe. I’ve done something similar
+                  but changed a couple of things.
                 </Text>
-                <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
                   <View>
-                    <Text style={{fontWeight: "bold"}}>Bobby Rutherford</Text>
+                    <Text style={{ fontWeight: "bold" }}>Bobby Rutherford</Text>
                   </View>
-                  <View style={{flexDirection: "row"}}>
+                  <View style={{ flexDirection: "row" }}>
                     <LabelledIcon label="10" iconName="heart-outline" />
                     <LabelledIcon label="Reply" iconName="undo-outline" />
                   </View>
@@ -224,7 +314,7 @@ const Recipe = ({ route, navigation }: any) => {
         </View>
       </ScrollView>
     </ParallaxHeader>
-  )
-}
+  );
+};
 
 export default Recipe;

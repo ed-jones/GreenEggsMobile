@@ -62,11 +62,12 @@ export default function AddRecipe({ navigation }: any) {
   const insets = useSafeAreaInsets();
 
   const onSubmit = async () => {
-    const res = await recipeForm.submitForm().catch((e) => console.log(e));
-    console.log(res);
-    // console.log(res.errors);
-    // console.log(res.data?.addRecipe.data);
-    // console.log(res.data?.addRecipe.error?.message);
+    const res = await recipeForm.submitForm();
+    if (res.data?.addRecipe.error) {
+      console.log(res.data?.addRecipe.error.message);
+    } else {
+      navigation.navigate("Recipe", { recipeId: res.data?.addRecipe.data?.id });
+    }
   };
 
   return (

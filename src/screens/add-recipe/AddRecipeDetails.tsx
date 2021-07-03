@@ -48,11 +48,11 @@ const CreateRecipeDetails = ({ form }: ICreateRecipeDetails) => (
       controllerProps={{ name: "timeEstimate", control: form.control }}
       inputProps={{
         label: "TIME ESTIMATE",
-        placeholder: "1 hour",
+        placeholder: "5 hours",
         defaultValue: "",
       }}
       submitError={form.formResult.data?.addRecipe.error}
-      type={InputType.NUMERIC}
+      type={InputType.TEXT}
     />
     <ControlledInput<RecipeInput>
       controllerProps={{ name: "previewURI", control: form.control }}

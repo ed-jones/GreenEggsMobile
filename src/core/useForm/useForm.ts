@@ -17,14 +17,15 @@ export default function useForm<
   MutationVariables extends Record<keyof MutationVariables, InputType>,
 >(
   Mutation: DocumentNode,
-  mutationVariableName: string,
+  mutationVariableName: keyof MutationVariables,
   options?: MutationHookOptions<MutationType, MutationVariables>,
   reactHookFormProps?: UseFormProps<InputType>
 ): IForm<InputType, MutationType, MutationVariables> {
   const reactHookForm = useReactHookForm<InputType>(reactHookFormProps);
 
+  const variables = { [mutationVariableName]: reactHookForm.getValues() as InputType } as MutationVariables;
   const [submitForm, formResult] = useMutation<MutationType, MutationVariables>(Mutation, {
-    variables: { [mutationVariableName]: reactHookForm.getValues() } as unknown as MutationVariables,
+    variables,
     ...options,
   });
 

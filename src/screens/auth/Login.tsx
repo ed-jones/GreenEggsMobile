@@ -30,11 +30,7 @@ const Login = ({ navigation }: any) => {
     const token = result.data?.login.data?.token;
     const error = result.data?.login.error;
     if (token && !error) {
-      setContext((_request, _previousContext) => ({
-        headers: {
-          authorization: token,
-        },
-      }));
+      // SET CONTEXT
       navigation.navigate("Home");
     }
   }

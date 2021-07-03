@@ -62,8 +62,11 @@ export default function AddRecipe({ navigation }: any) {
   const insets = useSafeAreaInsets();
 
   const onSubmit = async () => {
-    const result = await recipeForm.submitForm();
-    navigation.navigate("Home");
+    const res = await recipeForm.submitForm().catch((e) => console.log(e));
+    console.log(res);
+    // console.log(res.errors);
+    // console.log(res.data?.addRecipe.data);
+    // console.log(res.data?.addRecipe.error?.message);
   };
 
   return (
@@ -91,10 +94,7 @@ export default function AddRecipe({ navigation }: any) {
               Publish
             </Button>
           ) : (
-            <Button
-              onPress={recipeForm.handleSubmit(steps.next)}
-              accessoryRight={Icons.Forward}
-            >
+            <Button onPress={steps.next} accessoryRight={Icons.Forward}>
               Next
             </Button>
           )}

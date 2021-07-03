@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
 import { Button, Input, Spinner } from "@ui-kitten/components";
 import useLoginForm from "./useLoginForm";
@@ -9,6 +9,8 @@ import ControlledInput, {
   InputType,
 } from "@greeneggs/core/controlled-input/ControlledInput";
 import { LoginInput } from "@greeneggs/types/graphql";
+import * as SecureStore from "expo-secure-store";
+import { AuthContext } from "@greeneggs/core/auth-context/AuthContext";
 
 const styles = StyleSheet.create({
   forgotPassword: {
@@ -24,13 +26,15 @@ const styles = StyleSheet.create({
 
 const Login = ({ navigation }: any) => {
   const { formResult, handleSubmit, control, submitForm } = useLoginForm();
+  const { setToken } = useContext(AuthContext);
 
   async function onSubmit() {
     const result = await submitForm();
     const token = result.data?.login.data?.token;
     const error = result.data?.login.error;
     if (token && !error) {
-      // SET CONTEXT
+      SecureStore.setItemAsync("token", token);
+      setToken && setToken(token);
       navigation.navigate("Home");
     }
   }

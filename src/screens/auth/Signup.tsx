@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { StyleSheet } from "react-native";
 import { Button, Input, Spinner } from "@ui-kitten/components";
@@ -11,6 +11,7 @@ import ControlledInput, {
   InputType,
 } from "@greeneggs/core/controlled-input/ControlledInput";
 import { SignupInput } from "@greeneggs/types/graphql";
+import { AuthContext } from "@greeneggs/core/auth-context/AuthContext";
 
 const styles = StyleSheet.create({
   input: {
@@ -20,17 +21,14 @@ const styles = StyleSheet.create({
 
 const Signup = ({ navigation }: any) => {
   const { formResult, handleSubmit, control, submitForm } = useSignupForm();
+  const { setToken } = useContext(AuthContext);
 
   async function handleSignupFormSubmit() {
     const result = await submitForm();
     const token = result.data?.signup.data?.token;
     const error = result.data?.signup.error;
     if (token && !error) {
-      setContext((_request, _previousContext) => ({
-        headers: {
-          authorization: token,
-        },
-      }));
+      setToken && setToken(token);
       navigation.navigate("Home");
     }
   }

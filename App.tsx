@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import * as eva from "@eva-design/eva";
@@ -26,16 +26,29 @@ import { SafeAreaView } from "react-native";
 import Recipe from "@greeneggs/screens/recipe/Recipe";
 import RecipeDescription from "@greeneggs/screens/recipe/RecipeDescription";
 import { Navigation } from "@greeneggs/core";
+import { useContext } from "react";
+import { AuthContext, Token } from "@greeneggs/core/auth-context/AuthContext";
 
 const Stack = createStackNavigator();
 
-export default function App() {
+const AuthProvider = () => {
+  const [token, setToken] = useState<Token>(undefined);
+  return (
+    <AuthContext.Provider value={{ token: token, setToken: setToken }}>
+      <App />
+    </AuthContext.Provider>
+  );
+};
+
+export default AuthProvider;
+
+function App() {
   const isLoadingComplete = useCachedResources();
+  const { token } = useContext(AuthContext);
 
   const authLink = setContext((_request, _previousContext) => ({
     headers: {
-      authorization:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNzczMjViLWRjODEtNGQ4NS04ZGMyLTBjZGYxMjZhNTk3MiIsImZpcnN0TmFtZSI6IkpvaG4iLCJsYXN0TmFtZSI6IlNtaXRoIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwicGFzc3dvcmQiOiIkMmEkMTAkallJRnVublFTQk9FRkl3ZmVzUE5GdWRRMnBWL0lnV1ZRVDdQZkdCS1dJT2s2Snd4VnU0TU8iLCJhdmF0YXJVUkkiOm51bGwsInZlcmlmaWVkIjpmYWxzZSwiaWF0IjoxNjI1Mjg3NzY1fQ.EOD0i4-OYVaMeC8QKwCwzDNM-lwnLAvLni6ZC7l9DNM",
+      authorization: token,
     },
   }));
 
@@ -45,7 +58,7 @@ export default function App() {
 
   const client = new ApolloClient({
     cache: new InMemoryCache(),
-    link: authLink.concat(httpLink),
+    link: token ? authLink.concat(httpLink) : httpLink,
   });
 
   if (!isLoadingComplete) {

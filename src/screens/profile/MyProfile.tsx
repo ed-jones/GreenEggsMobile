@@ -3,9 +3,12 @@ import { Image, View, StyleSheet, SafeAreaView} from 'react-native';
 import {
   Text,
   Button,
-  Icon
+  Icon,
+  TopNavigation,
+  TopNavigationAction,
+  Avatar
 } from '@ui-kitten/components';
-import Avatar from '../../assets/images/icon.png';
+
 import {
   SafeAreaInsetsContext,
   useSafeAreaInsets,
@@ -15,24 +18,49 @@ const EditIcon = (props) => (
   <Icon {...props} name='edit-outline'/>
 );
 
+const SettingIcon = (props) => (
+  <Icon {...props} fill="#000000" name='settings-2-outline'/>
+);
+
+const AddPersonIcon = (props) => (
+  <Icon {...props} fill="#000000" name='person-add-outline'/>
+);
+
+const MoreIcon = (props) => (
+  <Icon {...props} fill="#000000" name='more-horizontal'/>
+);
+
+const navigateBack = () => {
+  navigation.goBack();
+};
+
 const styles = StyleSheet.create({
+  avatarContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center"
+  },
   avatar: {
+    margin: 8,
     width: 120,
-    height: 120,
-    borderRadius: 120/2
+    height:120
   },
   view: {
     backgroundColor: "#F7F9FC",
     height: "100%"
   },
-  name: {
-  },
   description: {
+    padding: 16
   },
   button: {
-    marginBottom: 8,
     width: 99,
     height: 32
+  },
+  topButton: {
+    width: 24,
+    height: 24,
+    backgroundColor: "transparent",
+    borderColor: "transparent"
   },
   profileContainer: {
     flex: 1,
@@ -41,7 +69,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   statContainer: {
-
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-evenly"
   }
 })
 
@@ -50,15 +80,29 @@ const MyProfile = ({ navigation }: any) => {
   const insets = useSafeAreaInsets();
   return (
     <View style={{ ...styles.view, paddingBottom: insets.bottom, paddingTop: insets.top}}>
-
-      <Image source={Avatar} style={styles.Avatar}/>
+      <TopNavigation
+        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
+        accessoryLeft={() => (
+          <TopNavigationAction icon={SettingIcon} onPress={navigateBack} />
+        )}
+        accessoryRight={() => (
+          <TopNavigationAction icon={AddPersonIcon} onPress={navigateBack} />,
+          <TopNavigationAction icon={MoreIcon} onPress={navigateBack} />
+        )}
+      />
+      <View style={styles.avatarContainer}>
+        <Avatar style={styles.avatar} shape='round' size='giant' source={require('../../assets/images/banner.jpg')}/>
+      </View>
       <View style={styles.profileContainer}>
-        <Text category="h5" style={styles.name}>PROFILE NAME</Text>
+        <Text category="h5">PROFILE NAME</Text>
         <Button style={styles.button} accessoryLeft={EditIcon}>EDIT</Button>
       </View>
       <Text style={styles.description} numberOfLines={2}>Profile Description</Text>
       <View style={styles.statContainer}>
-        <Text> THIS IS WHERE THE STATS WILL GO</Text>
+        <Text>Following</Text>
+        <Text>Followers</Text>
+        <Text>Recipes</Text>
+        <Text>Likes</Text>
       </View>
 
     </View>

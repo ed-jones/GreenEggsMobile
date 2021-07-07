@@ -5,17 +5,29 @@ import * as Fragments from './fragments';
 export const GET_RECIPES = gql`
   query recipes {
     recipes {
-      ...RecipeFragment
+      data {
+        ...RecipeFragment
+      }
+      error {
+        ...ErrorFragment
+      }
     }
   }
   ${Fragments.RecipeFragment}
+  ${Fragments.ErrorFragment}
 `;
 
 export const GET_RECIPE = gql`
   query recipe($recipeId: String!) {
     recipe(recipeId: $recipeId) {
-      ...RecipeFragment
+      data {
+        ...RecipeFragment
+      }
+      error {
+        ...ErrorFragment
+      }
     }
   }
   ${Fragments.RecipeFragment}
+  ${Fragments.ErrorFragment}
 `;

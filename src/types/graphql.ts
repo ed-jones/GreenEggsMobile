@@ -59,11 +59,11 @@ export interface addRecipe_addRecipe_data {
   servingCount: number;
   timeEstimate: string;
   coverImage: string;
-  categories: (addRecipe_addRecipe_data_categories | null)[];
-  diets: (addRecipe_addRecipe_data_diets | null)[];
-  allergies: (addRecipe_addRecipe_data_allergies | null)[];
-  ingredients: (addRecipe_addRecipe_data_ingredients | null)[];
-  steps: (addRecipe_addRecipe_data_steps | null)[];
+  categories: addRecipe_addRecipe_data_categories[];
+  diets: addRecipe_addRecipe_data_diets[];
+  allergies: addRecipe_addRecipe_data_allergies[];
+  ingredients: addRecipe_addRecipe_data_ingredients[];
+  steps: addRecipe_addRecipe_data_steps[];
 }
 
 export interface addRecipe_addRecipe_error {
@@ -212,11 +212,11 @@ export interface recipes_recipes_data {
   servingCount: number;
   timeEstimate: string;
   coverImage: string;
-  categories: (recipes_recipes_data_categories | null)[];
-  diets: (recipes_recipes_data_diets | null)[];
-  allergies: (recipes_recipes_data_allergies | null)[];
-  ingredients: (recipes_recipes_data_ingredients | null)[];
-  steps: (recipes_recipes_data_steps | null)[];
+  categories: recipes_recipes_data_categories[];
+  diets: recipes_recipes_data_diets[];
+  allergies: recipes_recipes_data_allergies[];
+  ingredients: recipes_recipes_data_ingredients[];
+  steps: recipes_recipes_data_steps[];
 }
 
 export interface recipes_recipes_error {
@@ -226,7 +226,7 @@ export interface recipes_recipes_error {
 
 export interface recipes_recipes {
   __typename: "RecipesResult";
-  data: (recipes_recipes_data | null)[] | null;
+  data: recipes_recipes_data[] | null;
   error: recipes_recipes_error | null;
 }
 
@@ -295,11 +295,11 @@ export interface recipe_recipe_data {
   servingCount: number;
   timeEstimate: string;
   coverImage: string;
-  categories: (recipe_recipe_data_categories | null)[];
-  diets: (recipe_recipe_data_diets | null)[];
-  allergies: (recipe_recipe_data_allergies | null)[];
-  ingredients: (recipe_recipe_data_ingredients | null)[];
-  steps: (recipe_recipe_data_steps | null)[];
+  categories: recipe_recipe_data_categories[];
+  diets: recipe_recipe_data_diets[];
+  allergies: recipe_recipe_data_allergies[];
+  ingredients: recipe_recipe_data_ingredients[];
+  steps: recipe_recipe_data_steps[];
 }
 
 export interface recipe_recipe_error {
@@ -400,11 +400,11 @@ export interface RecipeFragment {
   servingCount: number;
   timeEstimate: string;
   coverImage: string;
-  categories: (RecipeFragment_categories | null)[];
-  diets: (RecipeFragment_diets | null)[];
-  allergies: (RecipeFragment_allergies | null)[];
-  ingredients: (RecipeFragment_ingredients | null)[];
-  steps: (RecipeFragment_steps | null)[];
+  categories: RecipeFragment_categories[];
+  diets: RecipeFragment_diets[];
+  allergies: RecipeFragment_allergies[];
+  ingredients: RecipeFragment_ingredients[];
+  steps: RecipeFragment_steps[];
 }
 
 /* tslint:disable */
@@ -467,11 +467,11 @@ export interface RecipeInput {
   servingCount: number;
   timeEstimate: string;
   coverImage: any;
-  categories: (CategoryInput | null)[];
-  diets: (DietInput | null)[];
-  allergies: (AllergyInput | null)[];
-  ingredients: (IngredientInput | null)[];
-  steps: (RecipeStepInput | null)[];
+  categories: CategoryInput[];
+  diets: DietInput[];
+  allergies: AllergyInput[];
+  ingredients: IngredientInput[];
+  steps: RecipeStepInput[];
   visibility: Privacy;
   likeability: Privacy;
   commentability: Privacy;

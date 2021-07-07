@@ -83,8 +83,11 @@ const Recipe = ({ route, navigation }: any) => {
   };
   const insets = useSafeAreaInsets();
 
-  if (loading || !data) return <Spinner />;
-  if (error) return <Text>{error.message}</Text>;
+  if (loading || !data || !data.recipe.data) return <Spinner />;
+  if (error || data.recipe.error)
+    return <Text>{error?.message || data.recipe.error?.message}</Text>;
+
+  const { data: recipe } = data.recipe;
 
   return (
     <ParallaxHeader
@@ -104,7 +107,7 @@ const Recipe = ({ route, navigation }: any) => {
       )}
       renderHeader={() => (
         <ImageBackground
-          source={{ uri: data.recipe.data?.coverImage }}
+          source={{ uri: recipe.coverImage }}
           style={styles.coverPhoto}
         >
           <LinearGradient
@@ -117,12 +120,12 @@ const Recipe = ({ route, navigation }: any) => {
       <StatusBar style="dark" />
       <ScrollView>
         <View style={styles.content}>
-          <RecipeDetailsCard {...data.recipe.data!} navigation={navigation} />
-          {data.recipe.data?.allergies.length! > 0 ? (
+          <RecipeDetailsCard {...recipe} navigation={navigation} />
+          {recipe.allergies.length! > 0 ? (
             <Alert
               type="danger"
-              message={`This recipe is unsuitable for those with allergies to ${data.recipe.data?.allergies.map(
-                (allergy) => allergy?.name.toLowerCase()
+              message={`This recipe is unsuitable for those with allergies to ${recipe.allergies.map(
+                (allergy) => allergy.name.toLowerCase()
               )}.`}
             />
           ) : null}
@@ -131,10 +134,10 @@ const Recipe = ({ route, navigation }: any) => {
           </Text>
           <Tags
             tags={
-              data.recipe.data?.categories.map(
+              recipe.categories.map(
                 (category) =>
                   ({
-                    name: category!.name,
+                    name: category.name,
                     onPress: () => null,
                   } as Tag)
               )!
@@ -145,7 +148,7 @@ const Recipe = ({ route, navigation }: any) => {
           </Text>
           <View style={{ marginHorizontal: -16 }}>
             <List
-              data={data.recipe.data?.ingredients!}
+              data={recipe.ingredients!}
               renderItem={({
                 item,
               }: {
@@ -162,7 +165,7 @@ const Recipe = ({ route, navigation }: any) => {
             <Carousel
               sliderWidth={Dimensions.get("window").width}
               itemWidth={Dimensions.get("window").width * 0.8}
-              data={data.recipe.data?.steps!}
+              data={recipe.steps}
               renderItem={({ item }) => (
                 <Card
                   header={() => (
@@ -173,15 +176,15 @@ const Recipe = ({ route, navigation }: any) => {
                         aspectRatio: 1 / 1,
                       }}
                       source={{
-                        uri: item?.image,
+                        uri: item.image,
                       }}
                     />
                   )}
                   footer={() => (
-                    <Text style={{ margin: 16 }}>{item?.description}</Text>
+                    <Text style={{ margin: 16 }}>{item.description}</Text>
                   )}
                 >
-                  <Text category="h6">{item?.title}</Text>
+                  <Text category="h6">{item.title}</Text>
                 </Card>
               )}
             />

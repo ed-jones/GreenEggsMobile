@@ -3,7 +3,7 @@ import { LabelledIcon, noavatar } from "@greeneggs/core";
 import { convertTimeEstimate } from "@greeneggs/core/convertTimeEstimate/convertTimeEstimate";
 import ViewMore from "@greeneggs/core/view-more/ViewMore";
 import { View, StyleSheet } from "react-native";
-import { recipe_recipe } from "@greeneggs/types/graphql";
+import { recipe_recipe_data } from "@greeneggs/types/graphql";
 import { Text, Card, Avatar } from "@ui-kitten/components";
 
 const styles = StyleSheet.create({
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
 });
 
-interface IRecipeDetailsCard extends recipe_recipe {
+interface IRecipeDetailsCard extends recipe_recipe_data {
   navigation: any;
 }
 

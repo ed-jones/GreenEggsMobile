@@ -28,3 +28,5 @@ export { Icons };
 export { default as useForm, IForm } from './useForm/useForm';
 
 export { default as TimePicker } from './time-picker/TimePicker';
+
+export { default as toTitleCase } from './to-title-case/toTitleCase';

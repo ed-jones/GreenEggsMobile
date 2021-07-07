@@ -7,7 +7,7 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
-import { Icons, LabelledIcon, Queries } from "@greeneggs/core";
+import { Icons, LabelledIcon, Queries, toTitleCase } from "@greeneggs/core";
 import {
   Card,
   ListItem,
@@ -16,8 +16,13 @@ import {
   TopNavigation,
   TopNavigationAction,
   Divider,
+  List,
 } from "@ui-kitten/components";
-import { recipe, recipeVariables } from "@greeneggs/types/graphql";
+import {
+  recipe,
+  recipeVariables,
+  recipe_recipe_data_ingredients,
+} from "@greeneggs/types/graphql";
 import Alert from "@greeneggs/core/alert/Alert";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
@@ -27,7 +32,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Carousel from "react-native-snap-carousel";
 import { Dimensions } from "react-native";
 import RecipeDetailsCard from "./RecipeDetailsCard";
-import Tags from "../../core/tags/Tags";
+import Tags, { Tag } from "../../core/tags/Tags";
 import IngredientListItem from "@greeneggs/core/ingredient-list-item/IngredientListItem";
 
 const styles = StyleSheet.create({
@@ -99,7 +104,7 @@ const Recipe = ({ route, navigation }: any) => {
       )}
       renderHeader={() => (
         <ImageBackground
-          source={{ uri: data.recipe.previewURI }}
+          source={{ uri: data.recipe.data?.coverImage }}
           style={styles.coverPhoto}
         >
           <LinearGradient
@@ -112,46 +117,40 @@ const Recipe = ({ route, navigation }: any) => {
       <StatusBar style="dark" />
       <ScrollView>
         <View style={styles.content}>
-          <RecipeDetailsCard {...data.recipe} navigation={navigation} />
-          <Alert
-            type="danger"
-            message="This recipe is unsuitable for those with allergies to Eggs, Milk and Gluten."
-          />
+          <RecipeDetailsCard {...data.recipe.data!} navigation={navigation} />
+          {data.recipe.data?.allergies.length! > 0 ? (
+            <Alert
+              type="danger"
+              message={`This recipe is unsuitable for those with allergies to ${data.recipe.data?.allergies.map(
+                (allergy) => allergy?.name.toLowerCase()
+              )}.`}
+            />
+          ) : null}
           <Text category="h5" style={styles.heading}>
             Categories
           </Text>
           <Tags
-            tags={[
-              { name: "BREAKFAST", onPress: () => null },
-              { name: "LUNCH", onPress: () => null },
-              { name: "DINNER", onPress: () => null },
-            ]}
+            tags={
+              data.recipe.data?.categories.map(
+                (category) =>
+                  ({
+                    name: category!.name,
+                    onPress: () => null,
+                  } as Tag)
+              )!
+            }
           />
           <Text category="h5" style={styles.heading}>
             Ingredients
           </Text>
           <View style={{ marginHorizontal: -16 }}>
-            <IngredientListItem
-              ingredient={{
-                name: "Flour",
-                quantity: 150,
-                unit: "GRAMS",
-              }}
-            />
-            <IngredientListItem
-              ingredient={{
-                name: "Butter",
-                quantity: 2.8,
-                unit: "OUNCES",
-              }}
-            />
-            <IngredientListItem
-              ingredient={{
-                name: "Turmeric",
-                quantity: 1,
-                unit: "PINCH",
-                descriptor: "Optional",
-              }}
+            <List
+              data={data.recipe.data?.ingredients!}
+              renderItem={({
+                item,
+              }: {
+                item: recipe_recipe_data_ingredients;
+              }) => <IngredientListItem ingredient={item} />}
             />
             <Divider />
             <ViewMore onPress={() => null} />
@@ -163,8 +162,8 @@ const Recipe = ({ route, navigation }: any) => {
             <Carousel
               sliderWidth={Dimensions.get("window").width}
               itemWidth={Dimensions.get("window").width * 0.8}
-              data={[1, 2, 3, 4, 5]}
-              renderItem={({ index }) => (
+              data={data.recipe.data?.steps!}
+              renderItem={({ item }) => (
                 <Card
                   header={() => (
                     <Image
@@ -174,17 +173,15 @@ const Recipe = ({ route, navigation }: any) => {
                         aspectRatio: 1 / 1,
                       }}
                       source={{
-                        uri: "https://reviewed-com-res.cloudinary.com/image/fetch/s--lm7imI2e--/b_white,c_limit,cs_srgb,f_auto,fl_progressive.strip_profile,g_center,q_auto,w_792/https://reviewed-production.s3.amazonaws.com/attachment/98c2ea086c2d4ccc/Preheat_ovens_2.png",
+                        uri: item?.image,
                       }}
                     />
                   )}
                   footer={() => (
-                    <Text style={{ margin: 16 }}>
-                      Preheat oven to 375 degrees F (190 degrees C).
-                    </Text>
+                    <Text style={{ margin: 16 }}>{item?.description}</Text>
                   )}
                 >
-                  <Text category="h6">{`${index + 1}. Preheat Oven`}</Text>
+                  <Text category="h6">{item?.title}</Text>
                 </Card>
               )}
             />

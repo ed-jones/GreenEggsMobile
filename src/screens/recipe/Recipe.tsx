@@ -19,6 +19,7 @@ import RecipeCategoriesTags from "./RecipeCategoriesTags";
 import RecipeIngredients from "./RecipeIngredients";
 import RecipeDirections from "./RecipeDirections";
 import RecipeTopComments from "./RecipeTopComments";
+import LoadingScreen from "../loading/LoadingScreen";
 
 const styles = StyleSheet.create({
   coverPhoto: {
@@ -68,7 +69,7 @@ const Recipe = ({ route, navigation }: any) => {
   };
   const insets = useSafeAreaInsets();
 
-  if (loading || !data || !data.recipe.data) return <Spinner />;
+  if (loading || !data || !data.recipe.data) return <LoadingScreen />;
   if (error || data.recipe.error)
     return <Text>{error?.message || data.recipe.error?.message}</Text>;
 
@@ -103,28 +104,26 @@ const Recipe = ({ route, navigation }: any) => {
       )}
     >
       <StatusBar style="dark" />
-      <ScrollView>
-        <View style={styles.content}>
-          <RecipeDetailsCard {...recipe} navigation={navigation} />
-          <RecipeAllergies allergies={recipe.allergies} />
-          <Text category="h5" style={styles.heading}>
-            Categories
-          </Text>
-          <RecipeCategoriesTags categories={recipe.categories} />
-          <Text category="h5" style={styles.heading}>
-            Ingredients
-          </Text>
-          <RecipeIngredients ingredients={recipe.ingredients} />
-          <Text category="h5" style={styles.heading}>
-            Directions
-          </Text>
-          <RecipeDirections directions={recipe.steps} />
-          <Text category="h5" style={styles.heading}>
-            Top Comments
-          </Text>
-          <RecipeTopComments />
-        </View>
-      </ScrollView>
+      <View style={styles.content}>
+        <RecipeDetailsCard {...recipe} navigation={navigation} />
+        <RecipeAllergies allergies={recipe.allergies} />
+        <Text category="h5" style={styles.heading}>
+          Categories
+        </Text>
+        <RecipeCategoriesTags categories={recipe.categories} />
+        <Text category="h5" style={styles.heading}>
+          Ingredients
+        </Text>
+        <RecipeIngredients ingredients={recipe.ingredients} />
+        <Text category="h5" style={styles.heading}>
+          Directions
+        </Text>
+        <RecipeDirections directions={recipe.steps} />
+        <Text category="h5" style={styles.heading}>
+          Top Comments
+        </Text>
+        <RecipeTopComments />
+      </View>
     </ParallaxHeader>
   );
 };

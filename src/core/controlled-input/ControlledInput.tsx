@@ -153,7 +153,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
 });
 
 const ControlledInput = <
-  FieldValues extends Record<keyof FieldValues, string | number>
+  FieldValues extends Record<keyof FieldValues, string | number | object>
 >({
   controllerProps,
   inputProps,

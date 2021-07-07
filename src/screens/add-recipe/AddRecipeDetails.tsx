@@ -54,16 +54,6 @@ const CreateRecipeDetails = ({ form }: ICreateRecipeDetails) => (
       submitError={form.formResult.data?.addRecipe.error}
       type={InputType.TEXT}
     />
-    <ControlledInput<RecipeInput>
-      controllerProps={{ name: "previewURI", control: form.control }}
-      inputProps={{
-        label: "PREVIEW URI (TEMP)",
-        placeholder: "http://example.com/image.png",
-        defaultValue: "",
-      }}
-      submitError={form.formResult.data?.addRecipe.error}
-      type={InputType.TEXT}
-    />
     <Button>Add Cover Photo</Button>
   </ScrollView>
 );

@@ -36,7 +36,7 @@ interface IAddRecipeCategories {
 }
 
 const AddRecipeCategories = ({ form }: IAddRecipeCategories) => (
-  <ScrollView>
+  <ScrollView horizontal>
     <Text
       category="h5"
       style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}

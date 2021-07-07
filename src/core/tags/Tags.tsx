@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
 });
 
-interface Tag {
+export interface Tag {
   name: string;
   onPress: () => void;
 }

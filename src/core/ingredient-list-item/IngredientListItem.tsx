@@ -1,23 +1,16 @@
 import React from "react";
 import { ListItem, Text } from "@ui-kitten/components";
-
-// TEMPORARY
-// REPLACE WITH GRAPHQL GENERATED TYPE
-export interface IIngredient {
-  name: string;
-  descriptor?: string;
-  quantity: number;
-  unit: string;
-}
+import { recipe_recipe_data_ingredients } from "@greeneggs/types/graphql";
+import toTitleCase from "../to-title-case/toTitleCase";
 
 interface IIngredientListItem {
-  ingredient: IIngredient;
+  ingredient: recipe_recipe_data_ingredients;
 }
 
 const IngredientListItem = ({ ingredient }: IIngredientListItem) => (
   <ListItem
-    title={ingredient.name}
-    description={ingredient.descriptor}
+    title={toTitleCase(ingredient.name)}
+    description={ingredient.description || undefined}
     accessoryRight={() => (
       <Text category="label" style={{ marginRight: 16 }}>
         {`${ingredient.quantity} ${ingredient.unit}`}

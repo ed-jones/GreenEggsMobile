@@ -1,9 +1,8 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { ImageBackground, View, StyleSheet, ScrollView } from "react-native";
+import { ImageBackground, View, StyleSheet } from "react-native";
 import { Icons, Queries } from "@greeneggs/core";
 import {
-  Spinner,
   Text,
   TopNavigation,
   TopNavigationAction,

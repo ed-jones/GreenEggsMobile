@@ -23,21 +23,25 @@ const styles = StyleSheet.create({
   },
   view: {
     backgroundColor: "#F7F9FC",
-    alignItems: "center",
     height: "100%"
   },
   name: {
-    alignSelf: "flex-start"
   },
   description: {
-    justifyContent: "center"
   },
   button: {
     marginBottom: 8,
-    alignSelf: "flex-end"
+    width: 99,
+    height: 32
   },
-  container: {
-    flexDirection: "row"
+  profileContainer: {
+    flex: 1,
+    padding: 16,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  statContainer: {
+
   }
 })
 
@@ -46,12 +50,17 @@ const MyProfile = ({ navigation }: any) => {
   const insets = useSafeAreaInsets();
   return (
     <View style={{ ...styles.view, paddingBottom: insets.bottom, paddingTop: insets.top}}>
+
       <Image source={Avatar} style={styles.Avatar}/>
-      <View style={styles.container}>
+      <View style={styles.profileContainer}>
         <Text category="h5" style={styles.name}>PROFILE NAME</Text>
         <Button style={styles.button} accessoryLeft={EditIcon}>EDIT</Button>
       </View>
       <Text style={styles.description} numberOfLines={2}>Profile Description</Text>
+      <View style={styles.statContainer}>
+        <Text> THIS IS WHERE THE STATS WILL GO</Text>
+      </View>
+
     </View>
   )
 }

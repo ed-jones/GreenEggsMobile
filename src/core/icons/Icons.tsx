@@ -1,27 +1,31 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
-import { Icon } from "@ui-kitten/components";
+import { Icon, IconProps } from "@ui-kitten/components";
 
-export const Settings = (props: any) => <Icon {...props} name="settings" />;
+export const Settings = (props: IconProps) => (
+  <Icon {...props} name="settings" />
+);
 
-export const Back = (props: any) => (
+export const Back = (props: IconProps) => (
   <Icon {...props} name="chevron-left-outline" />
 );
 
-export const Forward = (props: any) => (
+export const Forward = (props: IconProps) => (
   <Icon {...props} name="chevron-right-outline" />
 );
 
-export const Down = (props: any) => (
+export const Down = (props: IconProps) => (
   <Icon {...props} name="chevron-down-outline" />
 );
 
-export const Warning = (props: any) => (
+export const Warning = (props: IconProps) => (
   <Icon {...props} name="alert-triangle" />
 );
 
-export const Publish = (props: any) => (
+export const Publish = (props: IconProps) => (
   <Icon {...props} name="upload-outline" />
 );
 
-export const Add = (props: any) => <Icon {...props} name="plus-outline" />;
+export const Add = (props: IconProps) => (
+  <Icon {...props} name="plus-outline" />
+);

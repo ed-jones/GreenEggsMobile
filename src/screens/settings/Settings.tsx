@@ -1,8 +1,12 @@
 import React from 'react';
-import { List, Text, TopNavigation, TopNavigationAction, ListItem, Icon } from '@ui-kitten/components';
-import { View } from 'react-native';
+import { List, Text, TopNavigation, TopNavigationAction, ListItem, Icon, Divider } from '@ui-kitten/components';
+import { View, StyleSheet } from 'react-native';
 import { Icons } from '@greeneggs/core';
 import Svg, { Circle } from 'react-native-svg';
+
+const styles = StyleSheet.create({
+    header: { padding: 16 }
+})
 
 interface IAccountSettingListItem {
     title: string
@@ -31,15 +35,18 @@ interface ISettingListItem {
 
 
 const SettingsListItem = ({ item }: ISettingListItem) => (
-    <ListItem title={item.title} accessoryRight={Icons.Forward} accessoryLeft={(props) => (
-        <>
-            <Svg height="32" width="32" style={{ position: 'absolute', marginLeft: 12 }} >
-                <Circle cx="16" cy="16" r="16" fill={item.color} />
-            </Svg>
-            <Icon {...props} name={item.icon} styles={{ width: 32, height: 32 }} fill='#FFFFFF' />
-        </>
-    )} />
+    <>
+        <ListItem title={item.title} accessoryRight={Icons.Forward} accessoryLeft={(props) => (
+            <>
+                <Svg height="32" width="32" style={{ position: 'absolute', marginLeft: 12 }} >
+                    <Circle cx="16" cy="16" r="16" fill={item.color} />
+                </Svg>
+                <Icon {...props} name={item.icon} styles={{ width: 32, height: 32 }} fill='#FFFFFF' />
+            </>
+        )} />
 
+        <Divider />
+    </>
 
 )
 
@@ -51,9 +58,10 @@ const Settings = (({ navigation }: any) => {
     });
     return (
         <View>
-            <TopNavigation title='Settings' alignment='center' accessoryLeft={(() => (
+            <TopNavigation title='Settings' alignment='center' style={{ backgroundColor: 'transparent' }} accessoryLeft={(() => (
                 <TopNavigationAction icon={Icons.Back} onPress={navigateBack} />
             ))} />
+            <Text category='h6' style={styles.header}>Account</Text>
             <List data={AccountSettings} renderItem={SettingsListItem} />
 
 

@@ -36,6 +36,7 @@ import DeleteAccount from "@greeneggs/screens/settings/DeleteAccount";
 import Diets from "@greeneggs/screens/settings/Diets";
 import Allergies from "@greeneggs/screens/settings/Allergies";
 import ProfileVisibility from "@greeneggs/screens/settings/ProfileVisibility";
+import Settings from "@greeneggs/screens/settings/Settings";
 
 const Stack = createStackNavigator();
 
@@ -95,6 +96,7 @@ function App() {
               name="CreateIngredient"
               component={CreateIngredient}
             />
+            <Stack.Screen name="Settings" component={Settings} />
             <Stack.Screen name="EditProfile" component={EditProfile} />
             <Stack.Screen name="ChangePassword" component={ChangePassword} />
             <Stack.Screen name="ConnectAccounts" component={ConnectAccounts} />

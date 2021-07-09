@@ -29,3 +29,15 @@ export const Publish = (props: IconProps) => (
 export const Add = (props: IconProps) => (
   <Icon {...props} name="plus-outline" />
 );
+
+export const Edit = (props: IconProps) => (
+  <Icon {...props} name="edit-outline" />
+);
+
+export const AddPerson = (props: IconProps) => (
+  <Icon {...props} fill="#000000" name="person-add-outline" />
+);
+
+export const More = (props: IconProps) => (
+  <Icon {...props} fill="#000000" name="more-horizontal" />
+);

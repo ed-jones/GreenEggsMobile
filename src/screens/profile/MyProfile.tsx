@@ -86,8 +86,8 @@ const MyProfile = ({ navigation }: any) => {
           <TopNavigationAction icon={SettingIcon} onPress={navigateBack} />
         )}
         accessoryRight={() => (
-          <TopNavigationAction icon={AddPersonIcon} onPress={navigateBack} />,
-          <TopNavigationAction icon={MoreIcon} onPress={navigateBack} />
+          <><TopNavigationAction icon={AddPersonIcon} onPress={navigateBack} />
+          <TopNavigationAction icon={MoreIcon} onPress={navigateBack} /></>
         )}
       />
       <View style={styles.avatarContainer}>

@@ -28,6 +28,14 @@ import { Navigation } from "@greeneggs/core";
 import { useContext } from "react";
 import { AuthContext, Token } from "@greeneggs/core/auth-context/AuthContext";
 import CreateIngredient from "@greeneggs/screens/add-recipe/add-recipe-ingredients/CreateIngredient";
+import EditProfile from "@greeneggs/screens/settings/EditProfile";
+import ChangePassword from "@greeneggs/screens/settings/ChangePassword";
+import ConnectAccounts from "@greeneggs/screens/settings/ConnectAccounts";
+import SignOut from "@greeneggs/screens/settings/SignOut";
+import DeleteAccount from "@greeneggs/screens/settings/DeleteAccount";
+import Diets from "@greeneggs/screens/settings/Diets";
+import Allergies from "@greeneggs/screens/settings/Allergies";
+import ProfileVisibility from "@greeneggs/screens/settings/ProfileVisibility";
 
 const Stack = createStackNavigator();
 
@@ -86,6 +94,17 @@ function App() {
             <Stack.Screen
               name="CreateIngredient"
               component={CreateIngredient}
+            />
+            <Stack.Screen name="EditProfile" component={EditProfile} />
+            <Stack.Screen name="ChangePassword" component={ChangePassword} />
+            <Stack.Screen name="ConnectAccounts" component={ConnectAccounts} />
+            <Stack.Screen name="SignOut" component={SignOut} />
+            <Stack.Screen name="DeleteAccount" component={DeleteAccount} />
+            <Stack.Screen name="Diets" component={Diets} />
+            <Stack.Screen name="Allergies" component={Allergies} />
+            <Stack.Screen
+              name="ProfileVisibility"
+              component={ProfileVisibility}
             />
           </Stack.Navigator>
         </NavigationContainer>

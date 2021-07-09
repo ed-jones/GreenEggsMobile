@@ -11,6 +11,7 @@ import {
 import { ScrollView, StyleSheet } from "react-native";
 import { Icons } from "@greeneggs/core";
 import Svg, { Circle } from "react-native-svg";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 const styles = StyleSheet.create({
   header: { padding: 16 },
@@ -38,6 +39,7 @@ interface ISettingListItem {
 const SettingsListItem = ({ item }: ISettingListItem) => (
   <>
     <ListItem
+      onPress={item.onPress}
       title={item.title}
       accessoryRight={(props) => (
         <>
@@ -63,37 +65,37 @@ const SettingsListItem = ({ item }: ISettingListItem) => (
   </>
 );
 
-const Settings = ({ navigation }: any) => {
+const Settings = ({ navigation }: { navigation: StackNavigationProp<any> }) => {
   const AccountSettings: ListItemProps[] = [
     {
       title: "Edit Profile",
       icon: "edit-outline",
       color: Colors.blue,
-      onPress: navigation.navigate("EditProfile"),
+      onPress: () => navigation.navigate("EditProfile"),
     },
     {
       title: "Change Password",
       icon: "lock-outline",
       color: Colors.yellow,
-      onPress: navigation.navigate("ChangePassword"),
+      onPress: () => navigation.navigate("ChangePassword"),
     },
     {
       title: "Connect Accounts",
       icon: "link-2-outline",
       color: Colors.green,
-      onPress: navigation.navigate("ConnectAccounts"),
+      onPress: () => navigation.navigate("ConnectAccounts"),
     },
     {
       title: "Sign Out",
       icon: "log-out-outline",
       color: Colors.yellow,
-      onPress: navigation.navigate("SignOut"),
+      onPress: () => navigation.navigate("SignOut"),
     },
     {
       title: "Delete Account",
       icon: "trash-2-outline",
       color: Colors.red,
-      onPress: navigation.navigate("DeleteAccount"),
+      onPress: () => navigation.navigate("DeleteAccount"),
     },
   ];
 
@@ -102,13 +104,13 @@ const Settings = ({ navigation }: any) => {
       title: "Diets",
       icon: "heart-outline",
       color: Colors.green,
-      onPress: navigation.navigate("Diets"),
+      onPress: () => navigation.navigate("Diets"),
     },
     {
       title: "Allergies",
       icon: "slash-outline",
       color: Colors.green,
-      onPress: navigation.navigate("Allergies"),
+      onPress: () => navigation.navigate("Allergies"),
     },
   ];
 
@@ -117,7 +119,7 @@ const Settings = ({ navigation }: any) => {
       title: "Profile Visibility",
       icon: "person-outline",
       color: Colors.green,
-      onPress: navigation.navigate("ProfileVisibility"),
+      onPress: () => navigation.navigate("ProfileVisibility"),
     },
   ];
 

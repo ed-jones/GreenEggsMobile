@@ -16,7 +16,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import useCachedResources from "./src/core/use-cached-resources/useCachedResources";
-import Welcome from "./src/screens/profile/MyProfile"; // CHANGED FOR TESTING PROFILE
+import Welcome from "./src/screens/auth/Welcome"; // CHANGED FOR TESTING PROFILE
 import Login from "./src/screens/auth/Login";
 import Signup from "./src/screens/auth/Signup";
 import Home from "./src/screens/home/Home";

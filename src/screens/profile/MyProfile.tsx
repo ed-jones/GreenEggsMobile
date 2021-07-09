@@ -9,6 +9,7 @@ import {
   Avatar
 } from '@ui-kitten/components';
 
+
 import {
   SafeAreaInsetsContext,
   useSafeAreaInsets,
@@ -72,14 +73,22 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-evenly"
+  },
+  statBox: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: 65,
+    height: 32
   }
 })
 
-
 const MyProfile = ({ navigation }: any) => {
   const insets = useSafeAreaInsets();
+
   return (
-    <View style={{ ...styles.view, paddingBottom: insets.bottom, paddingTop: insets.top}}>
+    <View style={{ ...styles.view}}>
       <TopNavigation
         style={{ backgroundColor: "transparent", paddingTop: insets.top }}
         accessoryLeft={() => (
@@ -94,15 +103,27 @@ const MyProfile = ({ navigation }: any) => {
         <Avatar style={styles.avatar} shape='round' size='giant' source={require('../../assets/images/banner.jpg')}/>
       </View>
       <View style={styles.profileContainer}>
-        <Text category="h5">PROFILE NAME</Text>
+        <Text category="h5">data.firstName</Text>
         <Button style={styles.button} accessoryLeft={EditIcon}>EDIT</Button>
       </View>
       <Text style={styles.description} numberOfLines={2}>Profile Description</Text>
       <View style={styles.statContainer}>
-        <Text>Following</Text>
-        <Text>Followers</Text>
-        <Text>Recipes</Text>
-        <Text>Likes</Text>
+        <View style={styles.statBox}>
+          <Text>0</Text>
+          <Text>Following</Text>
+        </View>
+        <View style={styles.statBox}>
+          <Text>0</Text>
+          <Text>Followers</Text>
+        </View>
+        <View style={styles.statBox}>
+          <Text>0</Text>
+          <Text>Recipes</Text>
+        </View>
+        <View style={styles.statBox}>
+          <Text>0</Text>
+          <Text>Likes</Text>
+        </View>
       </View>
 
     </View>

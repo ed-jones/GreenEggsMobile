@@ -98,7 +98,7 @@ const Settings = ({ navigation }: any) => {
         </Text>
         <List data={AccountSettings} renderItem={SettingsListItem} />
         <Text category="h6" style={styles.header}>
-          Account
+          Dietary Preferences
         </Text>
         <List data={DietaryPreferences} renderItem={SettingsListItem} />
         <Text category="h6" style={styles.header}>

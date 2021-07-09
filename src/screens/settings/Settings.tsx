@@ -16,10 +16,12 @@ const styles = StyleSheet.create({
   header: { padding: 16 },
 });
 
-interface IAccountSettingListItem {
+interface ListItemProps {
   title: string;
   icon: string;
+  rightText?: string;
   color: string;
+  onPress?: () => void;
 }
 
 const Colors = {
@@ -29,37 +31,20 @@ const Colors = {
   red: "#DB4A23",
 };
 
-const AccountSettings: IAccountSettingListItem[] = [
-  { title: "Edit Profile", icon: "edit-outline", color: Colors.blue },
-  { title: "Change Password", icon: "lock-outline", color: Colors.yellow },
-  { title: "Connect Accounts", icon: "link-2-outline", color: Colors.green },
-  { title: "Sign Out", icon: "log-out-outline", color: Colors.yellow },
-  { title: "Delete Account", icon: "trash-2-outline", color: Colors.red },
-];
-
-const DietaryPreferences: IAccountSettingListItem[] = [
-  { title: "Diets", icon: "heart-outline", color: Colors.green },
-  { title: "Allergies", icon: "slash-outline", color: Colors.green },
-];
-
-const PrivacySettings: IAccountSettingListItem[] = [
-  { title: "Profile Visibility", icon: "person-outline", color: Colors.green },
-];
-
-const About: IAccountSettingListItem[] = [
-  { title: "Version", icon: "cube-outline", color: Colors.yellow },
-  { title: "Developer", icon: "code-outline", color: Colors.green },
-];
-
 interface ISettingListItem {
-  item: IAccountSettingListItem;
+  item: ListItemProps;
 }
 
 const SettingsListItem = ({ item }: ISettingListItem) => (
   <>
     <ListItem
       title={item.title}
-      accessoryRight={Icons.Forward}
+      accessoryRight={(props) => (
+        <>
+          <Text category="c2">{item.rightText}</Text>
+          {item.onPress ? <Icons.Forward {...props} /> : null}
+        </>
+      )}
       accessoryLeft={(props) => (
         <>
           <Svg
@@ -79,9 +64,82 @@ const SettingsListItem = ({ item }: ISettingListItem) => (
 );
 
 const Settings = ({ navigation }: any) => {
+  const AccountSettings: ListItemProps[] = [
+    {
+      title: "Edit Profile",
+      icon: "edit-outline",
+      color: Colors.blue,
+      onPress: navigation.navigate("EditProfile"),
+    },
+    {
+      title: "Change Password",
+      icon: "lock-outline",
+      color: Colors.yellow,
+      onPress: navigation.navigate("ChangePassword"),
+    },
+    {
+      title: "Connect Accounts",
+      icon: "link-2-outline",
+      color: Colors.green,
+      onPress: navigation.navigate("ConnectAccounts"),
+    },
+    {
+      title: "Sign Out",
+      icon: "log-out-outline",
+      color: Colors.yellow,
+      onPress: navigation.navigate("SignOut"),
+    },
+    {
+      title: "Delete Account",
+      icon: "trash-2-outline",
+      color: Colors.red,
+      onPress: navigation.navigate("DeleteAccount"),
+    },
+  ];
+
+  const DietaryPreferences: ListItemProps[] = [
+    {
+      title: "Diets",
+      icon: "heart-outline",
+      color: Colors.green,
+      onPress: navigation.navigate("Diets"),
+    },
+    {
+      title: "Allergies",
+      icon: "slash-outline",
+      color: Colors.green,
+      onPress: navigation.navigate("Allergies"),
+    },
+  ];
+
+  const PrivacySettings: ListItemProps[] = [
+    {
+      title: "Profile Visibility",
+      icon: "person-outline",
+      color: Colors.green,
+      onPress: navigation.navigate("ProfileVisibility"),
+    },
+  ];
+
+  const About: ListItemProps[] = [
+    {
+      title: "Version",
+      icon: "cube-outline",
+      color: Colors.yellow,
+      rightText: process.env.version || "alpha-0.01",
+    },
+    {
+      title: "Developer",
+      icon: "code-outline",
+      color: Colors.green,
+      rightText: "Green Eggs",
+    },
+  ];
+
   const navigateBack = () => {
     navigation.navigate("Home");
   };
+
   return (
     <>
       <TopNavigation

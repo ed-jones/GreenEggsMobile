@@ -22,12 +22,12 @@ import Signup from "./src/screens/auth/Signup";
 import Home from "./src/screens/home/Home";
 import Theme from "./src/theme/theme.json";
 import Mapping from "./src/theme/mapping.json";
-import { SafeAreaView } from "react-native";
 import Recipe from "@greeneggs/screens/recipe/Recipe";
 import RecipeDescription from "@greeneggs/screens/recipe/RecipeDescription";
 import { Navigation } from "@greeneggs/core";
 import { useContext } from "react";
 import { AuthContext, Token } from "@greeneggs/core/auth-context/AuthContext";
+import CreateIngredient from "@greeneggs/screens/add-recipe/add-recipe-ingredients/CreateIngredient";
 
 const Stack = createStackNavigator();
 
@@ -82,6 +82,10 @@ function App() {
             <Stack.Screen
               name="RecipeDescription"
               component={RecipeDescription}
+            />
+            <Stack.Screen
+              name="CreateIngredient"
+              component={CreateIngredient}
             />
           </Stack.Navigator>
         </NavigationContainer>

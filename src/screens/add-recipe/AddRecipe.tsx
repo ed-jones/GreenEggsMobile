@@ -9,8 +9,8 @@ import {
 } from "@ui-kitten/components";
 
 import useRecipeForm from "./useRecipeForm";
-import { Icons, IForm, TimePicker } from "@greeneggs/core";
-import AddRecipeIngredients from "./AddRecipeIngredients";
+import { Icons, IForm } from "@greeneggs/core";
+import AddRecipeIngredients from "./add-recipe-ingredients/AddRecipeIngredients";
 import AddRecipeDirections from "./AddRecipeDirections";
 import AddRecipeCategories from "./AddRecipeCategories";
 import AddRecipeDetails from "./AddRecipeDetails";
@@ -44,7 +44,9 @@ export default function AddRecipe({ navigation }: any) {
   const Steps: Step[] = [
     {
       title: "Ingredients",
-      component: <AddRecipeIngredients form={recipeForm} />,
+      component: (
+        <AddRecipeIngredients form={recipeForm} navigation={navigation} />
+      ),
     },
     {
       title: "Directions",
@@ -62,11 +64,11 @@ export default function AddRecipe({ navigation }: any) {
   const insets = useSafeAreaInsets();
 
   const onSubmit = async () => {
-    const res = await recipeForm.submitForm();
-    if (res.data?.addRecipe.error) {
-      console.log(res.data?.addRecipe.error.message);
+    const { data } = await recipeForm.submitForm();
+    if (data?.addRecipe.error) {
+      console.log(data?.addRecipe.error.message);
     } else {
-      navigation.navigate("Recipe", { recipeId: res.data?.addRecipe.data?.id });
+      navigation.navigate("Recipe", { recipeId: data?.addRecipe.data?.id });
     }
   };
 

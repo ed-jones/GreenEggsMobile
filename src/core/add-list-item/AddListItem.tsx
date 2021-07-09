@@ -4,12 +4,13 @@ import { Add } from "../icons/Icons";
 
 interface IAddListItem {
   label: string;
+  onPress: () => void;
 }
 
-const AddListItem = ({ label }: IAddListItem) => (
+const AddListItem = ({ label, onPress }: IAddListItem) => (
   <>
     <Divider />
-    <ListItem style={{ justifyContent: "center" }}>
+    <ListItem style={{ justifyContent: "center" }} onPress={() => onPress}>
       <Add
         style={{ width: 24, height: 24, marginRight: 8, marginLeft: -32 }}
         fill="#2E3A59"

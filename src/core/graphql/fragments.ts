@@ -13,6 +13,7 @@ export const UserFragment = gql`
 export const RecipeFragment = gql`
   fragment RecipeFragment on Recipe {
     id
+    subtitle
     title
     description
     submittedBy {
@@ -23,7 +24,33 @@ export const RecipeFragment = gql`
     createdAt
     servingCount
     timeEstimate
-    previewURI
+    coverImage
+    categories {
+      name
+    }
+    diets {
+      name
+    }
+    allergies {
+      name
+    }
+    ingredients {
+      name
+      description
+      quantity
+      unit
+    }
+    steps {
+      title
+      description
+      image
+    }
   }
   ${UserFragment}
+`;
+
+export const ErrorFragment = gql`
+  fragment ErrorFragment on Error {
+    message
+  }
 `;

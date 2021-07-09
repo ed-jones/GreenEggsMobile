@@ -1,10 +1,10 @@
-import React from 'react';
-import { StyleSheet, Image, View } from 'react-native';
-import { Card } from '@ui-kitten/components';
-import { Recipes_recipes } from '@greeneggs/types/graphql';
-import { imagenotfound } from '@greeneggs/core';
-import RecipeCardHeader from './RecipeCardHeader';
-import RecipeCardFooter from './RecipeCardFooter';
+import React from "react";
+import { StyleSheet, Image, View } from "react-native";
+import { Card } from "@ui-kitten/components";
+import { recipes_recipes_data } from "@greeneggs/types/graphql";
+import { imagenotfound } from "@greeneggs/core";
+import RecipeCardHeader from "./RecipeCardHeader";
+import RecipeCardFooter from "./RecipeCardFooter";
 
 const styles = StyleSheet.create({
   card: {
@@ -15,14 +15,19 @@ const styles = StyleSheet.create({
     marginVertical: -16,
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: undefined,
     aspectRatio: 1 / 1,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
 });
 
-const RecipeCard = ({ recipe }: { recipe: Recipes_recipes }) => (
+interface IRecipeCard {
+  recipe: recipes_recipes_data;
+  onPress: () => void;
+}
+
+const RecipeCard = ({ recipe, onPress }: IRecipeCard) => (
   <Card
     appearance="filled"
     style={styles.card}
@@ -34,11 +39,12 @@ const RecipeCard = ({ recipe }: { recipe: Recipes_recipes }) => (
       // eslint-disable-next-line react/jsx-props-no-spreading
       <RecipeCardFooter {...recipe} />
     )}
+    onPress={onPress}
   >
     <View style={styles.imageContainer}>
       <Image
         style={styles.image}
-        source={recipe.previewURI ? { uri: recipe.previewURI } : imagenotfound}
+        source={recipe.coverImage ? { uri: recipe.coverImage } : imagenotfound}
       />
     </View>
   </Card>

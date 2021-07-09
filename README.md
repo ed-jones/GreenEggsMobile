@@ -1,5 +1,7 @@
 # Green Eggs (Mobile)
 
+![Build Status](https://github.com/ed-jones/green-eggs-mobile/actions/workflows/actions.yml/badge.svg)
+
 ## Dev Setup
 
 Create a .env file in the root directory with the following contents (obviously substituting with the host IP address running the green-eggs-api):

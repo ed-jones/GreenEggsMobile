@@ -16,9 +16,40 @@ export interface addRecipe_addRecipe_data_submittedBy {
   avatarURI: string | null;
 }
 
+export interface addRecipe_addRecipe_data_categories {
+  __typename: "Category";
+  name: string;
+}
+
+export interface addRecipe_addRecipe_data_diets {
+  __typename: "Diet";
+  name: string;
+}
+
+export interface addRecipe_addRecipe_data_allergies {
+  __typename: "Allergy";
+  name: string;
+}
+
+export interface addRecipe_addRecipe_data_ingredients {
+  __typename: "Ingredient";
+  name: string;
+  description: string | null;
+  quantity: number;
+  unit: string | null;
+}
+
+export interface addRecipe_addRecipe_data_steps {
+  __typename: "RecipeStep";
+  title: string;
+  description: string;
+  image: string;
+}
+
 export interface addRecipe_addRecipe_data {
   __typename: "Recipe";
   id: string;
+  subtitle: string;
   title: string;
   description: string;
   submittedBy: addRecipe_addRecipe_data_submittedBy;
@@ -27,12 +58,23 @@ export interface addRecipe_addRecipe_data {
   createdAt: string;
   servingCount: number;
   timeEstimate: string;
-  previewURI: string;
+  coverImage: string;
+  categories: addRecipe_addRecipe_data_categories[];
+  diets: addRecipe_addRecipe_data_diets[];
+  allergies: addRecipe_addRecipe_data_allergies[];
+  ingredients: addRecipe_addRecipe_data_ingredients[];
+  steps: addRecipe_addRecipe_data_steps[];
+}
+
+export interface addRecipe_addRecipe_error {
+  __typename: "Error";
+  message: string;
 }
 
 export interface addRecipe_addRecipe {
   __typename: "RecipeResult";
-  data: addRecipe_addRecipe_data;
+  data: addRecipe_addRecipe_data | null;
+  error: addRecipe_addRecipe_error | null;
 }
 
 export interface addRecipe {
@@ -49,10 +91,76 @@ export interface addRecipeVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: Recipes
+// GraphQL mutation operation: login
 // ====================================================
 
-export interface Recipes_recipes_submittedBy {
+export interface login_login_data {
+  __typename: "AuthResultData";
+  token: string;
+}
+
+export interface login_login_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface login_login {
+  __typename: "AuthResult";
+  data: login_login_data | null;
+  error: login_login_error | null;
+}
+
+export interface login {
+  login: login_login;
+}
+
+export interface loginVariables {
+  loginDetails: LoginInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: signup
+// ====================================================
+
+export interface signup_signup_data {
+  __typename: "AuthResultData";
+  token: string;
+}
+
+export interface signup_signup_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface signup_signup {
+  __typename: "AuthResult";
+  data: signup_signup_data | null;
+  error: signup_signup_error | null;
+}
+
+export interface signup {
+  signup: signup_signup;
+}
+
+export interface signupVariables {
+  signupDetails: SignupInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: recipes
+// ====================================================
+
+export interface recipes_recipes_data_submittedBy {
   __typename: "User";
   id: string;
   firstName: string;
@@ -61,22 +169,156 @@ export interface Recipes_recipes_submittedBy {
   avatarURI: string | null;
 }
 
-export interface Recipes_recipes {
-  __typename: "Recipe";
-  id: string;
+export interface recipes_recipes_data_categories {
+  __typename: "Category";
+  name: string;
+}
+
+export interface recipes_recipes_data_diets {
+  __typename: "Diet";
+  name: string;
+}
+
+export interface recipes_recipes_data_allergies {
+  __typename: "Allergy";
+  name: string;
+}
+
+export interface recipes_recipes_data_ingredients {
+  __typename: "Ingredient";
+  name: string;
+  description: string | null;
+  quantity: number;
+  unit: string | null;
+}
+
+export interface recipes_recipes_data_steps {
+  __typename: "RecipeStep";
   title: string;
   description: string;
-  submittedBy: Recipes_recipes_submittedBy;
+  image: string;
+}
+
+export interface recipes_recipes_data {
+  __typename: "Recipe";
+  id: string;
+  subtitle: string;
+  title: string;
+  description: string;
+  submittedBy: recipes_recipes_data_submittedBy;
   commentCount: number;
   likeCount: number;
   createdAt: string;
   servingCount: number;
   timeEstimate: string;
-  previewURI: string;
+  coverImage: string;
+  categories: recipes_recipes_data_categories[];
+  diets: recipes_recipes_data_diets[];
+  allergies: recipes_recipes_data_allergies[];
+  ingredients: recipes_recipes_data_ingredients[];
+  steps: recipes_recipes_data_steps[];
 }
 
-export interface Recipes {
-  recipes: Recipes_recipes[];
+export interface recipes_recipes_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface recipes_recipes {
+  __typename: "RecipesResult";
+  data: recipes_recipes_data[] | null;
+  error: recipes_recipes_error | null;
+}
+
+export interface recipes {
+  recipes: recipes_recipes;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: recipe
+// ====================================================
+
+export interface recipe_recipe_data_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  avatarURI: string | null;
+}
+
+export interface recipe_recipe_data_categories {
+  __typename: "Category";
+  name: string;
+}
+
+export interface recipe_recipe_data_diets {
+  __typename: "Diet";
+  name: string;
+}
+
+export interface recipe_recipe_data_allergies {
+  __typename: "Allergy";
+  name: string;
+}
+
+export interface recipe_recipe_data_ingredients {
+  __typename: "Ingredient";
+  name: string;
+  description: string | null;
+  quantity: number;
+  unit: string | null;
+}
+
+export interface recipe_recipe_data_steps {
+  __typename: "RecipeStep";
+  title: string;
+  description: string;
+  image: string;
+}
+
+export interface recipe_recipe_data {
+  __typename: "Recipe";
+  id: string;
+  subtitle: string;
+  title: string;
+  description: string;
+  submittedBy: recipe_recipe_data_submittedBy;
+  commentCount: number;
+  likeCount: number;
+  createdAt: string;
+  servingCount: number;
+  timeEstimate: string;
+  coverImage: string;
+  categories: recipe_recipe_data_categories[];
+  diets: recipe_recipe_data_diets[];
+  allergies: recipe_recipe_data_allergies[];
+  ingredients: recipe_recipe_data_ingredients[];
+  steps: recipe_recipe_data_steps[];
+}
+
+export interface recipe_recipe_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface recipe_recipe {
+  __typename: "RecipeResult";
+  data: recipe_recipe_data | null;
+  error: recipe_recipe_error | null;
+}
+
+export interface recipe {
+  recipe: recipe_recipe;
+}
+
+export interface recipeVariables {
+  recipeId: string;
 }
 
 /* tslint:disable */
@@ -115,9 +357,40 @@ export interface RecipeFragment_submittedBy {
   avatarURI: string | null;
 }
 
+export interface RecipeFragment_categories {
+  __typename: "Category";
+  name: string;
+}
+
+export interface RecipeFragment_diets {
+  __typename: "Diet";
+  name: string;
+}
+
+export interface RecipeFragment_allergies {
+  __typename: "Allergy";
+  name: string;
+}
+
+export interface RecipeFragment_ingredients {
+  __typename: "Ingredient";
+  name: string;
+  description: string | null;
+  quantity: number;
+  unit: string | null;
+}
+
+export interface RecipeFragment_steps {
+  __typename: "RecipeStep";
+  title: string;
+  description: string;
+  image: string;
+}
+
 export interface RecipeFragment {
   __typename: "Recipe";
   id: string;
+  subtitle: string;
   title: string;
   description: string;
   submittedBy: RecipeFragment_submittedBy;
@@ -126,7 +399,26 @@ export interface RecipeFragment {
   createdAt: string;
   servingCount: number;
   timeEstimate: string;
-  previewURI: string;
+  coverImage: string;
+  categories: RecipeFragment_categories[];
+  diets: RecipeFragment_diets[];
+  allergies: RecipeFragment_allergies[];
+  ingredients: RecipeFragment_ingredients[];
+  steps: RecipeFragment_steps[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: ErrorFragment
+// ====================================================
+
+export interface ErrorFragment {
+  __typename: "Error";
+  message: string;
 }
 
 /* tslint:disable */
@@ -138,12 +430,65 @@ export interface RecipeFragment {
 // START Enums and Input Objects
 //==============================================================
 
+export enum Privacy {
+  FRIENDS = "FRIENDS",
+  PRIVATE = "PRIVATE",
+  PUBLIC = "PUBLIC",
+}
+
+export interface AllergyInput {
+  name: string;
+}
+
+export interface CategoryInput {
+  name: string;
+}
+
+export interface DietInput {
+  name: string;
+}
+
+export interface IngredientInput {
+  name: string;
+  description?: string | null;
+  quantity: number;
+  unit?: string | null;
+}
+
+export interface LoginInput {
+  email: string;
+  password: string;
+}
+
 export interface RecipeInput {
   title: string;
+  subtitle: string;
   description: string;
   servingCount: number;
   timeEstimate: string;
-  previewURI: string;
+  coverImage: any;
+  categories: CategoryInput[];
+  diets: DietInput[];
+  allergies: AllergyInput[];
+  ingredients: IngredientInput[];
+  steps: RecipeStepInput[];
+  visibility: Privacy;
+  likeability: Privacy;
+  commentability: Privacy;
+}
+
+export interface RecipeStepInput {
+  image: any;
+  title: string;
+  description: string;
+}
+
+export interface SignupInput {
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  confirmPassword: string;
 }
 
 //==============================================================

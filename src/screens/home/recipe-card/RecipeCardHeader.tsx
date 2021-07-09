@@ -1,29 +1,29 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Avatar, Icon, Text } from '@ui-kitten/components';
-import { Recipes_recipes_submittedBy } from '@greeneggs/types/graphql';
-import { noavatar } from '@greeneggs/core';
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { Avatar, Icon, Text } from "@ui-kitten/components";
+import { recipes_recipes_data_submittedBy } from "@greeneggs/types/graphql";
+import { noavatar } from "@greeneggs/core";
 
 const styles = StyleSheet.create({
   view: {
-    flexDirection: 'row',
+    flexDirection: "row",
     padding: 14,
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   leftElements: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   rightElements: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   avatar: {
     marginRight: 10,
   },
   username: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   ellipsisIcon: {
     width: 24,
@@ -31,13 +31,18 @@ const styles = StyleSheet.create({
   },
 });
 
-export interface IRecipeCardHeaderProps extends Partial<Recipes_recipes_submittedBy> {
+export interface IRecipeCardHeaderProps
+  extends Partial<recipes_recipes_data_submittedBy> {
   avatarURI?: string | null;
   firstName: string;
   lastName: string;
 }
 
-const RecipeCardHeader = ({ avatarURI, firstName, lastName }: IRecipeCardHeaderProps) => (
+const RecipeCardHeader = ({
+  avatarURI,
+  firstName,
+  lastName,
+}: IRecipeCardHeaderProps) => (
   <View style={styles.view}>
     <View style={styles.leftElements}>
       <Avatar

@@ -8,7 +8,39 @@ export const ADD_RECIPE = gql`
       data {
         ...RecipeFragment
       }
+      error {
+        ...ErrorFragment
+      }
     }
   }
   ${Fragments.RecipeFragment}
+  ${Fragments.ErrorFragment}
+`;
+
+export const LOGIN = gql`
+  mutation login($loginDetails: LoginInput!) {
+    login(loginDetails: $loginDetails) {
+      data {
+        token
+      }
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.ErrorFragment}
+`;
+
+export const SIGNUP = gql`
+  mutation signup($signupDetails: SignupInput!) {
+    signup(signupDetails: $signupDetails) {
+      data {
+        token
+      }
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.ErrorFragment}
 `;

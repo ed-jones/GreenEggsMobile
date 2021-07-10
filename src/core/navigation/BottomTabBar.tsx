@@ -35,22 +35,65 @@ enum IconStyle {
   Secondary = "secondary",
 }
 
+interface IBottonNavigationIcon {
+  name: string;
+  iconStyle: IconStyle;
+  selected: boolean;
+}
+
 const BottomNavigationIcon = withStyles(
   ({
     name,
     iconStyle,
     eva,
-  }: { name: string; iconStyle: IconStyle } & ThemedComponentProps) => (
-    <Icon
-      style={styles[iconStyle]}
-      name={name}
-      fill={
-        iconStyle === IconStyle.Primary
-          ? eva?.theme && eva.theme["color-primary-500"]
-          : eva?.theme && eva.theme["text-primary-color"]
-      }
-    />
-  )
+    selected,
+    ...rest
+  }: IBottonNavigationIcon & ThemedComponentProps) => {
+    const iconName = `${name}${!selected ? "-outline" : ""}`;
+    if (iconStyle === IconStyle.Primary) {
+      return (
+        <View style={{ marginTop: -16 }}>
+          <Svg
+            height="72"
+            width="72"
+            style={{
+              position: "absolute",
+              marginLeft: -4,
+              marginTop: -4,
+            }}
+          >
+            <Circle
+              cx="36"
+              cy="36"
+              r="36"
+              fill={
+                selected
+                  ? eva?.theme && eva.theme["color-primary-500"]
+                  : eva?.theme && eva.theme["color-success-500"]
+              }
+            />
+          </Svg>
+          <Icon
+            {...rest}
+            name={iconName}
+            style={styles.primary}
+            fill={
+              selected ? "white" : eva?.theme && eva.theme["color-primary-500"]
+            }
+          />
+        </View>
+      );
+    } else {
+      return (
+        <Icon
+          {...rest}
+          style={styles[iconStyle]}
+          name={iconName}
+          fill={eva?.theme && eva.theme["text-primary-color"]}
+        />
+      );
+    }
+  }
 );
 
 const BottomTabBar = withStyles(
@@ -60,11 +103,15 @@ const BottomTabBar = withStyles(
     eva,
   }: BottomTabBarProps<BottomTabBarOptions> & ThemedComponentProps) => {
     const insets = useSafeAreaInsets();
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
 
     return (
       <BottomNavigation
         selectedIndex={state.index}
-        onSelect={(index) => navigation.navigate(state.routeNames[index])}
+        onSelect={(index) => {
+          navigation.navigate(state.routeNames[index]);
+          setSelectedIndex(index);
+        }}
         appearance="noIndicator"
         style={{ ...styles.navbar, paddingBottom: 24 + insets.bottom }}
       >
@@ -72,8 +119,9 @@ const BottomTabBar = withStyles(
           icon={(props) => (
             <BottomNavigationIcon
               {...props}
-              name="home-outline"
+              name="home"
               iconStyle={IconStyle.Secondary}
+              selected={selectedIndex == 0}
             />
           )}
         />
@@ -81,45 +129,9 @@ const BottomTabBar = withStyles(
           icon={(props) => (
             <BottomNavigationIcon
               {...props}
-              name="bookmark-outline"
+              name="bookmark"
               iconStyle={IconStyle.Secondary}
-            />
-          )}
-        />
-        <BottomNavigationTab
-          icon={(props) => (
-            <View style={{ marginTop: -16 }}>
-              <Svg
-                height="72"
-                width="72"
-                style={{
-                  position: "absolute",
-                  marginLeft: -4,
-                  marginTop: -4,
-                }}
-              >
-                <Circle
-                  cx="36"
-                  cy="36"
-                  r="36"
-                  fill={eva?.theme && eva.theme["color-success-500"]}
-                />
-              </Svg>
-              <Icon
-                {...props}
-                name="plus-outline"
-                style={styles.primary}
-                fill={eva?.theme && eva.theme["color-primary-500"]}
-              />
-            </View>
-          )}
-        />
-        <BottomNavigationTab
-          icon={(props) => (
-            <BottomNavigationIcon
-              {...props}
-              name="bell-outline"
-              iconStyle={IconStyle.Secondary}
+              selected={selectedIndex == 1}
             />
           )}
         />
@@ -127,8 +139,29 @@ const BottomTabBar = withStyles(
           icon={(props) => (
             <BottomNavigationIcon
               {...props}
-              name="person-outline"
+              name="plus"
+              iconStyle={IconStyle.Primary}
+              selected={selectedIndex == 2}
+            />
+          )}
+        />
+        <BottomNavigationTab
+          icon={(props) => (
+            <BottomNavigationIcon
+              {...props}
+              name="bell"
               iconStyle={IconStyle.Secondary}
+              selected={selectedIndex == 3}
+            />
+          )}
+        />
+        <BottomNavigationTab
+          icon={(props) => (
+            <BottomNavigationIcon
+              {...props}
+              name="person"
+              iconStyle={IconStyle.Secondary}
+              selected={selectedIndex == 4}
             />
           )}
         />

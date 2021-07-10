@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Controller,
   ControllerProps,
@@ -6,8 +6,11 @@ import {
   PathValue,
   RegisterOptions,
 } from "react-hook-form";
-import { Input, InputProps } from "@ui-kitten/components";
+import { Button, Input, InputProps } from "@ui-kitten/components";
 import { ErrorFragment } from "@greeneggs/types/graphql";
+import { Platform, Image } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
 
 // Function that converts JS numbers to strings in a way
 // that avoids NaN, undefined, etc.
@@ -51,6 +54,7 @@ export enum InputType {
   LASTNAME = "LastName",
   NUMERIC = "Numeric",
   TEXTAREA = "TextArea",
+  PHOTO = "Photo",
 }
 
 export interface IControlledInput<FieldValues> {
@@ -106,6 +110,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
   },
   Text: {},
   TextArea: {},
+  Photo: {},
   Password: {
     inputProps: {
       label: "PASSWORD",
@@ -164,32 +169,75 @@ const ControlledInput = <
 }: IControlledInput<FieldValues>) => {
   const inputTypeDefaultProps = InputTypeDefaultProps<FieldValues>()[type];
 
+  useEffect(() => {
+    if (type === InputType.PHOTO)
+      (async () => {
+        if (Platform.OS !== "web") {
+          const { status } = await ImagePicker.requestCameraPermissionsAsync();
+          if (status !== "granted") {
+            alert("Sorry, we need camera roll permissions to make this work!");
+          }
+        }
+      })();
+  }, []);
+
+  const pickImage = async (onChange: (...event: any[]) => void) => {
+    let result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      onChange(result);
+    }
+  };
+
   return (
     <Controller<FieldValues>
       render={({
         field: { onChange, onBlur, value },
         fieldState: { error },
-      }) => (
-        <Input
-          numberOfLines={type === InputType.TEXTAREA ? 4 : 1}
-          multiline={type === InputType.TEXTAREA}
-          onBlur={onBlur}
-          textAlignVertical={type === InputType.TEXTAREA ? "top" : undefined}
-          onChangeText={(e) =>
-            type === InputType.NUMERIC
-              ? onChange(stringToNumber(e))
-              : onChange(e)
-          }
-          value={
-            type === InputType.NUMERIC
-              ? (value && numberToString(value)) || ""
-              : (value && String(value)) || ""
-          }
-          status={error || !!submitError ? "danger" : undefined}
-          caption={submitError ? submitError.message : error?.message}
-          {...{ ...inputTypeDefaultProps.inputProps, ...inputProps }}
-        />
-      )}
+      }) => {
+        if (type === InputType.PHOTO) {
+          return (
+            <>
+              <Button onPress={() => pickImage(onChange)}>Take Photo</Button>
+              {value ? (
+                <Image
+                  source={{ uri: (value as ImageInfo).uri }}
+                  style={{ width: 200, height: 200 }}
+                />
+              ) : undefined}
+            </>
+          );
+        } else {
+          return (
+            <Input
+              numberOfLines={type === InputType.TEXTAREA ? 4 : 1}
+              multiline={type === InputType.TEXTAREA}
+              onBlur={onBlur}
+              textAlignVertical={
+                type === InputType.TEXTAREA ? "top" : undefined
+              }
+              onChangeText={(e) =>
+                type === InputType.NUMERIC
+                  ? onChange(stringToNumber(e))
+                  : onChange(e)
+              }
+              value={
+                type === InputType.NUMERIC
+                  ? (value && numberToString(value)) || ""
+                  : (value && String(value)) || ""
+              }
+              status={error || !!submitError ? "danger" : undefined}
+              caption={submitError ? submitError.message : error?.message}
+              {...{ ...inputTypeDefaultProps.inputProps, ...inputProps }}
+            />
+          );
+        }
+      }}
       {...{ ...inputTypeDefaultProps.controllerProps, ...controllerProps }}
     />
   );

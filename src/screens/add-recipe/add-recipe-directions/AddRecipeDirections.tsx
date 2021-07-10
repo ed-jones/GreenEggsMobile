@@ -1,9 +1,10 @@
 import React from "react";
 import { Divider, Input, List, ListItem, Text } from "@ui-kitten/components";
-import { ScrollView } from "react-native";
+import { ScrollView, Image } from "react-native";
 import { addRecipeStyles, RecipeForm } from "../AddRecipe";
 import { Icons, Navigation } from "@greeneggs/core";
 import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
+import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
 
 interface IAddRecipeDirections {
   form: RecipeForm;
@@ -21,7 +22,16 @@ const AddRecipeDirections = ({ form, navigation }: IAddRecipeDirections) => (
     <List
       data={form.watch("steps")}
       renderItem={({ item }) => (
-        <ListItem title={item.title} description={item.description} />
+        <ListItem
+          title={item.title}
+          description={item.description}
+          accessoryRight={() => (
+            <Image
+              source={{ uri: item.image && (item.image as ImageInfo).uri }}
+              style={{ width: 48, height: 48 }}
+            />
+          )}
+        />
       )}
     />
     <AddListItem

@@ -1,26 +1,16 @@
 import React from "react";
 import { Divider, Input, List, ListItem, Text } from "@ui-kitten/components";
 import { ScrollView } from "react-native";
-import { addRecipeStyles, RecipeForm } from "./AddRecipe";
-import { Icons } from "@greeneggs/core";
+import { addRecipeStyles, RecipeForm } from "../AddRecipe";
+import { Icons, Navigation } from "@greeneggs/core";
 import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
-
-const Directions = [
-  {
-    title: "Chop Carrots",
-    description: "After washing the carrots, carefully dice them into small",
-  },
-  {
-    title: "Boil Spaghetti",
-    description: "Place the spaghetti in boiling water until it softens",
-  },
-];
 
 interface IAddRecipeDirections {
   form: RecipeForm;
+  navigation: any;
 }
 
-const AddRecipeDirections = ({ form }: IAddRecipeDirections) => (
+const AddRecipeDirections = ({ form, navigation }: IAddRecipeDirections) => (
   <ScrollView>
     <Text
       category="h5"
@@ -29,12 +19,20 @@ const AddRecipeDirections = ({ form }: IAddRecipeDirections) => (
       Directions
     </Text>
     <List
-      data={Directions}
+      data={form.watch("steps")}
       renderItem={({ item }) => (
         <ListItem title={item.title} description={item.description} />
       )}
     />
-    <AddListItem label="ADD STEP" />
+    <AddListItem
+      label="ADD STEP"
+      onPress={() =>
+        navigation.navigate("CreateStep", {
+          form,
+          index: form.getValues("steps")?.length || 0,
+        })
+      }
+    />
   </ScrollView>
 );
 

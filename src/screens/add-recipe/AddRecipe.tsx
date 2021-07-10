@@ -12,7 +12,7 @@ import {
 import useRecipeForm from "./useRecipeForm";
 import { Icons, IForm } from "@greeneggs/core";
 import AddRecipeIngredients from "./add-recipe-ingredients/AddRecipeIngredients";
-import AddRecipeDirections from "./AddRecipeDirections";
+import AddRecipeDirections from "./add-recipe-directions/AddRecipeDirections";
 import AddRecipeCategories from "./AddRecipeCategories";
 import AddRecipeDetails from "./AddRecipeDetails";
 import Stepper from "./Stepper";
@@ -51,7 +51,9 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
     },
     {
       title: "Directions",
-      component: <AddRecipeDirections form={recipeForm} />,
+      component: (
+        <AddRecipeDirections form={recipeForm} navigation={navigation} />
+      ),
     },
     {
       title: "Categories",

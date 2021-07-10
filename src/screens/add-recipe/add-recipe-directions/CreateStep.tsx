@@ -47,8 +47,6 @@ const CreateStep = ({ navigation, route }: any) => {
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.cancelled) {
       setImage(result);
     }
@@ -99,7 +97,7 @@ const CreateStep = ({ navigation, route }: any) => {
           defaultValue: "",
         }}
         submitError={form.formResult.data?.addRecipe.error}
-        type={InputType.TEXT}
+        type={InputType.TEXTAREA}
       />
       {image ? (
         <Image

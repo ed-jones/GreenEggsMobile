@@ -50,6 +50,7 @@ export enum InputType {
   FIRSTNAME = "FirstName",
   LASTNAME = "LastName",
   NUMERIC = "Numeric",
+  TEXTAREA = "TextArea",
 }
 
 export interface IControlledInput<FieldValues> {
@@ -104,6 +105,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
     },
   },
   Text: {},
+  TextArea: {},
   Password: {
     inputProps: {
       label: "PASSWORD",
@@ -169,7 +171,10 @@ const ControlledInput = <
         fieldState: { error },
       }) => (
         <Input
+          numberOfLines={type === InputType.TEXTAREA ? 4 : 1}
+          multiline={type === InputType.TEXTAREA}
           onBlur={onBlur}
+          textAlignVertical={type === InputType.TEXTAREA ? "top" : undefined}
           onChangeText={(e) =>
             type === InputType.NUMERIC
               ? onChange(stringToNumber(e))

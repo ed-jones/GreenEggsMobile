@@ -6,6 +6,7 @@ import {
   TopNavigation,
   Layout,
   Spinner,
+  withStyles,
 } from "@ui-kitten/components";
 
 import useRecipeForm from "./useRecipeForm";
@@ -39,7 +40,7 @@ export const addRecipeStyles = StyleSheet.create({
 
 export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>;
 
-export default function AddRecipe({ navigation }: any) {
+export default withStyles(function AddRecipe({ navigation, eva }: any) {
   const recipeForm = useRecipeForm();
   const Steps: Step[] = [
     {
@@ -88,6 +89,7 @@ export default function AddRecipe({ navigation }: any) {
           {steps.isEnd ? (
             <Button
               onPress={recipeForm.handleSubmit(onSubmit)}
+              status="success"
               accessoryRight={
                 recipeForm.formResult.loading
                   ? () => <Spinner size="small" status="control" />
@@ -98,16 +100,25 @@ export default function AddRecipe({ navigation }: any) {
             </Button>
           ) : (
             <Button onPress={steps.next} accessoryRight={Icons.Forward}>
-              Next
+              NEXT
             </Button>
           )}
           {steps.isStart ? null : (
-            <Button onPress={steps.previous} accessoryLeft={Icons.Back}>
-              Previous
+            <Button
+              onPress={steps.previous}
+              accessoryLeft={(props) => (
+                <Icons.Back
+                  {...props}
+                  fill={eva?.theme && eva.theme["color-primary-500"]}
+                />
+              )}
+              status="basic"
+            >
+              PREVIOUS
             </Button>
           )}
         </View>
       </View>
     </>
   );
-}
+});

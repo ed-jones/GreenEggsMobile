@@ -21,12 +21,6 @@ const CreateRecipeIngredients = ({
   form,
   navigation,
 }: ICreateRecipeIngredients) => {
-  const [ingredients, setIngredients] = useState<IngredientInput[]>(
-    form.getValues("ingredients")
-  );
-
-  useEffect(() => form.setValue("ingredients", ingredients), [ingredients]);
-
   return (
     <ScrollView>
       <View style={addRecipeStyles.view}>
@@ -45,12 +39,17 @@ const CreateRecipeIngredients = ({
         </Text>
       </View>
       <List
-        data={ingredients}
+        data={form.watch("ingredients")}
         renderItem={({ item }) => <IngredientListItem ingredient={item} />}
       />
       <AddListItem
         label="ADD INGREDIENT"
-        onPress={() => navigation.navigate("CreateIngredient")}
+        onPress={() =>
+          navigation.navigate("CreateIngredient", {
+            form,
+            index: form.getValues("ingredients")?.length || 0,
+          })
+        }
       />
     </ScrollView>
   );

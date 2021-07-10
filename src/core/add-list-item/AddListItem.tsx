@@ -17,7 +17,7 @@ const AddListItem = withStyles(
   ({ label, onPress, eva }: IAddListItem & ThemedComponentProps) => (
     <>
       <Divider />
-      <ListItem style={{ justifyContent: "center" }} onPress={() => onPress}>
+      <ListItem style={{ justifyContent: "center" }} onPress={onPress}>
         <Add
           style={{ width: 24, height: 24, marginRight: 8, marginLeft: -32 }}
           fill={eva?.theme && eva.theme["text-primary-color"]}

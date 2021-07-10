@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     height: 120,
   },
   view: {
-    // backgroundColor: "#F7F9FC",
     height: "100%",
   },
   description: {

@@ -35,13 +35,11 @@ export const Edit = (props: IconProps) => (
 );
 
 export const AddPerson = (props: IconProps) => (
-  <Icon {...props} fill="#000000" name="person-add-outline" />
+  <Icon {...props} name="person-add-outline" />
 );
 
 export const More = (props: IconProps) => (
-  <Icon {...props} fill="#000000" name="more-horizontal" />
+  <Icon {...props} name="more-horizontal" />
 );
 
-export const Search = (props: IconProps) => (
-  <Icon {...props} fill="#000000" name="search" />
-);
+export const Search = (props: IconProps) => <Icon {...props} name="search" />;

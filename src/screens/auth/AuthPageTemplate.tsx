@@ -12,6 +12,8 @@ import {
   TopNavigation,
   TopNavigationAction,
   Input,
+  withStyles,
+  ThemedComponentProps,
 } from "@ui-kitten/components";
 import { Icons, IForm } from "@greeneggs/core";
 import useLoginForm from "./useLoginForm";
@@ -56,9 +58,6 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "flex-start",
   },
-  view: {
-    backgroundColor: "#F7F9FC",
-  },
   logoText: {
     flexDirection: "row",
     alignItems: "center",
@@ -81,43 +80,51 @@ interface IAuthPageTemplateProps {
   children: React.ReactNode;
 }
 
-const AuthPageTemplate = ({
-  navigation,
-  message,
-  children,
-}: IAuthPageTemplateProps) => {
-  const navigateBack = () => {
-    navigation.goBack();
-  };
-  const insets = useSafeAreaInsets();
+const AuthPageTemplate = withStyles(
+  ({
+    navigation,
+    message,
+    children,
+    eva,
+  }: IAuthPageTemplateProps & ThemedComponentProps) => {
+    const navigateBack = () => {
+      navigation.goBack();
+    };
+    const insets = useSafeAreaInsets();
 
-  return (
-    <View style={{ ...styles.view, paddingBottom: insets.bottom }}>
-      <StatusBar style="dark" />
-      <View style={styles.bannerContainer}>
-        <ImageBackground source={Banner} style={styles.banner}>
-          <LinearGradient
-            colors={["rgba(247, 249, 252,0.5)", "rgba(247, 249, 252,1)"]}
-            style={styles.gradient}
-          />
-          <TopNavigation
-            style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-            accessoryLeft={() => (
-              <TopNavigationAction icon={Icons.Back} onPress={navigateBack} />
-            )}
-          />
-          <View style={styles.logoText}>
-            <Text category="h1">Green Eggs</Text>
-            <Image source={Logo} style={styles.logo} />
-          </View>
-          <Text style={styles.centerText} category="s1">
-            {message}
-          </Text>
-        </ImageBackground>
+    return (
+      <View
+        style={{
+          backgroundColor: eva?.theme && eva.theme["color-basic-200"],
+          paddingBottom: insets.bottom,
+        }}
+      >
+        <StatusBar style="dark" />
+        <View style={styles.bannerContainer}>
+          <ImageBackground source={Banner} style={styles.banner}>
+            <LinearGradient
+              colors={["rgba(247, 249, 252,0.5)", "rgba(247, 249, 252,1)"]}
+              style={styles.gradient}
+            />
+            <TopNavigation
+              style={{ backgroundColor: "transparent", paddingTop: insets.top }}
+              accessoryLeft={() => (
+                <TopNavigationAction icon={Icons.Back} onPress={navigateBack} />
+              )}
+            />
+            <View style={styles.logoText}>
+              <Text category="h1">Green Eggs</Text>
+              <Image source={Logo} style={styles.logo} />
+            </View>
+            <Text style={styles.centerText} category="s1">
+              {message}
+            </Text>
+          </ImageBackground>
+        </View>
+        <View style={styles.form}>{children}</View>
       </View>
-      <View style={styles.form}>{children}</View>
-    </View>
-  );
-};
+    );
+  }
+);
 
 export default AuthPageTemplate;

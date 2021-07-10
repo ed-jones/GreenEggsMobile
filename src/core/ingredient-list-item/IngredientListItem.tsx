@@ -13,7 +13,7 @@ const IngredientListItem = ({ ingredient }: IIngredientListItem) => (
     description={ingredient.description || undefined}
     accessoryRight={() => (
       <Text category="label" style={{ marginRight: 16 }}>
-        {`${ingredient.quantity} ${ingredient.unit}`}
+        {`${ingredient.quantity} ${ingredient.unit || ""}`}
       </Text>
     )}
   />

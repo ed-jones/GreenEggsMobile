@@ -11,6 +11,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Icons } from "@greeneggs/core";
 import ControlledInput, {
   InputType,
+  Rules,
 } from "@greeneggs/core/controlled-input/ControlledInput";
 import { IngredientInput, RecipeInput } from "@greeneggs/types/graphql";
 import { RecipeForm } from "../AddRecipe";
@@ -42,6 +43,10 @@ const CreateIngredient = ({ navigation, route }: any) => {
         controllerProps={{
           name: `ingredients.${index}.name`,
           control: form.control,
+          rules: {
+            ...Rules.REQUIRED,
+            ...Rules.UNDER100CHARS,
+          },
         }}
         inputProps={{
           label: "INGREDIENT NAME",
@@ -55,9 +60,12 @@ const CreateIngredient = ({ navigation, route }: any) => {
         controllerProps={{
           name: `ingredients.${index}.description`,
           control: form.control,
+          rules: {
+            ...Rules.UNDER100CHARS,
+          },
         }}
         inputProps={{
-          label: "DESCRIPTION",
+          label: "DESCRIPTION (OPTIONAL)",
           placeholder: "Finely chopped",
           defaultValue: "",
         }}
@@ -68,6 +76,9 @@ const CreateIngredient = ({ navigation, route }: any) => {
         controllerProps={{
           name: `ingredients.${index}.quantity`,
           control: form.control,
+          rules: {
+            ...Rules.REQUIRED,
+          },
         }}
         inputProps={{
           label: "QUANTITY",
@@ -81,9 +92,12 @@ const CreateIngredient = ({ navigation, route }: any) => {
         controllerProps={{
           name: `ingredients.${index}.unit`,
           control: form.control,
+          rules: {
+            ...Rules.UNDER100CHARS,
+          },
         }}
         inputProps={{
-          label: "UNIT",
+          label: "UNIT (OPTIONAL)",
           placeholder: "Cups",
           defaultValue: "",
         }}
@@ -91,9 +105,15 @@ const CreateIngredient = ({ navigation, route }: any) => {
         type={InputType.TEXT}
       />
       <Button
-        disabled={!!form.formState.errors.ingredients}
         onPress={() => {
-          navigation.goBack();
+          form
+            .trigger([
+              `ingredients.${index}.name`,
+              `ingredients.${index}.description`,
+              `ingredients.${index}.quantity`,
+              `ingredients.${index}.unit`,
+            ])
+            .then((isValid) => (isValid ? navigation.goBack() : undefined));
         }}
       >
         ADD INGREDIENT

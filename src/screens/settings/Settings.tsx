@@ -12,6 +12,7 @@ import { ScrollView, StyleSheet } from "react-native";
 import { Icons } from "@greeneggs/core";
 import Svg, { Circle } from "react-native-svg";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const styles = StyleSheet.create({
   header: { padding: 16 },
@@ -66,6 +67,7 @@ const SettingsListItem = ({ item }: ISettingListItem) => (
 );
 
 const Settings = ({ navigation }: { navigation: StackNavigationProp<any> }) => {
+  const insets = useSafeAreaInsets();
   const AccountSettings: ListItemProps[] = [
     {
       title: "Edit Profile",
@@ -147,7 +149,7 @@ const Settings = ({ navigation }: { navigation: StackNavigationProp<any> }) => {
       <TopNavigation
         title="Settings"
         alignment="center"
-        style={{ backgroundColor: "transparent" }}
+        style={{ backgroundColor: "transparent", marginTop: insets.top }}
         accessoryLeft={() => (
           <TopNavigationAction icon={Icons.Back} onPress={navigateBack} />
         )}

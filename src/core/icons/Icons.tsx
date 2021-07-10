@@ -3,7 +3,7 @@ import React from "react";
 import { Icon, IconProps } from "@ui-kitten/components";
 
 export const Settings = (props: IconProps) => (
-  <Icon {...props} name="settings" />
+  <Icon {...props} name="settings-outline" />
 );
 
 export const Back = (props: IconProps) => (
@@ -40,4 +40,8 @@ export const AddPerson = (props: IconProps) => (
 
 export const More = (props: IconProps) => (
   <Icon {...props} fill="#000000" name="more-horizontal" />
+);
+
+export const Search = (props: IconProps) => (
+  <Icon {...props} fill="#000000" name="search" />
 );

@@ -69,11 +69,17 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
   const insets = useSafeAreaInsets();
 
   const onSubmit = async () => {
-    const { data } = await recipeForm.submitForm();
-    if (data?.addRecipe.error) {
-      console.log(data?.addRecipe.error.message);
-    } else {
-      navigation.navigate("Recipe", { recipeId: data?.addRecipe.data?.id });
+    try {
+      const { data } = await recipeForm.submitForm();
+      console.log(data);
+      if (data?.addRecipe.error) {
+        console.log(data?.addRecipe.error.message);
+      } else {
+        navigation.navigate("Recipe", { recipeId: data?.addRecipe.data?.id });
+      }
+    } catch (error) {
+      console.log(error);
+      console.log(recipeForm.getValues());
     }
   };
 

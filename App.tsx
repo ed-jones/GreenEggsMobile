@@ -6,6 +6,7 @@ import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import {
   ApolloClient,
+  ApolloLink,
   ApolloProvider,
   createHttpLink,
   InMemoryCache,
@@ -26,6 +27,7 @@ import Recipe from "@greeneggs/screens/recipe/Recipe";
 import RecipeDescription from "@greeneggs/screens/recipe/RecipeDescription";
 import { Navigation } from "@greeneggs/core";
 import { useContext } from "react";
+import { createUploadLink } from "apollo-upload-client";
 import { AuthContext, Token } from "@greeneggs/core/auth-context/AuthContext";
 import CreateIngredient from "@greeneggs/screens/add-recipe/add-recipe-ingredients/CreateIngredient";
 import EditProfile from "@greeneggs/screens/settings/EditProfile";
@@ -65,13 +67,15 @@ function App() {
     },
   }));
 
-  const httpLink = createHttpLink({
+  const uploadLink = createUploadLink({
     uri: process.env.API_URI,
   });
 
   const client = new ApolloClient({
     cache: new InMemoryCache(),
-    link: token ? authLink.concat(httpLink) : httpLink,
+    link: token
+      ? authLink.concat(uploadLink as unknown as ApolloLink)
+      : (uploadLink as unknown as ApolloLink),
   });
 
   if (!isLoadingComplete) {

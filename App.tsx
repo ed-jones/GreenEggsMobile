@@ -38,6 +38,9 @@ import Allergies from "@greeneggs/screens/settings/Allergies";
 import ProfileVisibility from "@greeneggs/screens/settings/ProfileVisibility";
 import Settings from "@greeneggs/screens/settings/Settings";
 import CreateStep from "@greeneggs/screens/add-recipe/add-recipe-directions/CreateStep";
+import CreateAllergy from "@greeneggs/screens/add-recipe/add-recipe-categories/CreateAllergy";
+import CreateCategory from "@greeneggs/screens/add-recipe/add-recipe-categories/CreateCategory";
+import CreateDiet from "@greeneggs/screens/add-recipe/add-recipe-categories/CreateDiet";
 
 const Stack = createStackNavigator();
 
@@ -98,6 +101,10 @@ function App() {
               component={CreateIngredient}
             />
             <Stack.Screen name="CreateStep" component={CreateStep} />
+            <Stack.Screen name="CreateCategory" component={CreateCategory} />
+            <Stack.Screen name="CreateDiet" component={CreateDiet} />
+            <Stack.Screen name="CreateAllergy" component={CreateAllergy} />
+
             <Stack.Screen name="Settings" component={Settings} />
             <Stack.Screen name="EditProfile" component={EditProfile} />
             <Stack.Screen name="ChangePassword" component={ChangePassword} />

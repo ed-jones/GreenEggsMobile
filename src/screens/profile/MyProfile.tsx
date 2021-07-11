@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, View, StyleSheet, SafeAreaView } from "react-native";
+import { Image, View, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 import {
   Text,
   Button,
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   description: {
     padding: 16,
   },
-  button: {},
+  button: {height: 35},
   topButton: {
     width: 24,
     height: 24,
@@ -56,7 +56,15 @@ const styles = StyleSheet.create({
   },
   search: {
     backgroundColor: "white",
+    paddingRight: 8,
+    flexBasis: "auto",
+    flexGrow: 1,
+  },
+  searchContainer: {
     margin: 16,
+    marginTop: 8,
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
 
@@ -123,12 +131,19 @@ const MyProfile = ({ navigation }: any) => {
         <ProfileStat label="Recipes" value="18" />
         <ProfileStat label="Likes" value="356" />
       </View>
-      <Input
-        placeholder="Search recipes"
-        size="large"
-        style={styles.search}
-        accessoryLeft={Icons.Search}
-      />
+      <View style={styles.searchContainer}>
+        <Input
+          placeholder="Search recipes"
+          size="large"
+          style={styles.search}
+          accessoryLeft={Icons.Search}
+        />
+        <Button size="small" style={styles.button} accessoryLeft={Icons.Filter}/>
+      </View>
+      <ScrollView style={styles.recipes}>
+        <Text>Insert Recipe Cards</Text>
+      </ScrollView>
+
     </Layout>
   );
 };

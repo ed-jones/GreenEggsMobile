@@ -42,4 +42,8 @@ export const More = (props: IconProps) => (
   <Icon {...props} name="more-horizontal" />
 );
 
+export const Filter = (props: IconProps) => (
+  <Icon {...props} name="options-2-outline" />
+)
+
 export const Search = (props: IconProps) => <Icon {...props} name="search" />;

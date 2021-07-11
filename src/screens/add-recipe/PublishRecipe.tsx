@@ -25,7 +25,6 @@ interface IAddRecipeDirections {
 
 const AddRecipeDirections = ({ form }: IAddRecipeDirections) => (
   <ScrollView style={addRecipeStyles.view}>
-    <Input label="RECIPE PRIVACY" placeholder="Public" />
     <ControlledInput<RecipeInput>
       controllerProps={{
         name: `visibility`,
@@ -37,7 +36,7 @@ const AddRecipeDirections = ({ form }: IAddRecipeDirections) => (
       inputProps={{
         label: "RECIPE PRIVACY",
         placeholder: "PUBLIC",
-        defaultValue: "PUBLIC",
+        defaultValue: "",
       }}
       submitError={form.formResult.data?.addRecipe.error}
       type={InputType.TEXT}
@@ -53,7 +52,7 @@ const AddRecipeDirections = ({ form }: IAddRecipeDirections) => (
       inputProps={{
         label: "COMMENT PRIVILEGES",
         placeholder: "PUBLIC",
-        defaultValue: "PUBLIC",
+        defaultValue: "",
       }}
       submitError={form.formResult.data?.addRecipe.error}
       type={InputType.TEXT}
@@ -70,7 +69,7 @@ const AddRecipeDirections = ({ form }: IAddRecipeDirections) => (
       inputProps={{
         label: "LIKE PRIVILEGES",
         placeholder: "PUBLIC",
-        defaultValue: "PUBLIC",
+        defaultValue: "",
       }}
       submitError={form.formResult.data?.addRecipe.error}
       type={InputType.TEXT}

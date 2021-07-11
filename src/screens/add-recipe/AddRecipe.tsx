@@ -69,6 +69,7 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
   const insets = useSafeAreaInsets();
 
   const onSubmit = async () => {
+    console.log(recipeForm.getValues());
     try {
       const { data } = await recipeForm.submitForm();
       console.log(data);
@@ -79,7 +80,6 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
       }
     } catch (error) {
       console.log(error);
-      console.log(recipeForm.getValues());
     }
   };
 

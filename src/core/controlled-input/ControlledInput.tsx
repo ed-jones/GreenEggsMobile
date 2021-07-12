@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Controller,
   ControllerProps,
@@ -6,17 +6,10 @@ import {
   PathValue,
   RegisterOptions,
 } from "react-hook-form";
-import { Input, InputProps, Text } from "@ui-kitten/components";
+import { Input, InputProps } from "@ui-kitten/components";
 import { ErrorFragment } from "@greeneggs/types/graphql";
-import { Platform, Image, View } from "react-native";
-import * as ImagePicker from "expo-image-picker";
 import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
-import { ReactNativeFile } from "apollo-upload-client";
-import { v4 as uuidv4 } from "uuid";
-import { ImageBackground } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 
-import * as Icons from "../icons/Icons";
 import ImageUpload from "./ImageUpload";
 
 // Function that converts JS numbers to strings in a way
@@ -188,6 +181,7 @@ const ControlledInput = <
               label={inputProps?.label?.toString()}
               uri={(value as ImageInfo)?.uri}
               onChange={onChange}
+              error={error}
             />
           );
         } else {

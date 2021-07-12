@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { List, Text } from "@ui-kitten/components";
-import { View } from "react-native";
-import { IngredientInput, RecipeInput } from "@greeneggs/types/graphql";
+import { ScrollView, View } from "react-native";
+import { RecipeInput } from "@greeneggs/types/graphql";
 import ControlledInput, {
   InputType,
   Rules,
 } from "@greeneggs/core/controlled-input/ControlledInput";
-import { ScrollView } from "react-native-gesture-handler";
 import { addRecipeStyles, RecipeForm } from "../AddRecipe";
 import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
 import IngredientListItem from "@greeneggs/core/ingredient-list-item/IngredientListItem";
-import { useEffect } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
+import Alert from "@greeneggs/core/alert/Alert";
 
 interface ICreateRecipeIngredients {
   form: RecipeForm;
@@ -24,28 +23,35 @@ const CreateRecipeIngredients = ({
 }: ICreateRecipeIngredients) => {
   return (
     <ScrollView>
-      <View style={addRecipeStyles.view}>
-        <ControlledInput<RecipeInput>
-          controllerProps={{
-            name: "servingCount",
-            control: form.control,
-            rules: {
-              ...Rules.Required,
-            },
-          }}
-          inputProps={{
-            label: "SERVES",
-            placeholder: "4",
-            defaultValue: "",
-            caption: "How many people can this recipe serve?",
-          }}
-          submitError={form.formResult.data?.addRecipe.error}
-          type={InputType.NUMERIC}
-        />
-        <Text category="h5" style={addRecipeStyles.heading}>
-          Ingredients
-        </Text>
-      </View>
+      <Alert
+        type="info"
+        message="Include ingredients needed to make this recipe."
+        style={addRecipeStyles.view}
+      />
+      <ControlledInput<RecipeInput>
+        controllerProps={{
+          name: "servingCount",
+          control: form.control,
+          rules: {
+            ...Rules.Required,
+          },
+        }}
+        inputProps={{
+          label: "SERVES",
+          placeholder: "4",
+          defaultValue: "",
+          caption: "How many people can this recipe serve?",
+          style: { ...addRecipeStyles.input, paddingHorizontal: 16 },
+        }}
+        submitError={form.formResult.data?.addRecipe.error}
+        type={InputType.NUMERIC}
+      />
+      <Text
+        category="h5"
+        style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}
+      >
+        Ingredients
+      </Text>
       <List
         data={form.watch("ingredients")}
         renderItem={({ item }) => <IngredientListItem ingredient={item} />}

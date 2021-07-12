@@ -1,10 +1,10 @@
 import React from "react";
-import { Divider, Input, List, ListItem, Text } from "@ui-kitten/components";
+import { List, ListItem, Text } from "@ui-kitten/components";
 import { ScrollView, Image } from "react-native";
 import { addRecipeStyles, RecipeForm } from "../AddRecipe";
-import { Icons, Navigation } from "@greeneggs/core";
 import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
 import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
+import Alert from "@greeneggs/core/alert/Alert";
 
 interface IAddRecipeDirections {
   form: RecipeForm;
@@ -13,6 +13,11 @@ interface IAddRecipeDirections {
 
 const AddRecipeDirections = ({ form, navigation }: IAddRecipeDirections) => (
   <ScrollView>
+    <Alert
+      type="info"
+      message="Include steps that must be completed in order to follow this recipe."
+      style={addRecipeStyles.view}
+    />
     <Text
       category="h5"
       style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}

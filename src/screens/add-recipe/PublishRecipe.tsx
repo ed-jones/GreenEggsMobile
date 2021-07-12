@@ -7,13 +7,18 @@ import ControlledInput, {
   Rules,
 } from "@greeneggs/core/controlled-input/ControlledInput";
 import { RecipeInput } from "@greeneggs/types/graphql";
+import Alert from "@greeneggs/core/alert/Alert";
 
 interface IPublishRecipe {
   form: RecipeForm;
 }
 
 const PublishRecipe = ({ form }: IPublishRecipe) => (
-  <ScrollView style={addRecipeStyles.view}>
+  <ScrollView style={{ paddingHorizontal: 16 }}>
+    <Alert
+      type="warning"
+      message="Control who is able to see, like and comment on your recipe."
+    />
     <ControlledInput<RecipeInput>
       controllerProps={{
         name: `visibility`,
@@ -26,6 +31,8 @@ const PublishRecipe = ({ form }: IPublishRecipe) => (
         label: "RECIPE PRIVACY",
         placeholder: "PUBLIC",
         defaultValue: "",
+        style: addRecipeStyles.input,
+        caption: "Who is able to see your recipe?",
       }}
       submitError={form.formResult.data?.addRecipe.error}
       type={InputType.TEXT}
@@ -42,6 +49,8 @@ const PublishRecipe = ({ form }: IPublishRecipe) => (
         label: "COMMENT PRIVILEGES",
         placeholder: "PUBLIC",
         defaultValue: "",
+        style: addRecipeStyles.input,
+        caption: "Who is able to comment on your recipe?",
       }}
       submitError={form.formResult.data?.addRecipe.error}
       type={InputType.TEXT}
@@ -58,6 +67,8 @@ const PublishRecipe = ({ form }: IPublishRecipe) => (
         label: "LIKE PRIVILEGES",
         placeholder: "PUBLIC",
         defaultValue: "",
+        style: addRecipeStyles.input,
+        caption: "Who is able to like your recipe?",
       }}
       submitError={form.formResult.data?.addRecipe.error}
       type={InputType.TEXT}

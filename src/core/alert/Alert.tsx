@@ -4,6 +4,7 @@ import {
   Icon,
   IconProps,
   Text,
+  TextElement,
   ThemedComponentProps,
   withStyles,
 } from "@ui-kitten/components";
@@ -12,7 +13,7 @@ type AlertType = "danger" | "warning" | "info" | "success";
 
 interface IAlert {
   type: AlertType;
-  message: string;
+  message: React.ReactText | TextElement;
   style?: StyleProp<ViewStyle>;
 }
 

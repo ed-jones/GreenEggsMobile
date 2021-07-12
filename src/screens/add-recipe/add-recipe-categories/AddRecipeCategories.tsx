@@ -3,6 +3,7 @@ import { List, ListItem, Text } from "@ui-kitten/components";
 import { ScrollView } from "react-native";
 import { addRecipeStyles, RecipeForm } from "../AddRecipe";
 import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
+import Alert from "@greeneggs/core/alert/Alert";
 
 interface IAddRecipeCategories {
   form: RecipeForm;
@@ -11,6 +12,18 @@ interface IAddRecipeCategories {
 
 const AddRecipeCategories = ({ form, navigation }: IAddRecipeCategories) => (
   <ScrollView>
+    <Alert
+      type="info"
+      message={
+        <Text>
+          Tag this recipe with relevant categories, such as{" "}
+          <Text style={{ fontWeight: "bold" }}>Breakfast</Text>,{" "}
+          <Text style={{ fontWeight: "bold" }}>Soup</Text> or{" "}
+          <Text style={{ fontWeight: "bold" }}>Italian</Text>.
+        </Text>
+      }
+      style={addRecipeStyles.view}
+    />
     <Text
       category="h5"
       style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}

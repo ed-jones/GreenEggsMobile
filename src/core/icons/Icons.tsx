@@ -42,4 +42,16 @@ export const More = (props: IconProps) => (
   <Icon {...props} name="more-horizontal" />
 );
 
+export const Camera = (props: IconProps) => (
+  <Icon {...props} name="camera-outline" />
+);
+
+export const Image = (props: IconProps) => (
+  <Icon {...props} name="image-outline" />
+);
+
+export const Cross = (props: IconProps) => (
+  <Icon {...props} name="close-outline" />
+);
+
 export const Search = (props: IconProps) => <Icon {...props} name="search" />;

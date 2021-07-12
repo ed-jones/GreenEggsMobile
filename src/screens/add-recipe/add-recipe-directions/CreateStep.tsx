@@ -65,6 +65,9 @@ const CreateStepForm = ({ form, index, navigation }: RecipeFormPart) => (
           ...Rules.REQUIRED,
         },
       }}
+      inputProps={{
+        label: "IMAGE",
+      }}
       submitError={form.formResult.data?.addRecipe.error}
       type={InputType.PHOTO}
     />

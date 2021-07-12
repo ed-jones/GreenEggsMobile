@@ -6,13 +6,18 @@ import {
   PathValue,
   RegisterOptions,
 } from "react-hook-form";
-import { Button, Input, InputProps } from "@ui-kitten/components";
+import { Input, InputProps, Text } from "@ui-kitten/components";
 import { ErrorFragment } from "@greeneggs/types/graphql";
-import { Platform, Image } from "react-native";
+import { Platform, Image, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
 import { ReactNativeFile } from "apollo-upload-client";
 import { v4 as uuidv4 } from "uuid";
+import { ImageBackground } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+
+import * as Icons from "../icons/Icons";
+import ImageUpload from "./ImageUpload";
 
 // Function that converts JS numbers to strings in a way
 // that avoids NaN, undefined, etc.
@@ -171,37 +176,6 @@ const ControlledInput = <
 }: IControlledInput<FieldValues>) => {
   const inputTypeDefaultProps = InputTypeDefaultProps<FieldValues>()[type];
 
-  useEffect(() => {
-    if (type === InputType.PHOTO)
-      (async () => {
-        if (Platform.OS !== "web") {
-          const { status } = await ImagePicker.requestCameraPermissionsAsync();
-          if (status !== "granted") {
-            alert("Sorry, we need camera roll permissions to make this work!");
-          }
-        }
-      })();
-  }, []);
-
-  const pickImage = async (onChange: (...event: any[]) => void) => {
-    let result = await ImagePicker.launchCameraAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 0.5,
-    });
-
-    if (!result.cancelled) {
-      onChange(
-        new ReactNativeFile({
-          uri: result.uri,
-          name: `${uuidv4()}.jpg`,
-          type: `${result.type}`,
-        })
-      );
-    }
-  };
-
   return (
     <Controller<FieldValues>
       render={({
@@ -210,15 +184,11 @@ const ControlledInput = <
       }) => {
         if (type === InputType.PHOTO) {
           return (
-            <>
-              <Button onPress={() => pickImage(onChange)}>Take Photo</Button>
-              {value ? (
-                <Image
-                  source={{ uri: (value as ImageInfo).uri }}
-                  style={{ width: 200, height: 200 }}
-                />
-              ) : undefined}
-            </>
+            <ImageUpload
+              label={inputProps?.label?.toString()}
+              uri={(value as ImageInfo)?.uri}
+              onChange={onChange}
+            />
           );
         } else {
           return (

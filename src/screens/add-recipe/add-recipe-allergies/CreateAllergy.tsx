@@ -41,9 +41,14 @@ const CreateAllergyForm = ({ form, index, navigation }: RecipeFormPart) => (
     />
     <Button
       onPress={() => {
-        form
-          .trigger([`allergies.${index}.name`])
-          .then((isValid) => (isValid ? navigation.goBack() : undefined));
+        form.trigger([`allergies.${index}.name`]).then((isValid) => {
+          if (isValid) {
+            form.register(`allergies.${index}`, {
+              value: form.getValues(`allergies.${index}`),
+            });
+            navigation.goBack();
+          }
+        });
       }}
     >
       ADD ALLERGY

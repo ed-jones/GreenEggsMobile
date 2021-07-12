@@ -171,6 +171,7 @@ const ControlledInput = <
 
   return (
     <Controller<FieldValues>
+      shouldUnregister
       render={({
         field: { onChange, onBlur, value },
         fieldState: { error },

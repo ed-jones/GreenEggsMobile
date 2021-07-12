@@ -41,9 +41,14 @@ const CreateCategoryForm = ({ form, index, navigation }: RecipeFormPart) => (
     />
     <Button
       onPress={() => {
-        form
-          .trigger([`categories.${index}.name`])
-          .then((isValid) => (isValid ? navigation.goBack() : undefined));
+        form.trigger([`categories.${index}.name`]).then((isValid) => {
+          if (isValid) {
+            form.register(`categories.${index}`, {
+              value: form.getValues(`categories.${index}`),
+            });
+            navigation.goBack();
+          }
+        });
       }}
     >
       ADD CATEGORY

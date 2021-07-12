@@ -1,6 +1,8 @@
 import { Icons } from "@greeneggs/core";
+import { IngredientInput, RecipeInput } from "@greeneggs/types/graphql";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { TopNavigation, TopNavigationAction } from "@ui-kitten/components";
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { addRecipeStyles, RecipeForm } from "./AddRecipe";
@@ -11,9 +13,21 @@ export interface RecipeFormPart {
   navigation: any;
 }
 
+// Roundabout way of generating a type for all keys of RecipeInput that are arrays of objects
+type InputExtendsAny = {
+  [K in keyof RecipeInput]: RecipeInput[K] extends never ? K : never;
+}[keyof RecipeInput];
+
+type InputExtendsArray = {
+  [K in keyof Omit<
+    RecipeInput,
+    InputExtendsAny
+  >]: RecipeInput[K] extends Array<object> ? K : never;
+}[keyof Omit<RecipeInput, InputExtendsAny>];
+
 interface ICreateRecipePartTemplate {
   title: string;
-  navigation: any;
+  navigation: StackNavigationProp<any>;
   route: any;
   formComponent: (props: RecipeFormPart) => React.ReactElement;
 }
@@ -26,7 +40,9 @@ const CreateRecipePartTemplate = ({
 }: ICreateRecipePartTemplate) => {
   const insets = useSafeAreaInsets();
   const { form, index } = route.params as { form: RecipeForm; index: number };
-
+  function goBack() {
+    navigation.goBack();
+  }
   return (
     <View style={{ paddingHorizontal: 16 }}>
       <TopNavigation
@@ -34,10 +50,7 @@ const CreateRecipePartTemplate = ({
         alignment="center"
         title={title}
         accessoryLeft={() => (
-          <TopNavigationAction
-            icon={Icons.Back}
-            onPress={() => navigation.goBack()}
-          />
+          <TopNavigationAction icon={Icons.Back} onPress={goBack} />
         )}
       />
       {React.createElement(formComponent, { form, index, navigation })}

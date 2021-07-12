@@ -16,6 +16,7 @@ const CreateIngredient = ({ navigation, route }: any) => (
     navigation={navigation}
     route={route}
     formComponent={CreateIngredientForm}
+    key="ingredients"
   />
 );
 
@@ -99,7 +100,14 @@ const CreateIngredientForm = ({ form, index, navigation }: RecipeFormPart) => (
             `ingredients.${index}.quantity`,
             `ingredients.${index}.unit`,
           ])
-          .then((isValid) => (isValid ? navigation.goBack() : undefined));
+          .then((isValid) => {
+            if (isValid) {
+              form.register(`ingredients.${index}`, {
+                value: form.getValues(`ingredients.${index}`),
+              });
+              navigation.goBack();
+            }
+          });
       }}
     >
       ADD INGREDIENT

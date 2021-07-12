@@ -41,9 +41,14 @@ const CreateDietForm = ({ form, index, navigation }: RecipeFormPart) => (
     />
     <Button
       onPress={() => {
-        form
-          .trigger([`diets.${index}.name`])
-          .then((isValid) => (isValid ? navigation.goBack() : undefined));
+        form.trigger([`diets.${index}.name`]).then((isValid) => {
+          if (isValid) {
+            form.register(`diets.${index}`, {
+              value: form.getValues(`diets.${index}`),
+            });
+            navigation.goBack();
+          }
+        });
       }}
     >
       ADD DIET

@@ -20,6 +20,7 @@ import PublishRecipe from "./PublishRecipe";
 
 import AddRecipeAllergies from "./add-recipe-allergies/AddRecipeAllergies";
 import AddRecipeDiets from "./add-recipe-diets/AddRecipeDiets";
+import { useEffect } from "react";
 
 export const addRecipeStyles = StyleSheet.create({
   view: {
@@ -123,11 +124,11 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
             </Button>
           ) : (
             <Button
-              onPress={() =>
+              onPress={() => {
                 form
                   .trigger()
-                  .then((isValid) => (isValid ? steps.next() : undefined))
-              }
+                  .then((isValid) => (isValid ? steps.next() : undefined));
+              }}
               accessoryRight={Icons.Forward}
             >
               NEXT

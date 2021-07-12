@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Text } from "@ui-kitten/components";
+import { Button, List, Text } from "@ui-kitten/components";
 import { ScrollView, View } from "react-native";
 import { RecipeInput } from "@greeneggs/types/graphql";
 import ControlledInput, {
@@ -41,7 +41,10 @@ const CreateRecipeIngredients = ({
           placeholder: "4",
           defaultValue: "",
           caption: "How many people can this recipe serve?",
-          style: { ...addRecipeStyles.input, paddingHorizontal: 16 },
+          style: {
+            ...addRecipeStyles.input,
+            paddingHorizontal: 16,
+          },
         }}
         submitError={form.formResult.data?.addRecipe.error}
         type={InputType.NUMERIC}

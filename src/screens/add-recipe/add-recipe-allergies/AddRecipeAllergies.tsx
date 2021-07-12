@@ -4,21 +4,21 @@ import { ScrollView } from "react-native";
 import { addRecipeStyles, RecipeForm } from "../AddRecipe";
 import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
 
-interface IAddRecipeCategories {
+interface IAddRecipeAllergies {
   form: RecipeForm;
   navigation: any;
 }
 
-const AddRecipeCategories = ({ form, navigation }: IAddRecipeCategories) => (
+const AddRecipeAllergies = ({ form, navigation }: IAddRecipeAllergies) => (
   <ScrollView>
     <Text
       category="h5"
       style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}
     >
-      Categories
+      Allergies
     </Text>
     <List
-      data={form.watch("categories")}
+      data={form.watch("allergies")}
       renderItem={({ item }) => (
         <>
           <ListItem title={item.name} />
@@ -26,15 +26,15 @@ const AddRecipeCategories = ({ form, navigation }: IAddRecipeCategories) => (
       )}
     />
     <AddListItem
-      label="ADD CATEGORY"
+      label="ADD ALLERGY"
       onPress={() =>
-        navigation.navigate("CreateCategory", {
+        navigation.navigate("CreateAllergy", {
           form,
-          index: form.getValues("categories")?.length || 0,
+          index: form.getValues("allergies")?.length || 0,
         })
       }
     />
   </ScrollView>
 );
 
-export default AddRecipeCategories;
+export default AddRecipeAllergies;

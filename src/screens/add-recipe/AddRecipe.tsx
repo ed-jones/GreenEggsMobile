@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
+import { Button, Spinner, withStyles } from "@ui-kitten/components";
 import {
-  Input,
-  Button,
-  TopNavigation,
-  Layout,
-  Spinner,
-  withStyles,
-} from "@ui-kitten/components";
+  addRecipe,
+  addRecipeVariables,
+  RecipeInput,
+} from "@greeneggs/types/graphql";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Icons, IForm } from "@greeneggs/core";
 
 import useRecipeForm from "./useRecipeForm";
-import { Icons, IForm } from "@greeneggs/core";
 import AddRecipeIngredients from "./add-recipe-ingredients/AddRecipeIngredients";
 import AddRecipeDirections from "./add-recipe-directions/AddRecipeDirections";
 import AddRecipeCategories from "./add-recipe-categories/AddRecipeCategories";
@@ -18,12 +17,9 @@ import AddRecipeDetails from "./AddRecipeDetails";
 import Stepper from "./Stepper";
 import { useSteps, Step } from "./useSteps";
 import PublishRecipe from "./PublishRecipe";
-import {
-  addRecipe,
-  addRecipeVariables,
-  RecipeInput,
-} from "@greeneggs/types/graphql";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+
+import AddRecipeAllergies from "./add-recipe-allergies/AddRecipeAllergies";
+import AddRecipeDiets from "./add-recipe-diets/AddRecipeDiets";
 
 export const addRecipeStyles = StyleSheet.create({
   view: {
@@ -36,42 +32,53 @@ export const addRecipeStyles = StyleSheet.create({
   heading: {
     paddingVertical: 16,
   },
+  input: {
+    marginBottom: 10,
+  },
 });
 
 export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>;
 
 export default withStyles(function AddRecipe({ navigation, eva }: any) {
-  const recipeForm = useRecipeForm();
+  const form = useRecipeForm();
   const Steps: Step[] = [
     {
       title: "Ingredients",
-      component: (
-        <AddRecipeIngredients form={recipeForm} navigation={navigation} />
-      ),
+      component: <AddRecipeIngredients {...{ form, navigation }} />,
     },
     {
       title: "Directions",
-      component: (
-        <AddRecipeDirections form={recipeForm} navigation={navigation} />
-      ),
+      component: <AddRecipeDirections {...{ form, navigation }} />,
     },
     {
       title: "Categories",
-      component: (
-        <AddRecipeCategories form={recipeForm} navigation={navigation} />
-      ),
+      component: <AddRecipeCategories {...{ form, navigation }} />,
     },
-    { title: "Details", component: <AddRecipeDetails form={recipeForm} /> },
-    { title: "Publish", component: <PublishRecipe form={recipeForm} /> },
+    {
+      title: "Diets",
+      component: <AddRecipeAllergies {...{ form, navigation }} />,
+    },
+    {
+      title: "Allergies",
+      component: <AddRecipeDiets {...{ form, navigation }} />,
+    },
+    {
+      title: "Details",
+      component: <AddRecipeDetails {...{ form, navigation }} />,
+    },
+    {
+      title: "Publish",
+      component: <PublishRecipe {...{ form, navigation }} />,
+    },
   ];
 
   const steps = useSteps(Steps);
   const insets = useSafeAreaInsets();
 
   const onSubmit = async () => {
-    console.log(recipeForm.getValues());
+    console.log(form.getValues());
     try {
-      const { data } = await recipeForm.submitForm();
+      const { data } = await form.submitForm();
       console.log(data);
       if (data?.addRecipe.error) {
         console.log(data?.addRecipe.error.message);
@@ -98,10 +105,16 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
         <View style={addRecipeStyles.buttonGroup}>
           {steps.isEnd ? (
             <Button
-              onPress={recipeForm.handleSubmit(onSubmit)}
+              onPress={() =>
+                form
+                  .trigger()
+                  .then((isValid) =>
+                    isValid ? form.handleSubmit(onSubmit) : undefined
+                  )
+              }
               status="success"
               accessoryRight={
-                recipeForm.formResult.loading
+                form.formResult.loading
                   ? () => <Spinner size="small" status="control" />
                   : Icons.Publish
               }
@@ -109,7 +122,14 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
               Publish
             </Button>
           ) : (
-            <Button onPress={steps.next} accessoryRight={Icons.Forward}>
+            <Button
+              onPress={() =>
+                form
+                  .trigger()
+                  .then((isValid) => (isValid ? steps.next() : undefined))
+              }
+              accessoryRight={Icons.Forward}
+            >
               NEXT
             </Button>
           )}

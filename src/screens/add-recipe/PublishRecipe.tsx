@@ -8,22 +8,11 @@ import ControlledInput, {
 } from "@greeneggs/core/controlled-input/ControlledInput";
 import { RecipeInput } from "@greeneggs/types/graphql";
 
-const Directions = [
-  {
-    title: "Chop Carrots",
-    description: "After washing the carrots, carefully dice them into small",
-  },
-  {
-    title: "Boil Spaghetti",
-    description: "Place the spaghetti in boiling water until it softens",
-  },
-];
-
-interface IAddRecipeDirections {
+interface IPublishRecipe {
   form: RecipeForm;
 }
 
-const AddRecipeDirections = ({ form }: IAddRecipeDirections) => (
+const PublishRecipe = ({ form }: IPublishRecipe) => (
   <ScrollView style={addRecipeStyles.view}>
     <ControlledInput<RecipeInput>
       controllerProps={{
@@ -57,7 +46,6 @@ const AddRecipeDirections = ({ form }: IAddRecipeDirections) => (
       submitError={form.formResult.data?.addRecipe.error}
       type={InputType.TEXT}
     />
-
     <ControlledInput<RecipeInput>
       controllerProps={{
         name: `likeability`,
@@ -77,4 +65,4 @@ const AddRecipeDirections = ({ form }: IAddRecipeDirections) => (
   </ScrollView>
 );
 
-export default AddRecipeDirections;
+export default PublishRecipe;

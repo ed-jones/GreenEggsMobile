@@ -4,6 +4,7 @@ import { View } from "react-native";
 import { IngredientInput, RecipeInput } from "@greeneggs/types/graphql";
 import ControlledInput, {
   InputType,
+  Rules,
 } from "@greeneggs/core/controlled-input/ControlledInput";
 import { ScrollView } from "react-native-gesture-handler";
 import { addRecipeStyles, RecipeForm } from "../AddRecipe";
@@ -25,7 +26,13 @@ const CreateRecipeIngredients = ({
     <ScrollView>
       <View style={addRecipeStyles.view}>
         <ControlledInput<RecipeInput>
-          controllerProps={{ name: "servingCount", control: form.control }}
+          controllerProps={{
+            name: "servingCount",
+            control: form.control,
+            rules: {
+              ...Rules.Required,
+            },
+          }}
           inputProps={{
             label: "SERVES",
             placeholder: "4",

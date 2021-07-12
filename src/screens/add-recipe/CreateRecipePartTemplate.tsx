@@ -28,7 +28,7 @@ const CreateRecipePartTemplate = ({
   const { form, index } = route.params as { form: RecipeForm; index: number };
 
   return (
-    <View style={addRecipeStyles.view}>
+    <View style={{ paddingHorizontal: 16 }}>
       <TopNavigation
         style={{ backgroundColor: "transparent", marginTop: insets.top }}
         alignment="center"

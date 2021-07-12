@@ -12,7 +12,7 @@ import CreateRecipePartTemplate, {
 
 const CreateStep = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate
-    title="Create Ingredient"
+    title="Create Step"
     navigation={navigation}
     route={route}
     formComponent={CreateStepForm}

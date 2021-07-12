@@ -37,6 +37,7 @@ const CreateRecipeIngredients = ({
             label: "SERVES",
             placeholder: "4",
             defaultValue: "",
+            caption: "How many people can this recipe serve?",
           }}
           submitError={form.formResult.data?.addRecipe.error}
           type={InputType.NUMERIC}

@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { StyleProp, View, ViewStyle } from "react-native";
 import {
   Icon,
   IconProps,
@@ -13,10 +13,11 @@ type AlertType = "danger" | "warning" | "info" | "success";
 interface IAlert {
   type: AlertType;
   message: string;
+  style?: StyleProp<ViewStyle>;
 }
 
 const Alert = withStyles(
-  ({ type, message, eva }: IAlert & ThemedComponentProps) => {
+  ({ type, message, eva, style }: IAlert & ThemedComponentProps) => {
     const IconNameFromAlertType: Record<AlertType, IconProps> = {
       danger: {
         name: "alert-triangle",
@@ -38,12 +39,15 @@ const Alert = withStyles(
 
     return (
       <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          paddingVertical: 16,
-          paddingRight: 64,
-        }}
+        style={Object.assign(
+          {
+            flexDirection: "row",
+            alignItems: "center",
+            paddingVertical: 16,
+            paddingRight: 64,
+          },
+          style
+        )}
       >
         <Icon
           style={{ width: 48, height: 48, marginRight: 10 }}

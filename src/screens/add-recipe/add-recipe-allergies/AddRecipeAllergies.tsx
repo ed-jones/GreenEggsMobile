@@ -3,6 +3,7 @@ import { List, ListItem, Text } from "@ui-kitten/components";
 import { ScrollView } from "react-native";
 import { addRecipeStyles, RecipeForm } from "../AddRecipe";
 import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
+import Alert from "@greeneggs/core/alert/Alert";
 
 interface IAddRecipeAllergies {
   form: RecipeForm;
@@ -11,6 +12,11 @@ interface IAddRecipeAllergies {
 
 const AddRecipeAllergies = ({ form, navigation }: IAddRecipeAllergies) => (
   <ScrollView>
+    <Alert
+      type="danger"
+      message="Make sure to specify any food allergies that this recipe may trigger."
+      style={addRecipeStyles.view}
+    />
     <Text
       category="h5"
       style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}

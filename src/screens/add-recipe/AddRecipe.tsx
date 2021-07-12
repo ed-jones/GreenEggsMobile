@@ -55,11 +55,11 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
       component: <AddRecipeCategories {...{ form, navigation }} />,
     },
     {
-      title: "Diets",
+      title: "Allergies",
       component: <AddRecipeAllergies {...{ form, navigation }} />,
     },
     {
-      title: "Allergies",
+      title: "Diets",
       component: <AddRecipeDiets {...{ form, navigation }} />,
     },
     {

@@ -11,6 +11,8 @@ import { ErrorFragment } from "@greeneggs/types/graphql";
 import { Platform, Image } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
+import { ReactNativeFile } from "apollo-upload-client";
+import { v4 as uuidv4 } from "uuid";
 
 // Function that converts JS numbers to strings in a way
 // that avoids NaN, undefined, etc.
@@ -186,11 +188,17 @@ const ControlledInput = <
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [1, 1],
-      quality: 1,
+      quality: 0.5,
     });
 
     if (!result.cancelled) {
-      onChange(result);
+      onChange(
+        new ReactNativeFile({
+          uri: result.uri,
+          name: `${uuidv4()}.jpg`,
+          type: `${result.type}`,
+        })
+      );
     }
   };
 

@@ -37,17 +37,6 @@ const ImageUpload = withStyles(
   }: IImageUpload & ThemedComponentProps) => {
     const [modalVisible, setModalVisible] = React.useState(false);
 
-    useEffect(() => {
-      (async () => {
-        if (Platform.OS !== "web") {
-          const { status } = await ImagePicker.requestCameraPermissionsAsync();
-          if (status !== "granted") {
-            alert("Sorry, we need camera roll permissions to make this work!");
-          }
-        }
-      })();
-    }, []);
-
     type ImageSource = "gallery" | "camera";
 
     const pickImage = async (
@@ -55,6 +44,25 @@ const ImageUpload = withStyles(
       onChange: (...event: any[]) => void
     ) => {
       cancelModal();
+
+      if (Platform.OS !== "web") {
+        if (source === "camera") {
+          const { status } = await ImagePicker.requestCameraPermissionsAsync();
+          if (status !== "granted") {
+            alert("Sorry, we need camera roll permissions to make this work!");
+          }
+        }
+
+        if (source === "gallery") {
+          const { status } =
+            await ImagePicker.requestMediaLibraryPermissionsAsync();
+          if (status !== "granted") {
+            alert(
+              "Sorry, we need media library permissions to make this work!"
+            );
+          }
+        }
+      }
 
       const result = await (source === "camera"
         ? ImagePicker.launchCameraAsync({

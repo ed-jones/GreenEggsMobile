@@ -7,7 +7,7 @@ import {
   RecipeInput,
 } from "@greeneggs/types/graphql";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Icons, IForm, Rules } from "@greeneggs/core";
+import { Icons, IForm, partialValidate, Rules } from "@greeneggs/core";
 
 import useRecipeForm from "./useRecipeForm";
 import AddRecipeIngredients from "./add-recipe-ingredients/AddRecipeIngredients";
@@ -132,14 +132,7 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
               Publish
             </Button>
           ) : (
-            <Button
-              onPress={() => {
-                form
-                  .trigger()
-                  .then((isValid) => (isValid ? steps.next() : undefined));
-              }}
-              accessoryRight={Icons.Forward}
-            >
+            <Button onPress={() => steps.next()} accessoryRight={Icons.Forward}>
               NEXT
             </Button>
           )}

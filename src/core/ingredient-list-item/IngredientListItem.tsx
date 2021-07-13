@@ -9,7 +9,7 @@ interface IIngredientListItem {
 
 const IngredientListItem = ({ ingredient }: IIngredientListItem) => (
   <ListItem
-    title={toTitleCase(ingredient.name)}
+    title={toTitleCase(ingredient.name || "")}
     description={ingredient.description || undefined}
     accessoryRight={() => (
       <Text category="label" style={{ marginRight: 16 }}>

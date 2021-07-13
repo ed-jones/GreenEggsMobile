@@ -1,7 +1,10 @@
 import React from "react";
 import { Button, List, Text } from "@ui-kitten/components";
 import { ScrollView, View } from "react-native";
-import { RecipeInput } from "@greeneggs/types/graphql";
+import {
+  RecipeInput,
+  recipe_recipe_data_ingredients,
+} from "@greeneggs/types/graphql";
 import { ControlledInput, InputType, Rules } from "@greeneggs/core";
 import { addRecipeStyles, RecipeForm } from "../AddRecipe";
 import AddListItem from "@greeneggs/core/add-list-item/AddListItem";

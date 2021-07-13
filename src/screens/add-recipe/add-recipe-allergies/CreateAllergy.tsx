@@ -1,6 +1,11 @@
 import React from "react";
 import { Button } from "@ui-kitten/components";
-import { ControlledInput, InputType, Rules } from "@greeneggs/core";
+import {
+  ControlledInput,
+  InputType,
+  partialValidate,
+  Rules,
+} from "@greeneggs/core";
 import { RecipeInput } from "@greeneggs/types/graphql";
 import CreateRecipePartTemplate, {
   RecipeFormPart,
@@ -37,16 +42,14 @@ const CreateAllergyForm = ({ form, index, navigation }: RecipeFormPart) => (
       type={InputType.TEXT}
     />
     <Button
-      onPress={() => {
-        form.trigger([`allergies.${index}.name`]).then((isValid) => {
-          if (isValid) {
-            form.register(`allergies.${index}`, {
-              value: form.getValues(`allergies.${index}`),
-            });
-            navigation.goBack();
-          }
-        });
-      }}
+      onPress={() =>
+        partialValidate({
+          form,
+          validate: [`allergies.${index}.name`],
+          register: `allergies.${index}`,
+          onValid: () => navigation.goBack(),
+        })
+      }
     >
       ADD ALLERGY
     </Button>

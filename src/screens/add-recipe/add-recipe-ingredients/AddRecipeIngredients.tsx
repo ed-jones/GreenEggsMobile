@@ -2,17 +2,13 @@ import React from "react";
 import { Button, List, Text } from "@ui-kitten/components";
 import { ScrollView, View } from "react-native";
 import { RecipeInput } from "@greeneggs/types/graphql";
-import {
-  ControlledInput,
-  InputType,
-  partialValidate,
-  Rules,
-} from "@greeneggs/core";
+import { ControlledInput, InputType, Rules } from "@greeneggs/core";
 import { addRecipeStyles, RecipeForm } from "../AddRecipe";
 import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
 import IngredientListItem from "@greeneggs/core/ingredient-list-item/IngredientListItem";
 import { StackNavigationProp } from "@react-navigation/stack";
 import Alert from "@greeneggs/core/alert/Alert";
+import { useEffect } from "react";
 
 interface ICreateRecipeIngredients {
   form: RecipeForm;
@@ -62,7 +58,8 @@ const CreateRecipeIngredients = ({
         renderItem={({ item }) => <IngredientListItem ingredient={item} />}
       />
       <AddListItem
-        label="ADD INGREDIENT"
+        error={Boolean(form.formState.errors.ingredients)}
+        label={`ADD INGREDIENT`}
         onPress={() =>
           navigation.navigate("CreateIngredient", {
             form,

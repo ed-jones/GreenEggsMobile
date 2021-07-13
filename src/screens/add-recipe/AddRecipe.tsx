@@ -7,7 +7,7 @@ import {
   RecipeInput,
 } from "@greeneggs/types/graphql";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Icons, IForm } from "@greeneggs/core";
+import { Icons, IForm, Rules } from "@greeneggs/core";
 
 import useRecipeForm from "./useRecipeForm";
 import AddRecipeIngredients from "./add-recipe-ingredients/AddRecipeIngredients";

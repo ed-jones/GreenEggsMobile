@@ -11,19 +11,31 @@ import { Add } from "../icons/Icons";
 interface IAddListItem {
   label: string;
   onPress: () => void;
+  error?: boolean;
 }
 
 const AddListItem = withStyles(
-  ({ label, onPress, eva }: IAddListItem & ThemedComponentProps) => (
+  ({ label, onPress, eva, error }: IAddListItem & ThemedComponentProps) => (
     <>
       <Divider />
       <ListItem style={{ justifyContent: "center" }} onPress={onPress}>
         <Add
           style={{ width: 24, height: 24, marginRight: 8, marginLeft: -32 }}
-          fill={eva?.theme && eva.theme["text-primary-color"]}
+          fill={
+            error
+              ? eva?.theme && eva.theme["text-danger-color"]
+              : eva?.theme && eva.theme["text-primary-color"]
+          }
         />
-        <Text category="label">{label}</Text>
+        <Text category="label" status={error ? "danger" : undefined}>
+          {label}
+        </Text>
       </ListItem>
+      {error ? (
+        <Text category="c2" status="danger">
+          {}
+        </Text>
+      ) : undefined}
     </>
   )
 );

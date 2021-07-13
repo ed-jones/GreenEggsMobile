@@ -1,4 +1,5 @@
 import { FieldPath, UseFormReturn } from "react-hook-form";
+import { Rules } from "../controlled-input/ControlledInput";
 
 interface IValidate<InputType> {
   form: UseFormReturn<InputType>;

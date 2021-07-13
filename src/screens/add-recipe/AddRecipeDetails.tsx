@@ -2,9 +2,7 @@ import React from "react";
 import { Text } from "@ui-kitten/components";
 import { ScrollView } from "react-native";
 import { addRecipeStyles, RecipeForm } from "./AddRecipe";
-import ControlledInput, {
-  InputType,
-} from "@greeneggs/core/form/controlled-input/ControlledInput";
+import { InputType, Rules, ControlledInput } from "@greeneggs/core";
 import { RecipeInput } from "@greeneggs/types/graphql";
 import Alert from "@greeneggs/core/alert/Alert";
 
@@ -22,7 +20,13 @@ const CreateRecipeDetails = ({ form }: ICreateRecipeDetails) => (
       Details
     </Text>
     <ControlledInput<RecipeInput>
-      controllerProps={{ name: "title", control: form.control }}
+      controllerProps={{
+        name: "title",
+        control: form.control,
+        rules: {
+          ...Rules.REQUIRED,
+        },
+      }}
       inputProps={{
         label: "TITLE",
         placeholder: "Spaghetti Carbonara",
@@ -33,7 +37,13 @@ const CreateRecipeDetails = ({ form }: ICreateRecipeDetails) => (
       type={InputType.TEXT}
     />
     <ControlledInput<RecipeInput>
-      controllerProps={{ name: "subtitle", control: form.control }}
+      controllerProps={{
+        name: "subtitle",
+        control: form.control,
+        rules: {
+          ...Rules.REQUIRED,
+        },
+      }}
       inputProps={{
         label: "SUBTITLE",
         placeholder: "A quick, healthy and delicious meal",
@@ -44,7 +54,13 @@ const CreateRecipeDetails = ({ form }: ICreateRecipeDetails) => (
       type={InputType.TEXT}
     />
     <ControlledInput<RecipeInput>
-      controllerProps={{ name: "description", control: form.control }}
+      controllerProps={{
+        name: "description",
+        control: form.control,
+        rules: {
+          ...Rules.REQUIRED,
+        },
+      }}
       inputProps={{
         label: "DESCRIPTION",
         placeholder:
@@ -56,7 +72,13 @@ const CreateRecipeDetails = ({ form }: ICreateRecipeDetails) => (
       type={InputType.TEXTAREA}
     />
     <ControlledInput<RecipeInput>
-      controllerProps={{ name: "timeEstimate", control: form.control }}
+      controllerProps={{
+        name: "timeEstimate",
+        control: form.control,
+        rules: {
+          ...Rules.REQUIRED,
+        },
+      }}
       inputProps={{
         label: "TIME ESTIMATE",
         placeholder: "5 hours",
@@ -68,7 +90,13 @@ const CreateRecipeDetails = ({ form }: ICreateRecipeDetails) => (
       type={InputType.TEXT}
     />
     <ControlledInput<RecipeInput>
-      controllerProps={{ name: "coverImage", control: form.control }}
+      controllerProps={{
+        name: "coverImage",
+        control: form.control,
+        rules: {
+          ...Rules.REQUIRED,
+        },
+      }}
       inputProps={{ label: "COVER IMAGE " }}
       submitError={form.formResult.data?.addRecipe.error}
       type={InputType.PHOTO}

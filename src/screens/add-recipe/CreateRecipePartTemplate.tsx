@@ -13,18 +13,6 @@ export interface RecipeFormPart {
   navigation: any;
 }
 
-// Roundabout way of generating a type for all keys of RecipeInput that are arrays of objects
-type InputExtendsAny = {
-  [K in keyof RecipeInput]: RecipeInput[K] extends never ? K : never;
-}[keyof RecipeInput];
-
-type InputExtendsArray = {
-  [K in keyof Omit<
-    RecipeInput,
-    InputExtendsAny
-  >]: RecipeInput[K] extends Array<object> ? K : never;
-}[keyof Omit<RecipeInput, InputExtendsAny>];
-
 interface ICreateRecipePartTemplate {
   title: string;
   navigation: StackNavigationProp<any>;
@@ -44,7 +32,7 @@ const CreateRecipePartTemplate = ({
     navigation.goBack();
   }
   return (
-    <View style={{ paddingHorizontal: 16 }}>
+    <>
       <TopNavigation
         style={{ backgroundColor: "transparent", marginTop: insets.top }}
         alignment="center"
@@ -53,10 +41,10 @@ const CreateRecipePartTemplate = ({
           <TopNavigationAction icon={Icons.Back} onPress={goBack} />
         )}
       />
-      <ScrollView style={{ marginBottom: insets.top * 4 }}>
+      <ScrollView style={{ paddingHorizontal: 16 }}>
         {React.createElement(formComponent, { form, index, navigation })}
       </ScrollView>
-    </View>
+    </>
   );
 };
 

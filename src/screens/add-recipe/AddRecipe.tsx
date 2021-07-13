@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import { Button, Spinner, withStyles } from "@ui-kitten/components";
 import {
   addRecipe,
@@ -91,6 +91,21 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
     }
   };
 
+  function publish() {
+    Alert.alert(
+      "Publish recipe",
+      "Are you sure you want to publish this recipe?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => form.handleSubmit(onSubmit) },
+      ],
+      { cancelable: false }
+    );
+  }
+
   return (
     <>
       <View style={{ ...addRecipeStyles.view, marginTop: insets.top }}>
@@ -106,13 +121,7 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
         <View style={addRecipeStyles.buttonGroup}>
           {steps.isEnd ? (
             <Button
-              onPress={() =>
-                form
-                  .trigger()
-                  .then((isValid) =>
-                    isValid ? form.handleSubmit(onSubmit) : undefined
-                  )
-              }
+              onPress={publish}
               status="success"
               accessoryRight={
                 form.formResult.loading

@@ -3,7 +3,7 @@ import { IngredientInput, RecipeInput } from "@greeneggs/types/graphql";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { TopNavigation, TopNavigationAction } from "@ui-kitten/components";
 import React, { useLayoutEffect } from "react";
-import { ScrollView, View } from "react-native";
+import { Alert, ScrollView, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { addRecipeStyles, RecipeForm } from "./AddRecipe";
 
@@ -29,7 +29,18 @@ const CreateRecipePartTemplate = ({
   const insets = useSafeAreaInsets();
   const { form, index } = route.params as { form: RecipeForm; index: number };
   function goBack() {
-    navigation.goBack();
+    Alert.alert(
+      "Exit without saving?",
+      "If you go back now you will lose your changes",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => navigation.goBack() },
+      ],
+      { cancelable: false }
+    );
   }
   return (
     <>

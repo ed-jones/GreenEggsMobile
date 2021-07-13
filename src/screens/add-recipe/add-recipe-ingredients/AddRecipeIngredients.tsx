@@ -2,10 +2,12 @@ import React from "react";
 import { Button, List, Text } from "@ui-kitten/components";
 import { ScrollView, View } from "react-native";
 import { RecipeInput } from "@greeneggs/types/graphql";
-import ControlledInput, {
+import {
+  ControlledInput,
   InputType,
+  partialValidate,
   Rules,
-} from "@greeneggs/core/controlled-input/ControlledInput";
+} from "@greeneggs/core";
 import { addRecipeStyles, RecipeForm } from "../AddRecipe";
 import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
 import IngredientListItem from "@greeneggs/core/ingredient-list-item/IngredientListItem";
@@ -33,7 +35,7 @@ const CreateRecipeIngredients = ({
           name: "servingCount",
           control: form.control,
           rules: {
-            ...Rules.Required,
+            ...Rules.REQUIRED,
           },
         }}
         inputProps={{

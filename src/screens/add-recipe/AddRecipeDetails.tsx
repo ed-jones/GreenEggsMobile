@@ -4,7 +4,7 @@ import { ScrollView } from "react-native";
 import { addRecipeStyles, RecipeForm } from "./AddRecipe";
 import ControlledInput, {
   InputType,
-} from "@greeneggs/core/controlled-input/ControlledInput";
+} from "@greeneggs/core/form/controlled-input/ControlledInput";
 import { RecipeInput } from "@greeneggs/types/graphql";
 import Alert from "@greeneggs/core/alert/Alert";
 

@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
 import { Platform, View } from "react-native";
 import {
-  Button,
-  Card,
-  Divider,
-  ListItem,
   Menu,
   MenuItem,
   Modal,
@@ -17,8 +13,9 @@ import { ReactNativeFile } from "apollo-upload-client";
 import { v4 as uuidv4 } from "uuid";
 import { ImageBackground } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import * as Icons from "../icons/Icons";
 import { FieldError } from "react-hook-form";
+
+import * as Icons from "../../icons/Icons";
 
 interface IImageUpload {
   label?: string;

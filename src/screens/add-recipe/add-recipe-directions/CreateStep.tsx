@@ -3,12 +3,13 @@ import { Button } from "@ui-kitten/components";
 import ControlledInput, {
   InputType,
   Rules,
-} from "@greeneggs/core/controlled-input/ControlledInput";
+} from "@greeneggs/core/form/controlled-input/ControlledInput";
 import { RecipeInput } from "@greeneggs/types/graphql";
 import { addRecipeStyles } from "../AddRecipe";
 import CreateRecipePartTemplate, {
   RecipeFormPart,
 } from "../CreateRecipePartTemplate";
+import { partialValidate } from "@greeneggs/core";
 
 const CreateStep = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate
@@ -73,22 +74,18 @@ const CreateStepForm = ({ form, index, navigation }: RecipeFormPart) => {
         type={InputType.PHOTO}
       />
       <Button
-        onPress={() => {
-          form
-            .trigger([
+        onPress={() =>
+          partialValidate({
+            form,
+            validate: [
               `steps.${index}.title`,
               `steps.${index}.description`,
               `steps.${index}.image`,
-            ])
-            .then((isValid) => {
-              if (isValid) {
-                form.register(`steps.${index}`, {
-                  value: form.getValues(`steps.${index}`),
-                });
-                navigation.goBack();
-              }
-            });
-        }}
+            ],
+            register: `steps.${index}`,
+            onValid: () => navigation.goBack(),
+          })
+        }
       >
         ADD STEP
       </Button>

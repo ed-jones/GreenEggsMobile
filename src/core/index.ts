@@ -25,7 +25,11 @@ export { default as useCachedResources } from './use-cached-resources/useCachedR
 
 export { Icons };
 
-export { default as useForm, IForm } from './useForm/useForm';
+export { default as useForm, IForm } from './form/useForm/useForm';
+
+export { default as partialValidate } from './form/partialValidate/partialValidate';
+
+export { default as ControlledInput, Rules, InputType } from './form/controlled-input/ControlledInput';
 
 export { default as TimePicker } from './time-picker/TimePicker';
 

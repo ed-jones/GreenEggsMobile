@@ -1,9 +1,6 @@
 import React from "react";
 import { Button } from "@ui-kitten/components";
-import ControlledInput, {
-  InputType,
-  Rules,
-} from "@greeneggs/core/controlled-input/ControlledInput";
+import { ControlledInput, InputType, Rules } from "@greeneggs/core";
 import { RecipeInput } from "@greeneggs/types/graphql";
 import CreateRecipePartTemplate, {
   RecipeFormPart,

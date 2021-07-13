@@ -1,12 +1,11 @@
 import { Icons } from "@greeneggs/core";
-import { IngredientInput, RecipeInput } from "@greeneggs/types/graphql";
 import { useFocusEffect } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { TopNavigation, TopNavigationAction } from "@ui-kitten/components";
-import React, { useLayoutEffect } from "react";
+import React from "react";
 import { Alert, BackHandler, ScrollView, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { addRecipeStyles, RecipeForm } from "./AddRecipe";
+import { RecipeForm } from "./AddRecipe";
 
 export interface RecipeFormPart {
   form: RecipeForm;

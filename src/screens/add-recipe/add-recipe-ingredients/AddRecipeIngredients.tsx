@@ -12,6 +12,7 @@ import IngredientListItem from "@greeneggs/core/ingredient-list-item/IngredientL
 import { StackNavigationProp } from "@react-navigation/stack";
 import Alert from "@greeneggs/core/alert/Alert";
 import { useEffect } from "react";
+import { Controller, FieldError, useFieldArray } from "react-hook-form";
 
 interface ICreateRecipeIngredients {
   form: RecipeForm;
@@ -22,6 +23,15 @@ const CreateRecipeIngredients = ({
   form,
   navigation,
 }: ICreateRecipeIngredients) => {
+  const { fields, remove } = useFieldArray({
+    control: form.control,
+    name: "ingredients",
+  });
+
+  const x = fields[0];
+
+  const index = form.getValues("ingredients")?.length || 0;
+
   return (
     <ScrollView>
       <Alert
@@ -58,15 +68,17 @@ const CreateRecipeIngredients = ({
       </Text>
       <List
         data={form.watch("ingredients")}
-        renderItem={({ item }) => <IngredientListItem ingredient={item} />}
+        renderItem={({ item, index }) => (
+          <IngredientListItem ingredient={item} remove={() => remove(index)} />
+        )}
       />
       <AddListItem
-        error={Boolean(form.formState.errors.ingredients)}
+        error={form.formState.errors.ingredients as unknown as FieldError}
         label={`ADD INGREDIENT`}
         onPress={() =>
           navigation.navigate("CreateIngredient", {
             form,
-            index: form.getValues("ingredients")?.length || 0,
+            index,
           })
         }
       />

@@ -73,6 +73,14 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
     },
   ];
 
+  const ingredientsLength = form.getValues("ingredients")?.length;
+  useEffect(() => {
+    console.log("Change");
+    if (ingredientsLength > 0) {
+      form.clearErrors("ingredients");
+    }
+  }, [ingredientsLength]);
+
   const steps = useSteps(Steps);
   const insets = useSafeAreaInsets();
 
@@ -129,10 +137,23 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
                   : Icons.Publish
               }
             >
-              Publish
+              PUBLISH
             </Button>
           ) : (
-            <Button onPress={() => steps.next()} accessoryRight={Icons.Forward}>
+            <Button
+              onPress={() => {
+                if (form.getValues("ingredients")?.length === 0) {
+                  form.setError("ingredients", {
+                    type: "required",
+                    message: "You must add at least 1 ingredient",
+                  });
+                }
+                form
+                  .trigger()
+                  .then((isValid) => (isValid ? steps.next() : undefined));
+              }}
+              accessoryRight={Icons.Forward}
+            >
               NEXT
             </Button>
           )}

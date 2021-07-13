@@ -95,6 +95,8 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       textContentType: "emailAddress",
       autoCompleteType: "email",
       autoCapitalize: "none",
+      keyboardType: "email-address",
+      placeholder: "johnsmith@example.com",
     },
     controllerProps: {
       rules: {
@@ -117,6 +119,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       textContentType: "password",
       autoCompleteType: "password",
       secureTextEntry: true,
+      placeholder: "********",
     },
     controllerProps: {
       rules: {
@@ -137,6 +140,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       textContentType: "givenName",
       autoCompleteType: "name",
       autoCapitalize: "words",
+      placeholder: "John",
     },
   },
   LastName: {
@@ -150,6 +154,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       textContentType: "familyName",
       autoCompleteType: "name",
       autoCapitalize: "words",
+      placeholder: "Smith",
     },
   },
   Numeric: {

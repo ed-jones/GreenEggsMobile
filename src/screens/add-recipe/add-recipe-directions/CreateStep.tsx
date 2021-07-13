@@ -24,7 +24,6 @@ const CreateStepForm = ({ form, index, navigation }: RecipeFormPart) => {
     <>
       <ControlledInput<RecipeInput>
         controllerProps={{
-          // shouldUnregister,
           name: `steps.${index}.title`,
           control: form.control,
           rules: {
@@ -43,7 +42,6 @@ const CreateStepForm = ({ form, index, navigation }: RecipeFormPart) => {
       />
       <ControlledInput<RecipeInput>
         controllerProps={{
-          // shouldUnregister,
           name: `steps.${index}.description`,
           control: form.control,
           rules: {
@@ -62,7 +60,6 @@ const CreateStepForm = ({ form, index, navigation }: RecipeFormPart) => {
       />
       <ControlledInput<RecipeInput>
         controllerProps={{
-          // shouldUnregister,
           name: `steps.${index}.image`,
           control: form.control,
           rules: {
@@ -75,7 +72,6 @@ const CreateStepForm = ({ form, index, navigation }: RecipeFormPart) => {
         submitError={form.formResult.data?.addRecipe.error}
         type={InputType.PHOTO}
       />
-
       <Button
         onPress={() => {
           form

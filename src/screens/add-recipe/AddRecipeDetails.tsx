@@ -69,6 +69,7 @@ const CreateRecipeDetails = ({ form }: ICreateRecipeDetails) => (
     />
     <ControlledInput<RecipeInput>
       controllerProps={{ name: "coverImage", control: form.control }}
+      inputProps={{ label: "COVER IMAGE " }}
       submitError={form.formResult.data?.addRecipe.error}
       type={InputType.PHOTO}
     />

@@ -3,7 +3,7 @@ import { IngredientInput, RecipeInput } from "@greeneggs/types/graphql";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { TopNavigation, TopNavigationAction } from "@ui-kitten/components";
 import React, { useLayoutEffect } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { addRecipeStyles, RecipeForm } from "./AddRecipe";
 
@@ -53,7 +53,9 @@ const CreateRecipePartTemplate = ({
           <TopNavigationAction icon={Icons.Back} onPress={goBack} />
         )}
       />
-      {React.createElement(formComponent, { form, index, navigation })}
+      <ScrollView style={{ marginBottom: insets.top * 4 }}>
+        {React.createElement(formComponent, { form, index, navigation })}
+      </ScrollView>
     </View>
   );
 };

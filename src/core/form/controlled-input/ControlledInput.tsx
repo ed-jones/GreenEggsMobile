@@ -173,6 +173,14 @@ const ControlledInput = <
   submitError,
 }: IControlledInput<FieldValues>) => {
   const inputTypeDefaultProps = InputTypeDefaultProps<FieldValues>()[type];
+  const { caption, ...unionInputProps } = {
+    ...inputTypeDefaultProps.inputProps,
+    ...inputProps,
+  };
+  const unionControlProps = {
+    ...inputTypeDefaultProps.controllerProps,
+    ...controllerProps,
+  };
 
   return (
     <Controller<FieldValues>
@@ -210,13 +218,15 @@ const ControlledInput = <
                   : (value && String(value)) || ""
               }
               status={error || !!submitError ? "danger" : undefined}
-              caption={submitError ? submitError.message : error?.message}
-              {...{ ...inputTypeDefaultProps.inputProps, ...inputProps }}
+              caption={
+                submitError ? submitError?.message : error?.message || caption
+              }
+              {...unionInputProps}
             />
           );
         }
       }}
-      {...{ ...inputTypeDefaultProps.controllerProps, ...controllerProps }}
+      {...unionControlProps}
     />
   );
 };

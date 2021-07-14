@@ -27,7 +27,10 @@ const CreateRecipePartTemplate = ({
   formComponent,
 }: ICreateRecipePartTemplate) => {
   const insets = useSafeAreaInsets();
-  const { form, index } = route.params as { form: RecipeForm; index: number };
+  const { form, index } = route.params as {
+    form: RecipeForm;
+    index: number;
+  };
 
   useFocusEffect(
     React.useCallback(() => {

@@ -21,6 +21,7 @@ import PublishRecipe from "./PublishRecipe";
 import AddRecipeAllergies from "./add-recipe-allergies/AddRecipeAllergies";
 import AddRecipeDiets from "./add-recipe-diets/AddRecipeDiets";
 import { useEffect } from "react";
+import { useFieldArray } from "react-hook-form";
 
 export const addRecipeStyles = StyleSheet.create({
   view: {
@@ -72,10 +73,15 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
       component: <PublishRecipe {...{ form, navigation }} />,
     },
   ];
+  const { remove } = useFieldArray({
+    control: form.control,
+    name: "ingredients",
+  });
 
-  const ingredientsLength = form.getValues("ingredients")?.length;
+  const ingredientsLength = form.getValues("ingredients")?.length || 0;
   useEffect(() => {
-    console.log("Change");
+    console.log(ingredientsLength);
+
     if (ingredientsLength > 0) {
       form.clearErrors("ingredients");
     }
@@ -142,7 +148,7 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
           ) : (
             <Button
               onPress={() => {
-                if (form.getValues("ingredients")?.length === 0) {
+                if (ingredientsLength === 0) {
                   form.setError("ingredients", {
                     type: "required",
                     message: "You must add at least 1 ingredient",

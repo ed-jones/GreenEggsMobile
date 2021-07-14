@@ -11,6 +11,8 @@ import { addRecipeStyles } from "../AddRecipe";
 import CreateRecipePartTemplate, {
   RecipeFormPart,
 } from "../CreateRecipePartTemplate";
+import { useEffect } from "react";
+import { useFieldArray } from "react-hook-form";
 
 const CreateIngredient = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate
@@ -18,15 +20,30 @@ const CreateIngredient = ({ navigation, route }: any) => (
     navigation={navigation}
     route={route}
     formComponent={CreateIngredientForm}
-    key="ingredients"
   />
 );
 
 const CreateIngredientForm = ({ form, index, navigation }: RecipeFormPart) => {
+  const { remove } = useFieldArray({
+    control: form.control,
+    name: "ingredients",
+  });
+
+  const removeIfInvalid = () => {
+    form.trigger(`ingredients.${index}`).then((isValid) => {
+      if (!isValid) {
+        remove(index);
+      }
+    });
+  };
+
+  useEffect(() => removeIfInvalid, []);
+
   return (
     <>
       <ControlledInput<RecipeInput>
         controllerProps={{
+          shouldUnregister: true,
           name: `ingredients.${index}.name`,
           control: form.control,
           rules: {
@@ -45,6 +62,7 @@ const CreateIngredientForm = ({ form, index, navigation }: RecipeFormPart) => {
       />
       <ControlledInput<RecipeInput>
         controllerProps={{
+          shouldUnregister: true,
           name: `ingredients.${index}.description`,
           control: form.control,
           rules: {
@@ -62,6 +80,7 @@ const CreateIngredientForm = ({ form, index, navigation }: RecipeFormPart) => {
       />
       <ControlledInput<RecipeInput>
         controllerProps={{
+          shouldUnregister: true,
           name: `ingredients.${index}.quantity`,
           control: form.control,
           rules: {
@@ -79,6 +98,7 @@ const CreateIngredientForm = ({ form, index, navigation }: RecipeFormPart) => {
       />
       <ControlledInput<RecipeInput>
         controllerProps={{
+          shouldUnregister: true,
           name: `ingredients.${index}.unit`,
           control: form.control,
           rules: {

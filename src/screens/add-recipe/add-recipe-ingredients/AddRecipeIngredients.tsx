@@ -28,8 +28,6 @@ const CreateRecipeIngredients = ({
     name: "ingredients",
   });
 
-  const x = fields[0];
-
   const index = form.getValues("ingredients")?.length || 0;
 
   return (
@@ -73,7 +71,11 @@ const CreateRecipeIngredients = ({
         )}
       />
       <AddListItem
-        error={form.formState.errors.ingredients as unknown as FieldError}
+        error={
+          (form.formState.errors.ingredients as unknown as FieldError)?.message
+            ? (form.formState.errors.ingredients as unknown as FieldError)
+            : undefined
+        }
         label={`ADD INGREDIENT`}
         onPress={() =>
           navigation.navigate("CreateIngredient", {

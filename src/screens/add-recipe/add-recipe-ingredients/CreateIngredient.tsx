@@ -1,18 +1,12 @@
 import React from "react";
 import { Button } from "@ui-kitten/components";
-import {
-  ControlledInput,
-  InputType,
-  partialValidate,
-  Rules,
-} from "@greeneggs/core";
-import { RecipeInput } from "@greeneggs/types/graphql";
+import { ControlledInput, InputType, Rules } from "@greeneggs/core";
+import { IngredientInput } from "@greeneggs/types/graphql";
 import { addRecipeStyles } from "../AddRecipe";
 import CreateRecipePartTemplate, {
   RecipeFormPart,
 } from "../CreateRecipePartTemplate";
-import { useEffect } from "react";
-import { useFieldArray } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const CreateIngredient = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate
@@ -23,28 +17,15 @@ const CreateIngredient = ({ navigation, route }: any) => (
   />
 );
 
-const CreateIngredientForm = ({ form, index, navigation }: RecipeFormPart) => {
-  const { remove } = useFieldArray({
-    control: form.control,
-    name: "ingredients",
-  });
-
-  const removeIfInvalid = () => {
-    form.trigger(`ingredients.${index}`).then((isValid) => {
-      if (!isValid) {
-        remove(index);
-      }
-    });
-  };
-
-  useEffect(() => removeIfInvalid, []);
+const CreateIngredientForm = ({ navigation, append }: RecipeFormPart) => {
+  const form = useForm<IngredientInput>({ mode: "all" });
 
   return (
     <>
-      <ControlledInput<RecipeInput>
+      <ControlledInput<IngredientInput>
         controllerProps={{
           shouldUnregister: true,
-          name: `ingredients.${index}.name`,
+          name: `name`,
           control: form.control,
           rules: {
             ...Rules.REQUIRED,
@@ -57,13 +38,12 @@ const CreateIngredientForm = ({ form, index, navigation }: RecipeFormPart) => {
           defaultValue: "",
           style: addRecipeStyles.input,
         }}
-        submitError={form.formResult.data?.addRecipe.error}
         type={InputType.TEXT}
       />
-      <ControlledInput<RecipeInput>
+      <ControlledInput<IngredientInput>
         controllerProps={{
           shouldUnregister: true,
-          name: `ingredients.${index}.description`,
+          name: `description`,
           control: form.control,
           rules: {
             ...Rules.UNDER100CHARS,
@@ -75,13 +55,12 @@ const CreateIngredientForm = ({ form, index, navigation }: RecipeFormPart) => {
           defaultValue: "",
           style: addRecipeStyles.input,
         }}
-        submitError={form.formResult.data?.addRecipe.error}
         type={InputType.TEXT}
       />
-      <ControlledInput<RecipeInput>
+      <ControlledInput<IngredientInput>
         controllerProps={{
           shouldUnregister: true,
-          name: `ingredients.${index}.quantity`,
+          name: `quantity`,
           control: form.control,
           rules: {
             ...Rules.REQUIRED,
@@ -93,13 +72,12 @@ const CreateIngredientForm = ({ form, index, navigation }: RecipeFormPart) => {
           defaultValue: "",
           style: addRecipeStyles.input,
         }}
-        submitError={form.formResult.data?.addRecipe.error}
         type={InputType.NUMERIC}
       />
-      <ControlledInput<RecipeInput>
+      <ControlledInput<IngredientInput>
         controllerProps={{
           shouldUnregister: true,
-          name: `ingredients.${index}.unit`,
+          name: `unit`,
           control: form.control,
           rules: {
             ...Rules.UNDER100CHARS,
@@ -111,24 +89,18 @@ const CreateIngredientForm = ({ form, index, navigation }: RecipeFormPart) => {
           defaultValue: "",
           style: addRecipeStyles.input,
         }}
-        submitError={form.formResult.data?.addRecipe.error}
         type={InputType.TEXT}
       />
       <Button
         onPress={() => {
-          partialValidate({
-            form,
-            validate: [
-              `ingredients.${index}.name`,
-              `ingredients.${index}.description`,
-              `ingredients.${index}.quantity`,
-              `ingredients.${index}.unit`,
-            ],
-            register: `ingredients.${index}`,
-            onValid: () => {
-              navigation.goBack();
-            },
-          });
+          form
+            .trigger([`name`, `description`, `quantity`, `unit`])
+            .then((isValid) => {
+              if (isValid) {
+                append(form.getValues());
+                navigation.goBack();
+              }
+            });
         }}
       >
         ADD INGREDIENT

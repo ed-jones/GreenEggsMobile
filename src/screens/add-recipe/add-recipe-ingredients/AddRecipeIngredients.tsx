@@ -23,7 +23,7 @@ const CreateRecipeIngredients = ({
   form,
   navigation,
 }: ICreateRecipeIngredients) => {
-  const { fields, remove } = useFieldArray({
+  const { fields, remove, append } = useFieldArray({
     control: form.control,
     name: "ingredients",
   });
@@ -65,10 +65,15 @@ const CreateRecipeIngredients = ({
         Ingredients
       </Text>
       <List
-        data={form.watch("ingredients")}
-        renderItem={({ item, index }) => (
-          <IngredientListItem ingredient={item} remove={() => remove(index)} />
-        )}
+        data={fields}
+        renderItem={({ item, index }) =>
+          item ? (
+            <IngredientListItem
+              ingredient={item}
+              remove={() => remove(index)}
+            />
+          ) : null
+        }
       />
       <AddListItem
         error={
@@ -79,7 +84,7 @@ const CreateRecipeIngredients = ({
         label={`ADD INGREDIENT`}
         onPress={() =>
           navigation.navigate("CreateIngredient", {
-            form,
+            append,
             index,
           })
         }

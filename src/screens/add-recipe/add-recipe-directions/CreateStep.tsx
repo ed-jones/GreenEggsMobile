@@ -17,6 +17,7 @@ const CreateStep = ({ navigation, route }: any) => (
     navigation={navigation}
     route={route}
     formComponent={CreateStepForm}
+    name="steps"
   />
 );
 

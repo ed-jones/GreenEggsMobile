@@ -165,7 +165,9 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
 });
 
 const ControlledInput = <
-  FieldValues extends Record<keyof FieldValues, string | number | object>
+  FieldValues extends Partial<
+    Record<keyof FieldValues, string | number | object | null>
+  >
 >({
   controllerProps,
   inputProps,

@@ -18,6 +18,7 @@ const CreateAllergy = ({ navigation, route }: any) => (
     navigation={navigation}
     route={route}
     formComponent={CreateAllergyForm}
+    name="ingredients"
   />
 );
 

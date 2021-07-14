@@ -1,16 +1,26 @@
 import { Icons } from "@greeneggs/core";
+import { RecipeInput } from "@greeneggs/types/graphql";
 import { useFocusEffect } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { TopNavigation, TopNavigationAction } from "@ui-kitten/components";
-import React from "react";
+import React, { useEffect } from "react";
+import {
+  FieldArrayMethodProps,
+  FieldArrayPath,
+  useFieldArray,
+} from "react-hook-form";
 import { Alert, BackHandler, ScrollView, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { RecipeForm } from "./AddRecipe";
 
+type AppendType = (
+  value: Partial<unknown> | Partial<unknown>[],
+  options?: FieldArrayMethodProps | undefined
+) => void;
+
 export interface RecipeFormPart {
-  form: RecipeForm;
-  index: number;
   navigation: any;
+  append: AppendType;
 }
 
 interface ICreateRecipePartTemplate {
@@ -27,9 +37,8 @@ const CreateRecipePartTemplate = ({
   formComponent,
 }: ICreateRecipePartTemplate) => {
   const insets = useSafeAreaInsets();
-  const { form, index } = route.params as {
-    form: RecipeForm;
-    index: number;
+  const { append } = route.params as {
+    append: AppendType;
   };
 
   useFocusEffect(
@@ -80,7 +89,10 @@ const CreateRecipePartTemplate = ({
         )}
       />
       <ScrollView style={{ paddingHorizontal: 16 }}>
-        {React.createElement(formComponent, { form, index, navigation })}
+        {React.createElement(formComponent, {
+          navigation,
+          append,
+        })}
       </ScrollView>
     </>
   );

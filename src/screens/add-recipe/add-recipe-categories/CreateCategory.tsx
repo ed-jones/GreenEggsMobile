@@ -18,6 +18,7 @@ const CreateCategory = ({ navigation, route }: any) => (
     navigation={navigation}
     route={route}
     formComponent={CreateCategoryForm}
+    name="categories"
   />
 );
 

@@ -73,19 +73,20 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
       component: <PublishRecipe {...{ form, navigation }} />,
     },
   ];
-  const { remove } = useFieldArray({
-    control: form.control,
-    name: "ingredients",
-  });
 
   const ingredientsLength = form.getValues("ingredients")?.length || 0;
   useEffect(() => {
-    console.log(ingredientsLength);
-
     if (ingredientsLength > 0) {
       form.clearErrors("ingredients");
     }
   }, [ingredientsLength]);
+
+  const directionsLength = form.getValues("steps")?.length || 0;
+  useEffect(() => {
+    if (directionsLength > 0) {
+      form.clearErrors("steps");
+    }
+  }, [directionsLength]);
 
   const steps = useSteps(Steps);
   const insets = useSafeAreaInsets();

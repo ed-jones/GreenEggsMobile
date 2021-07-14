@@ -18,6 +18,7 @@ const CreateDiet = ({ navigation, route }: any) => (
     navigation={navigation}
     route={route}
     formComponent={CreateDietForm}
+    name="diets"
   />
 );
 

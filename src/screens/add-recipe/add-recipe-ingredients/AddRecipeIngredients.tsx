@@ -12,7 +12,7 @@ import IngredientListItem from "@greeneggs/core/ingredient-list-item/IngredientL
 import { StackNavigationProp } from "@react-navigation/stack";
 import Alert from "@greeneggs/core/alert/Alert";
 import { useEffect } from "react";
-import { Controller, FieldError, useFieldArray } from "react-hook-form";
+import { FieldError, useFieldArray } from "react-hook-form";
 
 interface ICreateRecipeIngredients {
   form: RecipeForm;
@@ -28,7 +28,12 @@ const CreateRecipeIngredients = ({
     name: "ingredients",
   });
 
-  const index = form.getValues("ingredients")?.length || 0;
+  const ingredientsLength = fields?.length || 0;
+  useEffect(() => {
+    if (ingredientsLength > 0) {
+      form.clearErrors("ingredients");
+    }
+  }, [ingredientsLength]);
 
   return (
     <ScrollView>
@@ -85,7 +90,6 @@ const CreateRecipeIngredients = ({
         onPress={() =>
           navigation.navigate("CreateIngredient", {
             append,
-            index,
           })
         }
       />

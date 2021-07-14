@@ -6,11 +6,12 @@ import {
   partialValidate,
   Rules,
 } from "@greeneggs/core";
-import { RecipeInput } from "@greeneggs/types/graphql";
+import { CategoryInput, RecipeInput } from "@greeneggs/types/graphql";
 import CreateRecipePartTemplate, {
   RecipeFormPart,
 } from "../CreateRecipePartTemplate";
 import { addRecipeStyles } from "../AddRecipe";
+import { useForm } from "react-hook-form";
 
 const CreateCategory = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate
@@ -18,43 +19,45 @@ const CreateCategory = ({ navigation, route }: any) => (
     navigation={navigation}
     route={route}
     formComponent={CreateCategoryForm}
-    name="categories"
   />
 );
 
-const CreateCategoryForm = ({ form, index, navigation }: RecipeFormPart) => (
-  <>
-    <ControlledInput<RecipeInput>
-      controllerProps={{
-        name: `categories.${index}.name`,
-        control: form.control,
-        rules: {
-          ...Rules.UNDER100CHARS,
-          ...Rules.REQUIRED,
-        },
-      }}
-      inputProps={{
-        label: "CATEGORY",
-        placeholder: "Breakfast",
-        defaultValue: "",
-        style: addRecipeStyles.input,
-      }}
-      submitError={form.formResult.data?.addRecipe.error}
-      type={InputType.TEXT}
-    />
-    <Button
-      onPress={() =>
-        partialValidate({
-          form,
-          validate: `categories.${index}.name`,
-          register: `categories.${index}`,
-          onValid: () => navigation.goBack(),
-        })
-      }
-    >
-      ADD CATEGORY
-    </Button>
-  </>
-);
+const CreateCategoryForm = ({ append, navigation }: RecipeFormPart) => {
+  const form = useForm<CategoryInput>({ mode: "all" });
+
+  return (
+    <>
+      <ControlledInput<CategoryInput>
+        controllerProps={{
+          name: `name`,
+          control: form.control,
+          rules: {
+            ...Rules.UNDER100CHARS,
+            ...Rules.REQUIRED,
+          },
+        }}
+        inputProps={{
+          label: "CATEGORY",
+          placeholder: "Breakfast",
+          defaultValue: "",
+          style: addRecipeStyles.input,
+        }}
+        type={InputType.TEXT}
+      />
+      <Button
+        onPress={() => {
+          form.trigger("name").then((isValid) => {
+            if (isValid) {
+              append(form.getValues());
+              navigation.goBack();
+            }
+          });
+        }}
+      >
+        ADD CATEGORY
+      </Button>
+    </>
+  );
+};
 
 export default CreateCategory;

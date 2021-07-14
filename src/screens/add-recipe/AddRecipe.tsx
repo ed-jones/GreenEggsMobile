@@ -20,8 +20,6 @@ import PublishRecipe from "./PublishRecipe";
 
 import AddRecipeAllergies from "./add-recipe-allergies/AddRecipeAllergies";
 import AddRecipeDiets from "./add-recipe-diets/AddRecipeDiets";
-import { useEffect } from "react";
-import { useFieldArray } from "react-hook-form";
 
 export const addRecipeStyles = StyleSheet.create({
   view: {
@@ -73,20 +71,6 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
       component: <PublishRecipe {...{ form, navigation }} />,
     },
   ];
-
-  const ingredientsLength = form.getValues("ingredients")?.length || 0;
-  useEffect(() => {
-    if (ingredientsLength > 0) {
-      form.clearErrors("ingredients");
-    }
-  }, [ingredientsLength]);
-
-  const directionsLength = form.getValues("steps")?.length || 0;
-  useEffect(() => {
-    if (directionsLength > 0) {
-      form.clearErrors("steps");
-    }
-  }, [directionsLength]);
 
   const steps = useSteps(Steps);
   const insets = useSafeAreaInsets();
@@ -149,15 +133,24 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
           ) : (
             <Button
               onPress={() => {
-                if (ingredientsLength === 0) {
+                // Manual form validation for ingredients list
+                // Make sure that there is at least 1 ingreident
+                if (!form.getValues("ingredients")?.length) {
                   form.setError("ingredients", {
                     type: "required",
                     message: "You must add at least 1 ingredient",
                   });
                 }
-                form
-                  .trigger()
-                  .then((isValid) => (isValid ? steps.next() : undefined));
+
+                if (!form.getValues("steps")?.length) {
+                  form.setError("steps", {
+                    type: "required",
+                    message: "You must add at least 1 step",
+                  });
+                }
+                form.trigger().then((isValid) => {
+                  if (isValid) steps.next();
+                });
               }}
               accessoryRight={Icons.Forward}
             >

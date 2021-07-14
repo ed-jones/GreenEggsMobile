@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@ui-kitten/components";
 import ControlledInput, {
   InputType,
   Rules,
 } from "@greeneggs/core/form/controlled-input/ControlledInput";
-import { RecipeInput } from "@greeneggs/types/graphql";
+import { RecipeStepInput } from "@greeneggs/types/graphql";
 import { addRecipeStyles } from "../AddRecipe";
 import CreateRecipePartTemplate, {
   RecipeFormPart,
 } from "../CreateRecipePartTemplate";
-import { partialValidate } from "@greeneggs/core";
+import { useForm } from "react-hook-form";
 
 const CreateStep = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate
@@ -17,16 +17,17 @@ const CreateStep = ({ navigation, route }: any) => (
     navigation={navigation}
     route={route}
     formComponent={CreateStepForm}
-    name="steps"
   />
 );
 
-const CreateStepForm = ({ form, index, navigation }: RecipeFormPart) => {
+const CreateStepForm = ({ navigation, append }: RecipeFormPart) => {
+  const form = useForm<RecipeStepInput>({ mode: "all" });
+
   return (
     <>
-      <ControlledInput<RecipeInput>
+      <ControlledInput<RecipeStepInput>
         controllerProps={{
-          name: `steps.${index}.title`,
+          name: `title`,
           control: form.control,
           rules: {
             ...Rules.REQUIRED,
@@ -39,12 +40,11 @@ const CreateStepForm = ({ form, index, navigation }: RecipeFormPart) => {
           defaultValue: "",
           style: addRecipeStyles.input,
         }}
-        submitError={form.formResult.data?.addRecipe.error}
         type={InputType.TEXT}
       />
-      <ControlledInput<RecipeInput>
+      <ControlledInput<RecipeStepInput>
         controllerProps={{
-          name: `steps.${index}.description`,
+          name: `description`,
           control: form.control,
           rules: {
             ...Rules.UNDER100CHARS,
@@ -57,12 +57,11 @@ const CreateStepForm = ({ form, index, navigation }: RecipeFormPart) => {
           defaultValue: "",
           style: addRecipeStyles.input,
         }}
-        submitError={form.formResult.data?.addRecipe.error}
         type={InputType.TEXTAREA}
       />
-      <ControlledInput<RecipeInput>
+      <ControlledInput<RecipeStepInput>
         controllerProps={{
-          name: `steps.${index}.image`,
+          name: `image`,
           control: form.control,
           rules: {
             ...Rules.REQUIRED,
@@ -71,22 +70,17 @@ const CreateStepForm = ({ form, index, navigation }: RecipeFormPart) => {
         inputProps={{
           label: "IMAGE",
         }}
-        submitError={form.formResult.data?.addRecipe.error}
         type={InputType.PHOTO}
       />
       <Button
-        onPress={() =>
-          partialValidate({
-            form,
-            validate: [
-              `steps.${index}.title`,
-              `steps.${index}.description`,
-              `steps.${index}.image`,
-            ],
-            register: `steps.${index}`,
-            onValid: () => navigation.goBack(),
-          })
-        }
+        onPress={() => {
+          form.trigger([`title`, `description`, `image`]).then((isValid) => {
+            if (isValid) {
+              append(form.getValues());
+              navigation.goBack();
+            }
+          });
+        }}
       >
         ADD STEP
       </Button>

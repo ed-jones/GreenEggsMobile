@@ -4,50 +4,62 @@ import { ScrollView } from "react-native";
 import { addRecipeStyles, RecipeForm } from "../AddRecipe";
 import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
 import Alert from "@greeneggs/core/alert/Alert";
+import { Icons } from "@greeneggs/core";
+import { useFieldArray } from "react-hook-form";
 
 interface IAddRecipeDiets {
   form: RecipeForm;
   navigation: any;
 }
 
-const AddRecipeDiets = ({ form, navigation }: IAddRecipeDiets) => (
-  <ScrollView>
-    <Alert
-      type="warning"
-      message={
-        <Text>
-          Tag this recipe with relevant diets, such as{" "}
-          <Text style={{ fontWeight: "bold" }}>Kosher</Text>,{" "}
-          <Text style={{ fontWeight: "bold" }}>Vegetarian</Text> or{" "}
-          <Text style={{ fontWeight: "bold" }}>Gluten Free</Text>.
-        </Text>
-      }
-      style={addRecipeStyles.view}
-    />
-    <Text
-      category="h5"
-      style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}
-    >
-      Diets
-    </Text>
-    <List
-      data={form.watch("diets")}
-      renderItem={({ item }) => (
-        <>
-          <ListItem title={item.name} />
-        </>
-      )}
-    />
-    <AddListItem
-      label="ADD DIET"
-      onPress={() =>
-        navigation.navigate("CreateDiet", {
-          form,
-          index: form.getValues("diets")?.length || 0,
-        })
-      }
-    />
-  </ScrollView>
-);
+const AddRecipeDiets = ({ form, navigation }: IAddRecipeDiets) => {
+  const { fields, remove, append } = useFieldArray({
+    control: form.control,
+    name: "diets",
+  });
+  return (
+    <ScrollView>
+      <Alert
+        type="warning"
+        message={
+          <Text>
+            Tag this recipe with relevant diets, such as{" "}
+            <Text style={{ fontWeight: "bold" }}>Kosher</Text>,{" "}
+            <Text style={{ fontWeight: "bold" }}>Vegetarian</Text> or{" "}
+            <Text style={{ fontWeight: "bold" }}>Gluten Free</Text>.
+          </Text>
+        }
+        style={addRecipeStyles.view}
+      />
+      <Text
+        category="h5"
+        style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}
+      >
+        Diets
+      </Text>
+      <List
+        data={fields}
+        renderItem={({ item, index }) => (
+          <>
+            <ListItem
+              title={item.name}
+              accessoryRight={(props) => (
+                <Icons.Cross {...props} onPress={() => remove(index)} />
+              )}
+            />
+          </>
+        )}
+      />
+      <AddListItem
+        label="ADD DIET"
+        onPress={() =>
+          navigation.navigate("CreateDiet", {
+            append,
+          })
+        }
+      />
+    </ScrollView>
+  );
+};
 
 export default AddRecipeDiets;

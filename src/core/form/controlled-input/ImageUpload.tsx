@@ -74,8 +74,6 @@ const ImageUpload = withStyles(
             quality: 0.5,
           }));
 
-      console.log(result.cancelled);
-
       if (!result.cancelled) {
         const newFile = {
           uri: result.uri,

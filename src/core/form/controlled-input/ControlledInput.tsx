@@ -6,11 +6,12 @@ import {
   PathValue,
   RegisterOptions,
 } from "react-hook-form";
-import { Input, InputProps } from "@ui-kitten/components";
+import { Input, InputProps, Select, SelectItem } from "@ui-kitten/components";
 import { ErrorFragment } from "@greeneggs/types/graphql";
 import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
 
 import ImageUpload from "./ImageUpload";
+import PrivacySelect from "./PrivacySelect";
 
 // Function that converts JS numbers to strings in a way
 // that avoids NaN, undefined, etc.
@@ -55,6 +56,7 @@ export enum InputType {
   NUMERIC = "Numeric",
   TEXTAREA = "TextArea",
   PHOTO = "Photo",
+  PRIVACY = "Privacy",
 }
 
 export interface IControlledInput<FieldValues> {
@@ -162,6 +164,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       keyboardType: "numeric",
     },
   },
+  Privacy: {},
 });
 
 const ControlledInput = <
@@ -197,6 +200,17 @@ const ControlledInput = <
               uri={(value as ImageInfo)?.uri}
               onChange={onChange}
               error={error}
+            />
+          );
+        } else if (type === InputType.PRIVACY) {
+          return (
+            <PrivacySelect
+              error={error}
+              placeholder={inputProps?.placeholder?.toString()}
+              onChange={onChange}
+              value={value}
+              label={inputProps?.label?.toString()}
+              caption={inputProps?.caption?.toString()}
             />
           );
         } else {

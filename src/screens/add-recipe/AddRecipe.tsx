@@ -67,7 +67,7 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
       component: <AddRecipeDetails {...{ form, navigation }} />,
     },
     {
-      title: "Publish",
+      title: "Privacy",
       component: <PublishRecipe {...{ form, navigation }} />,
     },
   ];
@@ -99,7 +99,7 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
           text: "Cancel",
           style: "cancel",
         },
-        { text: "OK", onPress: () => form.handleSubmit(onSubmit) },
+        { text: "OK", onPress: () => onSubmit() },
       ],
       { cancelable: false }
     );
@@ -120,7 +120,11 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
         <View style={addRecipeStyles.buttonGroup}>
           {steps.isEnd ? (
             <Button
-              onPress={publish}
+              onPress={() => {
+                form.trigger().then((isValid) => {
+                  if (isValid) publish();
+                });
+              }}
               status="success"
               accessoryRight={
                 form.formResult.loading

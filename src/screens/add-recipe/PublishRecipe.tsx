@@ -1,5 +1,13 @@
 import React from "react";
-import { Divider, Input, List, ListItem, Text } from "@ui-kitten/components";
+import {
+  Divider,
+  Input,
+  List,
+  ListItem,
+  Select,
+  SelectItem,
+  Text,
+} from "@ui-kitten/components";
 import { ScrollView } from "react-native";
 import { addRecipeStyles, RecipeForm } from "./AddRecipe";
 import { ControlledInput, InputType, Rules } from "@greeneggs/core";
@@ -26,13 +34,12 @@ const PublishRecipe = ({ form }: IPublishRecipe) => (
       }}
       inputProps={{
         label: "RECIPE PRIVACY",
-        placeholder: "PUBLIC",
         defaultValue: "",
         style: addRecipeStyles.input,
         caption: "Who is able to see your recipe?",
       }}
       submitError={form.formResult.data?.addRecipe.error}
-      type={InputType.TEXT}
+      type={InputType.PRIVACY}
     />
     <ControlledInput<RecipeInput>
       controllerProps={{
@@ -44,13 +51,12 @@ const PublishRecipe = ({ form }: IPublishRecipe) => (
       }}
       inputProps={{
         label: "COMMENT PRIVILEGES",
-        placeholder: "PUBLIC",
         defaultValue: "",
         style: addRecipeStyles.input,
         caption: "Who is able to comment on your recipe?",
       }}
       submitError={form.formResult.data?.addRecipe.error}
-      type={InputType.TEXT}
+      type={InputType.PRIVACY}
     />
     <ControlledInput<RecipeInput>
       controllerProps={{
@@ -62,13 +68,12 @@ const PublishRecipe = ({ form }: IPublishRecipe) => (
       }}
       inputProps={{
         label: "LIKE PRIVILEGES",
-        placeholder: "PUBLIC",
         defaultValue: "",
         style: addRecipeStyles.input,
         caption: "Who is able to like your recipe?",
       }}
       submitError={form.formResult.data?.addRecipe.error}
-      type={InputType.TEXT}
+      type={InputType.PRIVACY}
     />
   </ScrollView>
 );

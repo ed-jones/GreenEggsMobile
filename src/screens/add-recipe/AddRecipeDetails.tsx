@@ -87,7 +87,7 @@ const CreateRecipeDetails = ({ form }: ICreateRecipeDetails) => (
         caption: "How long does it take to make this recipe?",
       }}
       submitError={form.formResult.data?.addRecipe.error}
-      type={InputType.TEXT}
+      type={InputType.TIME}
     />
     <ControlledInput<RecipeInput>
       controllerProps={{

@@ -12,11 +12,12 @@ import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
 
 import ImageUpload from "./ImageUpload";
 import PrivacySelect from "./PrivacySelect";
+import TimeInput from "./TimeSelect";
 
 // Function that converts JS numbers to strings in a way
 // that avoids NaN, undefined, etc.
-function numberToString<FieldValues>(
-  number: PathValue<FieldValues, Path<FieldValues>>
+export function numberToString<FieldValues>(
+  number: PathValue<FieldValues, Path<FieldValues>> | number
 ): string {
   if (number === NaN) {
     return "";
@@ -35,7 +36,7 @@ function numberToString<FieldValues>(
 
 // Function that converts string input to numbers in a
 // way that avoids NaN, undefined, etc.
-function stringToNumber(string: string): number | null {
+export function stringToNumber(string: string): number | null {
   if (string === "") {
     return null;
   }
@@ -57,6 +58,7 @@ export enum InputType {
   TEXTAREA = "TextArea",
   PHOTO = "Photo",
   PRIVACY = "Privacy",
+  TIME = "Time",
 }
 
 export interface IControlledInput<FieldValues> {
@@ -165,6 +167,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
     },
   },
   Privacy: {},
+  Time: {},
 });
 
 const ControlledInput = <
@@ -200,6 +203,16 @@ const ControlledInput = <
               uri={(value as ImageInfo)?.uri}
               onChange={onChange}
               error={error}
+            />
+          );
+        } else if (type === InputType.TIME) {
+          return (
+            <TimeInput
+              inputProps={unionInputProps}
+              onChange={onChange}
+              onBlur={onBlur}
+              error={error}
+              value={value}
             />
           );
         } else if (type === InputType.PRIVACY) {

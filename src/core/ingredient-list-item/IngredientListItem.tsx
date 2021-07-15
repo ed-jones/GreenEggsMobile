@@ -15,16 +15,12 @@ const IngredientListItem = ({ ingredient, remove }: IIngredientListItem) => {
       <ListItem
         title={toTitleCase(ingredient.name || "")}
         description={ingredient.description || undefined}
-        accessoryRight={() => (
+        accessoryRight={(props) => (
           <>
             <Text category="label" style={{ marginRight: 16 }}>
               {`${ingredient.quantity} ${ingredient.unit || ""}`}
             </Text>
-            <Icons.Cross
-              style={{ width: 32, height: 32 }}
-              fill="black"
-              onPress={remove}
-            />
+            <Icons.Cross {...props} onPress={remove} />
           </>
         )}
       />

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { List, ListItem, Text } from "@ui-kitten/components";
-import { ScrollView, Image } from "react-native";
+import { ScrollView, Image, View } from "react-native";
 import { addRecipeStyles, RecipeForm } from "../AddRecipe";
 import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
 import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
@@ -16,7 +16,7 @@ interface IAddRecipeDirections {
 const AddRecipeDirections = ({ form, navigation }: IAddRecipeDirections) => {
   const { fields, remove, append } = useFieldArray({
     control: form.control,
-    name: "ingredients",
+    name: "steps",
   });
 
   const directionsLength = fields?.length || 0;
@@ -40,29 +40,32 @@ const AddRecipeDirections = ({ form, navigation }: IAddRecipeDirections) => {
         Directions
       </Text>
       <List
-        data={form.watch("steps")}
-        renderItem={({ item, index }) => (
-          <ListItem
-            title={item.title}
-            description={item.description}
-            accessoryRight={() => (
-              <>
-                <Image
-                  source={{ uri: item.image && (item.image as ImageInfo).uri }}
-                  style={{ width: 48, height: 48 }}
-                />
-                <Icons.Cross onPress={remove(index)} />
-              </>
-            )}
-          />
-        )}
+        data={fields}
+        renderItem={({ item, index }) =>
+          item ? (
+            <ListItem
+              title={item.title}
+              description={item.description}
+              accessoryRight={(props) => (
+                <>
+                  <Image
+                    source={{
+                      uri: item.image && (item.image as ImageInfo).uri,
+                    }}
+                    style={{ width: 48, height: 48 }}
+                  />
+                  <Icons.Cross {...props} onPress={() => remove(index)} />
+                </>
+              )}
+            />
+          ) : null
+        }
       />
       <AddListItem
         label="ADD STEP"
         onPress={() =>
           navigation.navigate("CreateStep", {
-            form,
-            index: form.getValues("steps")?.length || 0,
+            append,
           })
         }
       />

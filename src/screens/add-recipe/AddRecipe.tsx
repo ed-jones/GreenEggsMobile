@@ -142,19 +142,19 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
                   });
                 }
 
-                if (!form.getValues("steps")?.length) {
-                  form.setError("steps", {
-                    type: "required",
-                    message: "You must add at least 1 step",
-                  });
-                }
+                // if (!form.getValues("steps")?.length) {
+                //   form.setError("steps", {
+                //     type: "required",
+                //     message: "You must add at least 1 step",
+                //   });
+                // }
                 form.trigger().then((isValid) => {
                   if (isValid) steps.next();
                 });
               }}
               accessoryRight={Icons.Forward}
             >
-              NEXT
+              {steps.nextStep?.title.toUpperCase()}
             </Button>
           )}
           {steps.isStart ? null : (
@@ -168,7 +168,7 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
               )}
               status="basic"
             >
-              PREVIOUS
+              {steps.lastStep?.title.toUpperCase()}
             </Button>
           )}
         </View>

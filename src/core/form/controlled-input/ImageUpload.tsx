@@ -10,7 +10,6 @@ import {
 } from "@ui-kitten/components";
 import * as ImagePicker from "expo-image-picker";
 import { ReactNativeFile } from "apollo-upload-client";
-import { v4 as uuidv4 } from "uuid";
 import { ImageBackground } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { FieldError } from "react-hook-form";
@@ -75,14 +74,15 @@ const ImageUpload = withStyles(
             quality: 0.5,
           }));
 
+      console.log(result.cancelled);
+
       if (!result.cancelled) {
-        onChange(
-          new ReactNativeFile({
-            uri: result.uri,
-            name: `${uuidv4()}.jpg`,
-            type: `${result.type}`,
-          })
-        );
+        const newFile = {
+          uri: result.uri,
+          name: `${result.uri.substr(result.uri.lastIndexOf("/") + 1)}`,
+          type: `${result.type}`,
+        };
+        onChange(new ReactNativeFile(newFile));
       }
     };
 

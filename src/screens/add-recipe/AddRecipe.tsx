@@ -20,7 +20,6 @@ import PublishRecipe from "./PublishRecipe";
 
 import AddRecipeAllergies from "./add-recipe-allergies/AddRecipeAllergies";
 import AddRecipeDiets from "./add-recipe-diets/AddRecipeDiets";
-import { useEffect } from "react";
 
 export const addRecipeStyles = StyleSheet.create({
   view: {

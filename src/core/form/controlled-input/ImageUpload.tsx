@@ -78,7 +78,7 @@ const ImageUpload = withStyles(
         const newFile = {
           uri: result.uri,
           name: `${result.uri.substr(result.uri.lastIndexOf("/") + 1)}`,
-          type: `${result.type}`,
+          type: `${result.type}/jpeg`,
         };
         onChange(new ReactNativeFile(newFile));
       }

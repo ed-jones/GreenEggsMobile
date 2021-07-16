@@ -81,7 +81,7 @@ const TimeInput = <FieldValues,>({
           {...{
             ...inputProps,
             label: undefined,
-            style: { marginRight: 16 },
+            // style: { marginRight: 16 },
             placeholder: "0",
             status: error ? "danger" : undefined,
             caption: error?.message || "Hours",

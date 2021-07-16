@@ -7,6 +7,7 @@ import CreateRecipePartTemplate, {
   RecipeFormPart,
 } from "../CreateRecipePartTemplate";
 import { useForm } from "react-hook-form";
+import { View } from "react-native";
 
 const CreateIngredient = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate
@@ -57,40 +58,46 @@ const CreateIngredientForm = ({ navigation, append }: RecipeFormPart) => {
         }}
         type={InputType.TEXT}
       />
-      <ControlledInput<IngredientInput>
-        controllerProps={{
-          shouldUnregister: true,
-          name: `quantity`,
-          control: form.control,
-          rules: {
-            ...Rules.REQUIRED,
-          },
-        }}
-        inputProps={{
-          label: "QUANTITY",
-          placeholder: "5",
-          defaultValue: "",
-          style: addRecipeStyles.input,
-        }}
-        type={InputType.NUMERIC}
-      />
-      <ControlledInput<IngredientInput>
-        controllerProps={{
-          shouldUnregister: true,
-          name: `unit`,
-          control: form.control,
-          rules: {
-            ...Rules.UNDER100CHARS,
-          },
-        }}
-        inputProps={{
-          label: "UNIT (OPTIONAL)",
-          placeholder: "Cups",
-          defaultValue: "",
-          style: addRecipeStyles.input,
-        }}
-        type={InputType.TEXT}
-      />
+      <View style={{ flexDirection: "row" }}>
+        <ControlledInput<IngredientInput>
+          controllerProps={{
+            shouldUnregister: true,
+            name: `unit`,
+            control: form.control,
+            rules: {
+              ...Rules.UNDER100CHARS,
+            },
+          }}
+          inputProps={{
+            label: "UNIT (OPTIONAL)",
+            placeholder: "Cups",
+            defaultValue: "",
+            style: { width: "70%", ...addRecipeStyles.input },
+          }}
+          type={InputType.TEXT}
+        />
+        <ControlledInput<IngredientInput>
+          controllerProps={{
+            shouldUnregister: true,
+            name: `quantity`,
+            control: form.control,
+            rules: {
+              ...Rules.REQUIRED,
+              max: {
+                value: 999,
+                message: "Must be under 1000",
+              },
+            },
+          }}
+          inputProps={{
+            label: "QUANTITY",
+            placeholder: "5",
+            defaultValue: "",
+            style: { width: "30%", ...addRecipeStyles.input },
+          }}
+          type={InputType.NUMERIC}
+        />
+      </View>
       <Button
         onPress={() => {
           form

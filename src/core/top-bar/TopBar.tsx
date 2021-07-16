@@ -1,10 +1,11 @@
 import React from "react";
-import { Icon, Input } from "@ui-kitten/components";
+import { Icon, Input, InputProps } from "@ui-kitten/components";
 import { StyleSheet, View, Image } from "react-native";
 
 import logo512 from "../logo/logo512.png";
 import { useNavigation } from "@react-navigation/core";
 import * as Icons from "../icons/Icons";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const styles = StyleSheet.create({
   topNavigation: {
@@ -28,22 +29,16 @@ const styles = StyleSheet.create({
   },
 });
 
-export type ModeType = "search" | "home";
-
 interface ITopBar {
-  mode: ModeType;
+  inputProps?: InputProps;
+  accessoryLeft?: React.ReactElement;
+  accessoryRight?: React.ReactElement;
 }
 
-const TopBar = ({ mode }: ITopBar) => {
-  const navigation = useNavigation();
+const TopBar = ({ inputProps, accessoryLeft, accessoryRight }: ITopBar) => {
   return (
     <View style={styles.topNavigation}>
-      {mode === "home" ? (
-        <Image source={logo512} style={styles.logo} />
-      ) : (
-        <Icons.Back style={{ width: 32, height: 32 }} fill="black" />
-      )}
-
+      {accessoryLeft}
       <Input
         placeholder="Search Recipe"
         size="large"
@@ -51,8 +46,9 @@ const TopBar = ({ mode }: ITopBar) => {
         accessoryLeft={(props) => (
           <Icon style={styles.icon} name="search" {...props} />
         )}
-        onBlur={() => navigation.navigate("RecipeSearch")}
+        {...inputProps}
       />
+      {accessoryRight}
     </View>
   );
 };

@@ -1,55 +1,35 @@
 import React from "react";
-import { Navigation, TopBar } from "@greeneggs/core";
 import HomeTabs from "./home-tabs/HomeTabs";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import RecipeSearch from "../recipe-search/RecipeSearch";
-import { template } from "@babel/core";
-import { NavigationContainer } from "@react-navigation/native";
-import { ModeType } from "@greeneggs/core/top-bar/TopBar";
+import { TopBar } from "@greeneggs/core";
+import { Image, StyleSheet, View } from "react-native";
+import logo512 from "@greeneggs/core/logo/logo512.png";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-const Stack = createStackNavigator();
+const styles = StyleSheet.create({
+  logo: {
+    width: 48,
+    height: 48,
+    marginRight: 16,
+  },
+});
 
-interface ITopBarTemplate {
-  children: React.ReactElement;
-  mode: ModeType;
-}
-
-const TopBarTemplate = ({ children, mode }: ITopBarTemplate) => {
+const Home = ({}) => {
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
   return (
     <>
-      <View style={{ paddingTop: insets.top }}>
-        <TopBar mode={mode} />
+      <View style={{ marginTop: insets.top }}>
+        <TopBar
+          inputProps={{ onFocus: () => navigation.navigate("RecipeSearch") }}
+          accessoryLeft={<Image source={logo512} style={styles.logo} />}
+        />
       </View>
-      {children}
+      <HomeTabs />
     </>
   );
 };
-
-const Home = () => (
-  <NavigationContainer independent>
-    <Stack.Navigator headerMode="none">
-      <Stack.Screen
-        name="HomeTabs"
-        component={() => (
-          <TopBarTemplate mode="home">
-            <HomeTabs />
-          </TopBarTemplate>
-        )}
-      />
-      <Stack.Screen
-        name="RecipeSearch"
-        component={() => (
-          <TopBarTemplate mode="search">
-            <RecipeSearch />
-          </TopBarTemplate>
-        )}
-      />
-    </Stack.Navigator>
-  </NavigationContainer>
-);
 
 export default Home;

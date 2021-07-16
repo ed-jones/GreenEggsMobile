@@ -43,6 +43,7 @@ import CreateStep from "@greeneggs/screens/add-recipe/add-recipe-directions/Crea
 import CreateAllergy from "@greeneggs/screens/add-recipe/add-recipe-allergies/CreateAllergy";
 import CreateCategory from "@greeneggs/screens/add-recipe/add-recipe-categories/CreateCategory";
 import CreateDiet from "@greeneggs/screens/add-recipe/add-recipe-diets/CreateDiet";
+import RecipeSearch from "@greeneggs/screens/recipe-search/RecipeSearch";
 
 const Stack = createStackNavigator();
 
@@ -121,6 +122,7 @@ function App() {
               name="ProfileVisibility"
               component={ProfileVisibility}
             />
+            <Stack.Screen name="RecipeSearch" component={RecipeSearch} />
           </Stack.Navigator>
         </NavigationContainer>
       </ApplicationProvider>

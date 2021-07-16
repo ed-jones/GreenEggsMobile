@@ -1,6 +1,7 @@
-import { Input, InputProps } from "@ui-kitten/components";
+import { Input, InputProps, Text } from "@ui-kitten/components";
 import React from "react";
 import { FieldError, Path, PathValue } from "react-hook-form";
+import { View } from "react-native";
 import { numberToString, stringToNumber } from "./ControlledInput";
 
 interface ITimeFields {
@@ -16,8 +17,16 @@ interface ITimeInput<FieldValues> {
   onBlur: () => void;
 }
 
-export const millisecondsToHoursAndMinutes = (milliseconds: number) => {
-  const totalMinutes = milliseconds / (1000 * 60);
+export const millisecondsToHoursAndMinutes = <FieldValues,>(
+  milliseconds: PathValue<FieldValues, Path<FieldValues>>
+): ITimeFields => {
+  if (milliseconds === null) {
+    return {
+      hours: null,
+      minutes: null,
+    };
+  }
+  const totalMinutes = Number(milliseconds) / (1000 * 60);
   return {
     hours: Math.floor(totalMinutes / 60),
     minutes: Math.floor(totalMinutes % 60),
@@ -27,11 +36,13 @@ export const millisecondsToHoursAndMinutes = (milliseconds: number) => {
 export const hoursAndMinutesToMilliseconds = ({
   hours,
   minutes,
-}: ITimeFields) => {
+}: ITimeFields): number | null => {
+  if (hours === null && minutes === null) {
+    return null;
+  }
   const hoursAsMilliseconds = (hours || 0) * 60 * 60 * 1000;
   const minutesAsMilliseconds = (minutes || 0) * 60 * 1000;
-  const milliseconds = hoursAsMilliseconds + minutesAsMilliseconds;
-  return milliseconds != 0 ? milliseconds : null;
+  return hoursAsMilliseconds + minutesAsMilliseconds;
 };
 
 const TimeInput = <FieldValues,>({
@@ -44,49 +55,58 @@ const TimeInput = <FieldValues,>({
     hours: newHours,
     minutes: newMinutes,
   }: ITimeFields) => {
+    const { hours: oldHours, minutes: oldMinutes } =
+      millisecondsToHoursAndMinutes(value);
+
     const milliseconds = hoursAndMinutesToMilliseconds({
-      hours: newHours || null,
-      minutes: newMinutes || null,
+      hours: newHours !== null ? newHours || oldHours : null,
+      minutes: newMinutes !== null ? newMinutes || oldMinutes : null,
     });
 
     onChange(milliseconds);
   };
-  const i = 1000 * 60 * 60 * 5;
-  console.log(i);
-  console.log(hoursAndMinutesToMilliseconds(millisecondsToHoursAndMinutes(i)));
 
   return (
     <>
-      <Input
-        {...{
-          ...{
-            label: "HOURS",
+      <Text appearance="hint" category="label" style={{ marginBottom: 4 }}>
+        {inputProps?.label?.toString()}
+      </Text>
+      <View
+        style={{
+          flexDirection: "row",
+          marginBottom: 16,
+        }}
+      >
+        <Input
+          {...{
+            ...inputProps,
+            label: undefined,
+            style: { marginRight: 16 },
+            placeholder: "0",
             status: error ? "danger" : undefined,
-            caption: error?.message,
-            value: numberToString(
-              millisecondsToHoursAndMinutes(Number(value)).hours
+            caption: error?.message || "Hours",
+            value: numberToString<FieldValues>(
+              millisecondsToHoursAndMinutes(value).hours || null
             ),
             onChangeText: (hours) =>
               handleChange({ hours: stringToNumber(hours) }),
-          },
-          ...inputProps,
-        }}
-      />
-      <Input
-        {...{
-          ...{
-            label: "MINUTES",
+          }}
+        />
+        <Input
+          {...{
+            ...inputProps,
+            label: undefined,
+            placeholder: "0",
             status: error ? "danger" : undefined,
-            caption: error?.message,
-            value: numberToString(
-              millisecondsToHoursAndMinutes(Number(value)).minutes
+            caption: error?.message || "Minutes",
+            value: numberToString<FieldValues>(
+              millisecondsToHoursAndMinutes(value).minutes || null
             ),
             onChangeText: (minutes) =>
               handleChange({ minutes: stringToNumber(minutes) }),
-          },
-          ...inputProps,
-        }}
-      />
+          }}
+        />
+      </View>
     </>
   );
 };

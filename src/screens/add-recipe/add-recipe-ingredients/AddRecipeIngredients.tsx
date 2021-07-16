@@ -42,27 +42,36 @@ const CreateRecipeIngredients = ({
         message="Include ingredients needed to make this recipe."
         style={addRecipeStyles.view}
       />
-      <ControlledInput<RecipeInput>
-        controllerProps={{
-          name: "servingCount",
-          control: form.control,
-          rules: {
-            ...Rules.REQUIRED,
-          },
-        }}
-        inputProps={{
-          label: "SERVES",
-          placeholder: "4",
-          defaultValue: "",
-          caption: "How many people can this recipe serve?",
-          style: {
-            ...addRecipeStyles.input,
-            paddingHorizontal: 16,
-          },
-        }}
-        submitError={form.formResult.data?.addRecipe.error}
-        type={InputType.NUMERIC}
-      />
+      <View style={{ flexDirection: "row", width: "50%" }}>
+        <ControlledInput<RecipeInput>
+          controllerProps={{
+            name: "servingCount",
+            control: form.control,
+            rules: {
+              ...Rules.REQUIRED,
+              max: {
+                value: 99,
+                message: "Serving count must be below 100 ",
+              },
+            },
+          }}
+          inputProps={{
+            // textAlign: "right",
+            label: "SERVES",
+            placeholder: "4",
+            defaultValue: "",
+            caption: "How many people can this recipe serve?",
+            style: {
+              ...addRecipeStyles.input,
+              paddingHorizontal: 16,
+              width: "100%",
+            },
+          }}
+          submitError={form.formResult.data?.addRecipe.error}
+          type={InputType.NUMERIC}
+        />
+      </View>
+
       <Text
         category="h5"
         style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}

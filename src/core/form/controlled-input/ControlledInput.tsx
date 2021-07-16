@@ -17,7 +17,7 @@ import TimeInput from "./TimeSelect";
 // Function that converts JS numbers to strings in a way
 // that avoids NaN, undefined, etc.
 export function numberToString<FieldValues>(
-  number: PathValue<FieldValues, Path<FieldValues>> | number
+  number: PathValue<FieldValues, Path<FieldValues>> | number | null
 ): string {
   if (number === NaN) {
     return "";
@@ -167,7 +167,11 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
     },
   },
   Privacy: {},
-  Time: {},
+  Time: {
+    inputProps: {
+      keyboardType: "numeric",
+    },
+  },
 });
 
 const ControlledInput = <

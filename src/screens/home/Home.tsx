@@ -1,33 +1,36 @@
 import React from "react";
 import HomeTabs from "./home-tabs/HomeTabs";
-import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { TopBar } from "@greeneggs/core";
-import { Image, StyleSheet, View } from "react-native";
-import logo512 from "@greeneggs/core/logo/logo512.png";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { StyleSheet } from "react-native";
+import TopBarTemplate, {
+  TopBarModes,
+} from "@greeneggs/core/top-bar/TopBarTemplate";
+import RecipeSearch from "../recipe-search/RecipeSearch";
 
-const styles = StyleSheet.create({
-  logo: {
-    width: 48,
-    height: 48,
-    marginRight: 16,
-  },
-});
+const { Screen, Navigator } = createStackNavigator();
 
 const Home = ({}) => {
-  const navigation = useNavigation();
-  const insets = useSafeAreaInsets();
-
   return (
     <>
-      <View style={{ marginTop: insets.top }}>
-        <TopBar
-          inputProps={{ onFocus: () => navigation.navigate("RecipeSearch") }}
-          accessoryLeft={<Image source={logo512} style={styles.logo} />}
-        />
-      </View>
-      <HomeTabs />
+      <Navigator
+        headerMode="float"
+        screenOptions={{
+          header: ({ navigation, scene }) => {
+            const { routes, index } = navigation.dangerouslyGetState();
+            const {
+              route: { name: routeName },
+            } = scene;
+
+            if (routes[index].name !== routeName) {
+              return null;
+            }
+            return <TopBarTemplate mode={routeName as TopBarModes} />;
+          },
+        }}
+      >
+        <Screen name="Home" component={HomeTabs} />
+        <Screen name="RecipeSearch" component={RecipeSearch} />
+      </Navigator>
     </>
   );
 };

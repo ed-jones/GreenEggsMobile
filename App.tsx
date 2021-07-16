@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import * as eva from "@eva-design/eva";
-import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
+import { ApplicationProvider, IconRegistry, Text } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import {
   ApolloClient,
@@ -44,6 +44,7 @@ import CreateAllergy from "@greeneggs/screens/add-recipe/add-recipe-allergies/Cr
 import CreateCategory from "@greeneggs/screens/add-recipe/add-recipe-categories/CreateCategory";
 import CreateDiet from "@greeneggs/screens/add-recipe/add-recipe-diets/CreateDiet";
 import RecipeSearch from "@greeneggs/screens/recipe-search/RecipeSearch";
+import TopBarTemplate from "@greeneggs/core/top-bar/TopBarTemplate";
 
 const Stack = createStackNavigator();
 
@@ -122,7 +123,6 @@ function App() {
               name="ProfileVisibility"
               component={ProfileVisibility}
             />
-            <Stack.Screen name="RecipeSearch" component={RecipeSearch} />
           </Stack.Navigator>
         </NavigationContainer>
       </ApplicationProvider>

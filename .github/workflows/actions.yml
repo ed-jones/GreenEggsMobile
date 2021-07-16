@@ -1,0 +1,46 @@
+name: Expo Publish
+on:
+  push:
+    branches:
+      - staging
+      - main
+
+env:
+  NODE_VERSION: "15.14.0"
+  EXPO_VERSION: "4.x"
+  API_URI: ${{ secrets.API_URI }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout GitHub Action"
+        uses: actions/checkout@v2
+
+      - name: Setup Node ${{ env.NODE_VERSION }} Environment
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: "Resolve Project Dependencies Using Yarn"
+        shell: bash
+        run: |
+          pushd .
+          yarn install
+          popd
+
+      - name: "Run Tests"
+        shell: bash
+        run: |
+          pushd .
+          yarn test
+          popd
+
+      - name: Setup Expo ${{ env.EXPO_VERSION }}
+        uses: expo/expo-github-action@v5
+        with:
+          expo-version: ${{ env.EXPO_VERSION }}
+          expo-username: ${{ secrets.EXPO_CLI_USERNAME }}
+          expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
+      - name: Publish to Expo
+        run: expo publish

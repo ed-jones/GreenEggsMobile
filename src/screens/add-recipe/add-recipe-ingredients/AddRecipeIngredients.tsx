@@ -1,16 +1,18 @@
-import React, { useState } from "react";
-import { List, Text } from "@ui-kitten/components";
-import { View } from "react-native";
-import { IngredientInput, RecipeInput } from "@greeneggs/types/graphql";
-import ControlledInput, {
-  InputType,
-} from "@greeneggs/core/controlled-input/ControlledInput";
-import { ScrollView } from "react-native-gesture-handler";
+import React from "react";
+import { Button, List, Text } from "@ui-kitten/components";
+import { ScrollView, View } from "react-native";
+import {
+  RecipeInput,
+  recipe_recipe_data_ingredients,
+} from "@greeneggs/types/graphql";
+import { ControlledInput, InputType, Rules } from "@greeneggs/core";
 import { addRecipeStyles, RecipeForm } from "../AddRecipe";
 import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
 import IngredientListItem from "@greeneggs/core/ingredient-list-item/IngredientListItem";
-import { useEffect } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
+import Alert from "@greeneggs/core/alert/Alert";
+import { useEffect } from "react";
+import { FieldError, useFieldArray } from "react-hook-form";
 
 interface ICreateRecipeIngredients {
   form: RecipeForm;
@@ -21,36 +23,84 @@ const CreateRecipeIngredients = ({
   form,
   navigation,
 }: ICreateRecipeIngredients) => {
-  const [ingredients, setIngredients] = useState<IngredientInput[]>(
-    form.getValues("ingredients")
-  );
+  const { fields, remove, append } = useFieldArray({
+    control: form.control,
+    name: "ingredients",
+  });
 
-  useEffect(() => form.setValue("ingredients", ingredients), [ingredients]);
+  const ingredientsLength = fields?.length || 0;
+  useEffect(() => {
+    if (ingredientsLength > 0) {
+      form.clearErrors("ingredients");
+    }
+  }, [ingredientsLength]);
 
   return (
     <ScrollView>
-      <View style={addRecipeStyles.view}>
+      <Alert
+        type="info"
+        message="Include ingredients needed to make this recipe."
+        style={addRecipeStyles.view}
+      />
+      <View style={{ flexDirection: "row", width: "50%" }}>
         <ControlledInput<RecipeInput>
-          controllerProps={{ name: "servingCount", control: form.control }}
+          controllerProps={{
+            name: "servingCount",
+            control: form.control,
+            rules: {
+              ...Rules.REQUIRED,
+              max: {
+                value: 99,
+                message: "Serving count must be below 100 ",
+              },
+            },
+          }}
           inputProps={{
+            // textAlign: "right",
             label: "SERVES",
             placeholder: "4",
             defaultValue: "",
+            caption: "How many people can this recipe serve?",
+            style: {
+              ...addRecipeStyles.input,
+              paddingHorizontal: 16,
+              width: "100%",
+            },
           }}
           submitError={form.formResult.data?.addRecipe.error}
           type={InputType.NUMERIC}
         />
-        <Text category="h5" style={addRecipeStyles.heading}>
-          Ingredients
-        </Text>
       </View>
+
+      <Text
+        category="h5"
+        style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}
+      >
+        Ingredients
+      </Text>
       <List
-        data={ingredients}
-        renderItem={({ item }) => <IngredientListItem ingredient={item} />}
+        data={fields}
+        renderItem={({ item, index }) =>
+          item ? (
+            <IngredientListItem
+              ingredient={item}
+              remove={() => remove(index)}
+            />
+          ) : null
+        }
       />
       <AddListItem
-        label="ADD INGREDIENT"
-        onPress={() => navigation.navigate("CreateIngredient")}
+        error={
+          (form.formState.errors.ingredients as unknown as FieldError)?.message
+            ? (form.formState.errors.ingredients as unknown as FieldError)
+            : undefined
+        }
+        label={`ADD INGREDIENT`}
+        onPress={() =>
+          navigation.navigate("CreateIngredient", {
+            append,
+          })
+        }
       />
     </ScrollView>
   );

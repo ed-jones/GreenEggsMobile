@@ -7,6 +7,8 @@ import {
   TopNavigation,
   TopNavigationAction,
   Avatar,
+  Input,
+  Layout,
 } from "@ui-kitten/components";
 
 import {
@@ -17,7 +19,6 @@ import { Icons } from "@greeneggs/core";
 
 const styles = StyleSheet.create({
   avatarContainer: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "center",
   },
@@ -27,16 +28,12 @@ const styles = StyleSheet.create({
     height: 120,
   },
   view: {
-    backgroundColor: "#F7F9FC",
     height: "100%",
   },
   description: {
     padding: 16,
   },
-  button: {
-    width: 99,
-    height: 32,
-  },
+  button: {},
   topButton: {
     width: 24,
     height: 24,
@@ -44,25 +41,36 @@ const styles = StyleSheet.create({
     borderColor: "transparent",
   },
   profileContainer: {
-    flex: 1,
     padding: 16,
     flexDirection: "row",
     justifyContent: "space-between",
   },
   statContainer: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "space-evenly",
+    padding: 16,
   },
   statBox: {
-    flex: 1,
     flexDirection: "column",
-    justifyContent: "space-between",
     alignItems: "center",
-    width: 65,
-    height: 32,
+  },
+  search: {
+    backgroundColor: "white",
+    margin: 16,
   },
 });
+
+interface IProfileStat {
+  label: string;
+  value: string;
+}
+
+const ProfileStat = ({ label, value }: IProfileStat) => (
+  <View style={styles.statBox}>
+    <Text category="label">{value}</Text>
+    <Text category="c1">{label}</Text>
+  </View>
+);
 
 const MyProfile = ({ navigation }: any) => {
   const insets = useSafeAreaInsets();
@@ -72,7 +80,7 @@ const MyProfile = ({ navigation }: any) => {
   };
 
   return (
-    <View style={{ ...styles.view }}>
+    <Layout level="2" style={{ ...styles.view }}>
       <TopNavigation
         style={{ backgroundColor: "transparent", paddingTop: insets.top }}
         accessoryLeft={() => (
@@ -100,33 +108,28 @@ const MyProfile = ({ navigation }: any) => {
         />
       </View>
       <View style={styles.profileContainer}>
-        <Text category="h5">data.firstName</Text>
-        <Button style={styles.button} accessoryLeft={Icons.Edit}>
+        <Text category="h5">John Davies</Text>
+        <Button size="small" style={styles.button} accessoryLeft={Icons.Edit}>
           EDIT
         </Button>
       </View>
       <Text style={styles.description} numberOfLines={2}>
-        Profile Description
+        Wannabe writer. Incurable entrepreneur. Food lover. Zombie junkie. Music
+        buff.
       </Text>
       <View style={styles.statContainer}>
-        <View style={styles.statBox}>
-          <Text>0</Text>
-          <Text>Following</Text>
-        </View>
-        <View style={styles.statBox}>
-          <Text>0</Text>
-          <Text>Followers</Text>
-        </View>
-        <View style={styles.statBox}>
-          <Text>0</Text>
-          <Text>Recipes</Text>
-        </View>
-        <View style={styles.statBox}>
-          <Text>0</Text>
-          <Text>Likes</Text>
-        </View>
+        <ProfileStat label="Following" value="51" />
+        <ProfileStat label="Followers" value="104" />
+        <ProfileStat label="Recipes" value="18" />
+        <ProfileStat label="Likes" value="356" />
       </View>
-    </View>
+      <Input
+        placeholder="Search recipes"
+        size="large"
+        style={styles.search}
+        accessoryLeft={Icons.Search}
+      />
+    </Layout>
   );
 };
 

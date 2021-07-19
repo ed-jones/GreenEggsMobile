@@ -6,13 +6,18 @@ import {
   PathValue,
   RegisterOptions,
 } from "react-hook-form";
-import { Input, InputProps } from "@ui-kitten/components";
+import { Input, InputProps, Select, SelectItem } from "@ui-kitten/components";
 import { ErrorFragment } from "@greeneggs/types/graphql";
+import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
+
+import ImageUpload from "./ImageUpload";
+import PrivacySelect from "./PrivacySelect";
+import TimeInput from "./TimeSelect";
 
 // Function that converts JS numbers to strings in a way
 // that avoids NaN, undefined, etc.
-function numberToString<FieldValues>(
-  number: PathValue<FieldValues, Path<FieldValues>>
+export function numberToString<FieldValues>(
+  number: PathValue<FieldValues, Path<FieldValues>> | number | null
 ): string {
   if (number === NaN) {
     return "";
@@ -31,7 +36,7 @@ function numberToString<FieldValues>(
 
 // Function that converts string input to numbers in a
 // way that avoids NaN, undefined, etc.
-function stringToNumber(string: string): number | null {
+export function stringToNumber(string: string): number | null {
   if (string === "") {
     return null;
   }
@@ -50,6 +55,10 @@ export enum InputType {
   FIRSTNAME = "FirstName",
   LASTNAME = "LastName",
   NUMERIC = "Numeric",
+  TEXTAREA = "TextArea",
+  PHOTO = "Photo",
+  PRIVACY = "Privacy",
+  TIME = "Time",
 }
 
 export interface IControlledInput<FieldValues> {
@@ -90,6 +99,8 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       textContentType: "emailAddress",
       autoCompleteType: "email",
       autoCapitalize: "none",
+      keyboardType: "email-address",
+      placeholder: "johnsmith@example.com",
     },
     controllerProps: {
       rules: {
@@ -104,12 +115,15 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
     },
   },
   Text: {},
+  TextArea: {},
+  Photo: {},
   Password: {
     inputProps: {
       label: "PASSWORD",
       textContentType: "password",
       autoCompleteType: "password",
       secureTextEntry: true,
+      placeholder: "********",
     },
     controllerProps: {
       rules: {
@@ -130,6 +144,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       textContentType: "givenName",
       autoCompleteType: "name",
       autoCapitalize: "words",
+      placeholder: "John",
     },
   },
   LastName: {
@@ -143,6 +158,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       textContentType: "familyName",
       autoCompleteType: "name",
       autoCapitalize: "words",
+      placeholder: "Smith",
     },
   },
   Numeric: {
@@ -150,10 +166,18 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       keyboardType: "numeric",
     },
   },
+  Privacy: {},
+  Time: {
+    inputProps: {
+      keyboardType: "numeric",
+    },
+  },
 });
 
 const ControlledInput = <
-  FieldValues extends Record<keyof FieldValues, string | number | object>
+  FieldValues extends Partial<
+    Record<keyof FieldValues, string | number | object | null>
+  >
 >({
   controllerProps,
   inputProps,
@@ -161,31 +185,80 @@ const ControlledInput = <
   submitError,
 }: IControlledInput<FieldValues>) => {
   const inputTypeDefaultProps = InputTypeDefaultProps<FieldValues>()[type];
+  const { caption, ...unionInputProps } = {
+    ...inputTypeDefaultProps.inputProps,
+    ...inputProps,
+  };
+  const unionControlProps = {
+    ...inputTypeDefaultProps.controllerProps,
+    ...controllerProps,
+  };
 
   return (
     <Controller<FieldValues>
       render={({
         field: { onChange, onBlur, value },
         fieldState: { error },
-      }) => (
-        <Input
-          onBlur={onBlur}
-          onChangeText={(e) =>
-            type === InputType.NUMERIC
-              ? onChange(stringToNumber(e))
-              : onChange(e)
-          }
-          value={
-            type === InputType.NUMERIC
-              ? (value && numberToString(value)) || ""
-              : (value && String(value)) || ""
-          }
-          status={error || !!submitError ? "danger" : undefined}
-          caption={submitError ? submitError.message : error?.message}
-          {...{ ...inputTypeDefaultProps.inputProps, ...inputProps }}
-        />
-      )}
-      {...{ ...inputTypeDefaultProps.controllerProps, ...controllerProps }}
+      }) => {
+        if (type === InputType.PHOTO) {
+          return (
+            <ImageUpload
+              label={inputProps?.label?.toString()}
+              uri={(value as ImageInfo)?.uri}
+              onChange={onChange}
+              error={error}
+            />
+          );
+        } else if (type === InputType.TIME) {
+          return (
+            <TimeInput
+              inputProps={unionInputProps}
+              onChange={onChange}
+              onBlur={onBlur}
+              error={error}
+              value={value}
+            />
+          );
+        } else if (type === InputType.PRIVACY) {
+          return (
+            <PrivacySelect
+              error={error}
+              placeholder={inputProps?.placeholder?.toString()}
+              onChange={onChange}
+              value={value}
+              label={inputProps?.label?.toString()}
+              caption={inputProps?.caption?.toString()}
+            />
+          );
+        } else {
+          return (
+            <Input
+              numberOfLines={type === InputType.TEXTAREA ? 4 : 1}
+              multiline={type === InputType.TEXTAREA}
+              onBlur={onBlur}
+              textAlignVertical={
+                type === InputType.TEXTAREA ? "top" : undefined
+              }
+              onChangeText={(e) =>
+                type === InputType.NUMERIC
+                  ? onChange(stringToNumber(e))
+                  : onChange(e)
+              }
+              value={
+                type === InputType.NUMERIC
+                  ? (value && numberToString(value)) || ""
+                  : (value && String(value)) || ""
+              }
+              status={error || !!submitError ? "danger" : undefined}
+              caption={
+                submitError ? submitError?.message : error?.message || caption
+              }
+              {...unionInputProps}
+            />
+          );
+        }
+      }}
+      {...unionControlProps}
     />
   );
 };

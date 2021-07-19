@@ -4,27 +4,22 @@ import {
   StyleSheet,
   ImageBackground,
   Image,
-  SafeAreaView,
+  ScrollView,
 } from "react-native";
 import {
   Text,
-  Button,
   TopNavigation,
   TopNavigationAction,
-  Input,
+  withStyles,
+  ThemedComponentProps,
 } from "@ui-kitten/components";
-import { Icons, IForm } from "@greeneggs/core";
-import useLoginForm from "./useLoginForm";
-import { setContext } from "@apollo/client/link/context";
+import { Icons } from "@greeneggs/core";
 import { LinearGradient } from "expo-linear-gradient";
 
 import Logo from "../../assets/images/icon.png";
 import Banner from "../../assets/images/banner.jpg";
 import { StatusBar } from "expo-status-bar";
-import {
-  SafeAreaInsetsContext,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const styles = StyleSheet.create({
   logo: {
@@ -33,8 +28,9 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   form: {
-    padding: 10,
-    height: "100%",
+    paddingHorizontal: 10,
+    // paddingTop: 664,
+    // height: "100%",
   },
   gradient: {
     position: "absolute",
@@ -44,7 +40,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   bannerContainer: {
-    height: "25%",
+    height: 200,
     justifyContent: "center",
   },
   bannerContent: {
@@ -55,9 +51,6 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     height: "100%",
     justifyContent: "flex-start",
-  },
-  view: {
-    backgroundColor: "#F7F9FC",
   },
   logoText: {
     flexDirection: "row",
@@ -81,43 +74,58 @@ interface IAuthPageTemplateProps {
   children: React.ReactNode;
 }
 
-const AuthPageTemplate = ({
-  navigation,
-  message,
-  children,
-}: IAuthPageTemplateProps) => {
-  const navigateBack = () => {
-    navigation.goBack();
-  };
-  const insets = useSafeAreaInsets();
+const AuthPageTemplate = withStyles(
+  ({
+    navigation,
+    message,
+    children,
+    eva,
+  }: IAuthPageTemplateProps & ThemedComponentProps) => {
+    const navigateBack = () => {
+      navigation.goBack();
+    };
+    const insets = useSafeAreaInsets();
 
-  return (
-    <View style={{ ...styles.view, paddingBottom: insets.bottom }}>
-      <StatusBar style="dark" />
-      <View style={styles.bannerContainer}>
-        <ImageBackground source={Banner} style={styles.banner}>
-          <LinearGradient
-            colors={["rgba(247, 249, 252,0.5)", "rgba(247, 249, 252,1)"]}
-            style={styles.gradient}
-          />
-          <TopNavigation
-            style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-            accessoryLeft={() => (
-              <TopNavigationAction icon={Icons.Back} onPress={navigateBack} />
-            )}
-          />
-          <View style={styles.logoText}>
-            <Text category="h1">Green Eggs</Text>
-            <Image source={Logo} style={styles.logo} />
-          </View>
-          <Text style={styles.centerText} category="s1">
-            {message}
-          </Text>
-        </ImageBackground>
-      </View>
-      <View style={styles.form}>{children}</View>
-    </View>
-  );
-};
+    return (
+      // <ScrollView
+      //   style={{
+      //     backgroundColor: eva?.theme && eva.theme["color-basic-200"],
+      //   }}
+      // >
+      <>
+        <StatusBar style="dark" />
+        <View style={styles.bannerContainer}>
+          <ImageBackground source={Banner} style={styles.banner}>
+            <LinearGradient
+              colors={["rgba(247, 249, 252,0.5)", "rgba(247, 249, 252,1)"]}
+              style={styles.gradient}
+            />
+            <TopNavigation
+              style={{ backgroundColor: "transparent", paddingTop: insets.top }}
+              accessoryLeft={() => (
+                <TopNavigationAction icon={Icons.Back} onPress={navigateBack} />
+              )}
+            />
+            <View style={styles.logoText}>
+              <Text category="h1">Green Eggs</Text>
+              <Image source={Logo} style={styles.logo} />
+            </View>
+            <Text style={styles.centerText} category="s1">
+              {message}
+            </Text>
+          </ImageBackground>
+        </View>
+        <ScrollView
+          style={{
+            ...styles.form,
+            backgroundColor: eva?.theme && eva.theme["color-basic-200"],
+          }}
+        >
+          {children}
+        </ScrollView>
+      </>
+    );
+  }
+);
 
 export default AuthPageTemplate;

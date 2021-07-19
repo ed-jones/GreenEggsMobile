@@ -1,10 +1,10 @@
-import React from 'react';
-import { View, Image, StyleSheet, ImageBackground } from 'react-native';
-import { Text, Button } from '@ui-kitten/components';
-import Logo from '../../assets/images/icon.png';
-import Banner from '../../assets/images/banner.jpg';
-import { LinearGradient } from 'expo-linear-gradient';
-import { StatusBar } from 'expo-status-bar';
+import React from "react";
+import { View, Image, StyleSheet, ImageBackground } from "react-native";
+import { Text, Button, ThemedComponentProps } from "@ui-kitten/components";
+import Logo from "../../assets/images/icon.png";
+import Banner from "../../assets/images/banner.jpg";
+import { LinearGradient } from "expo-linear-gradient";
+import { StatusBar } from "expo-status-bar";
 
 const styles = StyleSheet.create({
   logo: {
@@ -34,34 +34,38 @@ const styles = StyleSheet.create({
     padding: 16,
     flexDirection: "column",
     justifyContent: "space-between",
-    height: "50%"
+    height: "50%",
   },
   button: {
     marginBottom: 8,
   },
   view: {
-    backgroundColor: "#F7F9FC",
-    height: "100%"
+    height: "100%",
   },
   centerText: {
-    textAlign: "center"
+    textAlign: "center",
   },
   boldText: {
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });
 
-const Welcome = ({ navigation }: any) => (
-  <View style={styles.view}>
+const Welcome = ({ navigation, eva }: any & ThemedComponentProps) => (
+  <View
+    style={{
+      ...styles.view,
+      backgroundColor: eva?.theme && eva.theme["color-basic-200"],
+    }}
+  >
     <StatusBar style="light" />
     <View style={styles.bannerContainer}>
       <ImageBackground source={Banner} style={styles.banner}>
         <LinearGradient
-          colors={['transparent', 'rgba(247, 249, 252,1)']}
+          colors={["transparent", "rgba(247, 249, 252,1)"]}
           style={styles.gradient}
         />
         <View style={styles.bannerContent}>
-          <Image source={Logo} style={styles.logo}/>
+          <Image source={Logo} style={styles.logo} />
           <Text category="h1">Green Eggs</Text>
           <Text category="s1">A friendly recipe sharing experience</Text>
         </View>
@@ -71,14 +75,14 @@ const Welcome = ({ navigation }: any) => (
       <View>
         <Button
           style={styles.button}
-          onPress={() => navigation.navigate('Signup')}
+          onPress={() => navigation.navigate("Signup")}
           status="success"
         >
           CREATE ACCOUNT
         </Button>
         <Button
           style={styles.button}
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.navigate("Home")}
           status="basic"
         >
           CONTINUE AS GUEST
@@ -86,7 +90,12 @@ const Welcome = ({ navigation }: any) => (
       </View>
       <Text style={styles.centerText}>
         Already have an account?&nbsp;
-        <Text style={styles.boldText} onPress={() => navigation.navigate('Login')}>Login</Text>
+        <Text
+          style={styles.boldText}
+          onPress={() => navigation.navigate("Login")}
+        >
+          Login
+        </Text>
       </Text>
     </View>
     {/* <Text>OR CONTINUE WITH</Text>

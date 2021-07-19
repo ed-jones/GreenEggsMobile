@@ -1,3 +1,5 @@
+import { withStyles } from "@ui-kitten/components";
+
 const tintColorLight = '#2f95dc';
 const tintColorDark = '#fff';
 

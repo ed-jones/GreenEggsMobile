@@ -1,28 +1,25 @@
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
-import {
-  Input,
-  Button,
-  TopNavigation,
-  Layout,
-  Spinner,
-} from "@ui-kitten/components";
-
-import useRecipeForm from "./useRecipeForm";
-import { Icons, IForm } from "@greeneggs/core";
-import AddRecipeIngredients from "./add-recipe-ingredients/AddRecipeIngredients";
-import AddRecipeDirections from "./AddRecipeDirections";
-import AddRecipeCategories from "./AddRecipeCategories";
-import AddRecipeDetails from "./AddRecipeDetails";
-import Stepper from "./Stepper";
-import { useSteps, Step } from "./useSteps";
-import PublishRecipe from "./PublishRecipe";
+import React from "react";
+import { View, StyleSheet, Alert } from "react-native";
+import { Button, Spinner, withStyles } from "@ui-kitten/components";
 import {
   addRecipe,
   addRecipeVariables,
   RecipeInput,
 } from "@greeneggs/types/graphql";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Icons, IForm, partialValidate, Rules } from "@greeneggs/core";
+
+import useRecipeForm from "./useRecipeForm";
+import AddRecipeIngredients from "./add-recipe-ingredients/AddRecipeIngredients";
+import AddRecipeDirections from "./add-recipe-directions/AddRecipeDirections";
+import AddRecipeCategories from "./add-recipe-categories/AddRecipeCategories";
+import AddRecipeDetails from "./AddRecipeDetails";
+import Stepper from "./Stepper";
+import { useSteps, Step } from "./useSteps";
+import PublishRecipe from "./PublishRecipe";
+
+import AddRecipeAllergies from "./add-recipe-allergies/AddRecipeAllergies";
+import AddRecipeDiets from "./add-recipe-diets/AddRecipeDiets";
 
 export const addRecipeStyles = StyleSheet.create({
   view: {
@@ -35,42 +32,78 @@ export const addRecipeStyles = StyleSheet.create({
   heading: {
     paddingVertical: 16,
   },
+  input: {
+    marginBottom: 10,
+  },
 });
 
 export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>;
 
-export default function AddRecipe({ navigation }: any) {
-  const recipeForm = useRecipeForm();
+export default withStyles(function AddRecipe({ navigation, eva }: any) {
+  const form = useRecipeForm();
   const Steps: Step[] = [
     {
       title: "Ingredients",
-      component: (
-        <AddRecipeIngredients form={recipeForm} navigation={navigation} />
-      ),
+      component: <AddRecipeIngredients {...{ form, navigation }} />,
     },
     {
       title: "Directions",
-      component: <AddRecipeDirections form={recipeForm} />,
+      component: <AddRecipeDirections {...{ form, navigation }} />,
     },
     {
       title: "Categories",
-      component: <AddRecipeCategories form={recipeForm} />,
+      component: <AddRecipeCategories {...{ form, navigation }} />,
     },
-    { title: "Details", component: <AddRecipeDetails form={recipeForm} /> },
-    { title: "Publish", component: <PublishRecipe form={recipeForm} /> },
+    {
+      title: "Allergies",
+      component: <AddRecipeAllergies {...{ form, navigation }} />,
+    },
+    {
+      title: "Diets",
+      component: <AddRecipeDiets {...{ form, navigation }} />,
+    },
+    {
+      title: "Details",
+      component: <AddRecipeDetails {...{ form, navigation }} />,
+    },
+    {
+      title: "Privacy",
+      component: <PublishRecipe {...{ form, navigation }} />,
+    },
   ];
 
   const steps = useSteps(Steps);
   const insets = useSafeAreaInsets();
 
   const onSubmit = async () => {
-    const { data } = await recipeForm.submitForm();
-    if (data?.addRecipe.error) {
-      console.log(data?.addRecipe.error.message);
-    } else {
-      navigation.navigate("Recipe", { recipeId: data?.addRecipe.data?.id });
+    console.log(form.getValues());
+    try {
+      const { data } = await form.submitForm();
+      console.log(data);
+      if (data?.addRecipe.error) {
+        console.log(data?.addRecipe.error.message);
+      } else {
+        navigation.navigate("Recipe", { recipeId: data?.addRecipe.data?.id });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
+
+  function publish() {
+    Alert.alert(
+      "Publish recipe",
+      "Are you sure you want to publish this recipe?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => onSubmit() },
+      ],
+      { cancelable: false }
+    );
+  }
 
   return (
     <>
@@ -87,27 +120,63 @@ export default function AddRecipe({ navigation }: any) {
         <View style={addRecipeStyles.buttonGroup}>
           {steps.isEnd ? (
             <Button
-              onPress={recipeForm.handleSubmit(onSubmit)}
+              onPress={() => {
+                form.trigger().then((isValid) => {
+                  if (isValid) publish();
+                });
+              }}
+              status="success"
               accessoryRight={
-                recipeForm.formResult.loading
+                form.formResult.loading
                   ? () => <Spinner size="small" status="control" />
                   : Icons.Publish
               }
             >
-              Publish
+              PUBLISH
             </Button>
           ) : (
-            <Button onPress={steps.next} accessoryRight={Icons.Forward}>
-              Next
+            <Button
+              onPress={() => {
+                // Manual form validation for ingredients list
+                // Make sure that there is at least 1 ingreident
+                if (!form.getValues("ingredients")?.length) {
+                  form.setError("ingredients", {
+                    type: "required",
+                    message: "You must add at least 1 ingredient",
+                  });
+                }
+
+                // if (!form.getValues("steps")?.length) {
+                //   form.setError("steps", {
+                //     type: "required",
+                //     message: "You must add at least 1 step",
+                //   });
+                // }
+                form.trigger().then((isValid) => {
+                  if (isValid) steps.next();
+                });
+              }}
+              accessoryRight={Icons.Forward}
+            >
+              {steps.nextStep?.title.toUpperCase()}
             </Button>
           )}
           {steps.isStart ? null : (
-            <Button onPress={steps.previous} accessoryLeft={Icons.Back}>
-              Previous
+            <Button
+              onPress={steps.previous}
+              accessoryLeft={(props) => (
+                <Icons.Back
+                  {...props}
+                  fill={eva?.theme && eva.theme["color-primary-500"]}
+                />
+              )}
+              status="basic"
+            >
+              {steps.lastStep?.title.toUpperCase()}
             </Button>
           )}
         </View>
       </View>
     </>
   );
-}
+});

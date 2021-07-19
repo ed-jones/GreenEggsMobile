@@ -3,7 +3,7 @@ import React from "react";
 import { Icon, IconProps } from "@ui-kitten/components";
 
 export const Settings = (props: IconProps) => (
-  <Icon {...props} name="settings" />
+  <Icon {...props} name="settings-outline" />
 );
 
 export const Back = (props: IconProps) => (
@@ -35,9 +35,23 @@ export const Edit = (props: IconProps) => (
 );
 
 export const AddPerson = (props: IconProps) => (
-  <Icon {...props} fill="#000000" name="person-add-outline" />
+  <Icon {...props} name="person-add-outline" />
 );
 
 export const More = (props: IconProps) => (
-  <Icon {...props} fill="#000000" name="more-horizontal" />
+  <Icon {...props} name="more-horizontal" />
 );
+
+export const Camera = (props: IconProps) => (
+  <Icon {...props} name="camera-outline" />
+);
+
+export const Image = (props: IconProps) => (
+  <Icon {...props} name="image-outline" />
+);
+
+export const Cross = (props: IconProps) => (
+  <Icon {...props} name="close-outline" />
+);
+
+export const Search = (props: IconProps) => <Icon {...props} name="search" />;

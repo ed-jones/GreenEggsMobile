@@ -5,9 +5,7 @@ import useLoginForm from "./useLoginForm";
 import { setContext } from "@apollo/client/link/context";
 import AuthPageTemplate from "./AuthPageTemplate";
 import { Controller } from "react-hook-form";
-import ControlledInput, {
-  InputType,
-} from "@greeneggs/core/controlled-input/ControlledInput";
+import { ControlledInput, InputType } from "@greeneggs/core";
 import { LoginInput } from "@greeneggs/types/graphql";
 import * as SecureStore from "expo-secure-store";
 import { AuthContext } from "@greeneggs/core/auth-context/AuthContext";

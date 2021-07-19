@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { Text } from "@ui-kitten/components";
+import { Text, ThemedComponentProps, withStyles } from "@ui-kitten/components";
 
 const styles = StyleSheet.create({
   tag: {
@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     marginVertical: 4,
     paddingVertical: 4,
     paddingHorizontal: 8,
-    backgroundColor: "#8F9BB3",
   },
   tags: {
     flexDirection: "row",
@@ -25,14 +24,23 @@ interface IRecipeCategoryTags {
   tags: Tag[];
 }
 
-const RecipeCategoryTags = ({ tags }: IRecipeCategoryTags) => (
-  <View style={styles.tags}>
-    {tags.map((tag: Tag) => (
-      <Text category="label" appearance="alternative" style={styles.tag}>
-        {tag.name}
-      </Text>
-    ))}
-  </View>
+const RecipeCategoryTags = withStyles(
+  ({ tags, eva }: IRecipeCategoryTags & ThemedComponentProps) => (
+    <View style={styles.tags}>
+      {tags.map((tag: Tag) => (
+        <Text
+          category="label"
+          appearance="alternative"
+          style={{
+            ...styles.tag,
+            backgroundColor: eva?.theme && eva.theme["color-basic-600"],
+          }}
+        >
+          {tag.name}
+        </Text>
+      ))}
+    </View>
+  )
 );
 
 export default RecipeCategoryTags;

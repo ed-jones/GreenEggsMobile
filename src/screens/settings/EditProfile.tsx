@@ -9,7 +9,7 @@ import {
 } from "@ui-kitten/components";
 import { Icons } from "@greeneggs/core";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { Button, ScrollView, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { TextInput } from "react-native-gesture-handler";
 import Svg, { Circle } from "react-native-svg";
@@ -27,10 +27,33 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         borderWidth: 1
     },
+    bio: {
+        marginTop: -37,
+        marginBottom: -20,
+        backgroundColor: '#f5f5f5',
+        height: 70,
+        borderColor: '#f5f5f5',
+        color: '#191970',
+        fontSize: 14,
+        fontWeight: 'bold',
+        borderWidth: 1
+
+    },
+    button: {
+        marginTop: 40,
+        color: '#191970',
+        width: 170,
+        fontWeight: 'bold',
+        padding: 16,
+    },
+    profilePic: {
+        height: 70,
+
+
+    },
 });
 
 interface ListItemProps {
-
 }
 
 interface EProfileListItem {
@@ -71,32 +94,43 @@ const EditProfile = ({ navigation }: { navigation: StackNavigationProp<any> }) =
                 <Text category="h6" style={styles.header}>
                     Profile Picture
                 </Text>
-                <Text category="h6" style={styles.header}>
+                <View style={styles.profilePic}>
+
+                </View>
+                <Text category="h6" style={{ padding: 16, marginBottom: -20 }}>
                     Profile Details
                 </Text>
-                <Text category="s1" style={{ padding: 16, color: '#20b2aa' }}>
-                    First Name
+                <Text category="s1" style={{ padding: 16, color: '#20b2aa', fontSize: 14 }}>
+                    FIRST NAME
                 </Text>
                 <View style={styles.header}>
                     <TextInput style={styles.input}
                     />
                 </View>
-                <Text category="s1" style={{ padding: 16, color: '#20b2aa' }}>
-                    Last Name
+                <Text category="s1" style={{ padding: 16, color: '#20b2aa', fontSize: 14 }}>
+                    LAST NAME
                 </Text>
                 <View style={styles.header}>
                     <TextInput style={styles.input}
                     />
                 </View>
-                <Text category="s1" style={{ padding: 16, color: '#20b2aa' }}>
-                    Bio
+                <Text category="s1" style={{ padding: 16, color: '#20b2aa', fontSize: 14 }}>
+                    BIO
                 </Text>
                 <View style={styles.header}>
-                    <TextInput style={styles.input}
+                    <TextInput style={styles.bio}
+                        multiline={true}
+                    />
+                </View>
+                <View style={styles.button}>
+                    <Button
+                        onPress={() => {
+                            alert('You tapped the button!');
+                        }}
+                        title="Save Changes"
                     />
                 </View>
             </ScrollView>
-
         </>
     );
 };

@@ -23,28 +23,30 @@ const styles = StyleSheet.create({
         height: 40,
         borderColor: '#f5f5f5',
         color: '#191970',
-        fontSize: 14,
+        fontSize: 13,
         fontWeight: 'bold',
         borderWidth: 1
     },
     bio: {
-        marginTop: -37,
+        marginTop: -25,
         marginBottom: -20,
         backgroundColor: '#f5f5f5',
         height: 70,
         borderColor: '#f5f5f5',
         color: '#191970',
-        fontSize: 14,
+        fontSize: 13,
         fontWeight: 'bold',
         borderWidth: 1
 
     },
     button: {
         marginTop: 40,
-        color: '#191970',
+        color: '#FFFFFF',
         width: 170,
+        height: 70,
         fontWeight: 'bold',
         padding: 16,
+        backgroundColor: '#20b2aa',
     },
     profilePic: {
         height: 70,
@@ -100,21 +102,21 @@ const EditProfile = ({ navigation }: { navigation: StackNavigationProp<any> }) =
                 <Text category="h6" style={{ padding: 16, marginBottom: -20 }}>
                     Profile Details
                 </Text>
-                <Text category="s1" style={{ padding: 16, color: '#20b2aa', fontSize: 14 }}>
+                <Text category="s1" style={{ padding: 16, color: '#20b2aa', fontSize: 12 }}>
                     FIRST NAME
                 </Text>
                 <View style={styles.header}>
                     <TextInput style={styles.input}
                     />
                 </View>
-                <Text category="s1" style={{ padding: 16, color: '#20b2aa', fontSize: 14 }}>
+                <Text category="s1" style={{ padding: 16, color: '#20b2aa', fontSize: 12 }}>
                     LAST NAME
                 </Text>
                 <View style={styles.header}>
                     <TextInput style={styles.input}
                     />
                 </View>
-                <Text category="s1" style={{ padding: 16, color: '#20b2aa', fontSize: 14 }}>
+                <Text category="s1" style={{ padding: 16, color: '#20b2aa', fontSize: 12 }}>
                     BIO
                 </Text>
                 <View style={styles.header}>
@@ -124,6 +126,7 @@ const EditProfile = ({ navigation }: { navigation: StackNavigationProp<any> }) =
                 </View>
                 <View style={styles.button}>
                     <Button
+                        color='#FFFFFF'
                         onPress={() => {
                             alert('You tapped the button!');
                         }}

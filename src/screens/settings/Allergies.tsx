@@ -15,7 +15,7 @@ const Allergies = ({ navigation }: { navigation: StackNavigationProp<any> }) => 
     return (
         <>
             <TopNavigation
-                title="Dietary Preferences"
+                title="Allergies"
                 alignment="center"
                 style={{ backgroundColor: "transparent", marginTop: insets.top }}
                 accessoryLeft={() => (

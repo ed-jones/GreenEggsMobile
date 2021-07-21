@@ -1,6 +1,29 @@
 import React from "react";
-import { Text } from "@ui-kitten/components";
+import { Text, TopNavigation, TopNavigationAction } from "@ui-kitten/components";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Icons } from "@greeneggs/core";
+import { StackNavigationProp } from "@react-navigation/stack";
 
-const ProfileVisibility = () => <Text>Profile Visibility</Text>;
+const ProfileVisibility = ({ navigation }: { navigation: StackNavigationProp<any> }) => {
+
+    const insets = useSafeAreaInsets();
+
+    const navigateBack = () => {
+        navigation.goBack();
+    };
+
+    return (
+        <>
+            <TopNavigation
+                title="Profile Visibility"
+                alignment="center"
+                style={{ backgroundColor: "transparent", marginTop: insets.top }}
+                accessoryLeft={() => (
+                    <TopNavigationAction icon={Icons.Back} onPress={navigateBack} />
+                )}
+            />
+        </>
+    );
+};
 
 export default ProfileVisibility;

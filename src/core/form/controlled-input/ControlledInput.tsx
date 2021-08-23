@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Controller,
   ControllerProps,
@@ -6,18 +6,18 @@ import {
   PathValue,
   RegisterOptions,
 } from "react-hook-form";
-import { Button, Input, InputProps } from "@ui-kitten/components";
+import { Input, InputProps, Select, SelectItem } from "@ui-kitten/components";
 import { ErrorFragment } from "@greeneggs/types/graphql";
-import { Platform, Image } from "react-native";
-import * as ImagePicker from "expo-image-picker";
 import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
-import { ReactNativeFile } from "apollo-upload-client";
-import { v4 as uuidv4 } from "uuid";
+
+import ImageUpload from "./ImageUpload";
+import PrivacySelect from "./PrivacySelect";
+import TimeInput from "./TimeSelect";
 
 // Function that converts JS numbers to strings in a way
 // that avoids NaN, undefined, etc.
-function numberToString<FieldValues>(
-  number: PathValue<FieldValues, Path<FieldValues>>
+export function numberToString<FieldValues>(
+  number: PathValue<FieldValues, Path<FieldValues>> | number | null
 ): string {
   if (number === NaN) {
     return "";
@@ -36,7 +36,7 @@ function numberToString<FieldValues>(
 
 // Function that converts string input to numbers in a
 // way that avoids NaN, undefined, etc.
-function stringToNumber(string: string): number | null {
+export function stringToNumber(string: string): number | null {
   if (string === "") {
     return null;
   }
@@ -57,6 +57,8 @@ export enum InputType {
   NUMERIC = "Numeric",
   TEXTAREA = "TextArea",
   PHOTO = "Photo",
+  PRIVACY = "Privacy",
+  TIME = "Time",
 }
 
 export interface IControlledInput<FieldValues> {
@@ -97,6 +99,8 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       textContentType: "emailAddress",
       autoCompleteType: "email",
       autoCapitalize: "none",
+      keyboardType: "email-address",
+      placeholder: "johnsmith@example.com",
     },
     controllerProps: {
       rules: {
@@ -119,6 +123,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       textContentType: "password",
       autoCompleteType: "password",
       secureTextEntry: true,
+      placeholder: "********",
     },
     controllerProps: {
       rules: {
@@ -139,6 +144,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       textContentType: "givenName",
       autoCompleteType: "name",
       autoCapitalize: "words",
+      placeholder: "John",
     },
   },
   LastName: {
@@ -152,6 +158,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       textContentType: "familyName",
       autoCompleteType: "name",
       autoCapitalize: "words",
+      placeholder: "Smith",
     },
   },
   Numeric: {
@@ -159,10 +166,18 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       keyboardType: "numeric",
     },
   },
+  Privacy: {},
+  Time: {
+    inputProps: {
+      keyboardType: "numeric",
+    },
+  },
 });
 
 const ControlledInput = <
-  FieldValues extends Record<keyof FieldValues, string | number | object>
+  FieldValues extends Partial<
+    Record<keyof FieldValues, string | number | object | null>
+  >
 >({
   controllerProps,
   inputProps,
@@ -170,36 +185,13 @@ const ControlledInput = <
   submitError,
 }: IControlledInput<FieldValues>) => {
   const inputTypeDefaultProps = InputTypeDefaultProps<FieldValues>()[type];
-
-  useEffect(() => {
-    if (type === InputType.PHOTO)
-      (async () => {
-        if (Platform.OS !== "web") {
-          const { status } = await ImagePicker.requestCameraPermissionsAsync();
-          if (status !== "granted") {
-            alert("Sorry, we need camera roll permissions to make this work!");
-          }
-        }
-      })();
-  }, []);
-
-  const pickImage = async (onChange: (...event: any[]) => void) => {
-    let result = await ImagePicker.launchCameraAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 0.5,
-    });
-
-    if (!result.cancelled) {
-      onChange(
-        new ReactNativeFile({
-          uri: result.uri,
-          name: `${uuidv4()}.jpg`,
-          type: `${result.type}`,
-        })
-      );
-    }
+  const { caption, ...unionInputProps } = {
+    ...inputTypeDefaultProps.inputProps,
+    ...inputProps,
+  };
+  const unionControlProps = {
+    ...inputTypeDefaultProps.controllerProps,
+    ...controllerProps,
   };
 
   return (
@@ -210,15 +202,33 @@ const ControlledInput = <
       }) => {
         if (type === InputType.PHOTO) {
           return (
-            <>
-              <Button onPress={() => pickImage(onChange)}>Take Photo</Button>
-              {value ? (
-                <Image
-                  source={{ uri: (value as ImageInfo).uri }}
-                  style={{ width: 200, height: 200 }}
-                />
-              ) : undefined}
-            </>
+            <ImageUpload
+              label={inputProps?.label?.toString()}
+              uri={(value as ImageInfo)?.uri}
+              onChange={onChange}
+              error={error}
+            />
+          );
+        } else if (type === InputType.TIME) {
+          return (
+            <TimeInput
+              inputProps={unionInputProps}
+              onChange={onChange}
+              onBlur={onBlur}
+              error={error}
+              value={value}
+            />
+          );
+        } else if (type === InputType.PRIVACY) {
+          return (
+            <PrivacySelect
+              error={error}
+              placeholder={inputProps?.placeholder?.toString()}
+              onChange={onChange}
+              value={value}
+              label={inputProps?.label?.toString()}
+              caption={inputProps?.caption?.toString()}
+            />
           );
         } else {
           return (
@@ -240,13 +250,15 @@ const ControlledInput = <
                   : (value && String(value)) || ""
               }
               status={error || !!submitError ? "danger" : undefined}
-              caption={submitError ? submitError.message : error?.message}
-              {...{ ...inputTypeDefaultProps.inputProps, ...inputProps }}
+              caption={
+                submitError ? submitError?.message : error?.message || caption
+              }
+              {...unionInputProps}
             />
           );
         }
       }}
-      {...{ ...inputTypeDefaultProps.controllerProps, ...controllerProps }}
+      {...unionControlProps}
     />
   );
 };

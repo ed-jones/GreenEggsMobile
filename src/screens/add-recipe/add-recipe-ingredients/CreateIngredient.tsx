@@ -1,47 +1,32 @@
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
-import {
-  Button,
-  Input,
-  Text,
-  TopNavigation,
-  TopNavigationAction,
-} from "@ui-kitten/components";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Icons } from "@greeneggs/core";
-import ControlledInput, {
-  InputType,
-  Rules,
-} from "@greeneggs/core/controlled-input/ControlledInput";
-import { IngredientInput, RecipeInput } from "@greeneggs/types/graphql";
-import { RecipeForm } from "../AddRecipe";
+import React from "react";
+import { Button } from "@ui-kitten/components";
+import { ControlledInput, InputType, Rules } from "@greeneggs/core";
+import { IngredientInput } from "@greeneggs/types/graphql";
+import { addRecipeStyles } from "../AddRecipe";
+import CreateRecipePartTemplate, {
+  RecipeFormPart,
+} from "../CreateRecipePartTemplate";
+import { useForm } from "react-hook-form";
+import { View } from "react-native";
 
-const styles = StyleSheet.create({
-  view: {
-    paddingHorizontal: 16,
-  },
-});
+const CreateIngredient = ({ navigation, route }: any) => (
+  <CreateRecipePartTemplate
+    title="Create Ingredient"
+    navigation={navigation}
+    route={route}
+    formComponent={CreateIngredientForm}
+  />
+);
 
-const CreateIngredient = ({ navigation, route }: any) => {
-  const { form, index } = route.params as { form: RecipeForm; index: number };
+const CreateIngredientForm = ({ navigation, append }: RecipeFormPart) => {
+  const form = useForm<IngredientInput>({ mode: "all" });
 
-  const insets = useSafeAreaInsets();
   return (
-    <View style={styles.view}>
-      <TopNavigation
-        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-        alignment="center"
-        title="Add Ingredient"
-        accessoryLeft={() => (
-          <TopNavigationAction
-            icon={Icons.Back}
-            onPress={() => navigation.goBack()}
-          />
-        )}
-      />
-      <ControlledInput<RecipeInput>
+    <>
+      <ControlledInput<IngredientInput>
         controllerProps={{
-          name: `ingredients.${index}.name`,
+          shouldUnregister: true,
+          name: `name`,
           control: form.control,
           rules: {
             ...Rules.REQUIRED,
@@ -52,13 +37,14 @@ const CreateIngredient = ({ navigation, route }: any) => {
           label: "INGREDIENT NAME",
           placeholder: "Carrot",
           defaultValue: "",
+          style: addRecipeStyles.input,
         }}
-        submitError={form.formResult.data?.addRecipe.error}
         type={InputType.TEXT}
       />
-      <ControlledInput<RecipeInput>
+      <ControlledInput<IngredientInput>
         controllerProps={{
-          name: `ingredients.${index}.description`,
+          shouldUnregister: true,
+          name: `description`,
           control: form.control,
           rules: {
             ...Rules.UNDER100CHARS,
@@ -68,57 +54,65 @@ const CreateIngredient = ({ navigation, route }: any) => {
           label: "DESCRIPTION (OPTIONAL)",
           placeholder: "Finely chopped",
           defaultValue: "",
+          style: addRecipeStyles.input,
         }}
-        submitError={form.formResult.data?.addRecipe.error}
         type={InputType.TEXT}
       />
-      <ControlledInput<RecipeInput>
-        controllerProps={{
-          name: `ingredients.${index}.quantity`,
-          control: form.control,
-          rules: {
-            ...Rules.REQUIRED,
-          },
-        }}
-        inputProps={{
-          label: "QUANTITY",
-          placeholder: "5",
-          defaultValue: "",
-        }}
-        submitError={form.formResult.data?.addRecipe.error}
-        type={InputType.NUMERIC}
-      />
-      <ControlledInput<RecipeInput>
-        controllerProps={{
-          name: `ingredients.${index}.unit`,
-          control: form.control,
-          rules: {
-            ...Rules.UNDER100CHARS,
-          },
-        }}
-        inputProps={{
-          label: "UNIT (OPTIONAL)",
-          placeholder: "Cups",
-          defaultValue: "",
-        }}
-        submitError={form.formResult.data?.addRecipe.error}
-        type={InputType.TEXT}
-      />
+      <View style={{ flexDirection: "row" }}>
+        <ControlledInput<IngredientInput>
+          controllerProps={{
+            shouldUnregister: true,
+            name: `unit`,
+            control: form.control,
+            rules: {
+              ...Rules.UNDER100CHARS,
+            },
+          }}
+          inputProps={{
+            label: "UNIT (OPTIONAL)",
+            placeholder: "Cups",
+            defaultValue: "",
+            style: { width: "70%", ...addRecipeStyles.input },
+          }}
+          type={InputType.TEXT}
+        />
+        <ControlledInput<IngredientInput>
+          controllerProps={{
+            shouldUnregister: true,
+            name: `quantity`,
+            control: form.control,
+            rules: {
+              ...Rules.REQUIRED,
+              max: {
+                value: 999,
+                message: "Must be under 1000",
+              },
+            },
+          }}
+          inputProps={{
+            label: "QUANTITY",
+            placeholder: "5",
+            defaultValue: "",
+            style: { width: "30%", ...addRecipeStyles.input },
+          }}
+          type={InputType.NUMERIC}
+        />
+      </View>
       <Button
         onPress={() => {
           form
-            .trigger([
-              `ingredients.${index}.name`,
-              `ingredients.${index}.description`,
-              `ingredients.${index}.quantity`,
-              `ingredients.${index}.unit`,
-            ])
-            .then((isValid) => (isValid ? navigation.goBack() : undefined));
+            .trigger([`name`, `description`, `quantity`, `unit`])
+            .then((isValid) => {
+              if (isValid) {
+                append(form.getValues());
+                navigation.goBack();
+              }
+            });
         }}
       >
         ADD INGREDIENT
       </Button>
-    </View>
+    </>
   );
 };
 

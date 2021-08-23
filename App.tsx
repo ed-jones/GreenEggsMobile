@@ -40,9 +40,9 @@ import Allergies from "@greeneggs/screens/settings/Allergies";
 import ProfileVisibility from "@greeneggs/screens/settings/ProfileVisibility";
 import Settings from "@greeneggs/screens/settings/Settings";
 import CreateStep from "@greeneggs/screens/add-recipe/add-recipe-directions/CreateStep";
-import CreateAllergy from "@greeneggs/screens/add-recipe/add-recipe-categories/CreateAllergy";
+import CreateAllergy from "@greeneggs/screens/add-recipe/add-recipe-allergies/CreateAllergy";
 import CreateCategory from "@greeneggs/screens/add-recipe/add-recipe-categories/CreateCategory";
-import CreateDiet from "@greeneggs/screens/add-recipe/add-recipe-categories/CreateDiet";
+import CreateDiet from "@greeneggs/screens/add-recipe/add-recipe-diets/CreateDiet";
 
 const Stack = createStackNavigator();
 

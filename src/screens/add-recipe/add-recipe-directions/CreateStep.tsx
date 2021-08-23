@@ -1,47 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Platform, Image } from "react-native";
-import {
-  Button,
-  Text,
-  TopNavigation,
-  TopNavigationAction,
-} from "@ui-kitten/components";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Icons } from "@greeneggs/core";
+import React from "react";
+import { Button } from "@ui-kitten/components";
 import ControlledInput, {
   InputType,
   Rules,
-} from "@greeneggs/core/controlled-input/ControlledInput";
-import { RecipeInput } from "@greeneggs/types/graphql";
-import { RecipeForm } from "../AddRecipe";
-import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
+} from "@greeneggs/core/form/controlled-input/ControlledInput";
+import { RecipeStepInput } from "@greeneggs/types/graphql";
+import { addRecipeStyles } from "../AddRecipe";
+import CreateRecipePartTemplate, {
+  RecipeFormPart,
+} from "../CreateRecipePartTemplate";
+import { useForm } from "react-hook-form";
 
-const styles = StyleSheet.create({
-  view: {
-    paddingHorizontal: 16,
-  },
-});
+const CreateStep = ({ navigation, route }: any) => (
+  <CreateRecipePartTemplate
+    title="Create Step"
+    navigation={navigation}
+    route={route}
+    formComponent={CreateStepForm}
+  />
+);
 
-const CreateStep = ({ navigation, route }: any) => {
-  const { form, index } = route.params as { form: RecipeForm; index: number };
-  const insets = useSafeAreaInsets();
+const CreateStepForm = ({ navigation, append }: RecipeFormPart) => {
+  const form = useForm<RecipeStepInput>({ mode: "all" });
 
   return (
-    <View style={styles.view}>
-      <TopNavigation
-        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-        alignment="center"
-        title="Add Step"
-        accessoryLeft={() => (
-          <TopNavigationAction
-            icon={Icons.Back}
-            onPress={() => navigation.goBack()}
-          />
-        )}
-      />
-      <ControlledInput<RecipeInput>
+    <>
+      <ControlledInput<RecipeStepInput>
         controllerProps={{
-          name: `steps.${index}.title`,
+          name: `title`,
           control: form.control,
           rules: {
             ...Rules.REQUIRED,
@@ -52,13 +38,13 @@ const CreateStep = ({ navigation, route }: any) => {
           label: "TITLE",
           placeholder: "Chop the carrots",
           defaultValue: "",
+          style: addRecipeStyles.input,
         }}
-        submitError={form.formResult.data?.addRecipe.error}
         type={InputType.TEXT}
       />
-      <ControlledInput<RecipeInput>
+      <ControlledInput<RecipeStepInput>
         controllerProps={{
-          name: `steps.${index}.description`,
+          name: `description`,
           control: form.control,
           rules: {
             ...Rules.UNDER100CHARS,
@@ -69,36 +55,36 @@ const CreateStep = ({ navigation, route }: any) => {
           label: "DESCRIPTION",
           placeholder: "After washing the carrots, finely dice them...",
           defaultValue: "",
+          style: addRecipeStyles.input,
         }}
-        submitError={form.formResult.data?.addRecipe.error}
         type={InputType.TEXTAREA}
       />
-      <ControlledInput<RecipeInput>
+      <ControlledInput<RecipeStepInput>
         controllerProps={{
-          name: `steps.${index}.image`,
+          name: `image`,
           control: form.control,
           rules: {
             ...Rules.REQUIRED,
           },
         }}
-        submitError={form.formResult.data?.addRecipe.error}
+        inputProps={{
+          label: "IMAGE",
+        }}
         type={InputType.PHOTO}
       />
-
       <Button
         onPress={() => {
-          form
-            .trigger([
-              `steps.${index}.title`,
-              `steps.${index}.description`,
-              `steps.${index}.image`,
-            ])
-            .then((isValid) => (isValid ? navigation.goBack() : undefined));
+          form.trigger([`title`, `description`, `image`]).then((isValid) => {
+            if (isValid) {
+              append(form.getValues());
+              navigation.goBack();
+            }
+          });
         }}
       >
         ADD STEP
       </Button>
-    </View>
+    </>
   );
 };
 

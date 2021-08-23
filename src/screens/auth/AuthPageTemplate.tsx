@@ -4,29 +4,22 @@ import {
   StyleSheet,
   ImageBackground,
   Image,
-  SafeAreaView,
+  ScrollView,
 } from "react-native";
 import {
   Text,
-  Button,
   TopNavigation,
   TopNavigationAction,
-  Input,
   withStyles,
   ThemedComponentProps,
 } from "@ui-kitten/components";
-import { Icons, IForm } from "@greeneggs/core";
-import useLoginForm from "./useLoginForm";
-import { setContext } from "@apollo/client/link/context";
+import { Icons } from "@greeneggs/core";
 import { LinearGradient } from "expo-linear-gradient";
 
 import Logo from "../../assets/images/icon.png";
 import Banner from "../../assets/images/banner.jpg";
 import { StatusBar } from "expo-status-bar";
-import {
-  SafeAreaInsetsContext,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const styles = StyleSheet.create({
   logo: {
@@ -35,8 +28,9 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   form: {
-    padding: 10,
-    height: "100%",
+    paddingHorizontal: 10,
+    // paddingTop: 664,
+    // height: "100%",
   },
   gradient: {
     position: "absolute",
@@ -46,7 +40,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   bannerContainer: {
-    height: "25%",
+    height: 200,
     justifyContent: "center",
   },
   bannerContent: {
@@ -93,12 +87,12 @@ const AuthPageTemplate = withStyles(
     const insets = useSafeAreaInsets();
 
     return (
-      <View
-        style={{
-          backgroundColor: eva?.theme && eva.theme["color-basic-200"],
-          paddingBottom: insets.bottom,
-        }}
-      >
+      // <ScrollView
+      //   style={{
+      //     backgroundColor: eva?.theme && eva.theme["color-basic-200"],
+      //   }}
+      // >
+      <>
         <StatusBar style="dark" />
         <View style={styles.bannerContainer}>
           <ImageBackground source={Banner} style={styles.banner}>
@@ -121,8 +115,15 @@ const AuthPageTemplate = withStyles(
             </Text>
           </ImageBackground>
         </View>
-        <View style={styles.form}>{children}</View>
-      </View>
+        <ScrollView
+          style={{
+            ...styles.form,
+            backgroundColor: eva?.theme && eva.theme["color-basic-200"],
+          }}
+        >
+          {children}
+        </ScrollView>
+      </>
     );
   }
 );

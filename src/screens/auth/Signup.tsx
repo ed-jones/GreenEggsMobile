@@ -7,9 +7,7 @@ import useSignupForm from "./useSignUpForm";
 import AuthPageTemplate from "./AuthPageTemplate";
 import { setContext } from "@apollo/client/link/context";
 import { Controller } from "react-hook-form";
-import ControlledInput, {
-  InputType,
-} from "@greeneggs/core/controlled-input/ControlledInput";
+import { ControlledInput, InputType } from "@greeneggs/core";
 import { SignupInput } from "@greeneggs/types/graphql";
 import { AuthContext } from "@greeneggs/core/auth-context/AuthContext";
 

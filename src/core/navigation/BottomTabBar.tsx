@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import {
   BottomTabBarOptions,
   BottomTabBarProps,
@@ -105,12 +105,33 @@ const BottomTabBar = withStyles(
     const insets = useSafeAreaInsets();
     const [selectedIndex, setSelectedIndex] = React.useState(0);
 
+    const interceptNavigate = (navigate: () => void) => {
+      if (selectedIndex === 2) {
+        Alert.alert(
+          "Exit without saving?",
+          "If you exit now you will lose your changes",
+          [
+            {
+              text: "Cancel",
+              style: "cancel",
+            },
+            { text: "OK", onPress: navigate },
+          ],
+          { cancelable: false }
+        );
+      } else {
+        navigate();
+      }
+    };
+
     return (
       <BottomNavigation
         selectedIndex={state.index}
         onSelect={(index) => {
-          navigation.navigate(state.routeNames[index]);
-          setSelectedIndex(index);
+          interceptNavigate(() => {
+            navigation.navigate(state.routeNames[index]);
+            setSelectedIndex(index);
+          });
         }}
         appearance="noIndicator"
         style={{ ...styles.navbar, paddingBottom: 24 + insets.bottom }}

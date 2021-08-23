@@ -6,28 +6,28 @@ import {
   partialValidate,
   Rules,
 } from "@greeneggs/core";
-import { CategoryInput, RecipeInput } from "@greeneggs/types/graphql";
+import { AllergyInput, RecipeInput } from "@greeneggs/types/graphql";
 import CreateRecipePartTemplate, {
   RecipeFormPart,
 } from "../CreateRecipePartTemplate";
 import { addRecipeStyles } from "../AddRecipe";
 import { useForm } from "react-hook-form";
 
-const CreateCategory = ({ navigation, route }: any) => (
+const CreateAllergy = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate
-    title="Create Category"
+    title="Create Ingredient"
     navigation={navigation}
     route={route}
-    formComponent={CreateCategoryForm}
+    formComponent={CreateAllergyForm}
   />
 );
 
-const CreateCategoryForm = ({ append, navigation }: RecipeFormPart) => {
-  const form = useForm<CategoryInput>({ mode: "all" });
+const CreateAllergyForm = ({ append, navigation }: RecipeFormPart) => {
+  const form = useForm<AllergyInput>({ mode: "all" });
 
   return (
     <>
-      <ControlledInput<CategoryInput>
+      <ControlledInput<AllergyInput>
         controllerProps={{
           name: `name`,
           control: form.control,
@@ -37,8 +37,8 @@ const CreateCategoryForm = ({ append, navigation }: RecipeFormPart) => {
           },
         }}
         inputProps={{
-          label: "CATEGORY",
-          placeholder: "Breakfast",
+          label: "ALLERGY",
+          placeholder: "Dairy",
           defaultValue: "",
           style: addRecipeStyles.input,
         }}
@@ -54,10 +54,10 @@ const CreateCategoryForm = ({ append, navigation }: RecipeFormPart) => {
           });
         }}
       >
-        ADD CATEGORY
+        ADD ALLERGY
       </Button>
     </>
   );
 };
 
-export default CreateCategory;
+export default CreateAllergy;

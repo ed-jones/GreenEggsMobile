@@ -7,27 +7,27 @@ import Alert from "@greeneggs/core/alert/Alert";
 import { Icons } from "@greeneggs/core";
 import { useFieldArray } from "react-hook-form";
 
-interface IAddRecipeCategories {
+interface IAddRecipeAllergies {
   form: RecipeForm;
   navigation: any;
 }
 
-const AddRecipeCategories = ({ form, navigation }: IAddRecipeCategories) => {
+const AddRecipeAllergies = ({ form, navigation }: IAddRecipeAllergies) => {
   const { fields, remove, append } = useFieldArray({
     control: form.control,
-    name: "categories",
+    name: "allergies",
   });
 
   return (
     <ScrollView>
       <Alert
-        type="info"
+        type="danger"
         message={
           <Text>
-            Tag this recipe with relevant categories, such as{" "}
-            <Text style={{ fontWeight: "bold" }}>Breakfast</Text>,{" "}
-            <Text style={{ fontWeight: "bold" }}>Soup</Text> or{" "}
-            <Text style={{ fontWeight: "bold" }}>Italian</Text>.
+            Make sure to specify any food in this recipe that may trigger
+            allergies, such as <Text style={{ fontWeight: "bold" }}>Milk</Text>,{" "}
+            <Text style={{ fontWeight: "bold" }}>Eggs</Text> and{" "}
+            <Text style={{ fontWeight: "bold" }}>Peanuts</Text>.
           </Text>
         }
         style={addRecipeStyles.view}
@@ -36,7 +36,7 @@ const AddRecipeCategories = ({ form, navigation }: IAddRecipeCategories) => {
         category="h5"
         style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}
       >
-        Categories
+        Allergies
       </Text>
       <List
         data={fields}
@@ -52,9 +52,9 @@ const AddRecipeCategories = ({ form, navigation }: IAddRecipeCategories) => {
         )}
       />
       <AddListItem
-        label="ADD CATEGORY"
+        label="ADD ALLERGY"
         onPress={() =>
-          navigation.navigate("CreateCategory", {
+          navigation.navigate("CreateAllergy", {
             append,
           })
         }
@@ -63,4 +63,4 @@ const AddRecipeCategories = ({ form, navigation }: IAddRecipeCategories) => {
   );
 };
 
-export default AddRecipeCategories;
+export default AddRecipeAllergies;

@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import React from "react";
+import { View, StyleSheet, Alert } from "react-native";
+import { Button, Spinner, withStyles } from "@ui-kitten/components";
 import {
-  Input,
-  Button,
-  TopNavigation,
-  Layout,
-  Spinner,
-  withStyles,
-} from "@ui-kitten/components";
+  addRecipe,
+  addRecipeVariables,
+  RecipeInput,
+} from "@greeneggs/types/graphql";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Icons, IForm, partialValidate, Rules } from "@greeneggs/core";
 
 import useRecipeForm from "./useRecipeForm";
-import { Icons, IForm } from "@greeneggs/core";
 import AddRecipeIngredients from "./add-recipe-ingredients/AddRecipeIngredients";
 import AddRecipeDirections from "./add-recipe-directions/AddRecipeDirections";
 import AddRecipeCategories from "./add-recipe-categories/AddRecipeCategories";
@@ -18,12 +17,10 @@ import AddRecipeDetails from "./AddRecipeDetails";
 import Stepper from "./Stepper";
 import { useSteps, Step } from "./useSteps";
 import PublishRecipe from "./PublishRecipe";
-import {
-  addRecipe,
-  addRecipeVariables,
-  RecipeInput,
-} from "@greeneggs/types/graphql";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+
+import AddRecipeAllergies from "./add-recipe-allergies/AddRecipeAllergies";
+import AddRecipeDiets from "./add-recipe-diets/AddRecipeDiets";
+import { useEffect } from "react";
 
 export const addRecipeStyles = StyleSheet.create({
   view: {
@@ -36,42 +33,53 @@ export const addRecipeStyles = StyleSheet.create({
   heading: {
     paddingVertical: 16,
   },
+  input: {
+    marginBottom: 10,
+  },
 });
 
 export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>;
 
 export default withStyles(function AddRecipe({ navigation, eva }: any) {
-  const recipeForm = useRecipeForm();
+  const form = useRecipeForm();
   const Steps: Step[] = [
     {
       title: "Ingredients",
-      component: (
-        <AddRecipeIngredients form={recipeForm} navigation={navigation} />
-      ),
+      component: <AddRecipeIngredients {...{ form, navigation }} />,
     },
     {
       title: "Directions",
-      component: (
-        <AddRecipeDirections form={recipeForm} navigation={navigation} />
-      ),
+      component: <AddRecipeDirections {...{ form, navigation }} />,
     },
     {
       title: "Categories",
-      component: (
-        <AddRecipeCategories form={recipeForm} navigation={navigation} />
-      ),
+      component: <AddRecipeCategories {...{ form, navigation }} />,
     },
-    { title: "Details", component: <AddRecipeDetails form={recipeForm} /> },
-    { title: "Publish", component: <PublishRecipe form={recipeForm} /> },
+    {
+      title: "Allergies",
+      component: <AddRecipeAllergies {...{ form, navigation }} />,
+    },
+    {
+      title: "Diets",
+      component: <AddRecipeDiets {...{ form, navigation }} />,
+    },
+    {
+      title: "Details",
+      component: <AddRecipeDetails {...{ form, navigation }} />,
+    },
+    {
+      title: "Privacy",
+      component: <PublishRecipe {...{ form, navigation }} />,
+    },
   ];
 
   const steps = useSteps(Steps);
   const insets = useSafeAreaInsets();
 
   const onSubmit = async () => {
-    console.log(recipeForm.getValues());
+    console.log(form.getValues());
     try {
-      const { data } = await recipeForm.submitForm();
+      const { data } = await form.submitForm();
       console.log(data);
       if (data?.addRecipe.error) {
         console.log(data?.addRecipe.error.message);
@@ -82,6 +90,21 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
       console.log(error);
     }
   };
+
+  function publish() {
+    Alert.alert(
+      "Publish recipe",
+      "Are you sure you want to publish this recipe?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => onSubmit() },
+      ],
+      { cancelable: false }
+    );
+  }
 
   return (
     <>
@@ -98,19 +121,45 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
         <View style={addRecipeStyles.buttonGroup}>
           {steps.isEnd ? (
             <Button
-              onPress={recipeForm.handleSubmit(onSubmit)}
+              onPress={() => {
+                form.trigger().then((isValid) => {
+                  if (isValid) publish();
+                });
+              }}
               status="success"
               accessoryRight={
-                recipeForm.formResult.loading
+                form.formResult.loading
                   ? () => <Spinner size="small" status="control" />
                   : Icons.Publish
               }
             >
-              Publish
+              PUBLISH
             </Button>
           ) : (
-            <Button onPress={steps.next} accessoryRight={Icons.Forward}>
-              NEXT
+            <Button
+              onPress={() => {
+                // Manual form validation for ingredients list
+                // Make sure that there is at least 1 ingreident
+                if (!form.getValues("ingredients")?.length) {
+                  form.setError("ingredients", {
+                    type: "required",
+                    message: "You must add at least 1 ingredient",
+                  });
+                }
+
+                // if (!form.getValues("steps")?.length) {
+                //   form.setError("steps", {
+                //     type: "required",
+                //     message: "You must add at least 1 step",
+                //   });
+                // }
+                form.trigger().then((isValid) => {
+                  if (isValid) steps.next();
+                });
+              }}
+              accessoryRight={Icons.Forward}
+            >
+              {steps.nextStep?.title.toUpperCase()}
             </Button>
           )}
           {steps.isStart ? null : (
@@ -124,7 +173,7 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
               )}
               status="basic"
             >
-              PREVIOUS
+              {steps.lastStep?.title.toUpperCase()}
             </Button>
           )}
         </View>

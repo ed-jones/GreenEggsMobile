@@ -1,33 +1,28 @@
 import React from "react";
 import { Button } from "@ui-kitten/components";
-import {
-  ControlledInput,
-  InputType,
-  partialValidate,
-  Rules,
-} from "@greeneggs/core";
-import { CategoryInput, RecipeInput } from "@greeneggs/types/graphql";
+import { ControlledInput, InputType, Rules } from "@greeneggs/core";
+import { DietInput } from "@greeneggs/types/graphql";
 import CreateRecipePartTemplate, {
   RecipeFormPart,
 } from "../CreateRecipePartTemplate";
 import { addRecipeStyles } from "../AddRecipe";
 import { useForm } from "react-hook-form";
 
-const CreateCategory = ({ navigation, route }: any) => (
+const CreateDiet = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate
-    title="Create Category"
+    title="Create Diet"
     navigation={navigation}
     route={route}
-    formComponent={CreateCategoryForm}
+    formComponent={CreateDietForm}
   />
 );
 
-const CreateCategoryForm = ({ append, navigation }: RecipeFormPart) => {
-  const form = useForm<CategoryInput>({ mode: "all" });
+const CreateDietForm = ({ append, navigation }: RecipeFormPart) => {
+  const form = useForm<DietInput>({ mode: "all" });
 
   return (
     <>
-      <ControlledInput<CategoryInput>
+      <ControlledInput<DietInput>
         controllerProps={{
           name: `name`,
           control: form.control,
@@ -37,8 +32,8 @@ const CreateCategoryForm = ({ append, navigation }: RecipeFormPart) => {
           },
         }}
         inputProps={{
-          label: "CATEGORY",
-          placeholder: "Breakfast",
+          label: "DIET",
+          placeholder: "Vegetarian",
           defaultValue: "",
           style: addRecipeStyles.input,
         }}
@@ -54,10 +49,10 @@ const CreateCategoryForm = ({ append, navigation }: RecipeFormPart) => {
           });
         }}
       >
-        ADD CATEGORY
+        ADD DIET
       </Button>
     </>
   );
 };
 
-export default CreateCategory;
+export default CreateDiet;

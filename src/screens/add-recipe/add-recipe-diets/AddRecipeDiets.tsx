@@ -7,27 +7,26 @@ import Alert from "@greeneggs/core/alert/Alert";
 import { Icons } from "@greeneggs/core";
 import { useFieldArray } from "react-hook-form";
 
-interface IAddRecipeCategories {
+interface IAddRecipeDiets {
   form: RecipeForm;
   navigation: any;
 }
 
-const AddRecipeCategories = ({ form, navigation }: IAddRecipeCategories) => {
+const AddRecipeDiets = ({ form, navigation }: IAddRecipeDiets) => {
   const { fields, remove, append } = useFieldArray({
     control: form.control,
-    name: "categories",
+    name: "diets",
   });
-
   return (
     <ScrollView>
       <Alert
-        type="info"
+        type="warning"
         message={
           <Text>
-            Tag this recipe with relevant categories, such as{" "}
-            <Text style={{ fontWeight: "bold" }}>Breakfast</Text>,{" "}
-            <Text style={{ fontWeight: "bold" }}>Soup</Text> or{" "}
-            <Text style={{ fontWeight: "bold" }}>Italian</Text>.
+            Tag this recipe with relevant diets, such as{" "}
+            <Text style={{ fontWeight: "bold" }}>Kosher</Text>,{" "}
+            <Text style={{ fontWeight: "bold" }}>Vegetarian</Text> or{" "}
+            <Text style={{ fontWeight: "bold" }}>Gluten Free</Text>.
           </Text>
         }
         style={addRecipeStyles.view}
@@ -36,7 +35,7 @@ const AddRecipeCategories = ({ form, navigation }: IAddRecipeCategories) => {
         category="h5"
         style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}
       >
-        Categories
+        Diets
       </Text>
       <List
         data={fields}
@@ -52,9 +51,9 @@ const AddRecipeCategories = ({ form, navigation }: IAddRecipeCategories) => {
         )}
       />
       <AddListItem
-        label="ADD CATEGORY"
+        label="ADD DIET"
         onPress={() =>
-          navigation.navigate("CreateCategory", {
+          navigation.navigate("CreateDiet", {
             append,
           })
         }
@@ -63,4 +62,4 @@ const AddRecipeCategories = ({ form, navigation }: IAddRecipeCategories) => {
   );
 };
 
-export default AddRecipeCategories;
+export default AddRecipeDiets;

@@ -44,3 +44,21 @@ export const SIGNUP = gql`
   }
   ${Fragments.ErrorFragment}
 `;
+
+export const EDIT_PROFILE = gql`
+  mutation editProfile($profileDetails: ProfileDetails!) {
+    editProfile(profileDetails: $profileDetails) {
+      data {
+        firstName
+        lastName
+        email
+        bio
+        avatarURI
+      }
+      error {
+        message
+      }
+    }
+  }
+  ${Fragments.ErrorFragment}
+`;

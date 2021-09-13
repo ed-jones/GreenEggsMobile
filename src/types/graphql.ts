@@ -158,6 +158,43 @@ export interface signupVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: editProfile
+// ====================================================
+
+export interface editProfile_editProfile_data {
+  __typename: "User";
+  firstName: string;
+  lastName: string;
+  email: string;
+  bio: string | null;
+  avatarURI: string | null;
+}
+
+export interface editProfile_editProfile_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface editProfile_editProfile {
+  __typename: "EditProfileResult";
+  data: editProfile_editProfile_data | null;
+  error: editProfile_editProfile_error | null;
+}
+
+export interface editProfile {
+  editProfile: editProfile_editProfile;
+}
+
+export interface editProfileVariables {
+  profileDetails: ProfileDetails;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: recipes
 // ====================================================
 
@@ -684,6 +721,13 @@ export interface IngredientsFilter {
 export interface LoginInput {
   email: string;
   password: string;
+}
+
+export interface ProfileDetails {
+  firstName?: string | null;
+  lastName?: string | null;
+  bio?: string | null;
+  profileImage?: any | null;
 }
 
 export interface RecipeFilter {

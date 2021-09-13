@@ -236,6 +236,192 @@ export interface recipes {
   recipes: recipes_recipes;
 }
 
+export interface recipesVariables {
+  offset: number;
+  limit: number;
+  query: string;
+  sort: Sort;
+  filter: RecipeFilter;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: NewsFeed
+// ====================================================
+
+export interface NewsFeed_newsFeed_data_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface NewsFeed_newsFeed_data_categories {
+  __typename: "Category";
+  name: string;
+}
+
+export interface NewsFeed_newsFeed_data_diets {
+  __typename: "Diet";
+  name: string;
+}
+
+export interface NewsFeed_newsFeed_data_allergies {
+  __typename: "Allergy";
+  name: string;
+}
+
+export interface NewsFeed_newsFeed_data_ingredients {
+  __typename: "Ingredient";
+  name: string;
+  description: string | null;
+  quantity: number;
+  unit: string | null;
+}
+
+export interface NewsFeed_newsFeed_data_steps {
+  __typename: "RecipeStep";
+  title: string;
+  description: string;
+  image: string;
+}
+
+export interface NewsFeed_newsFeed_data {
+  __typename: "Recipe";
+  id: string;
+  subtitle: string;
+  title: string;
+  description: string;
+  submittedBy: NewsFeed_newsFeed_data_submittedBy;
+  commentCount: number;
+  likeCount: number;
+  createdAt: string;
+  servingCount: number;
+  timeEstimate: string;
+  coverImage: string;
+  categories: NewsFeed_newsFeed_data_categories[];
+  diets: NewsFeed_newsFeed_data_diets[];
+  allergies: NewsFeed_newsFeed_data_allergies[];
+  ingredients: NewsFeed_newsFeed_data_ingredients[];
+  steps: NewsFeed_newsFeed_data_steps[];
+}
+
+export interface NewsFeed_newsFeed_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface NewsFeed_newsFeed {
+  __typename: "RecipesResult";
+  data: NewsFeed_newsFeed_data[] | null;
+  error: NewsFeed_newsFeed_error | null;
+}
+
+export interface NewsFeed {
+  newsFeed: NewsFeed_newsFeed;
+}
+
+export interface NewsFeedVariables {
+  offset: number;
+  limit: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: Trending
+// ====================================================
+
+export interface Trending_trending_data_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface Trending_trending_data_categories {
+  __typename: "Category";
+  name: string;
+}
+
+export interface Trending_trending_data_diets {
+  __typename: "Diet";
+  name: string;
+}
+
+export interface Trending_trending_data_allergies {
+  __typename: "Allergy";
+  name: string;
+}
+
+export interface Trending_trending_data_ingredients {
+  __typename: "Ingredient";
+  name: string;
+  description: string | null;
+  quantity: number;
+  unit: string | null;
+}
+
+export interface Trending_trending_data_steps {
+  __typename: "RecipeStep";
+  title: string;
+  description: string;
+  image: string;
+}
+
+export interface Trending_trending_data {
+  __typename: "Recipe";
+  id: string;
+  subtitle: string;
+  title: string;
+  description: string;
+  submittedBy: Trending_trending_data_submittedBy;
+  commentCount: number;
+  likeCount: number;
+  createdAt: string;
+  servingCount: number;
+  timeEstimate: string;
+  coverImage: string;
+  categories: Trending_trending_data_categories[];
+  diets: Trending_trending_data_diets[];
+  allergies: Trending_trending_data_allergies[];
+  ingredients: Trending_trending_data_ingredients[];
+  steps: Trending_trending_data_steps[];
+}
+
+export interface Trending_trending_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface Trending_trending {
+  __typename: "RecipesResult";
+  data: Trending_trending_data[] | null;
+  error: Trending_trending_error | null;
+}
+
+export interface Trending {
+  trending: Trending_trending;
+}
+
+export interface TrendingVariables {
+  offset: number;
+  limit: number;
+}
+
 /* tslint:disable */
 /* eslint-disable */
 // @generated
@@ -465,6 +651,12 @@ export enum Privacy {
   PUBLIC = "PUBLIC",
 }
 
+export enum Sort {
+  NEW = "NEW",
+  POPULAR = "POPULAR",
+  RELEVANT = "RELEVANT",
+}
+
 export interface AllergyInput {
   name: string;
 }
@@ -484,9 +676,22 @@ export interface IngredientInput {
   unit?: string | null;
 }
 
+export interface IngredientsFilter {
+  includes?: string[] | null;
+  excludes?: string[] | null;
+}
+
 export interface LoginInput {
   email: string;
   password: string;
+}
+
+export interface RecipeFilter {
+  ingredients?: IngredientsFilter | null;
+  categories?: string[] | null;
+  allergies?: string[] | null;
+  diets?: string[] | null;
+  cookTime?: string | null;
 }
 
 export interface RecipeInput {

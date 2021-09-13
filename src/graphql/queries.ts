@@ -32,7 +32,7 @@ export const NEWS_FEED = gql`
   ${Fragments.ErrorFragment}
 `;
 
-export const Trending = gql`
+export const TRENDING = gql`
   query Trending($offset: Int!, $limit: Int!) {
     trending(offset: $offset, limit: $limit) {
       data {

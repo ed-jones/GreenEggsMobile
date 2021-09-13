@@ -34,3 +34,5 @@ export { default as ControlledInput, Rules, InputType } from './form/controlled-
 export { default as TimePicker } from './time-picker/TimePicker';
 
 export { default as toTitleCase } from './to-title-case/toTitleCase';
+
+export { default as Alert } from './alert/Alert';

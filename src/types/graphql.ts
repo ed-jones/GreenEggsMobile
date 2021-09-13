@@ -14,6 +14,7 @@ export interface addRecipe_addRecipe_data_submittedBy {
   lastName: string;
   email: string;
   avatarURI: string | null;
+  verified: boolean;
 }
 
 export interface addRecipe_addRecipe_data_categories {
@@ -167,6 +168,7 @@ export interface recipes_recipes_data_submittedBy {
   lastName: string;
   email: string;
   avatarURI: string | null;
+  verified: boolean;
 }
 
 export interface recipes_recipes_data_categories {
@@ -250,6 +252,7 @@ export interface recipe_recipe_data_submittedBy {
   lastName: string;
   email: string;
   avatarURI: string | null;
+  verified: boolean;
 }
 
 export interface recipe_recipe_data_categories {
@@ -337,6 +340,31 @@ export interface UserFragment {
   lastName: string;
   email: string;
   avatarURI: string | null;
+  verified: boolean;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: FullUserFragment
+// ====================================================
+
+export interface FullUserFragment {
+  __typename: "FullUser";
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+  likeCount: number;
+  followerCount: number;
+  followingCount: number;
+  recipeCount: number;
+  isFollowing: boolean | null;
 }
 
 /* tslint:disable */
@@ -355,6 +383,7 @@ export interface RecipeFragment_submittedBy {
   lastName: string;
   email: string;
   avatarURI: string | null;
+  verified: boolean;
 }
 
 export interface RecipeFragment_categories {

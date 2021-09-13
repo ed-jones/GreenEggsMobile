@@ -1,6 +1,6 @@
-import * as Queries from './graphql/queries';
-import * as Fragments from './graphql/fragments';
-import * as Mutations from './graphql/mutations';
+import * as Queries from '../graphql/queries';
+import * as Fragments from '../graphql/fragments';
+import * as Mutations from '../graphql/mutations';
 import * as Icons from './icons/Icons';
 
 export { default as Colors } from './constants/Colors';

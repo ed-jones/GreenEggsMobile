@@ -7,8 +7,26 @@ export const UserFragment = gql`
     lastName
     email
     avatarURI
+    verified
   }
 `;
+
+export const FullUserFragment = gql`
+  fragment FullUserFragment on FullUser {
+    id
+    firstName
+    lastName
+    email
+    avatarURI
+    verified
+    likeCount
+    followerCount
+    followingCount
+    recipeCount
+    isFollowing
+  }
+`;
+
 
 export const RecipeFragment = gql`
   fragment RecipeFragment on Recipe {

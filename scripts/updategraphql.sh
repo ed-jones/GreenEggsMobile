@@ -3,7 +3,7 @@
 # Update the schema from the API.
 echo "Updating schema.json from API..."
 yarn apollo client:download-schema \
-	--endpoint https://greeneggs-staging.herokuapp.com/ schema.json
+	--endpoint http://localhost:4000 schema.json
 
 # Generate the typescript typedefs.
 echo "Generating typescript type definitions..."

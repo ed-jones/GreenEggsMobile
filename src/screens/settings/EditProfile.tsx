@@ -61,10 +61,7 @@ export default function EditProfile() {
   }
 
   function onSubmit() {
-    form
-      .submitForm()
-      .then((data) => console.log(data))
-      .catch((e) => console.log(e));
+    form.submitForm().then(() => navigation.goBack());
   }
 
   return (

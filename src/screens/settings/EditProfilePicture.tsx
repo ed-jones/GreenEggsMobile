@@ -52,10 +52,7 @@ export default function EditProfile() {
   const navigation = useNavigation();
 
   function onSubmit() {
-    form
-      .submitForm()
-      .then((data) => console.log(data.data?.editProfile.error))
-      .catch((e) => console.log(e));
+    form.submitForm().then(() => navigation.goBack());
   }
 
   return (

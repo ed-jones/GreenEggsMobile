@@ -56,7 +56,7 @@ export const EDIT_PROFILE = gql`
         avatarURI
       }
       error {
-        message
+        ...ErrorFragment
       }
     }
   }

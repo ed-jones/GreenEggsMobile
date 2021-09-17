@@ -24,11 +24,12 @@ export default function useForm<
   const reactHookForm = useReactHookForm<InputType>(reactHookFormProps);
 
   const variables = { [mutationVariableName]: reactHookForm.getValues() as InputType } as MutationVariables;
-  console.log(variables)
+  console.log("vars", variables)
   const [submitForm, formResult] = useMutation<MutationType, MutationVariables>(Mutation, {
     variables,
     ...options,
   });
+  console.log("error", formResult.error?.networkError)
 
   return {...reactHookForm, formResult, submitForm};
 }

@@ -46,11 +46,7 @@ export const styles = StyleSheet.create({
 const useEditProfile = () =>
   useForm<ProfileDetails, editProfile, editProfileVariables>(
     Mutations.EDIT_PROFILE,
-    "profileDetails",
-    {},
-    {
-      mode: "all",
-    }
+    "profileDetails"
   );
 
 export default function EditProfile() {

@@ -66,7 +66,7 @@ export default function EditProfile() {
           />
         )}
         alignment="center"
-        title="Edit Profile"
+        title="Edit Profile Picture"
       />
       <ScrollView style={styles.view}>
         <ControlledInput<ProfileDetails>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, View, StyleSheet, SafeAreaView } from "react-native";
+import { Image, View, StyleSheet, SafeAreaView, Pressable } from "react-native";
 import {
   Text,
   Button,
@@ -115,12 +115,14 @@ const MyProfile = ({ navigation }: any) => {
         )}
       />
       <View style={styles.avatarContainer}>
-        <Avatar
-          style={styles.avatar}
-          shape="round"
-          size="giant"
-          source={me?.avatarURI ? { uri: me?.avatarURI } : noavatar}
-        />
+        <Pressable onPress={() => navigation.navigate("EditProfilePicture")}>
+          <Avatar
+            style={styles.avatar}
+            shape="round"
+            size="giant"
+            source={me?.avatarURI ? { uri: me?.avatarURI } : noavatar}
+          />
+        </Pressable>
       </View>
       <View style={styles.profileContainer}>
         <Text category="h5">{`${optional(me?.firstName)} ${optional(

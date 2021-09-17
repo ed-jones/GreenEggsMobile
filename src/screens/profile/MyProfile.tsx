@@ -10,12 +10,11 @@ import {
   Input,
   Layout,
 } from "@ui-kitten/components";
-
-import {
-  SafeAreaInsetsContext,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
-import { Icons } from "@greeneggs/core";
+import { useQuery } from "@apollo/client";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Alert, Icons, Queries, noavatar } from "@greeneggs/core";
+import { Me } from "@greeneggs/types/graphql";
+import LoadingScreen from "../loading/LoadingScreen";
 
 const styles = StyleSheet.create({
   avatarContainer: {
@@ -79,6 +78,22 @@ const MyProfile = ({ navigation }: any) => {
     navigation.goBack();
   };
 
+  const { loading, error, data } = useQuery<Me>(Queries.ME);
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
+  if (error) {
+    return <Alert message="There was an error" type="danger" />;
+  }
+
+  const me = data?.me.data;
+
+  function optional(value: string | number | null | undefined) {
+    return value?.toString() || "";
+  }
+
   return (
     <Layout level="2" style={{ ...styles.view }}>
       <TopNavigation
@@ -104,24 +119,25 @@ const MyProfile = ({ navigation }: any) => {
           style={styles.avatar}
           shape="round"
           size="giant"
-          source={require("../../assets/images/banner.jpg")}
+          source={me?.avatarURI ? { uri: me?.avatarURI } : noavatar}
         />
       </View>
       <View style={styles.profileContainer}>
-        <Text category="h5">John Davies</Text>
+        <Text category="h5">{`${optional(me?.firstName)} ${optional(
+          me?.lastName
+        )}`}</Text>
         <Button size="small" style={styles.button} accessoryLeft={Icons.Edit}>
           EDIT
         </Button>
       </View>
       <Text style={styles.description} numberOfLines={2}>
-        Wannabe writer. Incurable entrepreneur. Food lover. Zombie junkie. Music
-        buff.
+        {optional(me?.bio)}
       </Text>
       <View style={styles.statContainer}>
-        <ProfileStat label="Following" value="51" />
-        <ProfileStat label="Followers" value="104" />
-        <ProfileStat label="Recipes" value="18" />
-        <ProfileStat label="Likes" value="356" />
+        <ProfileStat label="Following" value={optional(me?.followingCount)} />
+        <ProfileStat label="Followers" value={optional(me?.followerCount)} />
+        <ProfileStat label="Recipes" value={optional(me?.recipeCount)} />
+        <ProfileStat label="Likes" value={optional(me?.likeCount)} />
       </View>
       <Input
         placeholder="Search recipes"

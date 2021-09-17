@@ -15,6 +15,7 @@ import { setContext } from "@apollo/client/link/context";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import * as SecureStore from "expo-secure-store";
 
 import useCachedResources from "./src/core/use-cached-resources/useCachedResources";
 import Welcome from "./src/screens/auth/Welcome"; // CHANGED FOR TESTING PROFILE
@@ -31,6 +32,7 @@ import { createUploadLink } from "apollo-upload-client";
 import { AuthContext, Token } from "@greeneggs/core/auth-context/AuthContext";
 import CreateIngredient from "@greeneggs/screens/add-recipe/add-recipe-ingredients/CreateIngredient";
 import EditProfile from "@greeneggs/screens/settings/EditProfile";
+import EditProfilePicture from "@greeneggs/screens/settings/EditProfilePicture";
 import ChangePassword from "@greeneggs/screens/settings/ChangePassword";
 import ConnectAccounts from "@greeneggs/screens/settings/ConnectAccounts";
 import SignOut from "@greeneggs/screens/settings/SignOut";
@@ -47,7 +49,13 @@ import CreateDiet from "@greeneggs/screens/add-recipe/add-recipe-diets/CreateDie
 const Stack = createStackNavigator();
 
 const AuthProvider = () => {
-  const [token, setToken] = useState<Token>(undefined);
+  // TODO check that token is valid
+
+  const [token, setToken] = useState<Token>();
+  SecureStore.getItemAsync("token").then((resolvedToken) =>
+    setToken(resolvedToken)
+  );
+
   return (
     <AuthContext.Provider value={{ token: token, setToken: setToken }}>
       <App />
@@ -91,36 +99,56 @@ function App() {
       >
         <NavigationContainer>
           <Stack.Navigator headerMode="none">
-            <Stack.Screen name="Welcome" component={Welcome} />
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Signup" component={Signup} />
-            <Stack.Screen name="Home" component={Navigation} />
-            <Stack.Screen name="Recipe" component={Recipe} />
-            <Stack.Screen
-              name="RecipeDescription"
-              component={RecipeDescription}
-            />
-            <Stack.Screen
-              name="CreateIngredient"
-              component={CreateIngredient}
-            />
-            <Stack.Screen name="CreateStep" component={CreateStep} />
-            <Stack.Screen name="CreateCategory" component={CreateCategory} />
-            <Stack.Screen name="CreateDiet" component={CreateDiet} />
-            <Stack.Screen name="CreateAllergy" component={CreateAllergy} />
+            {!token ? (
+              <>
+                <Stack.Screen name="Welcome" component={Welcome} />
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Signup" component={Signup} />
+              </>
+            ) : (
+              <>
+                <Stack.Screen name="Home" component={Navigation} />
+                <Stack.Screen name="Recipe" component={Recipe} />
+                <Stack.Screen
+                  name="RecipeDescription"
+                  component={RecipeDescription}
+                />
+                <Stack.Screen
+                  name="CreateIngredient"
+                  component={CreateIngredient}
+                />
+                <Stack.Screen name="CreateStep" component={CreateStep} />
+                <Stack.Screen
+                  name="CreateCategory"
+                  component={CreateCategory}
+                />
+                <Stack.Screen name="CreateDiet" component={CreateDiet} />
+                <Stack.Screen name="CreateAllergy" component={CreateAllergy} />
 
-            <Stack.Screen name="Settings" component={Settings} />
-            <Stack.Screen name="EditProfile" component={EditProfile} />
-            <Stack.Screen name="ChangePassword" component={ChangePassword} />
-            <Stack.Screen name="ConnectAccounts" component={ConnectAccounts} />
-            <Stack.Screen name="SignOut" component={SignOut} />
-            <Stack.Screen name="DeleteAccount" component={DeleteAccount} />
-            <Stack.Screen name="Diets" component={Diets} />
-            <Stack.Screen name="Allergies" component={Allergies} />
-            <Stack.Screen
-              name="ProfileVisibility"
-              component={ProfileVisibility}
-            />
+                <Stack.Screen name="Settings" component={Settings} />
+                <Stack.Screen name="EditProfile" component={EditProfile} />
+                <Stack.Screen
+                  name="EditProfilePicture"
+                  component={EditProfilePicture}
+                />
+                <Stack.Screen
+                  name="ChangePassword"
+                  component={ChangePassword}
+                />
+                <Stack.Screen
+                  name="ConnectAccounts"
+                  component={ConnectAccounts}
+                />
+                <Stack.Screen name="SignOut" component={SignOut} />
+                <Stack.Screen name="DeleteAccount" component={DeleteAccount} />
+                <Stack.Screen name="Diets" component={Diets} />
+                <Stack.Screen name="Allergies" component={Allergies} />
+                <Stack.Screen
+                  name="ProfileVisibility"
+                  component={ProfileVisibility}
+                />
+              </>
+            )}
           </Stack.Navigator>
         </NavigationContainer>
       </ApplicationProvider>

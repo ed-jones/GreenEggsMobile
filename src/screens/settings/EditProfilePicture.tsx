@@ -4,6 +4,8 @@ import {
   Icons,
   InputType,
   Mutations,
+  Queries,
+  Rules,
   useForm,
 } from "@greeneggs/core";
 import { ScrollView, StyleSheet } from "react-native";
@@ -41,11 +43,7 @@ export const styles = StyleSheet.create({
 const useEditProfile = () =>
   useForm<ProfileDetails, editProfile, editProfileVariables>(
     Mutations.EDIT_PROFILE,
-    "profileDetails",
-    {},
-    {
-      mode: "all",
-    }
+    "profileDetails"
   );
 
 export default function EditProfile() {
@@ -54,7 +52,10 @@ export default function EditProfile() {
   const navigation = useNavigation();
 
   function onSubmit() {
-    form.submitForm().catch((e) => console.log(e));
+    form
+      .submitForm()
+      .then((data) => console.log(data.data?.editProfile.error))
+      .catch((e) => console.log(e));
   }
 
   return (
@@ -68,7 +69,7 @@ export default function EditProfile() {
           />
         )}
         alignment="center"
-        title="Edit Profile Picture"
+        title="Edit Profile"
       />
       <ScrollView style={styles.view}>
         <ControlledInput<ProfileDetails>
@@ -78,7 +79,6 @@ export default function EditProfile() {
           }}
           inputProps={{
             label: "PROFILE PICTURE",
-            defaultValue: "",
             style: {
               ...styles.input,
               width: "100%",

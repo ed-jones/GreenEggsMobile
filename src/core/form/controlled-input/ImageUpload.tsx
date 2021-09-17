@@ -78,7 +78,7 @@ const ImageUpload = withStyles(
         const newFile = {
           uri: result.uri,
           name: `${result.uri.substr(result.uri.lastIndexOf("/") + 1)}`,
-          type: `${result.type}`,
+          type: "image/jpeg",
         };
         onChange(new ReactNativeFile(newFile));
       }
@@ -119,11 +119,11 @@ const ImageUpload = withStyles(
             </Menu>
           </View>
         </Modal>
-        {label ? (
+        {label && (
           <Text category="label" appearance="hint" style={{ marginBottom: 6 }}>
             {label}
           </Text>
-        ) : undefined}
+        )}
         <View
           style={{
             width: "100%",

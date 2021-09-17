@@ -126,23 +126,6 @@ export default function EditProfile() {
           submitError={form.formResult.data?.editProfile.error}
           type={InputType.TEXTAREA}
         />
-        {/* <ControlledInput<ProfileDetails>
-          controllerProps={{
-            name: "profileImage",
-            control: form.control,
-            defaultValue: null,
-          }}
-          inputProps={{
-            label: "PROFILE PICTURE",
-            defaultValue: "",
-            style: {
-              ...styles.input,
-              width: "100%",
-            },
-          }}
-          submitError={form.formResult.data?.editProfile.error}
-          type={InputType.PHOTO}
-        /> */}
         <Button
           accessoryRight={
             form.formResult.loading

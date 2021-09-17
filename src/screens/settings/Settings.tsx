@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   List,
   Text,
@@ -10,11 +10,13 @@ import {
   withStyles,
   ThemedComponentProps,
 } from "@ui-kitten/components";
-import { ScrollView, StyleSheet } from "react-native";
+import { Alert, ScrollView, StyleSheet } from "react-native";
 import { Icons } from "@greeneggs/core";
 import Svg, { Circle } from "react-native-svg";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import * as SecureStore from "expo-secure-store";
+import { AuthContext } from "@greeneggs/core/auth-context/AuthContext";
 
 const styles = StyleSheet.create({
   header: { padding: 16 },
@@ -66,6 +68,7 @@ const Settings = withStyles(
     eva,
   }: { navigation: StackNavigationProp<any> } & ThemedComponentProps) => {
     const insets = useSafeAreaInsets();
+    const { setToken } = useContext(AuthContext);
 
     const Colors = {
       blue: eva?.theme && eva.theme["color-info-500"],
@@ -103,7 +106,28 @@ const Settings = withStyles(
         title: "Sign Out",
         icon: "log-out-outline",
         color: Colors.yellow,
-        onPress: () => navigation.navigate("SignOut"),
+        onPress: () => {
+          Alert.alert(
+            "Sign out",
+            "Are you sure you want to sign out?",
+            [
+              {
+                text: "Cancel",
+                style: "cancel",
+              },
+              {
+                text: "Sign Out",
+                onPress: () => {
+                  SecureStore.deleteItemAsync("token").then(() => {
+                    setToken && setToken(null);
+                    navigation.navigate("Welcome");
+                  });
+                },
+              },
+            ],
+            { cancelable: false }
+          );
+        },
       },
       {
         title: "Delete Account",

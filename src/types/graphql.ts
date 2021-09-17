@@ -12,6 +12,7 @@ export interface addRecipe_addRecipe_data_submittedBy {
   id: string;
   firstName: string;
   lastName: string;
+  bio: string | null;
   email: string;
   avatarURI: string | null;
   verified: boolean;
@@ -203,6 +204,7 @@ export interface recipes_recipes_data_submittedBy {
   id: string;
   firstName: string;
   lastName: string;
+  bio: string | null;
   email: string;
   avatarURI: string | null;
   verified: boolean;
@@ -295,6 +297,7 @@ export interface NewsFeed_newsFeed_data_submittedBy {
   id: string;
   firstName: string;
   lastName: string;
+  bio: string | null;
   email: string;
   avatarURI: string | null;
   verified: boolean;
@@ -384,6 +387,7 @@ export interface Trending_trending_data_submittedBy {
   id: string;
   firstName: string;
   lastName: string;
+  bio: string | null;
   email: string;
   avatarURI: string | null;
   verified: boolean;
@@ -473,6 +477,7 @@ export interface recipe_recipe_data_submittedBy {
   id: string;
   firstName: string;
   lastName: string;
+  bio: string | null;
   email: string;
   avatarURI: string | null;
   verified: boolean;
@@ -553,6 +558,40 @@ export interface recipeVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: Me
+// ====================================================
+
+export interface Me_me_data {
+  __typename: "FullUser";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+  likeCount: number;
+  followerCount: number;
+  followingCount: number;
+  recipeCount: number;
+  isFollowing: boolean | null;
+}
+
+export interface Me_me {
+  __typename: "FullUserResult";
+  data: Me_me_data | null;
+}
+
+export interface Me {
+  me: Me_me;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: UserFragment
 // ====================================================
 
@@ -561,6 +600,7 @@ export interface UserFragment {
   id: string;
   firstName: string;
   lastName: string;
+  bio: string | null;
   email: string;
   avatarURI: string | null;
   verified: boolean;
@@ -580,6 +620,7 @@ export interface FullUserFragment {
   id: string;
   firstName: string;
   lastName: string;
+  bio: string | null;
   email: string;
   avatarURI: string | null;
   verified: boolean;
@@ -604,6 +645,7 @@ export interface RecipeFragment_submittedBy {
   id: string;
   firstName: string;
   lastName: string;
+  bio: string | null;
   email: string;
   avatarURI: string | null;
   verified: boolean;

@@ -61,3 +61,14 @@ export const GET_RECIPE = gql`
   ${Fragments.RecipeFragment}
   ${Fragments.ErrorFragment}
 `;
+
+export const ME = gql`
+  query Me {
+    me {
+      data {
+        ...FullUserFragment
+      }
+    }
+  }
+  ${Fragments.FullUserFragment}
+`;

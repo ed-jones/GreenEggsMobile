@@ -65,10 +65,7 @@ export default function EditProfile() {
   }
 
   function onSubmit() {
-    form
-      .submitForm()
-      .then((data) => console.log(data))
-      .catch((e) => console.log(e));
+    form.submitForm().catch((e) => console.log(e));
   }
 
   return (
@@ -87,51 +84,6 @@ export default function EditProfile() {
       <ScrollView style={styles.view}>
         <ControlledInput<ProfileDetails>
           controllerProps={{
-            name: "firstName",
-            control: form.control,
-            defaultValue: data?.me.data?.firstName,
-          }}
-          inputProps={{
-            label: "FIRST NAME",
-            style: {
-              ...styles.input,
-            },
-          }}
-          submitError={form.formResult.data?.editProfile.error}
-          type={InputType.TEXT}
-        />
-        <ControlledInput<ProfileDetails>
-          controllerProps={{
-            name: "lastName",
-            control: form.control,
-            defaultValue: data?.me.data?.lastName,
-          }}
-          inputProps={{
-            label: "LAST NAME",
-            style: {
-              ...styles.input,
-            },
-          }}
-          submitError={form.formResult.data?.editProfile.error}
-          type={InputType.TEXT}
-        />
-        <ControlledInput<ProfileDetails>
-          controllerProps={{
-            name: "bio",
-            control: form.control,
-            defaultValue: data?.me.data?.bio ?? "",
-          }}
-          inputProps={{
-            label: "BIO",
-            style: {
-              ...styles.input,
-            },
-          }}
-          submitError={form.formResult.data?.editProfile.error}
-          type={InputType.TEXTAREA}
-        />
-        {/* <ControlledInput<ProfileDetails>
-          controllerProps={{
             name: "profileImage",
             control: form.control,
             defaultValue: null,
@@ -146,7 +98,7 @@ export default function EditProfile() {
           }}
           submitError={form.formResult.data?.editProfile.error}
           type={InputType.PHOTO}
-        /> */}
+        />
         <Button
           accessoryRight={
             form.formResult.loading

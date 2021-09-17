@@ -82,6 +82,12 @@ const Settings = withStyles(
         onPress: () => navigation.navigate("EditProfile"),
       },
       {
+        title: "Edit Profile Picture",
+        icon: "camera-outline",
+        color: Colors.blue,
+        onPress: () => navigation.navigate("EditProfilePicture"),
+      },
+      {
         title: "Change Password",
         icon: "lock-outline",
         color: Colors.yellow,

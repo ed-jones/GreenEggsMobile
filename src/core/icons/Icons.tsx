@@ -55,3 +55,5 @@ export const Cross = (props: IconProps) => (
 );
 
 export const Search = (props: IconProps) => <Icon {...props} name="search" />;
+
+export const Save = (props: IconProps) => <Icon {...props} name="save" />;

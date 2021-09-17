@@ -126,7 +126,12 @@ const MyProfile = ({ navigation }: any) => {
         <Text category="h5">{`${optional(me?.firstName)} ${optional(
           me?.lastName
         )}`}</Text>
-        <Button size="small" style={styles.button} accessoryLeft={Icons.Edit}>
+        <Button
+          size="small"
+          style={styles.button}
+          accessoryLeft={Icons.Edit}
+          onPress={() => navigation.navigate("EditProfile")}
+        >
           EDIT
         </Button>
       </View>

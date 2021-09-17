@@ -5,6 +5,7 @@ export const UserFragment = gql`
     id
     firstName
     lastName
+    bio
     email
     avatarURI
     verified
@@ -16,6 +17,7 @@ export const FullUserFragment = gql`
     id
     firstName
     lastName
+    bio
     email
     avatarURI
     verified

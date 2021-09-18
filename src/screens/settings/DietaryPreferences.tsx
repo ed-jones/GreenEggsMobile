@@ -83,8 +83,10 @@ const DietaryPreferences = () => {
             data: {
               ...me,
               dietaryPreferences: [
-                ...me.dietaryPreferences,
-                diets[Number(selectedIndex.toString()) - 1],
+                ...new Set([
+                  ...me.dietaryPreferences,
+                  diets[Number(selectedIndex.toString()) - 1],
+                ]),
               ],
             },
             fragment: FullUserFragment,

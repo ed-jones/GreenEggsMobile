@@ -43,7 +43,7 @@ const Alert = withStyles(
         style={Object.assign(
           {
             flexDirection: "row",
-            alignItems: "center",
+            alignItems: "flex-start",
             paddingVertical: 16,
             paddingRight: 64,
           },
@@ -54,7 +54,9 @@ const Alert = withStyles(
           style={{ width: 48, height: 48, marginRight: 10 }}
           {...IconNameFromAlertType[type]}
         />
-        <Text>{message}</Text>
+        <View style={{ justifyContent: "center", minHeight: 48 }}>
+          <Text>{message}</Text>
+        </View>
       </View>
     );
   }

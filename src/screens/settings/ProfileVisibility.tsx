@@ -51,6 +51,11 @@ const ProfileVisibility = () => {
   const insets = useSafeAreaInsets();
 
   const { loading, error, data } = useQuery<Me>(Queries.ME);
+  const form = useForm<
+    ProfileVisibilityDetails,
+    UpdateProfileVisibility,
+    UpdateProfileVisibilityVariables
+  >(Mutations.UPDATE_PROFILE_VISIBILITY, "profileVisibilityDetails");
 
   if (loading) return <LoadingScreen />;
   if (error) {
@@ -58,31 +63,25 @@ const ProfileVisibility = () => {
   }
   const me = data?.me.data;
 
-  const form = useForm<
-    ProfileVisibilityDetails,
-    UpdateProfileVisibility,
-    UpdateProfileVisibilityVariables
-  >(Mutations.UPDATE_PROFILE_VISIBILITY, "profileVisibilityDetails", {
-    update(cache) {
-      if (me?.id) {
-        cache.writeFragment({
-          id: `FullUser:${me.id}`,
-          data: {
-            ...me,
-            visibility: form.getValues("visibility"),
-          },
-          fragment: FullUserFragment,
-          fragmentName: "FullUserFragment",
-        });
-      }
-    },
-  });
-
   function handleSubmit() {
     form
-      .submitForm()
+      .submitForm({
+        update: (cache) => {
+          if (me?.id) {
+            cache.writeFragment({
+              id: `FullUser:${me.id}`,
+              data: {
+                ...me,
+                visibility: form.getValues("visibility"),
+              },
+              fragment: FullUserFragment,
+              fragmentName: "FullUserFragment",
+            });
+          }
+        },
+      })
       .then(() => navigation.goBack())
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }
 
   return (

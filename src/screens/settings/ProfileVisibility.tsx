@@ -28,8 +28,9 @@ import {
   UpdateProfileVisibility_updateProfileVisibility,
 } from "@greeneggs/types/graphql";
 import { useQuery } from "@apollo/client";
-import { LoadingScreen } from "..";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
+
+import LoadingScreen from "../loading/LoadingScreen";
 
 export const styles = StyleSheet.create({
   view: {
@@ -67,6 +68,11 @@ const ProfileVisibility = () => {
   function handleSubmit() {
     form
       .submitForm({
+        variables: {
+          profileVisibilityDetails: {
+            visibility: form.getValues("visibility"),
+          },
+        },
         update: (cache) => {
           if (me?.id) {
             cache.writeFragment({
@@ -121,6 +127,7 @@ const ProfileVisibility = () => {
             rules: {
               ...Rules.REQUIRED,
             },
+            defaultValue: me?.visibility,
           }}
           submitError={form.formResult.data?.updateProfileVisibility.error}
           type={InputType.PRIVACY}

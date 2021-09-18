@@ -1,6 +1,13 @@
 import { Input, InputProps, Text } from "@ui-kitten/components";
 import React from "react";
-import { FieldError, Path, PathValue } from "react-hook-form";
+import {
+  DeepMap,
+  DeepPartial,
+  FieldError,
+  Path,
+  PathValue,
+  UnionLike,
+} from "react-hook-form";
 import { View } from "react-native";
 import { numberToString, stringToNumber } from "./ControlledInput";
 
@@ -12,7 +19,12 @@ interface ITimeFields {
 interface ITimeInput<FieldValues> {
   value: PathValue<FieldValues, Path<FieldValues>>;
   onChange: (...event: any[]) => void;
-  error?: FieldError;
+  error?:
+    | DeepMap<
+        DeepPartial<UnionLike<PathValue<FieldValues, Path<FieldValues>>>>,
+        FieldError
+      >
+    | undefined;
   inputProps?: InputProps;
   onBlur: () => void;
 }

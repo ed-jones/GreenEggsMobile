@@ -1,20 +1,36 @@
 import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
 import React from "react";
-import { FieldError, FieldValues, Path, PathValue } from "react-hook-form";
-
+import {
+  DeepMap,
+  DeepPartial,
+  FieldError,
+  FieldValues,
+  Path,
+  PathValue,
+  UnionLike,
+} from "react-hook-form";
+import { Privacy } from "@greeneggs/types/graphql";
 interface IPrivacySelect {
   label?: string;
   caption?: string;
   value: PathValue<FieldValues, Path<FieldValues>>;
   onChange: (...event: any[]) => void;
   placeholder?: string;
-  error?: FieldError;
+  error?:
+    | DeepMap<
+        DeepPartial<UnionLike<PathValue<FieldValues, Path<FieldValues>>>>,
+        FieldError
+      >
+    | undefined;
 }
-
-const Options = [
-  { title: "EVERYONE", value: "PUBLIC" },
-  { title: "FRIENDS", value: "FRIENDS" },
-  { title: "ONLY ME", value: "PRIVATE" },
+interface Option {
+  title: string;
+  value: Privacy;
+}
+const Options: Option[] = [
+  { title: "EVERYONE", value: Privacy.PUBLIC },
+  { title: "FRIENDS", value: Privacy.FRIENDS },
+  { title: "ONLY ME", value: Privacy.PRIVATE },
 ];
 
 const PrivacySelect = ({

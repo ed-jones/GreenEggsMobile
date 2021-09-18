@@ -12,7 +12,15 @@ import * as ImagePicker from "expo-image-picker";
 import { ReactNativeFile } from "apollo-upload-client";
 import { ImageBackground } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { FieldError } from "react-hook-form";
+import {
+  DeepMap,
+  DeepPartial,
+  FieldError,
+  FieldValues,
+  Path,
+  PathValue,
+  UnionLike,
+} from "react-hook-form";
 
 import * as Icons from "../../icons/Icons";
 
@@ -20,7 +28,12 @@ interface IImageUpload {
   label?: string;
   uri?: string;
   onChange: (...event: any[]) => void;
-  error?: FieldError;
+  error?:
+    | DeepMap<
+        DeepPartial<UnionLike<PathValue<FieldValues, Path<FieldValues>>>>,
+        FieldError
+      >
+    | undefined;
 }
 
 const ImageUpload = withStyles(

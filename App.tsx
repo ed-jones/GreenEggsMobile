@@ -4,6 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import * as eva from "@eva-design/eva";
 import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
+import { onError } from "@apollo/client/link/error";
 import {
   ApolloClient,
   ApolloLink,
@@ -75,9 +76,22 @@ function App() {
     },
   }));
 
-  const uploadLink = createUploadLink({
-    uri: process.env.API_URI,
+  // Log any GraphQL errors or network error that occurred
+  const errorLink = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors)
+      graphQLErrors.forEach(({ message, locations, path }) =>
+        console.log(
+          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        )
+      );
+    if (networkError) console.log(`[Network error]: ${networkError}`);
   });
+
+  const uploadLink = errorLink.concat(
+    createUploadLink({
+      uri: process.env.API_URI,
+    })
+  );
 
   const client = new ApolloClient({
     cache: new InMemoryCache(),

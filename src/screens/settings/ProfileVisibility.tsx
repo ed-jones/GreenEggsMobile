@@ -21,6 +21,7 @@ import { useNavigation } from "@react-navigation/core";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import {
   Me,
+  Privacy,
   ProfileVisibilityDetails,
   UpdateProfileVisibility,
   UpdateProfileVisibilityVariables,
@@ -115,12 +116,11 @@ const ProfileVisibility = () => {
         />
         <ControlledInput<ProfileVisibilityDetails>
           controllerProps={{
-            name: `visibility`,
+            name: "visibility",
             control: form.control,
             rules: {
               ...Rules.REQUIRED,
             },
-            defaultValue: me?.visibility,
           }}
           submitError={form.formResult.data?.updateProfileVisibility.error}
           type={InputType.PRIVACY}

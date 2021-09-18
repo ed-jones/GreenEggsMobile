@@ -105,9 +105,9 @@ const DietaryPreferences = () => {
             fragmentName: "FullUserFragment",
           });
         },
-        onCompleted: () => setSelectedIndex(new IndexPath(0)),
       });
     }
+    setSelectedIndex(new IndexPath(0));
   }
 
   function removeDiet(diet: Diets_diets_data) {

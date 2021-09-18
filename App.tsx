@@ -38,7 +38,7 @@ import ConnectAccounts from "@greeneggs/screens/settings/ConnectAccounts";
 import SignOut from "@greeneggs/screens/settings/SignOut";
 import DeleteAccount from "@greeneggs/screens/settings/DeleteAccount";
 import DietaryPreferences from "@greeneggs/screens/settings/DietaryPreferences";
-import Allergies from "@greeneggs/screens/settings/Allergies";
+import AllergyPreferences from "@greeneggs/screens/settings/AllergyPreferences";
 import ProfileVisibility from "@greeneggs/screens/settings/ProfileVisibility";
 import Settings from "@greeneggs/screens/settings/Settings";
 import CreateStep from "@greeneggs/screens/add-recipe/add-recipe-directions/CreateStep";
@@ -142,7 +142,7 @@ function App() {
                 <Stack.Screen name="SignOut" component={SignOut} />
                 <Stack.Screen name="DeleteAccount" component={DeleteAccount} />
                 <Stack.Screen name="Diets" component={DietaryPreferences} />
-                <Stack.Screen name="Allergies" component={Allergies} />
+                <Stack.Screen name="Allergies" component={AllergyPreferences} />
                 <Stack.Screen
                   name="ProfileVisibility"
                   component={ProfileVisibility}

@@ -107,7 +107,7 @@ export default function DeleteAccount() {
           />
         )}
         alignment="center"
-        title="Change Password"
+        title="Delete Account"
       />
       <ScrollView style={styles.view}>
         <Alert

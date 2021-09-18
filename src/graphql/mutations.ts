@@ -109,3 +109,33 @@ export const REMOVE_DIETARY_PREFERENCES = gql`
   ${Fragments.DietFragment}
   ${Fragments.ErrorFragment}
 `;
+
+export const UPDATE_ALLERGY_PREFERENCES = gql`
+  mutation UpdateAllergyPreferences($allergyPreferences: AllergyPreferenceDetails!) {
+    updateAllergyPreferences(allergyPreferenceDetails: $allergyPreferences) {
+      error {
+        ...ErrorFragment
+      }
+      data {
+        ...AllergyFragment
+      }
+    }
+  }
+  ${Fragments.AllergyFragment}
+  ${Fragments.ErrorFragment}
+`;
+
+export const REMOVE_ALLERGY_PREFERENCES = gql`
+  mutation RemoveAllergyPreferences($allergyPreferences: AllergyPreferenceDetails!) {
+    removeAllergyPreferences(allergyPreferenceDetails: $allergyPreferences) {
+      error {
+        ...ErrorFragment
+      }
+      data {
+        ...AllergyFragment
+      }
+    }
+  }
+  ${Fragments.AllergyFragment}
+  ${Fragments.ErrorFragment}
+`;

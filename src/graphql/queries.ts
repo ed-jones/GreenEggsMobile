@@ -77,13 +77,28 @@ export const GET_DIETS = gql`
   query Diets {
     diets {
       data {
-        id
-        name
+        ...DietFragment
       }
       error {
         ...ErrorFragment
       }
     }
   }
+  ${Fragments.DietFragment}
+  ${Fragments.ErrorFragment}
+`;
+
+export const GET_ALLERGIES = gql`
+  query Allergies {
+    allergies {
+      data {
+        ...AllergyFragment
+      }
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.AllergyFragment}
   ${Fragments.ErrorFragment}
 `;

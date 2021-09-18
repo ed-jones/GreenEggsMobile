@@ -4,6 +4,8 @@ import {
   IndexPath,
   List,
   ListItem,
+  Select,
+  SelectItem,
   Spinner,
   Text,
   TopNavigation,
@@ -13,16 +15,15 @@ import { StyleSheet, View } from "react-native";
 import { Alert, Icons, Mutations, Queries } from "@greeneggs/core";
 import { useNavigation } from "@react-navigation/core";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Select, SelectItem } from "@ui-kitten/components";
 import { useMutation, useQuery } from "@apollo/client";
 import {
-  Diets,
-  Diets_diets_data,
+  Allergies,
+  Allergies_allergies_data,
   Me,
-  RemoveDietaryPreferences,
-  RemoveDietaryPreferencesVariables,
-  UpdateDietaryPreferences,
-  UpdateDietaryPreferencesVariables,
+  RemoveAllergyPreferences,
+  RemoveAllergyPreferencesVariables,
+  UpdateAllergyPreferences,
+  UpdateAllergyPreferencesVariables,
 } from "@greeneggs/types/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
@@ -47,45 +48,47 @@ function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
   return Number(selectedIndex.toString()) - 1;
 }
 
-const DietaryPreferences = () => {
+const AllergyPreferences = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
-  const getDiet = useQuery<Diets>(Queries.GET_DIETS);
+  const getAllergy = useQuery<Allergies>(Queries.GET_ALLERGIES);
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(
     new IndexPath(0)
   );
   const getMe = useQuery<Me>(Queries.ME);
 
-  const [removeDietaryPreferences] = useMutation<
-    RemoveDietaryPreferences,
-    RemoveDietaryPreferencesVariables
-  >(Mutations.REMOVE_DIETARY_PREFERENCES);
-  const [updateDietaryPreferences, updateDietaryPreferencesResult] =
-    useMutation<UpdateDietaryPreferences, UpdateDietaryPreferencesVariables>(
-      Mutations.UPDATE_DIETARY_PREFERENCES
+  const [removeAllergyPreferences] = useMutation<
+    RemoveAllergyPreferences,
+    RemoveAllergyPreferencesVariables
+  >(Mutations.REMOVE_ALLERGY_PREFERENCES);
+  const [updateAllergyPreferences, updateAllergyPreferencesResult] =
+    useMutation<UpdateAllergyPreferences, UpdateAllergyPreferencesVariables>(
+      Mutations.UPDATE_ALLERGY_PREFERENCES
     );
 
-  if (getDiet.loading || getMe.loading) return <LoadingScreen />;
-  if (getDiet.error) {
-    return <Text>Error! {getDiet.error.message}</Text>;
+  if (getAllergy.loading || getMe.loading) return <LoadingScreen />;
+  if (getAllergy.error) {
+    return <Text>Error! {getAllergy.error.message}</Text>;
   }
   if (getMe.error) {
     return <Text>Error! {getMe.error.message}</Text>;
   }
   const me = getMe.data?.me.data;
-  const diets = getDiet.data?.diets.data || [];
-  const unselectedDiets = diets.filter(
-    (diet) => !me?.dietaryPreferences.includes(diet)
+  const allergies = getAllergy.data?.allergies.data || [];
+  const unselectedAllergies = allergies.filter(
+    (allergy) => !me?.allergyPreferences.includes(allergy)
   );
 
   function handleSubmit() {
-    if (me?.dietaryPreferences) {
-      updateDietaryPreferences({
+    if (me?.allergyPreferences) {
+      updateAllergyPreferences({
         variables: {
-          dietaryPreferences: {
-            diets: [
-              ...me.dietaryPreferences.map((selectedDiet) => selectedDiet.id),
-              unselectedDiets[indexToNumber(selectedIndex)].id,
+          allergyPreferences: {
+            allergies: [
+              ...me.allergyPreferences.map(
+                (selectedAllergy) => selectedAllergy.id
+              ),
+              unselectedAllergies[indexToNumber(selectedIndex)].id,
             ],
           },
         },
@@ -94,10 +97,10 @@ const DietaryPreferences = () => {
             id: `FullUser:${me.id}`,
             data: {
               ...me,
-              dietaryPreferences: [
+              allergyPreferences: [
                 ...new Set([
-                  ...me.dietaryPreferences,
-                  unselectedDiets[indexToNumber(selectedIndex)],
+                  ...me.allergyPreferences,
+                  unselectedAllergies[indexToNumber(selectedIndex)],
                 ]),
               ],
             },
@@ -110,12 +113,12 @@ const DietaryPreferences = () => {
     setSelectedIndex(new IndexPath(0));
   }
 
-  function removeDiet(diet: Diets_diets_data) {
-    if (me?.dietaryPreferences) {
-      removeDietaryPreferences({
+  function removeAllergy(allergy: Allergies_allergies_data) {
+    if (me?.allergyPreferences) {
+      removeAllergyPreferences({
         variables: {
-          dietaryPreferences: {
-            diets: [diet.id],
+          allergyPreferences: {
+            allergies: [allergy.id],
           },
         },
         update(cache) {
@@ -123,8 +126,8 @@ const DietaryPreferences = () => {
             id: `FullUser:${me.id}`,
             data: {
               ...me,
-              dietaryPreferences: me.dietaryPreferences.filter(
-                (allDiets) => allDiets.id !== diet.id
+              allergyPreferences: me.allergyPreferences.filter(
+                (allAllergies) => allAllergies.id !== allergy.id
               ),
             },
             fragment: FullUserFragment,
@@ -134,7 +137,6 @@ const DietaryPreferences = () => {
       });
     }
   }
-
   return (
     <>
       <TopNavigation
@@ -146,12 +148,12 @@ const DietaryPreferences = () => {
           />
         )}
         alignment="center"
-        title="Dietary Preferences"
+        title="Allergy Preferences"
       />
       <View>
         <View style={styles.view}>
           <Alert
-            message="Here you can tell us your dietary preferences so that we can better show you recipes relevant to you."
+            message="Here you can tell us if you have any allergies so that we can better show you recipes relevant to you."
             type="info"
           />
           <View style={{ flexDirection: "row" }}>
@@ -159,22 +161,22 @@ const DietaryPreferences = () => {
               style={{ flex: 1, marginHorizontal: 8 }}
               onSelect={(index) => setSelectedIndex(index)}
               selectedIndex={selectedIndex}
-              disabled={unselectedDiets.length === 0}
+              disabled={unselectedAllergies.length === 0}
               value={
-                unselectedDiets[indexToNumber(selectedIndex)]?.name ||
-                "NO DIETS FOUND"
+                unselectedAllergies[indexToNumber(selectedIndex)]?.name ||
+                "NO ALLERGIES FOUND"
               }
             >
-              {unselectedDiets.map((diet) => (
-                <SelectItem key={diet.id} title={diet.name} />
+              {unselectedAllergies.map((allergy) => (
+                <SelectItem key={allergy.id} title={allergy.name} />
               ))}
             </Select>
             <Button
               size="small"
               onPress={handleSubmit}
-              disabled={unselectedDiets.length === 0}
+              disabled={unselectedAllergies.length === 0}
               accessoryLeft={
-                updateDietaryPreferencesResult.loading
+                updateAllergyPreferencesResult.loading
                   ? () => <Spinner size="small" status="control" />
                   : Icons.Add
               }
@@ -184,12 +186,12 @@ const DietaryPreferences = () => {
           </View>
         </View>
         <List
-          data={me?.dietaryPreferences}
-          renderItem={({ item }: { item: Diets_diets_data }) => (
+          data={me?.allergyPreferences}
+          renderItem={({ item }: { item: Allergies_allergies_data }) => (
             <ListItem
               title={item.name}
               accessoryRight={(props) => (
-                <Icons.Cross {...props} onPress={() => removeDiet(item)} />
+                <Icons.Cross {...props} onPress={() => removeAllergy(item)} />
               )}
             />
           )}
@@ -199,4 +201,4 @@ const DietaryPreferences = () => {
   );
 };
 
-export default DietaryPreferences;
+export default AllergyPreferences;

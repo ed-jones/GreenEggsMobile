@@ -17,7 +17,14 @@ export const DietFragment = gql`
     id
     name
   }
-`
+`;
+
+export const AllergyFragment = gql`
+  fragment AllergyFragment on Allergy {
+    id
+    name
+  }
+`;
 
 export const FullUserFragment = gql`
   fragment FullUserFragment on FullUser {
@@ -36,8 +43,12 @@ export const FullUserFragment = gql`
     dietaryPreferences {
       ...DietFragment
     }
+    allergyPreferences {
+      ...AllergyFragment
+    }
   }
   ${DietFragment}
+  ${AllergyFragment}
 `;
 
 

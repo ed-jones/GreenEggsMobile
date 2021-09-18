@@ -14,11 +14,12 @@ import { Alert, Icons, Mutations, Queries } from "@greeneggs/core";
 import { useNavigation } from "@react-navigation/core";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Select, SelectItem } from "@ui-kitten/components";
-import { useMutation, useQuery } from "@apollo/client";
+import { DocumentNode, useMutation, useQuery } from "@apollo/client";
 import {
   Diets,
   Diets_diets_data,
   Me,
+  Me_me_data,
   RemoveDietaryPreferences,
   RemoveDietaryPreferencesVariables,
   UpdateDietaryPreferences,
@@ -47,42 +48,61 @@ function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
   return Number(selectedIndex.toString()) - 1;
 }
 
-const DietaryPreferences = () => {
+interface SelectPrefsTemplateProps<QueryType> {
+  query: DocumentNode;
+  removeMutation: DocumentNode;
+  updateMutation: DocumentNode;
+  queryString: keyof QueryType;
+  preferenceType: keyof Me_me_data;
+}
+
+const SelectPrefsTemplate = <
+  QueryType,
+  RemoveMutationType,
+  RemoveMutationVariablesType,
+  UpdateMutationType,
+  UpdateMutationVariables
+>({
+  query,
+  removeMutation,
+  updateMutation,
+  queryString,
+  preferenceType
+}: SelectPrefsTemplateProps<QueryType>) => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
-  const getDiet = useQuery<Diets>(Queries.GET_DIETS);
+  const getData = useQuery<QueryType>(query);
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(
     new IndexPath(0)
   );
   const getMe = useQuery<Me>(Queries.ME);
 
-  const [removeDietaryPreferences] = useMutation<
-    RemoveDietaryPreferences,
-    RemoveDietaryPreferencesVariables
-  >(Mutations.REMOVE_DIETARY_PREFERENCES);
-  const [updateDietaryPreferences, updateDietaryPreferencesResult] =
-    useMutation<UpdateDietaryPreferences, UpdateDietaryPreferencesVariables>(
-      Mutations.UPDATE_DIETARY_PREFERENCES
-    );
+  const [remove] = useMutation<RemoveMutationType, RemoveMutationVariablesType>(
+    removeMutation
+  );
+  const [update, updateResult] = useMutation<
+    UpdateMutationType,
+    UpdateMutationVariables
+  >(updateMutation);
 
-  if (getDiet.loading || getMe.loading) return <LoadingScreen />;
-  if (getDiet.error) {
-    return <Text>Error! {getDiet.error.message}</Text>;
+  if (getData.loading || getMe.loading) return <LoadingScreen />;
+  if (getData.error) {
+    return <Text>Error! {getData.error.message}</Text>;
   }
   if (getMe.error) {
     return <Text>Error! {getMe.error.message}</Text>;
   }
   const me = getMe.data?.me.data;
-  const diets = getDiet.data?.diets.data || [];
+  const diets = getData.data?[queryString].data || [];
   const unselectedDiets = diets.filter(
     (diet) => !me?.dietaryPreferences.includes(diet)
   );
 
   function handleSubmit() {
-    if (me?.dietaryPreferences) {
-      updateDietaryPreferences({
+    if (me?[preferenceType]) {
+      update({
         variables: {
-          dietaryPreferences: {
+          [preferenceType]: {
             diets: [
               ...me.dietaryPreferences.map((selectedDiet) => selectedDiet.id),
               unselectedDiets[indexToNumber(selectedIndex)].id,
@@ -112,7 +132,7 @@ const DietaryPreferences = () => {
 
   function removeDiet(diet: Diets_diets_data) {
     if (me?.dietaryPreferences) {
-      removeDietaryPreferences({
+      remove({
         variables: {
           dietaryPreferences: {
             diets: [diet.id],
@@ -174,7 +194,7 @@ const DietaryPreferences = () => {
               onPress={handleSubmit}
               disabled={unselectedDiets.length === 0}
               accessoryLeft={
-                updateDietaryPreferencesResult.loading
+                updateResult.loading
                   ? () => <Spinner size="small" status="control" />
                   : Icons.Add
               }
@@ -199,4 +219,4 @@ const DietaryPreferences = () => {
   );
 };
 
-export default DietaryPreferences;
+export default SelectPrefsTemplate;

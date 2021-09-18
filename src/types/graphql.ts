@@ -168,6 +168,12 @@ export interface editProfile_editProfile_data_dietaryPreferences {
   name: string;
 }
 
+export interface editProfile_editProfile_data_allergyPreferences {
+  __typename: "Allergy";
+  id: string;
+  name: string;
+}
+
 export interface editProfile_editProfile_data {
   __typename: "FullUser";
   id: string;
@@ -183,6 +189,7 @@ export interface editProfile_editProfile_data {
   recipeCount: number;
   isFollowing: boolean | null;
   dietaryPreferences: editProfile_editProfile_data_dietaryPreferences[];
+  allergyPreferences: editProfile_editProfile_data_allergyPreferences[];
 }
 
 export interface editProfile_editProfile_error {
@@ -320,6 +327,74 @@ export interface RemoveDietaryPreferences {
 
 export interface RemoveDietaryPreferencesVariables {
   dietaryPreferences: DietaryPreferenceDetails;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: UpdateAllergyPreferences
+// ====================================================
+
+export interface UpdateAllergyPreferences_updateAllergyPreferences_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface UpdateAllergyPreferences_updateAllergyPreferences_data {
+  __typename: "Allergy";
+  id: string;
+  name: string;
+}
+
+export interface UpdateAllergyPreferences_updateAllergyPreferences {
+  __typename: "UpdateAllergyPreferencesResult";
+  error: UpdateAllergyPreferences_updateAllergyPreferences_error | null;
+  data: UpdateAllergyPreferences_updateAllergyPreferences_data[] | null;
+}
+
+export interface UpdateAllergyPreferences {
+  updateAllergyPreferences: UpdateAllergyPreferences_updateAllergyPreferences;
+}
+
+export interface UpdateAllergyPreferencesVariables {
+  allergyPreferences: AllergyPreferenceDetails;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: RemoveAllergyPreferences
+// ====================================================
+
+export interface RemoveAllergyPreferences_removeAllergyPreferences_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface RemoveAllergyPreferences_removeAllergyPreferences_data {
+  __typename: "Allergy";
+  id: string;
+  name: string;
+}
+
+export interface RemoveAllergyPreferences_removeAllergyPreferences {
+  __typename: "RemoveAllergyPreferencesResult";
+  error: RemoveAllergyPreferences_removeAllergyPreferences_error | null;
+  data: RemoveAllergyPreferences_removeAllergyPreferences_data[] | null;
+}
+
+export interface RemoveAllergyPreferences {
+  removeAllergyPreferences: RemoveAllergyPreferences_removeAllergyPreferences;
+}
+
+export interface RemoveAllergyPreferencesVariables {
+  allergyPreferences: AllergyPreferenceDetails;
 }
 
 /* tslint:disable */
@@ -699,6 +774,12 @@ export interface Me_me_data_dietaryPreferences {
   name: string;
 }
 
+export interface Me_me_data_allergyPreferences {
+  __typename: "Allergy";
+  id: string;
+  name: string;
+}
+
 export interface Me_me_data {
   __typename: "FullUser";
   id: string;
@@ -714,6 +795,7 @@ export interface Me_me_data {
   recipeCount: number;
   isFollowing: boolean | null;
   dietaryPreferences: Me_me_data_dietaryPreferences[];
+  allergyPreferences: Me_me_data_allergyPreferences[];
 }
 
 export interface Me_me {
@@ -761,6 +843,36 @@ export interface Diets {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: Allergies
+// ====================================================
+
+export interface Allergies_allergies_data {
+  __typename: "Allergy";
+  id: string;
+  name: string;
+}
+
+export interface Allergies_allergies_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface Allergies_allergies {
+  __typename: "AllergiesResult";
+  data: Allergies_allergies_data[];
+  error: Allergies_allergies_error | null;
+}
+
+export interface Allergies {
+  allergies: Allergies_allergies;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: UserFragment
 // ====================================================
 
@@ -796,11 +908,32 @@ export interface DietFragment {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL fragment: AllergyFragment
+// ====================================================
+
+export interface AllergyFragment {
+  __typename: "Allergy";
+  id: string;
+  name: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: FullUserFragment
 // ====================================================
 
 export interface FullUserFragment_dietaryPreferences {
   __typename: "Diet";
+  id: string;
+  name: string;
+}
+
+export interface FullUserFragment_allergyPreferences {
+  __typename: "Allergy";
   id: string;
   name: string;
 }
@@ -820,6 +953,7 @@ export interface FullUserFragment {
   recipeCount: number;
   isFollowing: boolean | null;
   dietaryPreferences: FullUserFragment_dietaryPreferences[];
+  allergyPreferences: FullUserFragment_allergyPreferences[];
 }
 
 /* tslint:disable */
@@ -929,6 +1063,10 @@ export enum Sort {
 
 export interface AllergyInput {
   name: string;
+}
+
+export interface AllergyPreferenceDetails {
+  allergies: string[];
 }
 
 export interface CategoryInput {

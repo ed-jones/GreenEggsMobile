@@ -196,6 +196,56 @@ export interface editProfileVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: changePassword
+// ====================================================
+
+export interface changePassword_changePassword_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface changePassword_changePassword {
+  __typename: "ChangePasswordResult";
+  error: changePassword_changePassword_error | null;
+}
+
+export interface changePassword {
+  changePassword: changePassword_changePassword;
+}
+
+export interface changePasswordVariables {
+  changePasswordDetails: ChangePasswordDetails;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: deleteUser
+// ====================================================
+
+export interface deleteUser_deleteAccount_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface deleteUser_deleteAccount {
+  __typename: "DeleteAccountResult";
+  error: deleteUser_deleteAccount_error | null;
+}
+
+export interface deleteUser {
+  deleteAccount: deleteUser_deleteAccount;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: recipes
 // ====================================================
 
@@ -742,6 +792,12 @@ export interface AllergyInput {
 
 export interface CategoryInput {
   name: string;
+}
+
+export interface ChangePasswordDetails {
+  oldPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
 }
 
 export interface DietInput {

@@ -62,3 +62,23 @@ export const EDIT_PROFILE = gql`
   }
   ${Fragments.ErrorFragment}
 `;
+
+export const CHANGE_PASSWORD = gql`
+  mutation changePassword($changePasswordDetails: ChangePasswordDetails!) {
+    changePassword(changePasswordDetails: $changePasswordDetails) {
+      error {
+        message
+      }
+    }
+  }
+`;
+
+export const DELETE_USER = gql`
+  mutation deleteUser {
+    deleteAccount {
+      error {
+        message
+      }
+    }
+  }
+`;

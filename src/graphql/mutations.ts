@@ -139,3 +139,14 @@ export const REMOVE_ALLERGY_PREFERENCES = gql`
   ${Fragments.AllergyFragment}
   ${Fragments.ErrorFragment}
 `;
+
+export const UPDATE_PROFILE_VISIBILITY = gql`
+  mutation UpdateProfileVisibility($profileVisibilityDetails: ProfileVisibilityDetails!) {
+    updateProfileVisibility(profileVisibilityDetails: $profileVisibilityDetails) {
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.ErrorFragment}
+`;

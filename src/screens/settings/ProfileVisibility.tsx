@@ -1,13 +1,34 @@
 import React from "react";
 import {
+  Button,
+  Spinner,
   Text,
   TopNavigation,
   TopNavigationAction,
 } from "@ui-kitten/components";
 import { ScrollView, StyleSheet } from "react-native";
-import { Alert, Icons } from "@greeneggs/core";
+import {
+  Alert,
+  ControlledInput,
+  Icons,
+  InputType,
+  Mutations,
+  Queries,
+  Rules,
+  useForm,
+} from "@greeneggs/core";
 import { useNavigation } from "@react-navigation/core";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import {
+  Me,
+  ProfileVisibilityDetails,
+  UpdateProfileVisibility,
+  UpdateProfileVisibilityVariables,
+  UpdateProfileVisibility_updateProfileVisibility,
+} from "@greeneggs/types/graphql";
+import { useQuery } from "@apollo/client";
+import { LoadingScreen } from "..";
+import { FullUserFragment } from "@greeneggs/graphql/fragments";
 
 export const styles = StyleSheet.create({
   view: {
@@ -28,6 +49,41 @@ export const styles = StyleSheet.create({
 const ProfileVisibility = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
+
+  const { loading, error, data } = useQuery<Me>(Queries.ME);
+
+  if (loading) return <LoadingScreen />;
+  if (error) {
+    return <Text>Error! {error.message}</Text>;
+  }
+  const me = data?.me.data;
+
+  const form = useForm<
+    ProfileVisibilityDetails,
+    UpdateProfileVisibility,
+    UpdateProfileVisibilityVariables
+  >(Mutations.UPDATE_PROFILE_VISIBILITY, "profileVisibilityDetails", {
+    update(cache) {
+      if (me?.id) {
+        cache.writeFragment({
+          id: `FullUser:${me.id}`,
+          data: {
+            ...me,
+            visibility: form.getValues("visibility"),
+          },
+          fragment: FullUserFragment,
+          fragmentName: "FullUserFragment",
+        });
+      }
+    },
+  });
+
+  function handleSubmit() {
+    form
+      .submitForm()
+      .then(() => navigation.goBack())
+      .catch((error) => console.log(error));
+  }
 
   return (
     <>
@@ -58,6 +114,28 @@ const ProfileVisibility = () => {
           }
           type="info"
         />
+        <ControlledInput<ProfileVisibilityDetails>
+          controllerProps={{
+            name: `visibility`,
+            control: form.control,
+            rules: {
+              ...Rules.REQUIRED,
+            },
+            defaultValue: me?.visibility,
+          }}
+          submitError={form.formResult.data?.updateProfileVisibility.error}
+          type={InputType.PRIVACY}
+        />
+        <Button
+          onPress={handleSubmit}
+          accessoryRight={
+            form.formResult.loading
+              ? () => <Spinner size="small" status="control" />
+              : Icons.Save
+          }
+        >
+          SAVE CHANGES
+        </Button>
       </ScrollView>
     </>
   );

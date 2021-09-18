@@ -190,6 +190,7 @@ export interface editProfile_editProfile_data {
   isFollowing: boolean | null;
   dietaryPreferences: editProfile_editProfile_data_dietaryPreferences[];
   allergyPreferences: editProfile_editProfile_data_allergyPreferences[];
+  visibility: Privacy;
 }
 
 export interface editProfile_editProfile_error {
@@ -395,6 +396,33 @@ export interface RemoveAllergyPreferences {
 
 export interface RemoveAllergyPreferencesVariables {
   allergyPreferences: AllergyPreferenceDetails;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: UpdateProfileVisibility
+// ====================================================
+
+export interface UpdateProfileVisibility_updateProfileVisibility_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface UpdateProfileVisibility_updateProfileVisibility {
+  __typename: "UpdateProfileVisibilityResult";
+  error: UpdateProfileVisibility_updateProfileVisibility_error | null;
+}
+
+export interface UpdateProfileVisibility {
+  updateProfileVisibility: UpdateProfileVisibility_updateProfileVisibility;
+}
+
+export interface UpdateProfileVisibilityVariables {
+  profileVisibilityDetails: ProfileVisibilityDetails;
 }
 
 /* tslint:disable */
@@ -796,6 +824,7 @@ export interface Me_me_data {
   isFollowing: boolean | null;
   dietaryPreferences: Me_me_data_dietaryPreferences[];
   allergyPreferences: Me_me_data_allergyPreferences[];
+  visibility: Privacy;
 }
 
 export interface Me_me {
@@ -954,6 +983,7 @@ export interface FullUserFragment {
   isFollowing: boolean | null;
   dietaryPreferences: FullUserFragment_dietaryPreferences[];
   allergyPreferences: FullUserFragment_allergyPreferences[];
+  visibility: Privacy;
 }
 
 /* tslint:disable */
@@ -1109,6 +1139,10 @@ export interface ProfileDetails {
   lastName?: string | null;
   bio?: string | null;
   profileImage?: any | null;
+}
+
+export interface ProfileVisibilityDetails {
+  visibility: Privacy;
 }
 
 export interface RecipeFilter {

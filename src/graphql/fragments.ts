@@ -46,6 +46,7 @@ export const FullUserFragment = gql`
     allergyPreferences {
       ...AllergyFragment
     }
+    visibility
   }
   ${DietFragment}
   ${AllergyFragment}

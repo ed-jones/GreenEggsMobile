@@ -1,15 +1,14 @@
 import React, { useContext } from "react";
 
 import { StyleSheet } from "react-native";
-import { Button, Input, Spinner } from "@ui-kitten/components";
+import { Button, Spinner } from "@ui-kitten/components";
 
 import useSignupForm from "./useSignUpForm";
 import AuthPageTemplate from "./AuthPageTemplate";
-import { setContext } from "@apollo/client/link/context";
-import { Controller } from "react-hook-form";
 import { ControlledInput, InputType } from "@greeneggs/core";
 import { SignupInput } from "@greeneggs/types/graphql";
 import { AuthContext } from "@greeneggs/core/auth-context/AuthContext";
+import * as SecureStore from "expo-secure-store";
 
 const styles = StyleSheet.create({
   input: {
@@ -26,6 +25,7 @@ const Signup = ({ navigation }: any) => {
     const token = result.data?.signup.data?.token;
     const error = result.data?.signup.error;
     if (token && !error) {
+      SecureStore.setItemAsync("token", token);
       setToken && setToken(token);
       navigation.navigate("Home");
     }

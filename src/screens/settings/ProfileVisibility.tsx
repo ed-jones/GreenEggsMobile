@@ -21,11 +21,9 @@ import { useNavigation } from "@react-navigation/core";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import {
   Me,
-  Privacy,
   ProfileVisibilityDetails,
   UpdateProfileVisibility,
   UpdateProfileVisibilityVariables,
-  UpdateProfileVisibility_updateProfileVisibility,
 } from "@greeneggs/types/graphql";
 import { useQuery } from "@apollo/client";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
@@ -109,11 +107,12 @@ const ProfileVisibility = () => {
           message={
             <Text>
               Here you can control which users are able to follow you.{"\n\n"}
-              <Text style={{ fontWeight: "bold" }}>Public</Text> means anyone
-              can follow you.{"\n\n"}
-              <Text style={{ fontWeight: "bold" }}>Friends only</Text> means you
-              have to approve follow requests.{"\n\n"}
-              <Text style={{ fontWeight: "bold" }}>Private</Text> means nobody
+              <Text style={{ fontWeight: "bold" }}>EVERYONE</Text> means your
+              profile is public and anyone can follow you.{"\n\n"}
+              <Text style={{ fontWeight: "bold" }}>FRIENDS</Text> means your
+              profile is only visible to friends and you have to approve follow
+              requests.{"\n\n"}
+              <Text style={{ fontWeight: "bold" }}>ONLY ME</Text> means nobody
               can follow you. Your profile is hidden and you won't appear in any
               searches.{"\n\n"}
             </Text>

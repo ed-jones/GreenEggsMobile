@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   Button,
+  Icon,
   IndexPath,
   List,
   ListItem,
@@ -19,6 +20,8 @@ import {
   Diets,
   Diets_diets_data,
   Me,
+  RemoveDietaryPreferences,
+  RemoveDietaryPreferencesVariables,
   UpdateDietaryPreferences,
   UpdateDietaryPreferencesVariables,
 } from "@greeneggs/types/graphql";
@@ -48,9 +51,12 @@ const DietaryPreferences = () => {
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(
     new IndexPath(0)
   );
-
   const getMe = useQuery<Me>(Queries.ME);
 
+  const [removeDietaryPreferences, removeDietaryPreferencesResult] =
+    useMutation<RemoveDietaryPreferences, RemoveDietaryPreferencesVariables>(
+      Mutations.REMOVE_DIETARY_PREFERENCES
+    );
   const [updateDietaryPreferences, updateDietaryPreferencesResult] =
     useMutation<UpdateDietaryPreferences, UpdateDietaryPreferencesVariables>(
       Mutations.UPDATE_DIETARY_PREFERENCES
@@ -88,6 +94,31 @@ const DietaryPreferences = () => {
                   diets[Number(selectedIndex.toString()) - 1],
                 ]),
               ],
+            },
+            fragment: FullUserFragment,
+            fragmentName: "FullUserFragment",
+          });
+        },
+      });
+    }
+  }
+
+  function removeDiet(diet: Diets_diets_data) {
+    if (me?.dietaryPreferences) {
+      removeDietaryPreferences({
+        variables: {
+          dietaryPreferences: {
+            diets: [diet.id],
+          },
+        },
+        update(cache) {
+          cache.writeFragment({
+            id: `FullUser:${me.id}`,
+            data: {
+              ...me,
+              dietaryPreferences: me.dietaryPreferences.filter(
+                (allDiets) => allDiets.id !== diet.id
+              ),
             },
             fragment: FullUserFragment,
             fragmentName: "FullUserFragment",
@@ -143,7 +174,12 @@ const DietaryPreferences = () => {
         <List
           data={me?.dietaryPreferences}
           renderItem={({ item }: { item: Diets_diets_data }) => (
-            <ListItem title={item.name} />
+            <ListItem
+              title={item.name}
+              accessoryRight={(props) => (
+                <Icons.Cross {...props} onPress={() => removeDiet(item)} />
+              )}
+            />
           )}
         />
       </ScrollView>

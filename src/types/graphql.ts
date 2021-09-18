@@ -294,6 +294,40 @@ export interface UpdateDietaryPreferencesVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: RemoveDietaryPreferences
+// ====================================================
+
+export interface RemoveDietaryPreferences_removeDietaryPreferences_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface RemoveDietaryPreferences_removeDietaryPreferences_data {
+  __typename: "Diet";
+  id: string;
+  name: string;
+}
+
+export interface RemoveDietaryPreferences_removeDietaryPreferences {
+  __typename: "RemoveDietaryPreferencesResult";
+  error: RemoveDietaryPreferences_removeDietaryPreferences_error | null;
+  data: RemoveDietaryPreferences_removeDietaryPreferences_data[] | null;
+}
+
+export interface RemoveDietaryPreferences {
+  removeDietaryPreferences: RemoveDietaryPreferences_removeDietaryPreferences;
+}
+
+export interface RemoveDietaryPreferencesVariables {
+  dietaryPreferences: DietaryPreferenceDetails;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: recipes
 // ====================================================
 

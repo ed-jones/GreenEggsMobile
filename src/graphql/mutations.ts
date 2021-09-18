@@ -84,7 +84,7 @@ export const UPDATE_DIETARY_PREFERENCES = gql`
   mutation UpdateDietaryPreferences($dietaryPreferences: DietaryPreferenceDetails!) {
     updateDietaryPreferences(dietaryPreferenceDetails: $dietaryPreferences) {
       error {
-        message
+        ...ErrorFragment
       }
       data {
         ...DietFragment
@@ -92,5 +92,20 @@ export const UPDATE_DIETARY_PREFERENCES = gql`
     }
   }
   ${Fragments.DietFragment}
+  ${Fragments.ErrorFragment}
 `;
 
+export const REMOVE_DIETARY_PREFERENCES = gql`
+  mutation RemoveDietaryPreferences($dietaryPreferences: DietaryPreferenceDetails!) {
+    removeDietaryPreferences(dietaryPreferenceDetails: $dietaryPreferences) {
+      error {
+        ...ErrorFragment
+      }
+      data {
+        ...DietFragment
+      }
+    }
+  }
+  ${Fragments.DietFragment}
+  ${Fragments.ErrorFragment}
+`;

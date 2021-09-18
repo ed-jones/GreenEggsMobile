@@ -163,12 +163,19 @@ export interface signupVariables {
 // ====================================================
 
 export interface editProfile_editProfile_data {
-  __typename: "User";
+  __typename: "FullUser";
+  id: string;
   firstName: string;
   lastName: string;
-  email: string;
   bio: string | null;
+  email: string;
   avatarURI: string | null;
+  verified: boolean;
+  likeCount: number;
+  followerCount: number;
+  followingCount: number;
+  recipeCount: number;
+  isFollowing: boolean | null;
 }
 
 export interface editProfile_editProfile_error {

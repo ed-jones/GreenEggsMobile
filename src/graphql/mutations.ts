@@ -49,11 +49,7 @@ export const EDIT_PROFILE = gql`
   mutation editProfile($profileDetails: ProfileDetails!) {
     editProfile(profileDetails: $profileDetails) {
       data {
-        firstName
-        lastName
-        email
-        bio
-        avatarURI
+        ...FullUserFragment
       }
       error {
         ...ErrorFragment
@@ -61,6 +57,7 @@ export const EDIT_PROFILE = gql`
     }
   }
   ${Fragments.ErrorFragment}
+  ${Fragments.FullUserFragment}
 `;
 
 export const CHANGE_PASSWORD = gql`

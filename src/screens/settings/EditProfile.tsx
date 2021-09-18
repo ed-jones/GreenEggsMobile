@@ -5,6 +5,7 @@ import {
   InputType,
   Mutations,
   Queries,
+  Fragments,
   Rules,
   useForm,
 } from "@greeneggs/core";
@@ -61,7 +62,9 @@ export default function EditProfile() {
   }
 
   function onSubmit() {
-    form.submitForm().then(() => navigation.goBack());
+    form.submitForm().then(() => {
+      navigation.goBack();
+    });
   }
 
   return (

@@ -51,12 +51,6 @@ export default function ChangePassword() {
   >(Mutations.CHANGE_PASSWORD, "changePasswordDetails");
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
-  const { loading, error, data } = useQuery<Me>(Queries.ME);
-
-  if (loading) return <LoadingScreen />;
-  if (error) {
-    return <Text>Error! {error.message}</Text>;
-  }
 
   function onSubmit() {
     form.submitForm().then((data) => {

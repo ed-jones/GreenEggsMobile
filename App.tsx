@@ -99,7 +99,7 @@ function App() {
       >
         <NavigationContainer>
           <Stack.Navigator headerMode="none">
-            {!token ? (
+            {!Boolean(token) ? (
               <>
                 <Stack.Screen name="Welcome" component={Welcome} />
                 <Stack.Screen name="Login" component={Login} />

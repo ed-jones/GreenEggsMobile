@@ -57,3 +57,7 @@ export const Cross = (props: IconProps) => (
 export const Search = (props: IconProps) => <Icon {...props} name="search" />;
 
 export const Save = (props: IconProps) => <Icon {...props} name="save" />;
+
+export const Trash = (props: IconProps) => (
+  <Icon {...props} name="trash-2-outline" />
+);

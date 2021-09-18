@@ -37,7 +37,7 @@ import ChangePassword from "@greeneggs/screens/settings/ChangePassword";
 import ConnectAccounts from "@greeneggs/screens/settings/ConnectAccounts";
 import SignOut from "@greeneggs/screens/settings/SignOut";
 import DeleteAccount from "@greeneggs/screens/settings/DeleteAccount";
-import Diets from "@greeneggs/screens/settings/Diets";
+import DietaryPreferences from "@greeneggs/screens/settings/DietaryPreferences";
 import Allergies from "@greeneggs/screens/settings/Allergies";
 import ProfileVisibility from "@greeneggs/screens/settings/ProfileVisibility";
 import Settings from "@greeneggs/screens/settings/Settings";
@@ -141,7 +141,7 @@ function App() {
                 />
                 <Stack.Screen name="SignOut" component={SignOut} />
                 <Stack.Screen name="DeleteAccount" component={DeleteAccount} />
-                <Stack.Screen name="Diets" component={Diets} />
+                <Stack.Screen name="Diets" component={DietaryPreferences} />
                 <Stack.Screen name="Allergies" component={Allergies} />
                 <Stack.Screen
                   name="ProfileVisibility"

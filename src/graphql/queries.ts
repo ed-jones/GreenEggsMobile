@@ -72,3 +72,18 @@ export const ME = gql`
   }
   ${Fragments.FullUserFragment}
 `;
+
+export const GET_DIETS = gql`
+  query Diets {
+    diets {
+      data {
+        id
+        name
+      }
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.ErrorFragment}
+`;

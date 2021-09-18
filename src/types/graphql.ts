@@ -162,6 +162,12 @@ export interface signupVariables {
 // GraphQL mutation operation: editProfile
 // ====================================================
 
+export interface editProfile_editProfile_data_dietaryPreferences {
+  __typename: "Diet";
+  id: string;
+  name: string;
+}
+
 export interface editProfile_editProfile_data {
   __typename: "FullUser";
   id: string;
@@ -176,6 +182,7 @@ export interface editProfile_editProfile_data {
   followingCount: number;
   recipeCount: number;
   isFollowing: boolean | null;
+  dietaryPreferences: editProfile_editProfile_data_dietaryPreferences[];
 }
 
 export interface editProfile_editProfile_error {
@@ -245,6 +252,40 @@ export interface deleteUser_deleteAccount {
 
 export interface deleteUser {
   deleteAccount: deleteUser_deleteAccount;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: UpdateDietaryPreferences
+// ====================================================
+
+export interface UpdateDietaryPreferences_updateDietaryPreferences_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface UpdateDietaryPreferences_updateDietaryPreferences_data {
+  __typename: "Diet";
+  id: string;
+  name: string;
+}
+
+export interface UpdateDietaryPreferences_updateDietaryPreferences {
+  __typename: "UpdateDietaryPreferencesResult";
+  error: UpdateDietaryPreferences_updateDietaryPreferences_error | null;
+  data: UpdateDietaryPreferences_updateDietaryPreferences_data[] | null;
+}
+
+export interface UpdateDietaryPreferences {
+  updateDietaryPreferences: UpdateDietaryPreferences_updateDietaryPreferences;
+}
+
+export interface UpdateDietaryPreferencesVariables {
+  dietaryPreferences: DietaryPreferenceDetails;
 }
 
 /* tslint:disable */
@@ -618,6 +659,12 @@ export interface recipeVariables {
 // GraphQL query operation: Me
 // ====================================================
 
+export interface Me_me_data_dietaryPreferences {
+  __typename: "Diet";
+  id: string;
+  name: string;
+}
+
 export interface Me_me_data {
   __typename: "FullUser";
   id: string;
@@ -632,6 +679,7 @@ export interface Me_me_data {
   followingCount: number;
   recipeCount: number;
   isFollowing: boolean | null;
+  dietaryPreferences: Me_me_data_dietaryPreferences[];
 }
 
 export interface Me_me {
@@ -641,6 +689,36 @@ export interface Me_me {
 
 export interface Me {
   me: Me_me;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: Diets
+// ====================================================
+
+export interface Diets_diets_data {
+  __typename: "Diet";
+  id: string;
+  name: string;
+}
+
+export interface Diets_diets_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface Diets_diets {
+  __typename: "DietsResult";
+  data: Diets_diets_data[];
+  error: Diets_diets_error | null;
+}
+
+export interface Diets {
+  diets: Diets_diets;
 }
 
 /* tslint:disable */
@@ -669,8 +747,29 @@ export interface UserFragment {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL fragment: DietFragment
+// ====================================================
+
+export interface DietFragment {
+  __typename: "Diet";
+  id: string;
+  name: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: FullUserFragment
 // ====================================================
+
+export interface FullUserFragment_dietaryPreferences {
+  __typename: "Diet";
+  id: string;
+  name: string;
+}
 
 export interface FullUserFragment {
   __typename: "FullUser";
@@ -686,6 +785,7 @@ export interface FullUserFragment {
   followingCount: number;
   recipeCount: number;
   isFollowing: boolean | null;
+  dietaryPreferences: FullUserFragment_dietaryPreferences[];
 }
 
 /* tslint:disable */
@@ -809,6 +909,10 @@ export interface ChangePasswordDetails {
 
 export interface DietInput {
   name: string;
+}
+
+export interface DietaryPreferenceDetails {
+  diets: string[];
 }
 
 export interface IngredientInput {

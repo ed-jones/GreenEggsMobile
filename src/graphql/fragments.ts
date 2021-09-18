@@ -12,6 +12,13 @@ export const UserFragment = gql`
   }
 `;
 
+export const DietFragment = gql`
+  fragment DietFragment on Diet {
+    id
+    name
+  }
+`
+
 export const FullUserFragment = gql`
   fragment FullUserFragment on FullUser {
     id
@@ -26,7 +33,11 @@ export const FullUserFragment = gql`
     followingCount
     recipeCount
     isFollowing
+    dietaryPreferences {
+      ...DietFragment
+    }
   }
+  ${DietFragment}
 `;
 
 

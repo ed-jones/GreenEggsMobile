@@ -79,3 +79,18 @@ export const DELETE_USER = gql`
     }
   }
 `;
+
+export const UPDATE_DIETARY_PREFERENCES = gql`
+  mutation UpdateDietaryPreferences($dietaryPreferences: DietaryPreferenceDetails!) {
+    updateDietaryPreferences(dietaryPreferenceDetails: $dietaryPreferences) {
+      error {
+        message
+      }
+      data {
+        ...DietFragment
+      }
+    }
+  }
+  ${Fragments.DietFragment}
+`;
+

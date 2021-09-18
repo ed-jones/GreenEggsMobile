@@ -97,12 +97,6 @@ const Settings = withStyles(
         onPress: () => navigation.navigate("ChangePassword"),
       },
       {
-        title: "Connect Accounts",
-        icon: "link-2-outline",
-        color: Colors.green,
-        onPress: () => navigation.navigate("ConnectAccounts"),
-      },
-      {
         title: "Sign Out",
         icon: "log-out-outline",
         color: Colors.yellow,

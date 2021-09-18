@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Button,
-  Icon,
   IndexPath,
   List,
   ListItem,
@@ -10,7 +9,7 @@ import {
   TopNavigation,
   TopNavigationAction,
 } from "@ui-kitten/components";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Alert, Icons, Mutations, Queries } from "@greeneggs/core";
 import { useNavigation } from "@react-navigation/core";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -26,7 +25,7 @@ import {
   UpdateDietaryPreferencesVariables,
 } from "@greeneggs/types/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
-import { DietFragment, FullUserFragment } from "@greeneggs/graphql/fragments";
+import { FullUserFragment } from "@greeneggs/graphql/fragments";
 
 export const styles = StyleSheet.create({
   view: {
@@ -43,6 +42,10 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
+
+function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
+  return Number(selectedIndex.toString()) - 1;
+}
 
 const DietaryPreferences = () => {
   const navigation = useNavigation();
@@ -71,6 +74,9 @@ const DietaryPreferences = () => {
   }
   const me = getMe.data?.me.data;
   const diets = getDiet.data?.diets.data || [];
+  const unselectedDiets = diets.filter(
+    (diet) => !me?.dietaryPreferences.includes(diet)
+  );
 
   function handleSubmit() {
     if (me?.dietaryPreferences) {
@@ -79,7 +85,7 @@ const DietaryPreferences = () => {
           dietaryPreferences: {
             diets: [
               ...me.dietaryPreferences.map((selectedDiet) => selectedDiet.id),
-              diets[Number(selectedIndex.toString()) - 1].id,
+              unselectedDiets[indexToNumber(selectedIndex)].id,
             ],
           },
         },
@@ -91,7 +97,7 @@ const DietaryPreferences = () => {
               dietaryPreferences: [
                 ...new Set([
                   ...me.dietaryPreferences,
-                  diets[Number(selectedIndex.toString()) - 1],
+                  unselectedDiets[indexToNumber(selectedIndex)],
                 ]),
               ],
             },
@@ -99,6 +105,7 @@ const DietaryPreferences = () => {
             fragmentName: "FullUserFragment",
           });
         },
+        onCompleted: () => setSelectedIndex(new IndexPath(0)),
       });
     }
   }
@@ -128,6 +135,9 @@ const DietaryPreferences = () => {
     }
   }
 
+  console.log(selectedIndex.toString());
+  console.log(unselectedDiets, "\n\n\n\n\n");
+
   return (
     <>
       <TopNavigation
@@ -141,7 +151,7 @@ const DietaryPreferences = () => {
         alignment="center"
         title="Dietary Preferences"
       />
-      <ScrollView>
+      <View>
         <View style={styles.view}>
           <Alert
             message="Here you can tell us your dietary preferences so that we can better show you recipes relevant to you."
@@ -152,15 +162,20 @@ const DietaryPreferences = () => {
               style={{ flex: 1, marginHorizontal: 8 }}
               onSelect={(index) => setSelectedIndex(index)}
               selectedIndex={selectedIndex}
-              value={diets[Number(selectedIndex.toString()) - 1].name}
+              disabled={unselectedDiets.length === 0}
+              value={
+                unselectedDiets[indexToNumber(selectedIndex)]?.name ||
+                "NO DIETS FOUND"
+              }
             >
-              {diets.map((diet) => (
+              {unselectedDiets.map((diet) => (
                 <SelectItem key={diet.id} title={diet.name} />
               ))}
             </Select>
             <Button
               size="small"
               onPress={handleSubmit}
+              disabled={unselectedDiets.length === 0}
               accessoryLeft={
                 updateDietaryPreferencesResult.loading
                   ? () => <Spinner size="small" status="control" />
@@ -182,7 +197,7 @@ const DietaryPreferences = () => {
             />
           )}
         />
-      </ScrollView>
+      </View>
     </>
   );
 };

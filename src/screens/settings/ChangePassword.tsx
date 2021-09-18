@@ -77,7 +77,7 @@ export default function ChangePassword() {
           />
         )}
         alignment="center"
-        title="Edit Profile"
+        title="Change Password"
       />
       <ScrollView style={styles.view}>
         <ControlledInput

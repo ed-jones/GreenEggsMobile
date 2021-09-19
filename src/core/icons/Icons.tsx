@@ -61,3 +61,7 @@ export const Save = (props: IconProps) => <Icon {...props} name="save" />;
 export const Trash = (props: IconProps) => (
   <Icon {...props} name="trash-2-outline" />
 );
+
+export const Comment = (props: IconProps) => (
+  <Icon {...props} name="message-square-outline" />
+);

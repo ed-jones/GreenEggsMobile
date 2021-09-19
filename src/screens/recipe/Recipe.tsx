@@ -19,6 +19,7 @@ import RecipeIngredients from "./RecipeIngredients";
 import RecipeDirections from "./RecipeDirections";
 import RecipeTopComments from "./RecipeTopComments";
 import LoadingScreen from "../loading/LoadingScreen";
+import RecipeAddComment from "./RecipeAddComment";
 
 const styles = StyleSheet.create({
   coverPhoto: {
@@ -122,6 +123,9 @@ const Recipe = ({ route, navigation }: any) => {
           Top Comments
         </Text>
         <RecipeTopComments />
+        <View style={{ marginTop: 24 }}>
+          <RecipeAddComment recipeId={recipe.id} />
+        </View>
       </View>
     </ParallaxHeader>
   );

@@ -97,3 +97,9 @@ export const ErrorFragment = gql`
     message
   }
 `;
+
+export const RecipeCommentFragment = gql`
+  fragment RecipeCommentFragment on RecipeComment {
+    contents
+  }
+`;

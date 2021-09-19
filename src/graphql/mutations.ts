@@ -150,3 +150,33 @@ export const UPDATE_PROFILE_VISIBILITY = gql`
   }
   ${Fragments.ErrorFragment}
 `;
+
+export const ADD_RECIPE_COMMENT = gql`
+  mutation AddRecipeComment($recipeId: String!, $comment: String!) {
+    addComment(recipeId: $recipeId, comment: $comment) {
+      data {
+        ...RecipeCommentFragment
+      }
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.RecipeCommentFragment}
+  ${Fragments.ErrorFragment}
+`;
+
+export const ADD_RECIPE_COMMENT_REPLY = gql`
+  mutation AddRecipeCommentReply($commentId: String!, $comment: String!) {
+    replyToComment(commentId: $commentId, comment: $comment) {
+      data {
+        ...RecipeCommentFragment
+      }
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.RecipeCommentFragment}
+  ${Fragments.ErrorFragment}
+`;

@@ -6,7 +6,7 @@ import * as Icons from "../icons/Icons";
 
 interface IIngredientListItem {
   ingredient: recipe_recipe_data_ingredients;
-  remove: () => void;
+  remove?: () => void;
 }
 
 const IngredientListItem = ({ ingredient, remove }: IIngredientListItem) => {
@@ -20,7 +20,7 @@ const IngredientListItem = ({ ingredient, remove }: IIngredientListItem) => {
             <Text category="label" style={{ marginRight: 16 }}>
               {`${ingredient.quantity} ${ingredient.unit || ""}`}
             </Text>
-            <Icons.Cross {...props} onPress={remove} />
+            {remove && <Icons.Cross {...props} onPress={remove} />}
           </>
         )}
       />

@@ -431,6 +431,74 @@ export interface UpdateProfileVisibilityVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: AddRecipeComment
+// ====================================================
+
+export interface AddRecipeComment_addComment_data {
+  __typename: "RecipeComment";
+  contents: string;
+}
+
+export interface AddRecipeComment_addComment_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface AddRecipeComment_addComment {
+  __typename: "CommentResult";
+  data: AddRecipeComment_addComment_data | null;
+  error: AddRecipeComment_addComment_error | null;
+}
+
+export interface AddRecipeComment {
+  addComment: AddRecipeComment_addComment;
+}
+
+export interface AddRecipeCommentVariables {
+  recipeId: string;
+  comment: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: AddRecipeCommentReply
+// ====================================================
+
+export interface AddRecipeCommentReply_replyToComment_data {
+  __typename: "RecipeComment";
+  contents: string;
+}
+
+export interface AddRecipeCommentReply_replyToComment_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface AddRecipeCommentReply_replyToComment {
+  __typename: "CommentResult";
+  data: AddRecipeCommentReply_replyToComment_data | null;
+  error: AddRecipeCommentReply_replyToComment_error | null;
+}
+
+export interface AddRecipeCommentReply {
+  replyToComment: AddRecipeCommentReply_replyToComment;
+}
+
+export interface AddRecipeCommentReplyVariables {
+  commentId: string;
+  comment: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: recipes
 // ====================================================
 
@@ -1068,6 +1136,20 @@ export interface RecipeFragment {
 export interface ErrorFragment {
   __typename: "Error";
   message: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: RecipeCommentFragment
+// ====================================================
+
+export interface RecipeCommentFragment {
+  __typename: "RecipeComment";
+  contents: string;
 }
 
 /* tslint:disable */

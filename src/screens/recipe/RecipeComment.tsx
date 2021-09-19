@@ -40,7 +40,7 @@ export default function RecipeComment({
               />
               <LabelledIcon
                 label="Reply"
-                iconName="undo-outline"
+                iconName="message-square-outline"
                 onPress={() =>
                   navigation.push("RecipeCommentReplies", {
                     comment,
@@ -67,7 +67,7 @@ export default function RecipeComment({
                 }
                 size="small"
                 status="basic"
-              >{`Show all replies (${comment.replyCount.toString()})`}</Button>
+              >{`SHOW ALL REPLIES (${comment.replyCount.toString()})`}</Button>
             </View>
           )}
         </View>

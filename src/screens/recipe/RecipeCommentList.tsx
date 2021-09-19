@@ -1,10 +1,8 @@
 import React from "react";
-import { Icons, LabelledIcon } from "@greeneggs/core";
-import { Button, Divider, ListItem } from "@ui-kitten/components";
-import { View, Text } from "react-native";
+import { Divider } from "@ui-kitten/components";
+import { View } from "react-native";
 import ViewMore from "@greeneggs/core/view-more/ViewMore";
 import { recipe_recipe_data_comments } from "@greeneggs/types/graphql";
-import { useNavigation } from "@react-navigation/core";
 import RecipeComment from "./RecipeComment";
 
 interface RecipeCommentListProps {
@@ -15,11 +13,11 @@ interface RecipeCommentListProps {
 const RecipeCommentList = ({ comments, viewMore }: RecipeCommentListProps) => {
   return (
     <View style={{ marginHorizontal: -16 }}>
-      {comments.map((comment) => (
-        <RecipeComment comment={comment} replyButton />
+      {comments.map((comment, index) => (
+        <RecipeComment comment={comment} replyButton key={index.toString()} />
       ))}
       <Divider />
-      {viewMore && <ViewMore onPress={viewMore} />}
+      {viewMore && comments.length > 3 && <ViewMore onPress={viewMore} />}
     </View>
   );
 };

@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
-import { Icons, Mutations } from "@greeneggs/core";
+import { Icons, Mutations, Queries } from "@greeneggs/core";
 import {
   AddRecipeComment,
   AddRecipeCommentReply,
   AddRecipeCommentReplyVariables,
   AddRecipeCommentVariables,
+  recipe,
+  recipeVariables,
 } from "@greeneggs/types/graphql";
 import { Button, Input, Spinner } from "@ui-kitten/components";
-import { useMutation } from "@apollo/client";
+import {
+  ApolloCache,
+  useLazyQuery,
+  useMutation,
+  useQuery,
+} from "@apollo/client";
+import { RecipeFragment } from "@greeneggs/graphql/fragments";
 
 export const styles = StyleSheet.create({
   view: {
@@ -52,6 +60,7 @@ export default function RecipeAddComment({
           comment,
           recipeId,
         },
+        refetchQueries: [Queries.GET_RECIPE, "recipe"],
       });
     }
     if (commentId) {
@@ -60,6 +69,7 @@ export default function RecipeAddComment({
           comment,
           commentId,
         },
+        refetchQueries: [Queries.GET_RECIPE, "recipe"],
       });
     }
     setComment("");

@@ -40,7 +40,7 @@ export default function RecipeCommentReplies({ route }: any) {
         <RecipeComment comment={comment} />
         <View style={styles.content}>
           <View>
-            <RecipeAddComment commentId={comment.commentId} />
+            <RecipeAddComment commentId={comment.id} />
           </View>
         </View>
       </ScrollView>

@@ -619,6 +619,141 @@ export interface AddRecipeCommentReplyVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: LikeRecipe
+// ====================================================
+
+export interface LikeRecipe_likeRecipe_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface LikeRecipe_likeRecipe {
+  __typename: "LikeRecipeResult";
+  error: LikeRecipe_likeRecipe_error | null;
+}
+
+export interface LikeRecipe {
+  likeRecipe: LikeRecipe_likeRecipe;
+}
+
+export interface LikeRecipeVariables {
+  recipeId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: UnlikeRecipe
+// ====================================================
+
+export interface UnlikeRecipe_unlikeRecipe_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface UnlikeRecipe_unlikeRecipe {
+  __typename: "UnlikeRecipeResult";
+  error: UnlikeRecipe_unlikeRecipe_error | null;
+}
+
+export interface UnlikeRecipe {
+  unlikeRecipe: UnlikeRecipe_unlikeRecipe;
+}
+
+export interface UnlikeRecipeVariables {
+  recipeId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: LikeComment
+// ====================================================
+
+export interface LikeComment_likeComment_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface LikeComment_likeComment {
+  __typename: "LikeCommentResult";
+  error: LikeComment_likeComment_error | null;
+}
+
+export interface LikeComment {
+  likeComment: LikeComment_likeComment;
+}
+
+export interface LikeCommentVariables {
+  commentId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: UnlikeComment
+// ====================================================
+
+export interface UnlikeComment_unlikeComment_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface UnlikeComment_unlikeComment {
+  __typename: "UnlikeCommentResult";
+  error: UnlikeComment_unlikeComment_error | null;
+}
+
+export interface UnlikeComment {
+  unlikeComment: UnlikeComment_unlikeComment;
+}
+
+export interface UnlikeCommentVariables {
+  commentId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: DeleteComment
+// ====================================================
+
+export interface DeleteComment_deleteComment_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface DeleteComment_deleteComment {
+  __typename: "DeleteCommentResult";
+  error: DeleteComment_deleteComment_error | null;
+}
+
+export interface DeleteComment {
+  deleteComment: DeleteComment_deleteComment;
+}
+
+export interface DeleteCommentVariables {
+  commentId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: recipes
 // ====================================================
 

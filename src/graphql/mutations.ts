@@ -180,3 +180,58 @@ export const ADD_RECIPE_COMMENT_REPLY = gql`
   ${Fragments.RecipeCommentFragment}
   ${Fragments.ErrorFragment}
 `;
+
+export const LIKE_RECIPE = gql`
+  mutation LikeRecipe($recipeId: String!) {
+    likeRecipe(recipeId: $recipeId) {
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.ErrorFragment}
+`;
+
+export const UNLIKE_RECIPE = gql`
+  mutation UnlikeRecipe($recipeId: String!) {
+    unlikeRecipe(recipeId: $recipeId) {
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.ErrorFragment}
+`;
+
+export const LIKE_COMMENT = gql`
+  mutation LikeComment($commentId: String!) {
+    likeComment(commentId: $commentId) {
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.ErrorFragment}
+`;
+
+export const UNLIKE_COMMENT = gql`
+  mutation UnlikeComment($commentId: String!) {
+    unlikeComment(commentId: $commentId) {
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.ErrorFragment}
+`;
+
+export const DELETE_COMMENT = gql`
+  mutation DeleteComment($commentId: String!) {
+    deleteComment(commentId: $commentId) {
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.ErrorFragment}
+`;

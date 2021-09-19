@@ -65,6 +65,8 @@ const Recipe = ({ route, navigation }: any) => {
     }
   );
 
+  // const [likeRecipe, likeRecipeResult] =
+
   const navigateBack = () => {
     navigation.goBack();
   };

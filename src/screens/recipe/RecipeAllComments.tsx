@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 });
 
 export default function RecipeAllComments({ route }: any) {
-  const { comments, commentCount } = route.params;
+  const { comments, commentCount, isReply } = route.params;
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
@@ -32,14 +32,13 @@ export default function RecipeAllComments({ route }: any) {
           />
         )}
         alignment="center"
-        title="All Comments"
+        title={`All ${isReply ? "Replies" : "Comments"}`}
       />
       <ScrollView>
         <View style={styles.content}>
-          <Text
-            style={{ marginBottom: 24 }}
-            category="h5"
-          >{`All Comments (${commentCount})`}</Text>
+          <Text style={{ marginBottom: 24 }} category="h5">{`All ${
+            isReply ? "Replies" : "Comments"
+          } (${commentCount})`}</Text>
           <RecipeCommentList comments={comments} />
         </View>
       </ScrollView>

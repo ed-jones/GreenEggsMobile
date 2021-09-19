@@ -62,6 +62,7 @@ export default function RecipeComment({
                   navigation.push("RecipeAllComments", {
                     comments: comment.replies,
                     commentCount: comment.replyCount,
+                    isReply: true,
                   })
                 }
                 size="small"

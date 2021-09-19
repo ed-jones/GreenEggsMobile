@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { LabelledIcon, noavatar, Queries } from "@greeneggs/core";
+import { LabelledIcon, Mutations, noavatar, Queries } from "@greeneggs/core";
 import {
   ListItem,
   Button,
@@ -10,12 +10,14 @@ import {
 import { View, Text, StyleSheet } from "react-native";
 import {
   comment,
+  LikeComment,
   recipe_recipe_data_comments,
   recipe_recipe_data_comments_replies,
+  UnlikeComment,
 } from "@greeneggs/types/graphql";
 import { useNavigation } from "@react-navigation/core";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { useApolloClient } from "@apollo/client";
+import { useApolloClient, useMutation } from "@apollo/client";
 
 const styles = StyleSheet.create({
   avatar: {
@@ -33,27 +35,20 @@ export default function RecipeComment({
   replyButton,
 }: RecipeCommentProps) {
   const navigation: StackNavigationProp<any, any> = useNavigation();
-  const client = useApolloClient();
 
-  function handleLoadReplies() {
-    client
-      .query<comment>({
-        query: Queries.GET_COMMENT,
-        variables: {
-          commentId: comment.id,
-        },
-      })
-      .then(({ data }) => {
-        if (data.comment.data?.replies) {
-          navigation.push("RecipeAllComments", {
-            comments: data.comment.data.replies,
-            commentCount: data.comment.data.replyCount,
-            isReply: true,
-            commentId: data.comment.data.id,
-          });
-        }
-      });
-  }
+  const [likeComment] = useMutation<LikeComment>(Mutations.LIKE_COMMENT, {
+    variables: {
+      commentId: comment.id,
+    },
+    refetchQueries: [Queries.GET_RECIPE, "recipe"],
+  });
+
+  const [unlikeComment] = useMutation<UnlikeComment>(Mutations.UNLIKE_COMMENT, {
+    variables: {
+      commentId: comment.id,
+    },
+    refetchQueries: [Queries.GET_RECIPE, "recipe"],
+  });
 
   return (
     <>
@@ -83,7 +78,8 @@ export default function RecipeComment({
             <View style={{ flexDirection: "row" }}>
               <LabelledIcon
                 label={comment.likeCount.toString()}
-                iconName="heart-outline"
+                iconName={comment.liked ? "heart" : "heart-outline"}
+                onPress={comment.liked ? unlikeComment : likeComment}
               />
               <LabelledIcon
                 label="Reply"

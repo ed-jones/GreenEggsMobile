@@ -17,7 +17,7 @@ import RecipeAllergies from "./RecipeAllergies";
 import RecipeCategoriesTags from "./RecipeCategoriesTags";
 import RecipeIngredients from "./RecipeIngredients";
 import RecipeDirections from "./RecipeDirections";
-import RecipeTopComments from "./RecipeTopComments";
+import RecipeCommentList from "./RecipeCommentList";
 import LoadingScreen from "../loading/LoadingScreen";
 import RecipeAddComment from "./RecipeAddComment";
 
@@ -120,9 +120,16 @@ const Recipe = ({ route, navigation }: any) => {
         </Text>
         <RecipeDirections directions={recipe.steps} />
         <Text category="h5" style={styles.heading}>
-          Top Comments
+          {`Comments (${recipe.commentCount.toString()})`}
         </Text>
-        <RecipeTopComments />
+        <RecipeCommentList
+          comments={recipe.comments.slice(0, 3)}
+          viewMore={() =>
+            navigation.navigate("RecipeAllComments", {
+              comments: recipe.comments,
+            })
+          }
+        />
         <View style={{ marginTop: 24 }}>
           <RecipeAddComment recipeId={recipe.id} />
         </View>

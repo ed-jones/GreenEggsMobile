@@ -48,6 +48,25 @@ export interface addRecipe_addRecipe_data_steps {
   image: string;
 }
 
+export interface addRecipe_addRecipe_data_comments_replies {
+  __typename: "RecipeCommentReply";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+}
+
+export interface addRecipe_addRecipe_data_comments {
+  __typename: "RecipeComment";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  replies: addRecipe_addRecipe_data_comments_replies[];
+}
+
 export interface addRecipe_addRecipe_data {
   __typename: "Recipe";
   id: string;
@@ -66,6 +85,7 @@ export interface addRecipe_addRecipe_data {
   allergies: addRecipe_addRecipe_data_allergies[];
   ingredients: addRecipe_addRecipe_data_ingredients[];
   steps: addRecipe_addRecipe_data_steps[];
+  comments: addRecipe_addRecipe_data_comments[];
 }
 
 export interface addRecipe_addRecipe_error {
@@ -434,9 +454,23 @@ export interface UpdateProfileVisibilityVariables {
 // GraphQL mutation operation: AddRecipeComment
 // ====================================================
 
+export interface AddRecipeComment_addComment_data_replies {
+  __typename: "RecipeCommentReply";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+}
+
 export interface AddRecipeComment_addComment_data {
   __typename: "RecipeComment";
+  id: string;
   contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  replies: AddRecipeComment_addComment_data_replies[];
 }
 
 export interface AddRecipeComment_addComment_error {
@@ -468,9 +502,23 @@ export interface AddRecipeCommentVariables {
 // GraphQL mutation operation: AddRecipeCommentReply
 // ====================================================
 
+export interface AddRecipeCommentReply_replyToComment_data_replies {
+  __typename: "RecipeCommentReply";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+}
+
 export interface AddRecipeCommentReply_replyToComment_data {
   __typename: "RecipeComment";
+  id: string;
   contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  replies: AddRecipeCommentReply_replyToComment_data_replies[];
 }
 
 export interface AddRecipeCommentReply_replyToComment_error {
@@ -543,6 +591,25 @@ export interface recipes_recipes_data_steps {
   image: string;
 }
 
+export interface recipes_recipes_data_comments_replies {
+  __typename: "RecipeCommentReply";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+}
+
+export interface recipes_recipes_data_comments {
+  __typename: "RecipeComment";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  replies: recipes_recipes_data_comments_replies[];
+}
+
 export interface recipes_recipes_data {
   __typename: "Recipe";
   id: string;
@@ -561,6 +628,7 @@ export interface recipes_recipes_data {
   allergies: recipes_recipes_data_allergies[];
   ingredients: recipes_recipes_data_ingredients[];
   steps: recipes_recipes_data_steps[];
+  comments: recipes_recipes_data_comments[];
 }
 
 export interface recipes_recipes_error {
@@ -636,6 +704,25 @@ export interface NewsFeed_newsFeed_data_steps {
   image: string;
 }
 
+export interface NewsFeed_newsFeed_data_comments_replies {
+  __typename: "RecipeCommentReply";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+}
+
+export interface NewsFeed_newsFeed_data_comments {
+  __typename: "RecipeComment";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  replies: NewsFeed_newsFeed_data_comments_replies[];
+}
+
 export interface NewsFeed_newsFeed_data {
   __typename: "Recipe";
   id: string;
@@ -654,6 +741,7 @@ export interface NewsFeed_newsFeed_data {
   allergies: NewsFeed_newsFeed_data_allergies[];
   ingredients: NewsFeed_newsFeed_data_ingredients[];
   steps: NewsFeed_newsFeed_data_steps[];
+  comments: NewsFeed_newsFeed_data_comments[];
 }
 
 export interface NewsFeed_newsFeed_error {
@@ -726,6 +814,25 @@ export interface Trending_trending_data_steps {
   image: string;
 }
 
+export interface Trending_trending_data_comments_replies {
+  __typename: "RecipeCommentReply";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+}
+
+export interface Trending_trending_data_comments {
+  __typename: "RecipeComment";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  replies: Trending_trending_data_comments_replies[];
+}
+
 export interface Trending_trending_data {
   __typename: "Recipe";
   id: string;
@@ -744,6 +851,7 @@ export interface Trending_trending_data {
   allergies: Trending_trending_data_allergies[];
   ingredients: Trending_trending_data_ingredients[];
   steps: Trending_trending_data_steps[];
+  comments: Trending_trending_data_comments[];
 }
 
 export interface Trending_trending_error {
@@ -816,6 +924,25 @@ export interface recipe_recipe_data_steps {
   image: string;
 }
 
+export interface recipe_recipe_data_comments_replies {
+  __typename: "RecipeCommentReply";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+}
+
+export interface recipe_recipe_data_comments {
+  __typename: "RecipeComment";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  replies: recipe_recipe_data_comments_replies[];
+}
+
 export interface recipe_recipe_data {
   __typename: "Recipe";
   id: string;
@@ -834,6 +961,7 @@ export interface recipe_recipe_data {
   allergies: recipe_recipe_data_allergies[];
   ingredients: recipe_recipe_data_ingredients[];
   steps: recipe_recipe_data_steps[];
+  comments: recipe_recipe_data_comments[];
 }
 
 export interface recipe_recipe_error {
@@ -1060,6 +1188,34 @@ export interface FullUserFragment {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL fragment: RecipeCommentFragment
+// ====================================================
+
+export interface RecipeCommentFragment_replies {
+  __typename: "RecipeCommentReply";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+}
+
+export interface RecipeCommentFragment {
+  __typename: "RecipeComment";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  replies: RecipeCommentFragment_replies[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: RecipeFragment
 // ====================================================
 
@@ -1104,6 +1260,25 @@ export interface RecipeFragment_steps {
   image: string;
 }
 
+export interface RecipeFragment_comments_replies {
+  __typename: "RecipeCommentReply";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+}
+
+export interface RecipeFragment_comments {
+  __typename: "RecipeComment";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  replies: RecipeFragment_comments_replies[];
+}
+
 export interface RecipeFragment {
   __typename: "Recipe";
   id: string;
@@ -1122,6 +1297,7 @@ export interface RecipeFragment {
   allergies: RecipeFragment_allergies[];
   ingredients: RecipeFragment_ingredients[];
   steps: RecipeFragment_steps[];
+  comments: RecipeFragment_comments[];
 }
 
 /* tslint:disable */
@@ -1136,20 +1312,6 @@ export interface RecipeFragment {
 export interface ErrorFragment {
   __typename: "Error";
   message: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL fragment: RecipeCommentFragment
-// ====================================================
-
-export interface RecipeCommentFragment {
-  __typename: "RecipeComment";
-  contents: string;
 }
 
 /* tslint:disable */

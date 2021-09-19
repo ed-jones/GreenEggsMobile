@@ -46,6 +46,7 @@ import CreateStep from "@greeneggs/screens/add-recipe/add-recipe-directions/Crea
 import CreateAllergy from "@greeneggs/screens/add-recipe/add-recipe-allergies/CreateAllergy";
 import CreateCategory from "@greeneggs/screens/add-recipe/add-recipe-categories/CreateCategory";
 import CreateDiet from "@greeneggs/screens/add-recipe/add-recipe-diets/CreateDiet";
+import RecipeAllComments from "@greeneggs/screens/recipe/RecipeAllComments";
 
 const Stack = createStackNavigator();
 
@@ -160,6 +161,10 @@ function App() {
                 <Stack.Screen
                   name="ProfileVisibility"
                   component={ProfileVisibility}
+                />
+                <Stack.Screen
+                  name="RecipeAllComments"
+                  component={RecipeAllComments}
                 />
               </>
             )}

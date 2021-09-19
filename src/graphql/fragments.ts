@@ -53,6 +53,23 @@ export const FullUserFragment = gql`
 `;
 
 
+export const RecipeCommentFragment = gql`
+  fragment RecipeCommentFragment on RecipeComment {
+    id
+    contents
+    likeCount
+    replyCount
+    liked
+    replies {
+      id
+      contents
+      likeCount
+      replyCount
+      liked
+    }
+  }
+`;
+
 export const RecipeFragment = gql`
   fragment RecipeFragment on Recipe {
     id
@@ -88,18 +105,16 @@ export const RecipeFragment = gql`
       description
       image
     }
+    comments {
+      ...RecipeCommentFragment
+    }
   }
   ${UserFragment}
+  ${RecipeCommentFragment}
 `;
 
 export const ErrorFragment = gql`
   fragment ErrorFragment on Error {
     message
-  }
-`;
-
-export const RecipeCommentFragment = gql`
-  fragment RecipeCommentFragment on RecipeComment {
-    contents
   }
 `;

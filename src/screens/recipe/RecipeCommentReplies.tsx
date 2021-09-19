@@ -1,14 +1,16 @@
-import React from "react";
-import RecipeCommentList from "./RecipeCommentList";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { Icons } from "@greeneggs/core";
+import { useNavigation } from "@react-navigation/core";
 import {
   TopNavigation,
   TopNavigationAction,
   Text,
 } from "@ui-kitten/components";
-import { useNavigation } from "@react-navigation/core";
-import { Icons } from "@greeneggs/core";
+import React from "react";
+import { View, StyleSheet, ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import RecipeAddComment from "./RecipeAddComment";
+import RecipeComment from "./RecipeComment";
+import RecipeCommentList from "./RecipeCommentList";
 
 const styles = StyleSheet.create({
   content: {
@@ -16,8 +18,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function RecipeAllComments({ route }: any) {
-  const { comments, commentCount } = route.params;
+export default function RecipeCommentReplies({ route }: any) {
+  const { comment } = route.params;
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
@@ -32,15 +34,14 @@ export default function RecipeAllComments({ route }: any) {
           />
         )}
         alignment="center"
-        title="All Comments"
+        title="Reply To Comment"
       />
       <ScrollView>
+        <RecipeComment comment={comment} />
         <View style={styles.content}>
-          <Text
-            style={{ marginBottom: 24 }}
-            category="h5"
-          >{`All Comments (${commentCount})`}</Text>
-          <RecipeCommentList comments={comments} />
+          <View>
+            <RecipeAddComment commentId={comment.commentId} />
+          </View>
         </View>
       </ScrollView>
     </>

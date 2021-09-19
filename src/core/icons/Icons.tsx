@@ -65,3 +65,7 @@ export const Trash = (props: IconProps) => (
 export const Comment = (props: IconProps) => (
   <Icon {...props} name="message-square-outline" />
 );
+
+export const Reply = (props: IconProps) => (
+  <Icon {...props} name="undo-outline" />
+);

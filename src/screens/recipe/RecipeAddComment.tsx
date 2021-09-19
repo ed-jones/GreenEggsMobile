@@ -3,6 +3,8 @@ import { StyleSheet } from "react-native";
 import { Icons, Mutations } from "@greeneggs/core";
 import {
   AddRecipeComment,
+  AddRecipeCommentReply,
+  AddRecipeCommentReplyVariables,
   AddRecipeCommentVariables,
 } from "@greeneggs/types/graphql";
 import { Button, Input, Spinner } from "@ui-kitten/components";
@@ -25,23 +27,41 @@ export const styles = StyleSheet.create({
 });
 
 interface RecipeAddCommentProps {
-  recipeId: string;
+  recipeId?: string;
+  commentId?: string;
 }
 
-export default function RecipeAddComment({ recipeId }: RecipeAddCommentProps) {
+export default function RecipeAddComment({
+  recipeId,
+  commentId,
+}: RecipeAddCommentProps) {
   const [addRecipeComment, addRecipeCommentResult] = useMutation<
     AddRecipeComment,
     AddRecipeCommentVariables
   >(Mutations.ADD_RECIPE_COMMENT);
+  const [addRecipeReply, addRecipeCommentReply] = useMutation<
+    AddRecipeCommentReply,
+    AddRecipeCommentReplyVariables
+  >(Mutations.ADD_RECIPE_COMMENT_REPLY);
   const [comment, setComment] = useState<string>("");
 
   function handleSubmit() {
-    addRecipeComment({
-      variables: {
-        comment,
-        recipeId,
-      },
-    });
+    if (recipeId) {
+      addRecipeComment({
+        variables: {
+          comment,
+          recipeId,
+        },
+      });
+    }
+    if (commentId) {
+      addRecipeReply({
+        variables: {
+          comment,
+          commentId,
+        },
+      });
+    }
     setComment("");
   }
 
@@ -59,7 +79,7 @@ export default function RecipeAddComment({ recipeId }: RecipeAddCommentProps) {
       <Button
         onPress={handleSubmit}
         accessoryRight={
-          addRecipeCommentResult.loading
+          addRecipeCommentResult.loading || addRecipeCommentReply.loading
             ? () => <Spinner size="small" status="control" />
             : undefined
         }

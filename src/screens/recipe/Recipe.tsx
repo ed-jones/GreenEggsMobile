@@ -127,6 +127,8 @@ const Recipe = ({ route, navigation }: any) => {
           viewMore={() =>
             navigation.navigate("RecipeAllComments", {
               comments: recipe.comments,
+              commentCount: recipe.commentCount,
+              recipeId: recipe.id,
             })
           }
         />

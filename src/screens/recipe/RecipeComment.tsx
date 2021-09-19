@@ -8,14 +8,10 @@ import {
   Spinner,
 } from "@ui-kitten/components";
 import { View, Text, StyleSheet } from "react-native";
-import {
-  comment,
-  comment_comment_data_replies,
-  recipe_recipe_data_comments,
-} from "@greeneggs/types/graphql";
+import { comment, recipe_recipe_data_comments } from "@greeneggs/types/graphql";
 import { useNavigation } from "@react-navigation/core";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { useApolloClient, useLazyQuery } from "@apollo/client";
+import { useApolloClient } from "@apollo/client";
 
 const styles = StyleSheet.create({
   avatar: {
@@ -46,10 +42,10 @@ export default function RecipeComment({
       .then(({ data }) => {
         if (data.comment.data?.replies) {
           navigation.push("RecipeAllComments", {
-            comments: data.comment.data?.replies,
-            commentCount: comment.replyCount,
+            comments: data.comment.data.replies,
+            commentCount: data.comment.data.replyCount,
             isReply: true,
-            commentId: comment.id,
+            commentId: data.comment.data.id,
           });
         }
       });

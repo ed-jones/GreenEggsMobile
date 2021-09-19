@@ -6,17 +6,21 @@ import {
   AddRecipeCommentReply,
   AddRecipeCommentReplyVariables,
   AddRecipeCommentVariables,
+  comment,
   recipe,
   recipeVariables,
 } from "@greeneggs/types/graphql";
 import { Button, Input, Spinner } from "@ui-kitten/components";
 import {
   ApolloCache,
+  useApolloClient,
   useLazyQuery,
   useMutation,
   useQuery,
 } from "@apollo/client";
 import { RecipeFragment } from "@greeneggs/graphql/fragments";
+import { useNavigation } from "@react-navigation/core";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 export const styles = StyleSheet.create({
   view: {
@@ -52,6 +56,8 @@ export default function RecipeAddComment({
     AddRecipeCommentReplyVariables
   >(Mutations.ADD_RECIPE_COMMENT_REPLY);
   const [comment, setComment] = useState<string>("");
+  const navigation: StackNavigationProp<any, any> = useNavigation();
+  const client = useApolloClient();
 
   function handleSubmit() {
     if (recipeId) {
@@ -64,14 +70,35 @@ export default function RecipeAddComment({
       });
     }
     if (commentId) {
-      addRecipeReply({
-        variables: {
-          comment,
-          commentId,
-        },
-        refetchQueries: [Queries.GET_RECIPE, "recipe"],
-      });
+      client
+        .mutate<AddRecipeCommentReply, AddRecipeCommentReplyVariables>({
+          mutation: Mutations.ADD_RECIPE_COMMENT_REPLY,
+          variables: {
+            comment,
+            commentId,
+          },
+        })
+        .then(() => {
+          client
+            .query<comment>({
+              query: Queries.GET_COMMENT,
+              variables: {
+                commentId,
+              },
+            })
+            .then(({ data }) => {
+              if (data.comment.data?.replies) {
+                navigation.push("RecipeAllComments", {
+                  comments: data.comment.data.replies,
+                  commentCount: data.comment.data.replyCount,
+                  isReply: true,
+                  commentId: data.comment.data.id,
+                });
+              }
+            });
+        });
     }
+
     setComment("");
   }
 

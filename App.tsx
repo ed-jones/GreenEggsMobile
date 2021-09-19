@@ -48,6 +48,7 @@ import CreateCategory from "@greeneggs/screens/add-recipe/add-recipe-categories/
 import CreateDiet from "@greeneggs/screens/add-recipe/add-recipe-diets/CreateDiet";
 import RecipeAllComments from "@greeneggs/screens/recipe/RecipeAllComments";
 import RecipeCommentReplies from "@greeneggs/screens/recipe/RecipeCommentReplies";
+import RecipeAllIngredients from "@greeneggs/screens/recipe/RecipeAllIngredients";
 
 const Stack = createStackNavigator();
 
@@ -170,6 +171,10 @@ function App() {
                 <Stack.Screen
                   name="RecipeCommentReplies"
                   component={RecipeCommentReplies}
+                />
+                <Stack.Screen
+                  name="RecipeAllIngredients"
+                  component={RecipeAllIngredients}
                 />
               </>
             )}

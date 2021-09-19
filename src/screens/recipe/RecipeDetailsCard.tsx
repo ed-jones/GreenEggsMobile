@@ -1,10 +1,16 @@
 import React from "react";
-import { LabelledIcon, noavatar } from "@greeneggs/core";
+import { LabelledIcon, Mutations, noavatar } from "@greeneggs/core";
 import { convertTimeEstimate } from "@greeneggs/core/convertTimeEstimate/convertTimeEstimate";
 import ViewMore from "@greeneggs/core/view-more/ViewMore";
 import { View, StyleSheet } from "react-native";
-import { recipe_recipe_data } from "@greeneggs/types/graphql";
+import {
+  LikeRecipe,
+  recipe_recipe_data,
+  UnlikeRecipe,
+} from "@greeneggs/types/graphql";
 import { Text, Card, Avatar } from "@ui-kitten/components";
+import { useMutation } from "@apollo/client";
+import RecipeCategoriesTags from "./RecipeCategoriesTags";
 
 const styles = StyleSheet.create({
   cardSection: {
@@ -34,6 +40,8 @@ const RecipeDetailsCard = ({
   submittedBy,
   likeCount,
   commentCount,
+  categories,
+  id,
 }: IRecipeDetailsCard) => {
   const navigateToDescription = () => {
     navigation.navigate("RecipeDescription", {
@@ -44,18 +52,41 @@ const RecipeDetailsCard = ({
     });
   };
 
+  const [likeRecipe, likeRecipeResult] = useMutation<LikeRecipe>(
+    Mutations.LIKE_RECIPE,
+    {
+      variables: {
+        recipeId: id,
+      },
+    }
+  );
+
+  const [unlikeRecipe, unlikeRecipeResult] = useMutation<UnlikeRecipe>(
+    Mutations.UNLIKE_RECIPE,
+    {
+      variables: {
+        recipeId: id,
+      },
+    }
+  );
+
   return (
     <Card
       header={() => (
-        <View style={{ ...styles.cardSection, ...styles.row }}>
-          <View>
-            <Text category="h5">{title}</Text>
-            <Text category="s1">{subtitle}</Text>
+        <View style={styles.cardSection}>
+          <View style={styles.row}>
+            <View>
+              <Text category="h5">{title}</Text>
+              <Text category="s1">{subtitle}</Text>
+            </View>
+            <LabelledIcon
+              label={convertTimeEstimate(timeEstimate)}
+              iconName="clock-outline"
+            />
           </View>
-          <LabelledIcon
-            label={convertTimeEstimate(timeEstimate)}
-            iconName="clock-outline"
-          />
+          <View style={{ ...styles.row, marginTop: 8 }}>
+            <RecipeCategoriesTags categories={categories} />
+          </View>
         </View>
       )}
       footer={() => (

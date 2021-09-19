@@ -65,8 +65,6 @@ const Recipe = ({ route, navigation }: any) => {
     }
   );
 
-  // const [likeRecipe, likeRecipeResult] =
-
   const navigateBack = () => {
     navigation.goBack();
   };
@@ -110,10 +108,6 @@ const Recipe = ({ route, navigation }: any) => {
       <View style={styles.content}>
         <RecipeDetailsCard {...recipe} navigation={navigation} />
         <RecipeAllergies allergies={recipe.allergies} />
-        <Text category="h5" style={styles.heading}>
-          Categories
-        </Text>
-        <RecipeCategoriesTags categories={recipe.categories} />
         <Text category="h5" style={styles.heading}>
           Ingredients
         </Text>

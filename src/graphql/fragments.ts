@@ -60,14 +60,21 @@ export const RecipeCommentFragment = gql`
     likeCount
     replyCount
     liked
+    submittedBy {
+      ...UserFragment
+    }
     replies {
       id
       contents
       likeCount
       replyCount
       liked
+      submittedBy {
+        ...UserFragment
+      }
     }
   }
+  ${UserFragment}
 `;
 
 export const RecipeFragment = gql`

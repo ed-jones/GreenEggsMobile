@@ -1,10 +1,16 @@
 import React from "react";
-import { Icons, LabelledIcon } from "@greeneggs/core";
-import { ListItem, Button, Divider } from "@ui-kitten/components";
-import { View, Text } from "react-native";
+import { Icons, LabelledIcon, noavatar } from "@greeneggs/core";
+import { ListItem, Button, Divider, Avatar } from "@ui-kitten/components";
+import { View, Text, StyleSheet } from "react-native";
 import { recipe_recipe_data_comments } from "@greeneggs/types/graphql";
 import { useNavigation } from "@react-navigation/core";
 import { StackNavigationProp } from "@react-navigation/stack";
+
+const styles = StyleSheet.create({
+  avatar: {
+    marginRight: 10,
+  },
+});
 
 interface RecipeCommentProps {
   comment: recipe_recipe_data_comments;
@@ -30,8 +36,19 @@ export default function RecipeComment({
               alignItems: "center",
             }}
           >
-            <View>
-              <Text style={{ fontWeight: "bold" }}>Bobby Rutherford</Text>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Avatar
+                size="small"
+                source={
+                  comment.submittedBy.avatarURI
+                    ? { uri: comment.submittedBy.avatarURI }
+                    : noavatar
+                }
+                style={styles.avatar}
+              />
+              <Text
+                style={{ fontWeight: "bold" }}
+              >{`${comment.submittedBy.firstName} ${comment.submittedBy.lastName}`}</Text>
             </View>
             <View style={{ flexDirection: "row" }}>
               <LabelledIcon

@@ -48,6 +48,28 @@ export interface addRecipe_addRecipe_data_steps {
   image: string;
 }
 
+export interface addRecipe_addRecipe_data_comments_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface addRecipe_addRecipe_data_comments_replies_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
 export interface addRecipe_addRecipe_data_comments_replies {
   __typename: "RecipeCommentReply";
   id: string;
@@ -55,6 +77,7 @@ export interface addRecipe_addRecipe_data_comments_replies {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: addRecipe_addRecipe_data_comments_replies_submittedBy;
 }
 
 export interface addRecipe_addRecipe_data_comments {
@@ -64,6 +87,7 @@ export interface addRecipe_addRecipe_data_comments {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: addRecipe_addRecipe_data_comments_submittedBy;
   replies: addRecipe_addRecipe_data_comments_replies[];
 }
 
@@ -454,6 +478,28 @@ export interface UpdateProfileVisibilityVariables {
 // GraphQL mutation operation: AddRecipeComment
 // ====================================================
 
+export interface AddRecipeComment_addComment_data_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface AddRecipeComment_addComment_data_replies_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
 export interface AddRecipeComment_addComment_data_replies {
   __typename: "RecipeCommentReply";
   id: string;
@@ -461,6 +507,7 @@ export interface AddRecipeComment_addComment_data_replies {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: AddRecipeComment_addComment_data_replies_submittedBy;
 }
 
 export interface AddRecipeComment_addComment_data {
@@ -470,6 +517,7 @@ export interface AddRecipeComment_addComment_data {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: AddRecipeComment_addComment_data_submittedBy;
   replies: AddRecipeComment_addComment_data_replies[];
 }
 
@@ -502,6 +550,28 @@ export interface AddRecipeCommentVariables {
 // GraphQL mutation operation: AddRecipeCommentReply
 // ====================================================
 
+export interface AddRecipeCommentReply_replyToComment_data_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface AddRecipeCommentReply_replyToComment_data_replies_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
 export interface AddRecipeCommentReply_replyToComment_data_replies {
   __typename: "RecipeCommentReply";
   id: string;
@@ -509,6 +579,7 @@ export interface AddRecipeCommentReply_replyToComment_data_replies {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: AddRecipeCommentReply_replyToComment_data_replies_submittedBy;
 }
 
 export interface AddRecipeCommentReply_replyToComment_data {
@@ -518,6 +589,7 @@ export interface AddRecipeCommentReply_replyToComment_data {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: AddRecipeCommentReply_replyToComment_data_submittedBy;
   replies: AddRecipeCommentReply_replyToComment_data_replies[];
 }
 
@@ -591,6 +663,28 @@ export interface recipes_recipes_data_steps {
   image: string;
 }
 
+export interface recipes_recipes_data_comments_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface recipes_recipes_data_comments_replies_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
 export interface recipes_recipes_data_comments_replies {
   __typename: "RecipeCommentReply";
   id: string;
@@ -598,6 +692,7 @@ export interface recipes_recipes_data_comments_replies {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: recipes_recipes_data_comments_replies_submittedBy;
 }
 
 export interface recipes_recipes_data_comments {
@@ -607,6 +702,7 @@ export interface recipes_recipes_data_comments {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: recipes_recipes_data_comments_submittedBy;
   replies: recipes_recipes_data_comments_replies[];
 }
 
@@ -704,6 +800,28 @@ export interface NewsFeed_newsFeed_data_steps {
   image: string;
 }
 
+export interface NewsFeed_newsFeed_data_comments_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface NewsFeed_newsFeed_data_comments_replies_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
 export interface NewsFeed_newsFeed_data_comments_replies {
   __typename: "RecipeCommentReply";
   id: string;
@@ -711,6 +829,7 @@ export interface NewsFeed_newsFeed_data_comments_replies {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: NewsFeed_newsFeed_data_comments_replies_submittedBy;
 }
 
 export interface NewsFeed_newsFeed_data_comments {
@@ -720,6 +839,7 @@ export interface NewsFeed_newsFeed_data_comments {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: NewsFeed_newsFeed_data_comments_submittedBy;
   replies: NewsFeed_newsFeed_data_comments_replies[];
 }
 
@@ -814,6 +934,28 @@ export interface Trending_trending_data_steps {
   image: string;
 }
 
+export interface Trending_trending_data_comments_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface Trending_trending_data_comments_replies_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
 export interface Trending_trending_data_comments_replies {
   __typename: "RecipeCommentReply";
   id: string;
@@ -821,6 +963,7 @@ export interface Trending_trending_data_comments_replies {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: Trending_trending_data_comments_replies_submittedBy;
 }
 
 export interface Trending_trending_data_comments {
@@ -830,6 +973,7 @@ export interface Trending_trending_data_comments {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: Trending_trending_data_comments_submittedBy;
   replies: Trending_trending_data_comments_replies[];
 }
 
@@ -924,6 +1068,28 @@ export interface recipe_recipe_data_steps {
   image: string;
 }
 
+export interface recipe_recipe_data_comments_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface recipe_recipe_data_comments_replies_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
 export interface recipe_recipe_data_comments_replies {
   __typename: "RecipeCommentReply";
   id: string;
@@ -931,6 +1097,7 @@ export interface recipe_recipe_data_comments_replies {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: recipe_recipe_data_comments_replies_submittedBy;
 }
 
 export interface recipe_recipe_data_comments {
@@ -940,6 +1107,7 @@ export interface recipe_recipe_data_comments {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: recipe_recipe_data_comments_submittedBy;
   replies: recipe_recipe_data_comments_replies[];
 }
 
@@ -1191,6 +1359,28 @@ export interface FullUserFragment {
 // GraphQL fragment: RecipeCommentFragment
 // ====================================================
 
+export interface RecipeCommentFragment_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface RecipeCommentFragment_replies_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
 export interface RecipeCommentFragment_replies {
   __typename: "RecipeCommentReply";
   id: string;
@@ -1198,6 +1388,7 @@ export interface RecipeCommentFragment_replies {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: RecipeCommentFragment_replies_submittedBy;
 }
 
 export interface RecipeCommentFragment {
@@ -1207,6 +1398,7 @@ export interface RecipeCommentFragment {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: RecipeCommentFragment_submittedBy;
   replies: RecipeCommentFragment_replies[];
 }
 
@@ -1260,6 +1452,28 @@ export interface RecipeFragment_steps {
   image: string;
 }
 
+export interface RecipeFragment_comments_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface RecipeFragment_comments_replies_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
 export interface RecipeFragment_comments_replies {
   __typename: "RecipeCommentReply";
   id: string;
@@ -1267,6 +1481,7 @@ export interface RecipeFragment_comments_replies {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: RecipeFragment_comments_replies_submittedBy;
 }
 
 export interface RecipeFragment_comments {
@@ -1276,6 +1491,7 @@ export interface RecipeFragment_comments {
   likeCount: number;
   replyCount: number;
   liked: boolean;
+  submittedBy: RecipeFragment_comments_submittedBy;
   replies: RecipeFragment_comments_replies[];
 }
 

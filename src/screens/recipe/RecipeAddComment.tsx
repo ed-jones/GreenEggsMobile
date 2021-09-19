@@ -58,7 +58,6 @@ export default function RecipeAddComment({
   active,
 }: RecipeAddCommentProps) {
   const [comment, setComment] = useState<string>("");
-  const navigation: StackNavigationProp<any, any> = useNavigation();
   const client = useApolloClient();
   const { loading, error, data } = useQuery<Me>(Queries.ME);
   if (loading) return <LoadingScreen />;

@@ -92,6 +92,7 @@ export const RecipeFragment = gql`
     servingCount
     timeEstimate
     coverImage
+    liked
     categories {
       name
     }

@@ -1,5 +1,5 @@
 import React from "react";
-import { LabelledIcon, Mutations, noavatar } from "@greeneggs/core";
+import { LabelledIcon, Mutations, noavatar, Queries } from "@greeneggs/core";
 import { convertTimeEstimate } from "@greeneggs/core/convertTimeEstimate/convertTimeEstimate";
 import ViewMore from "@greeneggs/core/view-more/ViewMore";
 import { View, StyleSheet } from "react-native";
@@ -42,6 +42,7 @@ const RecipeDetailsCard = ({
   commentCount,
   categories,
   id,
+  liked,
 }: IRecipeDetailsCard) => {
   const navigateToDescription = () => {
     navigation.navigate("RecipeDescription", {
@@ -52,23 +53,19 @@ const RecipeDetailsCard = ({
     });
   };
 
-  const [likeRecipe, likeRecipeResult] = useMutation<LikeRecipe>(
-    Mutations.LIKE_RECIPE,
-    {
-      variables: {
-        recipeId: id,
-      },
-    }
-  );
+  const [likeRecipe] = useMutation<LikeRecipe>(Mutations.LIKE_RECIPE, {
+    variables: {
+      recipeId: id,
+    },
+    refetchQueries: [Queries.GET_RECIPE, "recipe"],
+  });
 
-  const [unlikeRecipe, unlikeRecipeResult] = useMutation<UnlikeRecipe>(
-    Mutations.UNLIKE_RECIPE,
-    {
-      variables: {
-        recipeId: id,
-      },
-    }
-  );
+  const [unlikeRecipe] = useMutation<UnlikeRecipe>(Mutations.UNLIKE_RECIPE, {
+    variables: {
+      recipeId: id,
+    },
+    refetchQueries: [Queries.GET_RECIPE, "recipe"],
+  });
 
   return (
     <Card
@@ -111,7 +108,11 @@ const RecipeDetailsCard = ({
           <Text>{`${submittedBy.firstName} ${submittedBy.lastName}`}</Text>
         </View>
         <View style={styles.row}>
-          <LabelledIcon label={String(likeCount)} iconName="heart-outline" />
+          <LabelledIcon
+            label={String(likeCount)}
+            iconName={liked ? "heart" : "heart-outline"}
+            onPress={liked ? unlikeRecipe : likeRecipe}
+          />
           <LabelledIcon
             label={String(commentCount)}
             iconName="message-square-outline"

@@ -102,3 +102,18 @@ export const GET_ALLERGIES = gql`
   ${Fragments.AllergyFragment}
   ${Fragments.ErrorFragment}
 `;
+
+export const GET_COMMENT = gql`
+  query comment($commentId: String!) {
+    comment(commentId: $commentId) {
+      data {
+        ...RecipeCommentFragment
+      }
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.RecipeCommentFragment}
+  ${Fragments.ErrorFragment}
+`;

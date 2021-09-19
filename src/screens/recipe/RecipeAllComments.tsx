@@ -7,7 +7,7 @@ import {
   Text,
 } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/core";
-import { Icons } from "@greeneggs/core";
+import { Icons, Queries } from "@greeneggs/core";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const styles = StyleSheet.create({

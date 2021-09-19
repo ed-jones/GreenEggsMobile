@@ -1,10 +1,21 @@
-import React from "react";
-import { Icons, LabelledIcon, noavatar } from "@greeneggs/core";
-import { ListItem, Button, Divider, Avatar } from "@ui-kitten/components";
+import React, { useEffect, useState } from "react";
+import { LabelledIcon, noavatar, Queries } from "@greeneggs/core";
+import {
+  ListItem,
+  Button,
+  Divider,
+  Avatar,
+  Spinner,
+} from "@ui-kitten/components";
 import { View, Text, StyleSheet } from "react-native";
-import { recipe_recipe_data_comments } from "@greeneggs/types/graphql";
+import {
+  comment,
+  comment_comment_data_replies,
+  recipe_recipe_data_comments,
+} from "@greeneggs/types/graphql";
 import { useNavigation } from "@react-navigation/core";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { useApolloClient, useLazyQuery } from "@apollo/client";
 
 const styles = StyleSheet.create({
   avatar: {
@@ -22,6 +33,28 @@ export default function RecipeComment({
   replyButton,
 }: RecipeCommentProps) {
   const navigation: StackNavigationProp<any, any> = useNavigation();
+  const client = useApolloClient();
+
+  function handleLoadReplies() {
+    client
+      .query<comment>({
+        query: Queries.GET_COMMENT,
+        variables: {
+          commentId: comment.id,
+        },
+      })
+      .then(({ data }) => {
+        if (data.comment.data?.replies) {
+          navigation.push("RecipeAllComments", {
+            comments: data.comment.data?.replies,
+            commentCount: comment.replyCount,
+            isReply: true,
+            commentId: comment.id,
+          });
+        }
+      });
+  }
+
   return (
     <>
       <ListItem>
@@ -75,13 +108,7 @@ export default function RecipeComment({
               }}
             >
               <Button
-                onPress={() =>
-                  navigation.push("RecipeAllComments", {
-                    comments: comment.replies,
-                    commentCount: comment.replyCount,
-                    isReply: true,
-                  })
-                }
+                onPress={handleLoadReplies}
                 size="small"
                 status="basic"
               >{`SHOW ALL REPLIES (${comment.replyCount.toString()})`}</Button>

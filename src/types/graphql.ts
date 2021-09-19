@@ -1266,6 +1266,77 @@ export interface Allergies {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: comment
+// ====================================================
+
+export interface comment_comment_data_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface comment_comment_data_replies_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface comment_comment_data_replies {
+  __typename: "RecipeCommentReply";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  submittedBy: comment_comment_data_replies_submittedBy;
+}
+
+export interface comment_comment_data {
+  __typename: "RecipeComment";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  submittedBy: comment_comment_data_submittedBy;
+  replies: comment_comment_data_replies[];
+}
+
+export interface comment_comment_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface comment_comment {
+  __typename: "CommentResult";
+  data: comment_comment_data | null;
+  error: comment_comment_error | null;
+}
+
+export interface comment {
+  comment: comment_comment;
+}
+
+export interface commentVariables {
+  commentId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: UserFragment
 // ====================================================
 

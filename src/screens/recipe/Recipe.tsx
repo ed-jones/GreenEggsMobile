@@ -20,6 +20,7 @@ import RecipeDirections from "./RecipeDirections";
 import RecipeCommentList from "./RecipeCommentList";
 import LoadingScreen from "../loading/LoadingScreen";
 import RecipeAddComment from "./RecipeAddComment";
+import ViewMore from "@greeneggs/core/view-more/ViewMore";
 
 const styles = StyleSheet.create({
   coverPhoto: {
@@ -122,19 +123,22 @@ const Recipe = ({ route, navigation }: any) => {
         <Text category="h5" style={styles.heading}>
           {`Comments (${recipe.commentCount.toString()})`}
         </Text>
-        <RecipeCommentList
-          comments={recipe.comments.slice(0, 3)}
-          viewMore={() =>
-            navigation.navigate("RecipeAllComments", {
-              comments: recipe.comments,
-              commentCount: recipe.commentCount,
-              recipeId: recipe.id,
-            })
-          }
-        />
-        <View style={{ marginTop: 24 }}>
+        <View style={{ marginBottom: 24 }}>
           <RecipeAddComment recipeId={recipe.id} />
         </View>
+        <RecipeCommentList comments={recipe.comments.slice(0, 3)} />
+        {recipe.comments.length >= 3 && (
+          <ViewMore
+            style={{ marginHorizontal: -16 }}
+            onPress={() =>
+              navigation.navigate("RecipeAllComments", {
+                comments: recipe.comments,
+                commentCount: recipe.commentCount,
+                recipeId: recipe.id,
+              })
+            }
+          />
+        )}
       </View>
     </ParallaxHeader>
   );

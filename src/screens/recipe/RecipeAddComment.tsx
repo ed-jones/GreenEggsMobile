@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
-import { Icons, Mutations, Queries } from "@greeneggs/core";
+import { StyleSheet, View } from "react-native";
+import { Icons, Mutations, noavatar, Queries } from "@greeneggs/core";
 import {
   AddRecipeComment,
   AddRecipeCommentReply,
   AddRecipeCommentReplyVariables,
   AddRecipeCommentVariables,
   comment,
+  Me,
   recipe,
   recipeVariables,
 } from "@greeneggs/types/graphql";
-import { Button, Input, Spinner } from "@ui-kitten/components";
+import { Avatar, Button, Input, Text } from "@ui-kitten/components";
 import {
   ApolloCache,
   useApolloClient,
@@ -21,6 +22,7 @@ import {
 import { RecipeFragment } from "@greeneggs/graphql/fragments";
 import { useNavigation } from "@react-navigation/core";
 import { StackNavigationProp } from "@react-navigation/stack";
+import LoadingScreen from "../loading/LoadingScreen";
 
 export const styles = StyleSheet.create({
   view: {
@@ -35,68 +37,65 @@ export const styles = StyleSheet.create({
   },
   input: {
     marginBottom: 10,
+    flex: 1,
+  },
+  avatar: {
+    marginRight: 10,
   },
 });
 
 interface RecipeAddCommentProps {
   recipeId?: string;
   commentId?: string;
+  isReply?: boolean;
+  active?: boolean;
 }
 
 export default function RecipeAddComment({
   recipeId,
   commentId,
+  isReply,
+  active,
 }: RecipeAddCommentProps) {
-  const [addRecipeComment, addRecipeCommentResult] = useMutation<
-    AddRecipeComment,
-    AddRecipeCommentVariables
-  >(Mutations.ADD_RECIPE_COMMENT);
-  const [addRecipeReply, addRecipeCommentReply] = useMutation<
-    AddRecipeCommentReply,
-    AddRecipeCommentReplyVariables
-  >(Mutations.ADD_RECIPE_COMMENT_REPLY);
   const [comment, setComment] = useState<string>("");
   const navigation: StackNavigationProp<any, any> = useNavigation();
   const client = useApolloClient();
+  const { loading, error, data } = useQuery<Me>(Queries.ME);
+  if (loading) return <LoadingScreen />;
+  if (error) {
+    return <Text>Error! {error.message}</Text>;
+  }
+  const me = data?.me.data;
 
   function handleSubmit() {
     if (recipeId) {
-      addRecipeComment({
+      client
+        .mutate<AddRecipeComment, AddRecipeCommentVariables>({
+          mutation: Mutations.ADD_RECIPE_COMMENT,
+          variables: {
+            comment,
+            recipeId,
+          },
+          refetchQueries: [Queries.GET_RECIPE, "recipe"],
+        })
+        .then(() => {
+          client.query<recipe>({
+            query: Queries.GET_RECIPE,
+            variables: {
+              recipeId,
+            },
+          });
+        });
+    }
+    if (commentId) {
+      client.mutate<AddRecipeCommentReply, AddRecipeCommentReplyVariables>({
+        mutation: Mutations.ADD_RECIPE_COMMENT_REPLY,
         variables: {
           comment,
-          recipeId,
+          commentId,
         },
         refetchQueries: [Queries.GET_RECIPE, "recipe"],
       });
-    }
-    if (commentId) {
-      client
-        .mutate<AddRecipeCommentReply, AddRecipeCommentReplyVariables>({
-          mutation: Mutations.ADD_RECIPE_COMMENT_REPLY,
-          variables: {
-            comment,
-            commentId,
-          },
-        })
-        .then(() => {
-          client
-            .query<comment>({
-              query: Queries.GET_COMMENT,
-              variables: {
-                commentId,
-              },
-            })
-            .then(({ data }) => {
-              if (data.comment.data?.replies) {
-                navigation.push("RecipeAllComments", {
-                  comments: data.comment.data.replies,
-                  commentCount: data.comment.data.replyCount,
-                  isReply: true,
-                  commentId: data.comment.data.id,
-                });
-              }
-            });
-        });
     }
 
     setComment("");
@@ -104,25 +103,41 @@ export default function RecipeAddComment({
 
   return (
     <>
-      <Input
-        style={styles.input}
-        numberOfLines={5}
-        multiline
-        textAlignVertical="top"
-        placeholder="Add a comment here..."
-        value={comment}
-        onChangeText={(newValue) => setComment(newValue)}
-      />
-      <Button
-        onPress={handleSubmit}
-        accessoryRight={
-          addRecipeCommentResult.loading || addRecipeCommentReply.loading
-            ? () => <Spinner size="small" status="control" />
-            : undefined
-        }
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          marginBottom: 16,
+        }}
       >
-        ADD COMMENT
-      </Button>
+        <View
+          style={{
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            height: "100%",
+          }}
+        >
+          <Avatar
+            size="small"
+            source={me?.avatarURI ? { uri: me?.avatarURI } : noavatar}
+            style={styles.avatar}
+          />
+        </View>
+        <Input
+          autoFocus={active}
+          style={styles.input}
+          numberOfLines={3}
+          multiline
+          textAlignVertical="top"
+          placeholder={`Write a ${isReply ? "reply" : "comment"}...`}
+          value={comment}
+          onChangeText={(newValue) => setComment(newValue)}
+        />
+      </View>
+
+      <Button onPress={handleSubmit}>{`POST ${
+        isReply ? "REPLY" : "COMMENT"
+      }`}</Button>
     </>
   );
 }

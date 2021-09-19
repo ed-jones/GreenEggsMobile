@@ -8,7 +8,11 @@ import {
   Spinner,
 } from "@ui-kitten/components";
 import { View, Text, StyleSheet } from "react-native";
-import { comment, recipe_recipe_data_comments } from "@greeneggs/types/graphql";
+import {
+  comment,
+  recipe_recipe_data_comments,
+  recipe_recipe_data_comments_replies,
+} from "@greeneggs/types/graphql";
 import { useNavigation } from "@react-navigation/core";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useApolloClient } from "@apollo/client";
@@ -20,7 +24,7 @@ const styles = StyleSheet.create({
 });
 
 interface RecipeCommentProps {
-  comment: recipe_recipe_data_comments;
+  comment: recipe_recipe_data_comments | recipe_recipe_data_comments_replies;
   replyButton?: boolean;
 }
 
@@ -55,9 +59,6 @@ export default function RecipeComment({
     <>
       <ListItem>
         <View style={{ flexDirection: "column", padding: 10, width: "100%" }}>
-          <Text numberOfLines={2} style={{ marginBottom: 16 }}>
-            {comment.contents}
-          </Text>
           <View
             style={{
               flexDirection: "row",
@@ -88,13 +89,18 @@ export default function RecipeComment({
                 label="Reply"
                 iconName="message-square-outline"
                 onPress={() =>
-                  navigation.push("RecipeCommentReplies", {
-                    comment,
+                  navigation.navigate("RecipeCommentReplies", {
+                    commentId: comment.id,
+                    replying: true,
                   })
                 }
               />
             </View>
           </View>
+
+          <Text numberOfLines={2} style={{ marginTop: 16 }}>
+            {comment.contents}
+          </Text>
           {comment.replyCount > 0 && replyButton && (
             <View
               style={{
@@ -104,7 +110,12 @@ export default function RecipeComment({
               }}
             >
               <Button
-                onPress={handleLoadReplies}
+                onPress={() =>
+                  navigation.push("RecipeCommentReplies", {
+                    commentId: comment.id,
+                    replying: false,
+                  })
+                }
                 size="small"
                 status="basic"
               >{`SHOW ALL REPLIES (${comment.replyCount.toString()})`}</Button>

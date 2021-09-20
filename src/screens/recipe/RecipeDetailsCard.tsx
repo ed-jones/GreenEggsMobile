@@ -43,6 +43,7 @@ const RecipeDetailsCard = ({
   categories,
   id,
   liked,
+  comments,
 }: IRecipeDetailsCard) => {
   const navigateToDescription = () => {
     navigation.navigate("RecipeDescription", {
@@ -116,6 +117,12 @@ const RecipeDetailsCard = ({
           <LabelledIcon
             label={String(commentCount)}
             iconName="message-square-outline"
+            onPress={() => {
+              navigation.navigate("RecipeAllComments", {
+                comments,
+                commentCount,
+              });
+            }}
           />
         </View>
       </View>

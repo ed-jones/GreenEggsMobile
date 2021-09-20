@@ -19,12 +19,18 @@ interface ILabelledIconProps {
   iconName: string;
   label: string;
   onPress?: () => void;
+  fill?: string;
 }
 
-const LabelledIcon = ({ iconName, label, onPress }: ILabelledIconProps) => (
+const LabelledIcon = ({
+  iconName,
+  label,
+  onPress,
+  fill,
+}: ILabelledIconProps) => (
   <Pressable onPress={onPress}>
     <View style={styles.view}>
-      <Icon style={styles.icon} name={iconName} fill="black" />
+      <Icon style={styles.icon} name={iconName} fill={fill || "black"} />
       <Text>{label}</Text>
     </View>
   </Pressable>

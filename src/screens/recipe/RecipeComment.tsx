@@ -6,18 +6,22 @@ import {
   Divider,
   Avatar,
   Spinner,
+  Icon,
 } from "@ui-kitten/components";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import {
   comment,
+  DeleteComment,
   LikeComment,
+  Me,
   recipe_recipe_data_comments,
   recipe_recipe_data_comments_replies,
   UnlikeComment,
 } from "@greeneggs/types/graphql";
 import { useNavigation } from "@react-navigation/core";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { useApolloClient, useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
+import LoadingScreen from "../loading/LoadingScreen";
 
 const styles = StyleSheet.create({
   avatar: {
@@ -49,6 +53,35 @@ export default function RecipeComment({
     },
     refetchQueries: [Queries.GET_RECIPE, "recipe"],
   });
+
+  const [deleteComment] = useMutation<DeleteComment>(Mutations.DELETE_COMMENT, {
+    variables: {
+      commentId: comment.id,
+    },
+    refetchQueries: [Queries.GET_RECIPE, "recipe"],
+  });
+
+  const { loading, error, data } = useQuery<Me>(Queries.ME);
+  if (loading) return <LoadingScreen />;
+  if (error) {
+    return <Text>Error! {error.message}</Text>;
+  }
+  const me = data?.me.data;
+
+  function handleDeleteComment() {
+    Alert.alert(
+      "Delete comment?",
+      "If you delete your comment any replies will still be visible",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => deleteComment() },
+      ],
+      { cancelable: false }
+    );
+  }
 
   return (
     <>
@@ -91,9 +124,16 @@ export default function RecipeComment({
                   })
                 }
               />
+              {me?.id === comment.submittedBy.id && (
+                <Icon
+                  name="trash-2-outline"
+                  fill="red"
+                  style={{ width: 24, height: 24, marginRight: 8 }}
+                  onPress={handleDeleteComment}
+                />
+              )}
             </View>
           </View>
-
           <Text numberOfLines={2} style={{ marginTop: 16 }}>
             {comment.contents}
           </Text>

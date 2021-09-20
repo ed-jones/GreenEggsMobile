@@ -9,7 +9,7 @@ import {
   UnionLike,
 } from "react-hook-form";
 import { View } from "react-native";
-import { numberToString, stringToNumber } from "./ControlledInput";
+import { numberToString, stringToNumber } from "./utils";
 
 interface ITimeFields {
   hours?: number | null;

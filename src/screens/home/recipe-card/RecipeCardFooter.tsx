@@ -42,6 +42,7 @@ const RecipeCardFooter = ({
   commentCount,
   likeCount,
   timeEstimate,
+  createdAt,
 }: IRecipeCardFooterProps) => (
   <View style={styles.view}>
     <View style={styles.labelledIcons}>
@@ -54,7 +55,7 @@ const RecipeCardFooter = ({
         </Text>
       </View>
       <View style={styles.labelledIconGroup}>
-        <Text>16 hours ago</Text>
+        <Text>{convertTimeEstimate(createdAt)}</Text>
       </View>
     </View>
     <View style={styles.labelledIcons}>

@@ -21,6 +21,8 @@ import {
 import { useNavigation } from "@react-navigation/core";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useMutation, useQuery } from "@apollo/client";
+import { convertTimeEstimate } from "@greeneggs/core/convertTimeEstimate/convertTimeEstimate";
+
 import LoadingScreen from "../loading/LoadingScreen";
 
 const styles = StyleSheet.create({
@@ -109,6 +111,9 @@ export default function RecipeComment({
                 <Text
                   style={{ fontWeight: "bold" }}
                 >{`${comment.submittedBy.firstName} ${comment.submittedBy.lastName}`}</Text>
+                <Text style={{ marginLeft: 6 }}>
+                  {convertTimeEstimate(comment.createdAt)} ago
+                </Text>
               </View>
               <View style={{ flexDirection: "row" }}>
                 <LabelledIcon

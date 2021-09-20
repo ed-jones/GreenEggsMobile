@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 });
 
 interface RecipeCommentProps {
-  comment: recipe_recipe_data_comments | recipe_recipe_data_comments_replies;
+  comment: recipe_recipe_data_comments;
   replyButton?: boolean;
 }
 
@@ -70,8 +70,8 @@ export default function RecipeComment({
 
   function handleDeleteComment() {
     Alert.alert(
-      "Delete comment?",
-      "If you delete your comment any replies will still be visible",
+      "Delete comment",
+      "This action cannot be undone",
       [
         {
           text: "Cancel",
@@ -87,56 +87,57 @@ export default function RecipeComment({
     <>
       <ListItem>
         <View style={{ flexDirection: "column", padding: 10, width: "100%" }}>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Avatar
-                size="small"
-                source={
-                  comment.submittedBy.avatarURI
-                    ? { uri: comment.submittedBy.avatarURI }
-                    : noavatar
-                }
-                style={styles.avatar}
-              />
-              <Text
-                style={{ fontWeight: "bold" }}
-              >{`${comment.submittedBy.firstName} ${comment.submittedBy.lastName}`}</Text>
-            </View>
-            <View style={{ flexDirection: "row" }}>
-              <LabelledIcon
-                label={comment.likeCount.toString()}
-                iconName={comment.liked ? "heart" : "heart-outline"}
-                onPress={comment.liked ? unlikeComment : likeComment}
-              />
-              <LabelledIcon
-                label="Reply"
-                iconName="message-square-outline"
-                onPress={() =>
-                  navigation.navigate("RecipeCommentReplies", {
-                    commentId: comment.id,
-                    replying: true,
-                  })
-                }
-              />
-              {me?.id === comment.submittedBy.id && (
-                <Icon
-                  name="trash-2-outline"
-                  fill="red"
-                  style={{ width: 24, height: 24, marginRight: 8 }}
-                  onPress={handleDeleteComment}
+          {!comment.deleted && (
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: 16,
+              }}
+            >
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Avatar
+                  size="small"
+                  source={
+                    comment.submittedBy.avatarURI
+                      ? { uri: comment.submittedBy.avatarURI }
+                      : noavatar
+                  }
+                  style={styles.avatar}
                 />
-              )}
+                <Text
+                  style={{ fontWeight: "bold" }}
+                >{`${comment.submittedBy.firstName} ${comment.submittedBy.lastName}`}</Text>
+              </View>
+              <View style={{ flexDirection: "row" }}>
+                <LabelledIcon
+                  label={comment.likeCount.toString()}
+                  iconName={comment.liked ? "heart" : "heart-outline"}
+                  onPress={comment.liked ? unlikeComment : likeComment}
+                />
+                <LabelledIcon
+                  label="Reply"
+                  iconName="message-square-outline"
+                  onPress={() =>
+                    navigation.navigate("RecipeCommentReplies", {
+                      commentId: comment.id,
+                      replying: true,
+                    })
+                  }
+                />
+                {me?.id === comment.submittedBy.id && (
+                  <Icon
+                    name="trash-2-outline"
+                    fill="red"
+                    style={{ width: 24, height: 24, marginRight: 8 }}
+                    onPress={handleDeleteComment}
+                  />
+                )}
+              </View>
             </View>
-          </View>
-          <Text numberOfLines={2} style={{ marginTop: 16 }}>
-            {comment.contents}
-          </Text>
+          )}
+          <Text numberOfLines={2}>{comment.contents}</Text>
           {comment.replyCount > 0 && replyButton && (
             <View
               style={{

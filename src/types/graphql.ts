@@ -88,6 +88,7 @@ export interface addRecipe_addRecipe_data_comments {
   replyCount: number;
   liked: boolean;
   createdAt: string;
+  deleted: boolean;
   submittedBy: addRecipe_addRecipe_data_comments_submittedBy;
   replies: addRecipe_addRecipe_data_comments_replies[];
 }
@@ -520,6 +521,7 @@ export interface AddRecipeComment_addComment_data {
   replyCount: number;
   liked: boolean;
   createdAt: string;
+  deleted: boolean;
   submittedBy: AddRecipeComment_addComment_data_submittedBy;
   replies: AddRecipeComment_addComment_data_replies[];
 }
@@ -593,6 +595,7 @@ export interface AddRecipeCommentReply_replyToComment_data {
   replyCount: number;
   liked: boolean;
   createdAt: string;
+  deleted: boolean;
   submittedBy: AddRecipeCommentReply_replyToComment_data_submittedBy;
   replies: AddRecipeCommentReply_replyToComment_data_replies[];
 }
@@ -842,6 +845,7 @@ export interface recipes_recipes_data_comments {
   replyCount: number;
   liked: boolean;
   createdAt: string;
+  deleted: boolean;
   submittedBy: recipes_recipes_data_comments_submittedBy;
   replies: recipes_recipes_data_comments_replies[];
 }
@@ -981,6 +985,7 @@ export interface NewsFeed_newsFeed_data_comments {
   replyCount: number;
   liked: boolean;
   createdAt: string;
+  deleted: boolean;
   submittedBy: NewsFeed_newsFeed_data_comments_submittedBy;
   replies: NewsFeed_newsFeed_data_comments_replies[];
 }
@@ -1117,6 +1122,7 @@ export interface Trending_trending_data_comments {
   replyCount: number;
   liked: boolean;
   createdAt: string;
+  deleted: boolean;
   submittedBy: Trending_trending_data_comments_submittedBy;
   replies: Trending_trending_data_comments_replies[];
 }
@@ -1253,6 +1259,7 @@ export interface recipe_recipe_data_comments {
   replyCount: number;
   liked: boolean;
   createdAt: string;
+  deleted: boolean;
   submittedBy: recipe_recipe_data_comments_submittedBy;
   replies: recipe_recipe_data_comments_replies[];
 }
@@ -1456,6 +1463,7 @@ export interface comment_comment_data {
   replyCount: number;
   liked: boolean;
   createdAt: string;
+  deleted: boolean;
   submittedBy: comment_comment_data_submittedBy;
   replies: comment_comment_data_replies[];
 }
@@ -1618,6 +1626,7 @@ export interface RecipeCommentFragment {
   replyCount: number;
   liked: boolean;
   createdAt: string;
+  deleted: boolean;
   submittedBy: RecipeCommentFragment_submittedBy;
   replies: RecipeCommentFragment_replies[];
 }
@@ -1712,6 +1721,7 @@ export interface RecipeFragment_comments {
   replyCount: number;
   liked: boolean;
   createdAt: string;
+  deleted: boolean;
   submittedBy: RecipeFragment_comments_submittedBy;
   replies: RecipeFragment_comments_replies[];
 }

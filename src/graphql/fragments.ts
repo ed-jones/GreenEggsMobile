@@ -61,6 +61,7 @@ export const RecipeCommentFragment = gql`
     replyCount
     liked
     createdAt
+    deleted
     submittedBy {
       ...UserFragment
     }

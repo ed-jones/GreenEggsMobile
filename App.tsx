@@ -175,6 +175,10 @@ function App() {
                   name="RecipeAllIngredients"
                   component={Screens.RecipeAllIngredients}
                 />
+                <Stack.Screen
+                  name="RecipeDirectionExpanded"
+                  component={Screens.RecipeDirectionExpanded}
+                />
               </>
             )}
           </Stack.Navigator>

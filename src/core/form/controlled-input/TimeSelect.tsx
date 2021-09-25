@@ -75,7 +75,7 @@ const TimeInput = <FieldValues,>({
       minutes: newMinutes !== null ? newMinutes || oldMinutes : null,
     });
 
-    onChange(milliseconds);
+    onChange(numberToString(milliseconds));
   };
 
   return (

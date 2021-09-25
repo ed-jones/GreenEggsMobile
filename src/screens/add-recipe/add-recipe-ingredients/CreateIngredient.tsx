@@ -59,24 +59,7 @@ const CreateIngredientForm = ({ navigation, append }: RecipeFormPart) => {
         type={InputType.TEXT}
       />
       <View style={{ flexDirection: "row" }}>
-        <ControlledInput<IngredientInput>
-          controllerProps={{
-            shouldUnregister: true,
-            name: `unit`,
-            control: form.control,
-            rules: {
-              ...Rules.UNDER100CHARS,
-            },
-          }}
-          inputProps={{
-            label: "UNIT (OPTIONAL)",
-            placeholder: "Cups",
-            defaultValue: "",
-            style: { width: "70%", ...addRecipeStyles.input },
-          }}
-          type={InputType.TEXT}
-        />
-        <ControlledInput<IngredientInput>
+      <ControlledInput<IngredientInput>
           controllerProps={{
             shouldUnregister: true,
             name: `quantity`,
@@ -96,6 +79,23 @@ const CreateIngredientForm = ({ navigation, append }: RecipeFormPart) => {
             style: { width: "30%", ...addRecipeStyles.input },
           }}
           type={InputType.NUMERIC}
+        />
+        <ControlledInput<IngredientInput>
+          controllerProps={{
+            shouldUnregister: true,
+            name: `unit`,
+            control: form.control,
+            rules: {
+              ...Rules.UNDER100CHARS,
+            },
+          }}
+          inputProps={{
+            label: "UNIT (OPTIONAL)",
+            placeholder: "Cups",
+            defaultValue: "",
+            style: { width: "70%", ...addRecipeStyles.input },
+          }}
+          type={InputType.TEXT}
         />
       </View>
       <Button

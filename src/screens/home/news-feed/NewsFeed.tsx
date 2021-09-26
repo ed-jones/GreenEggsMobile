@@ -2,7 +2,10 @@ import * as React from "react";
 import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { useQuery } from "@apollo/client";
-import { NewsFeed as NewsFeedType, NewsFeedVariables } from "@greeneggs/types/graphql";
+import {
+  NewsFeed as NewsFeedType,
+  NewsFeedVariables,
+} from "@greeneggs/types/graphql";
 import { Queries, Alert } from "@greeneggs/core";
 
 import LoadingScreen from "../../loading/LoadingScreen";
@@ -22,14 +25,15 @@ const styles = StyleSheet.create({
 });
 
 export default function NewsFeed({ navigation }: any) {
-  const { loading, error, data, refetch } = useQuery<NewsFeedType, NewsFeedVariables>(
-    Queries.NEWS_FEED, {
-      variables: {
-        offset: 0,
-        limit: 10,
-      }
-    }
-  );
+  const { loading, error, data, refetch } = useQuery<
+    NewsFeedType,
+    NewsFeedVariables
+  >(Queries.NEWS_FEED, {
+    variables: {
+      offset: 0,
+      limit: 10,
+    },
+  });
 
   if (loading) return <LoadingScreen />;
   if (error) {
@@ -42,27 +46,29 @@ export default function NewsFeed({ navigation }: any) {
         <RefreshControl refreshing={loading} onRefresh={refetch} />
       }
     >
-      {
-        (data?.newsFeed?.data && data?.newsFeed?.data.length > 0) ? (
-          data?.newsFeed.data?.map((recipe, i: number) => (
-            <View
-              key={recipe?.id}
-              style={
-                i === 0 ? { ...styles.firstCard, ...styles.card } : styles.card
+      {data?.newsFeed?.data && data?.newsFeed?.data.length > 0 ? (
+        data?.newsFeed.data?.map((recipe, i: number) => (
+          <View
+            key={recipe?.id}
+            style={
+              i === 0 ? { ...styles.firstCard, ...styles.card } : styles.card
+            }
+          >
+            <RecipeCard
+              recipe={recipe!}
+              onPress={() =>
+                navigation.navigate("Recipe", { recipeId: recipe?.id })
               }
-            >
-              <RecipeCard
-                recipe={recipe!}
-                onPress={() =>
-                  navigation.navigate("Recipe", { recipeId: recipe?.id })
-                }
-              />
-            </View>
-          ))
-        ) : (
-          <Alert type="info" message="Nothing found!" />
-        )
-      }
+            />
+          </View>
+        ))
+      ) : (
+        <Alert
+          type="info"
+          message="News feed empty! Try following some users to see their latest recipes."
+          style={{ padding: 16 }}
+        />
+      )}
     </ScrollView>
   );
 }

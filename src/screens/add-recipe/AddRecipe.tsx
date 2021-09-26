@@ -68,7 +68,7 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
       } else {
         form.reset();
         steps.reset();
-        navigation.navigate("Recipe", { recipeId: data?.addRecipe.data?.id });
+        navigation.push("Recipe", { recipeId: data?.addRecipe.data?.id });
       }
     } catch (error) {
       console.error(error);

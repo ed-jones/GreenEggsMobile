@@ -29,7 +29,7 @@ const Alert = withStyles(
         fill: eva?.theme && eva.theme["color-warning-500"],
       },
       info: {
-        name: "alert-circle",
+        name: "info",
         fill: eva?.theme && eva.theme["color-info-500"],
       },
       success: {

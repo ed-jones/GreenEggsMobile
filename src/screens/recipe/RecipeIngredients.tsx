@@ -9,9 +9,7 @@ import {
 } from "@ui-kitten/components";
 import IngredientListItem from "@greeneggs/core/ingredient-list-item/IngredientListItem";
 import ViewMore from "@greeneggs/core/view-more/ViewMore";
-import { Icons, Navigation } from "@greeneggs/core";
 import { useNavigation } from "@react-navigation/core";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface IRecipeIngredients {
   ingredients: recipe_recipe_data_ingredients[];
@@ -19,15 +17,13 @@ interface IRecipeIngredients {
 
 const RecipeIngredients = ({ ingredients }: IRecipeIngredients) => {
   const navigation = useNavigation();
-  const insets = useSafeAreaInsets();
   return (
     <View style={{ marginHorizontal: -16 }}>
-      <List
-        data={ingredients.slice(0, 5)}
-        renderItem={({ item }: { item: recipe_recipe_data_ingredients }) => (
-          <IngredientListItem ingredient={item} />
-        )}
-      />
+      {ingredients
+        .slice(0, 5)
+        .map((ingredient: recipe_recipe_data_ingredients, index) => (
+          <IngredientListItem ingredient={ingredient} key={index.toString()} />
+        ))}
       <Divider />
       <ViewMore
         onPress={() =>

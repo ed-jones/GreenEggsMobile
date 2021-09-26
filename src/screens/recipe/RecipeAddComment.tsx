@@ -1,27 +1,16 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Icons, Mutations, noavatar, Queries } from "@greeneggs/core";
+import { Mutations, noavatar, Queries } from "@greeneggs/core";
 import {
   AddRecipeComment,
   AddRecipeCommentReply,
   AddRecipeCommentReplyVariables,
   AddRecipeCommentVariables,
-  comment,
   Me,
   recipe,
-  recipeVariables,
 } from "@greeneggs/types/graphql";
 import { Avatar, Button, Input, Text } from "@ui-kitten/components";
-import {
-  ApolloCache,
-  useApolloClient,
-  useLazyQuery,
-  useMutation,
-  useQuery,
-} from "@apollo/client";
-import { RecipeFragment } from "@greeneggs/graphql/fragments";
-import { useNavigation } from "@react-navigation/core";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { useApolloClient, useQuery } from "@apollo/client";
 import LoadingScreen from "../loading/LoadingScreen";
 
 export const styles = StyleSheet.create({

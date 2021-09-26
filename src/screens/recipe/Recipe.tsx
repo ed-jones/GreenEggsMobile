@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { ImageBackground, View, StyleSheet } from "react-native";
 import { Icons, Queries } from "@greeneggs/core";
@@ -83,6 +83,7 @@ const Recipe = ({ route, navigation }: any) => {
       renderOverlay={() => (
         <TopNavigation
           style={{
+            height: 64,
             backgroundColor: "transparent",
             paddingTop: insets.top,
             alignItems: "flex-start",

@@ -66,6 +66,8 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
       const { data } = await form.submitForm();
       if (data?.addRecipe.error) {
       } else {
+        form.reset();
+        steps.reset();
         navigation.navigate("Recipe", { recipeId: data?.addRecipe.data?.id });
       }
     } catch (error) {
@@ -107,7 +109,6 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
                 form.trigger().then((isValid) => {
                   if (isValid) {
                     publish();
-                    form.reset();
                   }
                 });
               }}

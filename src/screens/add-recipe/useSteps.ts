@@ -11,6 +11,7 @@ type ISteps = {
     lastStep: Step | undefined,
     previous: () => void,
     next: () => void,
+    reset: () => void,
     isStart: boolean,
     isEnd: boolean,
     index: number,
@@ -34,5 +35,9 @@ export function useSteps(steps: Step[]): ISteps {
         if (index > 0) setIndex(index - 1);
     }
 
-    return {currentStep, nextStep, lastStep, next, previous, isStart, isEnd, index, length};
+    const reset = () => {
+        setIndex(0);
+    }
+
+    return {currentStep, nextStep, lastStep, next, previous, isStart, isEnd, index, length, reset};
 }

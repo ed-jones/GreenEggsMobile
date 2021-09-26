@@ -55,7 +55,7 @@ const RecipeCardFooter = ({
         </Text>
       </View>
       <View style={styles.labelledIconGroup}>
-        <Text>{convertTimeEstimate(createdAt)}</Text>
+        <Text>{`${convertTimeEstimate(createdAt)} ago`}</Text>
       </View>
     </View>
     <View style={styles.labelledIcons}>

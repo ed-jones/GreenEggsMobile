@@ -105,7 +105,10 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
             <Button
               onPress={() => {
                 form.trigger().then((isValid) => {
-                  if (isValid) publish();
+                  if (isValid) {
+                    publish();
+                    form.reset();
+                  }
                 });
               }}
               status="success"

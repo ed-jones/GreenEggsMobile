@@ -105,7 +105,10 @@ const BottomTabBar = withStyles(
     const insets = useSafeAreaInsets();
     const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-    const interceptNavigate = (navigate: () => void) => {
+    const interceptNavigate = (index: number, navigate: () => void) => {
+      if (index === selectedIndex) {
+        return;
+      }
       if (selectedIndex === 2) {
         Alert.alert(
           "Exit without saving?",
@@ -128,7 +131,7 @@ const BottomTabBar = withStyles(
       <BottomNavigation
         selectedIndex={state.index}
         onSelect={(index) => {
-          interceptNavigate(() => {
+          interceptNavigate(index, () => {
             navigation.navigate(state.routeNames[index]);
             setSelectedIndex(index);
           });

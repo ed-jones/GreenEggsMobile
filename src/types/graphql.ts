@@ -1493,6 +1493,143 @@ export interface commentVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: savedRecipes
+// ====================================================
+
+export interface savedRecipes_savedRecipes_data_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface savedRecipes_savedRecipes_data_categories {
+  __typename: "Category";
+  name: string;
+}
+
+export interface savedRecipes_savedRecipes_data_diets {
+  __typename: "Diet";
+  name: string;
+}
+
+export interface savedRecipes_savedRecipes_data_allergies {
+  __typename: "Allergy";
+  name: string;
+}
+
+export interface savedRecipes_savedRecipes_data_ingredients {
+  __typename: "Ingredient";
+  name: string;
+  description: string | null;
+  quantity: number;
+  unit: string | null;
+}
+
+export interface savedRecipes_savedRecipes_data_steps {
+  __typename: "RecipeStep";
+  title: string;
+  description: string;
+  image: string;
+}
+
+export interface savedRecipes_savedRecipes_data_comments_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface savedRecipes_savedRecipes_data_comments_replies_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface savedRecipes_savedRecipes_data_comments_replies {
+  __typename: "RecipeCommentReply";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  submittedBy: savedRecipes_savedRecipes_data_comments_replies_submittedBy;
+}
+
+export interface savedRecipes_savedRecipes_data_comments {
+  __typename: "RecipeComment";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  createdAt: string;
+  deleted: boolean;
+  submittedBy: savedRecipes_savedRecipes_data_comments_submittedBy;
+  replies: savedRecipes_savedRecipes_data_comments_replies[];
+}
+
+export interface savedRecipes_savedRecipes_data {
+  __typename: "Recipe";
+  id: string;
+  subtitle: string;
+  title: string;
+  description: string;
+  submittedBy: savedRecipes_savedRecipes_data_submittedBy;
+  commentCount: number;
+  likeCount: number;
+  createdAt: string;
+  servingCount: number;
+  timeEstimate: string;
+  coverImage: string;
+  liked: boolean;
+  categories: savedRecipes_savedRecipes_data_categories[];
+  diets: savedRecipes_savedRecipes_data_diets[];
+  allergies: savedRecipes_savedRecipes_data_allergies[];
+  ingredients: savedRecipes_savedRecipes_data_ingredients[];
+  steps: savedRecipes_savedRecipes_data_steps[];
+  comments: savedRecipes_savedRecipes_data_comments[];
+}
+
+export interface savedRecipes_savedRecipes_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface savedRecipes_savedRecipes {
+  __typename: "RecipesResult";
+  data: savedRecipes_savedRecipes_data[] | null;
+  error: savedRecipes_savedRecipes_error | null;
+}
+
+export interface savedRecipes {
+  savedRecipes: savedRecipes_savedRecipes;
+}
+
+export interface savedRecipesVariables {
+  offset: number;
+  limit: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: UserFragment
 // ====================================================
 

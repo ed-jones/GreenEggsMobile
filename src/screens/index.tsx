@@ -23,4 +23,5 @@ export { default as RecipeCommentReplies } from "@greeneggs/screens/recipe/Recip
 export { default as RecipeAllIngredients } from "@greeneggs/screens/recipe/RecipeAllIngredients";
 export { default as Recipe } from "@greeneggs/screens/recipe/Recipe";
 export { default as RecipeDescription } from "@greeneggs/screens/recipe/RecipeDescription";
-export { default as RecipeDirectionExpanded } from '@greeneggs/screens/recipe/RecipeDirectionExpanded';
+export { default as RecipeDirectionExpanded } from "@greeneggs/screens/recipe/RecipeDirectionExpanded";
+export { default as SavedRecipes } from "@greeneggs/screens/saved-recipes/SavedRecipes";

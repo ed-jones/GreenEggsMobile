@@ -104,15 +104,6 @@ const MyProfile = ({ navigation }: any) => {
             onPress={() => navigation.navigate("Settings")}
           />
         )}
-        accessoryRight={() => (
-          <>
-            <TopNavigationAction
-              icon={Icons.AddPerson}
-              onPress={navigateBack}
-            />
-            <TopNavigationAction icon={Icons.More} onPress={navigateBack} />
-          </>
-        )}
       />
       <View style={styles.avatarContainer}>
         <Pressable onPress={() => navigation.navigate("EditProfilePicture")}>

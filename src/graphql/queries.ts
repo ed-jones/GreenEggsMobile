@@ -117,3 +117,18 @@ export const GET_COMMENT = gql`
   ${Fragments.RecipeCommentFragment}
   ${Fragments.ErrorFragment}
 `;
+
+export const GET_SAVED_RECIPES = gql`
+  query savedRecipes($offset: Int!, $limit: Int!) {
+    savedRecipes(offset: $offset, limit: $limit) {
+      data {
+      ...RecipeFragment
+      }
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.RecipeFragment}
+  ${Fragments.ErrorFragment}
+`;

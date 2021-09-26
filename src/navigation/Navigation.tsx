@@ -1,7 +1,13 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { NotFoundScreen, AddRecipe, Home, Profile } from "../screens";
+import {
+  NotFoundScreen,
+  AddRecipe,
+  Home,
+  Profile,
+  SavedRecipes,
+} from "../screens";
 import BottomTabBar from "./BottomTabBar";
 
 const { Navigator, Screen } = createBottomTabNavigator();
@@ -11,13 +17,13 @@ export default function Navigation() {
     <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
       <Screen name="Home" component={Home} />
       <Screen
-        name="Notifications"
-        component={NotFoundScreen}
+        name="SavedRecipes"
+        component={SavedRecipes}
         options={{ title: "Oops!" }}
       />
       <Screen name="AddRecipe" component={AddRecipe} />
       <Screen
-        name="Bookmarks"
+        name="Notifications"
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
       />

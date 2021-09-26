@@ -246,3 +246,14 @@ export const SAVE_RECIPE = gql`
   }
   ${Fragments.ErrorFragment}
 `;
+
+export const UNSAVE_RECIPE = gql`
+  mutation UnsaveRecipe($recipeId: String!) {
+    unsaveRecipe(recipeId: $recipeId) {
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.ErrorFragment}
+`;

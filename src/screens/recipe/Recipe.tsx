@@ -71,6 +71,11 @@ const Recipe = ({ route, navigation }: any) => {
     refetchQueries: [Queries.GET_RECIPE, "recipe", Queries.GET_SAVED_RECIPES],
   });
 
+  const [unsaveRecipe] = useMutation(Mutations.UNSAVE_RECIPE, {
+    variables: { recipeId },
+    refetchQueries: [Queries.GET_RECIPE, "recipe", Queries.GET_SAVED_RECIPES],
+  });
+
   const navigateBack = () => {
     navigation.goBack();
   };
@@ -106,7 +111,7 @@ const Recipe = ({ route, navigation }: any) => {
                   <Icon {...iconProps} name="bookmark-outline" />
                 )
               }
-              onPress={() => saveRecipe()}
+              onPress={() => (recipe.saved ? unsaveRecipe() : saveRecipe())}
             />
           )}
         />

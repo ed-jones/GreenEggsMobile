@@ -20,7 +20,7 @@ import PublishRecipe from "./PublishRecipe";
 
 import AddRecipeAllergies from "./add-recipe-allergies/AddRecipeAllergies";
 import AddRecipeDiets from "./add-recipe-diets/AddRecipeDiets";
-import addRecipeStyles from './add-recipe-styles';
+import addRecipeStyles from "./add-recipe-styles";
 
 export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>;
 
@@ -64,14 +64,12 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
     console.log(form.getValues());
     try {
       const { data } = await form.submitForm();
-      console.log(data);
       if (data?.addRecipe.error) {
-        console.log(data?.addRecipe.error.message);
       } else {
         navigation.navigate("Recipe", { recipeId: data?.addRecipe.data?.id });
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

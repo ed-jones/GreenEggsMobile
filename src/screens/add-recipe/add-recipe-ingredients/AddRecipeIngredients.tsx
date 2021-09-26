@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Text } from "@ui-kitten/components";
+import { Text } from "@ui-kitten/components";
 import { ScrollView, View } from "react-native";
 import { RecipeInput } from "@greeneggs/types/graphql";
 import { ControlledInput, InputType, Rules } from "@greeneggs/core";
@@ -76,17 +76,11 @@ const CreateRecipeIngredients = ({
       >
         Ingredients
       </Text>
-      <List
-        data={fields}
-        renderItem={({ item, index }) =>
-          item ? (
-            <IngredientListItem
-              ingredient={item}
-              remove={() => remove(index)}
-            />
-          ) : null
-        }
-      />
+      {fields.map((field, index) => {
+        field && (
+          <IngredientListItem ingredient={field} remove={() => remove(index)} />
+        );
+      })}
       <AddListItem
         error={
           (form.formState.errors.ingredients as unknown as FieldError)?.message

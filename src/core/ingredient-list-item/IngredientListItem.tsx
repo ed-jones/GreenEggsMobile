@@ -5,7 +5,7 @@ import toTitleCase from "../to-title-case/toTitleCase";
 import * as Icons from "../icons/Icons";
 
 interface IIngredientListItem {
-  ingredient: recipe_recipe_data_ingredients;
+  ingredient: Partial<recipe_recipe_data_ingredients>;
   remove?: () => void;
 }
 

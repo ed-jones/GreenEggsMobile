@@ -24,7 +24,8 @@ const AddListItem = withStyles(
         style={{
           justifyContent: "center",
           borderColor: eva?.theme && eva.theme["text-danger-color"],
-          borderWidth: error ? 1 : undefined,
+          borderTopWidth: error ? 1 : undefined,
+          borderBottomWidth: error ? 1 : undefined,
         }}
         onPress={onPress}
       >

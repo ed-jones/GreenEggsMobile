@@ -10,8 +10,8 @@ import { CategoryInput, RecipeInput } from "@greeneggs/types/graphql";
 import CreateRecipePartTemplate, {
   RecipeFormPart,
 } from "../CreateRecipePartTemplate";
-import { addRecipeStyles } from "../AddRecipe";
 import { useForm } from "react-hook-form";
+import addRecipeStyles from "../add-recipe-styles";
 
 const CreateCategory = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate

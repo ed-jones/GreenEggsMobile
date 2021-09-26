@@ -2,12 +2,12 @@ import React from "react";
 import { Button } from "@ui-kitten/components";
 import { ControlledInput, InputType, Rules } from "@greeneggs/core";
 import { IngredientInput } from "@greeneggs/types/graphql";
-import { addRecipeStyles } from "../AddRecipe";
 import CreateRecipePartTemplate, {
   RecipeFormPart,
 } from "../CreateRecipePartTemplate";
 import { useForm } from "react-hook-form";
 import { View } from "react-native";
+import addRecipeStyles from "../add-recipe-styles";
 
 const CreateIngredient = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate
@@ -59,7 +59,7 @@ const CreateIngredientForm = ({ navigation, append }: RecipeFormPart) => {
         type={InputType.TEXT}
       />
       <View style={{ flexDirection: "row" }}>
-      <ControlledInput<IngredientInput>
+        <ControlledInput<IngredientInput>
           controllerProps={{
             shouldUnregister: true,
             name: `quantity`,

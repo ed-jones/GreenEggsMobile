@@ -5,11 +5,11 @@ import ControlledInput, {
   Rules,
 } from "@greeneggs/core/form/controlled-input/ControlledInput";
 import { RecipeStepInput } from "@greeneggs/types/graphql";
-import { addRecipeStyles } from "../AddRecipe";
 import CreateRecipePartTemplate, {
   RecipeFormPart,
 } from "../CreateRecipePartTemplate";
 import { useForm } from "react-hook-form";
+import addRecipeStyles from "../add-recipe-styles";
 
 const CreateStep = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate

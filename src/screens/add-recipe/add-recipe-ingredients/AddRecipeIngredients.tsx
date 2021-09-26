@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "@ui-kitten/components";
+import { List, Text } from "@ui-kitten/components";
 import { ScrollView, View } from "react-native";
 import { RecipeInput } from "@greeneggs/types/graphql";
 import { ControlledInput, InputType, Rules } from "@greeneggs/core";
@@ -9,7 +9,7 @@ import IngredientListItem from "@greeneggs/core/ingredient-list-item/IngredientL
 import { StackNavigationProp } from "@react-navigation/stack";
 import Alert from "@greeneggs/core/alert/Alert";
 import { useEffect } from "react";
-import { FieldError, useFieldArray } from "react-hook-form";
+import { FieldArrayWithId, FieldError, useFieldArray } from "react-hook-form";
 import addRecipeStyles from "../add-recipe-styles";
 
 interface ICreateRecipeIngredients {
@@ -40,7 +40,7 @@ const CreateRecipeIngredients = ({
         message="Include ingredients needed to make this recipe."
         style={addRecipeStyles.view}
       />
-      <View style={{ flexDirection: "row", width: "50%" }}>
+      <View style={{ flexDirection: "row" }}>
         <ControlledInput<RecipeInput>
           controllerProps={{
             name: "servingCount",
@@ -76,11 +76,17 @@ const CreateRecipeIngredients = ({
       >
         Ingredients
       </Text>
-      {fields.map((field, index) => {
-        field && (
-          <IngredientListItem ingredient={field} remove={() => remove(index)} />
-        );
-      })}
+      <List
+        data={fields}
+        renderItem={({ item, index }) =>
+          item && (
+            <IngredientListItem
+              ingredient={{ ...item, __typename: "Ingredient" }}
+              remove={() => remove(index)}
+            />
+          )
+        }
+      />
       <AddListItem
         error={
           (form.formState.errors.ingredients as unknown as FieldError)?.message

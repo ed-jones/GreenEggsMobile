@@ -1,17 +1,12 @@
 import React from "react";
 import { Button } from "@ui-kitten/components";
-import {
-  ControlledInput,
-  InputType,
-  partialValidate,
-  Rules,
-} from "@greeneggs/core";
-import { AllergyInput, RecipeInput } from "@greeneggs/types/graphql";
+import { ControlledInput, InputType, Rules } from "@greeneggs/core";
+import { AllergyInput } from "@greeneggs/types/graphql";
 import CreateRecipePartTemplate, {
   RecipeFormPart,
 } from "../CreateRecipePartTemplate";
-import { addRecipeStyles } from "../AddRecipe";
 import { useForm } from "react-hook-form";
+import addRecipeStyles from "../add-recipe-styles";
 
 const CreateAllergy = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate

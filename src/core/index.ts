@@ -13,7 +13,7 @@ export { logo512 } from './logo/logo512.png';
 
 export { imagenotfound } from './image-not-found/imagenotfound.jpg';
 
-export { noavatar } from './no-avatar/noavatar.jpg';
+export { default as noavatar } from './no-avatar/noavatar.jpg';
 
 export { default as TopBar } from './top-bar/TopBar';
 

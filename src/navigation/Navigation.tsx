@@ -1,10 +1,8 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { NotFoundScreen, AddRecipe, Home, Profile } from "../../screens";
+import { NotFoundScreen, AddRecipe, Home, Profile } from "../screens";
 import BottomTabBar from "./BottomTabBar";
-import Settings from "@greeneggs/screens/settings/Settings";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 

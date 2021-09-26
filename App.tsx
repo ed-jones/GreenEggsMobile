@@ -1,5 +1,9 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useState, useContext } from "react";
 import * as eva from "@eva-design/eva";
+import { createUploadLink } from "apollo-upload-client";
+import { AuthContext, Token } from "@greeneggs/core/auth-context/AuthContext";
+import * as Screens from "@greeneggs/screens";
+import { Navigation } from "@greeneggs/navigation";
 import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { onError } from "@apollo/client/link/error";
@@ -21,12 +25,6 @@ import Login from "./src/screens/auth/Login";
 import Signup from "./src/screens/auth/Signup";
 import Theme from "./src/theme/theme.json";
 import Mapping from "./src/theme/mapping.json";
-
-import { Navigation } from "@greeneggs/core";
-import { useContext } from "react";
-import { createUploadLink } from "apollo-upload-client";
-import { AuthContext, Token } from "@greeneggs/core/auth-context/AuthContext";
-import * as Screens from "@greeneggs/screens";
 
 const Stack = createStackNavigator();
 

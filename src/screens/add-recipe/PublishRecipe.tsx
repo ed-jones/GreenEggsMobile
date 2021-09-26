@@ -1,18 +1,10 @@
 import React from "react";
-import {
-  Divider,
-  Input,
-  List,
-  ListItem,
-  Select,
-  SelectItem,
-  Text,
-} from "@ui-kitten/components";
 import { ScrollView } from "react-native";
-import { addRecipeStyles, RecipeForm } from "./AddRecipe";
+import { RecipeForm } from "./AddRecipe";
 import { ControlledInput, InputType, Rules } from "@greeneggs/core";
 import { RecipeInput } from "@greeneggs/types/graphql";
 import Alert from "@greeneggs/core/alert/Alert";
+import addRecipeStyles from "./add-recipe-styles";
 
 interface IPublishRecipe {
   form: RecipeForm;

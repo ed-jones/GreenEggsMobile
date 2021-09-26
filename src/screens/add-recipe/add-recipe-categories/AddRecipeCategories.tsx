@@ -1,11 +1,12 @@
 import React from "react";
 import { List, ListItem, Text } from "@ui-kitten/components";
 import { ScrollView } from "react-native";
-import { addRecipeStyles, RecipeForm } from "../AddRecipe";
+import { RecipeForm } from "../AddRecipe";
 import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
 import Alert from "@greeneggs/core/alert/Alert";
 import { Icons } from "@greeneggs/core";
 import { useFieldArray } from "react-hook-form";
+import addRecipeStyles from '../add-recipe-styles';
 
 interface IAddRecipeCategories {
   form: RecipeForm;

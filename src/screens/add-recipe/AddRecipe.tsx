@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, Alert } from "react-native";
 import { Button, Spinner, withStyles } from "@ui-kitten/components";
 import {
   addRecipe,
@@ -7,7 +7,7 @@ import {
   RecipeInput,
 } from "@greeneggs/types/graphql";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Icons, IForm, partialValidate, Rules } from "@greeneggs/core";
+import { Icons, IForm } from "@greeneggs/core";
 
 import useRecipeForm from "./useRecipeForm";
 import AddRecipeIngredients from "./add-recipe-ingredients/AddRecipeIngredients";
@@ -20,23 +20,7 @@ import PublishRecipe from "./PublishRecipe";
 
 import AddRecipeAllergies from "./add-recipe-allergies/AddRecipeAllergies";
 import AddRecipeDiets from "./add-recipe-diets/AddRecipeDiets";
-import { useEffect } from "react";
-
-export const addRecipeStyles = StyleSheet.create({
-  view: {
-    padding: 16,
-  },
-  buttonGroup: {
-    flexDirection: "row-reverse",
-    justifyContent: "space-between",
-  },
-  heading: {
-    paddingVertical: 16,
-  },
-  input: {
-    marginBottom: 10,
-  },
-});
+import addRecipeStyles from './add-recipe-styles';
 
 export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>;
 

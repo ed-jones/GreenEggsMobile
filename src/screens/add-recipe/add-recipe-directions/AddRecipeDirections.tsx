@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { List, ListItem, Text } from "@ui-kitten/components";
 import { ScrollView, Image, View } from "react-native";
-import { addRecipeStyles, RecipeForm } from "../AddRecipe";
+import { RecipeForm } from "../AddRecipe";
 import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
 import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
 import Alert from "@greeneggs/core/alert/Alert";
 import { useFieldArray } from "react-hook-form";
 import { Icons } from "@greeneggs/core";
+import addRecipeStyles from '../add-recipe-styles';
 
 interface IAddRecipeDirections {
   form: RecipeForm;

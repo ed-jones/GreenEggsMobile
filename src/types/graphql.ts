@@ -107,6 +107,7 @@ export interface addRecipe_addRecipe_data {
   timeEstimate: string;
   coverImage: string;
   liked: boolean;
+  saved: boolean;
   categories: addRecipe_addRecipe_data_categories[];
   diets: addRecipe_addRecipe_data_diets[];
   allergies: addRecipe_addRecipe_data_allergies[];
@@ -761,6 +762,33 @@ export interface DeleteCommentVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: SaveRecipe
+// ====================================================
+
+export interface SaveRecipe_saveRecipe_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface SaveRecipe_saveRecipe {
+  __typename: "SaveRecipeResult";
+  error: SaveRecipe_saveRecipe_error | null;
+}
+
+export interface SaveRecipe {
+  saveRecipe: SaveRecipe_saveRecipe;
+}
+
+export interface SaveRecipeVariables {
+  recipeId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: recipes
 // ====================================================
 
@@ -864,6 +892,7 @@ export interface recipes_recipes_data {
   timeEstimate: string;
   coverImage: string;
   liked: boolean;
+  saved: boolean;
   categories: recipes_recipes_data_categories[];
   diets: recipes_recipes_data_diets[];
   allergies: recipes_recipes_data_allergies[];
@@ -1004,6 +1033,7 @@ export interface NewsFeed_newsFeed_data {
   timeEstimate: string;
   coverImage: string;
   liked: boolean;
+  saved: boolean;
   categories: NewsFeed_newsFeed_data_categories[];
   diets: NewsFeed_newsFeed_data_diets[];
   allergies: NewsFeed_newsFeed_data_allergies[];
@@ -1141,6 +1171,7 @@ export interface Trending_trending_data {
   timeEstimate: string;
   coverImage: string;
   liked: boolean;
+  saved: boolean;
   categories: Trending_trending_data_categories[];
   diets: Trending_trending_data_diets[];
   allergies: Trending_trending_data_allergies[];
@@ -1278,6 +1309,7 @@ export interface recipe_recipe_data {
   timeEstimate: string;
   coverImage: string;
   liked: boolean;
+  saved: boolean;
   categories: recipe_recipe_data_categories[];
   diets: recipe_recipe_data_diets[];
   allergies: recipe_recipe_data_allergies[];
@@ -1596,6 +1628,7 @@ export interface savedRecipes_savedRecipes_data {
   timeEstimate: string;
   coverImage: string;
   liked: boolean;
+  saved: boolean;
   categories: savedRecipes_savedRecipes_data_categories[];
   diets: savedRecipes_savedRecipes_data_diets[];
   allergies: savedRecipes_savedRecipes_data_allergies[];
@@ -1877,6 +1910,7 @@ export interface RecipeFragment {
   timeEstimate: string;
   coverImage: string;
   liked: boolean;
+  saved: boolean;
   categories: RecipeFragment_categories[];
   diets: RecipeFragment_diets[];
   allergies: RecipeFragment_allergies[];

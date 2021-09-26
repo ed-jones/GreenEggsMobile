@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { ImageBackground, View, StyleSheet } from "react-native";
-import { Icons, Queries } from "@greeneggs/core";
+import { Icons, Mutations, Queries } from "@greeneggs/core";
 import {
+  Icon,
   Text,
   TopNavigation,
   TopNavigationAction,
@@ -65,6 +66,11 @@ const Recipe = ({ route, navigation }: any) => {
     }
   );
 
+  const [saveRecipe] = useMutation(Mutations.SAVE_RECIPE, {
+    variables: { recipeId },
+    refetchQueries: [Queries.GET_RECIPE, "recipe", Queries.GET_SAVED_RECIPES],
+  });
+
   const navigateBack = () => {
     navigation.goBack();
   };
@@ -90,6 +96,18 @@ const Recipe = ({ route, navigation }: any) => {
           }}
           accessoryLeft={() => (
             <TopNavigationAction icon={Icons.Back} onPress={navigateBack} />
+          )}
+          accessoryRight={() => (
+            <TopNavigationAction
+              icon={(iconProps) =>
+                recipe.saved ? (
+                  <Icon {...iconProps} name="bookmark" />
+                ) : (
+                  <Icon {...iconProps} name="bookmark-outline" />
+                )
+              }
+              onPress={() => saveRecipe()}
+            />
           )}
         />
       )}

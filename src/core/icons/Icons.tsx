@@ -69,3 +69,7 @@ export const Comment = (props: IconProps) => (
 export const Reply = (props: IconProps) => (
   <Icon {...props} name="undo-outline" />
 );
+
+export const Bookmark = (props: IconProps) => (
+  <Icon {...props} name="bookmark-outline" />
+);

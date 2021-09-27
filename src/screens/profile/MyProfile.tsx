@@ -104,7 +104,7 @@ const MyRecipes: FC<MyRecipesProps> = ({ query, userId }) => {
       },
       onCompleted: (data) => {
         if (data.recipes.data) {
-          mergeRecipes(data.recipes.data);
+          setRecipesState(data.recipes.data);
         }
       },
     }
@@ -123,6 +123,16 @@ const MyRecipes: FC<MyRecipesProps> = ({ query, userId }) => {
       <Alert
         style={{ marginHorizontal: 16 }}
         message="You haven't uploaded any recipes! Once you've uploaded some recipes they'll be shown here."
+        type="info"
+      />
+    );
+  }
+
+  if (recipesState.length === 0) {
+    return (
+      <Alert
+        style={{ marginHorizontal: 16 }}
+        message="No recipes found!"
         type="info"
       />
     );

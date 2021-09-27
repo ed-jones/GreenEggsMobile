@@ -1,5 +1,12 @@
-import React from "react";
-import { Image, View, StyleSheet, SafeAreaView, Pressable } from "react-native";
+import React, { FC, useState } from "react";
+import {
+  Image,
+  View,
+  StyleSheet,
+  SafeAreaView,
+  Pressable,
+  ScrollView,
+} from "react-native";
 import {
   Text,
   Button,
@@ -13,8 +20,17 @@ import {
 import { useQuery } from "@apollo/client";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Alert, Icons, Queries, noavatar } from "@greeneggs/core";
-import { Me } from "@greeneggs/types/graphql";
+import {
+  Me,
+  recipe,
+  recipes,
+  recipesVariables,
+  recipeVariables,
+  Sort,
+} from "@greeneggs/types/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
+import RecipeCardSmall from "@greeneggs/core/recipe-card-small";
+import { useNavigation } from "@react-navigation/core";
 
 const styles = StyleSheet.create({
   avatarContainer: {
@@ -71,24 +87,76 @@ const ProfileStat = ({ label, value }: IProfileStat) => (
   </View>
 );
 
-const MyProfile = ({ navigation }: any) => {
-  const insets = useSafeAreaInsets();
+interface MyRecipesProps {
+  query: string;
+}
 
-  const navigateBack = () => {
-    navigation.goBack();
-  };
+const MyRecipes: FC<MyRecipesProps> = ({ query }) => {
+  const navigation = useNavigation();
 
-  const { loading, error, data } = useQuery<Me>(Queries.ME);
+  const myRecipesResult = useQuery<recipes, recipesVariables>(
+    Queries.GET_RECIPES,
+    {
+      variables: {
+        offset: 0,
+        limit: 10,
+        query: query,
+        sort: Sort.NEW,
+        filter: {},
+      },
+    }
+  );
 
-  if (loading) {
+  if (myRecipesResult.loading) {
     return <LoadingScreen />;
   }
 
-  if (error) {
+  if (myRecipesResult.error) {
+    return <Alert message="There was an error" type="danger" />;
+  }
+  const myRecipes = myRecipesResult.data?.recipes.data;
+
+  return (
+    <>
+      {myRecipes ? (
+        myRecipes.map((myRecipe) => (
+          <View style={{ marginBottom: 16, marginHorizontal: 16 }}>
+            <RecipeCardSmall
+              recipe={myRecipe}
+              onPress={() =>
+                navigation.navigate("Recipe", {
+                  recipeId: myRecipe.id,
+                })
+              }
+            />
+          </View>
+        ))
+      ) : (
+        <Alert
+          style={{ marginHorizontal: 16 }}
+          message="You haven't uploaded any recipes! Once you've uploaded some recipes they'll be shown here."
+          type="info"
+        />
+      )}
+    </>
+  );
+};
+
+const MyProfile = () => {
+  const insets = useSafeAreaInsets();
+  const navigation = useNavigation();
+  const meResult = useQuery<Me>(Queries.ME);
+  const [myRecipeQuery, setMyRecipeQuery] = useState("");
+
+  if (meResult.loading) {
+    return <LoadingScreen />;
+  }
+
+  if (meResult.error) {
     return <Alert message="There was an error" type="danger" />;
   }
 
-  const me = data?.me.data;
+  const me = meResult.data?.me.data;
 
   function optional(value: string | number | null | undefined) {
     return value?.toString() || "";
@@ -96,53 +164,58 @@ const MyProfile = ({ navigation }: any) => {
 
   return (
     <Layout level="2" style={{ ...styles.view }}>
-      <TopNavigation
-        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-        accessoryLeft={() => (
-          <TopNavigationAction
-            icon={Icons.Settings}
-            onPress={() => navigation.navigate("Settings")}
-          />
-        )}
-      />
-      <View style={styles.avatarContainer}>
-        <Pressable onPress={() => navigation.navigate("EditProfilePicture")}>
-          <Avatar
-            style={styles.avatar}
-            shape="round"
-            size="giant"
-            source={me?.avatarURI ? { uri: me?.avatarURI } : noavatar}
-          />
-        </Pressable>
-      </View>
-      <View style={styles.profileContainer}>
-        <Text category="h5">{`${optional(me?.firstName)} ${optional(
-          me?.lastName
-        )}`}</Text>
-        <Button
-          size="small"
-          style={styles.button}
-          accessoryLeft={Icons.Edit}
-          onPress={() => navigation.navigate("EditProfile")}
-        >
-          EDIT
-        </Button>
-      </View>
-      <Text style={styles.description} numberOfLines={2}>
-        {optional(me?.bio)}
-      </Text>
-      <View style={styles.statContainer}>
-        <ProfileStat label="Following" value={optional(me?.followingCount)} />
-        <ProfileStat label="Followers" value={optional(me?.followerCount)} />
-        <ProfileStat label="Recipes" value={optional(me?.recipeCount)} />
-        <ProfileStat label="Likes" value={optional(me?.likeCount)} />
-      </View>
-      <Input
-        placeholder="Search recipes"
-        size="large"
-        style={styles.search}
-        accessoryLeft={Icons.Search}
-      />
+      <ScrollView>
+        <TopNavigation
+          style={{ backgroundColor: "transparent", paddingTop: insets.top }}
+          accessoryLeft={() => (
+            <TopNavigationAction
+              icon={Icons.Settings}
+              onPress={() => navigation.navigate("Settings")}
+            />
+          )}
+        />
+        <View style={styles.avatarContainer}>
+          <Pressable onPress={() => navigation.navigate("EditProfilePicture")}>
+            <Avatar
+              style={styles.avatar}
+              shape="round"
+              size="giant"
+              source={me?.avatarURI ? { uri: me?.avatarURI } : noavatar}
+            />
+          </Pressable>
+        </View>
+        <View style={styles.profileContainer}>
+          <Text category="h5">{`${optional(me?.firstName)} ${optional(
+            me?.lastName
+          )}`}</Text>
+          <Button
+            size="small"
+            style={styles.button}
+            accessoryLeft={Icons.Edit}
+            onPress={() => navigation.navigate("EditProfile")}
+          >
+            EDIT
+          </Button>
+        </View>
+        <Text style={styles.description} numberOfLines={2}>
+          {optional(me?.bio)}
+        </Text>
+        <View style={styles.statContainer}>
+          <ProfileStat label="Following" value={optional(me?.followingCount)} />
+          <ProfileStat label="Followers" value={optional(me?.followerCount)} />
+          <ProfileStat label="Recipes" value={optional(me?.recipeCount)} />
+          <ProfileStat label="Likes" value={optional(me?.likeCount)} />
+        </View>
+        <Input
+          placeholder="Search recipes"
+          size="large"
+          style={styles.search}
+          accessoryLeft={Icons.Search}
+          value={myRecipeQuery}
+          onChangeText={(newText) => setMyRecipeQuery(newText)}
+        />
+        <MyRecipes query={myRecipeQuery} />
+      </ScrollView>
     </Layout>
   );
 };

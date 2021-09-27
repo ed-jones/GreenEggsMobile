@@ -257,3 +257,18 @@ export const UNSAVE_RECIPE = gql`
   }
   ${Fragments.ErrorFragment}
 `;
+
+export const FOLLOW_USER = gql`
+  mutation FollowUser($userId: String!) {
+    followUser(userId: $userId) {
+      error {
+        ...ErrorFragment
+      }
+      data {
+        ...UserFragment
+      }
+    }
+  }
+  ${Fragments.ErrorFragment}
+  ${Fragments.UserFragment}
+`;

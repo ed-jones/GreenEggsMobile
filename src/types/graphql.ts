@@ -816,6 +816,45 @@ export interface UnsaveRecipeVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: FollowUser
+// ====================================================
+
+export interface FollowUser_followUser_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface FollowUser_followUser_data {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface FollowUser_followUser {
+  __typename: "FollowUserResult";
+  error: FollowUser_followUser_error | null;
+  data: FollowUser_followUser_data | null;
+}
+
+export interface FollowUser {
+  followUser: FollowUser_followUser;
+}
+
+export interface FollowUserVariables {
+  userId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: recipes
 // ====================================================
 

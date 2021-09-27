@@ -52,9 +52,6 @@ const RecipeCardHeader = ({
       />
       <Text style={styles.username}>{`${firstName} ${lastName}`}</Text>
     </View>
-    <View style={styles.rightElements}>
-      <Icon style={styles.ellipsisIcon} name="more-horizontal" fill="black" />
-    </View>
   </View>
 );
 

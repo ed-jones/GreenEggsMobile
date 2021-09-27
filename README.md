@@ -4,14 +4,14 @@
 
 ## About
 
-Green Eggs is a recipe sharing app created in React Native for our UOW Major Project (CSIT321). Users can create create a recipe with photos in simple steps and share them with everyone, themselves or just their friends. The app caters to users of all backgrounds, and features tools that will help users with dietary requirements and allergies.
+Green Eggs is a recipe sharing app created in React Native for our UOW Major Project (CSIT321). Users can create a recipe with photos in simple steps and optionally share them. Users can also search a large database of recipes, finding recipes that suit their dietary and allergy requirements.
 
 ## Dev Setup
 
-Create a .env file in the root directory with the following contents (obviously substituting with the host IP address running the green-eggs-api):
+Create a `.env` file in the root directory with the following contents:
 
 ```
-API_URI=http://your-host-ip:4000/
+API_URI=http://<Host IP>:4000/
 ```
 
 After updating this enviornment variable it may need updating in the expo cache, so when starting run `yarn start --clear`.

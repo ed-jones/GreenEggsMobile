@@ -1,6 +1,6 @@
 import { DocumentNode, useQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList } from "react-native";
 import Alert from "./alert/Alert";
 import LoadingScreen from "../screens/loading/LoadingScreen";
 import { ListRenderItem } from "react-native";
@@ -45,6 +45,7 @@ const LazyList = <
   const [done, setDone] = useState(false);
   const limit = 2;
   const [data, setData] = useState<TDataType[]>([]);
+  const [refreshing, setRefreshing] = useState(false);
 
   const queryResult = useQuery<TData, TVariables>(query, {
     variables: {
@@ -114,7 +115,14 @@ const LazyList = <
 
   return (
     <FlatList
-      onRefresh={() => queryResult.refetch()}
+      refreshing={refreshing}
+      onRefresh={async () => {
+        setRefreshing(true);
+        const result = await queryResult.refetch();
+        if (result.data) {
+          setRefreshing(false);
+        }
+      }}
       onEndReached={() => nextPage()}
       onEndReachedThreshold={0.5}
       data={data}

@@ -789,6 +789,33 @@ export interface SaveRecipeVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: UnsaveRecipe
+// ====================================================
+
+export interface UnsaveRecipe_unsaveRecipe_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface UnsaveRecipe_unsaveRecipe {
+  __typename: "UnsaveRecipeResult";
+  error: UnsaveRecipe_unsaveRecipe_error | null;
+}
+
+export interface UnsaveRecipe {
+  unsaveRecipe: UnsaveRecipe_unsaveRecipe;
+}
+
+export interface UnsaveRecipeVariables {
+  recipeId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: recipes
 // ====================================================
 
@@ -2014,6 +2041,7 @@ export interface RecipeFilter {
   allergies?: string[] | null;
   diets?: string[] | null;
   cookTime?: string | null;
+  user?: string | null;
 }
 
 export interface RecipeInput {

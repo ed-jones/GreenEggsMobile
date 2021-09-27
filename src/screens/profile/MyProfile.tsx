@@ -1,16 +1,8 @@
 import React, { FC, useState } from "react";
-import {
-  Image,
-  View,
-  StyleSheet,
-  SafeAreaView,
-  Pressable,
-  ScrollView,
-} from "react-native";
+import { View, StyleSheet, Pressable, ScrollView } from "react-native";
 import {
   Text,
   Button,
-  Icon,
   TopNavigation,
   TopNavigationAction,
   Avatar,
@@ -20,14 +12,7 @@ import {
 import { useQuery } from "@apollo/client";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Alert, Icons, Queries, noavatar } from "@greeneggs/core";
-import {
-  Me,
-  recipe,
-  recipes,
-  recipesVariables,
-  recipeVariables,
-  Sort,
-} from "@greeneggs/types/graphql";
+import { Me, recipes, recipesVariables, Sort } from "@greeneggs/types/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
 import RecipeCardSmall from "@greeneggs/core/recipe-card-small";
 import { useNavigation } from "@react-navigation/core";
@@ -89,9 +74,10 @@ const ProfileStat = ({ label, value }: IProfileStat) => (
 
 interface MyRecipesProps {
   query: string;
+  userId: string;
 }
 
-const MyRecipes: FC<MyRecipesProps> = ({ query }) => {
+const MyRecipes: FC<MyRecipesProps> = ({ query, userId }) => {
   const navigation = useNavigation();
 
   const myRecipesResult = useQuery<recipes, recipesVariables>(
@@ -102,7 +88,9 @@ const MyRecipes: FC<MyRecipesProps> = ({ query }) => {
         limit: 10,
         query: query,
         sort: Sort.NEW,
-        filter: {},
+        filter: {
+          user: userId,
+        },
       },
     }
   );
@@ -158,6 +146,10 @@ const MyProfile = () => {
 
   const me = meResult.data?.me.data;
 
+  if (me === undefined || me === null) {
+    return <Text>Error! User not found</Text>;
+  }
+
   function optional(value: string | number | null | undefined) {
     return value?.toString() || "";
   }
@@ -180,13 +172,13 @@ const MyProfile = () => {
               style={styles.avatar}
               shape="round"
               size="giant"
-              source={me?.avatarURI ? { uri: me?.avatarURI } : noavatar}
+              source={me.avatarURI ? { uri: me.avatarURI } : noavatar}
             />
           </Pressable>
         </View>
         <View style={styles.profileContainer}>
-          <Text category="h5">{`${optional(me?.firstName)} ${optional(
-            me?.lastName
+          <Text category="h5">{`${optional(me.firstName)} ${optional(
+            me.lastName
           )}`}</Text>
           <Button
             size="small"
@@ -198,13 +190,13 @@ const MyProfile = () => {
           </Button>
         </View>
         <Text style={styles.description} numberOfLines={2}>
-          {optional(me?.bio)}
+          {optional(me.bio)}
         </Text>
         <View style={styles.statContainer}>
-          <ProfileStat label="Following" value={optional(me?.followingCount)} />
-          <ProfileStat label="Followers" value={optional(me?.followerCount)} />
-          <ProfileStat label="Recipes" value={optional(me?.recipeCount)} />
-          <ProfileStat label="Likes" value={optional(me?.likeCount)} />
+          <ProfileStat label="Following" value={optional(me.followingCount)} />
+          <ProfileStat label="Followers" value={optional(me.followerCount)} />
+          <ProfileStat label="Recipes" value={optional(me.recipeCount)} />
+          <ProfileStat label="Likes" value={optional(me.likeCount)} />
         </View>
         <Input
           placeholder="Search recipes"
@@ -214,7 +206,7 @@ const MyProfile = () => {
           value={myRecipeQuery}
           onChangeText={(newText) => setMyRecipeQuery(newText)}
         />
-        <MyRecipes query={myRecipeQuery} />
+        <MyRecipes query={myRecipeQuery} userId={me.id} />
       </ScrollView>
     </Layout>
   );

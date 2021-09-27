@@ -1690,6 +1690,65 @@ export interface savedRecipesVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: profile
+// ====================================================
+
+export interface profile_profile_data_dietaryPreferences {
+  __typename: "Diet";
+  id: string;
+  name: string;
+}
+
+export interface profile_profile_data_allergyPreferences {
+  __typename: "Allergy";
+  id: string;
+  name: string;
+}
+
+export interface profile_profile_data {
+  __typename: "FullUser";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+  likeCount: number;
+  followerCount: number;
+  followingCount: number;
+  recipeCount: number;
+  isFollowing: boolean | null;
+  dietaryPreferences: profile_profile_data_dietaryPreferences[];
+  allergyPreferences: profile_profile_data_allergyPreferences[];
+  visibility: Privacy;
+}
+
+export interface profile_profile_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface profile_profile {
+  __typename: "FullUserResult";
+  data: profile_profile_data | null;
+  error: profile_profile_error | null;
+}
+
+export interface profile {
+  profile: profile_profile;
+}
+
+export interface profileVariables {
+  userId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: UserFragment
 // ====================================================
 

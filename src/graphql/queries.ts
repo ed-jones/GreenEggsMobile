@@ -132,3 +132,18 @@ export const GET_SAVED_RECIPES = gql`
   ${Fragments.RecipeFragment}
   ${Fragments.ErrorFragment}
 `;
+
+export const GET_PROFILE = gql`
+  query profile($userId: String!) {
+    profile(userId: $userId) {
+      data {
+        ...FullUserFragment
+      }
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.FullUserFragment}
+  ${Fragments.ErrorFragment}
+`;

@@ -181,6 +181,7 @@ function App() {
                   name="SavedRecipes"
                   component={Screens.SavedRecipes}
                 />
+                <Stack.Screen name="Profile" component={Screens.Profile} />
               </>
             )}
           </Stack.Navigator>

@@ -5,7 +5,7 @@ import {
   NotFoundScreen,
   AddRecipe,
   Home,
-  Profile,
+  MyProfile,
   SavedRecipes,
 } from "../screens";
 import BottomTabBar from "./BottomTabBar";
@@ -27,7 +27,7 @@ export default function Navigation() {
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
       />
-      <Screen name="Profile" component={Profile} />
+      <Screen name="Profile" component={MyProfile} />
       <Screen
         name="NotFound"
         component={NotFoundScreen}

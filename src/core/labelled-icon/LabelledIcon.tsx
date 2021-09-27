@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
     height: 24,
     marginRight: 8,
   },
+  label: {
+    fontWeight: "bold",
+  },
 });
 
 interface ILabelledIconProps {
@@ -31,7 +34,7 @@ const LabelledIcon = ({
   <Pressable onPress={onPress}>
     <View style={styles.view}>
       <Icon style={styles.icon} name={iconName} fill={fill || "black"} />
-      <Text>{label}</Text>
+      <Text style={styles.label}>{label}</Text>
     </View>
   </Pressable>
 );

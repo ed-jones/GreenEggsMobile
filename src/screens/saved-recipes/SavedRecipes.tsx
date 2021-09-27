@@ -7,9 +7,11 @@ import { Text, TopNavigation } from "@ui-kitten/components";
 import { savedRecipes, savedRecipesVariables } from "@greeneggs/types/graphql";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/core";
 
 const SavedRecipes: FC = () => {
   const insets = useSafeAreaInsets();
+  const navigation = useNavigation();
   const { data, loading, error } = useQuery<
     savedRecipes,
     savedRecipesVariables
@@ -47,7 +49,16 @@ const SavedRecipes: FC = () => {
       />
       <View style={{ padding: 16 }}>
         {recipes.map((recipe) => (
-          <RecipeCardSmall recipe={recipe} onPress={() => null} />
+          <View style={{ marginBottom: 16 }}>
+            <RecipeCardSmall
+              recipe={recipe}
+              onPress={() =>
+                navigation.navigate("Recipe", {
+                  recipeId: recipe.id,
+                })
+              }
+            />
+          </View>
         ))}
       </View>
     </>

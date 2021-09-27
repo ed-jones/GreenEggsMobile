@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { View, StyleSheet, Pressable, ScrollView } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 import {
   Text,
   Button,
@@ -186,7 +186,7 @@ const MyRecipes: FC<MyRecipesProps> = ({ query, userId }) => {
           />
         </View>
       )}
-    ></FlatList>
+    />
   );
 };
 

@@ -24,6 +24,8 @@ interface LazyListProps<TData, TVariables, TDataType> {
   variables: Omit<TVariables, "offset" | "limit">;
   dataKey: keyof TData;
   renderItem: ListRenderItem<TDataType>;
+  emptyMessage: string;
+  errorMessage: string;
 }
 
 const LazyList = <
@@ -37,6 +39,8 @@ const LazyList = <
   variables,
   dataKey,
   renderItem,
+  emptyMessage,
+  errorMessage,
 }: LazyListProps<TData, TVariables, TDataType>) => {
   const [done, setDone] = useState(false);
   const limit = 2;
@@ -49,8 +53,6 @@ const LazyList = <
       limit,
     } as TVariables,
     onCompleted: (data) => {
-      console.log(dataKey);
-      // console.log(data.recipes.data);
       const d = data[dataKey]?.data;
       if (d) {
         setData(d);
@@ -74,7 +76,7 @@ const LazyList = <
     return (
       <Alert
         style={{ marginHorizontal: 16 }}
-        message="You haven't uploaded any recipes! Once you've uploaded some recipes they'll be shown here."
+        message={emptyMessage}
         type="info"
       />
     );
@@ -84,7 +86,7 @@ const LazyList = <
     return (
       <Alert
         style={{ marginHorizontal: 16 }}
-        message="No results found!"
+        message={errorMessage}
         type="info"
       />
     );

@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { View, StyleSheet, Pressable, ScrollView } from "react-native";
 import {
   Text,
@@ -89,6 +89,10 @@ const MyRecipes: FC<MyRecipesProps> = ({ query, userId }) => {
   const limit = 2;
   const [done, setDone] = useState(false);
   const [recipesState, setRecipesState] = useState<recipes_recipes_data[]>([]);
+
+  useEffect(() => {
+    setDone(false);
+  }, [query]);
 
   const myRecipesResult = useQuery<recipes, recipesVariables>(
     Queries.GET_RECIPES,

@@ -127,9 +127,10 @@ const MyRecipes: FC<MyRecipesProps> = ({ query, userId }) => {
 
 interface GenericProfileProps {
   userId: string;
+  isMe?: boolean;
 }
 
-const GenericProfile = ({ userId }: GenericProfileProps) => {
+const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
   const profileResult = useQuery<profile>(Queries.GET_PROFILE, {
@@ -161,12 +162,19 @@ const GenericProfile = ({ userId }: GenericProfileProps) => {
     <Layout level="2" style={{ ...styles.view }}>
       <TopNavigation
         style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-        accessoryLeft={() => (
-          <TopNavigationAction
-            icon={Icons.Settings}
-            onPress={() => navigation.navigate("Settings")}
-          />
-        )}
+        accessoryLeft={() => {
+          return isMe ? (
+            <TopNavigationAction
+              icon={Icons.Settings}
+              onPress={() => navigation.navigate("Settings")}
+            />
+          ) : (
+            <TopNavigationAction
+              icon={Icons.Back}
+              onPress={() => navigation.goBack()}
+            />
+          );
+        }}
       />
       <View style={styles.avatarContainer}>
         <Pressable onPress={() => navigation.navigate("EditProfilePicture")}>
@@ -180,14 +188,18 @@ const GenericProfile = ({ userId }: GenericProfileProps) => {
       </View>
       <View style={styles.profileContainer}>
         <Text category="h5">{`${profile.firstName} ${profile.lastName}`}</Text>
-        <Button
-          size="small"
-          style={styles.button}
-          accessoryLeft={Icons.Edit}
-          onPress={() => navigation.navigate("EditProfile")}
-        >
-          EDIT
-        </Button>
+        {isMe ? (
+          <Button
+            size="small"
+            style={styles.button}
+            accessoryLeft={Icons.Edit}
+            onPress={() => navigation.navigate("EditProfile")}
+          >
+            EDIT
+          </Button>
+        ) : (
+          <Button size="small">FOLLOW</Button>
+        )}
       </View>
       <Text style={styles.description} numberOfLines={2}>
         {optional(profile.bio)}

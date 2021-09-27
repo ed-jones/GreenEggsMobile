@@ -23,7 +23,7 @@ const MyProfile = () => {
     return <Text>Error! User not found</Text>;
   }
 
-  return <GenericProfile userId={me.id} />;
+  return <GenericProfile userId={me.id} isMe />;
 };
 
 export default MyProfile;

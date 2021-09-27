@@ -855,6 +855,45 @@ export interface FollowUserVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: UnfollowUser
+// ====================================================
+
+export interface UnfollowUser_unfollowUser_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface UnfollowUser_unfollowUser_data {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface UnfollowUser_unfollowUser {
+  __typename: "UnfollowUserResult";
+  error: UnfollowUser_unfollowUser_error | null;
+  data: UnfollowUser_unfollowUser_data | null;
+}
+
+export interface UnfollowUser {
+  unfollowUser: UnfollowUser_unfollowUser;
+}
+
+export interface UnfollowUserVariables {
+  userId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: recipes
 // ====================================================
 

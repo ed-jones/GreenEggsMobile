@@ -140,14 +140,19 @@ const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) => {
     },
   });
 
-  const [followUser, followUserResult] = useMutation<FollowUser>(
-    Mutations.FOLLOW_USER,
-    {
-      variables: {
-        userId,
-      },
-    }
-  );
+  const [followUser] = useMutation<FollowUser>(Mutations.FOLLOW_USER, {
+    variables: {
+      userId,
+    },
+    refetchQueries: [Queries.GET_PROFILE, "profile"],
+  });
+
+  const [unfollowUser] = useMutation<FollowUser>(Mutations.FOLLOW_USER, {
+    variables: {
+      userId,
+    },
+    refetchQueries: [Queries.GET_PROFILE, "profile"],
+  });
 
   const [myRecipeQuery, setMyRecipeQuery] = useState("");
 
@@ -209,8 +214,13 @@ const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) => {
             EDIT
           </Button>
         ) : (
-          <Button size="small" onPress={() => followUser()}>
-            FOLLOW
+          <Button
+            size="small"
+            onPress={
+              profile.isFollowing ? () => unfollowUser() : () => followUser()
+            }
+          >
+            {profile.isFollowing ? "UNFOLLOW" : "FOLLOW"}
           </Button>
         )}
       </View>

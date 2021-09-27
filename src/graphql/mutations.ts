@@ -272,3 +272,18 @@ export const FOLLOW_USER = gql`
   ${Fragments.ErrorFragment}
   ${Fragments.UserFragment}
 `;
+
+export const UNFOLLOW_USER = gql`
+  mutation UnfollowUser($userId: String!) {
+    unfollowUser(userId: $userId) {
+      error {
+        ...ErrorFragment
+      }
+      data {
+        ...UserFragment
+      }
+    }
+  }
+  ${Fragments.ErrorFragment}
+  ${Fragments.UserFragment}
+`;

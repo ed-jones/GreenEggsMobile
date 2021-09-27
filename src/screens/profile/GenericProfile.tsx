@@ -147,7 +147,7 @@ const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) => {
     refetchQueries: [Queries.GET_PROFILE, "profile"],
   });
 
-  const [unfollowUser] = useMutation<FollowUser>(Mutations.FOLLOW_USER, {
+  const [unfollowUser] = useMutation<FollowUser>(Mutations.UNFOLLOW_USER, {
     variables: {
       userId,
     },

@@ -2,7 +2,7 @@ import React from "react";
 import { LabelledIcon, Mutations, noavatar, Queries } from "@greeneggs/core";
 import { convertTimeEstimate } from "@greeneggs/core/convertTimeEstimate/convertTimeEstimate";
 import ViewMore from "@greeneggs/core/view-more/ViewMore";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 import {
   LikeRecipe,
   recipe_recipe_data,
@@ -98,16 +98,29 @@ const RecipeDetailsCard = ({
       )}
     >
       <View style={styles.row}>
-        <View style={styles.row}>
-          <Avatar
-            size="small"
-            source={
-              submittedBy.avatarURI ? { uri: submittedBy.avatarURI } : noavatar
-            }
-            style={styles.avatar}
-          />
-          <Text>{`${submittedBy.firstName} ${submittedBy.lastName}`}</Text>
-        </View>
+        <Pressable
+          onPress={() =>
+            navigation.navigate("Profile", {
+              userId: submittedBy.id,
+            })
+          }
+        >
+          <View style={styles.row}>
+            <Avatar
+              size="small"
+              source={
+                submittedBy.avatarURI
+                  ? { uri: submittedBy.avatarURI }
+                  : noavatar
+              }
+              style={styles.avatar}
+            />
+            <Text
+              style={{ fontWeight: "bold" }}
+            >{`${submittedBy.firstName} ${submittedBy.lastName}`}</Text>
+          </View>
+        </Pressable>
+
         <View style={styles.row}>
           <LabelledIcon
             label={String(likeCount)}

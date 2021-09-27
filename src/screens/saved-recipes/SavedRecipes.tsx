@@ -4,10 +4,18 @@ import { useQuery } from "@apollo/client";
 import { Queries, Alert } from "@greeneggs/core";
 import LoadingScreen from "../loading/LoadingScreen";
 import { Text, TopNavigation } from "@ui-kitten/components";
-import { savedRecipes, savedRecipesVariables } from "@greeneggs/types/graphql";
+import {
+  RecipeFilter,
+  savedRecipes,
+  savedRecipesVariables,
+  savedRecipes_savedRecipes_data,
+  Sort,
+  savedRecipes as SavedRecipesType,
+} from "@greeneggs/types/graphql";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/core";
+import LazyList from "@greeneggs/core/lazy-list";
 
 const SavedRecipesHeader = () => {
   const insets = useSafeAreaInsets();
@@ -57,9 +65,20 @@ const SavedRecipes: FC = () => {
   return (
     <>
       <SavedRecipesHeader />
-      <View style={{ padding: 16 }}>
-        {recipes.map((recipe) => (
-          <View style={{ marginBottom: 16 }}>
+      <LazyList<
+        SavedRecipesType,
+        savedRecipesVariables,
+        savedRecipes_savedRecipes_data,
+        Sort,
+        RecipeFilter
+      >
+        query={Queries.GET_SAVED_RECIPES}
+        variables={{}}
+        dataKey="savedRecipes"
+        emptyMessage="ou haven't saved any recipes yet! Save some recipes and they will appear here."
+        errorMessage="Error! No recipes found."
+        renderItem={({ item: recipe }) => (
+          <View style={{ marginBottom: 16, padding: 16 }}>
             <RecipeCardSmall
               recipe={recipe}
               onPress={() =>
@@ -69,8 +88,8 @@ const SavedRecipes: FC = () => {
               }
             />
           </View>
-        ))}
-      </View>
+        )}
+      />
     </>
   );
 };

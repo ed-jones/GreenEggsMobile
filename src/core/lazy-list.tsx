@@ -114,6 +114,7 @@ const LazyList = <
 
   return (
     <FlatList
+      onRefresh={() => queryResult.refetch()}
       onEndReached={() => nextPage()}
       onEndReachedThreshold={0.5}
       data={data}

@@ -1,7 +1,5 @@
 import * as React from "react";
-import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
-import { Text } from "@ui-kitten/components";
-import { useQuery } from "@apollo/client";
+import { StyleSheet, View } from "react-native";
 import {
   RecipeFilter,
   Sort,
@@ -11,7 +9,6 @@ import {
 } from "@greeneggs/types/graphql";
 import { Queries } from "@greeneggs/core";
 
-import LoadingScreen from "../../loading/LoadingScreen";
 import RecipeCard from "../recipe-card/RecipeCard";
 import LazyList from "@greeneggs/core/lazy-list";
 import { useNavigation } from "@react-navigation/core";

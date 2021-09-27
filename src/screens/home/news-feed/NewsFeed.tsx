@@ -1,15 +1,17 @@
 import * as React from "react";
-import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
-import { Text } from "@ui-kitten/components";
-import { useQuery } from "@apollo/client";
+import { StyleSheet, View } from "react-native";
 import {
   NewsFeed as NewsFeedType,
   NewsFeedVariables,
+  NewsFeed_newsFeed_data,
+  RecipeFilter,
+  Sort,
 } from "@greeneggs/types/graphql";
-import { Queries, Alert } from "@greeneggs/core";
+import { Queries } from "@greeneggs/core";
 
-import LoadingScreen from "../../loading/LoadingScreen";
 import RecipeCard from "../recipe-card/RecipeCard";
+import { useNavigation } from "@react-navigation/native";
+import LazyList from "@greeneggs/core/lazy-list";
 
 const CardVerticalMargin = 20;
 const CardHorizontalMargin = 24;
@@ -24,51 +26,36 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function NewsFeed({ navigation }: any) {
-  const { loading, error, data, refetch } = useQuery<
-    NewsFeedType,
-    NewsFeedVariables
-  >(Queries.NEWS_FEED, {
-    variables: {
-      offset: 0,
-      limit: 10,
-    },
-  });
-
-  if (loading) return <LoadingScreen />;
-  if (error) {
-    return <Text>Error! {error.message}</Text>;
-  }
-
+export default function NewsFeed() {
+  const navigation = useNavigation();
   return (
-    <ScrollView
-      refreshControl={
-        <RefreshControl refreshing={loading} onRefresh={refetch} />
-      }
+    <LazyList<
+      NewsFeedType,
+      NewsFeedVariables,
+      NewsFeed_newsFeed_data,
+      Sort,
+      RecipeFilter
     >
-      {data?.newsFeed?.data && data?.newsFeed?.data.length > 0 ? (
-        data?.newsFeed.data?.map((recipe, i: number) => (
-          <View
-            key={recipe?.id}
-            style={
-              i === 0 ? { ...styles.firstCard, ...styles.card } : styles.card
+      query={Queries.NEWS_FEED}
+      variables={{}}
+      dataKey="newsFeed"
+      emptyMessage="News feed empty! Try following some users to see their latest recipes."
+      errorMessage="Error! No recipes found."
+      renderItem={({ item: recipe, index }) => (
+        <View
+          key={recipe?.id}
+          style={
+            index === 0 ? { ...styles.firstCard, ...styles.card } : styles.card
+          }
+        >
+          <RecipeCard
+            recipe={recipe}
+            onPress={() =>
+              navigation.navigate("Recipe", { recipeId: recipe?.id })
             }
-          >
-            <RecipeCard
-              recipe={recipe!}
-              onPress={() =>
-                navigation.navigate("Recipe", { recipeId: recipe?.id })
-              }
-            />
-          </View>
-        ))
-      ) : (
-        <Alert
-          type="info"
-          message="News feed empty! Try following some users to see their latest recipes."
-          style={{ padding: 16 }}
-        />
+          />
+        </View>
       )}
-    </ScrollView>
+    />
   );
 }

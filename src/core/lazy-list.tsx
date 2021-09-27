@@ -1,40 +1,41 @@
 import { DocumentNode, useQuery } from "@apollo/client";
-import { RecipeFilter, Sort } from "@greeneggs/types/graphql";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
 import Alert from "./alert/Alert";
 import LoadingScreen from "../screens/loading/LoadingScreen";
 import { ListRenderItem } from "react-native";
 
-interface TDataWithData<TDataType> {
-  [key: string]: {
-    data: TDataType[];
+type TDataWithData<TData, TDataType> = {
+  [key in keyof TData]: {
+    data: TDataType[] | null;
   };
-}
+};
 
-interface CommonVariables {
+interface CommonVariables<SortType, FilterType> {
   offset: number;
   limit: number;
   query: string;
-  sort: Sort;
-  filter: RecipeFilter;
+  sort: SortType;
+  filter: FilterType;
 }
 
 interface LazyListProps<TData, TVariables, TDataType> {
   query: DocumentNode;
-  variables: TVariables;
-  key: keyof TData;
+  variables: Omit<TVariables, "offset" | "limit">;
+  dataKey: keyof TData;
   renderItem: ListRenderItem<TDataType>;
 }
 
 const LazyList = <
-  TData extends TDataWithData<TDataType>,
-  TVariables extends CommonVariables,
-  TDataType
+  TData extends TDataWithData<TData, TDataType>,
+  TVariables extends CommonVariables<SortType, FilterType>,
+  TDataType,
+  SortType,
+  FilterType
 >({
   query,
   variables,
-  key,
+  dataKey,
   renderItem,
 }: LazyListProps<TData, TVariables, TDataType>) => {
   const [done, setDone] = useState(false);
@@ -46,10 +47,13 @@ const LazyList = <
       ...variables,
       offset: 0,
       limit,
-    },
+    } as TVariables,
     onCompleted: (data) => {
-      if (data[key].data) {
-        setData(data[key].data);
+      console.log(dataKey);
+      // console.log(data.recipes.data);
+      const d = data[dataKey]?.data;
+      if (d) {
+        setData(d);
       }
     },
   });
@@ -88,18 +92,19 @@ const LazyList = <
 
   async function nextPage() {
     if (!done) {
-      const result = await queryResult.fetchMore({
+      const result = await queryResult.fetchMore<TData, TVariables>({
         variables: {
           ...variables,
           offset: data.length,
           limit,
-        },
+        } as TVariables,
       });
-      if (result.data[key].data) {
-        if (result.data[key].data.length === 0) {
+      const d = result.data[dataKey]?.data;
+      if (d) {
+        if (d.length === 0) {
           setDone(true);
         } else {
-          setData([...data, ...result.data[key].data]);
+          setData([...data, ...d]);
         }
       }
     }

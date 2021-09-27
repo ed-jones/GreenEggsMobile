@@ -14,6 +14,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Alert, Icons, Queries, noavatar } from "@greeneggs/core";
 import {
   Me,
+  RecipeFilter,
   recipes,
   recipesVariables,
   recipes_recipes_data,
@@ -23,6 +24,7 @@ import LoadingScreen from "../loading/LoadingScreen";
 import RecipeCardSmall from "@greeneggs/core/recipe-card-small";
 import { useNavigation } from "@react-navigation/core";
 import { FlatList } from "react-native-gesture-handler";
+import LazyList from "@greeneggs/core/lazy-list";
 
 const styles = StyleSheet.create({
   avatarContainer: {
@@ -86,94 +88,24 @@ interface MyRecipesProps {
 
 const MyRecipes: FC<MyRecipesProps> = ({ query, userId }) => {
   const navigation = useNavigation();
-  const limit = 2;
-  const [done, setDone] = useState(false);
-  const [recipesState, setRecipesState] = useState<recipes_recipes_data[]>([]);
 
-  useEffect(() => {
-    setDone(false);
-  }, [query]);
-
-  const myRecipesResult = useQuery<recipes, recipesVariables>(
-    Queries.GET_RECIPES,
-    {
-      variables: {
-        offset: 0,
-        limit,
+  return (
+    <LazyList<
+      recipes,
+      recipesVariables,
+      recipes_recipes_data,
+      Sort,
+      RecipeFilter
+    >
+      query={Queries.GET_RECIPES}
+      variables={{
         query: query,
         sort: Sort.NEW,
         filter: {
           user: userId,
         },
-      },
-      onCompleted: (data) => {
-        if (data.recipes.data) {
-          setRecipesState(data.recipes.data);
-        }
-      },
-    }
-  );
-
-  if (myRecipesResult.loading) {
-    return <LoadingScreen />;
-  }
-
-  if (myRecipesResult.error) {
-    return <Alert message="There was an error" type="danger" />;
-  }
-
-  if (recipesState === null || recipesState === undefined) {
-    return (
-      <Alert
-        style={{ marginHorizontal: 16 }}
-        message="You haven't uploaded any recipes! Once you've uploaded some recipes they'll be shown here."
-        type="info"
-      />
-    );
-  }
-
-  if (recipesState.length === 0) {
-    return (
-      <Alert
-        style={{ marginHorizontal: 16 }}
-        message="No recipes found!"
-        type="info"
-      />
-    );
-  }
-
-  function mergeRecipes(recipes: recipes_recipes_data[]) {
-    setRecipesState([...recipesState, ...recipes]);
-  }
-
-  async function nextPage() {
-    if (!done) {
-      const result = await myRecipesResult.fetchMore({
-        variables: {
-          offset: recipesState.length,
-          limit,
-          query: query,
-          sort: Sort.NEW,
-          filter: {
-            user: userId,
-          },
-        },
-      });
-      if (result.data.recipes.data) {
-        if (result.data.recipes.data.length === 0) {
-          setDone(true);
-        } else {
-          mergeRecipes(result.data.recipes.data);
-        }
-      }
-    }
-  }
-
-  return (
-    <FlatList
-      onEndReached={() => nextPage()}
-      onEndReachedThreshold={0.5}
-      data={recipesState}
+      }}
+      dataKey="recipes"
       renderItem={({ item: myRecipe }) => (
         <View style={{ marginBottom: 16, marginHorizontal: 16 }}>
           <RecipeCardSmall

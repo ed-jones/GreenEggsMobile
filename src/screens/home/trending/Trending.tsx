@@ -2,11 +2,19 @@ import * as React from "react";
 import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { useQuery } from "@apollo/client";
-import { Trending as TrendingType, TrendingVariables } from "@greeneggs/types/graphql";
-import { Queries, Alert } from "@greeneggs/core";
+import {
+  RecipeFilter,
+  Sort,
+  Trending as TrendingType,
+  TrendingVariables,
+  Trending_trending_data,
+} from "@greeneggs/types/graphql";
+import { Queries } from "@greeneggs/core";
 
 import LoadingScreen from "../../loading/LoadingScreen";
 import RecipeCard from "../recipe-card/RecipeCard";
+import LazyList from "@greeneggs/core/lazy-list";
+import { useNavigation } from "@react-navigation/core";
 
 const CardVerticalMargin = 20;
 const CardHorizontalMargin = 24;
@@ -21,48 +29,36 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Trending({ navigation }: any) {
-  const { loading, error, data, refetch } = useQuery<TrendingType, TrendingVariables>(
-    Queries.TRENDING, {
-      variables: {
-        offset: 0,
-        limit: 10,
-      }
-    }
-  );
-
-  if (loading) return <LoadingScreen />;
-  if (error) {
-    return <Text>Error! {error.message}</Text>;
-  }
-
+export default function Trending() {
+  const navigation = useNavigation();
   return (
-    <ScrollView
-      refreshControl={
-        <RefreshControl refreshing={loading} onRefresh={refetch} />
-      }
+    <LazyList<
+      TrendingType,
+      TrendingVariables,
+      Trending_trending_data,
+      Sort,
+      RecipeFilter
     >
-      {
-        (data?.trending?.data && data?.trending?.data.length > 0) ? (
-          data?.trending.data?.map((recipe, i: number) => (
-            <View
-              key={recipe?.id}
-              style={
-                i === 0 ? { ...styles.firstCard, ...styles.card } : styles.card
-              }
-            >
-              <RecipeCard
-                recipe={recipe!}
-                onPress={() =>
-                  navigation.navigate("Recipe", { recipeId: recipe?.id })
-                }
-              />
-            </View>
-          ))
-        ) : (
-          <Alert type="info" message="Nothing found!" />
-        )
-      }
-    </ScrollView>
+      query={Queries.TRENDING}
+      variables={{}}
+      dataKey="trending"
+      emptyMessage="There are no trending recipes! This means nobody has uploaded a recipe for a while."
+      errorMessage="Error! No recipes found."
+      renderItem={({ item: recipe, index }) => (
+        <View
+          key={recipe?.id}
+          style={
+            index === 0 ? { ...styles.firstCard, ...styles.card } : styles.card
+          }
+        >
+          <RecipeCard
+            recipe={recipe}
+            onPress={() =>
+              navigation.navigate("Recipe", { recipeId: recipe?.id })
+            }
+          />
+        </View>
+      )}
+    />
   );
 }

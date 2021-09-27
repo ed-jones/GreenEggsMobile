@@ -21,7 +21,7 @@ interface CommonVariables<SortType, FilterType> {
 
 interface LazyListProps<TData, TVariables, TDataType> {
   query: DocumentNode;
-  variables: Omit<TVariables, "offset" | "limit">;
+  variables: Partial<Omit<TVariables, "offset" | "limit">>;
   dataKey: keyof TData;
   renderItem: ListRenderItem<TDataType>;
   emptyMessage: string;
@@ -30,7 +30,7 @@ interface LazyListProps<TData, TVariables, TDataType> {
 
 const LazyList = <
   TData extends TDataWithData<TData, TDataType>,
-  TVariables extends CommonVariables<SortType, FilterType>,
+  TVariables extends Partial<CommonVariables<SortType, FilterType>>,
   TDataType,
   SortType,
   FilterType

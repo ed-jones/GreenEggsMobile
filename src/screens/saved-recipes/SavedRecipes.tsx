@@ -9,8 +9,19 @@ import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/core";
 
-const SavedRecipes: FC = () => {
+const SavedRecipesHeader = () => {
   const insets = useSafeAreaInsets();
+
+  return (
+    <TopNavigation
+      style={{ backgroundColor: "transparent", paddingTop: insets.top }}
+      alignment="center"
+      title="Saved Recipes"
+    />
+  );
+};
+
+const SavedRecipes: FC = () => {
   const navigation = useNavigation();
   const { data, loading, error } = useQuery<
     savedRecipes,
@@ -33,20 +44,19 @@ const SavedRecipes: FC = () => {
   }
   if (recipes.length === 0) {
     return (
-      <Alert
-        style={{ padding: 16 }}
-        message="You haven't saved any recipes yet! Save some recipes and they will appear here."
-        type="info"
-      />
+      <>
+        <SavedRecipesHeader />
+        <Alert
+          style={{ padding: 16 }}
+          message="You haven't saved any recipes yet! Save some recipes and they will appear here."
+          type="info"
+        />
+      </>
     );
   }
   return (
     <>
-      <TopNavigation
-        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-        alignment="center"
-        title="Saved Recipes"
-      />
+      <SavedRecipesHeader />
       <View style={{ padding: 16 }}>
         {recipes.map((recipe) => (
           <View style={{ marginBottom: 16 }}>

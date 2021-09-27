@@ -9,10 +9,11 @@ import {
   Input,
   Layout,
 } from "@ui-kitten/components";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Alert, Icons, Queries, noavatar } from "@greeneggs/core";
+import { Alert, Icons, Queries, noavatar, Mutations } from "@greeneggs/core";
 import {
+  FollowUser,
   profile,
   RecipeFilter,
   recipes,
@@ -138,6 +139,16 @@ const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) => {
       userId,
     },
   });
+
+  const [followUser, followUserResult] = useMutation<FollowUser>(
+    Mutations.FOLLOW_USER,
+    {
+      variables: {
+        userId,
+      },
+    }
+  );
+
   const [myRecipeQuery, setMyRecipeQuery] = useState("");
 
   if (profileResult.loading) {
@@ -198,7 +209,9 @@ const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) => {
             EDIT
           </Button>
         ) : (
-          <Button size="small">FOLLOW</Button>
+          <Button size="small" onPress={() => followUser()}>
+            FOLLOW
+          </Button>
         )}
       </View>
       <Text style={styles.description} numberOfLines={2}>

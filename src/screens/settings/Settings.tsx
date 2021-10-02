@@ -16,7 +16,7 @@ import Svg, { Circle } from "react-native-svg";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as SecureStore from "expo-secure-store";
-import { AuthContext } from "@greeneggs/core/auth-context/AuthContext";
+import { AuthContext } from "@greeneggs/providers/AuthProvider";
 
 const styles = StyleSheet.create({
   header: { padding: 16 },

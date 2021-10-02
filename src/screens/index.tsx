@@ -26,3 +26,6 @@ export { default as RecipeDescription } from "@greeneggs/screens/recipe/RecipeDe
 export { default as RecipeDirectionExpanded } from "@greeneggs/screens/recipe/RecipeDirectionExpanded";
 export { default as SavedRecipes } from "@greeneggs/screens/saved-recipes/SavedRecipes";
 export { default as Profile } from "@greeneggs/screens/profile/Profile";
+export { default as Welcome } from "@greeneggs/screens/auth/Welcome";
+export { default as Login } from "@greeneggs/screens/auth/Login";
+export { default as Signup } from "@greeneggs/screens/auth/Signup";

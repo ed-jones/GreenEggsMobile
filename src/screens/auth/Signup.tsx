@@ -7,7 +7,7 @@ import useSignupForm from "./useSignUpForm";
 import AuthPageTemplate from "./AuthPageTemplate";
 import { ControlledInput, InputType } from "@greeneggs/core";
 import { SignupInput } from "@greeneggs/types/graphql";
-import { AuthContext } from "@greeneggs/core/auth-context/AuthContext";
+import { AuthContext } from "@greeneggs/providers/AuthProvider";
 import * as SecureStore from "expo-secure-store";
 
 const styles = StyleSheet.create({

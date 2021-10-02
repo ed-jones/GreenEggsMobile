@@ -17,8 +17,6 @@ export { default as noavatar } from './no-avatar/noavatar.jpg';
 
 export { default as TopBar } from './top-bar/TopBar';
 
-export { default as useCachedResources } from './use-cached-resources/useCachedResources';
-
 export { Icons };
 
 export { default as useForm, IForm } from './form/useForm/useForm';

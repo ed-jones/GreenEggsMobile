@@ -8,7 +8,7 @@ import { Controller } from "react-hook-form";
 import { ControlledInput, InputType } from "@greeneggs/core";
 import { LoginInput } from "@greeneggs/types/graphql";
 import * as SecureStore from "expo-secure-store";
-import { AuthContext } from "@greeneggs/core/auth-context/AuthContext";
+import { AuthContext } from "@greeneggs/providers/AuthProvider";
 
 const styles = StyleSheet.create({
   forgotPassword: {

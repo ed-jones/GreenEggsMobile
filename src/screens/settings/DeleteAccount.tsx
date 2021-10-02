@@ -24,7 +24,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { Me } from "@greeneggs/types/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
 import useLoginForm from "../auth/useLoginForm";
-import { AuthContext } from "@greeneggs/core/auth-context/AuthContext";
+import { AuthContext } from "@greeneggs/providers/AuthProvider";
 import * as SecureStore from "expo-secure-store";
 
 export const styles = StyleSheet.create({

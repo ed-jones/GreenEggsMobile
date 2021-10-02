@@ -147,3 +147,18 @@ export const GET_PROFILE = gql`
   ${Fragments.FullUserFragment}
   ${Fragments.ErrorFragment}
 `;
+
+export const GET_INGREDIENTS = gql`
+  query Ingredients {
+    ingredients {
+      data {
+        ...IngredientFragment
+      }
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.IngredientFragment}
+  ${Fragments.ErrorFragment}
+`;

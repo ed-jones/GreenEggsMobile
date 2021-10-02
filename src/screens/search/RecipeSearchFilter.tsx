@@ -4,13 +4,18 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/core';
 import { Icons } from '@greeneggs/core';
 
-const FilterOptions = [
-  'Ingredients (Included)',
-  'Ingredients (Excluded)',
-  'Category',
-  'Allergies',
-  'Diets',
-  'Cook Time',
+interface FilterListItemProps {
+  title: string;
+  to: string;
+}
+
+const FilterOptions: FilterListItemProps[] = [
+  { title: 'Ingredients (Included)', to: 'FilterIngredientsIncluded' },
+  { title: 'Ingredients (Excluded)', to: '' },
+  { title: 'Category', to: '' },
+  { title: 'Allergies', to: '' },
+  { title: 'Diets', to: '' },
+  { title: 'Cook Time', to: '' },
 ]
 
 const RecipeSearchFilter: FC = () => {
@@ -31,7 +36,7 @@ const RecipeSearchFilter: FC = () => {
       />
       <List data={FilterOptions} renderItem={({ item }) => (
         <>
-          <ListItem title={item} accessoryRight={Icons.Forward} />
+          <ListItem title={item.title} accessoryRight={Icons.Forward} onPress={() => navigation.navigate(item.to)} />
           <Divider />
         </>
       )}/>

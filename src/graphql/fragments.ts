@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import { G } from 'react-native-svg';
 
 export const UserFragment = gql`
   fragment UserFragment on User {
@@ -127,5 +128,14 @@ export const RecipeFragment = gql`
 export const ErrorFragment = gql`
   fragment ErrorFragment on Error {
     message
+  }
+`;
+
+export const IngredientFragment = gql`
+  fragment IngredientFragment on Ingredient {
+    name
+    description
+    quantity
+    unit
   }
 `;

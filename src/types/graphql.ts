@@ -1827,6 +1827,38 @@ export interface profileVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: Ingredients
+// ====================================================
+
+export interface Ingredients_ingredients_data {
+  __typename: "Ingredient";
+  name: string;
+  description: string | null;
+  quantity: number;
+  unit: string | null;
+}
+
+export interface Ingredients_ingredients_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface Ingredients_ingredients {
+  __typename: "IngredientsResult";
+  data: Ingredients_ingredients_data[];
+  error: Ingredients_ingredients_error | null;
+}
+
+export interface Ingredients {
+  ingredients: Ingredients_ingredients;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: UserFragment
 // ====================================================
 
@@ -2095,6 +2127,23 @@ export interface RecipeFragment {
 export interface ErrorFragment {
   __typename: "Error";
   message: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: IngredientFragment
+// ====================================================
+
+export interface IngredientFragment {
+  __typename: "Ingredient";
+  name: string;
+  description: string | null;
+  quantity: number;
+  unit: string | null;
 }
 
 /* tslint:disable */

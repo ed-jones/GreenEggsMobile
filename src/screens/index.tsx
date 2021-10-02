@@ -30,3 +30,4 @@ export { default as Welcome } from "@greeneggs/screens/auth/Welcome";
 export { default as Login } from "@greeneggs/screens/auth/Login";
 export { default as Signup } from "@greeneggs/screens/auth/Signup";
 export { default as RecipeSearchFilter } from '@greeneggs/screens/search/RecipeSearchFilter'
+export { default as FilterIngredientsIncluded } from '@greeneggs/screens/search/FilterIngredientsIncluded'

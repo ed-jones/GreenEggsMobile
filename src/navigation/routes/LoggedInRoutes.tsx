@@ -86,6 +86,7 @@ const LoggedInRoutes = [
   />,
   <Stack.Screen name="Profile" component={Screens.Profile} />,
   <Stack.Screen name="RecipeSearchFilter" component={Screens.RecipeSearchFilter} />,
+  <Stack.Screen name="FilterIngredientsIncluded" component={Screens.FilterIngredientsIncluded} />,
  ]
 
 export default LoggedInRoutes;

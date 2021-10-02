@@ -4,6 +4,7 @@ import { StyleSheet, View, Image } from 'react-native';
 
 import logo512 from '../logo/logo512.png';
 import * as Icons from '../icons/Icons';
+import { useNavigation } from '@react-navigation/core';
 
 const styles = StyleSheet.create({
   topNavigation: {
@@ -33,6 +34,8 @@ interface TopBarProps {
 }
 
 const TopBar = withStyles(({ query, setQuery, eva }: TopBarProps & ThemedComponentProps) => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.topNavigation}>
       { query === undefined ? (
@@ -52,6 +55,7 @@ const TopBar = withStyles(({ query, setQuery, eva }: TopBarProps & ThemedCompone
         <Button
           accessoryLeft={(props) => <Icons.Filter {...props} fill={eva?.theme?.["color-primary-800"]} />}
           status="basic"
+          onPress={() => navigation.navigate("RecipeSearchFilter")}
         />
       )}
     </View>

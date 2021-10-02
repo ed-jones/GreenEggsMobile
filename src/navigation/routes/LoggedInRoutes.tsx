@@ -85,6 +85,7 @@ const LoggedInRoutes = [
     component={Screens.SavedRecipes}
   />,
   <Stack.Screen name="Profile" component={Screens.Profile} />,
+  <Stack.Screen name="RecipeSearchFilter" component={Screens.RecipeSearchFilter} />,
  ]
 
 export default LoggedInRoutes;

@@ -8,7 +8,7 @@ import {
   Spinner,
   Icon,
 } from "@ui-kitten/components";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, Pressable } from "react-native";
 import {
   comment,
   DeleteComment,
@@ -99,18 +99,28 @@ export default function RecipeComment({
               }}
             >
               <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Avatar
-                  size="small"
-                  source={
-                    comment.submittedBy.avatarURI
-                      ? { uri: comment.submittedBy.avatarURI }
-                      : noavatar
+                <Pressable
+                  onPress={() =>
+                    navigation.navigate("Profile", {
+                      userId: comment.submittedBy.id,
+                    })
                   }
-                  style={styles.avatar}
-                />
-                <Text
-                  style={{ fontWeight: "bold" }}
-                >{`${comment.submittedBy.firstName} ${comment.submittedBy.lastName}`}</Text>
+                >
+                  <View style={{flexDirection: "row", alignItems: "center"}}>
+                    <Avatar
+                      size="small"
+                      source={
+                        comment.submittedBy.avatarURI
+                          ? { uri: comment.submittedBy.avatarURI }
+                          : noavatar
+                      }
+                      style={styles.avatar}
+                    />
+                    <Text
+                      style={{ fontWeight: "bold" }}
+                    >{`${comment.submittedBy.firstName} ${comment.submittedBy.lastName}`}</Text>
+                  </View>
+                </Pressable>
                 <Text style={{ marginLeft: 6 }}>
                   {convertTimeEstimate(comment.createdAt)} ago
                 </Text>

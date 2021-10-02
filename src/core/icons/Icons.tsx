@@ -73,3 +73,7 @@ export const Reply = (props: IconProps) => (
 export const Bookmark = (props: IconProps) => (
   <Icon {...props} name="bookmark-outline" />
 );
+
+export const Filter = (props: IconProps) => (
+  <Icon {...props} name="options-2-outline" />
+);

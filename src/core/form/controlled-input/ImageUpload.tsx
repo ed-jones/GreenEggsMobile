@@ -102,8 +102,8 @@ const ImageUpload = withStyles(
     };
 
     const TextColor = error
-      ? eva?.theme && eva.theme["color-danger-500"]
-      : eva?.theme && eva.theme["color-basic-600"];
+      ? eva?.theme?.["color-danger-500"]
+      : eva?.theme?.["color-basic-600"];
 
     return (
       <View style={{ marginBottom: 16 }}>

@@ -22,19 +22,19 @@ const Alert = withStyles(
     const IconNameFromAlertType: Record<AlertType, IconProps> = {
       danger: {
         name: "alert-triangle",
-        fill: eva?.theme && eva.theme["color-danger-500"],
+        fill: eva?.theme?.["color-danger-500"],
       },
       warning: {
         name: "alert-triangle",
-        fill: eva?.theme && eva.theme["color-warning-500"],
+        fill: eva?.theme?.["color-warning-500"],
       },
       info: {
         name: "info",
-        fill: eva?.theme && eva.theme["color-info-500"],
+        fill: eva?.theme?.["color-info-500"],
       },
       success: {
         name: "checkmark-circle-2",
-        fill: eva?.theme && eva.theme["color-success-500"],
+        fill: eva?.theme?.["color-success-500"],
       },
     };
 

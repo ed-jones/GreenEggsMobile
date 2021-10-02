@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { TopBar } from '@greeneggs/core';
-import HomeTabs from './home-tabs/HomeTabs';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+
+import HomeTabs from './home-tabs/HomeTabs';
+import RecipeSearch from '../search/RecipeSearch';
 
 
 const Home = () => { 
@@ -16,7 +18,7 @@ const Home = () => {
       </View>
       { query === undefined ? (
         <HomeTabs/>
-      ): <Text>You are typing</Text>}
+      ): <RecipeSearch query={query} />}
     </>
   )
 };

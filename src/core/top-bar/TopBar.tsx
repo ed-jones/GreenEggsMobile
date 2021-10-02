@@ -1,8 +1,9 @@
 import React from 'react';
-import { Icon, Input } from '@ui-kitten/components';
+import { Icon, Input, TopNavigationAction } from '@ui-kitten/components';
 import { StyleSheet, View, Image } from 'react-native';
 
 import logo512 from '../logo/logo512.png';
+import * as Icons from '../icons/Icons';
 
 const styles = StyleSheet.create({
   topNavigation: {
@@ -26,16 +27,29 @@ const styles = StyleSheet.create({
   },
 });
 
-const TopBar = () => (
-  <View style={styles.topNavigation}>
-    <Image source={logo512} style={styles.logo} />
-    <Input
-      placeholder="Search Recipe"
-      size="large"
-      style={styles.search}
-      accessoryLeft={(props) => <Icon style={styles.icon} name="search" {...props} />}
-    />
-  </View>
-);
+interface TopBarProps {
+  query: string | undefined;
+  setQuery: (query: string | undefined) => void;
+}
+
+const TopBar = ({ query, setQuery }: TopBarProps) => {
+  return (
+    <View style={styles.topNavigation}>
+      { query === undefined ? (
+        <Image source={logo512} style={styles.logo} />
+      ) : (
+        <TopNavigationAction icon={Icons.Back} onPress={() => setQuery(undefined)}/>
+      ) }
+      <Input
+        placeholder="Search Recipe"
+        size="large"
+        style={styles.search}
+        accessoryLeft={(props) => <Icon style={styles.icon} name="search" {...props} />}
+        value={query}
+        onChangeText={setQuery}
+      />
+    </View>
+  )
+}
 
 export default TopBar;

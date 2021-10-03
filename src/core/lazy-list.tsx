@@ -27,6 +27,7 @@ interface UseLazyListProps<TVariables, TData> {
   query: DocumentNode;
   variables: Partial<Omit<TVariables, "offset" | "limit">>;
   dataKey: keyof TData;
+  limit?: number;
 }
 
 export function useLazyList<
@@ -35,9 +36,8 @@ export function useLazyList<
   TDataType,
   SortType,
   FilterType
->({ query, variables, dataKey }: UseLazyListProps<TVariables, TData>) {
+>({ query, variables, dataKey, limit = 2 }: UseLazyListProps<TVariables, TData>) {
   const [done, setDone] = useState(false);
-  const limit = 2;
   const [data, setData] = useState<TDataType[]>([]);
 
   useEffect(() => {

@@ -9,6 +9,7 @@ import {
 import Alert from "./alert/Alert";
 import LoadingScreen from "../screens/loading/LoadingScreen";
 import AlphaList, { buildAlphaListItems, CategoriseItem } from "./alpha-list";
+import { List, Text } from "@ui-kitten/components";
 
 interface LazyListAlphaProps<TData, TVariables, TDataType>
   extends Omit<LazyListProps<TData, TVariables, TDataType>, "renderItem"> {
@@ -37,7 +38,7 @@ const LazyListAlpha = <
     TDataType,
     SortType,
     FilterType
-  >({ query, variables, dataKey });
+  >({ query, variables, dataKey, limit: 10 });
   const { refreshing, onRefresh } = useListRefresh(refetch);
 
   if (loading) {
@@ -58,16 +59,18 @@ const LazyListAlpha = <
     );
   }
 
+  const items = buildAlphaListItems({
+    items: data,
+    categoriseItem,
+  });
+
   return (
     <AlphaList
       refreshing={refreshing}
       onRefresh={onRefresh}
       onEndReached={() => nextPage()}
       onEndReachedThreshold={0.5}
-      items={buildAlphaListItems({
-        items: data,
-        categoriseItem,
-      })}
+      items={items}
       renderItem={renderItem}
     />
   );

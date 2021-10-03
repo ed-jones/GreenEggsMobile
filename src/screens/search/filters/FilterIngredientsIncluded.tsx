@@ -13,7 +13,13 @@ const FilterIngredientsIncluded: FC = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const [query, setQuery] = useState('');
-  const { data, loading, error } = useQuery<Ingredients>(Queries.GET_INGREDIENTS);
+  const { data, loading, error } = useQuery<Ingredients>(Queries.GET_INGREDIENTS, {
+    variables: {
+      query: '',
+      offset: 0,
+      limit: 100,
+    }
+  });
   const ingredients = data?.ingredients.data;
 
   if (loading) {

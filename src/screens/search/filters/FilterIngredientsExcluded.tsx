@@ -50,11 +50,8 @@ const FilterIngredientsExcluded: FC = () => {
         Sort,
         RecipeFilter
       >
-        renderItem={(item) => {
-          console.log(item);
-          return <ListItem title={item.name} />;
-        }}
-        categoriseItem={(item) => item.name[0] as AlphabetType}
+        renderItem={(item) => <ListItem title={item.name} />}
+        categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
         query={Queries.GET_INGREDIENTS}
         emptyMessage={"No ingredients found"}
         errorMessage={"Error"}

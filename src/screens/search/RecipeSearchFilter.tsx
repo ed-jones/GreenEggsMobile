@@ -11,11 +11,11 @@ interface FilterListItemProps {
 
 const FilterOptions: FilterListItemProps[] = [
   { title: 'Ingredients (Included)', to: 'FilterIngredientsIncluded' },
-  { title: 'Ingredients (Excluded)', to: '' },
-  { title: 'Category', to: '' },
-  { title: 'Allergies', to: '' },
-  { title: 'Diets', to: '' },
-  { title: 'Cook Time', to: '' },
+  { title: 'Ingredients (Excluded)', to: 'FilterIngredientsExcluded' },
+  { title: 'Category', to: 'FilterRecipeCategory' },
+  { title: 'Allergies', to: 'FilterRecipeAllergies' },
+  { title: 'Diets', to: 'FilterRecipeDiets' },
+  { title: 'Cook Time', to: 'FilterRecipeCookTime' },
 ]
 
 const RecipeSearchFilter: FC = () => {

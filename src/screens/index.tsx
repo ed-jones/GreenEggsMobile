@@ -30,4 +30,9 @@ export { default as Welcome } from "@greeneggs/screens/auth/Welcome";
 export { default as Login } from "@greeneggs/screens/auth/Login";
 export { default as Signup } from "@greeneggs/screens/auth/Signup";
 export { default as RecipeSearchFilter } from '@greeneggs/screens/search/RecipeSearchFilter'
-export { default as FilterIngredientsIncluded } from '@greeneggs/screens/search/FilterIngredientsIncluded'
+export { default as FilterIngredientsIncluded } from '@greeneggs/screens/search/filters/FilterIngredientsIncluded'
+export { default as FilterIngredientsExcluded } from '@greeneggs/screens/search/filters/FilterIngredientsExcluded'
+// export { default as FilterRecipeAllergies } from '@greeneggs/screens/search/filters/FilterRecipeAllergies'
+// export { default as FilterRecipeDiets } from '@greeneggs/screens/search/filters/FilterRecipeDiets'
+// export { default as FilterRecipeCategories } from '@greeneggs/screens/search/filters/FilterRecipeCategories'
+// export { default as FilterRecipeCookTime } from '@greeneggs/screens/search/filters/FilterRecipeCookTime'

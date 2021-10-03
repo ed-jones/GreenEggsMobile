@@ -87,6 +87,11 @@ const LoggedInRoutes = [
   <Stack.Screen name="Profile" component={Screens.Profile} />,
   <Stack.Screen name="RecipeSearchFilter" component={Screens.RecipeSearchFilter} />,
   <Stack.Screen name="FilterIngredientsIncluded" component={Screens.FilterIngredientsIncluded} />,
+  <Stack.Screen name="FilterIngredientsExcluded" component={Screens.FilterIngredientsExcluded} />,
+  // <Stack.Screen name="FilterRecipeCategory" component={Screens.FilterRecipeCategory} />,
+  // <Stack.Screen name="FilterRecipeAllergies" component={Screens.FilterRecipeAllergies} />,
+  // <Stack.Screen name="FilterRecipeDiets" component={Screens.FilterRecipeDiets} />,
+  // <Stack.Screen name="FilterRecipeCookTime" component={Screens.FilterRecipeCookTime} />,
  ]
 
 export default LoggedInRoutes;

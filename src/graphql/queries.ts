@@ -162,3 +162,18 @@ export const GET_INGREDIENTS = gql`
   ${Fragments.IngredientFragment}
   ${Fragments.ErrorFragment}
 `;
+
+export const GET_CATEGORIES = gql`
+  query Categories {
+    categories {
+      data {
+        ...CategoryFragment
+      }
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.CategoryFragment}
+  ${Fragments.ErrorFragment}
+`;

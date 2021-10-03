@@ -139,3 +139,10 @@ export const IngredientFragment = gql`
     unit
   }
 `;
+
+export const CategoryFragment = gql`
+  fragment CategoryFragment on Category {
+    id
+    name
+  }
+`;

@@ -1853,6 +1853,12 @@ export interface Ingredients {
   ingredients: Ingredients_ingredients;
 }
 
+export interface IngredientsVariables {
+  offset: number;
+  limit: number;
+  query: string;
+}
+
 /* tslint:disable */
 /* eslint-disable */
 // @generated

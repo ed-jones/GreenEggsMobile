@@ -1,9 +1,27 @@
-import { DocumentNode, useQuery } from "@apollo/client";
+import { ApolloQueryResult, DocumentNode, useQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native";
 import Alert from "./alert/Alert";
 import LoadingScreen from "../screens/loading/LoadingScreen";
 import { ListRenderItem } from "react-native";
+
+export function useListRefresh<TData, TVariables>(
+  refetch: (
+    variables?: Partial<TVariables> | undefined
+  ) => Promise<ApolloQueryResult<TData>>
+) {
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    const result = await refetch();
+    if (result.data) {
+      setRefreshing(false);
+    }
+  };
+
+  return { refreshing, onRefresh };
+}
 
 interface UseLazyListProps<TVariables, TData> {
   query: DocumentNode;
@@ -11,7 +29,7 @@ interface UseLazyListProps<TVariables, TData> {
   dataKey: keyof TData;
 }
 
-function useLazyList<
+export function useLazyList<
   TData extends TDataWithData<TData, TDataType>,
   TVariables extends Partial<CommonVariables<SortType, FilterType>>,
   TDataType,
@@ -63,13 +81,13 @@ function useLazyList<
   return { ...queryResult, data, nextPage };
 }
 
-type TDataWithData<TData, TDataType> = {
+export type TDataWithData<TData, TDataType> = {
   [key in keyof TData]: {
     data: TDataType[] | null;
   };
 };
 
-interface CommonVariables<SortType, FilterType> {
+export interface CommonVariables<SortType, FilterType> {
   offset: number;
   limit: number;
   query: string;
@@ -77,7 +95,7 @@ interface CommonVariables<SortType, FilterType> {
   filter: FilterType;
 }
 
-interface LazyListProps<TData, TVariables, TDataType>
+export interface LazyListProps<TData, TVariables, TDataType>
   extends UseLazyListProps<TVariables, TData> {
   renderItem: ListRenderItem<TDataType>;
   emptyMessage: string;
@@ -105,7 +123,7 @@ const LazyList = <
     SortType,
     FilterType
   >({ query, variables, dataKey });
-  const [refreshing, setRefreshing] = useState(false);
+  const { refreshing, onRefresh } = useListRefresh(refetch);
 
   if (loading) {
     return <LoadingScreen />;
@@ -138,13 +156,7 @@ const LazyList = <
   return (
     <FlatList
       refreshing={refreshing}
-      onRefresh={async () => {
-        setRefreshing(true);
-        const result = await refetch();
-        if (result.data) {
-          setRefreshing(false);
-        }
-      }}
+      onRefresh={onRefresh}
       onEndReached={() => nextPage()}
       onEndReachedThreshold={0.5}
       data={data}

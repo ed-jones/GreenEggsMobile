@@ -1,6 +1,6 @@
 import { List, ListItem } from "@ui-kitten/components";
 import React, { FC } from "react";
-import { SectionList } from "react-native";
+import { SectionList, SectionListProps } from "react-native";
 
 export const AlphabetArray = [
   "a",
@@ -37,24 +37,24 @@ export interface AlphaListItem<T> {
   data: T[]
 }
 
+export type CategoriseItem<T> = (item: T) => AlphabetType;
+
 export type AlphaListItems<T> = Array<AlphaListItem<T>>
 
 interface BuildAlphaListItemProps<T> {
   items: T[]
-  categoriseItem: (item: T) => AlphabetType
+  categoriseItem: CategoriseItem<T>
 }
 
 export function buildAlphaListItems <T, >({ items, categoriseItem }: BuildAlphaListItemProps<T>): AlphaListItems<T> {
-  const alphaListItems: AlphaListItems<T> = AlphabetArray.map((letter) => ({ letter, data: [] as T[] }))
-
+  const alphaListItems: AlphaListItems<T> = AlphabetArray.map((letter) => ({ letter, data: [] as T[] }));
   items.forEach((item) => {
     alphaListItems?.find((alphaListItem) => alphaListItem.letter === categoriseItem(item))?.data.push(item);
   });
-
   return alphaListItems;
 }
 
-interface AlphaListProps<T> {
+interface AlphaListProps<T> extends Omit<SectionListProps<T, AlphaListItem<T>>, 'renderItem' | 'sections'> {
   items: AlphaListItems<T>;
   renderItem: FC<T>;
 }

@@ -1,7 +1,6 @@
 import { gql } from '@apollo/client';
 import * as Fragments from './fragments';
 
-// eslint-disable-next-line import/prefer-default-export
 export const GET_RECIPES = gql`
   query recipes($offset: Int!, $limit: Int!, $query: String!, $sort: Sort!, $filter: RecipeFilter!) {
     recipes(offset: $offset, limit: $limit, query: $query, sort: $sort, filter: $filter) {
@@ -149,8 +148,8 @@ export const GET_PROFILE = gql`
 `;
 
 export const GET_INGREDIENTS = gql`
-  query Ingredients {
-    ingredients {
+  query Ingredients($offset: Int!, $limit: Int!, $query: String!) {
+    ingredients(offset: $offset, limit: $limit, query: $query) {
       data {
         ...IngredientFragment
       }

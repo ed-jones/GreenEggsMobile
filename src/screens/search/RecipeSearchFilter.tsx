@@ -12,7 +12,7 @@ interface FilterListItemProps {
 const FilterOptions: FilterListItemProps[] = [
   { title: 'Ingredients (Included)', to: 'FilterIngredientsIncluded' },
   { title: 'Ingredients (Excluded)', to: 'FilterIngredientsExcluded' },
-  { title: 'Category', to: 'FilterRecipeCategory' },
+  { title: 'Categories', to: 'FilterRecipeCategories' },
   { title: 'Allergies', to: 'FilterRecipeAllergies' },
   { title: 'Diets', to: 'FilterRecipeDiets' },
   { title: 'Cook Time', to: 'FilterRecipeCookTime' },

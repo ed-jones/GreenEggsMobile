@@ -1859,6 +1859,36 @@ export interface Ingredients {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: Categories
+// ====================================================
+
+export interface Categories_categories_data {
+  __typename: "Category";
+  id: string;
+  name: string;
+}
+
+export interface Categories_categories_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface Categories_categories {
+  __typename: "CategoriesResult";
+  data: Categories_categories_data[];
+  error: Categories_categories_error | null;
+}
+
+export interface Categories {
+  categories: Categories_categories;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: UserFragment
 // ====================================================
 
@@ -2144,6 +2174,21 @@ export interface IngredientFragment {
   description: string | null;
   quantity: number;
   unit: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: CategoryFragment
+// ====================================================
+
+export interface CategoryFragment {
+  __typename: "Category";
+  id: string;
+  name: string;
 }
 
 /* tslint:disable */

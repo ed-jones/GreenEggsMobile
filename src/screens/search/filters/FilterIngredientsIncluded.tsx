@@ -1,13 +1,14 @@
 import React, { FC, useState } from 'react';
 import { Icons, Queries } from '@greeneggs/core';
-import { List, ListItem, TopNavigation, TopNavigationAction, Text, Divider, Input } from '@ui-kitten/components';
+import { ListItem, TopNavigation, TopNavigationAction, Text, Input } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/core';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Ingredients } from '@greeneggs/types/graphql';
+import { Ingredients, IngredientsVariables, Ingredients_ingredients_data, RecipeFilter, Sort } from '@greeneggs/types/graphql';
 import { useQuery } from '@apollo/client';
 
 import LoadingScreen from '../../loading/LoadingScreen';
-import AlphaList, { AlphabetType, buildAlphaListItems } from '@greeneggs/core/alpha-list';
+import { AlphabetType, buildAlphaListItems } from '@greeneggs/core/alpha-list';
+import LazyListAlpha from '@greeneggs/core/lazy-alpha-list';
 
 const FilterIngredientsIncluded: FC = () => {
   const navigation = useNavigation();
@@ -59,12 +60,23 @@ const FilterIngredientsIncluded: FC = () => {
         onChangeText={setQuery}
         value={query}
       />
-      <AlphaList items={alphaListItems} renderItem={(item) => (
-        <>
-          <ListItem title={item.name} />
-          <Divider />
-        </>
-      )}/>
+      <LazyListAlpha<
+        Ingredients,
+        IngredientsVariables,
+        Ingredients_ingredients_data,
+        Sort,
+        RecipeFilter
+      >
+        renderItem={(item) => <ListItem title={item.name} />}
+        categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
+        query={Queries.GET_INGREDIENTS}
+        emptyMessage={"No ingredients found"}
+        errorMessage={"Error"}
+        variables={{
+          query,
+        }}
+        dataKey="ingredients"
+      />
     </>
   );
 }

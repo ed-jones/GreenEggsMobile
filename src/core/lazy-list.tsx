@@ -5,6 +5,64 @@ import Alert from "./alert/Alert";
 import LoadingScreen from "../screens/loading/LoadingScreen";
 import { ListRenderItem } from "react-native";
 
+interface UseLazyListProps<TVariables, TData> {
+  query: DocumentNode;
+  variables: Partial<Omit<TVariables, "offset" | "limit">>;
+  dataKey: keyof TData;
+}
+
+function useLazyList<
+  TData extends TDataWithData<TData, TDataType>,
+  TVariables extends Partial<CommonVariables<SortType, FilterType>>,
+  TDataType,
+  SortType,
+  FilterType
+>({ query, variables, dataKey }: UseLazyListProps<TVariables, TData>) {
+  const [done, setDone] = useState(false);
+  const limit = 2;
+  const [data, setData] = useState<TDataType[]>([]);
+
+  useEffect(() => {
+    setDone(false);
+  }, [variables.query]);
+
+  const queryResult = useQuery<TData, TVariables>(query, {
+    variables: {
+      ...variables,
+      offset: 0,
+      limit,
+    } as TVariables,
+    onCompleted: (data) => {
+      const d = data[dataKey]?.data;
+      if (d) {
+        setData(d);
+      }
+    },
+  });
+
+  async function nextPage() {
+    if (!done) {
+      const result = await queryResult.fetchMore<TData, TVariables>({
+        variables: {
+          ...variables,
+          offset: data.length,
+          limit,
+        } as TVariables,
+      });
+      const d = result.data[dataKey]?.data;
+      if (d) {
+        if (d.length === 0) {
+          setDone(true);
+        } else {
+          setData([...data, ...d]);
+        }
+      }
+    }
+  }
+
+  return { ...queryResult, data, nextPage };
+}
+
 type TDataWithData<TData, TDataType> = {
   [key in keyof TData]: {
     data: TDataType[] | null;
@@ -19,10 +77,8 @@ interface CommonVariables<SortType, FilterType> {
   filter: FilterType;
 }
 
-interface LazyListProps<TData, TVariables, TDataType> {
-  query: DocumentNode;
-  variables: Partial<Omit<TVariables, "offset" | "limit">>;
-  dataKey: keyof TData;
+interface LazyListProps<TData, TVariables, TDataType>
+  extends UseLazyListProps<TVariables, TData> {
   renderItem: ListRenderItem<TDataType>;
   emptyMessage: string;
   errorMessage: string;
@@ -42,34 +98,20 @@ const LazyList = <
   emptyMessage,
   errorMessage,
 }: LazyListProps<TData, TVariables, TDataType>) => {
-  const [done, setDone] = useState(false);
-  const limit = 2;
-  const [data, setData] = useState<TDataType[]>([]);
+  const { loading, error, data, refetch, nextPage } = useLazyList<
+    TData,
+    TVariables,
+    TDataType,
+    SortType,
+    FilterType
+  >({ query, variables, dataKey });
   const [refreshing, setRefreshing] = useState(false);
 
-  const queryResult = useQuery<TData, TVariables>(query, {
-    variables: {
-      ...variables,
-      offset: 0,
-      limit,
-    } as TVariables,
-    onCompleted: (data) => {
-      const d = data[dataKey]?.data;
-      if (d) {
-        setData(d);
-      }
-    },
-  });
-
-  useEffect(() => {
-    setDone(false);
-  }, [variables.query]);
-
-  if (queryResult.loading) {
+  if (loading) {
     return <LoadingScreen />;
   }
 
-  if (queryResult.error) {
+  if (error) {
     return <Alert message="There was an error" type="danger" />;
   }
 
@@ -93,32 +135,12 @@ const LazyList = <
     );
   }
 
-  async function nextPage() {
-    if (!done) {
-      const result = await queryResult.fetchMore<TData, TVariables>({
-        variables: {
-          ...variables,
-          offset: data.length,
-          limit,
-        } as TVariables,
-      });
-      const d = result.data[dataKey]?.data;
-      if (d) {
-        if (d.length === 0) {
-          setDone(true);
-        } else {
-          setData([...data, ...d]);
-        }
-      }
-    }
-  }
-
   return (
     <FlatList
       refreshing={refreshing}
       onRefresh={async () => {
         setRefreshing(true);
-        const result = await queryResult.refetch();
+        const result = await refetch();
         if (result.data) {
           setRefreshing(false);
         }

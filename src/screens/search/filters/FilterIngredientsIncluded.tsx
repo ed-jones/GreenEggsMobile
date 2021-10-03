@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
 import { Icons, Queries } from '@greeneggs/core';
-import { List, ListItem, TopNavigation, TopNavigationAction, Text } from '@ui-kitten/components';
+import { List, ListItem, TopNavigation, TopNavigationAction, Text, Divider } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/core';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ingredients } from '@greeneggs/types/graphql';
 import { useQuery } from '@apollo/client';
 
 import LoadingScreen from '../../loading/LoadingScreen';
+import AlphaList, { AlphabetType, buildAlphaListItems } from '@greeneggs/core/alpha-list';
 
 const FilterIngredientsIncluded: FC = () => {
   const navigation = useNavigation();
@@ -22,6 +23,15 @@ const FilterIngredientsIncluded: FC = () => {
     return <Text>Error! {error.message}</Text>
   }
 
+  if (ingredients === undefined) {
+    return <Text>No Ingredients Found</Text>
+  }
+
+  const alphaListItems = buildAlphaListItems({
+    items: ingredients,
+    categoriseItem: (item) => item.name[0].toLowerCase() as AlphabetType
+  });
+
   return (
     <>
       <TopNavigation
@@ -35,9 +45,12 @@ const FilterIngredientsIncluded: FC = () => {
         title="Ingredients (Included)"
         alignment="center"
       />
-      <List data={ingredients} renderItem={({ item }) => (
-        <ListItem title={item.name} />
-      )} />
+      <AlphaList items={alphaListItems} renderItem={(item) => (
+        <>
+          <ListItem title={item.name} />
+          <Divider />
+        </>
+      )}/>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { ListItem } from "@ui-kitten/components";
+import { List, ListItem } from "@ui-kitten/components";
 import React, { FC } from "react";
 
 export const AlphabetArray = [
@@ -55,15 +55,13 @@ interface AlphaListProps<T> {
 
 const AlphaList = <T,>({ items, renderItem }: AlphaListProps<T>) => {
   return (
-    <>
-      {AlphabetArray.map((letter) => (
-        <>
-          {items[letter].length > 0 && <ListItem title={letter} />}
-          {items[letter].map(renderItem)}
-        </>
-      ))}
-    </>
-  );
+    <List data={AlphabetArray} renderItem={({ item: letter }) => (
+      <>
+        {items[letter].length > 0 && <ListItem title={letter.toUpperCase()} style={{ backgroundColor: '#EDF1F7' }} />}
+        {items[letter].map(renderItem)}
+      </>
+    )}/>
+  )
 };
 
 export default AlphaList;

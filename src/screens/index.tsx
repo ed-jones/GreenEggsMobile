@@ -35,4 +35,4 @@ export { default as FilterIngredientsExcluded } from '@greeneggs/screens/search/
 export { default as FilterRecipeAllergies } from '@greeneggs/screens/search/filters/FilterRecipeAllergies'
 export { default as FilterRecipeDiets } from '@greeneggs/screens/search/filters/FilterRecipeDiets'
 export { default as FilterRecipeCategories } from '@greeneggs/screens/search/filters/FilterRecipeCategories'
-// export { default as FilterRecipeCookTime } from '@greeneggs/screens/search/filters/FilterRecipeCookTime'
+export { default as FilterRecipeCookTime } from '@greeneggs/screens/search/filters/FilterRecipeCookTime'

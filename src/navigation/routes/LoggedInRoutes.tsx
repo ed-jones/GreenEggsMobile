@@ -91,7 +91,7 @@ const LoggedInRoutes = [
   <Stack.Screen name="FilterRecipeCategories" component={Screens.FilterRecipeCategories} />,
   <Stack.Screen name="FilterRecipeAllergies" component={Screens.FilterRecipeAllergies} />,
   <Stack.Screen name="FilterRecipeDiets" component={Screens.FilterRecipeDiets} />,
-  // <Stack.Screen name="FilterRecipeCookTime" component={Screens.FilterRecipeCookTime} />,
+  <Stack.Screen name="FilterRecipeCookTime" component={Screens.FilterRecipeCookTime} />,
  ]
 
 export default LoggedInRoutes;

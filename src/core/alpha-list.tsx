@@ -1,5 +1,6 @@
 import { List, ListItem } from "@ui-kitten/components";
 import React, { FC } from "react";
+import { SectionList } from "react-native";
 
 export const AlphabetArray = [
   "a",
@@ -31,7 +32,12 @@ export const AlphabetArray = [
 ] as const;
 export type AlphabetType = typeof AlphabetArray[number];
 
-export type AlphaListItems<T> = Record<AlphabetType, T[]>
+export interface AlphaListItem<T> {
+  letter: AlphabetType
+  data: T[]
+}
+
+export type AlphaListItems<T> = Array<AlphaListItem<T>>
 
 interface BuildAlphaListItemProps<T> {
   items: T[]
@@ -39,10 +45,10 @@ interface BuildAlphaListItemProps<T> {
 }
 
 export function buildAlphaListItems <T, >({ items, categoriseItem }: BuildAlphaListItemProps<T>): AlphaListItems<T> {
-  const alphaListItems: AlphaListItems<T> = Object.assign({}, ...AlphabetArray.map((letter) => ({ [letter]: [] as T[] })))
+  const alphaListItems: AlphaListItems<T> = AlphabetArray.map((letter) => ({ letter, data: [] as T[] }))
 
   items.forEach((item) => {
-    alphaListItems[categoriseItem(item)].push(item);
+    alphaListItems?.find((alphaListItem) => alphaListItem.letter === categoriseItem(item))?.data.push(item);
   });
 
   return alphaListItems;
@@ -55,12 +61,14 @@ interface AlphaListProps<T> {
 
 const AlphaList = <T,>({ items, renderItem }: AlphaListProps<T>) => {
   return (
-    <List data={AlphabetArray} renderItem={({ item: letter }) => (
-      <>
-        {items[letter].length > 0 && <ListItem title={letter.toUpperCase()} style={{ backgroundColor: '#EDF1F7' }} />}
-        {items[letter].map(renderItem)}
-      </>
-    )}/>
+    <SectionList
+      sections={items.filter((item) => item.data.length > 0)}
+      renderSectionHeader={({ section: { letter }}) => (
+        <ListItem title={letter.toUpperCase()} style={{ backgroundColor: '#EDF1F7' }} />
+      )}
+      renderItem={({ item }) => renderItem(item)}
+      stickySectionHeadersEnabled
+    />
   )
 };
 

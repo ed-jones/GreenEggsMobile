@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import { Icons, Queries } from "@greeneggs/core";
 import {
+  Divider,
   Input,
   ListItem,
   TopNavigation,
@@ -50,7 +51,12 @@ const FilterIngredientsExcluded: FC = () => {
         Sort,
         RecipeFilter
       >
-        renderItem={(item) => <ListItem title={item.name} />}
+        renderItem={(item) => (
+          <>
+            <ListItem title={item.name} />
+            <Divider />
+          </>
+        )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
         query={Queries.GET_INGREDIENTS}
         emptyMessage={"No ingredients found"}

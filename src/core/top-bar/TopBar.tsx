@@ -1,18 +1,27 @@
-import React, { useContext } from 'react';
-import { Button, Icon, Input, ThemedComponentProps, TopNavigationAction, withStyles } from '@ui-kitten/components';
-import { StyleSheet, View, Image } from 'react-native';
+import React, { useContext } from "react";
+import {
+  Button,
+  Icon,
+  Input,
+  ThemedComponentProps,
+  TopNavigationAction,
+  withStyles,
+} from "@ui-kitten/components";
+import { StyleSheet, View, Image } from "react-native";
 
-import logo512 from '../logo/logo512.png';
-import * as Icons from '../icons/Icons';
-import { useNavigation } from '@react-navigation/core';
-import { SearchContext } from '@greeneggs/providers/SearchStateProvider';
+import logo512 from "../logo/logo512.png";
+import * as Icons from "../icons/Icons";
+import { useNavigation } from "@react-navigation/core";
+import { SearchContext } from "@greeneggs/providers/SearchStateProvider";
+import { countActiveFilters } from "@greeneggs/screens/search/RecipeSearchFilter";
+import CountCircle from "@greeneggs/screens/search/common/count-circle";
 
 const styles = StyleSheet.create({
   topNavigation: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     padding: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   icon: {
     width: 24,
@@ -31,33 +40,54 @@ const styles = StyleSheet.create({
 
 const TopBar = withStyles(({ eva }: ThemedComponentProps) => {
   const navigation = useNavigation();
-  const {searchState, setSearchState} = useContext(SearchContext)
-  const setQuery = (query: string | undefined) => setSearchState?.({...searchState, query})
+  const { searchState, setSearchState } = useContext(SearchContext);
+  const setQuery = (query: string | undefined) =>
+    setSearchState?.({ ...searchState, query });
 
   return (
     <View style={styles.topNavigation}>
-      { searchState.query === undefined ? (
+      {searchState.query === undefined ? (
         <Image source={logo512} style={styles.logo} />
       ) : (
-        <TopNavigationAction icon={Icons.Back} onPress={() => setQuery(undefined)}/>
-      ) }
+        <TopNavigationAction
+          icon={Icons.Back}
+          onPress={() => setQuery(undefined)}
+        />
+      )}
       <Input
         placeholder="Search Recipe"
         size="large"
         style={styles.search}
-        accessoryLeft={(props) => <Icon style={styles.icon} name="search" {...props} />}
+        accessoryLeft={(props) => (
+          <Icon style={styles.icon} name="search" {...props} />
+        )}
         value={searchState.query}
         onChangeText={setQuery}
       />
-      { searchState.query !== undefined && (
-        <Button
-          accessoryLeft={(props) => <Icons.Filter {...props} fill={eva?.theme?.["color-primary-800"]} />}
-          status="basic"
-          onPress={() => navigation.navigate("RecipeSearchFilter")}
-        />
+      {searchState.query !== undefined && (
+        <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+          {countActiveFilters(searchState) > 0 && (
+            <CountCircle
+              style={{ position: "absolute", zIndex: 1, marginTop: -6 }}
+            >
+              {countActiveFilters(searchState)}
+            </CountCircle>
+          )}
+          <Button
+            style={{ width: 50 }}
+            accessoryLeft={(props) => (
+              <Icons.Filter
+                {...props}
+                fill={eva?.theme?.["color-primary-800"]}
+              />
+            )}
+            status="basic"
+            onPress={() => navigation.navigate("RecipeSearchFilter")}
+          />
+        </View>
       )}
     </View>
-  )
-})
+  );
+});
 
 export default TopBar;

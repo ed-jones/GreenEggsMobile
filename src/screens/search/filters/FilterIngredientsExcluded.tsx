@@ -3,7 +3,8 @@ import { Icons, Queries } from "@greeneggs/core";
 import {
   Divider,
   Input,
-  ListItem,
+  Layout,
+  Text,
   TopNavigation,
   TopNavigationAction,
 } from "@ui-kitten/components";
@@ -28,9 +29,34 @@ const FilterIngredientsExcluded: FC = () => {
   const insets = useSafeAreaInsets();
   const [query, setQuery] = useState("");
   const { searchState, setSearchState } = useContext(SearchContext);
+  const [selectedIngredients, setSelectedIngredients] = useState<string[]>(
+    searchState.filter.ingredients?.excludes ?? []
+  );
+
+  const setSelected = (selected: boolean, id: string) => {
+    setSelectedIngredients(
+      selected
+        ? [...selectedIngredients, id]
+        : [...selectedIngredients.filter((excludes) => excludes !== id)]
+    );
+  };
+
+  const addToFilter = () => {
+    setSearchState?.({
+      ...searchState,
+      filter: {
+        ...searchState.filter,
+        ingredients: {
+          ...searchState.filter.ingredients,
+          excludes: selectedIngredients,
+        },
+      },
+    });
+    navigation.goBack();
+  };
 
   return (
-    <>
+    <Layout style={{flex: 1}} level="2">
       <TopNavigation
         style={{ backgroundColor: "transparent", paddingTop: insets.top }}
         accessoryLeft={() => (
@@ -43,7 +69,7 @@ const FilterIngredientsExcluded: FC = () => {
         alignment="center"
       />
       <Input
-        style={{ padding: 16 }}
+        style={{ padding: 16, backgroundColor: 'white' }}
         placeholder="Search Ingredients"
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
@@ -60,31 +86,8 @@ const FilterIngredientsExcluded: FC = () => {
           <>
             <SelectableListItem
               title={item.name}
-              selected={
-                searchState.filter.ingredients?.excludes?.includes(item.id) ??
-                false
-              }
-              setSelected={(selected: boolean) => {
-                setSearchState?.({
-                  ...searchState,
-                  filter: {
-                    ...searchState.filter,
-                    ingredients: {
-                      ...searchState.filter.ingredients,
-                      excludes: selected
-                        ? [
-                            ...(searchState.filter.ingredients?.excludes ?? []),
-                            item.id,
-                          ]
-                        : [
-                            ...(
-                              searchState.filter.ingredients?.excludes ?? []
-                            ).filter((excludes) => excludes !== item.id),
-                          ],
-                    },
-                  },
-                });
-              }}
+              selected={selectedIngredients.includes(item.id)}
+              setSelected={(selected) => setSelected(selected, item.id)}
             />
             <Divider />
           </>
@@ -98,8 +101,12 @@ const FilterIngredientsExcluded: FC = () => {
         }}
         dataKey="ingredients"
       />
-      <AddToFilter filterCount={0} />
-    </>
+      <AddToFilter
+        clearFilters={() => setSelectedIngredients([])}
+        filterCount={selectedIngredients.length}
+        addToFilter={addToFilter}
+      />
+    </Layout>
   );
 };
 

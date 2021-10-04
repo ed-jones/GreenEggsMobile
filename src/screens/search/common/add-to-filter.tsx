@@ -3,14 +3,16 @@ import FilterControlGroup from '@greeneggs/core/filter-control-group';
 
 export interface AddToFilterProps {
   filterCount: number;
+  clearFilters?: () => void;
+  addToFilter?: () => void;
 }
 
-const AddToFilter: FC<AddToFilterProps> = ({ filterCount }) => {
+const AddToFilter: FC<AddToFilterProps> = ({ filterCount, clearFilters, addToFilter }) => {
   return (
     <FilterControlGroup
-      label={`${filterCount.toString()} FILTERS ADDED`}
-      clearButton={{ title: "CLEAR FILTERS", onPress: () => undefined }}
-      applyButton={{ title: "ADD TO FILTER", onPress: () => undefined }}
+      label={`${filterCount.toString()} FILTERS SELECTED`}
+      clearButton={{ title: "CLEAR FILTERS", onPress: () => clearFilters?.() }}
+      applyButton={{ title: "ADD TO FILTER", onPress: () => addToFilter?.() }}
     />
   );
 }

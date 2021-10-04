@@ -9,7 +9,8 @@ import {
 import Alert from "./alert/Alert";
 import LoadingScreen from "../screens/loading/LoadingScreen";
 import AlphaList, { buildAlphaListItems, CategoriseItem } from "./alpha-list";
-import { List, Text } from "@ui-kitten/components";
+import { Layout, List, Text } from "@ui-kitten/components";
+import { View } from "react-native";
 
 interface LazyListAlphaProps<TData, TVariables, TDataType>
   extends Omit<LazyListProps<TData, TVariables, TDataType>, "renderItem"> {
@@ -29,7 +30,6 @@ const LazyListAlpha = <
   dataKey,
   renderItem,
   emptyMessage,
-  errorMessage,
   categoriseItem,
 }: LazyListAlphaProps<TData, TVariables, TDataType>) => {
   const { loading, error, data, refetch, nextPage } = useLazyList<
@@ -42,20 +42,30 @@ const LazyListAlpha = <
   const { refreshing, onRefresh } = useListRefresh(refetch);
 
   if (loading) {
-    return <LoadingScreen />;
+    return (
+      <Layout style={{flex: 1}}>
+        <LoadingScreen />
+      </Layout>
+    );
   }
 
   if (error) {
-    return <Alert message="There was an error" type="danger" />;
+    return (
+      <View style={{flex: 1}}>
+        <Alert message="There was an error" type="danger" />
+      </View>
+    );
   }
 
   if (data === null || data === undefined || data.length === 0) {
     return (
-      <Alert
-        style={{ marginHorizontal: 16 }}
-        message={emptyMessage}
-        type="info"
-      />
+      <View style={{flex: 1}}>
+        <Alert
+          style={{ marginHorizontal: 16 }}
+          message={emptyMessage}
+          type="info"
+        />
+      </View>
     );
   }
 

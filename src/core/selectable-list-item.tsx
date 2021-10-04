@@ -1,4 +1,4 @@
-import { ListItem, ListItemProps, Icon } from "@ui-kitten/components";
+import { ListItem, ListItemProps, Icon, Text } from "@ui-kitten/components";
 import { RenderProp } from "@ui-kitten/components/devsupport";
 import React, { FC } from "react";
 import { ViewProps } from "react-native";
@@ -11,23 +11,26 @@ const CheckIcon: RenderProp<ViewProps> = (props) => {
 const CircleIcon: RenderProp<ViewProps> = (props) => {
   return (
     <Svg {...props}>
-      <Circle cx="12" cy="12" r="10" stroke="black" />
+      <Circle cx="12" cy="12" r="9" stroke="#8F9BB3" strokeWidth={2} />
     </Svg>
   );
 };
 
-interface SelectableListItemProps extends ListItemProps {
+interface SelectableListItemProps extends Omit<ListItemProps, 'title'> {
   selected: boolean;
   setSelected: (selected: boolean) => void;
+  title: string;
 }
 
 const SelectableListItem: FC<SelectableListItemProps> = ({
   selected,
   setSelected,
+  title,
   ...props
 }) => (
   <ListItem
     {...props}
+    title={<Text style={{ fontWeight: 'bold' }}>{title}</Text>}
     accessoryRight={selected ? CheckIcon : CircleIcon}
     onPress={() => setSelected(!selected)}
   />

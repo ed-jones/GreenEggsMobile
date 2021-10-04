@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, ReactElement, ReactText } from "react";
 import {
   Text,
   Button,
@@ -24,7 +24,7 @@ const FilterControlGroup: FC<FilterControlGroupProps> =
     applyButton,
   }) => {
     return (
-      <Layout style={{padding: 16}} level="3">
+      <Layout style={{padding: 16}} level="4">
         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16}}>
           <Text category="label">{label}</Text>
           <Button size="small" status="basic" onPress={clearButton.onPress}>{clearButton.title}</Button>

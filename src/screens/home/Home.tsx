@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { TopBar } from '@greeneggs/core';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View } from 'react-native';
+import { SearchContext } from '@greeneggs/providers/SearchStateProvider';
 
 import HomeTabs from './home-tabs/HomeTabs';
 import RecipeSearch from '../search/RecipeSearch';
 
-
 const Home = () => { 
   const insets = useSafeAreaInsets();
-  const [query, setQuery] = useState<string | undefined>();
+  const {searchState, setSearchState} = useContext(SearchContext)
 
   return (
     <>
       <View style={{ paddingTop: insets.top }}>
-        <TopBar query={query} setQuery={setQuery} />
+        <TopBar query={searchState.query} setQuery={(query) => setSearchState?.({...searchState, query})} />
       </View>
-      { query === undefined ? (
+      { searchState.query === undefined ? (
         <HomeTabs/>
-      ): <RecipeSearch query={query} />}
+      ): <RecipeSearch query={searchState.query} />}
     </>
   )
 };

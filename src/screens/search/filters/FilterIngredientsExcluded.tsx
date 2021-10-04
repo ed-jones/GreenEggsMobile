@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import { Icons, Queries } from "@greeneggs/core";
 import {
   Divider,
@@ -18,13 +18,16 @@ import {
 } from "@greeneggs/types/graphql";
 import LazyListAlpha from "@greeneggs/core/lazy-alpha-list";
 import { AlphabetType } from "@greeneggs/core/alpha-list";
-import FilterControlGroup from "@greeneggs/core/filter-control-group";
+import SelectableListItem from "@greeneggs/core/selectable-list-item";
+import { SearchContext } from "@greeneggs/providers/SearchStateProvider";
+
 import AddToFilter from "../common/add-to-filter";
 
 const FilterIngredientsExcluded: FC = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const [query, setQuery] = useState("");
+  const { searchState, setSearchState } = useContext(SearchContext);
 
   return (
     <>
@@ -55,7 +58,34 @@ const FilterIngredientsExcluded: FC = () => {
       >
         renderItem={(item) => (
           <>
-            <ListItem title={item.name} />
+            <SelectableListItem
+              title={item.name}
+              selected={
+                searchState.filter.ingredients?.excludes?.includes(item.id) ??
+                false
+              }
+              setSelected={(selected: boolean) => {
+                setSearchState?.({
+                  ...searchState,
+                  filter: {
+                    ...searchState.filter,
+                    ingredients: {
+                      ...searchState.filter.ingredients,
+                      excludes: selected
+                        ? [
+                            ...(searchState.filter.ingredients?.excludes ?? []),
+                            item.id,
+                          ]
+                        : [
+                            ...(
+                              searchState.filter.ingredients?.excludes ?? []
+                            ).filter((excludes) => excludes !== item.id),
+                          ],
+                    },
+                  },
+                });
+              }}
+            />
             <Divider />
           </>
         )}

@@ -1521,6 +1521,12 @@ export interface Diets {
   diets: Diets_diets;
 }
 
+export interface DietsVariables {
+  offset: number;
+  limit: number;
+  query: string;
+}
+
 /* tslint:disable */
 /* eslint-disable */
 // @generated
@@ -1549,6 +1555,12 @@ export interface Allergies_allergies {
 
 export interface Allergies {
   allergies: Allergies_allergies;
+}
+
+export interface AllergiesVariables {
+  offset: number;
+  limit: number;
+  query: string;
 }
 
 /* tslint:disable */
@@ -1887,6 +1899,12 @@ export interface Categories_categories {
 
 export interface Categories {
   categories: Categories_categories;
+}
+
+export interface CategoriesVariables {
+  offset: number;
+  limit: number;
+  query: string;
 }
 
 /* tslint:disable */

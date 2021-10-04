@@ -73,8 +73,8 @@ export const ME = gql`
 `;
 
 export const GET_DIETS = gql`
-  query Diets {
-    diets {
+  query Diets($offset: Int!, $limit: Int!, $query: String!) {
+    diets(offset: $offset, limit: $limit, query: $query) {
       data {
         ...DietFragment
       }
@@ -88,8 +88,8 @@ export const GET_DIETS = gql`
 `;
 
 export const GET_ALLERGIES = gql`
-  query Allergies {
-    allergies {
+  query Allergies($offset: Int!, $limit: Int!, $query: String!) {
+    allergies(offset: $offset, limit: $limit, query: $query) {
       data {
         ...AllergyFragment
       }
@@ -163,8 +163,8 @@ export const GET_INGREDIENTS = gql`
 `;
 
 export const GET_CATEGORIES = gql`
-  query Categories {
-    categories {
+  query Categories($offset: Int!, $limit: Int!, $query: String!) {
+    categories(offset: $offset, limit: $limit, query: $query) {
       data {
         ...CategoryFragment
       }

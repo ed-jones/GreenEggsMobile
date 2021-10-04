@@ -161,6 +161,7 @@ const LazyList = <
       onEndReachedThreshold={0.5}
       data={data}
       renderItem={renderItem}
+      keyExtractor={(_item, index) => index.toString()}
     />
   );
 };

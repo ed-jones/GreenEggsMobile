@@ -50,7 +50,13 @@ function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
 const DietaryPreferences = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
-  const getDiet = useQuery<Diets>(Queries.GET_DIETS);
+  const getDiet = useQuery<Diets>(Queries.GET_DIETS, {
+    variables: {
+      query: '',
+      offset: 0,
+      limit: 100,
+    }
+  });
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(
     new IndexPath(0)
   );

@@ -51,7 +51,13 @@ function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
 const AllergyPreferences = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
-  const getAllergy = useQuery<Allergies>(Queries.GET_ALLERGIES);
+  const getAllergy = useQuery<Allergies>(Queries.GET_ALLERGIES, {
+    variables: {
+      query: '',
+      offset: 0,
+      limit: 100,
+    }
+  });
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(
     new IndexPath(0)
   );

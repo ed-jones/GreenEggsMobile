@@ -1,18 +1,17 @@
 import { useQuery } from '@apollo/client';
 import { Queries } from '@greeneggs/core';
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import LazyList from '@greeneggs/core/lazy-list';
 import RecipeCardSmall from '@greeneggs/core/recipe-card-small';
 import { RecipeFilter, recipes, recipesVariables, recipes_recipes_data, Sort } from '@greeneggs/types/graphql';
 import { useNavigation } from '@react-navigation/core';
 import { View } from 'react-native';
+import { SearchContext } from '@greeneggs/providers/SearchStateProvider';
 
-interface RecipeSearchProps {
-  query: string;
-}
-
-const RecipeSearch: FC<RecipeSearchProps> = ({ query }) => {
+const RecipeSearch: FC = () => {
   const navigation = useNavigation();
+  const {searchState} = useContext(SearchContext)
+
   return (
     <LazyList<
       recipes,
@@ -23,7 +22,7 @@ const RecipeSearch: FC<RecipeSearchProps> = ({ query }) => {
     >
       query={Queries.GET_RECIPES}
       variables={{
-        query: query,
+        query: searchState.query,
         sort: Sort.NEW,
         filter: {}
       }}

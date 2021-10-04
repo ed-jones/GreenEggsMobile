@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Icon, Input, ThemedComponentProps, TopNavigationAction, withStyles } from '@ui-kitten/components';
 import { StyleSheet, View, Image } from 'react-native';
 
 import logo512 from '../logo/logo512.png';
 import * as Icons from '../icons/Icons';
 import { useNavigation } from '@react-navigation/core';
+import { SearchContext } from '@greeneggs/providers/SearchStateProvider';
 
 const styles = StyleSheet.create({
   topNavigation: {
@@ -28,17 +29,14 @@ const styles = StyleSheet.create({
   },
 });
 
-interface TopBarProps {
-  query: string | undefined;
-  setQuery: (query: string | undefined) => void;
-}
-
-const TopBar = withStyles(({ query, setQuery, eva }: TopBarProps & ThemedComponentProps) => {
+const TopBar = withStyles(({ eva }: ThemedComponentProps) => {
   const navigation = useNavigation();
+  const {searchState, setSearchState} = useContext(SearchContext)
+  const setQuery = (query: string | undefined) => setSearchState?.({...searchState, query})
 
   return (
     <View style={styles.topNavigation}>
-      { query === undefined ? (
+      { searchState.query === undefined ? (
         <Image source={logo512} style={styles.logo} />
       ) : (
         <TopNavigationAction icon={Icons.Back} onPress={() => setQuery(undefined)}/>
@@ -48,10 +46,10 @@ const TopBar = withStyles(({ query, setQuery, eva }: TopBarProps & ThemedCompone
         size="large"
         style={styles.search}
         accessoryLeft={(props) => <Icon style={styles.icon} name="search" {...props} />}
-        value={query}
+        value={searchState.query}
         onChangeText={setQuery}
       />
-      { query !== undefined && (
+      { searchState.query !== undefined && (
         <Button
           accessoryLeft={(props) => <Icons.Filter {...props} fill={eva?.theme?.["color-primary-800"]} />}
           status="basic"

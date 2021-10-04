@@ -9,16 +9,16 @@ import RecipeSearch from '../search/RecipeSearch';
 
 const Home = () => { 
   const insets = useSafeAreaInsets();
-  const {searchState, setSearchState} = useContext(SearchContext)
+  const {searchState} = useContext(SearchContext)
 
   return (
     <>
       <View style={{ paddingTop: insets.top }}>
-        <TopBar query={searchState.query} setQuery={(query) => setSearchState?.({...searchState, query})} />
+        <TopBar />
       </View>
       { searchState.query === undefined ? (
         <HomeTabs/>
-      ): <RecipeSearch query={searchState.query} />}
+      ): <RecipeSearch />}
     </>
   )
 };

@@ -6,15 +6,40 @@ import {
   ListItem,
   TopNavigation,
   TopNavigationAction,
-  Text,
 } from "@ui-kitten/components";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/core";
 import { Icons } from "@greeneggs/core";
 import FilterControlGroup from "@greeneggs/core/filter-control-group";
-import { SearchContext } from "@greeneggs/providers/SearchStateProvider";
+import { SearchContext, SearchState } from "@greeneggs/providers/SearchStateProvider";
 import CountCircle from "./common/count-circle";
 import { View } from "react-native";
+
+export function countActiveFilters(searchState: SearchState) {
+  let activeFilterCount = 0;
+
+  if (searchState.filter.allergies?.length ?? 0 > 0) {
+    activeFilterCount++;
+  }
+
+  if (searchState.filter.categories?.length ?? 0 > 0) {
+    activeFilterCount++;
+  }
+
+  if (searchState.filter.diets?.length ?? 0 > 0) {
+    activeFilterCount++;
+  }
+
+  if (searchState.filter.ingredients?.excludes?.length ?? 0 > 0) {
+    activeFilterCount++;
+  }
+
+  if (searchState.filter.ingredients?.includes?.length ?? 0 > 0) {
+    activeFilterCount++;
+  }
+
+  return activeFilterCount;
+}
 
 interface FilterListItemProps {
   title: string;
@@ -26,6 +51,11 @@ const RecipeSearchFilter: FC = () => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
   const { searchState, setSearchState } = useContext(SearchContext);
+
+  function applyAllFilters() {
+    setSearchState?.(searchState);
+    navigation.goBack();
+  }
 
   const FilterOptions: FilterListItemProps[] = [
     {
@@ -88,14 +118,12 @@ const RecipeSearchFilter: FC = () => {
         )}
       />
       <FilterControlGroup
-        label={`${Object.values(searchState.filter)
-          .filter(Boolean)
-          .length.toString()} CATEGORIES SELECTED`}
+        label={`${countActiveFilters(searchState)} CATEGORIES SELECTED`}
         clearButton={{
           title: "CLEAR ALL",
           onPress: () => setSearchState?.({ ...searchState, filter: {} }),
         }}
-        applyButton={{ title: "ADD TO FILTER", onPress: () => undefined }}
+        applyButton={{ title: "APPLY ALL FILTERS", onPress: applyAllFilters }}
       />
     </Layout>
   );

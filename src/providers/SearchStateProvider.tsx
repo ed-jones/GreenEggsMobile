@@ -1,13 +1,13 @@
 import React, { useState, FC, createContext } from 'react';
 import { RecipeFilter, Sort } from '@greeneggs/types/graphql';
 
-interface SearchState {
+export interface SearchState {
   query?: string;
   filter: RecipeFilter;
   sort: Sort;
 }
 
-const defaultSearchState: SearchState = {
+export const defaultSearchState: SearchState = {
   query: undefined,
   filter: {
     ingredients: undefined,

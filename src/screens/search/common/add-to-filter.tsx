@@ -12,7 +12,7 @@ const AddToFilter: FC<AddToFilterProps> = ({ filterCount, clearFilters, addToFil
     <FilterControlGroup
       label={`${filterCount.toString()} FILTERS SELECTED`}
       clearButton={{ title: "CLEAR FILTERS", onPress: () => clearFilters?.() }}
-      applyButton={{ title: "ADD TO FILTER", onPress: () => addToFilter?.() }}
+      applyButton={{ title: "SAVE CHANGES", onPress: () => addToFilter?.() }}
     />
   );
 }

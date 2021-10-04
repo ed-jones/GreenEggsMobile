@@ -140,6 +140,13 @@ export const IngredientFragment = gql`
   }
 `;
 
+export const GenericIngredientFragment = gql`
+  fragment GenericIngredientFragment on GenericIngredient {
+    id
+    name
+  }
+`;
+
 export const CategoryFragment = gql`
   fragment CategoryFragment on Category {
     id

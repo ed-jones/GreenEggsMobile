@@ -1843,11 +1843,9 @@ export interface profileVariables {
 // ====================================================
 
 export interface Ingredients_ingredients_data {
-  __typename: "Ingredient";
+  __typename: "GenericIngredient";
+  id: string;
   name: string;
-  description: string | null;
-  quantity: number;
-  unit: string | null;
 }
 
 export interface Ingredients_ingredients_error {
@@ -2198,6 +2196,21 @@ export interface IngredientFragment {
   description: string | null;
   quantity: number;
   unit: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: GenericIngredientFragment
+// ====================================================
+
+export interface GenericIngredientFragment {
+  __typename: "GenericIngredient";
+  id: string;
+  name: string;
 }
 
 /* tslint:disable */

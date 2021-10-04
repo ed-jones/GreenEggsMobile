@@ -151,14 +151,14 @@ export const GET_INGREDIENTS = gql`
   query Ingredients($offset: Int!, $limit: Int!, $query: String!) {
     ingredients(offset: $offset, limit: $limit, query: $query) {
       data {
-        ...IngredientFragment
+        ...GenericIngredientFragment
       }
       error {
         ...ErrorFragment
       }
     }
   }
-  ${Fragments.IngredientFragment}
+  ${Fragments.GenericIngredientFragment}
   ${Fragments.ErrorFragment}
 `;
 

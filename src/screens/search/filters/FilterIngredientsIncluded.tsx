@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import { Icons, Queries } from "@greeneggs/core";
 import {
   ListItem,
@@ -7,6 +7,7 @@ import {
   Text,
   Input,
   Divider,
+  Layout,
 } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/core";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -17,50 +18,45 @@ import {
   RecipeFilter,
   Sort,
 } from "@greeneggs/types/graphql";
-import { useQuery } from "@apollo/client";
-
-import LoadingScreen from "../../loading/LoadingScreen";
-import { AlphabetType, buildAlphaListItems } from "@greeneggs/core/alpha-list";
+import { AlphabetType } from "@greeneggs/core/alpha-list";
 import LazyListAlpha from "@greeneggs/core/lazy-alpha-list";
 import AddToFilter from "../common/add-to-filter";
+import SelectableListItem from "@greeneggs/core/selectable-list-item";
+import { SearchContext } from "@greeneggs/providers/SearchStateProvider";
 
 const FilterIngredientsIncluded: FC = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const [query, setQuery] = useState("");
-  const { data, loading, error } = useQuery<Ingredients>(
-    Queries.GET_INGREDIENTS,
-    {
-      variables: {
-        query: "",
-        offset: 0,
-        limit: 100,
-      },
-    }
+  const { searchState, setSearchState } = useContext(SearchContext);
+  const [selectedIngredients, setSelectedIngredients] = useState<string[]>(
+    searchState.filter.ingredients?.includes ?? []
   );
-  const ingredients = data?.ingredients.data;
 
-  if (loading) {
-    return <LoadingScreen />;
-  }
+  const setSelected = (selected: boolean, id: string) => {
+    setSelectedIngredients(
+      selected
+        ? [...selectedIngredients, id]
+        : [...selectedIngredients.filter((excludes) => excludes !== id)]
+    );
+  };
 
-  if (error) {
-    return <Text>Error! {error.message}</Text>;
-  }
-
-  if (ingredients === undefined) {
-    return <Text>No Ingredients Found</Text>;
-  }
-
-  const alphaListItems = buildAlphaListItems({
-    items: ingredients.filter((ingredient) =>
-      ingredient.name.toLowerCase().includes(query.toLowerCase())
-    ),
-    categoriseItem: (item) => item.name[0].toLowerCase() as AlphabetType,
-  });
+  const addToFilter = () => {
+    setSearchState?.({
+      ...searchState,
+      filter: {
+        ...searchState.filter,
+        ingredients: {
+          ...searchState.filter.ingredients,
+          includes: selectedIngredients,
+        },
+      },
+    });
+    navigation.goBack();
+  };
 
   return (
-    <>
+    <Layout style={{ flex: 1 }} level="2">
       <TopNavigation
         style={{ backgroundColor: "transparent", paddingTop: insets.top }}
         accessoryLeft={() => (
@@ -73,7 +69,7 @@ const FilterIngredientsIncluded: FC = () => {
         alignment="center"
       />
       <Input
-        style={{ padding: 16 }}
+        style={{ padding: 16, backgroundColor: "white" }}
         placeholder="Search Ingredients"
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
@@ -88,7 +84,11 @@ const FilterIngredientsIncluded: FC = () => {
       >
         renderItem={(item) => (
           <>
-            <ListItem title={item.name} />
+            <SelectableListItem
+              title={item.name}
+              selected={selectedIngredients.includes(item.id)}
+              setSelected={(selected) => setSelected(selected, item.id)}
+            />
             <Divider />
           </>
         )}
@@ -101,8 +101,12 @@ const FilterIngredientsIncluded: FC = () => {
         }}
         dataKey="ingredients"
       />
-      <AddToFilter filterCount={0} />
-    </>
+      <AddToFilter
+        clearFilters={() => setSelectedIngredients([])}
+        filterCount={selectedIngredients.length}
+        addToFilter={addToFilter}
+      />
+    </Layout>
   );
 };
 

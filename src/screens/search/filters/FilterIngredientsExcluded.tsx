@@ -18,6 +18,8 @@ import {
 } from "@greeneggs/types/graphql";
 import LazyListAlpha from "@greeneggs/core/lazy-alpha-list";
 import { AlphabetType } from "@greeneggs/core/alpha-list";
+import FilterControlGroup from "@greeneggs/core/filter-control-group";
+import AddToFilter from "../common/add-to-filter";
 
 const FilterIngredientsExcluded: FC = () => {
   const navigation = useNavigation();
@@ -66,6 +68,7 @@ const FilterIngredientsExcluded: FC = () => {
         }}
         dataKey="ingredients"
       />
+      <AddToFilter filterCount={0} />
     </>
   );
 };

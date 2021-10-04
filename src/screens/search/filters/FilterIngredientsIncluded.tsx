@@ -22,6 +22,7 @@ import { useQuery } from "@apollo/client";
 import LoadingScreen from "../../loading/LoadingScreen";
 import { AlphabetType, buildAlphaListItems } from "@greeneggs/core/alpha-list";
 import LazyListAlpha from "@greeneggs/core/lazy-alpha-list";
+import AddToFilter from "../common/add-to-filter";
 
 const FilterIngredientsIncluded: FC = () => {
   const navigation = useNavigation();
@@ -100,6 +101,7 @@ const FilterIngredientsIncluded: FC = () => {
         }}
         dataKey="ingredients"
       />
+      <AddToFilter filterCount={0} />
     </>
   );
 };

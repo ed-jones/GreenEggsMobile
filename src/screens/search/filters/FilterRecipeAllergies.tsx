@@ -8,6 +8,7 @@ import { useQuery } from '@apollo/client';
 import LoadingScreen from '../../loading/LoadingScreen';
 import LazyListAlpha from '@greeneggs/core/lazy-alpha-list';
 import { AlphabetType } from '@greeneggs/core/alpha-list';
+import AddToFilter from '../common/add-to-filter';
 
 const FilterRecipeAllergies: FC = () => {
   const navigation = useNavigation();
@@ -56,6 +57,7 @@ const FilterRecipeAllergies: FC = () => {
         }}
         dataKey="allergies"
       />
+      <AddToFilter filterCount={0} />
     </>
   );
 }

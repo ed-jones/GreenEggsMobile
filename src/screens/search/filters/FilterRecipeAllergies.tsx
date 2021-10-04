@@ -1,22 +1,46 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { Icons, Queries } from '@greeneggs/core';
-import { List, ListItem, TopNavigation, TopNavigationAction, Text, Divider, Input } from '@ui-kitten/components';
+import { TopNavigation, TopNavigationAction, Divider, Input, Layout } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/core';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Allergies, AllergiesVariables, Allergies_allergies_data, RecipeFilter, Sort } from '@greeneggs/types/graphql';
-import { useQuery } from '@apollo/client';
-import LoadingScreen from '../../loading/LoadingScreen';
 import LazyListAlpha from '@greeneggs/core/lazy-alpha-list';
 import { AlphabetType } from '@greeneggs/core/alpha-list';
 import AddToFilter from '../common/add-to-filter';
+import { SearchContext } from '@greeneggs/providers/SearchStateProvider';
+import SelectableListItem from '@greeneggs/core/selectable-list-item';
 
 const FilterRecipeAllergies: FC = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const [query, setQuery] = useState("");
+  const { searchState, setSearchState } = useContext(SearchContext);
+  const [selectedAllergies, setSelectedAllergies] = useState<string[]>(
+    searchState.filter.allergies ?? []
+  );
+
+  const setSelected = (selected: boolean, id: string) => {
+    setSelectedAllergies(
+      selected
+        ? [...selectedAllergies, id]
+        : [...selectedAllergies.filter((allergies) => allergies !== id)]
+    );
+  };
+
+  const addToFilter = () => {
+    setSearchState?.({
+      ...searchState,
+      filter: {
+        ...searchState.filter,
+        allergies: selectedAllergies,
+      },
+    });
+    navigation.goBack();
+  };
+
 
   return (
-    <>
+    <Layout style={{ flex: 1 }} level="2">
       <TopNavigation
         style={{ backgroundColor: "transparent", paddingTop: insets.top }}
         accessoryLeft={() => 
@@ -29,7 +53,7 @@ const FilterRecipeAllergies: FC = () => {
         alignment="center"
       />
       <Input
-        style={{ padding: 16 }}
+        style={{ padding: 16, backgroundColor: 'white' }}
         placeholder="Search Allergies"
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
@@ -44,7 +68,11 @@ const FilterRecipeAllergies: FC = () => {
       >
         renderItem={(item) => (
           <>
-            <ListItem title={item.name} />
+            <SelectableListItem
+              title={item.name}
+              selected={selectedAllergies.includes(item.id)}
+              setSelected={(selected) => setSelected(selected, item.id)}
+            />
             <Divider />
           </>
         )}
@@ -57,8 +85,12 @@ const FilterRecipeAllergies: FC = () => {
         }}
         dataKey="allergies"
       />
-      <AddToFilter filterCount={0} />
-    </>
+      <AddToFilter
+        clearFilters={() => setSelectedAllergies([])}
+        filterCount={selectedAllergies.length}
+        addToFilter={addToFilter}
+      />
+    </Layout>
   );
 }
 

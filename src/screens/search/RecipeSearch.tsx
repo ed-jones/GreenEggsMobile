@@ -23,8 +23,8 @@ const RecipeSearch: FC = () => {
       query={Queries.GET_RECIPES}
       variables={{
         query: searchState.query,
-        sort: Sort.NEW,
-        filter: {}
+        sort: Sort.NEW, // FIXME: needs to also user searchState
+        filter: searchState.filter,
       }}
       dataKey="recipes"
       emptyMessage="You haven't uploaded any recipes! Once you've uploaded some recipes they'll be shown here."

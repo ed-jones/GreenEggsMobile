@@ -3,6 +3,7 @@ import { Divider, List, ListItem, TopNavigation, TopNavigationAction } from '@ui
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/core';
 import { Icons } from '@greeneggs/core';
+import FilterControlGroup from '@greeneggs/core/filter-control-group';
 
 interface FilterListItemProps {
   title: string;
@@ -40,6 +41,11 @@ const RecipeSearchFilter: FC = () => {
           <Divider />
         </>
       )}/>
+      <FilterControlGroup
+        label="N CATEGORIES SELECTED"
+        clearButton={{ title: "CLEAR SELECTED", onPress: () => undefined }}
+        applyButton={{ title: "ADD TO FILTER", onPress: () => undefined }}
+      />
     </>
   );
 }

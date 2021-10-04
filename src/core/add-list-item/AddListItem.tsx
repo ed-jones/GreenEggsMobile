@@ -8,7 +8,6 @@ import {
 } from "@ui-kitten/components";
 import { Add } from "../icons/Icons";
 import { FieldError } from "react-hook-form";
-import * as Icons from "../icons/Icons";
 
 interface IAddListItem {
   label: string;
@@ -23,7 +22,7 @@ const AddListItem = withStyles(
       <ListItem
         style={{
           justifyContent: "center",
-          borderColor: eva?.theme && eva.theme["text-danger-color"],
+          borderColor: eva?.theme?.["text-danger-color"],
           borderTopWidth: error ? 1 : undefined,
           borderBottomWidth: error ? 1 : undefined,
         }}
@@ -33,8 +32,8 @@ const AddListItem = withStyles(
           style={{ width: 24, height: 24, marginRight: 8, marginLeft: -32 }}
           fill={
             error
-              ? eva?.theme && eva.theme["text-danger-color"]
-              : eva?.theme && eva.theme["text-primary-color"]
+              ? eva?.theme?.["text-danger-color"]
+              : eva?.theme?.["text-primary-color"]
           }
         />
         <Text category="label" status={error ? "danger" : undefined}>

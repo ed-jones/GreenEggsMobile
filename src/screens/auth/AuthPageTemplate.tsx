@@ -13,11 +13,9 @@ import {
 } from "@ui-kitten/components";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
-import { TopNavigation } from "@greeneggs/ui";
-import { Background } from "@greeneggs/ui";
-
-import Logo from "../../assets/images/icon.png";
-import Banner from "../../assets/images/banner.jpg";
+import { TopNavigation, Background } from "@greeneggs/ui";
+import {  } from "@greeneggs/ui";
+import { logo, banner } from '@greeneggs/assets';
 
 const styles = StyleSheet.create({
   logo: {
@@ -81,7 +79,7 @@ const AuthPageTemplate = withStyles(
     <Background>
       <StatusBar style="dark" />
       <View style={styles.bannerContainer}>
-        <ImageBackground source={Banner} style={styles.banner}>
+        <ImageBackground source={banner} style={styles.banner}>
           <LinearGradient
             colors={["rgba(247, 249, 252,0.5)", "rgba(247, 249, 252,1)"]}
             style={styles.gradient}
@@ -89,7 +87,7 @@ const AuthPageTemplate = withStyles(
           <TopNavigation />
           <View style={styles.logoText}>
             <Text category="h1">Green Eggs</Text>
-            <Image source={Logo} style={styles.logo} />
+            <Image source={logo} style={styles.logo} />
           </View>
           <Text style={styles.centerText} category="s1">
             {message}

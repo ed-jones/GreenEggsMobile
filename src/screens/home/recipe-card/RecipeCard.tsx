@@ -2,7 +2,8 @@ import React from "react";
 import { StyleSheet, Image, View } from "react-native";
 import { Card } from "@ui-kitten/components";
 import { recipes_recipes_data } from "@greeneggs/types/graphql";
-import { imagenotfound } from "@greeneggs/core";
+import { imageNotFound } from "@greeneggs/assets";
+
 import RecipeCardHeader from "./RecipeCardHeader";
 import RecipeCardFooter from "./RecipeCardFooter";
 
@@ -44,7 +45,7 @@ const RecipeCard = ({ recipe, onPress }: IRecipeCard) => (
     <View style={styles.imageContainer}>
       <Image
         style={styles.image}
-        source={recipe.coverImage ? { uri: recipe.coverImage } : imagenotfound}
+        source={recipe.coverImage ? { uri: recipe.coverImage } : imageNotFound}
       />
     </View>
   </Card>

@@ -3,8 +3,8 @@ import { Card, Text } from "@ui-kitten/components";
 import React, { FC } from "react";
 import { View, StyleSheet, Image } from "react-native";
 
-import { convertTimeEstimate } from "./convertTimeEstimate/convertTimeEstimate";
-import imagenotfound from "./image-not-found/imagenotfound.jpg";
+import { convertTimeEstimate } from "@greeneggs/utils";
+import { imageNotFound } from "@greeneggs/assets";
 import { LabelledIcon } from '@greeneggs/ui';
 
 const styles = StyleSheet.create({
@@ -71,7 +71,7 @@ const RecipeCardSmall: FC<IRecipeCardSmall> = ({ recipe, onPress }) => {
           <Image
             style={styles.image}
             source={
-              recipe.coverImage ? { uri: recipe.coverImage } : imagenotfound
+              recipe.coverImage ? { uri: recipe.coverImage } : imageNotFound
             }
           />
         </View>

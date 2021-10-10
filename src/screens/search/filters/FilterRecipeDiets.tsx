@@ -1,6 +1,7 @@
 import React, { FC, useContext, useState } from 'react';
 import { Icons, Queries } from '@greeneggs/core';
-import { Input, Divider } from '@ui-kitten/components';
+import { Divider } from '@ui-kitten/components';
+import Input from '@greeneggs/core/input';
 import { useNavigation } from '@react-navigation/core';
 import { Diets, DietsVariables, Diets_diets_data, RecipeFilter, Sort } from '@greeneggs/types/graphql';
 import LazyListAlpha from '@greeneggs/core/lazy-alpha-list';

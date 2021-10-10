@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import {
   Button,
   Icon,
-  Input,
   ThemedComponentProps,
   TopNavigationAction,
   withStyles,
 } from "@ui-kitten/components";
+import Input from '@greeneggs/core/input';
 import { StyleSheet, View, Image } from "react-native";
 
 import logo512 from "../logo/logo512.png";

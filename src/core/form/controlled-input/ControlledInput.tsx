@@ -6,9 +6,10 @@ import {
   PathValue,
   RegisterOptions,
 } from "react-hook-form";
-import { Input, InputProps, Select, SelectItem } from "@ui-kitten/components";
+import { InputProps, Select, SelectItem } from "@ui-kitten/components";
 import { ErrorFragment } from "@greeneggs/types/graphql";
 import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
+import Input from '@greeneggs/core/input';
 
 import ImageUpload from "./ImageUpload";
 import PrivacySelect from "./PrivacySelect";

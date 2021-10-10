@@ -1,9 +1,9 @@
 import React, { FC, useContext, useState } from "react";
 import { Icons, Queries } from "@greeneggs/core";
 import {
-  Input,
   Divider,
 } from "@ui-kitten/components";
+import Input from '@greeneggs/core/input';
 import { useNavigation } from "@react-navigation/core";
 import {
   Ingredients,

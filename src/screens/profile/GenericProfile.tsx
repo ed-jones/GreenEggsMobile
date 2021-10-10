@@ -6,8 +6,8 @@ import {
   TopNavigation,
   TopNavigationAction,
   Avatar,
-  Input,
 } from "@ui-kitten/components";
+import Input from '@greeneggs/core/input';
 import { useMutation, useQuery } from "@apollo/client";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Alert, Icons, Queries, noavatar, Mutations } from "@greeneggs/core";

@@ -1,4 +1,4 @@
-import { Input, InputProps, Text } from "@ui-kitten/components";
+import { InputProps, Text } from "@ui-kitten/components";
 import React from "react";
 import {
   DeepMap,
@@ -9,6 +9,8 @@ import {
   UnionLike,
 } from "react-hook-form";
 import { View } from "react-native";
+import Input from '@greeneggs/core/input';
+
 import { numberToString, stringToNumber } from "./utils";
 
 interface ITimeFields {

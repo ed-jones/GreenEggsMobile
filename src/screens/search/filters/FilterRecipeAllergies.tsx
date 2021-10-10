@@ -1,6 +1,6 @@
 import React, { FC, useContext, useState } from 'react';
 import { Icons, Queries } from '@greeneggs/core';
-import { Divider, Input } from '@ui-kitten/components';
+import { Divider } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/core';
 import { Allergies, AllergiesVariables, Allergies_allergies_data, RecipeFilter, Sort } from '@greeneggs/types/graphql';
 import LazyListAlpha from '@greeneggs/core/lazy-alpha-list';
@@ -10,6 +10,7 @@ import { SearchContext } from '@greeneggs/providers/SearchStateProvider';
 import SelectableListItem from '@greeneggs/core/selectable-list-item';
 import TopNavigationGeneric from '@greeneggs/core/top-navigation-generic';
 import Background from '@greeneggs/core/background';
+import Input from '@greeneggs/core/input';
 
 const FilterRecipeAllergies: FC = () => {
   const navigation = useNavigation();

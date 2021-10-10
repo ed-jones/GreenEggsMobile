@@ -9,7 +9,8 @@ import {
   Me,
   recipe,
 } from "@greeneggs/types/graphql";
-import { Avatar, Button, Input, Text } from "@ui-kitten/components";
+import { Avatar, Button, Text } from "@ui-kitten/components";
+import Input from '@greeneggs/core/input';
 import { useApolloClient, useQuery } from "@apollo/client";
 import LoadingScreen from "../loading/LoadingScreen";
 

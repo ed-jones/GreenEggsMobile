@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
-import { Text, Layout } from '@ui-kitten/components';
+import { Text } from '@ui-kitten/components';
 import TopNavigationGeneric from '@greeneggs/core/top-navigation-generic';
+import Background from '@greeneggs/core/background';
 
 const FilterIngredientsExcluded: FC = () => (
-  <Layout style={{ flex: 1 }} level="2">
+  <Background>
     <TopNavigationGeneric title="Cook Time" />
     <Text>Work in progress!</Text>
-  </Layout>
+  </Background>
 );
 
 export default FilterIngredientsExcluded;

@@ -7,7 +7,6 @@ import {
   TopNavigationAction,
   Avatar,
   Input,
-  Layout,
 } from "@ui-kitten/components";
 import { useMutation, useQuery } from "@apollo/client";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -26,6 +25,7 @@ import RecipeCardSmall from "@greeneggs/core/recipe-card-small";
 import { useNavigation } from "@react-navigation/core";
 import { FlatList } from "react-native-gesture-handler";
 import LazyList from "@greeneggs/core/lazy-list";
+import Background from "@greeneggs/core/background";
 
 const styles = StyleSheet.create({
   avatarContainer: {
@@ -175,7 +175,7 @@ const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) => {
   }
 
   return (
-    <Layout level="2" style={{ ...styles.view }}>
+    <Background style={{ ...styles.view }}>
       <TopNavigation
         style={{ backgroundColor: "transparent", paddingTop: insets.top }}
         accessoryLeft={() => {
@@ -248,7 +248,7 @@ const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) => {
         onChangeText={(newText) => setMyRecipeQuery(newText)}
       />
       <MyRecipes query={myRecipeQuery} userId={profile.id} />
-    </Layout>
+    </Background>
   );
 };
 

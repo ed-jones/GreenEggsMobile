@@ -1,7 +1,6 @@
 import React, { FC, useContext } from "react";
 import {
   Divider,
-  Layout,
   List,
   ListItem,
 } from "@ui-kitten/components";
@@ -12,6 +11,7 @@ import { SearchContext, SearchState } from "@greeneggs/providers/SearchStateProv
 import CountCircle from "./common/count-circle";
 import { View } from "react-native";
 import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import Background from "@greeneggs/core/background";
 
 export function countActiveFilters(searchState: SearchState) {
   let activeFilterCount = 0;
@@ -84,7 +84,7 @@ const RecipeSearchFilter: FC = () => {
   ];
 
   return (
-    <Layout style={{ flex: 1 }} level="2">
+    <Background>
       <TopNavigationGeneric title="Filter Search" />
       <List
         data={FilterOptions}
@@ -112,7 +112,7 @@ const RecipeSearchFilter: FC = () => {
         }}
         applyButton={{ title: "APPLY ALL FILTERS", onPress: applyAllFilters }}
       />
-    </Layout>
+    </Background>
   );
 };
 

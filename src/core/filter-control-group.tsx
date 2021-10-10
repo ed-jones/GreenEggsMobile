@@ -1,10 +1,11 @@
-import React, { FC, ReactElement, ReactText } from "react";
+import React, { FC } from "react";
 import {
   Text,
   Button,
   Layout,
 } from "@ui-kitten/components";
 import { View } from "react-native";
+import Background from "./background";
 
 interface SimpleButtonProps {
   title: string;

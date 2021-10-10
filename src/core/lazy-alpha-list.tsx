@@ -9,8 +9,8 @@ import {
 import Alert from "./alert/Alert";
 import LoadingScreen from "../screens/loading/LoadingScreen";
 import AlphaList, { buildAlphaListItems, CategoriseItem } from "./alpha-list";
-import { Layout, List, Text } from "@ui-kitten/components";
 import { View } from "react-native";
+import Background from "./background";
 
 interface LazyListAlphaProps<TData, TVariables, TDataType>
   extends Omit<LazyListProps<TData, TVariables, TDataType>, "renderItem"> {
@@ -43,17 +43,15 @@ const LazyListAlpha = <
 
   if (loading) {
     return (
-      <Layout style={{flex: 1}}>
-        <LoadingScreen />
-      </Layout>
+      <LoadingScreen />
     );
   }
 
   if (error) {
     return (
-      <View style={{flex: 1}}>
+      <Background>
         <Alert message="There was an error" type="danger" />
-      </View>
+      </Background>
     );
   }
 

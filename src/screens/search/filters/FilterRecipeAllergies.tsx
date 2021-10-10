@@ -1,6 +1,6 @@
 import React, { FC, useContext, useState } from 'react';
 import { Icons, Queries } from '@greeneggs/core';
-import { Divider, Input, Layout } from '@ui-kitten/components';
+import { Divider, Input } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/core';
 import { Allergies, AllergiesVariables, Allergies_allergies_data, RecipeFilter, Sort } from '@greeneggs/types/graphql';
 import LazyListAlpha from '@greeneggs/core/lazy-alpha-list';
@@ -9,6 +9,7 @@ import AddToFilter from '../common/add-to-filter';
 import { SearchContext } from '@greeneggs/providers/SearchStateProvider';
 import SelectableListItem from '@greeneggs/core/selectable-list-item';
 import TopNavigationGeneric from '@greeneggs/core/top-navigation-generic';
+import Background from '@greeneggs/core/background';
 
 const FilterRecipeAllergies: FC = () => {
   const navigation = useNavigation();
@@ -39,7 +40,7 @@ const FilterRecipeAllergies: FC = () => {
 
 
   return (
-    <Layout style={{ flex: 1 }} level="2">
+    <Background>
       <TopNavigationGeneric title="Allergies" />
       <Input
         style={{ padding: 16, backgroundColor: 'white' }}
@@ -79,7 +80,7 @@ const FilterRecipeAllergies: FC = () => {
         filterCount={selectedAllergies.length}
         addToFilter={addToFilter}
       />
-    </Layout>
+    </Background>
   );
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Spinner } from '@ui-kitten/components';
 import { StyleSheet, View } from 'react-native';
+import Background from '@greeneggs/core/background';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,9 +11,9 @@ const styles = StyleSheet.create({
 });
 
 const LoadingScreen = () => (
-  <View style={styles.container}>
+  <Background style={styles.container}>
     <Spinner />
-  </View>
+  </Background>
 );
 
 export default LoadingScreen;

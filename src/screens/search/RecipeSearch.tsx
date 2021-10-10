@@ -32,6 +32,7 @@ import {
   createMaterialTopTabNavigator,
   MaterialTopTabBarProps,
 } from "@react-navigation/material-top-tabs";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 
@@ -72,7 +73,7 @@ const RecipeSearch: FC = () => {
 };
 
 const UserSearch: FC = () => {
-  const navigation = useNavigation();
+  const navigation: StackNavigationProp<any, any> = useNavigation();
   const { searchState } = useContext<ISearchContext>(SearchContext);
   return (
     <LazyList<Users, UsersVariables, Users_users_data, Sort, RecipeFilter>
@@ -82,8 +83,8 @@ const UserSearch: FC = () => {
         sort: searchState.sort ?? Sort.NEW,
       }}
       dataKey="users"
-      emptyMessage="You haven't uploaded any recipes! Once you've uploaded some recipes they'll be shown here."
-      errorMessage="No recipes found!"
+      emptyMessage="No users found!"
+      errorMessage="No users found!"
       renderItem={({ item: user }) => (
         <>
           <ListItem
@@ -95,11 +96,7 @@ const UserSearch: FC = () => {
               />
             )}
             accessoryRight={Icons.Forward}
-            onPress={() =>
-              navigation.navigate("Profile", {
-                userId: user.id,
-              })
-            }
+            onPress={() => navigation.push("Profile", { userId: user.id })}
           />
           <Divider />
         </>

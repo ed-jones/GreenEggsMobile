@@ -55,7 +55,7 @@ const TopBar = withStyles(({ eva }: ThemedComponentProps) => {
         />
       )}
       <Input
-        placeholder="Search Recipe"
+        placeholder="Search recipes or users..."
         size="large"
         style={styles.search}
         accessoryLeft={(props) => (

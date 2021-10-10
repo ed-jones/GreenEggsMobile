@@ -4,16 +4,14 @@ import {
   Layout,
   List,
   ListItem,
-  TopNavigation,
-  TopNavigationAction,
 } from "@ui-kitten/components";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/core";
 import { Icons } from "@greeneggs/core";
 import FilterControlGroup from "@greeneggs/core/filter-control-group";
 import { SearchContext, SearchState } from "@greeneggs/providers/SearchStateProvider";
 import CountCircle from "./common/count-circle";
 import { View } from "react-native";
+import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
 
 export function countActiveFilters(searchState: SearchState) {
   let activeFilterCount = 0;
@@ -48,7 +46,6 @@ interface FilterListItemProps {
 }
 
 const RecipeSearchFilter: FC = () => {
-  const insets = useSafeAreaInsets();
   const navigation = useNavigation();
   const { searchState, setSearchState } = useContext(SearchContext);
 
@@ -88,17 +85,7 @@ const RecipeSearchFilter: FC = () => {
 
   return (
     <Layout style={{ flex: 1 }} level="2">
-      <TopNavigation
-        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-        accessoryLeft={() => (
-          <TopNavigationAction
-            icon={Icons.Back}
-            onPress={() => navigation.goBack()}
-          />
-        )}
-        title="Filter Search"
-        alignment="center"
-      />
+      <TopNavigationGeneric title="Filter Search" />
       <List
         data={FilterOptions}
         renderItem={({ item }) => (

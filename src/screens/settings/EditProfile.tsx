@@ -5,8 +5,6 @@ import {
   InputType,
   Mutations,
   Queries,
-  Fragments,
-  Rules,
   useForm,
 } from "@greeneggs/core";
 import { ScrollView, StyleSheet } from "react-native";
@@ -17,16 +15,14 @@ import {
 } from "@greeneggs/types/graphql";
 import {
   Button,
-  TopNavigation,
-  TopNavigationAction,
   Text,
   Spinner,
 } from "@ui-kitten/components";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/core";
+ import { useNavigation } from "@react-navigation/core";
 import { useQuery } from "@apollo/client";
 import { Me } from "@greeneggs/types/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
+import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
 
 export const styles = StyleSheet.create({
   view: {
@@ -52,7 +48,6 @@ const useEditProfile = () =>
 
 export default function EditProfile() {
   const form = useEditProfile();
-  const insets = useSafeAreaInsets();
   const navigation = useNavigation();
   const { loading, error, data } = useQuery<Me>(Queries.ME);
 
@@ -69,17 +64,7 @@ export default function EditProfile() {
 
   return (
     <>
-      <TopNavigation
-        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-        accessoryLeft={() => (
-          <TopNavigationAction
-            icon={Icons.Back}
-            onPress={() => navigation.goBack()}
-          />
-        )}
-        alignment="center"
-        title="Edit Profile"
-      />
+      <TopNavigationGeneric title="Edit Profile" />
       <ScrollView style={styles.view}>
         <ControlledInput<ProfileDetails>
           controllerProps={{

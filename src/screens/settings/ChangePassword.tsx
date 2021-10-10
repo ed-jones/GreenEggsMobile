@@ -4,8 +4,6 @@ import {
   Icons,
   InputType,
   Mutations,
-  Queries,
-  Rules,
   useForm,
 } from "@greeneggs/core";
 import { ScrollView, StyleSheet } from "react-native";
@@ -16,16 +14,10 @@ import {
 } from "@greeneggs/types/graphql";
 import {
   Button,
-  TopNavigation,
-  TopNavigationAction,
-  Text,
   Spinner,
 } from "@ui-kitten/components";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/core";
-import { useQuery } from "@apollo/client";
-import { Me } from "@greeneggs/types/graphql";
-import LoadingScreen from "../loading/LoadingScreen";
+import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
 
 export const styles = StyleSheet.create({
   view: {
@@ -49,7 +41,6 @@ export default function ChangePassword() {
     changePassword,
     changePasswordVariables
   >(Mutations.CHANGE_PASSWORD, "changePasswordDetails");
-  const insets = useSafeAreaInsets();
   const navigation = useNavigation();
 
   function onSubmit() {
@@ -62,17 +53,7 @@ export default function ChangePassword() {
 
   return (
     <>
-      <TopNavigation
-        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-        accessoryLeft={() => (
-          <TopNavigationAction
-            icon={Icons.Back}
-            onPress={() => navigation.goBack()}
-          />
-        )}
-        alignment="center"
-        title="Change Password"
-      />
+      <TopNavigationGeneric title="Change Password" />
       <ScrollView style={styles.view}>
         <ControlledInput
           controllerProps={{

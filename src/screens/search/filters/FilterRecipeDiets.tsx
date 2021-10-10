@@ -1,20 +1,17 @@
 import React, { FC, useContext, useState } from 'react';
 import { Icons, Queries } from '@greeneggs/core';
-import { List, ListItem, TopNavigation, TopNavigationAction, Text, Input, Divider, Layout } from '@ui-kitten/components';
+import { Input, Divider, Layout } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/core';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Diets, DietsVariables, Diets_diets_data, RecipeFilter, Sort } from '@greeneggs/types/graphql';
-import { useQuery } from '@apollo/client';
-import LoadingScreen from '../../loading/LoadingScreen';
 import LazyListAlpha from '@greeneggs/core/lazy-alpha-list';
 import { AlphabetType } from '@greeneggs/core/alpha-list';
 import AddToFilter from '../common/add-to-filter';
 import SelectableListItem from '@greeneggs/core/selectable-list-item';
 import { SearchContext } from '@greeneggs/providers/SearchStateProvider';
+import TopNavigationGeneric from '@greeneggs/core/top-navigation-generic';
 
 const FilterRecipeDiets: FC = () => {
   const navigation = useNavigation();
-  const insets = useSafeAreaInsets();
   const [query, setQuery] = useState("");
   const { searchState, setSearchState } = useContext(SearchContext);
   const [selectedDiets, setSelectedDiets] = useState<string[]>(
@@ -42,17 +39,7 @@ const FilterRecipeDiets: FC = () => {
   
   return (
     <Layout style={{ flex: 1 }} level="2">
-      <TopNavigation
-        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-        accessoryLeft={() => 
-          <TopNavigationAction
-            icon={Icons.Back}
-            onPress={() => navigation.goBack()}
-          />
-        }
-        title="Diets"
-        alignment="center"
-      />
+      <TopNavigationGeneric title="Diets" />
       <Input
         style={{ padding: 16, backgroundColor: 'white' }}
         placeholder="Search Diets"

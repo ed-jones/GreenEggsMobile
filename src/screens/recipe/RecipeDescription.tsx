@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Card, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Icons } from '@greeneggs/core';
+import { Card, Text } from '@ui-kitten/components';
+import TopNavigationGeneric from '@greeneggs/core/top-navigation-generic';
 
 const styles = StyleSheet.create({
   cardElement: {
@@ -12,27 +11,13 @@ const styles = StyleSheet.create({
 })
 
 const RecipeDescription = (
-  { navigation, route }: any
+  { route }: any
 ) => {
-  const insets = useSafeAreaInsets();
   const { description, createdAt, title, submittedBy } = route.params;
 
-  const navigateBack = () => {
-    navigation.goBack();
-  };
-
   return (
-    <View style={{paddingTop: insets.top}}>
-      <TopNavigation
-        alignment="center"
-        accessoryLeft={() => (
-          <TopNavigationAction icon={Icons.Back}
-            onPress={navigateBack}
-          />
-        )}
-        title="Description"
-        style={{backgroundColor: 'transparent',}}
-      />
+    <View>
+      <TopNavigationGeneric title="Description" />
       <Card
         header={() => (
           <View style={styles.cardElement}>

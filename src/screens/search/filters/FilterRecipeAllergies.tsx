@@ -1,18 +1,17 @@
 import React, { FC, useContext, useState } from 'react';
 import { Icons, Queries } from '@greeneggs/core';
-import { TopNavigation, TopNavigationAction, Divider, Input, Layout } from '@ui-kitten/components';
+import { Divider, Input, Layout } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/core';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Allergies, AllergiesVariables, Allergies_allergies_data, RecipeFilter, Sort } from '@greeneggs/types/graphql';
 import LazyListAlpha from '@greeneggs/core/lazy-alpha-list';
 import { AlphabetType } from '@greeneggs/core/alpha-list';
 import AddToFilter from '../common/add-to-filter';
 import { SearchContext } from '@greeneggs/providers/SearchStateProvider';
 import SelectableListItem from '@greeneggs/core/selectable-list-item';
+import TopNavigationGeneric from '@greeneggs/core/top-navigation-generic';
 
 const FilterRecipeAllergies: FC = () => {
   const navigation = useNavigation();
-  const insets = useSafeAreaInsets();
   const [query, setQuery] = useState("");
   const { searchState, setSearchState } = useContext(SearchContext);
   const [selectedAllergies, setSelectedAllergies] = useState<string[]>(
@@ -41,17 +40,7 @@ const FilterRecipeAllergies: FC = () => {
 
   return (
     <Layout style={{ flex: 1 }} level="2">
-      <TopNavigation
-        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-        accessoryLeft={() => 
-          <TopNavigationAction
-            icon={Icons.Back}
-            onPress={() => navigation.goBack()}
-          />
-        }
-        title="Allergies"
-        alignment="center"
-      />
+      <TopNavigationGeneric title="Allergies" />
       <Input
         style={{ padding: 16, backgroundColor: 'white' }}
         placeholder="Search Allergies"

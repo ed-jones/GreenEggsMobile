@@ -4,8 +4,6 @@ import {
   Icons,
   InputType,
   Mutations,
-  Queries,
-  Rules,
   useForm,
 } from "@greeneggs/core";
 import { ScrollView, StyleSheet } from "react-native";
@@ -16,13 +14,12 @@ import {
 } from "@greeneggs/types/graphql";
 import {
   Button,
-  TopNavigation,
-  TopNavigationAction,
   Text,
   Spinner,
 } from "@ui-kitten/components";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/core";
+import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
 
 export const styles = StyleSheet.create({
   view: {
@@ -57,17 +54,7 @@ export default function EditProfile() {
 
   return (
     <>
-      <TopNavigation
-        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-        accessoryLeft={() => (
-          <TopNavigationAction
-            icon={Icons.Back}
-            onPress={() => navigation.goBack()}
-          />
-        )}
-        alignment="center"
-        title="Edit Profile Picture"
-      />
+      <TopNavigationGeneric title="Edit Profile Picture" />
       <ScrollView style={styles.view}>
         <ControlledInput<ProfileDetails>
           controllerProps={{

@@ -3,8 +3,6 @@ import {
   Button,
   Spinner,
   Text,
-  TopNavigation,
-  TopNavigationAction,
 } from "@ui-kitten/components";
 import { ScrollView, StyleSheet } from "react-native";
 import {
@@ -29,6 +27,7 @@ import { useQuery } from "@apollo/client";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
 
 import LoadingScreen from "../loading/LoadingScreen";
+import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
 
 export const styles = StyleSheet.create({
   view: {
@@ -91,17 +90,7 @@ const ProfileVisibility = () => {
 
   return (
     <>
-      <TopNavigation
-        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-        accessoryLeft={() => (
-          <TopNavigationAction
-            icon={Icons.Back}
-            onPress={() => navigation.goBack()}
-          />
-        )}
-        alignment="center"
-        title="Profile Visibility"
-      />
+      <TopNavigationGeneric title="Profile Visibility"/>
       <ScrollView style={styles.view}>
         <Alert
           message={

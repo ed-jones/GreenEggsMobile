@@ -4,12 +4,8 @@ import {
   Divider,
   Input,
   Layout,
-  Text,
-  TopNavigation,
-  TopNavigationAction,
 } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/core";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import {
   Ingredients,
   IngredientsVariables,
@@ -23,10 +19,10 @@ import SelectableListItem from "@greeneggs/core/selectable-list-item";
 import { SearchContext } from "@greeneggs/providers/SearchStateProvider";
 
 import AddToFilter from "../common/add-to-filter";
+import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
 
 const FilterIngredientsExcluded: FC = () => {
   const navigation = useNavigation();
-  const insets = useSafeAreaInsets();
   const [query, setQuery] = useState("");
   const { searchState, setSearchState } = useContext(SearchContext);
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>(
@@ -57,17 +53,7 @@ const FilterIngredientsExcluded: FC = () => {
 
   return (
     <Layout style={{flex: 1}} level="2">
-      <TopNavigation
-        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-        accessoryLeft={() => (
-          <TopNavigationAction
-            icon={Icons.Back}
-            onPress={() => navigation.goBack()}
-          />
-        )}
-        title="Ingredients (Excluded)"
-        alignment="center"
-      />
+      <TopNavigationGeneric title="Ingredients (Excluded)" />
       <Input
         style={{ padding: 16, backgroundColor: 'white' }}
         placeholder="Search Ingredients"

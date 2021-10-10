@@ -6,19 +6,13 @@ import {
   InputType,
   Mutations,
   Queries,
-  Rules,
-  useForm,
 } from "@greeneggs/core";
 import { ScrollView, StyleSheet, View, Alert as RNAlert } from "react-native";
 import { deleteUser, LoginInput } from "@greeneggs/types/graphql";
 import {
   Button,
-  TopNavigation,
-  TopNavigationAction,
   Text,
-  Spinner,
 } from "@ui-kitten/components";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/core";
 import { useMutation, useQuery } from "@apollo/client";
 import { Me } from "@greeneggs/types/graphql";
@@ -26,6 +20,7 @@ import LoadingScreen from "../loading/LoadingScreen";
 import useLoginForm from "../auth/useLoginForm";
 import { AuthContext } from "@greeneggs/providers/AuthProvider";
 import * as SecureStore from "expo-secure-store";
+import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
 
 export const styles = StyleSheet.create({
   view: {
@@ -44,7 +39,6 @@ export const styles = StyleSheet.create({
 });
 
 export default function DeleteAccount() {
-  const insets = useSafeAreaInsets();
   const navigation = useNavigation();
   const { loading, error, data } = useQuery<Me>(Queries.ME);
   const { formResult, handleSubmit, control, submitForm, register, setValue } =
@@ -98,17 +92,7 @@ export default function DeleteAccount() {
 
   return (
     <>
-      <TopNavigation
-        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-        accessoryLeft={() => (
-          <TopNavigationAction
-            icon={Icons.Back}
-            onPress={() => navigation.goBack()}
-          />
-        )}
-        alignment="center"
-        title="Delete Account"
-      />
+      <TopNavigationGeneric title="Delete Account" />
       <ScrollView style={styles.view}>
         <Alert
           message={

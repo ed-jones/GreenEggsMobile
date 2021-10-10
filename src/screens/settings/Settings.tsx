@@ -1,9 +1,6 @@
 import React, { Key, useContext } from "react";
 import {
-  List,
   Text,
-  TopNavigation,
-  TopNavigationAction,
   ListItem,
   Icon,
   Divider,
@@ -17,6 +14,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as SecureStore from "expo-secure-store";
 import { AuthContext } from "@greeneggs/providers/AuthProvider";
+import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
 
 const styles = StyleSheet.create({
   header: { padding: 16 },
@@ -195,14 +193,7 @@ const Settings = withStyles(
 
     return (
       <>
-        <TopNavigation
-          title="Settings"
-          alignment="center"
-          style={{ backgroundColor: "transparent", marginTop: insets.top }}
-          accessoryLeft={() => (
-            <TopNavigationAction icon={Icons.Back} onPress={navigateBack} />
-          )}
-        />
+        <TopNavigationGeneric />
         <ScrollView>
           <Text category="h6" style={styles.header}>
             Account

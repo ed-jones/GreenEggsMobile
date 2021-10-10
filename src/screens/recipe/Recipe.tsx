@@ -1,27 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { ImageBackground, View, StyleSheet } from "react-native";
-import { Icons, Mutations, Queries } from "@greeneggs/core";
+import { Mutations, Queries } from "@greeneggs/core";
 import {
   Icon,
   Text,
-  TopNavigation,
   TopNavigationAction,
 } from "@ui-kitten/components";
 import { recipe, recipeVariables } from "@greeneggs/types/graphql";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { StatusBar } from "expo-status-bar";
 import ParallaxHeader from "@fabfit/react-native-parallax-header";
 import { LinearGradient } from "expo-linear-gradient";
 import RecipeDetailsCard from "./RecipeDetailsCard";
 import RecipeAllergies from "./RecipeAllergies";
-import RecipeCategoriesTags from "./RecipeCategoriesTags";
 import RecipeIngredients from "./RecipeIngredients";
 import RecipeDirections from "./RecipeDirections";
 import RecipeCommentList from "./RecipeCommentList";
 import LoadingScreen from "../loading/LoadingScreen";
 import RecipeAddComment from "./RecipeAddComment";
 import ViewMore from "@greeneggs/core/view-more/ViewMore";
+import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
 
 const styles = StyleSheet.create({
   coverPhoto: {
@@ -76,11 +73,6 @@ const Recipe = ({ route, navigation }: any) => {
     refetchQueries: [Queries.GET_RECIPE, "recipe", Queries.GET_SAVED_RECIPES],
   });
 
-  const navigateBack = () => {
-    navigation.goBack();
-  };
-  const insets = useSafeAreaInsets();
-
   if (loading || !data || !data.recipe.data) return <LoadingScreen />;
   if (error || data.recipe.error)
     return <Text>{error?.message || data.recipe.error?.message}</Text>;
@@ -92,16 +84,8 @@ const Recipe = ({ route, navigation }: any) => {
       maxHeight={300}
       minHeight={64}
       renderOverlay={() => (
-        <TopNavigation
-          style={{
-            height: 64,
-            backgroundColor: "transparent",
-            paddingTop: insets.top,
-            alignItems: "flex-start",
-          }}
-          accessoryLeft={() => (
-            <TopNavigationAction icon={Icons.Back} onPress={navigateBack} />
-          )}
+        <TopNavigationGeneric
+          style={{ height: 64, alignItems: "flex-start" }}
           accessoryRight={() => (
             <TopNavigationAction
               icon={(iconProps) =>
@@ -128,7 +112,6 @@ const Recipe = ({ route, navigation }: any) => {
         </ImageBackground>
       )}
     >
-      <StatusBar style="dark" />
       <View style={styles.content}>
         <RecipeDetailsCard {...recipe} navigation={navigation} />
         <RecipeAllergies allergies={recipe.allergies} />

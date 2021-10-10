@@ -1,16 +1,11 @@
 import React, { FC, useContext, useState } from "react";
 import { Icons, Queries } from "@greeneggs/core";
 import {
-  ListItem,
-  TopNavigation,
-  TopNavigationAction,
-  Text,
   Input,
   Divider,
   Layout,
 } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/core";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import {
   Ingredients,
   IngredientsVariables,
@@ -23,10 +18,10 @@ import LazyListAlpha from "@greeneggs/core/lazy-alpha-list";
 import AddToFilter from "../common/add-to-filter";
 import SelectableListItem from "@greeneggs/core/selectable-list-item";
 import { SearchContext } from "@greeneggs/providers/SearchStateProvider";
+import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
 
 const FilterIngredientsIncluded: FC = () => {
   const navigation = useNavigation();
-  const insets = useSafeAreaInsets();
   const [query, setQuery] = useState("");
   const { searchState, setSearchState } = useContext(SearchContext);
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>(
@@ -57,17 +52,7 @@ const FilterIngredientsIncluded: FC = () => {
 
   return (
     <Layout style={{ flex: 1 }} level="2">
-      <TopNavigation
-        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-        accessoryLeft={() => (
-          <TopNavigationAction
-            icon={Icons.Back}
-            onPress={() => navigation.goBack()}
-          />
-        )}
-        title="Ingredients (Included)"
-        alignment="center"
-      />
+      <TopNavigationGeneric title="Ingredients (included)" />
       <Input
         style={{ padding: 16, backgroundColor: "white" }}
         placeholder="Search Ingredients"

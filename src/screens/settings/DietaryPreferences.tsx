@@ -6,13 +6,9 @@ import {
   ListItem,
   Spinner,
   Text,
-  TopNavigation,
-  TopNavigationAction,
 } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
 import { Alert, Icons, Mutations, Queries } from "@greeneggs/core";
-import { useNavigation } from "@react-navigation/core";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Select, SelectItem } from "@ui-kitten/components";
 import { useMutation, useQuery } from "@apollo/client";
 import {
@@ -26,6 +22,7 @@ import {
 } from "@greeneggs/types/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
+import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
 
 export const styles = StyleSheet.create({
   view: {
@@ -48,8 +45,6 @@ function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
 }
 
 const DietaryPreferences = () => {
-  const navigation = useNavigation();
-  const insets = useSafeAreaInsets();
   const getDiet = useQuery<Diets>(Queries.GET_DIETS, {
     variables: {
       query: '',
@@ -143,17 +138,7 @@ const DietaryPreferences = () => {
 
   return (
     <>
-      <TopNavigation
-        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-        accessoryLeft={() => (
-          <TopNavigationAction
-            icon={Icons.Back}
-            onPress={() => navigation.goBack()}
-          />
-        )}
-        alignment="center"
-        title="Dietary Preferences"
-      />
+      <TopNavigationGeneric title="Dietary Preferences" />
       <View>
         <View style={styles.view}>
           <Alert

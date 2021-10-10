@@ -3,7 +3,7 @@ import RecipeCardSmall from "@greeneggs/core/recipe-card-small";
 import { useQuery } from "@apollo/client";
 import { Queries, Alert } from "@greeneggs/core";
 import LoadingScreen from "../loading/LoadingScreen";
-import { Text, TopNavigation } from "@ui-kitten/components";
+import { Text } from "@ui-kitten/components";
 import {
   RecipeFilter,
   savedRecipes,
@@ -13,21 +13,13 @@ import {
   savedRecipes as SavedRecipesType,
 } from "@greeneggs/types/graphql";
 import { View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/core";
 import LazyList from "@greeneggs/core/lazy-list";
+import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
 
-const SavedRecipesHeader = () => {
-  const insets = useSafeAreaInsets();
-
-  return (
-    <TopNavigation
-      style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-      alignment="center"
-      title="Saved Recipes"
-    />
-  );
-};
+const SavedRecipesHeader = () => (
+  <TopNavigationGeneric title="Saved Recipes" accessoryLeft={undefined} />
+);
 
 const SavedRecipes: FC = () => {
   const navigation = useNavigation();

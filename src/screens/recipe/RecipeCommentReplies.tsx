@@ -1,17 +1,11 @@
 import { useQuery } from "@apollo/client";
-import { Icons, Queries } from "@greeneggs/core";
+import { Queries } from "@greeneggs/core";
+import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
 import ViewMore from "@greeneggs/core/view-more/ViewMore";
 import { comment } from "@greeneggs/types/graphql";
-import { useNavigation } from "@react-navigation/core";
-import {
-  TopNavigation,
-  TopNavigationAction,
-  Text,
-  Divider,
-} from "@ui-kitten/components";
+import { Text } from "@ui-kitten/components";
 import React, { useState } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import LoadingScreen from "../loading/LoadingScreen";
 import RecipeAddComment from "./RecipeAddComment";
 import RecipeComment from "./RecipeComment";
@@ -25,8 +19,6 @@ const styles = StyleSheet.create({
 
 export default function RecipeCommentReplies({ route }: any) {
   const { commentId, replying } = route.params;
-  const navigation = useNavigation();
-  const insets = useSafeAreaInsets();
   const [visibleCommentCount, setVisibleCommentCount] = useState<number>(3);
 
   const { data, loading, error } = useQuery<comment>(Queries.GET_COMMENT, {
@@ -47,17 +39,7 @@ export default function RecipeCommentReplies({ route }: any) {
 
   return (
     <>
-      <TopNavigation
-        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
-        accessoryLeft={() => (
-          <TopNavigationAction
-            icon={Icons.Back}
-            onPress={() => navigation.goBack()}
-          />
-        )}
-        alignment="center"
-        title="Comment Thread"
-      />
+      <TopNavigationGeneric title="Comment Thread" />
       <ScrollView>
         <RecipeComment comment={comment} />
         <View style={styles.content}>

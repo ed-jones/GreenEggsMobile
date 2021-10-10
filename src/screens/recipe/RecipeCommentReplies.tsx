@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { Queries } from "@greeneggs/core";
-import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import { TopNavigation } from "@greeneggs/ui";
 import ViewMore from "@greeneggs/core/view-more/ViewMore";
 import { comment } from "@greeneggs/types/graphql";
 import { Text } from "@ui-kitten/components";
@@ -39,7 +39,7 @@ export default function RecipeCommentReplies({ route }: any) {
 
   return (
     <>
-      <TopNavigationGeneric title="Comment Thread" />
+      <TopNavigation title="Comment Thread" />
       <ScrollView>
         <RecipeComment comment={comment} />
         <View style={styles.content}>

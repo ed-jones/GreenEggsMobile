@@ -17,7 +17,7 @@ import {
   Spinner,
 } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/core";
-import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import { TopNavigation } from "@greeneggs/ui";
 import Background from "@greeneggs/core/background";
 
 export const styles = StyleSheet.create({
@@ -54,7 +54,7 @@ export default function ChangePassword() {
 
   return (
     <Background>
-      <TopNavigationGeneric title="Change Password" />
+      <TopNavigation title="Change Password" />
       <ScrollView style={styles.view}>
         <ControlledInput
           controllerProps={{

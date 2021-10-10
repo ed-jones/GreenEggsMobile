@@ -20,7 +20,7 @@ import LoadingScreen from "../loading/LoadingScreen";
 import useLoginForm from "../auth/useLoginForm";
 import { AuthContext } from "@greeneggs/providers/AuthProvider";
 import * as SecureStore from "expo-secure-store";
-import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import { TopNavigation } from "@greeneggs/ui";
 import Background from "@greeneggs/core/background";
 
 export const styles = StyleSheet.create({
@@ -93,7 +93,7 @@ export default function DeleteAccount() {
 
   return (
     <Background>
-      <TopNavigationGeneric title="Delete Account" />
+      <TopNavigation title="Delete Account" />
       <ScrollView style={styles.view}>
         <Alert
           message={

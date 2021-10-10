@@ -6,7 +6,7 @@ import {
   TopNavigationAction,
   withStyles,
 } from "@ui-kitten/components";
-import Input from '@greeneggs/core/input';
+import { Input } from '@greeneggs/ui';
 import { StyleSheet, View, Image } from "react-native";
 
 import logo512 from "../logo/logo512.png";

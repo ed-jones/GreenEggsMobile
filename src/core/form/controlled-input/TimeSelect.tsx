@@ -9,7 +9,7 @@ import {
   UnionLike,
 } from "react-hook-form";
 import { View } from "react-native";
-import Input from '@greeneggs/core/input';
+import { Input } from '@greeneggs/ui';
 
 import { numberToString, stringToNumber } from "./utils";
 

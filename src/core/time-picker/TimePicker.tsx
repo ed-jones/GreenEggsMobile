@@ -1,6 +1,6 @@
 import React from 'react';
 import { SelectItem } from '@ui-kitten/components';
-import Select from "@greeneggs/core/select";
+import { Select } from "@greeneggs/ui/select";
 
 const TimePicker = () => (
   <>

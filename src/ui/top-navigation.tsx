@@ -5,11 +5,7 @@ import { useNavigation } from '@react-navigation/core';
 import * as Icons from './icons/Icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-interface TopNavigationGenericProps extends TopNavigationProps {
-  title?: string
-}
-
-const TopNavigationGeneric: FC<TopNavigationGenericProps> = ({ style, ...props }) => {
+export const TopNavigation: FC<TopNavigationProps> = ({ style, ...props }) => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
@@ -27,5 +23,3 @@ const TopNavigationGeneric: FC<TopNavigationGenericProps> = ({ style, ...props }
     />
   )
 }
-
-export default TopNavigationGeneric;

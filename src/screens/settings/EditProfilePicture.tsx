@@ -19,7 +19,7 @@ import {
 } from "@ui-kitten/components";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/core";
-import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import { TopNavigation } from "@greeneggs/ui";
 import Background from "@greeneggs/core/background";
 
 export const styles = StyleSheet.create({
@@ -55,7 +55,7 @@ export default function EditProfile() {
 
   return (
     <Background>
-      <TopNavigationGeneric title="Edit Profile Picture" />
+      <TopNavigation title="Edit Profile Picture" />
       <ScrollView style={styles.view}>
         <ControlledInput<ProfileDetails>
           controllerProps={{

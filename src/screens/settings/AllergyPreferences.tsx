@@ -8,7 +8,7 @@ import {
   Spinner,
   Text,
 } from "@ui-kitten/components";
-import Select from "@greeneggs/core/select";
+import { Select, TopNavigation } from "@greeneggs/ui";
 import { StyleSheet, View } from "react-native";
 import { Alert, Icons, Mutations, Queries } from "@greeneggs/core";
 import { useMutation, useQuery } from "@apollo/client";
@@ -23,7 +23,6 @@ import {
 } from "@greeneggs/types/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
-import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
 import Background from "@greeneggs/core/background";
 
 export const styles = StyleSheet.create({
@@ -141,7 +140,7 @@ const AllergyPreferences = () => {
   }
   return (
     <Background>
-      <TopNavigationGeneric title="Allergy Preferences" />
+      <TopNavigation title="Allergy Preferences" />
       <View>
         <View style={styles.view}>
           <Alert

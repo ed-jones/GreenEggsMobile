@@ -1,7 +1,7 @@
 import React, { FC, useContext, useState } from 'react';
 import { Icons, Queries } from '@greeneggs/core';
 import { Divider } from '@ui-kitten/components';
-import Input from '@greeneggs/core/input';
+import { Input, TopNavigation } from '@greeneggs/ui';
 import { useNavigation } from '@react-navigation/core';
 import { Categories, CategoriesVariables, Categories_categories_data, RecipeFilter, Sort } from '@greeneggs/types/graphql';
 import LazyListAlpha from '@greeneggs/core/lazy-alpha-list';
@@ -9,7 +9,6 @@ import { AlphabetType } from '@greeneggs/core/alpha-list';
 import AddToFilter from '../common/add-to-filter';
 import { SearchContext } from '@greeneggs/providers/SearchStateProvider';
 import SelectableListItem from '@greeneggs/core/selectable-list-item';
-import TopNavigationGeneric from '@greeneggs/core/top-navigation-generic';
 import Background from '@greeneggs/core/background';
 
 const FilterRecipeCategories: FC = () => {
@@ -41,7 +40,7 @@ const FilterRecipeCategories: FC = () => {
 
   return (
     <Background>
-      <TopNavigationGeneric title="Categories" />
+      <TopNavigation title="Categories" />
       <Input
         style={{ padding: 16, backgroundColor: 'white' }}
         placeholder="Search Categories"

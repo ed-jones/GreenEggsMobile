@@ -25,7 +25,7 @@ import {
   Tab,
   TabBar,
 } from "@ui-kitten/components";
-import Select from "@greeneggs/core/select";
+import { Select } from "@greeneggs/ui/select";
 import {
   createMaterialTopTabNavigator,
   MaterialTopTabBarProps,

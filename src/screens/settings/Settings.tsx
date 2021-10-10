@@ -14,7 +14,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as SecureStore from "expo-secure-store";
 import { AuthContext } from "@greeneggs/providers/AuthProvider";
-import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import { TopNavigation } from "@greeneggs/ui";
 import Background from "@greeneggs/core/background";
 
 const styles = StyleSheet.create({
@@ -194,7 +194,7 @@ const Settings = withStyles(
 
     return (
       <Background>
-        <TopNavigationGeneric />
+        <TopNavigation />
         <ScrollView>
           <Text category="h6" style={styles.header}>
             Account

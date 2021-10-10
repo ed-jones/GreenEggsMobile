@@ -15,11 +15,11 @@ import {
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import LazyList from "@greeneggs/core/lazy-list";
-import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import { TopNavigation } from "@greeneggs/ui";
 import Background from "@greeneggs/core/background";
 
 const SavedRecipesHeader = () => (
-  <TopNavigationGeneric title="Saved Recipes" accessoryLeft={undefined} />
+  <TopNavigation title="Saved Recipes" accessoryLeft={undefined} />
 );
 
 const SavedRecipes: FC = () => {

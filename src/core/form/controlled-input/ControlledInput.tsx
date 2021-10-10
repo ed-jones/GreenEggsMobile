@@ -9,7 +9,7 @@ import {
 import { InputProps, Select, SelectItem } from "@ui-kitten/components";
 import { ErrorFragment } from "@greeneggs/types/graphql";
 import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
-import Input from '@greeneggs/core/input';
+import { Input } from '@greeneggs/ui';
 
 import ImageUpload from "./ImageUpload";
 import PrivacySelect from "./PrivacySelect";

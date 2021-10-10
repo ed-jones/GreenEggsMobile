@@ -10,7 +10,7 @@ import {
   UnionLike,
 } from "react-hook-form";
 import { Privacy } from "@greeneggs/types/graphql";
-import Select from "@greeneggs/core/select";
+import { Select } from "@greeneggs/ui";
 interface IPrivacySelect {
   label?: string;
   caption?: string;

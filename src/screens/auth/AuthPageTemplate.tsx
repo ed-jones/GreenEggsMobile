@@ -13,7 +13,7 @@ import {
 } from "@ui-kitten/components";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
-import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import { TopNavigation } from "@greeneggs/ui";
 import Background from "@greeneggs/core/background";
 
 import Logo from "../../assets/images/icon.png";
@@ -86,7 +86,7 @@ const AuthPageTemplate = withStyles(
             colors={["rgba(247, 249, 252,0.5)", "rgba(247, 249, 252,1)"]}
             style={styles.gradient}
           />
-          <TopNavigationGeneric />
+          <TopNavigation />
           <View style={styles.logoText}>
             <Text category="h1">Green Eggs</Text>
             <Image source={Logo} style={styles.logo} />

@@ -18,7 +18,7 @@ import RecipeCommentList from "./RecipeCommentList";
 import LoadingScreen from "../loading/LoadingScreen";
 import RecipeAddComment from "./RecipeAddComment";
 import ViewMore from "@greeneggs/core/view-more/ViewMore";
-import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import { TopNavigation } from "@greeneggs/ui";
 import Background from "@greeneggs/core/background";
 
 const styles = StyleSheet.create({
@@ -85,7 +85,7 @@ const Recipe = ({ route, navigation }: any) => {
       maxHeight={300}
       minHeight={64}
       renderOverlay={() => (
-        <TopNavigationGeneric
+        <TopNavigation
           style={{ height: 64, alignItems: "flex-start" }}
           accessoryRight={() => (
             <TopNavigationAction

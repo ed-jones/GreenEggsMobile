@@ -27,7 +27,7 @@ import { useQuery } from "@apollo/client";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
 
 import LoadingScreen from "../loading/LoadingScreen";
-import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import { TopNavigation } from "@greeneggs/ui";
 import Background from "@greeneggs/core/background";
 
 export const styles = StyleSheet.create({
@@ -91,7 +91,7 @@ const ProfileVisibility = () => {
 
   return (
     <Background>
-      <TopNavigationGeneric title="Profile Visibility"/>
+      <TopNavigation title="Profile Visibility"/>
       <ScrollView style={styles.view}>
         <Alert
           message={

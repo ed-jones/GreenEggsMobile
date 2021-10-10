@@ -1,6 +1,6 @@
 import React from "react";
 
-import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import { TopNavigation } from "@greeneggs/ui";
 import { useFocusEffect } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { FieldArrayMethodProps } from "react-hook-form";
@@ -73,7 +73,7 @@ const CreateRecipePartTemplate = ({
   }
   return (
     <Background>
-      <TopNavigationGeneric title={title} />
+      <TopNavigation title={title} />
       <ScrollView style={{ paddingHorizontal: 16 }}>
         {React.createElement(formComponent, {
           navigation,

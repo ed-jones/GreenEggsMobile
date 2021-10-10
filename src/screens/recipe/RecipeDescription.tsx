@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Card, Text } from '@ui-kitten/components';
-import TopNavigationGeneric from '@greeneggs/core/top-navigation-generic';
+import { TopNavigation } from '@greeneggs/ui';
 import Background from '@greeneggs/core/background';
 
 const styles = StyleSheet.create({
@@ -18,7 +18,7 @@ const RecipeDescription = (
 
   return (
     <Background>
-      <TopNavigationGeneric title="Description" />
+      <TopNavigation title="Description" />
       <Card
         header={() => (
           <View style={styles.cardElement}>

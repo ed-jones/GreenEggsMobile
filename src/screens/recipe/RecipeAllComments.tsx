@@ -2,7 +2,7 @@ import React from "react";
 import RecipeCommentList from "./RecipeCommentList";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { Text } from "@ui-kitten/components";
-import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import { TopNavigation } from "@greeneggs/ui";
 
 const styles = StyleSheet.create({
   content: {
@@ -15,7 +15,7 @@ export default function RecipeAllComments({ route }: any) {
 
   return (
     <>
-      <TopNavigationGeneric title={`All ${isReply ? "Replies" : "Comments"}`} />
+      <TopNavigation title={`All ${isReply ? "Replies" : "Comments"}`} />
       <ScrollView>
         <View style={styles.content}>
           <Text style={{ marginBottom: 24 }} category="h5">{`All ${

@@ -22,7 +22,7 @@ import {
 import { useQuery } from "@apollo/client";
 import { Me } from "@greeneggs/types/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
-import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import { TopNavigation } from "@greeneggs/ui";
 import Background from "@greeneggs/core/background";
 
 export const styles = StyleSheet.create({
@@ -65,7 +65,7 @@ export default function EditProfile() {
 
   return (
     <Background>
-      <TopNavigationGeneric title="Edit Profile" />
+      <TopNavigation title="Edit Profile" />
       <ScrollView style={styles.view}>
         <ControlledInput<ProfileDetails>
           controllerProps={{

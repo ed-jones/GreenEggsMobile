@@ -10,7 +10,6 @@ import {
 import { StyleSheet, View } from "react-native";
 import { Alert, Icons, Mutations, Queries } from "@greeneggs/core";
 import { SelectItem } from "@ui-kitten/components";
-import Select from "@greeneggs/core/select";
 import { useMutation, useQuery } from "@apollo/client";
 import {
   Diets,
@@ -23,7 +22,7 @@ import {
 } from "@greeneggs/types/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
-import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import { TopNavigation, Select } from "@greeneggs/ui";
 import Background from "@greeneggs/core/background";
 
 export const styles = StyleSheet.create({
@@ -140,7 +139,7 @@ const DietaryPreferences = () => {
 
   return (
     <Background>
-      <TopNavigationGeneric title="Dietary Preferences" />
+      <TopNavigation title="Dietary Preferences" />
       <View>
         <View style={styles.view}>
           <Alert

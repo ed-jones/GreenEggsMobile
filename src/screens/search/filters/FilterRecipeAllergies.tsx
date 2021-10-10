@@ -8,9 +8,8 @@ import { AlphabetType } from '@greeneggs/core/alpha-list';
 import AddToFilter from '../common/add-to-filter';
 import { SearchContext } from '@greeneggs/providers/SearchStateProvider';
 import SelectableListItem from '@greeneggs/core/selectable-list-item';
-import TopNavigationGeneric from '@greeneggs/core/top-navigation-generic';
 import Background from '@greeneggs/core/background';
-import Input from '@greeneggs/core/input';
+import { Input, TopNavigation } from '@greeneggs/ui';
 
 const FilterRecipeAllergies: FC = () => {
   const navigation = useNavigation();
@@ -42,7 +41,7 @@ const FilterRecipeAllergies: FC = () => {
 
   return (
     <Background>
-      <TopNavigationGeneric title="Allergies" />
+      <TopNavigation title="Allergies" />
       <Input
         style={{ padding: 16, backgroundColor: 'white' }}
         placeholder="Search Allergies"

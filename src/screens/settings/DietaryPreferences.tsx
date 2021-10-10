@@ -9,7 +9,8 @@ import {
 } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
 import { Alert, Icons, Mutations, Queries } from "@greeneggs/core";
-import { Select, SelectItem } from "@ui-kitten/components";
+import { SelectItem } from "@ui-kitten/components";
+import Select from "@greeneggs/core/select";
 import { useMutation, useQuery } from "@apollo/client";
 import {
   Diets,

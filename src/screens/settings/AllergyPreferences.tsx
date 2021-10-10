@@ -4,11 +4,11 @@ import {
   IndexPath,
   List,
   ListItem,
-  Select,
   SelectItem,
   Spinner,
   Text,
 } from "@ui-kitten/components";
+import Select from "@greeneggs/core/select";
 import { StyleSheet, View } from "react-native";
 import { Alert, Icons, Mutations, Queries } from "@greeneggs/core";
 import { useMutation, useQuery } from "@apollo/client";

@@ -1,4 +1,4 @@
-import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
+import { IndexPath, SelectItem } from "@ui-kitten/components";
 import React from "react";
 import {
   DeepMap,
@@ -10,6 +10,7 @@ import {
   UnionLike,
 } from "react-hook-form";
 import { Privacy } from "@greeneggs/types/graphql";
+import Select from "@greeneggs/core/select";
 interface IPrivacySelect {
   label?: string;
   caption?: string;

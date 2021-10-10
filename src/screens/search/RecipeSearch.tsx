@@ -21,11 +21,11 @@ import {
 import {
   Divider,
   IndexPath,
-  Select,
   SelectItem,
   Tab,
   TabBar,
 } from "@ui-kitten/components";
+import Select from "@greeneggs/core/select";
 import {
   createMaterialTopTabNavigator,
   MaterialTopTabBarProps,

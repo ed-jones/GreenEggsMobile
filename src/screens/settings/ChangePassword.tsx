@@ -2,9 +2,9 @@ import React from "react";
 import {
   ControlledInput,
   InputType,
-  Mutations,
   useForm,
 } from "@greeneggs/core";
+import { Mutations } from "@greeneggs/graphql";
 import { ScrollView, StyleSheet } from "react-native";
 import {
   ChangePasswordDetails,

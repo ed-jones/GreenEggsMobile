@@ -1,7 +1,7 @@
 import React from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { ImageBackground, View, StyleSheet } from "react-native";
-import { Mutations, Queries } from "@greeneggs/core";
+import { Mutations, Queries } from "@greeneggs/graphql";
 import {
   Icon,
   Text,

@@ -10,7 +10,7 @@ import {
 } from "@ui-kitten/components";
 import { Select, TopNavigation, Background, Callout, Icons } from "@greeneggs/ui";
 import { StyleSheet, View } from "react-native";
-import {  Mutations, Queries } from "@greeneggs/core";
+import { Mutations, Queries } from "@greeneggs/graphql";
 import { useMutation, useQuery } from "@apollo/client";
 import {
   Allergies,

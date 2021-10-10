@@ -1,5 +1,5 @@
 import React, { FC, useContext, useState } from "react";
-import { Queries } from "@greeneggs/core";
+import { Queries } from "@greeneggs/graphql";
 import {
   Divider,
 } from "@ui-kitten/components";

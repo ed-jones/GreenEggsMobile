@@ -8,11 +8,10 @@ import { ScrollView, StyleSheet } from "react-native";
 import {
   ControlledInput,
   InputType,
-  Mutations,
-  Queries,
   Rules,
   useForm,
 } from "@greeneggs/core";
+import { Mutations, Queries } from "@greeneggs/graphql";
 import { useNavigation } from "@react-navigation/core";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import {

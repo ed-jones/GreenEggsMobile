@@ -2,9 +2,8 @@ import React, { useContext, useEffect } from "react";
 import {
   ControlledInput,
   InputType,
-  Mutations,
-  Queries,
 } from "@greeneggs/core";
+import { Mutations, Queries } from "@greeneggs/graphql";
 import { ScrollView, StyleSheet, View, Alert as RNAlert } from "react-native";
 import { deleteUser, LoginInput } from "@greeneggs/types/graphql";
 import {

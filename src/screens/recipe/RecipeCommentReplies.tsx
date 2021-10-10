@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { Queries } from "@greeneggs/core";
+import { Queries } from "@greeneggs/graphql";
 import { TopNavigation } from "@greeneggs/ui";
 import ViewMore from "@greeneggs/core/view-more/ViewMore";
 import { comment } from "@greeneggs/types/graphql";

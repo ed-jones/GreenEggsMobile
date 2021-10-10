@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import RecipeCardSmall from "@greeneggs/core/recipe-card-small";
 import { useQuery } from "@apollo/client";
-import { Queries } from "@greeneggs/core";
+import { Queries } from "@greeneggs/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
 import { Text } from "@ui-kitten/components";
 import {

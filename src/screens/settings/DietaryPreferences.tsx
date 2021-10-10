@@ -9,7 +9,7 @@ import {
   SelectItem,
 } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
-import { Mutations, Queries } from "@greeneggs/core";
+import { Mutations, Queries } from "@greeneggs/graphql";
 import {  } from "@ui-kitten/components";
 import { useMutation, useQuery } from "@apollo/client";
 import {

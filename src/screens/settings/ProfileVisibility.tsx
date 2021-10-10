@@ -7,7 +7,6 @@ import {
 import { ScrollView, StyleSheet } from "react-native";
 import {
   ControlledInput,
-  Icons,
   InputType,
   Mutations,
   Queries,
@@ -26,7 +25,7 @@ import { useQuery } from "@apollo/client";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
 
 import LoadingScreen from "../loading/LoadingScreen";
-import { TopNavigation, Background, Callout } from "@greeneggs/ui";
+import { TopNavigation, Background, Callout, Icons } from "@greeneggs/ui";
 
 export const styles = StyleSheet.create({
   view: {

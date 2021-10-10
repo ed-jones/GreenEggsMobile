@@ -1,7 +1,6 @@
 import React from "react";
 import {
   ControlledInput,
-  Icons,
   InputType,
   Mutations,
   Queries,
@@ -22,7 +21,7 @@ import {
 import { useQuery } from "@apollo/client";
 import { Me } from "@greeneggs/types/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
-import { TopNavigation, Background } from "@greeneggs/ui";
+import { TopNavigation, Background, Icons } from "@greeneggs/ui";
 
 export const styles = StyleSheet.create({
   view: {

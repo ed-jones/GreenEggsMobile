@@ -1,10 +1,10 @@
 import React from "react";
 import { ListItem, ListItemProps, Text } from "@ui-kitten/components";
-import { Down } from "../icons/Icons";
+import { Icons } from '@greeneggs/ui';
 
 const ViewMore = (props: ListItemProps) => (
   <ListItem
-    accessoryRight={Down}
+    accessoryRight={Icons.Down}
     title={() => (
       <Text style={{ textAlign: "center", marginRight: -32 }} category="label">
         VIEW MORE

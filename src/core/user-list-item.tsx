@@ -3,8 +3,7 @@ import { Avatar, ListItem } from '@ui-kitten/components';
 import { Users_users_data } from '@greeneggs/types/graphql';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
-
-import * as Icons from './icons/Icons';
+import { Icons } from '@greeneggs/ui';
 import noavatar from './no-avatar/noavatar.jpg';
 
 interface UserListItemProps {

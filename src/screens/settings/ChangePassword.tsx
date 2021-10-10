@@ -1,7 +1,6 @@
 import React from "react";
 import {
   ControlledInput,
-  Icons,
   InputType,
   Mutations,
   useForm,
@@ -17,7 +16,7 @@ import {
   Spinner,
 } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/core";
-import { TopNavigation, Background } from "@greeneggs/ui";
+import { TopNavigation, Background, Icons } from "@greeneggs/ui";
 
 export const styles = StyleSheet.create({
   view: {

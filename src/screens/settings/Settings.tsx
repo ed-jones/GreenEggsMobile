@@ -8,7 +8,7 @@ import {
   ThemedComponentProps,
 } from "@ui-kitten/components";
 import { Alert, ScrollView, StyleSheet } from "react-native";
-import { Icons } from "@greeneggs/core";
+import { Icons } from '@greeneggs/ui';
 import Svg, { Circle } from "react-native-svg";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";

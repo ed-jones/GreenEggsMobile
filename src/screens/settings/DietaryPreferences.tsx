@@ -9,7 +9,7 @@ import {
   SelectItem,
 } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
-import { Icons, Mutations, Queries } from "@greeneggs/core";
+import { Mutations, Queries } from "@greeneggs/core";
 import {  } from "@ui-kitten/components";
 import { useMutation, useQuery } from "@apollo/client";
 import {
@@ -23,7 +23,7 @@ import {
 } from "@greeneggs/types/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
-import { TopNavigation, Select, Background, Callout } from "@greeneggs/ui";
+import { TopNavigation, Select, Background, Callout, Icons } from "@greeneggs/ui";
 
 export const styles = StyleSheet.create({
   view: {

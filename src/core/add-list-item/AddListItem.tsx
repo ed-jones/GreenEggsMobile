@@ -6,7 +6,7 @@ import {
   ThemedComponentProps,
   withStyles,
 } from "@ui-kitten/components";
-import { Add } from "../icons/Icons";
+import { Icons } from '@greeneggs/ui';
 import { FieldError } from "react-hook-form";
 
 interface IAddListItem {
@@ -28,7 +28,7 @@ const AddListItem = withStyles(
         }}
         onPress={onPress}
       >
-        <Add
+        <Icons.Add
           style={{ width: 24, height: 24, marginRight: 8, marginLeft: -32 }}
           fill={
             error

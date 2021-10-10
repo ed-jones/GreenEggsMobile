@@ -6,15 +6,14 @@ import {
   TopNavigationAction,
   withStyles,
 } from "@ui-kitten/components";
-import { Input } from '@greeneggs/ui';
+import { Input, Icons } from '@greeneggs/ui';
 import { StyleSheet, View, Image } from "react-native";
 
 import logo512 from "../logo/logo512.png";
-import * as Icons from "../icons/Icons";
-import { useNavigation } from "@react-navigation/core";
 import { SearchContext } from "@greeneggs/providers/SearchStateProvider";
 import { countActiveFilters } from "@greeneggs/screens/search/RecipeSearchFilter";
 import CountCircle from "@greeneggs/screens/search/common/count-circle";
+import { useNavigation } from "@react-navigation/native";
 
 const styles = StyleSheet.create({
   topNavigation: {

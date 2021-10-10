@@ -21,8 +21,7 @@ import {
   PathValue,
   UnionLike,
 } from "react-hook-form";
-
-import * as Icons from "../../icons/Icons";
+import { Icons } from '@greeneggs/ui';
 
 interface IImageUpload {
   label?: string;

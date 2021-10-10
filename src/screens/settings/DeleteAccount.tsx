@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import {
   ControlledInput,
-  Icons,
   InputType,
   Mutations,
   Queries,
@@ -19,7 +18,7 @@ import LoadingScreen from "../loading/LoadingScreen";
 import useLoginForm from "../auth/useLoginForm";
 import { AuthContext } from "@greeneggs/providers/AuthProvider";
 import * as SecureStore from "expo-secure-store";
-import { TopNavigation, Background, Callout } from "@greeneggs/ui";
+import { TopNavigation, Background, Callout, Icons } from "@greeneggs/ui";
 
 export const styles = StyleSheet.create({
   view: {

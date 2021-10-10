@@ -1,16 +1,16 @@
 import React, { FC } from 'react';
-import { TopNavigation, TopNavigationAction, TopNavigationProps } from '@ui-kitten/components';
+import { TopNavigation as UIKittenTopNavigation, TopNavigationAction, TopNavigationProps } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/core';
-
-import * as Icons from './icons/Icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import * as Icons from './icons';
 
 export const TopNavigation: FC<TopNavigationProps> = ({ style, ...props }) => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
   return (
-    <TopNavigation
+    <UIKittenTopNavigation
       alignment="center"
       accessoryLeft={() => 
         <TopNavigationAction

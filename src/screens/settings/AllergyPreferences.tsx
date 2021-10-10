@@ -8,9 +8,9 @@ import {
   Spinner,
   Text,
 } from "@ui-kitten/components";
-import { Select, TopNavigation, Background, Callout } from "@greeneggs/ui";
+import { Select, TopNavigation, Background, Callout, Icons } from "@greeneggs/ui";
 import { StyleSheet, View } from "react-native";
-import { Icons, Mutations, Queries } from "@greeneggs/core";
+import {  Mutations, Queries } from "@greeneggs/core";
 import { useMutation, useQuery } from "@apollo/client";
 import {
   Allergies,

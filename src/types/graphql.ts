@@ -37,7 +37,7 @@ export interface addRecipe_addRecipe_data_ingredients {
   __typename: "Ingredient";
   name: string;
   description: string | null;
-  quantity: number;
+  quantity: number | null;
   unit: string | null;
 }
 
@@ -45,7 +45,7 @@ export interface addRecipe_addRecipe_data_steps {
   __typename: "RecipeStep";
   title: string;
   description: string;
-  image: string;
+  image: string | null;
 }
 
 export interface addRecipe_addRecipe_data_comments_submittedBy {
@@ -927,7 +927,7 @@ export interface recipes_recipes_data_ingredients {
   __typename: "Ingredient";
   name: string;
   description: string | null;
-  quantity: number;
+  quantity: number | null;
   unit: string | null;
 }
 
@@ -935,7 +935,7 @@ export interface recipes_recipes_data_steps {
   __typename: "RecipeStep";
   title: string;
   description: string;
-  image: string;
+  image: string | null;
 }
 
 export interface recipes_recipes_data_comments_submittedBy {
@@ -1068,7 +1068,7 @@ export interface NewsFeed_newsFeed_data_ingredients {
   __typename: "Ingredient";
   name: string;
   description: string | null;
-  quantity: number;
+  quantity: number | null;
   unit: string | null;
 }
 
@@ -1076,7 +1076,7 @@ export interface NewsFeed_newsFeed_data_steps {
   __typename: "RecipeStep";
   title: string;
   description: string;
-  image: string;
+  image: string | null;
 }
 
 export interface NewsFeed_newsFeed_data_comments_submittedBy {
@@ -1206,7 +1206,7 @@ export interface Trending_trending_data_ingredients {
   __typename: "Ingredient";
   name: string;
   description: string | null;
-  quantity: number;
+  quantity: number | null;
   unit: string | null;
 }
 
@@ -1214,7 +1214,7 @@ export interface Trending_trending_data_steps {
   __typename: "RecipeStep";
   title: string;
   description: string;
-  image: string;
+  image: string | null;
 }
 
 export interface Trending_trending_data_comments_submittedBy {
@@ -1344,7 +1344,7 @@ export interface recipe_recipe_data_ingredients {
   __typename: "Ingredient";
   name: string;
   description: string | null;
-  quantity: number;
+  quantity: number | null;
   unit: string | null;
 }
 
@@ -1352,7 +1352,7 @@ export interface recipe_recipe_data_steps {
   __typename: "RecipeStep";
   title: string;
   description: string;
-  image: string;
+  image: string | null;
 }
 
 export interface recipe_recipe_data_comments_submittedBy {
@@ -1675,7 +1675,7 @@ export interface savedRecipes_savedRecipes_data_ingredients {
   __typename: "Ingredient";
   name: string;
   description: string | null;
-  quantity: number;
+  quantity: number | null;
   unit: string | null;
 }
 
@@ -1683,7 +1683,7 @@ export interface savedRecipes_savedRecipes_data_steps {
   __typename: "RecipeStep";
   title: string;
   description: string;
-  image: string;
+  image: string | null;
 }
 
 export interface savedRecipes_savedRecipes_data_comments_submittedBy {
@@ -1911,6 +1911,48 @@ export interface CategoriesVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: Users
+// ====================================================
+
+export interface Users_users_data {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface Users_users_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface Users_users {
+  __typename: "UsersResult";
+  data: Users_users_data[] | null;
+  error: Users_users_error | null;
+}
+
+export interface Users {
+  users: Users_users;
+}
+
+export interface UsersVariables {
+  offset: number;
+  limit: number;
+  query: string;
+  sort: Sort;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: UserFragment
 // ====================================================
 
@@ -2088,7 +2130,7 @@ export interface RecipeFragment_ingredients {
   __typename: "Ingredient";
   name: string;
   description: string | null;
-  quantity: number;
+  quantity: number | null;
   unit: string | null;
 }
 
@@ -2096,7 +2138,7 @@ export interface RecipeFragment_steps {
   __typename: "RecipeStep";
   title: string;
   description: string;
-  image: string;
+  image: string | null;
 }
 
 export interface RecipeFragment_comments_submittedBy {
@@ -2194,7 +2236,7 @@ export interface IngredientFragment {
   __typename: "Ingredient";
   name: string;
   description: string | null;
-  quantity: number;
+  quantity: number | null;
   unit: string | null;
 }
 
@@ -2278,7 +2320,7 @@ export interface DietaryPreferenceDetails {
 export interface IngredientInput {
   name: string;
   description?: string | null;
-  quantity: number;
+  quantity?: number | null;
   unit?: string | null;
 }
 
@@ -2330,8 +2372,8 @@ export interface RecipeInput {
 }
 
 export interface RecipeStepInput {
-  image: any;
-  title: string;
+  image?: any | null;
+  title?: string | null;
   description: string;
 }
 

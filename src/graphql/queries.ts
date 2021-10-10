@@ -176,3 +176,18 @@ export const GET_CATEGORIES = gql`
   ${Fragments.CategoryFragment}
   ${Fragments.ErrorFragment}
 `;
+
+export const GET_USERS = gql`
+  query Users($offset: Int!, $limit: Int!, $query: String!, $sort: Sort!) {
+    users(offset: $offset, limit: $limit, query: $query, sort: $sort) {
+      data {
+        ...UserFragment
+      }
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.UserFragment}
+  ${Fragments.ErrorFragment}
+`;

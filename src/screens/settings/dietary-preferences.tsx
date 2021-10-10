@@ -21,11 +21,11 @@ import {
   UpdateDietaryPreferences,
   UpdateDietaryPreferencesVariables,
 } from "@greeneggs/types/graphql";
-import LoadingScreen from "../loading-screen";
+import { LoadingScreen } from "../loading-screen";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
 import { TopNavigation, Select, Background, Callout, Icons } from "@greeneggs/ui";
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   view: {
     padding: 16,
   },
@@ -45,7 +45,7 @@ function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
   return Number(selectedIndex.toString()) - 1;
 }
 
-const DietaryPreferences = () => {
+export const DietaryPreferences = () => {
   const getDiet = useQuery<Diets>(Queries.GET_DIETS, {
     variables: {
       query: '',
@@ -190,5 +190,3 @@ const DietaryPreferences = () => {
     </Background>
   );
 };
-
-export default DietaryPreferences;

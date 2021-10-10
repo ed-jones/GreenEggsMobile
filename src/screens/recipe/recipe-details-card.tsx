@@ -11,7 +11,7 @@ import {
 } from "@greeneggs/types/graphql";
 import { Text, Card, Avatar } from "@ui-kitten/components";
 import { useMutation } from "@apollo/client";
-import RecipeCategoriesTags from "./recipe-categories-tags";
+import { RecipeCategoriesTags } from "./recipe-categories-tags";
 
 const styles = StyleSheet.create({
   cardSection: {
@@ -31,7 +31,7 @@ interface IRecipeDetailsCard extends recipe_recipe_data {
   navigation: any;
 }
 
-const RecipeDetailsCard = ({
+export const RecipeDetailsCard = ({
   navigation,
   title,
   subtitle,
@@ -143,5 +143,3 @@ const RecipeDetailsCard = ({
     </Card>
   );
 };
-
-export default RecipeDetailsCard;

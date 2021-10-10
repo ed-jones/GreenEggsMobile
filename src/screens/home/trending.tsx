@@ -11,7 +11,7 @@ import { Queries } from "@greeneggs/graphql";
 import { useNavigation } from "@react-navigation/core";
 import { Background, LazyList } from "@greeneggs/ui";
 
-import RecipeCard from "./recipe-card";
+import { RecipeCard} from "./recipe-card";
 
 
 const CardVerticalMargin = 20;
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Trending() {
+export function Trending() {
   const navigation = useNavigation();
   return (
     <Background>

@@ -4,19 +4,19 @@ import { ScrollView } from "react-native";
 import { InputType, Rules, ControlledInput, Callout } from "@greeneggs/ui";
 import { RecipeInput } from "@greeneggs/types/graphql";
 import { RecipeForm } from "./add-recipe";
-import addRecipeStyles from "./add-recipe-styles";
+import { AddRecipeStyles } from "./add-recipe-styles";
 
 interface ICreateRecipeDetails {
   form: RecipeForm;
 }
 
-const CreateRecipeDetails = ({ form }: ICreateRecipeDetails) => (
+export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
   <ScrollView style={{ paddingHorizontal: 16 }}>
     <Callout
       type="info"
       message="Add details such as a title, subtitle, description, time estimate and cover photo."
     />
-    <Text category="h5" style={addRecipeStyles.heading}>
+    <Text category="h5" style={AddRecipeStyles.heading}>
       Details
     </Text>
     <ControlledInput<RecipeInput>
@@ -31,7 +31,7 @@ const CreateRecipeDetails = ({ form }: ICreateRecipeDetails) => (
         label: "TITLE",
         placeholder: "Spaghetti Carbonara",
         defaultValue: "",
-        style: addRecipeStyles.input,
+        style: AddRecipeStyles.input,
       }}
       submitError={form.formResult.data?.addRecipe.error}
       type={InputType.TEXT}
@@ -48,7 +48,7 @@ const CreateRecipeDetails = ({ form }: ICreateRecipeDetails) => (
         label: "SUBTITLE",
         placeholder: "A quick, healthy and delicious meal",
         defaultValue: "",
-        style: addRecipeStyles.input,
+        style: AddRecipeStyles.input,
       }}
       submitError={form.formResult.data?.addRecipe.error}
       type={InputType.TEXT}
@@ -66,7 +66,7 @@ const CreateRecipeDetails = ({ form }: ICreateRecipeDetails) => (
         placeholder:
           "When I was a little girl growing up in the mountains of Italy...",
         defaultValue: "",
-        style: addRecipeStyles.input,
+        style: AddRecipeStyles.input,
       }}
       submitError={form.formResult.data?.addRecipe.error}
       type={InputType.TEXTAREA}
@@ -83,7 +83,7 @@ const CreateRecipeDetails = ({ form }: ICreateRecipeDetails) => (
         label: "TIME ESTIMATE",
         placeholder: "5 hours",
         defaultValue: "",
-        style: addRecipeStyles.input,
+        style: AddRecipeStyles.input,
         caption: "How long does it take to make this recipe?",
       }}
       submitError={form.formResult.data?.addRecipe.error}
@@ -103,5 +103,3 @@ const CreateRecipeDetails = ({ form }: ICreateRecipeDetails) => (
     />
   </ScrollView>
 );
-
-export default CreateRecipeDetails;

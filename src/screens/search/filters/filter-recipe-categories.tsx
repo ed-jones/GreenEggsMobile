@@ -8,7 +8,7 @@ import { SearchContext } from '@greeneggs/providers/search-state-provider';
 
 import { AddToFilter } from '../common';
 
-const FilterRecipeCategories: FC = () => {
+export const FilterRecipeCategories: FC = () => {
   const navigation = useNavigation();
   const [query, setQuery] = useState("");
   const { searchState, setSearchState } = useContext(SearchContext);
@@ -79,5 +79,3 @@ const FilterRecipeCategories: FC = () => {
     </Background>
   );
 }
-
-export default FilterRecipeCategories;

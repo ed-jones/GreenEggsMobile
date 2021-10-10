@@ -4,8 +4,8 @@ import { Card } from "@ui-kitten/components";
 import { recipes_recipes_data } from "@greeneggs/types/graphql";
 import { imageNotFound } from "@greeneggs/assets";
 
-import RecipeCardHeader from "./recipe-card-header";
-import RecipeCardFooter from "./recipe-card-footer";
+import { RecipeCardHeader } from "./recipe-card-header";
+import { RecipeCardFooter } from "./recipe-card-footer";
 
 const styles = StyleSheet.create({
   card: {
@@ -28,7 +28,7 @@ interface IRecipeCard {
   onPress: () => void;
 }
 
-const RecipeCard = ({ recipe, onPress }: IRecipeCard) => (
+export const RecipeCard = ({ recipe, onPress }: IRecipeCard) => (
   <Card
     appearance="filled"
     style={styles.card}
@@ -50,5 +50,3 @@ const RecipeCard = ({ recipe, onPress }: IRecipeCard) => (
     </View>
   </Card>
 );
-
-export default RecipeCard;

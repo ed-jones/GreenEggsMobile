@@ -6,9 +6,9 @@ import CreateRecipePartTemplate, {
   RecipeFormPart,
 } from "../create-recipe-part-template";
 import { useForm } from "react-hook-form";
-import addRecipeStyles from "../add-recipe-styles";
+import { AddRecipeStyles } from "../add-recipe-styles";
 
-const CreateAllergy = ({ navigation, route }: any) => (
+export const CreateAllergy = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate
     title="Create Ingredient"
     navigation={navigation}
@@ -35,7 +35,7 @@ const CreateAllergyForm = ({ append, navigation }: RecipeFormPart) => {
           label: "ALLERGY",
           placeholder: "Dairy",
           defaultValue: "",
-          style: addRecipeStyles.input,
+          style: AddRecipeStyles.input,
         }}
         type={InputType.TEXT}
       />
@@ -54,5 +54,3 @@ const CreateAllergyForm = ({ append, navigation }: RecipeFormPart) => {
     </>
   );
 };
-
-export default CreateAllergy;

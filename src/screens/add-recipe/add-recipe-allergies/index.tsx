@@ -1,42 +1,41 @@
 import React from "react";
 import { List, ListItem, Text } from "@ui-kitten/components";
 import { ScrollView } from "react-native";
+import { RecipeForm } from "../add-recipe";
 import { Icons, Callout, AddListItem } from "@greeneggs/ui";
 import { useFieldArray } from "react-hook-form";
+import { AddRecipeStyles } from '../add-recipe-styles';
 
-import { RecipeForm } from "../add-recipe";
-import addRecipeStyles from '../add-recipe-styles';
-
-interface IAddRecipeCategories {
+interface IAddRecipeAllergies {
   form: RecipeForm;
   navigation: any;
 }
 
-const AddRecipeCategories = ({ form, navigation }: IAddRecipeCategories) => {
+export const AddRecipeAllergies = ({ form, navigation }: IAddRecipeAllergies) => {
   const { fields, remove, append } = useFieldArray({
     control: form.control,
-    name: "categories",
+    name: "allergies",
   });
 
   return (
     <ScrollView>
       <Callout
-        type="info"
+        type="danger"
         message={
           <Text>
-            Tag this recipe with relevant categories, such as{" "}
-            <Text style={{ fontWeight: "bold" }}>Breakfast</Text>,{" "}
-            <Text style={{ fontWeight: "bold" }}>Soup</Text> or{" "}
-            <Text style={{ fontWeight: "bold" }}>Italian</Text>.
+            Make sure to specify any food in this recipe that may trigger
+            allergies, such as <Text style={{ fontWeight: "bold" }}>Milk</Text>,{" "}
+            <Text style={{ fontWeight: "bold" }}>Eggs</Text> and{" "}
+            <Text style={{ fontWeight: "bold" }}>Peanuts</Text>.
           </Text>
         }
-        style={addRecipeStyles.view}
+        style={AddRecipeStyles.view}
       />
       <Text
         category="h5"
-        style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}
+        style={{ ...AddRecipeStyles.heading, ...AddRecipeStyles.view }}
       >
-        Categories
+        Allergies
       </Text>
       <List
         data={fields}
@@ -52,9 +51,9 @@ const AddRecipeCategories = ({ form, navigation }: IAddRecipeCategories) => {
         )}
       />
       <AddListItem
-        label="ADD CATEGORY"
+        label="ADD ALLERGY"
         onPress={() =>
-          navigation.navigate("CreateCategory", {
+          navigation.navigate("CreateAllergy", {
             append,
           })
         }
@@ -62,5 +61,3 @@ const AddRecipeCategories = ({ form, navigation }: IAddRecipeCategories) => {
     </ScrollView>
   );
 };
-
-export default AddRecipeCategories;

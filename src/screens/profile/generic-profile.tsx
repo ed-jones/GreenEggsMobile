@@ -21,7 +21,7 @@ import {
   recipes_recipes_data,
   Sort,
 } from "@greeneggs/types/graphql";
-import LoadingScreen from "../loading-screen";
+import { LoadingScreen } from "../loading-screen";
 import { useNavigation } from "@react-navigation/core";
 
 const styles = StyleSheet.create({
@@ -128,7 +128,7 @@ interface GenericProfileProps {
   isMe?: boolean;
 }
 
-const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) => {
+export const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
   const profileResult = useQuery<profile>(Queries.GET_PROFILE, {
@@ -248,5 +248,3 @@ const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) => {
     </Background>
   );
 };
-
-export default GenericProfile;

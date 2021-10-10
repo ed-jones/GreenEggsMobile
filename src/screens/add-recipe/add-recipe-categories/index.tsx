@@ -5,37 +5,38 @@ import { Icons, Callout, AddListItem } from "@greeneggs/ui";
 import { useFieldArray } from "react-hook-form";
 
 import { RecipeForm } from "../add-recipe";
-import addRecipeStyles from '../add-recipe-styles';
+import { AddRecipeStyles } from '../add-recipe-styles';
 
-interface IAddRecipeDiets {
+interface IAddRecipeCategories {
   form: RecipeForm;
   navigation: any;
 }
 
-const AddRecipeDiets = ({ form, navigation }: IAddRecipeDiets) => {
+export const AddRecipeCategories = ({ form, navigation }: IAddRecipeCategories) => {
   const { fields, remove, append } = useFieldArray({
     control: form.control,
-    name: "diets",
+    name: "categories",
   });
+
   return (
     <ScrollView>
       <Callout
-        type="warning"
+        type="info"
         message={
           <Text>
-            Tag this recipe with relevant diets, such as{" "}
-            <Text style={{ fontWeight: "bold" }}>Kosher</Text>,{" "}
-            <Text style={{ fontWeight: "bold" }}>Vegetarian</Text> or{" "}
-            <Text style={{ fontWeight: "bold" }}>Gluten Free</Text>.
+            Tag this recipe with relevant categories, such as{" "}
+            <Text style={{ fontWeight: "bold" }}>Breakfast</Text>,{" "}
+            <Text style={{ fontWeight: "bold" }}>Soup</Text> or{" "}
+            <Text style={{ fontWeight: "bold" }}>Italian</Text>.
           </Text>
         }
-        style={addRecipeStyles.view}
+        style={AddRecipeStyles.view}
       />
       <Text
         category="h5"
-        style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}
+        style={{ ...AddRecipeStyles.heading, ...AddRecipeStyles.view }}
       >
-        Diets
+        Categories
       </Text>
       <List
         data={fields}
@@ -51,9 +52,9 @@ const AddRecipeDiets = ({ form, navigation }: IAddRecipeDiets) => {
         )}
       />
       <AddListItem
-        label="ADD DIET"
+        label="ADD CATEGORY"
         onPress={() =>
-          navigation.navigate("CreateDiet", {
+          navigation.navigate("CreateCategory", {
             append,
           })
         }
@@ -61,5 +62,3 @@ const AddRecipeDiets = ({ form, navigation }: IAddRecipeDiets) => {
     </ScrollView>
   );
 };
-
-export default AddRecipeDiets;

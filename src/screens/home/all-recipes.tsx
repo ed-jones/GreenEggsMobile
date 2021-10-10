@@ -5,8 +5,8 @@ import { useQuery } from "@apollo/client";
 import { recipes } from "@greeneggs/types/graphql";
 import { Queries } from "@greeneggs/graphql";
 
-import LoadingScreen from "@greeneggs/screens/loading-screen";
-import RecipeCard from "./recipe-card";
+import { LoadingScreen } from "@greeneggs/screens/loading-screen";
+import { RecipeCard } from "./recipe-card";
 
 const CardVerticalMargin = 20;
 const CardHorizontalMargin = 24;
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Recipes({ navigation }: any) {
+export function AllRecipes({ navigation }: any) {
   const { loading, error, data, refetch } = useQuery<recipes>(
     Queries.GET_RECIPES
   );

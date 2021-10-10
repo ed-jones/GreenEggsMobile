@@ -3,13 +3,13 @@ import { ScrollView } from "react-native";
 import { RecipeForm } from "./add-recipe";
 import { ControlledInput, InputType, Rules, Callout } from "@greeneggs/ui";
 import { RecipeInput } from "@greeneggs/types/graphql";
-import addRecipeStyles from "./add-recipe-styles";
+import { AddRecipeStyles } from "./add-recipe-styles";
 
 interface IPublishRecipe {
   form: RecipeForm;
 }
 
-const PublishRecipe = ({ form }: IPublishRecipe) => (
+export const PublishRecipe = ({ form }: IPublishRecipe) => (
   <ScrollView style={{ paddingHorizontal: 16 }}>
     <Callout
       type="warning"
@@ -26,7 +26,7 @@ const PublishRecipe = ({ form }: IPublishRecipe) => (
       inputProps={{
         label: "RECIPE PRIVACY",
         defaultValue: "",
-        style: addRecipeStyles.input,
+        style: AddRecipeStyles.input,
         caption: "Who is able to see your recipe?",
       }}
       submitError={form.formResult.data?.addRecipe.error}
@@ -43,7 +43,7 @@ const PublishRecipe = ({ form }: IPublishRecipe) => (
       inputProps={{
         label: "COMMENT PRIVILEGES",
         defaultValue: "",
-        style: addRecipeStyles.input,
+        style: AddRecipeStyles.input,
         caption: "Who is able to comment on your recipe?",
       }}
       submitError={form.formResult.data?.addRecipe.error}
@@ -60,7 +60,7 @@ const PublishRecipe = ({ form }: IPublishRecipe) => (
       inputProps={{
         label: "LIKE PRIVILEGES",
         defaultValue: "",
-        style: addRecipeStyles.input,
+        style: AddRecipeStyles.input,
         caption: "Who is able to like your recipe?",
       }}
       submitError={form.formResult.data?.addRecipe.error}
@@ -68,5 +68,3 @@ const PublishRecipe = ({ form }: IPublishRecipe) => (
     />
   </ScrollView>
 );
-
-export default PublishRecipe;

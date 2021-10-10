@@ -1,7 +1,7 @@
 import React from "react";
 import { recipe_recipe_data_allergies } from "@greeneggs/types/graphql";
-import Alert from "@greeneggs/core/alert/Alert";
 import { Text } from "@ui-kitten/components";
+import { Callout } from '@greeneggs/ui';
 
 interface IRecipeAllergies {
   allergies: recipe_recipe_data_allergies[];
@@ -21,11 +21,11 @@ function stringifyAllergies(allergies: recipe_recipe_data_allergies[]) {
   return allergyString;
 }
 
-const RecipeAllergies = ({ allergies }: IRecipeAllergies) => {
+export const RecipeAllergies = ({ allergies }: IRecipeAllergies) => {
   console.log(allergies);
   if (allergies.length > 0)
     return (
-      <Alert
+      <Callout
         type="danger"
         message={
           <Text>
@@ -42,5 +42,3 @@ const RecipeAllergies = ({ allergies }: IRecipeAllergies) => {
     );
   return null;
 };
-
-export default RecipeAllergies;

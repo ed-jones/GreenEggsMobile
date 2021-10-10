@@ -6,7 +6,7 @@ interface IRecipeCategoriesTags {
   categories: recipe_recipe_data_categories[];
 }
 
-const RecipeCategoriesTags = ({ categories }: IRecipeCategoriesTags) => (
+export const RecipeCategoriesTags = ({ categories }: IRecipeCategoriesTags) => (
   <Tags
     tags={categories.map((category) => ({
       name: category.name,
@@ -14,5 +14,3 @@ const RecipeCategoriesTags = ({ categories }: IRecipeCategoriesTags) => (
     }))}
   />
 );
-
-export default RecipeCategoriesTags;

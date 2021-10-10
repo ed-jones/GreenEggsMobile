@@ -4,7 +4,7 @@ import { Users_users_data } from '@greeneggs/types/graphql';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Icons } from '@greeneggs/ui';
-import noavatar from './no-avatar/noavatar.jpg';
+import { noAvatar } from '@greeneggs/assets';
 
 interface UserListItemProps {
   user: Users_users_data
@@ -18,7 +18,7 @@ export const UserListItem = ({ user }: UserListItemProps) => {
       accessoryLeft={() => (
         <Avatar
           style={{ width: 32, height: 32, marginHorizontal: 8 }}
-          source={user.avatarURI ? { uri: user.avatarURI } : noavatar}
+          source={user.avatarURI ? { uri: user.avatarURI } : noAvatar}
         />
       )}
       accessoryRight={Icons.Forward}

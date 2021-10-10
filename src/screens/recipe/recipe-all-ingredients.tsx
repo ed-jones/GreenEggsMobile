@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const RecipeIngredients = ({ route }: any) => {
+export const RecipeAllIngredients = ({ route }: any) => {
   const { ingredients } = route.params;
 
   return (
@@ -28,5 +28,3 @@ const RecipeIngredients = ({ route }: any) => {
     </Background>
   );
 };
-
-export default RecipeIngredients;

@@ -8,11 +8,11 @@ import {
   MyProfile,
   SavedRecipes,
 } from "../screens";
-import BottomTabBar from "./bottom-tab-bar";
+import { BottomTabBar} from "./bottom-tab-bar";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
-export default function Navigation() {
+export function Navigation() {
   return (
     <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
       <Screen name="Home" component={Home} />

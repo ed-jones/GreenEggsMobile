@@ -7,14 +7,14 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { Callout, AddListItem, ControlledInput, InputType, Rules, IngredientListItem } from "@greeneggs/ui";
 import { useEffect } from "react";
 import { FieldError, useFieldArray } from "react-hook-form";
-import addRecipeStyles from "../add-recipe-styles";
+import { AddRecipeStyles } from "../add-recipe-styles";
 
 interface ICreateRecipeIngredients {
   form: RecipeForm;
   navigation: StackNavigationProp<any>;
 }
 
-const CreateRecipeIngredients = ({
+export const AddRecipeIngredients = ({
   form,
   navigation,
 }: ICreateRecipeIngredients) => {
@@ -35,7 +35,7 @@ const CreateRecipeIngredients = ({
       <Callout
         type="info"
         message="Include ingredients needed to make this recipe."
-        style={addRecipeStyles.view}
+        style={AddRecipeStyles.view}
       />
       <View style={{ flexDirection: "row" }}>
         <ControlledInput<RecipeInput>
@@ -57,7 +57,7 @@ const CreateRecipeIngredients = ({
             defaultValue: "",
             caption: "How many people can this recipe serve?",
             style: {
-              ...addRecipeStyles.input,
+              ...AddRecipeStyles.input,
               paddingHorizontal: 16,
               width: "100%",
             },
@@ -69,7 +69,7 @@ const CreateRecipeIngredients = ({
 
       <Text
         category="h5"
-        style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}
+        style={{ ...AddRecipeStyles.heading, ...AddRecipeStyles.view }}
       >
         Ingredients
       </Text>
@@ -100,5 +100,3 @@ const CreateRecipeIngredients = ({
     </ScrollView>
   );
 };
-
-export default CreateRecipeIngredients;

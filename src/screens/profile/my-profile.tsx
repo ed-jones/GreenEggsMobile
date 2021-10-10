@@ -4,10 +4,10 @@ import { useQuery } from "@apollo/client";
 import { Callout } from "@greeneggs/ui";
 import { Queries } from '@greeneggs/graphql';
 import { Me } from "@greeneggs/types/graphql";
-import LoadingScreen from "../loading-screen";
-import GenericProfile from "./generic-profile";
+import { LoadingScreen } from "../loading-screen";
+import { GenericProfile } from "./generic-profile";
 
-const MyProfile = () => {
+export const MyProfile = () => {
   const meResult = useQuery<Me>(Queries.ME);
 
   if (meResult.loading) {
@@ -26,5 +26,3 @@ const MyProfile = () => {
 
   return <GenericProfile userId={me.id} isMe />;
 };
-
-export default MyProfile;

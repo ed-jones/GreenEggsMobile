@@ -2,7 +2,7 @@ import { ApolloQueryResult, DocumentNode, useQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native";
 import { Callout } from "@greeneggs/ui";
-import LoadingScreen from "../screens/loading-screen";
+import { LoadingScreen } from "../screens/loading-screen";
 import { ListRenderItem } from "react-native";
 
 export function useListRefresh<TData, TVariables>(

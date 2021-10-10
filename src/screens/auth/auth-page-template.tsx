@@ -70,7 +70,7 @@ interface IAuthPageTemplateProps {
   children: React.ReactNode;
 }
 
-const AuthPageTemplate = withStyles(
+export const AuthPageTemplate = withStyles(
   ({
     message,
     children,
@@ -105,5 +105,3 @@ const AuthPageTemplate = withStyles(
     </Background>
   )
 );
-
-export default AuthPageTemplate;

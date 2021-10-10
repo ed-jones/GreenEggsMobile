@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export default StyleSheet.create({
+export const AddRecipeStyles = StyleSheet.create({
   view: {
     padding: 16,
   },

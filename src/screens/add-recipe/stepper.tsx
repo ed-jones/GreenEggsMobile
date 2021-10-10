@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Stepper = withStyles(
+export const Stepper = withStyles(
   ({
     currentStep,
     nextStep,
@@ -52,5 +52,3 @@ const Stepper = withStyles(
     </View>
   )
 );
-
-export default Stepper;

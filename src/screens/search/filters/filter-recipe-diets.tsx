@@ -7,7 +7,7 @@ import { Diets, DietsVariables, Diets_diets_data, RecipeFilter, Sort } from '@gr
 import { AddToFilter} from '../common';
 import { SearchContext } from '@greeneggs/providers/search-state-provider';
 
-const FilterRecipeDiets: FC = () => {
+export const FilterRecipeDiets: FC = () => {
   const navigation = useNavigation();
   const [query, setQuery] = useState("");
   const { searchState, setSearchState } = useContext(SearchContext);
@@ -78,5 +78,3 @@ const FilterRecipeDiets: FC = () => {
     </Background>
   );
 }
-
-export default FilterRecipeDiets;

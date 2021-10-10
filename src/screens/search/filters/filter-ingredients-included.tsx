@@ -17,7 +17,7 @@ import { TopNavigation, Background, AlphabetType, LazyListAlpha, SelectableListI
 
 import { AddToFilter } from "../common";
 
-const FilterIngredientsIncluded: FC = () => {
+export const FilterIngredientsIncluded: FC = () => {
   const navigation = useNavigation();
   const [query, setQuery] = useState("");
   const { searchState, setSearchState } = useContext(SearchContext);
@@ -91,5 +91,3 @@ const FilterIngredientsIncluded: FC = () => {
     </Background>
   );
 };
-
-export default FilterIngredientsIncluded;

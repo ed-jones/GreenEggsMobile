@@ -7,7 +7,6 @@ import {
 import { ScrollView, StyleSheet } from "react-native";
 import { Mutations, Queries } from "@greeneggs/graphql";
 import { useNavigation } from "@react-navigation/core";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import {
   Me,
   ProfileVisibilityDetails,
@@ -17,10 +16,10 @@ import {
 import { useQuery } from "@apollo/client";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
 
-import LoadingScreen from "../loading-screen";
+import { LoadingScreen } from "../loading-screen";
 import { TopNavigation, Background, Callout, Icons, ControlledInput, InputType, Rules, useForm } from "@greeneggs/ui";
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   view: {
     padding: 16,
   },
@@ -36,9 +35,8 @@ export const styles = StyleSheet.create({
   },
 });
 
-const ProfileVisibility = () => {
+export const ProfileVisibility = () => {
   const navigation = useNavigation();
-  const insets = useSafeAreaInsets();
 
   const { loading, error, data } = useQuery<Me>(Queries.ME);
   const form = useForm<
@@ -125,5 +123,3 @@ const ProfileVisibility = () => {
     </Background>
   );
 };
-
-export default ProfileVisibility;

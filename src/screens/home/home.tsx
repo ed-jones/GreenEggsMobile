@@ -1,15 +1,16 @@
-import React, { useContext, useState } from 'react';
-import { TopBar, Background } from '@greeneggs/core';
+import React, { useContext } from 'react';
+import { Background } from '@greeneggs/ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View } from 'react-native';
 import { SearchContext } from '@greeneggs/providers/search-state-provider';
 
-import HomeTabs from './home-tabs';
-import RecipeSearch from '../search/recipe-search';
+import { HomeTabs } from './home-tabs';
+import { RecipeSearch } from '../search/recipe-search';
+import { TopBar} from '../search/common/top-bar';
 
-const Home = () => { 
+export const Home = () => { 
   const insets = useSafeAreaInsets();
-  const {searchState} = useContext(SearchContext)
+  const { searchState } = useContext(SearchContext)
 
   return (
     <Background>
@@ -22,5 +23,3 @@ const Home = () => {
     </Background>
   )
 };
-
-export default Home;

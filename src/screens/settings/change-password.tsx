@@ -13,7 +13,7 @@ import {
 import { useNavigation } from "@react-navigation/core";
 import { TopNavigation, Background, Icons, ControlledInput, InputType, useForm } from "@greeneggs/ui";
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   view: {
     padding: 16,
   },
@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
   },
 });
 
-export default function ChangePassword() {
+export function ChangePassword() {
   const form = useForm<
     ChangePasswordDetails,
     changePassword,

@@ -21,10 +21,10 @@ import {
   UpdateAllergyPreferences,
   UpdateAllergyPreferencesVariables,
 } from "@greeneggs/types/graphql";
-import LoadingScreen from "../loading-screen";
+import { LoadingScreen } from "../loading-screen";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   view: {
     padding: 16,
   },
@@ -44,7 +44,7 @@ function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
   return Number(selectedIndex.toString()) - 1;
 }
 
-const AllergyPreferences = () => {
+export const AllergyPreferences = () => {
   const getAllergy = useQuery<Allergies>(Queries.GET_ALLERGIES, {
     variables: {
       query: '',
@@ -190,5 +190,3 @@ const AllergyPreferences = () => {
     </Background>
   );
 };
-
-export default AllergyPreferences;

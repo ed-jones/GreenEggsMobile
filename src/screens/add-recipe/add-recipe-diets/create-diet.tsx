@@ -2,13 +2,14 @@ import React from "react";
 import { Button } from "@ui-kitten/components";
 import { ControlledInput, InputType, Rules } from "@greeneggs/ui";
 import { DietInput } from "@greeneggs/types/graphql";
-import CreateRecipePartTemplate, {
+import {
+  CreateRecipePartTemplate,
   RecipeFormPart,
 } from "../create-recipe-part-template";
 import { useForm } from "react-hook-form";
-import addRecipeStyles from "../add-recipe-styles";
+import { AddRecipeStyles } from "../add-recipe-styles";
 
-const CreateDiet = ({ navigation, route }: any) => (
+export const CreateDiet = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate
     title="Create Diet"
     navigation={navigation}
@@ -35,7 +36,7 @@ const CreateDietForm = ({ append, navigation }: RecipeFormPart) => {
           label: "DIET",
           placeholder: "Vegetarian",
           defaultValue: "",
-          style: addRecipeStyles.input,
+          style: AddRecipeStyles.input,
         }}
         type={InputType.TEXT}
       />
@@ -54,5 +55,3 @@ const CreateDietForm = ({ append, navigation }: RecipeFormPart) => {
     </>
   );
 };
-
-export default CreateDiet;

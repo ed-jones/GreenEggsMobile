@@ -14,10 +14,10 @@ import {
  import { useNavigation } from "@react-navigation/core";
 import { useQuery } from "@apollo/client";
 import { Me } from "@greeneggs/types/graphql";
-import LoadingScreen from "../loading-screen";
+import { LoadingScreen } from "../loading-screen";
 import { TopNavigation, Background, Icons, ControlledInput, InputType, useForm } from "@greeneggs/ui";
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   view: {
     padding: 16,
   },
@@ -39,7 +39,7 @@ const useEditProfile = () =>
     "profileDetails"
   );
 
-export default function EditProfile() {
+export function EditProfile() {
   const form = useEditProfile();
   const navigation = useNavigation();
   const { loading, error, data } = useQuery<Me>(Queries.ME);

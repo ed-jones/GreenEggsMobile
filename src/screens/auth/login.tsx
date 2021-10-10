@@ -1,11 +1,9 @@
 import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
-import { Button, Input, Spinner } from "@ui-kitten/components";
-import useLoginForm from "./use-login-form";
-import { setContext } from "@apollo/client/link/context";
-import AuthPageTemplate from "./auth-page-template";
-import { Controller } from "react-hook-form";
-import { ControlledInput, InputType } from "@greeneggs/core";
+import { Button, Spinner } from "@ui-kitten/components";
+import { useLoginForm} from "./use-login-form";
+import { AuthPageTemplate } from "./auth-page-template";
+import { ControlledInput, InputType } from "@greeneggs/ui";
 import { LoginInput } from "@greeneggs/types/graphql";
 import * as SecureStore from "expo-secure-store";
 import { AuthContext } from "@greeneggs/providers/auth-provider";
@@ -22,7 +20,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Login = ({ navigation }: any) => {
+export const Login = ({ navigation }: any) => {
   const { formResult, handleSubmit, control, submitForm } = useLoginForm();
   const { setToken } = useContext(AuthContext);
 
@@ -80,5 +78,3 @@ const Login = ({ navigation }: any) => {
     </AuthPageTemplate>
   );
 };
-
-export default Login;

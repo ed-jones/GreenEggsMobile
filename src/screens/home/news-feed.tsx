@@ -10,7 +10,7 @@ import {
 import { Queries } from "@greeneggs/graphql";
 import { Background, LazyList } from "@greeneggs/ui";
 import { useNavigation } from "@react-navigation/native";
-import RecipeCard from "./recipe-card";
+import { RecipeCard } from "./recipe-card";
 
 const CardVerticalMargin = 20;
 const CardHorizontalMargin = 24;
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function NewsFeed() {
+export function NewsFeed() {
   const navigation = useNavigation();
   return (
     <Background>

@@ -1,1 +1,2 @@
-export { default as Navigation } from './navigation';
+export * from './navigation';
+export { Router } from './routes/router';

@@ -2,14 +2,15 @@ import React from "react";
 import { Button } from "@ui-kitten/components";
 import { ControlledInput, InputType, Rules } from "@greeneggs/ui";
 import { IngredientInput } from "@greeneggs/types/graphql";
-import CreateRecipePartTemplate, {
+import {
+  CreateRecipePartTemplate,
   RecipeFormPart,
 } from "../create-recipe-part-template";
 import { useForm } from "react-hook-form";
 import { View } from "react-native";
-import addRecipeStyles from "../add-recipe-styles";
+import { AddRecipeStyles } from "../add-recipe-styles";
 
-const CreateIngredient = ({ navigation, route }: any) => (
+export const CreateIngredient = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate
     title="Create Ingredient"
     navigation={navigation}
@@ -37,7 +38,7 @@ const CreateIngredientForm = ({ navigation, append }: RecipeFormPart) => {
           label: "INGREDIENT NAME",
           placeholder: "Carrot",
           defaultValue: "",
-          style: addRecipeStyles.input,
+          style: AddRecipeStyles.input,
         }}
         type={InputType.TEXT}
       />
@@ -54,7 +55,7 @@ const CreateIngredientForm = ({ navigation, append }: RecipeFormPart) => {
           label: "DESCRIPTION (OPTIONAL)",
           placeholder: "Finely chopped",
           defaultValue: "",
-          style: addRecipeStyles.input,
+          style: AddRecipeStyles.input,
         }}
         type={InputType.TEXT}
       />
@@ -75,7 +76,7 @@ const CreateIngredientForm = ({ navigation, append }: RecipeFormPart) => {
             label: "QUANTITY (OPTIONAL)",
             placeholder: "5",
             defaultValue: "",
-            style: { width: "40%", ...addRecipeStyles.input },
+            style: { width: "40%", ...AddRecipeStyles.input },
           }}
           type={InputType.NUMERIC}
         />
@@ -92,7 +93,7 @@ const CreateIngredientForm = ({ navigation, append }: RecipeFormPart) => {
             label: "UNIT (OPTIONAL)",
             placeholder: "Cups",
             defaultValue: "",
-            style: { width: "60%", ...addRecipeStyles.input },
+            style: { width: "60%", ...AddRecipeStyles.input },
           }}
           type={InputType.TEXT}
         />
@@ -114,5 +115,3 @@ const CreateIngredientForm = ({ navigation, append }: RecipeFormPart) => {
     </>
   );
 };
-
-export default CreateIngredient;

@@ -9,7 +9,7 @@ interface IRecipeDirections {
   directions: recipe_recipe_data_steps[];
 }
 
-const RecipeDirections = ({ directions }: IRecipeDirections) => {
+export const RecipeDirections = ({ directions }: IRecipeDirections) => {
   const navigation = useNavigation();
 
   return (
@@ -23,7 +23,7 @@ const RecipeDirections = ({ directions }: IRecipeDirections) => {
             onPress={() => navigation.navigate("RecipeDirectionExpanded", {
               direction: item,
             })}
-            header={() => (
+            header={item.image !== null ? () => (
               <Image
                 style={{
                   height: undefined,
@@ -34,7 +34,7 @@ const RecipeDirections = ({ directions }: IRecipeDirections) => {
                   uri: item.image,
                 }}
               />
-            )}
+            ) : undefined}
             footer={() => <Text numberOfLines={2} style={{ margin: 16 }}>{item.description}</Text>}
           >
             <Text category="h6">{item.title}</Text>
@@ -44,5 +44,3 @@ const RecipeDirections = ({ directions }: IRecipeDirections) => {
     </View>
 )
 }
-
-export default RecipeDirections;

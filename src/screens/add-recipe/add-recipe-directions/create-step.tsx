@@ -6,13 +6,14 @@ import {
   Rules,
 } from "@greeneggs/ui";
 import { RecipeStepInput } from "@greeneggs/types/graphql";
-import CreateRecipePartTemplate, {
+import {
+  CreateRecipePartTemplate,
   RecipeFormPart,
 } from "../create-recipe-part-template";
 import { useForm } from "react-hook-form";
-import addRecipeStyles from "../add-recipe-styles";
+import { AddRecipeStyles } from "../add-recipe-styles";
 
-const CreateStep = ({ navigation, route }: any) => (
+export const CreateStep = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate
     title="Create Step"
     navigation={navigation}
@@ -39,7 +40,7 @@ const CreateStepForm = ({ navigation, append }: RecipeFormPart) => {
           label: "TITLE",
           placeholder: "Chop the carrots",
           defaultValue: "",
-          style: addRecipeStyles.input,
+          style: AddRecipeStyles.input,
         }}
         type={InputType.TEXT}
       />
@@ -56,7 +57,7 @@ const CreateStepForm = ({ navigation, append }: RecipeFormPart) => {
           label: "DESCRIPTION",
           placeholder: "After washing the carrots, finely dice them...",
           defaultValue: "",
-          style: addRecipeStyles.input,
+          style: AddRecipeStyles.input,
         }}
         type={InputType.TEXTAREA}
       />
@@ -88,5 +89,3 @@ const CreateStepForm = ({ navigation, append }: RecipeFormPart) => {
     </>
   );
 };
-
-export default CreateStep;

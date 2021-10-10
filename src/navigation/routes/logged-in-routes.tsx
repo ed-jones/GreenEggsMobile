@@ -1,9 +1,9 @@
 import React from 'react';
-import Stack from '../stack';
+import { Stack } from '../stack';
 import * as Screens from "../../screens";
 import { Navigation } from "@greeneggs/navigation";
 
-const LoggedInRoutes = [
+export const LoggedInRoutes = [
   <Stack.Screen name="Home" component={Navigation} />,
   <Stack.Screen name="Recipe" component={Screens.Recipe} />,
   <Stack.Screen
@@ -88,5 +88,3 @@ const LoggedInRoutes = [
   <Stack.Screen name="FilterRecipeDiets" component={Screens.FilterRecipeDiets} />,
   <Stack.Screen name="FilterRecipeCookTime" component={Screens.FilterRecipeCookTime} />,
  ]
-
-export default LoggedInRoutes;

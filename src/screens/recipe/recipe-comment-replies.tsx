@@ -5,10 +5,10 @@ import { TopNavigation, ViewMore } from "@greeneggs/ui";
 import { comment } from "@greeneggs/types/graphql";
 import { Text } from "@ui-kitten/components";
 import { View, StyleSheet, ScrollView } from "react-native";
-import LoadingScreen from "../loading-screen";
-import RecipeAddComment from "./recipe-add-comment";
-import RecipeComment from "./recipe-comment";
-import RecipeCommentList from "./recipe-comment-list";
+import { LoadingScreen } from "../loading-screen";
+import { RecipeAddComment } from "./recipe-add-comment";
+import { RecipeComment } from "./recipe-comment";
+import { RecipeCommentList} from "./recipe-comment-list";
 
 const styles = StyleSheet.create({
   content: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function RecipeCommentReplies({ route }: any) {
+export function RecipeCommentReplies({ route }: any) {
   const { commentId, replying } = route.params;
   const [visibleCommentCount, setVisibleCommentCount] = useState<number>(3);
 

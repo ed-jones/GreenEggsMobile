@@ -6,14 +6,14 @@ import { useFieldArray } from "react-hook-form";
 import { Icons, AddListItem, Callout } from "@greeneggs/ui";
 
 import { RecipeForm } from "../add-recipe";
-import addRecipeStyles from '../add-recipe-styles';
+import { AddRecipeStyles } from '../add-recipe-styles';
 
 interface IAddRecipeDirections {
   form: RecipeForm;
   navigation: any;
 }
 
-const AddRecipeDirections = ({ form, navigation }: IAddRecipeDirections) => {
+export const AddRecipeDirections = ({ form, navigation }: IAddRecipeDirections) => {
   const { fields, remove, append } = useFieldArray({
     control: form.control,
     name: "steps",
@@ -31,11 +31,11 @@ const AddRecipeDirections = ({ form, navigation }: IAddRecipeDirections) => {
       <Callout
         type="info"
         message="Include steps that must be completed in order to follow this recipe."
-        style={addRecipeStyles.view}
+        style={AddRecipeStyles.view}
       />
       <Text
         category="h5"
-        style={{ ...addRecipeStyles.heading, ...addRecipeStyles.view }}
+        style={{ ...AddRecipeStyles.heading, ...AddRecipeStyles.view }}
       >
         Directions
       </Text>
@@ -72,5 +72,3 @@ const AddRecipeDirections = ({ form, navigation }: IAddRecipeDirections) => {
     </ScrollView>
   );
 };
-
-export default AddRecipeDirections;

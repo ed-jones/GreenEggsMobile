@@ -10,13 +10,13 @@ import {
 import { recipe, recipeVariables } from "@greeneggs/types/graphql";
 import ParallaxHeader from "@fabfit/react-native-parallax-header";
 import { LinearGradient } from "expo-linear-gradient";
-import RecipeDetailsCard from "./recipe-details-card";
-import RecipeAllergies from "./recipe-allergies";
-import RecipeIngredients from "./recipe-ingredients";
-import RecipeDirections from "./recipe-directions";
-import RecipeCommentList from "./recipe-comment-list";
-import LoadingScreen from "../loading-screen";
-import RecipeAddComment from "./recipe-add-comment";
+import { RecipeDetailsCard } from "./recipe-details-card";
+import { RecipeAllergies } from "./recipe-allergies";
+import { RecipeIngredients } from "./recipe-ingredients";
+import { RecipeDirections } from "./recipe-directions";
+import { RecipeCommentList } from "./recipe-comment-list";
+import { LoadingScreen } from "../loading-screen";
+import { RecipeAddComment } from "./recipe-add-comment";
 import { TopNavigation, Background, ViewMore } from "@greeneggs/ui";
 
 const styles = StyleSheet.create({
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Recipe = ({ route, navigation }: any) => {
+export const Recipe = ({ route, navigation }: any) => {
   const { recipeId } = route.params;
 
   const { loading, error, data } = useQuery<recipe, recipeVariables>(
@@ -145,5 +145,3 @@ const Recipe = ({ route, navigation }: any) => {
     </ParallaxHeader>
   );
 };
-
-export default Recipe;

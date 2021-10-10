@@ -23,7 +23,7 @@ interface ICreateRecipePartTemplate {
   formComponent: (props: RecipeFormPart) => React.ReactElement;
 }
 
-const CreateRecipePartTemplate = ({
+export const CreateRecipePartTemplate = ({
   title,
   navigation,
   route,
@@ -82,5 +82,3 @@ const CreateRecipePartTemplate = ({
     </Background>
   );
 };
-
-export default CreateRecipePartTemplate;

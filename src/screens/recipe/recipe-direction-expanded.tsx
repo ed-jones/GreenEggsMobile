@@ -5,7 +5,7 @@ import { ScrollView, Image } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { TopNavigation, Background } from "@greeneggs/ui";
 
-const RecipeDirections = ({ route }: any) => {
+export const RecipeDirectionExpanded = ({ route }: any) => {
   const { direction }: { direction: recipe_recipe_data_steps } = route.params;
   const insets = useSafeAreaInsets();
 
@@ -32,5 +32,3 @@ const RecipeDirections = ({ route }: any) => {
     </Background>
   );
 };
-
-export default RecipeDirections;

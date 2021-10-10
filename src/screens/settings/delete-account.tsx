@@ -9,13 +9,13 @@ import {
 import { useNavigation } from "@react-navigation/core";
 import { useMutation, useQuery } from "@apollo/client";
 import { Me } from "@greeneggs/types/graphql";
-import LoadingScreen from "../loading-screen";
-import useLoginForm from "../auth/use-login-form";
+import { LoadingScreen } from "../loading-screen";
+import { useLoginForm } from "../auth/use-login-form";
 import { AuthContext } from "@greeneggs/providers/auth-provider";
 import * as SecureStore from "expo-secure-store";
 import { TopNavigation, Background, Callout, Icons, ControlledInput, InputType } from "@greeneggs/ui";
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   view: {
     padding: 16,
   },
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
   },
 });
 
-export default function DeleteAccount() {
+export function DeleteAccount() {
   const navigation = useNavigation();
   const { loading, error, data } = useQuery<Me>(Queries.ME);
   const { formResult, handleSubmit, control, submitForm, register, setValue } =

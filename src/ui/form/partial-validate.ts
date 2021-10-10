@@ -7,7 +7,7 @@ interface IValidate<InputType> {
   onValid: () => void;
 }
 
-const partialValidate = <InputType>({form, validate, register, onValid }: IValidate<InputType>) => {
+export const partialValidate = <InputType>({form, validate, register, onValid }: IValidate<InputType>) => {
   form.trigger(validate).then((isValid) => {
       if (isValid) {
         form.register(register, {
@@ -18,5 +18,3 @@ const partialValidate = <InputType>({form, validate, register, onValid }: IValid
     }
   );
 }
-
-export default partialValidate;

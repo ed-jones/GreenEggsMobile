@@ -8,12 +8,13 @@ import {
 import { CategoryInput } from "@greeneggs/types/graphql";
 import { useForm } from "react-hook-form";
 
-import CreateRecipePartTemplate, {
+import {
+  CreateRecipePartTemplate,
   RecipeFormPart,
 } from "../create-recipe-part-template";
-import addRecipeStyles from "../add-recipe-styles";
+import { AddRecipeStyles } from "../add-recipe-styles";
 
-const CreateCategory = ({ navigation, route }: any) => (
+export const CreateCategory = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate
     title="Create Category"
     navigation={navigation}
@@ -40,7 +41,7 @@ const CreateCategoryForm = ({ append, navigation }: RecipeFormPart) => {
           label: "CATEGORY",
           placeholder: "Breakfast",
           defaultValue: "",
-          style: addRecipeStyles.input,
+          style: AddRecipeStyles.input,
         }}
         type={InputType.TEXT}
       />
@@ -59,5 +60,3 @@ const CreateCategoryForm = ({ append, navigation }: RecipeFormPart) => {
     </>
   );
 };
-
-export default CreateCategory;

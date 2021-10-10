@@ -1,4 +1,4 @@
-export * as Fragments from './fragments';
-export * as Mutations from './mutations';
-export * as Queries from './queries';
- 
+import * as Fragments from './fragments';
+import * as Mutations from './mutations';
+import * as Queries from './queries';
+export { Fragments, Mutations, Queries };

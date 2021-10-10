@@ -7,8 +7,8 @@ import { SignupInput } from "@greeneggs/types/graphql";
 import { AuthContext } from "@greeneggs/providers/auth-provider";
 import * as SecureStore from "expo-secure-store";
 
-import useSignupForm from "./use-sign-up-form";
-import AuthPageTemplate from "./auth-page-template";
+import { useSignupForm } from "./use-sign-up-form";
+import { AuthPageTemplate } from "./auth-page-template";
 
 const styles = StyleSheet.create({
   input: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Signup = ({ navigation }: any) => {
+export const Signup = ({ navigation }: any) => {
   const { formResult, handleSubmit, control, submitForm } = useSignupForm();
   const { setToken } = useContext(AuthContext);
 
@@ -118,5 +118,3 @@ const Signup = ({ navigation }: any) => {
     </AuthPageTemplate>
   );
 };
-
-export default Signup;

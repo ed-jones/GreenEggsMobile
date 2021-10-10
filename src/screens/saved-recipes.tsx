@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useQuery } from "@apollo/client";
 import { Queries } from "@greeneggs/graphql";
-import LoadingScreen from "./loading-screen";
+import { LoadingScreen } from "./loading-screen";
 import { Text } from "@ui-kitten/components";
 import {
   RecipeFilter,
@@ -19,7 +19,7 @@ const SavedRecipesHeader = () => (
   <TopNavigation title="Saved Recipes" accessoryLeft={undefined} />
 );
 
-const SavedRecipes: FC = () => {
+export const SavedRecipes: FC = () => {
   const navigation = useNavigation();
   const { data, loading, error } = useQuery<
     savedRecipes,
@@ -83,5 +83,3 @@ const SavedRecipes: FC = () => {
     </Background>
   );
 };
-
-export default SavedRecipes;

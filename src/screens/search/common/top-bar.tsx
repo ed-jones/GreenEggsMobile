@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const TopBar = withStyles(({ eva }: ThemedComponentProps) => {
+export const TopBar = withStyles(({ eva }: ThemedComponentProps) => {
   const navigation = useNavigation();
   const { searchState, setSearchState } = useContext(SearchContext);
   const setQuery = (query: string | undefined) =>
@@ -89,5 +89,3 @@ const TopBar = withStyles(({ eva }: ThemedComponentProps) => {
     </View>
   );
 });
-
-export default TopBar;

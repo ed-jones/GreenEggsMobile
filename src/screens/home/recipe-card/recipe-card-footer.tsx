@@ -1,9 +1,9 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Text } from "@ui-kitten/components";
-import { LabelledIcon } from "@greeneggs/core";
+import { LabelledIcon } from "@greeneggs/ui";
 import { recipes_recipes_data } from "@greeneggs/types/graphql";
-import { convertTimeEstimate } from "@greeneggs/core/convertTimeEstimate/convertTimeEstimate";
+import { convertTimeEstimate } from "@greeneggs/utils";
 
 const styles = StyleSheet.create({
   view: {
@@ -36,7 +36,7 @@ export interface IRecipeCardFooterProps extends Partial<recipes_recipes_data> {
   timeEstimate: string;
 }
 
-const RecipeCardFooter = ({
+export const RecipeCardFooter = ({
   title,
   subtitle,
   commentCount,
@@ -75,5 +75,3 @@ const RecipeCardFooter = ({
     </View>
   </View>
 );
-
-export default RecipeCardFooter;

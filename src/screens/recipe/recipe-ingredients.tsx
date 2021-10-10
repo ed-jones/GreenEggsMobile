@@ -11,7 +11,7 @@ interface IRecipeIngredients {
   ingredients: recipe_recipe_data_ingredients[];
 }
 
-const RecipeIngredients = ({ ingredients }: IRecipeIngredients) => {
+export const RecipeIngredients = ({ ingredients }: IRecipeIngredients) => {
   const navigation = useNavigation();
   return (
     <View style={{ marginHorizontal: -16 }}>
@@ -31,5 +31,3 @@ const RecipeIngredients = ({ ingredients }: IRecipeIngredients) => {
     </View>
   );
 };
-
-export default RecipeIngredients;

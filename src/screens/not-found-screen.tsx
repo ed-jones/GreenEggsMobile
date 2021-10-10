@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function NotFoundScreen() {
+export function NotFoundScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>This screen doesn&apos;t exist.</Text>

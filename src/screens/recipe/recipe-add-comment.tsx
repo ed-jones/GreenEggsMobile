@@ -13,9 +13,9 @@ import {
 import { Avatar, Button, Text } from "@ui-kitten/components";
 import { Input } from '@greeneggs/ui';
 import { useApolloClient, useQuery } from "@apollo/client";
-import LoadingScreen from "../loading-screen";
+import { LoadingScreen } from "../loading-screen";
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   view: {
     padding: 16,
   },
@@ -42,7 +42,7 @@ interface RecipeAddCommentProps {
   active?: boolean;
 }
 
-export default function RecipeAddComment({
+export function RecipeAddComment({
   recipeId,
   commentId,
   isReply,

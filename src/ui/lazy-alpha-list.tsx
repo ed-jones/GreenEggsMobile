@@ -6,7 +6,7 @@ import {
   useLazyList,
   useListRefresh,
 } from "./lazy-list";
-import LoadingScreen from "../screens/loading-screen";
+import { LoadingScreen } from "../screens/loading-screen";
 import { AlphaList, buildAlphaListItems, CategoriseItem } from "./alpha-list";
 import { View } from "react-native";
 import { Background, Callout } from '@greeneggs/ui';

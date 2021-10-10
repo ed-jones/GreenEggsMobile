@@ -1,11 +1,7 @@
 import React from "react";
 import "react-native-gesture-handler";
-import CachedResourcesProvider from "@greeneggs/providers/cached-resources-provider";
-import GraphQLProvider from "@greeneggs/providers/GraphQLProvider";
-import EvaProvider from "@greeneggs/providers/eva-provider";
-import Router from "@greeneggs/navigation/routes/Router";
-import AuthProvider from "@greeneggs/providers/auth-provider";
-import SearchStateProvider from "@greeneggs/providers/search-state-provider";
+import { CachedResourcesProvider, GraphQLProvider, EvaProvider, AuthProvider, SearchStateProvider } from "@greeneggs/providers";
+import { Router } from "@greeneggs/navigation";
 
 export default function App() {
   return (

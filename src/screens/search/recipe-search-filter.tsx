@@ -42,7 +42,7 @@ interface FilterListItemProps {
   count: number;
 }
 
-const RecipeSearchFilter: FC = () => {
+export const RecipeSearchFilter: FC = () => {
   const navigation = useNavigation();
   const { searchState, setSearchState } = useContext(SearchContext);
 
@@ -112,5 +112,3 @@ const RecipeSearchFilter: FC = () => {
     </Background>
   );
 };
-
-export default RecipeSearchFilter;

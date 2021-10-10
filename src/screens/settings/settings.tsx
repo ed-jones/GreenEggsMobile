@@ -29,10 +29,6 @@ interface ListItemProps {
   key: Key;
 }
 
-interface ISettingListItem {
-  item: ListItemProps;
-}
-
 const SettingsListItem = ({
   onPress,
   title,
@@ -69,7 +65,8 @@ const SettingsListItem = ({
     <Divider />
   </>
 );
-const Settings = withStyles(
+
+export const Settings = withStyles(
   ({
     navigation,
     eva,
@@ -216,5 +213,3 @@ const Settings = withStyles(
     );
   }
 );
-
-export default Settings;

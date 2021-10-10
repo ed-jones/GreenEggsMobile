@@ -16,7 +16,7 @@ import { SearchContext } from "@greeneggs/providers/search-state-provider";
 
 import { AddToFilter } from "../common";
 
-const FilterIngredientsExcluded: FC = () => {
+export const FilterIngredientsExcluded: FC = () => {
   const navigation = useNavigation();
   const [query, setQuery] = useState("");
   const { searchState, setSearchState } = useContext(SearchContext);
@@ -90,5 +90,3 @@ const FilterIngredientsExcluded: FC = () => {
     </Background>
   );
 };
-
-export default FilterIngredientsExcluded;

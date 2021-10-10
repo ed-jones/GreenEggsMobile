@@ -9,22 +9,22 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Icons, IForm, Background } from "@greeneggs/ui";
 
-import useRecipeForm from "./use-recipe-form";
-import AddRecipeIngredients from "./add-recipe-ingredients/add-recipe-ingredients";
-import AddRecipeDirections from "./add-recipe-directions/add-recipe-directions";
-import AddRecipeCategories from "./add-recipe-categories/add-recipe-categories";
-import AddRecipeDetails from "./add-recipe-details";
-import Stepper from "./stepper";
+import { useRecipeForm } from "./use-recipe-form";
+import { AddRecipeIngredients } from "./add-recipe-ingredients";
+import { AddRecipeDirections } from "./add-recipe-directions";
+import { AddRecipeCategories } from "./add-recipe-categories";
+import { AddRecipeDetails } from "./add-recipe-details";
+import { Stepper } from "./stepper";
 import { useSteps, Step } from "./use-steps";
-import PublishRecipe from "./publish-recipe";
+import { PublishRecipe } from "./publish-recipe";
 
-import AddRecipeAllergies from "./add-recipe-allergies/add-recipe-allergies";
-import AddRecipeDiets from "./add-recipe-diets/add-recipe-diets";
-import addRecipeStyles from "./add-recipe-styles";
+import { AddRecipeAllergies } from "./add-recipe-allergies";
+import { AddRecipeDiets } from "./add-recipe-diets";
+import { AddRecipeStyles } from "./add-recipe-styles";
 
 export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>;
 
-export default withStyles(function AddRecipe({ navigation, eva }: any) {
+export const AddRecipe = withStyles(function AddRecipe({ navigation, eva }: any) {
   const form = useRecipeForm();
   const Steps: Step[] = [
     {
@@ -92,7 +92,7 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
 
   return (
     <Background>
-      <View style={{ ...addRecipeStyles.view, marginTop: insets.top }}>
+      <View style={{ ...AddRecipeStyles.view, marginTop: insets.top }}>
         <Stepper
           index={steps.index}
           length={steps.length}
@@ -101,8 +101,8 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
         />
       </View>
       {steps.currentStep.component}
-      <View style={addRecipeStyles.view}>
-        <View style={addRecipeStyles.buttonGroup}>
+      <View style={AddRecipeStyles.view}>
+        <View style={AddRecipeStyles.buttonGroup}>
           {steps.isEnd ? (
             <Button
               onPress={() => {

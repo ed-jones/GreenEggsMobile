@@ -13,7 +13,7 @@ import {
 import { useNavigation } from "@react-navigation/core";
 import { TopNavigation, Background, Icons, ControlledInput, InputType, useForm } from "@greeneggs/ui";
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   view: {
     padding: 16,
   },
@@ -35,7 +35,7 @@ const useEditProfile = () =>
     "profileDetails"
   );
 
-export default function EditProfile() {
+export function EditProfilePicture() {
   const form = useEditProfile();
   const navigation = useNavigation();
 

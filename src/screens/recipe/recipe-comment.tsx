@@ -22,7 +22,7 @@ import { useNavigation } from "@react-navigation/core";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useMutation, useQuery } from "@apollo/client";
 
-import LoadingScreen from "../loading-screen";
+import { LoadingScreen } from "../loading-screen";
 
 const styles = StyleSheet.create({
   avatar: {
@@ -35,7 +35,7 @@ interface RecipeCommentProps {
   replyButton?: boolean;
 }
 
-export default function RecipeComment({
+export function RecipeComment({
   comment,
   replyButton,
 }: RecipeCommentProps) {

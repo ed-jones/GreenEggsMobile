@@ -96,7 +96,7 @@ const BottomNavigationIcon = withStyles(
   }
 );
 
-const BottomTabBar = withStyles(
+export const BottomTabBar = withStyles(
   ({
     navigation,
     state,
@@ -193,5 +193,3 @@ const BottomTabBar = withStyles(
     );
   }
 );
-
-export default BottomTabBar;

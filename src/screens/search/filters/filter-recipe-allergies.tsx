@@ -7,7 +7,7 @@ import { SearchContext } from '@greeneggs/providers/search-state-provider';
 import { Input, TopNavigation, Background, Icons, SelectableListItem, AlphabetType, LazyListAlpha } from '@greeneggs/ui';
 import { AddToFilter } from '../common';
 
-const FilterRecipeAllergies: FC = () => {
+export const FilterRecipeAllergies: FC = () => {
   const navigation = useNavigation();
   const [query, setQuery] = useState("");
   const { searchState, setSearchState } = useContext(SearchContext);
@@ -79,5 +79,3 @@ const FilterRecipeAllergies: FC = () => {
     </Background>
   );
 }
-
-export default FilterRecipeAllergies;

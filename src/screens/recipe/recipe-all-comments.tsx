@@ -1,5 +1,5 @@
 import React from "react";
-import RecipeCommentList from "./recipe-comment-list";
+import { RecipeCommentList } from "./recipe-comment-list";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { TopNavigation } from "@greeneggs/ui";
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function RecipeAllComments({ route }: any) {
+export function RecipeAllComments({ route }: any) {
   const { comments, commentCount, isReply } = route.params;
 
   return (

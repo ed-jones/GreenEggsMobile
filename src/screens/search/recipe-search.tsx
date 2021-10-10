@@ -31,7 +31,7 @@ import {
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 
-const RecipeSearch: FC = () => {
+export const RecipeSearch: FC = () => {
   const navigation = useNavigation();
   const { searchState } = useContext<ISearchContext>(SearchContext);
   return (
@@ -93,7 +93,7 @@ const UserSearch: FC = () => {
   );
 };
 
-const SearchTabBar = ({ navigation, state }: MaterialTopTabBarProps) => (
+export const SearchTabBar = ({ navigation, state }: MaterialTopTabBarProps) => (
   <TabBar
     selectedIndex={state.index}
     onSelect={(index) => navigation.navigate(state.routeNames[index])}
@@ -103,7 +103,7 @@ const SearchTabBar = ({ navigation, state }: MaterialTopTabBarProps) => (
   </TabBar>
 );
 
-const SearchTabs: FC = () => {
+export const SearchTabs: FC = () => {
   const { searchState, setSearchState } =
     useContext<ISearchContext>(SearchContext);
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(
@@ -150,5 +150,3 @@ const SearchTabs: FC = () => {
     </Navigator>
   );
 };
-
-export default SearchTabs;

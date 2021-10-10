@@ -5,7 +5,7 @@ import {
   recipe_recipe_data_comments,
   recipe_recipe_data_comments_replies,
 } from "@greeneggs/types/graphql";
-import RecipeComment from "./recipe-comment";
+import { RecipeComment } from "./recipe-comment";
 
 interface RecipeCommentListProps {
   comments:
@@ -13,7 +13,7 @@ interface RecipeCommentListProps {
     | recipe_recipe_data_comments_replies[];
 }
 
-const RecipeCommentList = ({ comments }: RecipeCommentListProps) => {
+export const RecipeCommentList = ({ comments }: RecipeCommentListProps) => {
   return (
     <View style={{ marginHorizontal: -16 }}>
       {comments.map((comment, index) => (
@@ -23,5 +23,3 @@ const RecipeCommentList = ({ comments }: RecipeCommentListProps) => {
     </View>
   );
 };
-
-export default RecipeCommentList;

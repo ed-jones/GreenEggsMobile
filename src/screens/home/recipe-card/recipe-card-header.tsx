@@ -1,8 +1,8 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { Avatar, Icon, Text } from "@ui-kitten/components";
+import { Avatar, Text } from "@ui-kitten/components";
 import { recipes_recipes_data_submittedBy } from "@greeneggs/types/graphql";
-import { noavatar } from "@greeneggs/core";
+import { noAvatar } from "@greeneggs/assets";
 
 const styles = StyleSheet.create({
   view: {
@@ -38,7 +38,7 @@ export interface IRecipeCardHeaderProps
   lastName: string;
 }
 
-const RecipeCardHeader = ({
+export const RecipeCardHeader = ({
   avatarURI,
   firstName,
   lastName,
@@ -47,12 +47,10 @@ const RecipeCardHeader = ({
     <View style={styles.leftElements}>
       <Avatar
         size="small"
-        source={avatarURI ? { uri: avatarURI } : noavatar}
+        source={avatarURI ? { uri: avatarURI } : noAvatar}
         style={styles.avatar}
       />
       <Text style={styles.username}>{`${firstName} ${lastName}`}</Text>
     </View>
   </View>
 );
-
-export default RecipeCardHeader;

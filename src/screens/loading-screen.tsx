@@ -1,6 +1,6 @@
 import React from 'react';
 import { Spinner } from '@ui-kitten/components';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Background } from '@greeneggs/ui';
 
 const styles = StyleSheet.create({
@@ -10,10 +10,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const LoadingScreen = () => (
+export const LoadingScreen = () => (
   <Background style={styles.container}>
     <Spinner />
   </Background>
 );
-
-export default LoadingScreen;

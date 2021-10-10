@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const RecipeDescription = (
+export const RecipeDescription = (
   { route }: any
 ) => {
   const { description, createdAt, title, submittedBy } = route.params;
@@ -36,5 +36,3 @@ const RecipeDescription = (
     </Background>
   )
 };
-
-export default RecipeDescription;

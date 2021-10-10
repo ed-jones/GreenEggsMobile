@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Welcome = ({ navigation }: any & ThemedComponentProps) => (
+export const Welcome = ({ navigation }: any & ThemedComponentProps) => (
   <Background
     style={{
       ...styles.view,
@@ -91,5 +91,3 @@ const Welcome = ({ navigation }: any & ThemedComponentProps) => (
     </View>
   </Background>
 );
-
-export default Welcome;

@@ -17,8 +17,7 @@ import {
   Spinner,
 } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/core";
-import { TopNavigation } from "@greeneggs/ui";
-import Background from "@greeneggs/core/background";
+import { TopNavigation, Background } from "@greeneggs/ui";
 
 export const styles = StyleSheet.create({
   view: {

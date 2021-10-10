@@ -5,7 +5,6 @@ import {
   Layout,
 } from "@ui-kitten/components";
 import { View } from "react-native";
-import Background from "./background";
 
 interface SimpleButtonProps {
   title: string;

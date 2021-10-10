@@ -3,8 +3,7 @@ import { recipe_recipe_data_ingredients } from "@greeneggs/types/graphql";
 import { View, StyleSheet } from "react-native";
 import { Divider, List } from "@ui-kitten/components";
 import IngredientListItem from "@greeneggs/core/ingredient-list-item/IngredientListItem";
-import { TopNavigation } from "@greeneggs/ui";
-import Background from "@greeneggs/core/background";
+import { TopNavigation, Background } from "@greeneggs/ui";
 
 const styles = StyleSheet.create({
   content: {

@@ -1,7 +1,7 @@
 import React, { FC, useContext, useState } from 'react';
 import { Icons, Queries } from '@greeneggs/core';
 import { Divider } from '@ui-kitten/components';
-import { Input, TopNavigation } from '@greeneggs/ui';
+import { Input, TopNavigation, Background } from '@greeneggs/ui';
 import { useNavigation } from '@react-navigation/core';
 import { Diets, DietsVariables, Diets_diets_data, RecipeFilter, Sort } from '@greeneggs/types/graphql';
 import LazyListAlpha from '@greeneggs/core/lazy-alpha-list';
@@ -9,7 +9,6 @@ import { AlphabetType } from '@greeneggs/core/alpha-list';
 import AddToFilter from '../common/add-to-filter';
 import SelectableListItem from '@greeneggs/core/selectable-list-item';
 import { SearchContext } from '@greeneggs/providers/SearchStateProvider';
-import Background from '@greeneggs/core/background';
 
 const FilterRecipeDiets: FC = () => {
   const navigation = useNavigation();

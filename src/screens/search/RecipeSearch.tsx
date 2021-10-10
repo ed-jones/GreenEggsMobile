@@ -25,13 +25,12 @@ import {
   Tab,
   TabBar,
 } from "@ui-kitten/components";
-import { Select } from "@greeneggs/ui/select";
+import { Select, Background } from "@greeneggs/ui";
 import {
   createMaterialTopTabNavigator,
   MaterialTopTabBarProps,
 } from "@react-navigation/material-top-tabs";
 import UserListItem from "@greeneggs/core/user-list-item";
-import Background from "@greeneggs/core/background";
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 

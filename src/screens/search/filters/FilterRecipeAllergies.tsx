@@ -8,7 +8,7 @@ import { AlphabetType } from '@greeneggs/core/alpha-list';
 import AddToFilter from '../common/add-to-filter';
 import { SearchContext } from '@greeneggs/providers/SearchStateProvider';
 import SelectableListItem from '@greeneggs/core/selectable-list-item';
-import Background from '@greeneggs/core/background';
+import { Background } from '@greeneggs/ui';
 import { Input, TopNavigation } from '@greeneggs/ui';
 
 const FilterRecipeAllergies: FC = () => {

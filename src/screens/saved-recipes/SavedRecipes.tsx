@@ -15,8 +15,7 @@ import {
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import LazyList from "@greeneggs/core/lazy-list";
-import { TopNavigation } from "@greeneggs/ui";
-import Background from "@greeneggs/core/background";
+import { TopNavigation, Background } from "@greeneggs/ui";
 
 const SavedRecipesHeader = () => (
   <TopNavigation title="Saved Recipes" accessoryLeft={undefined} />

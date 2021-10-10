@@ -20,8 +20,7 @@ import LoadingScreen from "../loading/LoadingScreen";
 import useLoginForm from "../auth/useLoginForm";
 import { AuthContext } from "@greeneggs/providers/AuthProvider";
 import * as SecureStore from "expo-secure-store";
-import { TopNavigation } from "@greeneggs/ui";
-import Background from "@greeneggs/core/background";
+import { TopNavigation, Background } from "@greeneggs/ui";
 
 export const styles = StyleSheet.create({
   view: {

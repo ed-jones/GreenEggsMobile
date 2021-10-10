@@ -14,13 +14,10 @@ import {
 } from "@greeneggs/types/graphql";
 import {
   Button,
-  Text,
   Spinner,
 } from "@ui-kitten/components";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/core";
-import { TopNavigation } from "@greeneggs/ui";
-import Background from "@greeneggs/core/background";
+import { TopNavigation, Background } from "@greeneggs/ui";
 
 export const styles = StyleSheet.create({
   view: {
@@ -46,7 +43,6 @@ const useEditProfile = () =>
 
 export default function EditProfile() {
   const form = useEditProfile();
-  const insets = useSafeAreaInsets();
   const navigation = useNavigation();
 
   function onSubmit() {

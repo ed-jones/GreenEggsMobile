@@ -14,7 +14,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import { TopNavigation } from "@greeneggs/ui";
-import Background from "@greeneggs/core/background";
+import { Background } from "@greeneggs/ui";
 
 import Logo from "../../assets/images/icon.png";
 import Banner from "../../assets/images/banner.jpg";

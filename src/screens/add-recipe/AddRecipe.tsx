@@ -21,7 +21,7 @@ import PublishRecipe from "./PublishRecipe";
 import AddRecipeAllergies from "./add-recipe-allergies/AddRecipeAllergies";
 import AddRecipeDiets from "./add-recipe-diets/AddRecipeDiets";
 import addRecipeStyles from "./add-recipe-styles";
-import Background from "@greeneggs/core/background";
+import { Background } from "@greeneggs/ui";
 
 export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>;
 

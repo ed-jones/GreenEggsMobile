@@ -12,7 +12,7 @@ import { Queries } from "@greeneggs/core";
 import RecipeCard from "../recipe-card/RecipeCard";
 import LazyList from "@greeneggs/core/lazy-list";
 import { useNavigation } from "@react-navigation/core";
-import Background from "@greeneggs/core/background";
+import { Background } from "@greeneggs/ui";
 
 const CardVerticalMargin = 20;
 const CardHorizontalMargin = 24;

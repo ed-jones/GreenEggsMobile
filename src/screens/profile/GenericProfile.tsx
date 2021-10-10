@@ -7,7 +7,7 @@ import {
   TopNavigationAction,
   Avatar,
 } from "@ui-kitten/components";
-import { Input } from '@greeneggs/ui';
+import { Input, Background } from '@greeneggs/ui';
 import { useMutation, useQuery } from "@apollo/client";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Alert, Icons, Queries, noavatar, Mutations } from "@greeneggs/core";
@@ -23,9 +23,7 @@ import {
 import LoadingScreen from "../loading/LoadingScreen";
 import RecipeCardSmall from "@greeneggs/core/recipe-card-small";
 import { useNavigation } from "@react-navigation/core";
-import { FlatList } from "react-native-gesture-handler";
 import LazyList from "@greeneggs/core/lazy-list";
-import Background from "@greeneggs/core/background";
 
 const styles = StyleSheet.create({
   avatarContainer: {

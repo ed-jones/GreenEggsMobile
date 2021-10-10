@@ -18,8 +18,7 @@ import RecipeCommentList from "./RecipeCommentList";
 import LoadingScreen from "../loading/LoadingScreen";
 import RecipeAddComment from "./RecipeAddComment";
 import ViewMore from "@greeneggs/core/view-more/ViewMore";
-import { TopNavigation } from "@greeneggs/ui";
-import Background from "@greeneggs/core/background";
+import { TopNavigation, Background } from "@greeneggs/ui";
 
 const styles = StyleSheet.create({
   coverPhoto: {

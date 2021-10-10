@@ -10,7 +10,7 @@ import Alert from "./alert/Alert";
 import LoadingScreen from "../screens/loading/LoadingScreen";
 import AlphaList, { buildAlphaListItems, CategoriseItem } from "./alpha-list";
 import { View } from "react-native";
-import Background from "./background";
+import { Background } from '@greeneggs/ui';
 
 interface LazyListAlphaProps<TData, TVariables, TDataType>
   extends Omit<LazyListProps<TData, TVariables, TDataType>, "renderItem"> {

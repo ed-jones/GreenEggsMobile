@@ -10,8 +10,7 @@ import FilterControlGroup from "@greeneggs/core/filter-control-group";
 import { SearchContext, SearchState } from "@greeneggs/providers/SearchStateProvider";
 import CountCircle from "./common/count-circle";
 import { View } from "react-native";
-import { TopNavigation } from "@greeneggs/ui";
-import Background from "@greeneggs/core/background";
+import { TopNavigation, Background } from "@greeneggs/ui";
 
 export function countActiveFilters(searchState: SearchState) {
   let activeFilterCount = 0;

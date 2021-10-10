@@ -5,7 +5,7 @@ import Logo from "../../assets/images/icon.png";
 import Banner from "../../assets/images/banner.jpg";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
-import Background from "@greeneggs/core/background";
+import { Background } from '@greeneggs/ui';
 
 const styles = StyleSheet.create({
   logo: {

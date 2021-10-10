@@ -3,7 +3,7 @@ import { Icons, Queries } from "@greeneggs/core";
 import {
   Divider,
 } from "@ui-kitten/components";
-import { Input, TopNavigation } from '@greeneggs/ui';
+import { Input, TopNavigation, Background } from '@greeneggs/ui';
 import { useNavigation } from "@react-navigation/core";
 import {
   Ingredients,
@@ -18,7 +18,6 @@ import SelectableListItem from "@greeneggs/core/selectable-list-item";
 import { SearchContext } from "@greeneggs/providers/SearchStateProvider";
 
 import AddToFilter from "../common/add-to-filter";
-import Background from "@greeneggs/core/background";
 
 const FilterIngredientsExcluded: FC = () => {
   const navigation = useNavigation();

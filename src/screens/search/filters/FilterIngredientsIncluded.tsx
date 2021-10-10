@@ -18,7 +18,7 @@ import AddToFilter from "../common/add-to-filter";
 import SelectableListItem from "@greeneggs/core/selectable-list-item";
 import { SearchContext } from "@greeneggs/providers/SearchStateProvider";
 import { TopNavigation } from "@greeneggs/ui";
-import Background from "@greeneggs/core/background";
+import { Background} from "@greeneggs/ui";
 
 const FilterIngredientsIncluded: FC = () => {
   const navigation = useNavigation();

@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Card, Text } from '@ui-kitten/components';
-import { TopNavigation } from '@greeneggs/ui';
-import Background from '@greeneggs/core/background';
+import { TopNavigation, Background } from '@greeneggs/ui';
 
 const styles = StyleSheet.create({
   cardElement: {

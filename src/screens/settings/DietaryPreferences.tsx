@@ -6,10 +6,11 @@ import {
   ListItem,
   Spinner,
   Text,
+  SelectItem,
 } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
 import { Alert, Icons, Mutations, Queries } from "@greeneggs/core";
-import { SelectItem } from "@ui-kitten/components";
+import {  } from "@ui-kitten/components";
 import { useMutation, useQuery } from "@apollo/client";
 import {
   Diets,
@@ -22,8 +23,7 @@ import {
 } from "@greeneggs/types/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
-import { TopNavigation, Select } from "@greeneggs/ui";
-import Background from "@greeneggs/core/background";
+import { TopNavigation, Select, Background } from "@greeneggs/ui";
 
 export const styles = StyleSheet.create({
   view: {

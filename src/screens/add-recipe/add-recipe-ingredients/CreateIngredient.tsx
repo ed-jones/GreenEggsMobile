@@ -8,7 +8,7 @@ import CreateRecipePartTemplate, {
 import { useForm } from "react-hook-form";
 import { View } from "react-native";
 import addRecipeStyles from "../add-recipe-styles";
-import Background from "@greeneggs/core/background";
+import { Background } from '@greeneggs/ui';
 
 const CreateIngredient = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate

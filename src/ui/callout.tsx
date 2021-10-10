@@ -17,7 +17,7 @@ interface IAlert {
   style?: StyleProp<ViewStyle>;
 }
 
-const Alert = withStyles(
+export const Callout = withStyles(
   ({ type, message, eva, style }: IAlert & ThemedComponentProps) => {
     const IconNameFromAlertType: Record<AlertType, IconProps> = {
       danger: {
@@ -61,5 +61,3 @@ const Alert = withStyles(
     );
   }
 );
-
-export default Alert;

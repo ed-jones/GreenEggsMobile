@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import {
-  Alert,
   ControlledInput,
   Icons,
   InputType,
@@ -20,7 +19,7 @@ import LoadingScreen from "../loading/LoadingScreen";
 import useLoginForm from "../auth/useLoginForm";
 import { AuthContext } from "@greeneggs/providers/AuthProvider";
 import * as SecureStore from "expo-secure-store";
-import { TopNavigation, Background } from "@greeneggs/ui";
+import { TopNavigation, Background, Callout } from "@greeneggs/ui";
 
 export const styles = StyleSheet.create({
   view: {
@@ -94,7 +93,7 @@ export default function DeleteAccount() {
     <Background>
       <TopNavigation title="Delete Account" />
       <ScrollView style={styles.view}>
-        <Alert
+        <Callout
           message={
             <Text>
               If you delete your account you will lose all

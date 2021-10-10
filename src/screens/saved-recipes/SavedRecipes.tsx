@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import RecipeCardSmall from "@greeneggs/core/recipe-card-small";
 import { useQuery } from "@apollo/client";
-import { Queries, Alert } from "@greeneggs/core";
+import { Queries } from "@greeneggs/core";
 import LoadingScreen from "../loading/LoadingScreen";
 import { Text } from "@ui-kitten/components";
 import {
@@ -15,7 +15,7 @@ import {
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import LazyList from "@greeneggs/core/lazy-list";
-import { TopNavigation, Background } from "@greeneggs/ui";
+import { TopNavigation, Background, Callout } from "@greeneggs/ui";
 
 const SavedRecipesHeader = () => (
   <TopNavigation title="Saved Recipes" accessoryLeft={undefined} />
@@ -46,7 +46,7 @@ const SavedRecipes: FC = () => {
     return (
       <>
         <SavedRecipesHeader />
-        <Alert
+        <Callout
           style={{ padding: 16 }}
           message="You haven't saved any recipes yet! Save some recipes and they will appear here."
           type="info"

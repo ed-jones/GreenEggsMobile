@@ -6,7 +6,6 @@ import {
 } from "@ui-kitten/components";
 import { ScrollView, StyleSheet } from "react-native";
 import {
-  Alert,
   ControlledInput,
   Icons,
   InputType,
@@ -27,7 +26,7 @@ import { useQuery } from "@apollo/client";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
 
 import LoadingScreen from "../loading/LoadingScreen";
-import { TopNavigation, Background } from "@greeneggs/ui";
+import { TopNavigation, Background, Callout } from "@greeneggs/ui";
 
 export const styles = StyleSheet.create({
   view: {
@@ -92,7 +91,7 @@ const ProfileVisibility = () => {
     <Background>
       <TopNavigation title="Profile Visibility"/>
       <ScrollView style={styles.view}>
-        <Alert
+        <Callout
           message={
             <Text>
               Here you can control which users are able to follow you.{"\n\n"}

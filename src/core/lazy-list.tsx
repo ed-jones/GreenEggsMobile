@@ -1,7 +1,7 @@
 import { ApolloQueryResult, DocumentNode, useQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native";
-import Alert from "./alert/Alert";
+import { Callout } from "@greeneggs/ui";
 import LoadingScreen from "../screens/loading/LoadingScreen";
 import { ListRenderItem } from "react-native";
 
@@ -130,12 +130,12 @@ const LazyList = <
   }
 
   if (error) {
-    return <Alert message="There was an error" type="danger" />;
+    return <Callout message="There was an error" type="danger" />;
   }
 
   if (data === null || data === undefined) {
     return (
-      <Alert
+      <Callout
         style={{ marginHorizontal: 16 }}
         message={emptyMessage}
         type="info"
@@ -145,7 +145,7 @@ const LazyList = <
 
   if (data.length === 0) {
     return (
-      <Alert
+      <Callout
         style={{ marginHorizontal: 16 }}
         message={errorMessage}
         type="info"

@@ -8,9 +8,9 @@ import {
   Spinner,
   Text,
 } from "@ui-kitten/components";
-import { Select, TopNavigation, Background } from "@greeneggs/ui";
+import { Select, TopNavigation, Background, Callout } from "@greeneggs/ui";
 import { StyleSheet, View } from "react-native";
-import { Alert, Icons, Mutations, Queries } from "@greeneggs/core";
+import { Icons, Mutations, Queries } from "@greeneggs/core";
 import { useMutation, useQuery } from "@apollo/client";
 import {
   Allergies,
@@ -142,7 +142,7 @@ const AllergyPreferences = () => {
       <TopNavigation title="Allergy Preferences" />
       <View>
         <View style={styles.view}>
-          <Alert
+          <Callout
             message="Here you can tell us if you have any allergies so that we can better show you recipes relevant to you."
             type="info"
           />

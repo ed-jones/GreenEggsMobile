@@ -9,7 +9,7 @@ import {
   SelectItem,
 } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
-import { Alert, Icons, Mutations, Queries } from "@greeneggs/core";
+import { Icons, Mutations, Queries } from "@greeneggs/core";
 import {  } from "@ui-kitten/components";
 import { useMutation, useQuery } from "@apollo/client";
 import {
@@ -23,7 +23,7 @@ import {
 } from "@greeneggs/types/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
-import { TopNavigation, Select, Background } from "@greeneggs/ui";
+import { TopNavigation, Select, Background, Callout } from "@greeneggs/ui";
 
 export const styles = StyleSheet.create({
   view: {
@@ -142,7 +142,7 @@ const DietaryPreferences = () => {
       <TopNavigation title="Dietary Preferences" />
       <View>
         <View style={styles.view}>
-          <Alert
+          <Callout
             message="Here you can tell us your dietary preferences so that we can better show you recipes relevant to you."
             type="info"
           />

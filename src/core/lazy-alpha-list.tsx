@@ -6,11 +6,10 @@ import {
   useLazyList,
   useListRefresh,
 } from "./lazy-list";
-import Alert from "./alert/Alert";
 import LoadingScreen from "../screens/loading/LoadingScreen";
 import AlphaList, { buildAlphaListItems, CategoriseItem } from "./alpha-list";
 import { View } from "react-native";
-import { Background } from '@greeneggs/ui';
+import { Background, Callout } from '@greeneggs/ui';
 
 interface LazyListAlphaProps<TData, TVariables, TDataType>
   extends Omit<LazyListProps<TData, TVariables, TDataType>, "renderItem"> {
@@ -50,7 +49,7 @@ const LazyListAlpha = <
   if (error) {
     return (
       <Background>
-        <Alert message="There was an error" type="danger" />
+        <Callout message="There was an error" type="danger" />
       </Background>
     );
   }
@@ -58,7 +57,7 @@ const LazyListAlpha = <
   if (data === null || data === undefined || data.length === 0) {
     return (
       <View style={{flex: 1}}>
-        <Alert
+        <Callout
           style={{ marginHorizontal: 16 }}
           message={emptyMessage}
           type="info"

@@ -18,6 +18,7 @@ import {
 } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/core";
 import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import Background from "@greeneggs/core/background";
 
 export const styles = StyleSheet.create({
   view: {
@@ -52,7 +53,7 @@ export default function ChangePassword() {
   }
 
   return (
-    <>
+    <Background>
       <TopNavigationGeneric title="Change Password" />
       <ScrollView style={styles.view}>
         <ControlledInput
@@ -108,6 +109,6 @@ export default function ChangePassword() {
           SAVE CHANGES
         </Button>
       </ScrollView>
-    </>
+    </Background>
   );
 }

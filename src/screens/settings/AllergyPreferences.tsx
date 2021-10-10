@@ -24,6 +24,7 @@ import {
 import LoadingScreen from "../loading/LoadingScreen";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
 import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import Background from "@greeneggs/core/background";
 
 export const styles = StyleSheet.create({
   view: {
@@ -139,7 +140,7 @@ const AllergyPreferences = () => {
     }
   }
   return (
-    <>
+    <Background>
       <TopNavigationGeneric title="Allergy Preferences" />
       <View>
         <View style={styles.view}>
@@ -188,7 +189,7 @@ const AllergyPreferences = () => {
           )}
         />
       </View>
-    </>
+    </Background>
   );
 };
 

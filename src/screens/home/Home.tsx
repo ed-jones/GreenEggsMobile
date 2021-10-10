@@ -6,20 +6,21 @@ import { SearchContext } from '@greeneggs/providers/SearchStateProvider';
 
 import HomeTabs from './home-tabs/HomeTabs';
 import RecipeSearch from '../search/RecipeSearch';
+import Background from '@greeneggs/core/background';
 
 const Home = () => { 
   const insets = useSafeAreaInsets();
   const {searchState} = useContext(SearchContext)
 
   return (
-    <>
+    <Background>
       <View style={{ paddingTop: insets.top }}>
         <TopBar />
       </View>
       { searchState.query === undefined ? (
         <HomeTabs/>
       ): <RecipeSearch />}
-    </>
+    </Background>
   )
 };
 

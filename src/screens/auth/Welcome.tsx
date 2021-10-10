@@ -5,6 +5,7 @@ import Logo from "../../assets/images/icon.png";
 import Banner from "../../assets/images/banner.jpg";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
+import Background from "@greeneggs/core/background";
 
 const styles = StyleSheet.create({
   logo: {
@@ -50,11 +51,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const Welcome = ({ navigation, eva }: any & ThemedComponentProps) => (
-  <View
+const Welcome = ({ navigation }: any & ThemedComponentProps) => (
+  <Background
     style={{
       ...styles.view,
-      backgroundColor: eva?.theme && eva.theme["color-basic-200"],
     }}
   >
     <StatusBar style="light" />
@@ -82,28 +82,14 @@ const Welcome = ({ navigation, eva }: any & ThemedComponentProps) => (
         </Button>
         <Button
           style={styles.button}
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.navigate("Login")}
           status="basic"
         >
-          CONTINUE AS GUEST
+          LOGIN
         </Button>
       </View>
-      <Text style={styles.centerText}>
-        Already have an account?&nbsp;
-        <Text
-          style={styles.boldText}
-          onPress={() => navigation.navigate("Login")}
-        >
-          Login
-        </Text>
-      </Text>
     </View>
-    {/* <Text>OR CONTINUE WITH</Text>
-    <Button>GOOGLE</Button>
-    <Button>FACEBOOK</Button>
-    <Button>TWITTER</Button>
-    <Text>Don&apos;t have an account? Create New Account</Text> */}
-  </View>
+  </Background>
 );
 
 export default Welcome;

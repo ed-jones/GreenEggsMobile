@@ -7,8 +7,6 @@ export { default as CreateIngredient } from "@greeneggs/screens/add-recipe/add-r
 export { default as EditProfile } from "@greeneggs/screens/settings/EditProfile";
 export { default as EditProfilePicture } from "@greeneggs/screens/settings/EditProfilePicture";
 export { default as ChangePassword } from "@greeneggs/screens/settings/ChangePassword";
-export { default as ConnectAccounts } from "@greeneggs/screens/settings/ConnectAccounts";
-export { default as SignOut } from "@greeneggs/screens/settings/SignOut";
 export { default as DeleteAccount } from "@greeneggs/screens/settings/DeleteAccount";
 export { default as DietaryPreferences } from "@greeneggs/screens/settings/DietaryPreferences";
 export { default as AllergyPreferences } from "@greeneggs/screens/settings/AllergyPreferences";

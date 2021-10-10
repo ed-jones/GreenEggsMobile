@@ -8,6 +8,7 @@ import CreateRecipePartTemplate, {
 import { useForm } from "react-hook-form";
 import { View } from "react-native";
 import addRecipeStyles from "../add-recipe-styles";
+import Background from "@greeneggs/core/background";
 
 const CreateIngredient = ({ navigation, route }: any) => (
   <CreateRecipePartTemplate
@@ -65,7 +66,6 @@ const CreateIngredientForm = ({ navigation, append }: RecipeFormPart) => {
             name: `quantity`,
             control: form.control,
             rules: {
-              ...Rules.REQUIRED,
               max: {
                 value: 999,
                 message: "Must be under 1000",
@@ -73,10 +73,10 @@ const CreateIngredientForm = ({ navigation, append }: RecipeFormPart) => {
             },
           }}
           inputProps={{
-            label: "QUANTITY",
+            label: "QUANTITY (OPTIONAL)",
             placeholder: "5",
             defaultValue: "",
-            style: { width: "30%", ...addRecipeStyles.input },
+            style: { width: "40%", ...addRecipeStyles.input },
           }}
           type={InputType.NUMERIC}
         />
@@ -93,7 +93,7 @@ const CreateIngredientForm = ({ navigation, append }: RecipeFormPart) => {
             label: "UNIT (OPTIONAL)",
             placeholder: "Cups",
             defaultValue: "",
-            style: { width: "70%", ...addRecipeStyles.input },
+            style: { width: "60%", ...addRecipeStyles.input },
           }}
           type={InputType.TEXT}
         />

@@ -44,11 +44,6 @@ const LoggedInRoutes = [
     component={Screens.ChangePassword}
   />,
   <Stack.Screen
-    name="ConnectAccounts"
-    component={Screens.ConnectAccounts}
-  />,
-  <Stack.Screen name="SignOut" component={Screens.SignOut} />,
-  <Stack.Screen
     name="DeleteAccount"
     component={Screens.DeleteAccount}
   />,

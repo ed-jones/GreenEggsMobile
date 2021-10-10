@@ -23,6 +23,7 @@ import {
 import LoadingScreen from "../loading/LoadingScreen";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
 import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import Background from "@greeneggs/core/background";
 
 export const styles = StyleSheet.create({
   view: {
@@ -137,7 +138,7 @@ const DietaryPreferences = () => {
   }
 
   return (
-    <>
+    <Background>
       <TopNavigationGeneric title="Dietary Preferences" />
       <View>
         <View style={styles.view}>
@@ -186,7 +187,7 @@ const DietaryPreferences = () => {
           )}
         />
       </View>
-    </>
+    </Background>
   );
 };
 

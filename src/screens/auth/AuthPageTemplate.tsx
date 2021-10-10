@@ -14,6 +14,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import Background from "@greeneggs/core/background";
 
 import Logo from "../../assets/images/icon.png";
 import Banner from "../../assets/images/banner.jpg";
@@ -77,7 +78,7 @@ const AuthPageTemplate = withStyles(
     children,
     eva,
   }: IAuthPageTemplateProps & ThemedComponentProps) => (
-    <>
+    <Background>
       <StatusBar style="dark" />
       <View style={styles.bannerContainer}>
         <ImageBackground source={Banner} style={styles.banner}>
@@ -103,7 +104,7 @@ const AuthPageTemplate = withStyles(
       >
         {children}
       </ScrollView>
-    </>
+    </Background>
   )
 );
 

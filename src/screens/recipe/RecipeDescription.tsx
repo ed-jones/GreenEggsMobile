@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Card, Text } from '@ui-kitten/components';
 import TopNavigationGeneric from '@greeneggs/core/top-navigation-generic';
+import Background from '@greeneggs/core/background';
 
 const styles = StyleSheet.create({
   cardElement: {
@@ -16,7 +17,7 @@ const RecipeDescription = (
   const { description, createdAt, title, submittedBy } = route.params;
 
   return (
-    <View>
+    <Background>
       <TopNavigationGeneric title="Description" />
       <Card
         header={() => (
@@ -33,7 +34,7 @@ const RecipeDescription = (
       >
         <Text>{description}</Text>
       </Card>
-    </View>
+    </Background>
   )
 };
 

@@ -9,7 +9,7 @@ import IngredientListItem from "@greeneggs/core/ingredient-list-item/IngredientL
 import { StackNavigationProp } from "@react-navigation/stack";
 import Alert from "@greeneggs/core/alert/Alert";
 import { useEffect } from "react";
-import { FieldArrayWithId, FieldError, useFieldArray } from "react-hook-form";
+import { FieldError, useFieldArray } from "react-hook-form";
 import addRecipeStyles from "../add-recipe-styles";
 
 interface ICreateRecipeIngredients {

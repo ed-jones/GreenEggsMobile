@@ -5,6 +5,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { FieldArrayMethodProps } from "react-hook-form";
 import { Alert, BackHandler, ScrollView } from "react-native";
+import Background from "@greeneggs/core/background";
 
 type AppendType = (
   value: Partial<unknown> | Partial<unknown>[],
@@ -71,7 +72,7 @@ const CreateRecipePartTemplate = ({
     }
   }
   return (
-    <>
+    <Background>
       <TopNavigationGeneric title={title} />
       <ScrollView style={{ paddingHorizontal: 16 }}>
         {React.createElement(formComponent, {
@@ -79,7 +80,7 @@ const CreateRecipePartTemplate = ({
           append,
         })}
       </ScrollView>
-    </>
+    </Background>
   );
 };
 

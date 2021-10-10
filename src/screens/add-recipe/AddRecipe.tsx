@@ -21,6 +21,7 @@ import PublishRecipe from "./PublishRecipe";
 import AddRecipeAllergies from "./add-recipe-allergies/AddRecipeAllergies";
 import AddRecipeDiets from "./add-recipe-diets/AddRecipeDiets";
 import addRecipeStyles from "./add-recipe-styles";
+import Background from "@greeneggs/core/background";
 
 export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>;
 
@@ -91,7 +92,7 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
   }
 
   return (
-    <>
+    <Background>
       <View style={{ ...addRecipeStyles.view, marginTop: insets.top }}>
         <Stepper
           index={steps.index}
@@ -164,6 +165,6 @@ export default withStyles(function AddRecipe({ navigation, eva }: any) {
           )}
         </View>
       </View>
-    </>
+    </Background>
   );
 });

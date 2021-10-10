@@ -4,6 +4,7 @@ import { View, StyleSheet } from "react-native";
 import { Divider, List } from "@ui-kitten/components";
 import IngredientListItem from "@greeneggs/core/ingredient-list-item/IngredientListItem";
 import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import Background from "@greeneggs/core/background";
 
 const styles = StyleSheet.create({
   content: {
@@ -15,7 +16,7 @@ const RecipeIngredients = ({ route }: any) => {
   const { ingredients } = route.params;
 
   return (
-    <>
+    <Background>
       <TopNavigationGeneric title="All Ingredients" />
       <View style={{ ...styles.content, marginHorizontal: -16 }}>
         <List
@@ -26,7 +27,7 @@ const RecipeIngredients = ({ route }: any) => {
         />
         <Divider />
       </View>
-    </>
+    </Background>
   );
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC, ReactElement, ReactNode } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import {

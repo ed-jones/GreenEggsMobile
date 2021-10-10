@@ -19,6 +19,7 @@ import LoadingScreen from "../loading/LoadingScreen";
 import RecipeAddComment from "./RecipeAddComment";
 import ViewMore from "@greeneggs/core/view-more/ViewMore";
 import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import Background from "@greeneggs/core/background";
 
 const styles = StyleSheet.create({
   coverPhoto: {
@@ -112,7 +113,7 @@ const Recipe = ({ route, navigation }: any) => {
         </ImageBackground>
       )}
     >
-      <View style={styles.content}>
+      <Background style={styles.content}>
         <RecipeDetailsCard {...recipe} navigation={navigation} />
         <RecipeAllergies allergies={recipe.allergies} />
         <Text category="h5" style={styles.heading}>
@@ -142,7 +143,7 @@ const Recipe = ({ route, navigation }: any) => {
             }
           />
         )}
-      </View>
+      </Background>
     </ParallaxHeader>
   );
 };

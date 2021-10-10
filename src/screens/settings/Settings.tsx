@@ -15,6 +15,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as SecureStore from "expo-secure-store";
 import { AuthContext } from "@greeneggs/providers/AuthProvider";
 import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import Background from "@greeneggs/core/background";
 
 const styles = StyleSheet.create({
   header: { padding: 16 },
@@ -192,7 +193,7 @@ const Settings = withStyles(
     };
 
     return (
-      <>
+      <Background>
         <TopNavigationGeneric />
         <ScrollView>
           <Text category="h6" style={styles.header}>
@@ -212,7 +213,7 @@ const Settings = withStyles(
           </Text>
           {About.map(SettingsListItem)}
         </ScrollView>
-      </>
+      </Background>
     );
   }
 );

@@ -1,4 +1,4 @@
-import { Icons, noavatar, Queries } from "@greeneggs/core";
+import { Queries } from "@greeneggs/core";
 import React, { FC, useContext, useState } from "react";
 import LazyList from "@greeneggs/core/lazy-list";
 import RecipeCardSmall from "@greeneggs/core/recipe-card-small";
@@ -19,10 +19,8 @@ import {
   SearchContext,
 } from "@greeneggs/providers/SearchStateProvider";
 import {
-  Avatar,
   Divider,
   IndexPath,
-  ListItem,
   Select,
   SelectItem,
   Tab,
@@ -32,8 +30,8 @@ import {
   createMaterialTopTabNavigator,
   MaterialTopTabBarProps,
 } from "@react-navigation/material-top-tabs";
-import { StackNavigationProp } from "@react-navigation/stack";
 import UserListItem from "@greeneggs/core/user-list-item";
+import Background from "@greeneggs/core/background";
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 
@@ -41,57 +39,61 @@ const RecipeSearch: FC = () => {
   const navigation = useNavigation();
   const { searchState } = useContext<ISearchContext>(SearchContext);
   return (
-    <LazyList<
-      recipes,
-      recipesVariables,
-      recipes_recipes_data,
-      Sort,
-      RecipeFilter
-    >
-      query={Queries.GET_RECIPES}
-      variables={{
-        query: searchState.query,
-        sort: searchState.sort ?? Sort.NEW,
-        filter: searchState.filter,
-      }}
-      dataKey="recipes"
-      emptyMessage="No recipes found!"
-      errorMessage="No recipes found!"
-      renderItem={({ item: myRecipe }) => (
-        <View style={{ marginBottom: 16, marginHorizontal: 16 }}>
-          <RecipeCardSmall
-            recipe={myRecipe}
-            onPress={() =>
-              navigation.navigate("Recipe", {
-                recipeId: myRecipe.id,
-              })
-            }
-          />
-        </View>
-      )}
-    />
+    <Background>
+      <LazyList<
+        recipes,
+        recipesVariables,
+        recipes_recipes_data,
+        Sort,
+        RecipeFilter
+      >
+        query={Queries.GET_RECIPES}
+        variables={{
+          query: searchState.query,
+          sort: searchState.sort ?? Sort.NEW,
+          filter: searchState.filter,
+        }}
+        dataKey="recipes"
+        emptyMessage="No recipes found!"
+        errorMessage="No recipes found!"
+        renderItem={({ item: myRecipe }) => (
+          <View style={{ marginBottom: 16, marginHorizontal: 16 }}>
+            <RecipeCardSmall
+              recipe={myRecipe}
+              onPress={() =>
+                navigation.navigate("Recipe", {
+                  recipeId: myRecipe.id,
+                })
+              }
+            />
+          </View>
+        )}
+      />
+    </Background>
   );
 };
 
 const UserSearch: FC = () => {
   const { searchState } = useContext<ISearchContext>(SearchContext);
   return (
-    <LazyList<Users, UsersVariables, Users_users_data, Sort, RecipeFilter>
-      query={Queries.GET_USERS}
-      variables={{
-        query: searchState.query,
-        sort: searchState.sort ?? Sort.NEW,
-      }}
-      dataKey="users"
-      emptyMessage="No users found!"
-      errorMessage="No users found!"
-      renderItem={({ item: user }) => (
-        <>
-          <UserListItem user={user} />
-          <Divider />
-        </>
-      )}
-    />
+    <Background>
+      <LazyList<Users, UsersVariables, Users_users_data, Sort, RecipeFilter>
+        query={Queries.GET_USERS}
+        variables={{
+          query: searchState.query,
+          sort: searchState.sort ?? Sort.NEW,
+        }}
+        dataKey="users"
+        emptyMessage="No users found!"
+        errorMessage="No users found!"
+        renderItem={({ item: user }) => (
+          <>
+            <UserListItem user={user} />
+            <Divider />
+          </>
+        )}
+      />
+    </Background>
   );
 };
 

@@ -28,6 +28,7 @@ import { FullUserFragment } from "@greeneggs/graphql/fragments";
 
 import LoadingScreen from "../loading/LoadingScreen";
 import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import Background from "@greeneggs/core/background";
 
 export const styles = StyleSheet.create({
   view: {
@@ -89,7 +90,7 @@ const ProfileVisibility = () => {
   }
 
   return (
-    <>
+    <Background>
       <TopNavigationGeneric title="Profile Visibility"/>
       <ScrollView style={styles.view}>
         <Alert
@@ -131,7 +132,7 @@ const ProfileVisibility = () => {
           SAVE CHANGES
         </Button>
       </ScrollView>
-    </>
+    </Background>
   );
 };
 

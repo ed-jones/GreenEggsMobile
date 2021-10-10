@@ -16,6 +16,7 @@ import { View } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import LazyList from "@greeneggs/core/lazy-list";
 import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
+import Background from "@greeneggs/core/background";
 
 const SavedRecipesHeader = () => (
   <TopNavigationGeneric title="Saved Recipes" accessoryLeft={undefined} />
@@ -55,7 +56,7 @@ const SavedRecipes: FC = () => {
     );
   }
   return (
-    <>
+    <Background>
       <SavedRecipesHeader />
       <LazyList<
         SavedRecipesType,
@@ -70,7 +71,7 @@ const SavedRecipes: FC = () => {
         emptyMessage="ou haven't saved any recipes yet! Save some recipes and they will appear here."
         errorMessage="Error! No recipes found."
         renderItem={({ item: recipe }) => (
-          <View style={{ marginBottom: 16, padding: 16 }}>
+          <View style={{ paddingHorizontal: 16, marginBottom: 16 }}>
             <RecipeCardSmall
               recipe={recipe}
               onPress={() =>
@@ -82,7 +83,7 @@ const SavedRecipes: FC = () => {
           </View>
         )}
       />
-    </>
+    </Background>
   );
 };
 

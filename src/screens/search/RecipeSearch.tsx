@@ -6,12 +6,11 @@ import RecipeCardSmall from '@greeneggs/core/recipe-card-small';
 import { RecipeFilter, recipes, recipesVariables, recipes_recipes_data, Sort } from '@greeneggs/types/graphql';
 import { useNavigation } from '@react-navigation/core';
 import { View } from 'react-native';
-import { SearchContext } from '@greeneggs/providers/SearchStateProvider';
+import { ISearchContext, SearchContext } from '@greeneggs/providers/SearchStateProvider';
 
 const RecipeSearch: FC = () => {
   const navigation = useNavigation();
-  const {searchState} = useContext(SearchContext)
-
+  const {searchState} = useContext<ISearchContext>(SearchContext)
   return (
     <LazyList<
       recipes,
@@ -23,7 +22,7 @@ const RecipeSearch: FC = () => {
       query={Queries.GET_RECIPES}
       variables={{
         query: searchState.query,
-        sort: Sort.NEW, // FIXME: needs to also user searchState
+        sort: searchState.sort ?? "NEW", // FIXME: needs to also user searchState
         filter: searchState.filter,
       }}
       dataKey="recipes"

@@ -42,7 +42,7 @@ export function useLazyList<
 
   useEffect(() => {
     setDone(false);
-  }, [variables.query]);
+  }, [variables]);
 
   const queryResult = useQuery<TData, TVariables>(query, {
     variables: {

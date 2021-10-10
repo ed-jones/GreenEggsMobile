@@ -20,7 +20,7 @@ export const defaultSearchState: SearchState = {
   sort: Sort.RELEVANT,
 }
 
-interface ISearchContext {
+export interface ISearchContext {
   searchState: SearchState,
   setSearchState?: (searchState: SearchState) => void,
 }

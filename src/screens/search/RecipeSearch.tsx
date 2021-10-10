@@ -33,6 +33,7 @@ import {
   MaterialTopTabBarProps,
 } from "@react-navigation/material-top-tabs";
 import { StackNavigationProp } from "@react-navigation/stack";
+import UserListItem from "@greeneggs/core/user-list-item";
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 
@@ -73,7 +74,6 @@ const RecipeSearch: FC = () => {
 };
 
 const UserSearch: FC = () => {
-  const navigation: StackNavigationProp<any, any> = useNavigation();
   const { searchState } = useContext<ISearchContext>(SearchContext);
   return (
     <LazyList<Users, UsersVariables, Users_users_data, Sort, RecipeFilter>
@@ -87,17 +87,7 @@ const UserSearch: FC = () => {
       errorMessage="No users found!"
       renderItem={({ item: user }) => (
         <>
-          <ListItem
-            title={`${user.firstName} ${user.lastName}`}
-            accessoryLeft={() => (
-              <Avatar
-                style={{ width: 32, height: 32, marginHorizontal: 8 }}
-                source={user.avatarURI ? { uri: user.avatarURI } : noavatar}
-              />
-            )}
-            accessoryRight={Icons.Forward}
-            onPress={() => navigation.push("Profile", { userId: user.id })}
-          />
+          <UserListItem user={user} />
           <Divider />
         </>
       )}

@@ -1,17 +1,10 @@
-import { Icons } from "@greeneggs/core";
-import { RecipeInput } from "@greeneggs/types/graphql";
+import React from "react";
+
+import TopNavigationGeneric from "@greeneggs/core/top-navigation-generic";
 import { useFocusEffect } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { TopNavigation, TopNavigationAction } from "@ui-kitten/components";
-import React, { useEffect } from "react";
-import {
-  FieldArrayMethodProps,
-  FieldArrayPath,
-  useFieldArray,
-} from "react-hook-form";
-import { Alert, BackHandler, ScrollView, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { RecipeForm } from "./AddRecipe";
+import { FieldArrayMethodProps } from "react-hook-form";
+import { Alert, BackHandler, ScrollView } from "react-native";
 
 type AppendType = (
   value: Partial<unknown> | Partial<unknown>[],
@@ -36,7 +29,6 @@ const CreateRecipePartTemplate = ({
   route,
   formComponent,
 }: ICreateRecipePartTemplate) => {
-  const insets = useSafeAreaInsets();
   const { append } = route.params as {
     append: AppendType;
   };
@@ -80,14 +72,7 @@ const CreateRecipePartTemplate = ({
   }
   return (
     <>
-      <TopNavigation
-        style={{ backgroundColor: "transparent", marginTop: insets.top }}
-        alignment="center"
-        title={title}
-        accessoryLeft={() => (
-          <TopNavigationAction icon={Icons.Back} onPress={goBack} />
-        )}
-      />
+      <TopNavigationGeneric title={title} />
       <ScrollView style={{ paddingHorizontal: 16 }}>
         {React.createElement(formComponent, {
           navigation,

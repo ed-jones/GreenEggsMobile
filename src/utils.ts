@@ -1,3 +1,7 @@
+export function toTitleCase(input: string): string {
+  return `${input.toUpperCase()[0]}${input.toLowerCase().slice(1)}`
+}
+
 export function convertTimeEstimate(timeEstimate: string): string {
   const minuteEstimate = new Date(Number(timeEstimate)).getMinutes();
   if (!timeEstimate) {

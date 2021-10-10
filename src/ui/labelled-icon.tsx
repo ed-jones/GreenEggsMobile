@@ -25,7 +25,7 @@ interface ILabelledIconProps {
   fill?: string;
 }
 
-const LabelledIcon = ({
+export const LabelledIcon = ({
   iconName,
   label,
   onPress,
@@ -38,5 +38,3 @@ const LabelledIcon = ({
     </View>
   </Pressable>
 );
-
-export default LabelledIcon;

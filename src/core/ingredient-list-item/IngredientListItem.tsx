@@ -1,8 +1,8 @@
 import React from "react";
 import { ListItem, Text } from "@ui-kitten/components";
 import { recipe_recipe_data_ingredients } from "@greeneggs/types/graphql";
-import toTitleCase from "../to-title-case/toTitleCase";
 import * as Icons from "../icons/Icons";
+import { toTitleCase } from "@greeneggs/utils";
 
 interface IIngredientListItem {
   ingredient: Partial<recipe_recipe_data_ingredients>;

@@ -7,8 +7,6 @@ export { default as Colors } from './constants/Colors';
 export { default as Layout } from './constants/Layout';
 export { Queries, Fragments, Mutations };
 
-export { default as LabelledIcon } from './labelled-icon/LabelledIcon';
-
 export { logo512 } from './logo/logo512.png';
 
 export { imagenotfound } from './image-not-found/imagenotfound.jpg';
@@ -24,7 +22,3 @@ export { default as useForm, IForm } from './form/useForm/useForm';
 export { default as partialValidate } from './form/partialValidate/partialValidate';
 
 export { default as ControlledInput, Rules, InputType } from './form/controlled-input/ControlledInput';
-
-export { default as TimePicker } from './time-picker/TimePicker';
-
-export { default as toTitleCase } from './to-title-case/toTitleCase';

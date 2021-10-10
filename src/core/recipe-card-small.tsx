@@ -5,7 +5,7 @@ import { View, StyleSheet, Image } from "react-native";
 
 import { convertTimeEstimate } from "./convertTimeEstimate/convertTimeEstimate";
 import imagenotfound from "./image-not-found/imagenotfound.jpg";
-import LabelledIcon from "./labelled-icon/LabelledIcon";
+import { LabelledIcon } from '@greeneggs/ui';
 
 const styles = StyleSheet.create({
   card: {

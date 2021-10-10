@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Icons } from '@greeneggs/core';
-import { TopNavigation, TopNavigationAction, Text } from '@ui-kitten/components';
+import { TopNavigation, TopNavigationAction, Text, Layout } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/core';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -9,7 +9,7 @@ const FilterIngredientsExcluded: FC = () => {
   const insets = useSafeAreaInsets();
 
   return (
-    <>
+    <Layout style={{ flex: 1 }} level="2">
       <TopNavigation
         style={{ backgroundColor: "transparent", paddingTop: insets.top }}
         accessoryLeft={() => 
@@ -18,11 +18,11 @@ const FilterIngredientsExcluded: FC = () => {
             onPress={() => navigation.goBack()}
           />
         }
-        title="Ingredients (Excluded)"
+        title="Cook Time"
         alignment="center"
       />
       <Text>Work in progress!</Text>
-    </>
+    </Layout>
   );
 }
 

@@ -11,7 +11,7 @@ export interface IForm<InputType, MutationType, MutationVariables> extends UseFo
  *  Custom hook that combines the functionality of react-hook-form
  *  with type safe apollo mutations
  */
-export default function useForm<
+export function useForm<
   InputType,
   MutationType,
   MutationVariables extends Record<keyof MutationVariables, InputType>,

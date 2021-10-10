@@ -7,10 +7,11 @@ import {
   TopNavigationAction,
   Avatar,
 } from "@ui-kitten/components";
-import { Input, Background } from '@greeneggs/ui';
+import { Input, Background, LazyList, RecipeCardSmall, Callout, Icons } from '@greeneggs/ui';
 import { useMutation, useQuery } from "@apollo/client";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Alert, Icons, Queries, noavatar, Mutations } from "@greeneggs/core";
+import { noAvatar } from '@greeneggs/assets';
+import { Queries, Mutations } from "@greeneggs/graphql";
 import {
   FollowUser,
   profile,
@@ -21,9 +22,7 @@ import {
   Sort,
 } from "@greeneggs/types/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
-import RecipeCardSmall from "@greeneggs/core/recipe-card-small";
 import { useNavigation } from "@react-navigation/core";
-import LazyList from "@greeneggs/core/lazy-list";
 
 const styles = StyleSheet.create({
   avatarContainer: {
@@ -159,7 +158,7 @@ const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) => {
   }
 
   if (profileResult.error) {
-    return <Alert message="There was an error" type="danger" />;
+    return <Callout message="There was an error" type="danger" />;
   }
 
   const profile = profileResult.data?.profile.data;
@@ -196,7 +195,7 @@ const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) => {
             style={styles.avatar}
             shape="round"
             size="giant"
-            source={profile.avatarURI ? { uri: profile.avatarURI } : noavatar}
+            source={profile.avatarURI ? { uri: profile.avatarURI } : noAvatar}
           />
         </Pressable>
       </View>

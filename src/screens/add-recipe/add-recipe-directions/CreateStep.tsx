@@ -3,7 +3,7 @@ import { Button } from "@ui-kitten/components";
 import ControlledInput, {
   InputType,
   Rules,
-} from "@greeneggs/core/form/controlled-input/ControlledInput";
+} from "@greeneggs/ui/form/controlled-input/ControlledInput";
 import { RecipeStepInput } from "@greeneggs/types/graphql";
 import CreateRecipePartTemplate, {
   RecipeFormPart,

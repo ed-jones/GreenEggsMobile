@@ -9,7 +9,7 @@ interface IIngredientListItem {
   remove?: () => void;
 }
 
-const IngredientListItem = ({ ingredient, remove }: IIngredientListItem) => {
+export const IngredientListItem = ({ ingredient, remove }: IIngredientListItem) => {
   if (ingredient.name) {
     return (
       <ListItem
@@ -29,5 +29,3 @@ const IngredientListItem = ({ ingredient, remove }: IIngredientListItem) => {
     return null;
   }
 };
-
-export default IngredientListItem;

@@ -7,7 +7,7 @@ export interface CountCircleProps extends Omit<SvgProps, 'children'> {
   children: number
 }
 
-const CountCircle = withStyles(({ children, eva, ...props}: CountCircleProps & ThemedComponentProps) => {
+export const CountCircle = withStyles(({ children, eva, ...props}: CountCircleProps & ThemedComponentProps) => {
   return (
     <Svg {...props} width="18" height="18">
       <Circle cx="50%" cy="50%" r="50%" fill={eva?.theme?.["color-primary-500"]} />
@@ -15,5 +15,3 @@ const CountCircle = withStyles(({ children, eva, ...props}: CountCircleProps & T
     </Svg>
   )
 })
-
-export default CountCircle;

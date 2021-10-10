@@ -1,7 +1,5 @@
-import { Queries } from "@greeneggs/core";
+import { Queries } from "@greeneggs/graphql";
 import React, { FC, useContext, useState } from "react";
-import LazyList from "@greeneggs/core/lazy-list";
-import RecipeCardSmall from "@greeneggs/core/recipe-card-small";
 import {
   RecipeFilter,
   recipes,
@@ -25,12 +23,11 @@ import {
   Tab,
   TabBar,
 } from "@ui-kitten/components";
-import { Select, Background } from "@greeneggs/ui";
+import { Select, Background, LazyList, RecipeCardSmall, UserListItem } from "@greeneggs/ui";
 import {
   createMaterialTopTabNavigator,
   MaterialTopTabBarProps,
 } from "@react-navigation/material-top-tabs";
-import UserListItem from "@greeneggs/core/user-list-item";
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 

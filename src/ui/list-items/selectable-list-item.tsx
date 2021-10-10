@@ -22,7 +22,7 @@ interface SelectableListItemProps extends Omit<ListItemProps, 'title'> {
   title: string;
 }
 
-const SelectableListItem: FC<SelectableListItemProps> = ({
+export const SelectableListItem: FC<SelectableListItemProps> = ({
   selected,
   setSelected,
   title,
@@ -35,5 +35,3 @@ const SelectableListItem: FC<SelectableListItemProps> = ({
     onPress={() => setSelected(!selected)}
   />
 );
-
-export default SelectableListItem;

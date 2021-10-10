@@ -1,13 +1,10 @@
 import React, { FC, useContext, useState } from 'react';
 import { Queries } from "@greeneggs/graphql";
 import { Divider } from '@ui-kitten/components';
-import { Input, TopNavigation, Background, Icons } from '@greeneggs/ui';
+import { Input, TopNavigation, Background, Icons, LazyListAlpha, AlphabetType, SelectableListItem } from '@greeneggs/ui';
 import { useNavigation } from '@react-navigation/core';
 import { Diets, DietsVariables, Diets_diets_data, RecipeFilter, Sort } from '@greeneggs/types/graphql';
-import LazyListAlpha from '@greeneggs/core/lazy-alpha-list';
-import { AlphabetType } from '@greeneggs/core/alpha-list';
-import AddToFilter from '../common/add-to-filter';
-import SelectableListItem from '@greeneggs/core/selectable-list-item';
+import { AddToFilter} from '../common';
 import { SearchContext } from '@greeneggs/providers/SearchStateProvider';
 
 const FilterRecipeDiets: FC = () => {

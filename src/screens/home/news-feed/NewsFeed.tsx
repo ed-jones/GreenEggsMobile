@@ -7,12 +7,11 @@ import {
   RecipeFilter,
   Sort,
 } from "@greeneggs/types/graphql";
-import { Queries } from "@greeneggs/core";
+import { Queries } from "@greeneggs/graphql";
+import { Background, LazyList } from "@greeneggs/ui";
+import { useNavigation } from "@react-navigation/native";
 
 import RecipeCard from "../recipe-card/RecipeCard";
-import { useNavigation } from "@react-navigation/native";
-import LazyList from "@greeneggs/core/lazy-list";
-import { Background } from "@greeneggs/ui";
 
 const CardVerticalMargin = 20;
 const CardHorizontalMargin = 24;

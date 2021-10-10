@@ -102,7 +102,7 @@ export interface LazyListProps<TData, TVariables, TDataType>
   errorMessage: string;
 }
 
-const LazyList = <
+export const LazyList = <
   TData extends TDataWithData<TData, TDataType>,
   TVariables extends Partial<CommonVariables<SortType, FilterType>>,
   TDataType,
@@ -165,5 +165,3 @@ const LazyList = <
     />
   );
 };
-
-export default LazyList;

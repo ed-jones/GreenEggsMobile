@@ -59,7 +59,7 @@ export const hoursAndMinutesToMilliseconds = ({
   return hoursAsMilliseconds + minutesAsMilliseconds;
 };
 
-const TimeInput = <FieldValues,>({
+export const TimeInput = <FieldValues,>({
   value,
   inputProps,
   error,
@@ -124,5 +124,3 @@ const TimeInput = <FieldValues,>({
     </>
   );
 };
-
-export default TimeInput;

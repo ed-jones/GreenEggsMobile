@@ -1,9 +1,4 @@
 import React from "react";
-import {
-  ControlledInput,
-  InputType,
-  useForm,
-} from "@greeneggs/core";
 import { Mutations } from "@greeneggs/graphql";
 import { ScrollView, StyleSheet } from "react-native";
 import {
@@ -16,7 +11,7 @@ import {
   Spinner,
 } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/core";
-import { TopNavigation, Background, Icons } from "@greeneggs/ui";
+import { TopNavigation, Background, Icons, ControlledInput, InputType, useForm } from "@greeneggs/ui";
 
 export const styles = StyleSheet.create({
   view: {

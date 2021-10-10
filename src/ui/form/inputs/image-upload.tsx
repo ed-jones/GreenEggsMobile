@@ -35,7 +35,7 @@ interface IImageUpload {
     | undefined;
 }
 
-const ImageUpload = withStyles(
+export const ImageUpload = withStyles(
   ({
     label,
     uri,
@@ -213,5 +213,3 @@ const ImageUpload = withStyles(
     );
   }
 );
-
-export default ImageUpload;

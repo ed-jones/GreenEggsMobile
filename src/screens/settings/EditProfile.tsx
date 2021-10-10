@@ -1,9 +1,4 @@
 import React from "react";
-import {
-  ControlledInput,
-  InputType,
-  useForm,
-} from "@greeneggs/core";
 import { Mutations, Queries } from "@greeneggs/graphql";
 import { ScrollView, StyleSheet } from "react-native";
 import {
@@ -20,7 +15,7 @@ import {
 import { useQuery } from "@apollo/client";
 import { Me } from "@greeneggs/types/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
-import { TopNavigation, Background, Icons } from "@greeneggs/ui";
+import { TopNavigation, Background, Icons, ControlledInput, InputType, useForm } from "@greeneggs/ui";
 
 export const styles = StyleSheet.create({
   view: {

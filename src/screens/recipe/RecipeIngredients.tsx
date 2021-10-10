@@ -4,8 +4,7 @@ import { View } from "react-native";
 import {
   Divider,
 } from "@ui-kitten/components";
-import IngredientListItem from "@greeneggs/core/ingredient-list-item/IngredientListItem";
-import ViewMore from "@greeneggs/core/view-more/ViewMore";
+import { IngredientListItem, ViewMore } from '@greeneggs/ui';
 import { useNavigation } from "@react-navigation/core";
 
 interface IRecipeIngredients {

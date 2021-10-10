@@ -2,7 +2,7 @@ import React from "react";
 import { ListItem, ListItemProps, Text } from "@ui-kitten/components";
 import { Icons } from '@greeneggs/ui';
 
-const ViewMore = (props: ListItemProps) => (
+export const ViewMore = (props: ListItemProps) => (
   <ListItem
     accessoryRight={Icons.Down}
     title={() => (
@@ -13,5 +13,3 @@ const ViewMore = (props: ListItemProps) => (
     {...props}
   />
 );
-
-export default ViewMore;

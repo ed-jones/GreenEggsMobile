@@ -2,12 +2,9 @@ import React from "react";
 import { List, Text } from "@ui-kitten/components";
 import { ScrollView, View } from "react-native";
 import { RecipeInput } from "@greeneggs/types/graphql";
-import { ControlledInput, InputType, Rules } from "@greeneggs/core";
 import { RecipeForm } from "../AddRecipe";
-import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
-import IngredientListItem from "@greeneggs/core/ingredient-list-item/IngredientListItem";
 import { StackNavigationProp } from "@react-navigation/stack";
-import Alert from "@greeneggs/core/alert/Alert";
+import { Callout, AddListItem, ControlledInput, InputType, Rules, IngredientListItem } from "@greeneggs/ui";
 import { useEffect } from "react";
 import { FieldError, useFieldArray } from "react-hook-form";
 import addRecipeStyles from "../add-recipe-styles";
@@ -35,7 +32,7 @@ const CreateRecipeIngredients = ({
 
   return (
     <ScrollView>
-      <Alert
+      <Callout
         type="info"
         message="Include ingredients needed to make this recipe."
         style={addRecipeStyles.view}

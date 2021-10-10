@@ -15,7 +15,7 @@ interface IAddListItem {
   error?: FieldError | undefined;
 }
 
-const AddListItem = withStyles(
+export const AddListItem = withStyles(
   ({ label, onPress, eva, error }: IAddListItem & ThemedComponentProps) => (
     <>
       <Divider />
@@ -52,5 +52,3 @@ const AddListItem = withStyles(
     </>
   )
 );
-
-export default AddListItem;

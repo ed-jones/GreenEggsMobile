@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Mutations, noavatar, Queries } from "@greeneggs/core";
+import { Mutations, Queries } from "@greeneggs/graphql";
+import { noAvatar } from '@greeneggs/assets';
 import {
   AddRecipeComment,
   AddRecipeCommentReply,
@@ -108,7 +109,7 @@ export default function RecipeAddComment({
         >
           <Avatar
             size="small"
-            source={me?.avatarURI ? { uri: me?.avatarURI } : noavatar}
+            source={me?.avatarURI ? { uri: me?.avatarURI } : noAvatar}
             style={styles.avatar}
           />
         </View>

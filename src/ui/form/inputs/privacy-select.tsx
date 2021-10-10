@@ -34,7 +34,7 @@ const Options: Option[] = [
   { title: "ONLY ME", value: Privacy.PRIVATE },
 ];
 
-const PrivacySelect = ({
+export const PrivacySelect = ({
   label,
   caption,
   value,
@@ -64,5 +64,3 @@ const PrivacySelect = ({
     ))}
   </Select>
 );
-
-export default PrivacySelect;

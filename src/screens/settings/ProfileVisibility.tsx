@@ -5,12 +5,6 @@ import {
   Text,
 } from "@ui-kitten/components";
 import { ScrollView, StyleSheet } from "react-native";
-import {
-  ControlledInput,
-  InputType,
-  Rules,
-  useForm,
-} from "@greeneggs/core";
 import { Mutations, Queries } from "@greeneggs/graphql";
 import { useNavigation } from "@react-navigation/core";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -24,7 +18,7 @@ import { useQuery } from "@apollo/client";
 import { FullUserFragment } from "@greeneggs/graphql/fragments";
 
 import LoadingScreen from "../loading/LoadingScreen";
-import { TopNavigation, Background, Callout, Icons } from "@greeneggs/ui";
+import { TopNavigation, Background, Callout, Icons, ControlledInput, InputType, Rules, useForm } from "@greeneggs/ui";
 
 export const styles = StyleSheet.create({
   view: {

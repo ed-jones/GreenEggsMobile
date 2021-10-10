@@ -7,7 +7,7 @@ import {
   useListRefresh,
 } from "./lazy-list";
 import LoadingScreen from "../screens/loading/LoadingScreen";
-import AlphaList, { buildAlphaListItems, CategoriseItem } from "./alpha-list";
+import { AlphaList, buildAlphaListItems, CategoriseItem } from "./alpha-list";
 import { View } from "react-native";
 import { Background, Callout } from '@greeneggs/ui';
 
@@ -17,7 +17,7 @@ interface LazyListAlphaProps<TData, TVariables, TDataType>
   categoriseItem: CategoriseItem<TDataType>;
 }
 
-const LazyListAlpha = <
+export const LazyListAlpha = <
   TData extends TDataWithData<TData, TDataType>,
   TVariables extends Partial<CommonVariables<SortType, FilterType>>,
   TDataType,
@@ -82,5 +82,3 @@ const LazyListAlpha = <
     />
   );
 };
-
-export default LazyListAlpha;

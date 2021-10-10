@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import { List, ListItem, Text } from "@ui-kitten/components";
-import { ScrollView, Image, View } from "react-native";
+import { ScrollView, Image } from "react-native";
 import { RecipeForm } from "../AddRecipe";
-import AddListItem from "@greeneggs/core/add-list-item/AddListItem";
 import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
-import Alert from "@greeneggs/core/alert/Alert";
 import { useFieldArray } from "react-hook-form";
-import { Icons } from "@greeneggs/core";
+import { Icons, AddListItem, Callout } from "@greeneggs/ui";
 import addRecipeStyles from '../add-recipe-styles';
 
 interface IAddRecipeDirections {
@@ -29,7 +27,7 @@ const AddRecipeDirections = ({ form, navigation }: IAddRecipeDirections) => {
 
   return (
     <ScrollView>
-      <Alert
+      <Callout
         type="info"
         message="Include steps that must be completed in order to follow this recipe."
         style={addRecipeStyles.view}

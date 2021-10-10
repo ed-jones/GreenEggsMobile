@@ -7,12 +7,12 @@ import {
   TrendingVariables,
   Trending_trending_data,
 } from "@greeneggs/types/graphql";
-import { Queries } from "@greeneggs/core";
+import { Queries } from "@greeneggs/graphql";
+import { useNavigation } from "@react-navigation/core";
+import { Background, LazyList } from "@greeneggs/ui";
 
 import RecipeCard from "../recipe-card/RecipeCard";
-import LazyList from "@greeneggs/core/lazy-list";
-import { useNavigation } from "@react-navigation/core";
-import { Background } from "@greeneggs/ui";
+
 
 const CardVerticalMargin = 20;
 const CardHorizontalMargin = 24;

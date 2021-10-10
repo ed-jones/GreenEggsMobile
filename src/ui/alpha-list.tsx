@@ -59,7 +59,7 @@ interface AlphaListProps<T> extends Omit<SectionListProps<T, AlphaListItem<T>>, 
   renderItem: FC<T>;
 }
 
-const AlphaList = <T,>({ items, renderItem, ...props }: AlphaListProps<T>) => {
+export const AlphaList = <T,>({ items, renderItem, ...props }: AlphaListProps<T>) => {
   return (
     <SectionList
       {...props}
@@ -72,5 +72,3 @@ const AlphaList = <T,>({ items, renderItem, ...props }: AlphaListProps<T>) => {
     />
   )
 };
-
-export default AlphaList;

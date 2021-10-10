@@ -1,10 +1,9 @@
+import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { Queries } from "@greeneggs/graphql";
-import { TopNavigation } from "@greeneggs/ui";
-import ViewMore from "@greeneggs/core/view-more/ViewMore";
+import { TopNavigation, ViewMore } from "@greeneggs/ui";
 import { comment } from "@greeneggs/types/graphql";
 import { Text } from "@ui-kitten/components";
-import React, { useState } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import LoadingScreen from "../loading/LoadingScreen";
 import RecipeAddComment from "./RecipeAddComment";

@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import RecipeCardSmall from "@greeneggs/core/recipe-card-small";
 import { useQuery } from "@apollo/client";
 import { Queries } from "@greeneggs/graphql";
 import LoadingScreen from "../loading/LoadingScreen";
@@ -14,8 +13,7 @@ import {
 } from "@greeneggs/types/graphql";
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/core";
-import LazyList from "@greeneggs/core/lazy-list";
-import { TopNavigation, Background, Callout } from "@greeneggs/ui";
+import { TopNavigation, Background, Callout, LazyList, RecipeCardSmall } from "@greeneggs/ui";
 
 const SavedRecipesHeader = () => (
   <TopNavigation title="Saved Recipes" accessoryLeft={undefined} />

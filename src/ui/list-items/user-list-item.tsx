@@ -10,7 +10,7 @@ interface UserListItemProps {
   user: Users_users_data
 }
 
-const UserListItem = ({ user }: UserListItemProps) => {
+export const UserListItem = ({ user }: UserListItemProps) => {
   const navigation: StackNavigationProp<any, any> = useNavigation();
   return (
     <ListItem
@@ -26,5 +26,3 @@ const UserListItem = ({ user }: UserListItemProps) => {
     />
   )
 }
-
-export default UserListItem;

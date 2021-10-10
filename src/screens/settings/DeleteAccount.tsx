@@ -1,8 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import {
-  ControlledInput,
-  InputType,
-} from "@greeneggs/core";
 import { Mutations, Queries } from "@greeneggs/graphql";
 import { ScrollView, StyleSheet, View, Alert as RNAlert } from "react-native";
 import { deleteUser, LoginInput } from "@greeneggs/types/graphql";
@@ -17,7 +13,7 @@ import LoadingScreen from "../loading/LoadingScreen";
 import useLoginForm from "../auth/useLoginForm";
 import { AuthContext } from "@greeneggs/providers/AuthProvider";
 import * as SecureStore from "expo-secure-store";
-import { TopNavigation, Background, Callout, Icons } from "@greeneggs/ui";
+import { TopNavigation, Background, Callout, Icons, ControlledInput, InputType } from "@greeneggs/ui";
 
 export const styles = StyleSheet.create({
   view: {

@@ -36,7 +36,7 @@ interface IRecipeCardSmall {
   onPress: () => void;
 }
 
-const RecipeCardSmall: FC<IRecipeCardSmall> = ({ recipe, onPress }) => {
+export const RecipeCardSmall: FC<IRecipeCardSmall> = ({ recipe, onPress }) => {
   return (
     <Card appearance="filled" style={styles.card} onPress={onPress}>
       <View style={styles.cardContents}>
@@ -78,5 +78,3 @@ const RecipeCardSmall: FC<IRecipeCardSmall> = ({ recipe, onPress }) => {
     </Card>
   );
 };
-
-export default RecipeCardSmall;

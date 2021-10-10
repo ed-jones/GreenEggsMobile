@@ -17,7 +17,7 @@ export interface FilterControlGroupProps {
   applyButton: SimpleButtonProps;
 }
 
-const FilterControlGroup: FC<FilterControlGroupProps> = 
+export const FilterControlGroup: FC<FilterControlGroupProps> = 
   ({
     label,
     clearButton,
@@ -34,5 +34,3 @@ const FilterControlGroup: FC<FilterControlGroupProps> =
     );
   }
 
-
-export default FilterControlGroup;

@@ -12,13 +12,10 @@ import {
   RecipeFilter,
   Sort,
 } from "@greeneggs/types/graphql";
-import { AlphabetType } from "@greeneggs/core/alpha-list";
-import LazyListAlpha from "@greeneggs/core/lazy-alpha-list";
-import AddToFilter from "../common/add-to-filter";
-import SelectableListItem from "@greeneggs/core/selectable-list-item";
 import { SearchContext } from "@greeneggs/providers/SearchStateProvider";
-import { TopNavigation } from "@greeneggs/ui";
-import { Background} from "@greeneggs/ui";
+import { TopNavigation, Background, AlphabetType, LazyListAlpha, SelectableListItem } from "@greeneggs/ui";
+
+import { AddToFilter } from "../common";
 
 const FilterIngredientsIncluded: FC = () => {
   const navigation = useNavigation();

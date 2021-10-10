@@ -2,19 +2,15 @@ import React from "react";
 import {
   Controller,
   ControllerProps,
-  Path,
-  PathValue,
   RegisterOptions,
 } from "react-hook-form";
-import { InputProps, Select, SelectItem } from "@ui-kitten/components";
+import { InputProps } from "@ui-kitten/components";
 import { ErrorFragment } from "@greeneggs/types/graphql";
 import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
 import { Input } from '@greeneggs/ui';
 
-import ImageUpload from "./ImageUpload";
-import PrivacySelect from "./PrivacySelect";
-import TimeInput from "./TimeSelect";
-import { numberToString, stringToNumber } from "./utils";
+import { ImageUpload, PrivacySelect, TimeInput } from "./inputs";
+import { numberToString, stringToNumber } from "./inputs/utils";
 
 // Data types that can be used by this component
 // Includes form validation, styling and other behaviour
@@ -144,7 +140,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
   },
 });
 
-const ControlledInput = <
+export const ControlledInput = <
   FieldValues extends Partial<
     Record<keyof FieldValues, string | number | object | null>
   >
@@ -232,5 +228,3 @@ const ControlledInput = <
     />
   );
 };
-
-export default ControlledInput;

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import FilterControlGroup from '@greeneggs/core/filter-control-group';
+import { FilterControlGroup } from '../common';
 
 export interface AddToFilterProps {
   filterCount: number;
@@ -7,7 +7,7 @@ export interface AddToFilterProps {
   addToFilter?: () => void;
 }
 
-const AddToFilter: FC<AddToFilterProps> = ({ filterCount, clearFilters, addToFilter }) => {
+export const AddToFilter: FC<AddToFilterProps> = ({ filterCount, clearFilters, addToFilter }) => {
   return (
     <FilterControlGroup
       label={`${filterCount.toString()} FILTERS SELECTED`}
@@ -16,5 +16,3 @@ const AddToFilter: FC<AddToFilterProps> = ({ filterCount, clearFilters, addToFil
     />
   );
 }
-
-export default AddToFilter;

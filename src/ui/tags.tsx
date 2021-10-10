@@ -24,7 +24,7 @@ interface IRecipeCategoryTags {
   tags: Tag[];
 }
 
-const RecipeCategoryTags = withStyles(
+export const Tags = withStyles(
   ({ tags, eva }: IRecipeCategoryTags & ThemedComponentProps) => (
     <View style={styles.tags}>
       {tags.map((tag: Tag) => (
@@ -42,5 +42,3 @@ const RecipeCategoryTags = withStyles(
     </View>
   )
 );
-
-export default RecipeCategoryTags;

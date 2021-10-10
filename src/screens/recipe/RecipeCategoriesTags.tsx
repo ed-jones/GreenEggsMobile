@@ -1,5 +1,5 @@
 import React from "react";
-import Tags from "@greeneggs/core/tags/Tags";
+import { Tags } from "@greeneggs/ui";
 import { recipe_recipe_data_categories } from "@greeneggs/types/graphql";
 
 interface IRecipeCategoriesTags {

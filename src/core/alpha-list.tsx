@@ -1,4 +1,4 @@
-import { List, ListItem } from "@ui-kitten/components";
+import { ListItem } from "@ui-kitten/components";
 import React, { FC } from "react";
 import { SectionList, SectionListProps } from "react-native";
 

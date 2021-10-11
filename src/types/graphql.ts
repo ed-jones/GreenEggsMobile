@@ -1882,6 +1882,7 @@ export interface Categories_categories_data {
   __typename: "Category";
   id: string;
   name: string;
+  coverImage: string | null;
 }
 
 export interface Categories_categories_error {
@@ -2352,6 +2353,7 @@ export interface CategoryFragment {
   __typename: "Category";
   id: string;
   name: string;
+  coverImage: string | null;
 }
 
 /* tslint:disable */

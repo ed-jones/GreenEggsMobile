@@ -13,13 +13,12 @@ import {
   Layout,
 } from "@ui-kitten/components";
 import { Alert, ScrollView, StyleSheet } from "react-native";
-import { Icons } from "@greeneggs/core";
+import { Icons, LazyList } from "@greeneggs/ui";
 import Svg, { Circle } from "react-native-svg";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as SecureStore from "expo-secure-store";
-import { AuthContext } from "@greeneggs/core/auth-context/AuthContext";
-import LazyList from "@greeneggs/core/lazy-list";
+import { AuthContext } from "@greeneggs/providers";
 
 const styles = StyleSheet.create({
   found: {
@@ -66,7 +65,7 @@ const FollowingItem = ({ onPress, title, color, icon, key }: ListItemProps) => (
   </>
 );
 
-const Following = withStyles(
+export const Following = withStyles(
   ({
     navigation,
     eva,
@@ -150,5 +149,3 @@ const Following = withStyles(
     );
   }
 );
-
-export default Following;

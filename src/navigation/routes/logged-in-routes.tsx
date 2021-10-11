@@ -87,4 +87,6 @@ export const LoggedInRoutes = [
   <Stack.Screen name="FilterRecipeAllergies" component={Screens.FilterRecipeAllergies} />,
   <Stack.Screen name="FilterRecipeDiets" component={Screens.FilterRecipeDiets} />,
   <Stack.Screen name="FilterRecipeCookTime" component={Screens.FilterRecipeCookTime} />,
+  <Stack.Screen name="Following" component={Screens.Following} />,
+  <Stack.Screen name="Followers" component={Screens.Followers} />,
  ]

@@ -35,3 +35,5 @@ export * from '@greeneggs/screens/search/filters/filter-recipe-diets'
 export * from '@greeneggs/screens/search/filters/filter-recipe-categories'
 export * from '@greeneggs/screens/search/filters/filter-recipe-cook-time'
 
+export * from './profile/following';
+export * from './profile/followers';

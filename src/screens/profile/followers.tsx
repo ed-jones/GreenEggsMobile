@@ -60,8 +60,8 @@ export const Followers = () => {
           query,
         }}
         dataKey="followedUsers"
-        emptyMessage="ou haven't saved any recipes yet! Save some recipes and they will appear here."
-        errorMessage="Error! No recipes found."
+        emptyMessage="This user isn't being followed by anyone."
+        errorMessage="This user isn't being followed by anyone."
         renderItem={({ item: user }) => <UserListItem user={user} />}
       />
     </Background>

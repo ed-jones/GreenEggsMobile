@@ -71,13 +71,16 @@ const styles = StyleSheet.create({
 interface IProfileStat {
   label: string;
   value: string;
+  onPress?: () => void;
 }
 
-const ProfileStat = ({ label, value }: IProfileStat) => (
-  <View style={styles.statBox}>
-    <Text category="label">{value}</Text>
-    <Text category="c1">{label}</Text>
-  </View>
+const ProfileStat = ({ label, value, onPress }: IProfileStat) => (
+  <Pressable onPress={onPress}>
+    <View style={styles.statBox}>
+      <Text category="label">{value}</Text>
+      <Text category="c1">{label}</Text>
+    </View>
+  </Pressable>
 );
 
 interface MyRecipesProps {
@@ -228,10 +231,12 @@ export const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) =>
         <ProfileStat
           label="Following"
           value={profile.followingCount.toString()}
+          onPress={() => navigation.navigate("Following", { userId })}
         />
         <ProfileStat
           label="Followers"
           value={profile.followerCount.toString()}
+          onPress={() => navigation.navigate("Followers", { userId })}
         />
         <ProfileStat label="Recipes" value={profile.recipeCount.toString()} />
         <ProfileStat label="Likes" value={profile.likeCount.toString()} />

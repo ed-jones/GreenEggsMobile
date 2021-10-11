@@ -191,3 +191,33 @@ export const GET_USERS = gql`
   ${Fragments.UserFragment}
   ${Fragments.ErrorFragment}
 `;
+
+export const GET_FOLLOWING_USERS = gql`
+  query FollowingUsers($userId: String!, $offset: Int!, $limit: Int!, $query: String!) {
+    followingUsers(userId: $userId, offset: $offset, limit: $limit, query: $query) {
+      error {
+        ...ErrorFragment
+      }
+      data {
+        ...UserFragment
+      }
+    }
+  }
+  ${Fragments.UserFragment}
+  ${Fragments.ErrorFragment}
+`;
+
+export const GET_FOLLOWED_USERS = gql`
+  query FollowedUsers($userId: String!, $offset: Int!, $limit: Int!, $query: String!) {
+    followedUsers(userId: $userId, offset: $offset, limit: $limit, query: $query) {
+      error {
+        ...ErrorFragment
+      }
+      data {
+        ...UserFragment
+      }
+    }
+  }
+  ${Fragments.UserFragment}
+  ${Fragments.ErrorFragment}
+`;

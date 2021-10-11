@@ -1,10 +1,9 @@
 import React from 'react';
 import { createMaterialTopTabNavigator, MaterialTopTabBarProps } from '@react-navigation/material-top-tabs';
 import { TabBar, Tab } from '@ui-kitten/components';
-
-import { AllRecipes } from './all-recipes';
 import { NewsFeed } from './news-feed';
 import { Trending } from './trending';
+import { Categories } from './categories';
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 
@@ -29,7 +28,7 @@ export function HomeTabs() {
     >
       <Screen name="NEWS FEED" component={NewsFeed} />
       <Screen name="TRENDING" component={Trending} />
-      <Screen name="CATEGORIES" component={AllRecipes} />
+      <Screen name="CATEGORIES" component={Categories} />
     </Navigator>
   );
 }

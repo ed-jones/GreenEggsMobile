@@ -1953,6 +1953,90 @@ export interface UsersVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: FollowingUsers
+// ====================================================
+
+export interface FollowingUsers_followingUsers_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface FollowingUsers_followingUsers_data {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface FollowingUsers_followingUsers {
+  __typename: "UsersResult";
+  error: FollowingUsers_followingUsers_error | null;
+  data: FollowingUsers_followingUsers_data[] | null;
+}
+
+export interface FollowingUsers {
+  followingUsers: FollowingUsers_followingUsers;
+}
+
+export interface FollowingUsersVariables {
+  userId: string;
+  offset: number;
+  limit: number;
+  query: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: FollowedUsers
+// ====================================================
+
+export interface FollowedUsers_followedUsers_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface FollowedUsers_followedUsers_data {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface FollowedUsers_followedUsers {
+  __typename: "UsersResult";
+  error: FollowedUsers_followedUsers_error | null;
+  data: FollowedUsers_followedUsers_data[] | null;
+}
+
+export interface FollowedUsers {
+  followedUsers: FollowedUsers_followedUsers;
+}
+
+export interface FollowedUsersVariables {
+  userId: string;
+  offset: number;
+  limit: number;
+  query: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: UserFragment
 // ====================================================
 

@@ -1,31 +1,28 @@
-import React, { Key, useContext, useState } from "react";
+import React, { useState } from "react";
+import { StyleSheet } from "react-native";
 import {
-  List,
-  Text,
+  Background,
+  Icons,
+  LazyList,
   TopNavigation,
-  TopNavigationAction,
-  ListItem,
-  Icon,
-  Divider,
-  withStyles,
-  ThemedComponentProps,
+  UserListItem,
   Input,
-  Layout,
-} from "@ui-kitten/components";
-import { Alert, ScrollView, StyleSheet } from "react-native";
-import { Icons, LazyList } from "@greeneggs/ui";
-import Svg, { Circle } from "react-native-svg";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import * as SecureStore from "expo-secure-store";
-import { AuthContext } from "@greeneggs/providers";
+} from "@greeneggs/ui";
+import {
+  FollowedUsers,
+  FollowedUsersVariables,
+  FollowedUsers_followedUsers_data,
+  RecipeFilter,
+  Sort,
+} from "@greeneggs/types/graphql";
+import { Queries } from "@greeneggs/graphql";
+import { RouteProp, useRoute } from "@react-navigation/core";
 
 const styles = StyleSheet.create({
   found: {
     padding: 16,
   },
   search: {
-    backgroundColor: "white",
     margin: 16,
   },
   view: {
@@ -33,123 +30,40 @@ const styles = StyleSheet.create({
   },
 });
 
-interface ListItemProps {
-  title: string;
-  icon?: string;
-  color?: string;
-  onPress?: () => void;
-  key: Key;
-}
+export const Followers = () => {
+  const [query, setQuery] = useState("");
+  const {
+    params: { userId },
+  } = useRoute<RouteProp<{ params: { userId: string } }, "params">>();
 
-interface IFollowersListItem {
-  item: ListItemProps;
-}
-
-const FollowersItem = ({ onPress, title, color, icon, key }: ListItemProps) => (
-  <>
-    <ListItem
-      key={key}
-      onPress={onPress}
-      title={title}
-      accessoryLeft={(props) => (
-        <>
-          <Svg
-            height="32"
-            width="32"
-            style={{ position: "absolute", marginLeft: 12 }}
-          >
-            <Circle cx="16" cy="16" r="16" fill={color} />
-          </Svg>
-          <Icon {...props} name={icon} fill="white" />
-        </>
-      )}
-    />
-
-    <Divider />
-  </>
-);
-
-export const Followers = withStyles(
-  ({
-    navigation,
-    eva,
-  }: { navigation: StackNavigationProp<any> } & ThemedComponentProps) => {
-    const insets = useSafeAreaInsets();
-    const { setToken } = useContext(AuthContext);
-
-    const Colors = {
-      green: eva?.theme && eva.theme["color-primary-400"],
-    };
-
-    const navigateBack = () => {
-      navigation.navigate("Home");
-    };
-
-    const FollowersList: ListItemProps[] = [
-      {
-        title: "Gi-Hun",
-        icon: "person-outline",
-        color: Colors.green,
-        onPress: () => navigation.navigate("Profile"),
-        key: "gihun",
-      },
-      {
-        title: "Victor Ying",
-        icon: "person-outline",
-        color: Colors.green,
-        onPress: () => navigation.navigate("Profile"),
-        key: "vying",
-      },
-      {
-        title: "Ed Jones",
-        icon: "person-outline",
-        color: Colors.green,
-        onPress: () => navigation.navigate("Profile"),
-        key: "edjones",
-      },
-      {
-        title: "Sang-Woo",
-        icon: "person-outline",
-        color: Colors.green,
-        onPress: () => navigation.navigate("Profile"),
-        key: "sangwoo",
-      },
-      {
-        title: "Nick Brewer",
-        icon: "person-outline",
-        color: Colors.green,
-        onPress: () => navigation.navigate("Profile"),
-        key: "nickb",
-      },
-    ];
-
-    const [myFollowersQuery, setMyFollowersQuery] = useState("");
-
-    return (
-      <Layout level="2" style={{ ...styles.view }}>
-        <TopNavigation
-          title="Followers"
-          alignment="center"
-          style={{ backgroundColor: "transparent", marginTop: insets.top }}
-          accessoryLeft={() => (
-            <TopNavigationAction icon={Icons.Back} onPress={navigateBack} />
-          )}
-        />
-        <Input
-          placeholder="Search users"
-          size="medium"
-          style={styles.search}
-          accessoryLeft={Icons.Search}
-          value={myFollowersQuery}
-          onChangeText={(newText) => setMyFollowersQuery(newText)}
-        />
-        <ScrollView>
-          {FollowersList.map(FollowersItem)}
-          <Text category="c5" style={styles.found}>
-            Found 5 results
-          </Text>
-        </ScrollView>
-      </Layout>
-    );
-  }
-);
+  return (
+    <Background style={{ ...styles.view }}>
+      <TopNavigation title="Followers" />
+      <Input
+        placeholder="Search users"
+        size="medium"
+        style={styles.search}
+        accessoryLeft={Icons.Search}
+        value={query}
+        onChangeText={(newText) => setQuery(newText)}
+      />
+      <LazyList<
+        FollowedUsers,
+        FollowedUsersVariables,
+        FollowedUsers_followedUsers_data,
+        Sort,
+        RecipeFilter
+      >
+        query={Queries.GET_FOLLOWED_USERS}
+        variables={{
+          userId,
+          query,
+        }}
+        dataKey="followedUsers"
+        emptyMessage="ou haven't saved any recipes yet! Save some recipes and they will appear here."
+        errorMessage="Error! No recipes found."
+        renderItem={({ item: user }) => <UserListItem user={user} />}
+      />
+    </Background>
+  );
+};

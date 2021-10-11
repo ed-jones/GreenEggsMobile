@@ -103,7 +103,7 @@ export const SearchTabBar = ({ navigation, state }: MaterialTopTabBarProps) => (
   </TabBar>
 );
 
-export const SearchTabs: FC = () => {
+export const Search: FC = () => {
   const { searchState, setSearchState } =
     useContext<ISearchContext>(SearchContext);
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(

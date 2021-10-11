@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import { SearchContext } from '@greeneggs/providers/search-state-provider';
 
 import { HomeTabs } from './home-tabs';
-import { RecipeSearch } from '../search/recipe-search';
+import { Search } from '../search';
 import { TopBar} from '../search/common/top-bar';
 
 export const Home = () => { 
@@ -19,7 +19,7 @@ export const Home = () => {
       </View>
       { searchState.query === undefined ? (
         <HomeTabs/>
-      ): <RecipeSearch />}
+      ): <Search />}
     </Background>
   )
 };

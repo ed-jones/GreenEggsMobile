@@ -1,9 +1,10 @@
 import { ApolloQueryResult, DocumentNode, useQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
-import { FlatList } from "react-native";
+import { FlatList, FlatListProps, View } from "react-native";
 import { Callout } from "@greeneggs/ui";
 import { LoadingScreen } from "../screens/loading-screen";
 import { ListRenderItem } from "react-native";
+import { Spinner } from "@ui-kitten/components";
 
 interface UseLazyListProps<TVariables, TData> {
   query: DocumentNode;
@@ -18,7 +19,12 @@ export function useLazyList<
   TDataType,
   SortType,
   FilterType
->({ query, variables, dataKey, limit = 2 }: UseLazyListProps<TVariables, TData>) {
+>({
+  query,
+  variables,
+  dataKey,
+  limit = 2,
+}: UseLazyListProps<TVariables, TData>) {
   const [done, setDone] = useState(false);
   const [data, setData] = useState<TDataType[]>([]);
   const [refetching, setRefetching] = useState(false);
@@ -46,7 +52,7 @@ export function useLazyList<
     if (d) {
       setData(d);
     }
-  }, [queryResult.data])
+  }, [queryResult.data]);
 
   async function nextPage() {
     if (!done) {
@@ -76,7 +82,7 @@ export function useLazyList<
     }
   };
 
-  return { ...queryResult, refetch, refetching, data, nextPage };
+  return { ...queryResult, refetch, refetching, data, nextPage, done };
 }
 
 export type TDataWithData<TData, TDataType> = {
@@ -94,8 +100,8 @@ export interface CommonVariables<SortType, FilterType> {
 }
 
 export interface LazyListProps<TData, TVariables, TDataType>
-  extends UseLazyListProps<TVariables, TData> {
-  renderItem: ListRenderItem<TDataType>;
+  extends UseLazyListProps<TVariables, TData>,
+    Omit<FlatListProps<TDataType>, "data"> {
   emptyMessage: string;
   errorMessage: string;
 }
@@ -113,45 +119,27 @@ export const LazyList = <
   renderItem,
   emptyMessage,
   errorMessage,
+  ...props
 }: LazyListProps<TData, TVariables, TDataType>) => {
-  const { loading, error, data, refetch, refetching, nextPage } = useLazyList<
-    TData,
-    TVariables,
-    TDataType,
-    SortType,
-    FilterType
-  >({ query, variables, dataKey });
-
-  if (loading) {
-    return <LoadingScreen />;
-  }
+  const { loading, error, data, refetch, refetching, nextPage, done } =
+    useLazyList<TData, TVariables, TDataType, SortType, FilterType>({
+      query,
+      variables,
+      dataKey,
+    });
 
   if (error) {
-    return <Callout message="There was an error" type="danger" />;
-  }
-
-  if (data === null || data === undefined) {
     return (
-      <Callout
-        style={{ marginHorizontal: 16 }}
-        message={emptyMessage}
-        type="info"
-      />
-    );
-  }
-
-  if (data.length === 0) {
-    return (
-      <Callout
-        style={{ marginHorizontal: 16 }}
-        message={errorMessage}
-        type="info"
-      />
+      <>
+        {props.ListHeaderComponent}
+        <Callout message="There was an error" type="danger" />
+      </>
     );
   }
 
   return (
     <FlatList
+      {...props}
       refreshing={refetching}
       onRefresh={refetch}
       onEndReached={() => nextPage()}
@@ -160,6 +148,26 @@ export const LazyList = <
       extraData={data}
       renderItem={renderItem}
       keyExtractor={(_item, index) => index.toString()}
+      ListEmptyComponent={
+        <Callout
+          style={{ marginHorizontal: 16 }}
+          message={errorMessage}
+          type="info"
+        />
+      }
+      ListFooterComponent={
+        !done && data.length > 0 ? (
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: 16,
+            }}
+          >
+            <Spinner />
+          </View>
+        ) : undefined
+      }
     />
   );
 };

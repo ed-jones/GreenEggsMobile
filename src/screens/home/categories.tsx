@@ -20,7 +20,7 @@ interface CategoryWithImageProps {
 const styles = StyleSheet.create({
   categoryCard: {
     width: '100%',
-    height: 100,
+    height: 75,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 12,
@@ -40,13 +40,13 @@ const CategoryWithImage: FC<CategoryWithImageProps> = ({
   coverImage,
 }) => {
   return (
-    <View style={{ marginHorizontal: 16, marginTop: 16 }}>
+    <View style={{ paddingHorizontal: 8, marginTop: 16, flexGrow: 1, width: '50%' }}>
       <ImageBackground source={{ uri: coverImage }} style={styles.categoryCard}>
         <LinearGradient
             colors={["transparent", "rgba(0, 0, 0, 0.8)"]}
             style={styles.gradient}
           />
-        <Text category="h2" style={{ color: 'white' }}>{name.toUpperCase()}</Text>
+        <Text category="h5" style={{ color: 'white' }}>{name.toUpperCase()}</Text>
       </ImageBackground>
     </View>
   );
@@ -69,19 +69,16 @@ export const Categories: FC = () => {
         dataKey="categories"
         emptyMessage="No categories found."
         errorMessage="No categories found."
+        horizontal={false}
+        numColumns={2}
+        columnWrapperStyle={{paddingHorizontal: 16}}
         renderItem={({ item: category, index }) =>
           category.coverImage ? (
             <CategoryWithImage
               name={category.name}
               coverImage={category.coverImage}
             />
-          ) : (
-            <ListItem
-              title={category.name}
-              accessoryRight={Icons.Forward}
-              key={index.toString()}
-            />
-          )
+          ) : null
         }
       />
     </Background>

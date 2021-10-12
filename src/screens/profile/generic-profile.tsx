@@ -7,10 +7,18 @@ import {
   TopNavigationAction,
   Avatar,
 } from "@ui-kitten/components";
-import { Input, Background, LazyList, RecipeCardSmall, Callout, Icons } from '@greeneggs/ui';
+import {
+  Input,
+  Background,
+  LazyList,
+  RecipeCardSmall,
+  Callout,
+  Icons,
+  LazyListProps,
+} from "@greeneggs/ui";
 import { useMutation, useQuery } from "@apollo/client";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { noAvatar } from '@greeneggs/assets';
+import { noAvatar } from "@greeneggs/assets";
 import { Queries, Mutations } from "@greeneggs/graphql";
 import {
   FollowUser,
@@ -83,12 +91,16 @@ const ProfileStat = ({ label, value, onPress }: IProfileStat) => (
   </Pressable>
 );
 
-interface MyRecipesProps {
+interface MyRecipesProps
+  extends Omit<
+    Partial<LazyListProps<recipes, recipesVariables, recipes_recipes_data>>,
+    "query"
+  > {
   query: string;
   userId: string;
 }
 
-const MyRecipes: FC<MyRecipesProps> = ({ query, userId }) => {
+const MyRecipes: FC<MyRecipesProps> = ({ query, userId, ...props }) => {
   const navigation = useNavigation();
 
   return (
@@ -99,6 +111,7 @@ const MyRecipes: FC<MyRecipesProps> = ({ query, userId }) => {
       Sort,
       RecipeFilter
     >
+      {...props}
       query={Queries.GET_RECIPES}
       variables={{
         query: query,
@@ -131,7 +144,10 @@ interface GenericProfileProps {
   isMe?: boolean;
 }
 
-export const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) => {
+export const GenericProfile = ({
+  userId,
+  isMe = false,
+}: GenericProfileProps) => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
   const profileResult = useQuery<profile>(Queries.GET_PROFILE, {
@@ -192,64 +208,81 @@ export const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) =>
           );
         }}
       />
-      <View style={styles.avatarContainer}>
-        <Pressable onPress={() => navigation.navigate("EditProfilePicture")}>
-          <Avatar
-            style={styles.avatar}
-            shape="round"
-            size="giant"
-            source={profile.avatarURI ? { uri: profile.avatarURI } : noAvatar}
-          />
-        </Pressable>
-      </View>
-      <View style={styles.profileContainer}>
-        <Text category="h5">{`${profile.firstName} ${profile.lastName}`}</Text>
-        {isMe ? (
-          <Button
-            size="small"
-            style={styles.button}
-            accessoryLeft={Icons.Edit}
-            onPress={() => navigation.navigate("EditProfile")}
-          >
-            EDIT
-          </Button>
-        ) : (
-          <Button
-            size="small"
-            onPress={
-              profile.isFollowing ? () => unfollowUser() : () => followUser()
-            }
-          >
-            {profile.isFollowing ? "UNFOLLOW" : "FOLLOW"}
-          </Button>
+      <MyRecipes
+        query={myRecipeQuery}
+        userId={profile.id}
+        extraData={myRecipeQuery}
+        ListHeaderComponent={(
+          <>
+            <View style={styles.avatarContainer}>
+              <Pressable
+                onPress={() => navigation.navigate("EditProfilePicture")}
+              >
+                <Avatar
+                  style={styles.avatar}
+                  shape="round"
+                  size="giant"
+                  source={
+                    profile.avatarURI ? { uri: profile.avatarURI } : noAvatar
+                  }
+                />
+              </Pressable>
+            </View>
+            <View style={styles.profileContainer}>
+              <Text category="h5">{`${profile.firstName} ${profile.lastName}`}</Text>
+              {isMe ? (
+                <Button
+                  size="small"
+                  style={styles.button}
+                  accessoryLeft={Icons.Edit}
+                  onPress={() => navigation.navigate("EditProfile")}
+                >
+                  EDIT
+                </Button>
+              ) : (
+                <Button
+                  size="small"
+                  onPress={
+                    profile.isFollowing
+                      ? () => unfollowUser()
+                      : () => followUser()
+                  }
+                >
+                  {profile.isFollowing ? "UNFOLLOW" : "FOLLOW"}
+                </Button>
+              )}
+            </View>
+            <Text style={styles.description} numberOfLines={2}>
+              {optional(profile.bio)}
+            </Text>
+            <View style={styles.statContainer}>
+              <ProfileStat
+                label="Following"
+                value={profile.followingCount.toString()}
+                onPress={() => navigation.navigate("Following", { userId })}
+              />
+              <ProfileStat
+                label="Followers"
+                value={profile.followerCount.toString()}
+                onPress={() => navigation.navigate("Followers", { userId })}
+              />
+              <ProfileStat
+                label="Recipes"
+                value={profile.recipeCount.toString()}
+              />
+              <ProfileStat label="Likes" value={profile.likeCount.toString()} />
+            </View>
+            <Input
+              placeholder="Search recipes"
+              size="large"
+              style={styles.search}
+              accessoryLeft={Icons.Search}
+              value={myRecipeQuery}
+              onChangeText={(newText) => setMyRecipeQuery(newText)}
+            />
+          </>
         )}
-      </View>
-      <Text style={styles.description} numberOfLines={2}>
-        {optional(profile.bio)}
-      </Text>
-      <View style={styles.statContainer}>
-        <ProfileStat
-          label="Following"
-          value={profile.followingCount.toString()}
-          onPress={() => navigation.navigate("Following", { userId })}
-        />
-        <ProfileStat
-          label="Followers"
-          value={profile.followerCount.toString()}
-          onPress={() => navigation.navigate("Followers", { userId })}
-        />
-        <ProfileStat label="Recipes" value={profile.recipeCount.toString()} />
-        <ProfileStat label="Likes" value={profile.likeCount.toString()} />
-      </View>
-      <Input
-        placeholder="Search recipes"
-        size="large"
-        style={styles.search}
-        accessoryLeft={Icons.Search}
-        value={myRecipeQuery}
-        onChangeText={(newText) => setMyRecipeQuery(newText)}
       />
-      <MyRecipes query={myRecipeQuery} userId={profile.id} />
     </Background>
   );
 };

@@ -37,3 +37,4 @@ export * from '@greeneggs/screens/search/filters/filter-recipe-cook-time'
 export * from './profile/following';
 export * from './profile/followers';
 export * from './notifications';
+export * from './home/category';

@@ -147,11 +147,13 @@ export const LazyList = <
       renderItem={renderItem}
       keyExtractor={(_item, index) => index.toString()}
       ListEmptyComponent={
-        <Callout
-          style={{ marginHorizontal: 16 }}
-          message={errorMessage}
-          type="info"
-        />
+        loading ? <Spinner /> : (
+          <Callout
+            style={{ marginHorizontal: 16 }}
+            message={errorMessage}
+            type="info"
+          />
+        )
       }
       ListFooterComponent={
         data.length > 0 ? (

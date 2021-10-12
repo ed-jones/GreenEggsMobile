@@ -1,3 +1,5 @@
+import { UserFragment } from "./types/graphql";
+
 export function toTitleCase(input: string): string {
   return `${input.toUpperCase()[0]}${input.toLowerCase().slice(1)}`
 }
@@ -26,4 +28,8 @@ export function convertTimeEstimate(timeEstimate: string): string {
     return `${Math.floor(minuteEstimate / (60 * 24 * 30))} months`;
   }
   return `${Math.floor(minuteEstimate / (60 * 24 * 365))} years`;
+}
+
+export function convertUserToFullname(user: UserFragment) {
+  return `${user.firstName} ${user.lastName}`;
 }

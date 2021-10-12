@@ -4,6 +4,8 @@ import {
   Divider,
   ListItem,
   ListItemProps,
+  ThemedComponentProps,
+  withStyles,
 } from "@ui-kitten/components";
 import { useQuery } from "@apollo/client";
 import {
@@ -15,24 +17,48 @@ import { Queries } from "@greeneggs/graphql";
 import { Background, Callout, TopNavigation } from "@greeneggs/ui";
 import { noAvatar } from "@greeneggs/assets";
 import { convertTimeEstimate, convertUserToFullname } from "@greeneggs/utils";
+import Svg, { Circle } from "react-native-svg";
+import { View } from "react-native";
 
-type NotificationListItemProps = ListItemProps & Notifications_notifications_data;
+type NotificationListItemProps = ListItemProps &
+  Notifications_notifications_data;
 
-const NotificationListItem: FC<NotificationListItemProps> = ({
-  concerns,
-  createdAt,
-  ...props
-}) => {
-  return (
-    <ListItem
-      {...props}
-      description={`${convertTimeEstimate(createdAt)} ago`}
-      accessoryLeft={() => (
-        <Avatar source={concerns.avatarURI ? { uri: concerns.avatarURI } : noAvatar} />
-      )}
-    />
-  );
-};
+const NotificationListItem = withStyles(
+  ({
+    eva,
+    concerns,
+    createdAt,
+    read,
+    ...props
+  }: NotificationListItemProps & ThemedComponentProps) => {
+    return (
+      <ListItem
+        {...props}
+        description={`${convertTimeEstimate(createdAt)} ago`}
+        accessoryLeft={() => (
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            {!read && (
+              <Svg height="8" width="8">
+                <Circle
+                  cx="4"
+                  cy="4"
+                  r="4"
+                  fill={eva?.theme?.["color-primary-500"]}
+                />
+              </Svg>
+            )}
+            <Avatar
+              source={
+                concerns.avatarURI ? { uri: concerns.avatarURI } : noAvatar
+              }
+              style={{ marginLeft: read ? 16 : 8 }}
+            />
+          </View>
+        )}
+      />
+    );
+  }
+);
 
 const CommentLikedNotificationListItem: FC<Notifications_notifications_data> = (
   notification: Notifications_notifications_data
@@ -40,7 +66,9 @@ const CommentLikedNotificationListItem: FC<Notifications_notifications_data> = (
   return (
     <NotificationListItem
       {...notification}
-      title={`${convertUserToFullname(notification.concerns)} liked your comment.`}
+      title={`${convertUserToFullname(
+        notification.concerns
+      )} liked your comment.`}
     />
   );
 };
@@ -51,7 +79,9 @@ const RecipeLikedNotificationListItem: FC<Notifications_notifications_data> = (
   return (
     <NotificationListItem
       {...notification}
-      title={`${convertUserToFullname(notification.concerns)} liked your recipe.`}
+      title={`${convertUserToFullname(
+        notification.concerns
+      )} liked your recipe.`}
     />
   );
 };
@@ -61,7 +91,9 @@ const RecipeCommentedNotificationListItem: FC<Notifications_notifications_data> 
     return (
       <NotificationListItem
         {...notification}
-        title={`${convertUserToFullname(notification.concerns)} commented on your recipe.`}
+        title={`${convertUserToFullname(
+          notification.concerns
+        )} commented on your recipe.`}
       />
     );
   };
@@ -71,7 +103,9 @@ const CommentRepliedNotificationListItem: FC<Notifications_notifications_data> =
     return (
       <NotificationListItem
         {...notification}
-        title={`${convertUserToFullname(notification.concerns)} replied to your comment.`}
+        title={`${convertUserToFullname(
+          notification.concerns
+        )} replied to your comment.`}
       />
     );
   };

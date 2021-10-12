@@ -1,10 +1,8 @@
-import { ApolloQueryResult, DocumentNode, useQuery } from "@apollo/client";
+import { DocumentNode, useQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import { FlatList, FlatListProps, View } from "react-native";
 import { Callout } from "@greeneggs/ui";
-import { LoadingScreen } from "../screens/loading-screen";
-import { ListRenderItem } from "react-native";
-import { Spinner } from "@ui-kitten/components";
+import { Spinner, Text } from "@ui-kitten/components";
 
 interface UseLazyListProps<TVariables, TData> {
   query: DocumentNode;
@@ -156,7 +154,7 @@ export const LazyList = <
         />
       }
       ListFooterComponent={
-        !done && data.length > 0 ? (
+        data.length > 0 ? (
           <View
             style={{
               alignItems: "center",
@@ -164,7 +162,13 @@ export const LazyList = <
               marginBottom: 16,
             }}
           >
-            <Spinner />
+            {!done ? (
+              <Spinner />
+            ) : (
+              <Text style={{ marginVertical: 16 }}>
+                Found {data.length} items.
+              </Text>
+            )}
           </View>
         ) : undefined
       }

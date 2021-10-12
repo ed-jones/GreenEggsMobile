@@ -11,11 +11,20 @@ import {
 import { useQuery } from "@apollo/client";
 import {
   Notifications as NotificationsType,
+  NotificationsVariables,
   Notifications_notifications_data,
   NotificationType as NotificationTypeEnum,
+  RecipeFilter,
+  Sort,
 } from "@greeneggs/types/graphql";
 import { Queries } from "@greeneggs/graphql";
-import { Background, Callout, Icons, TopNavigation } from "@greeneggs/ui";
+import {
+  Background,
+  Callout,
+  Icons,
+  LazyList,
+  TopNavigation,
+} from "@greeneggs/ui";
 import { noAvatar } from "@greeneggs/assets";
 import { convertTimeEstimate, convertUserToFullname } from "@greeneggs/utils";
 import Svg, { Circle } from "react-native-svg";
@@ -114,28 +123,32 @@ const NOTIFICATION_LIST_ITEM_MAP: Record<
 };
 
 export const Notifications: FC = () => {
-  const { data, loading, error } = useQuery<NotificationsType>(
-    Queries.GET_NOTIFICATIONS
-  );
-  const notifications = data?.notifications.data;
-
-  if (loading || error) {
-    return <Callout message="Data not defined" type="info" />;
-  }
-
   return (
     <Background>
       <TopNavigation title="Notifications" accessoryLeft={undefined} />
-      {notifications?.map((notification) => {
-        const NotificationListItem =
-          NOTIFICATION_LIST_ITEM_MAP[notification.type];
-        return (
-          <>
-            <NotificationListItem {...notification} />
-            <Divider />
-          </>
-        );
-      })}
+      <LazyList<
+        NotificationsType,
+        NotificationsVariables,
+        Notifications_notifications_data,
+        Sort,
+        RecipeFilter
+      >
+        query={Queries.GET_NOTIFICATIONS}
+        variables={{}}
+        dataKey="notifications"
+        emptyMessage="You don't have any notifications."
+        errorMessage="You don't have any notifications."
+        renderItem={({ item: notification, index }) => {
+          const NotificationListItem =
+            NOTIFICATION_LIST_ITEM_MAP[notification.type];
+          return (
+            <View key={index.toString()}>
+              <NotificationListItem {...notification} />
+              <Divider />
+            </View>
+          );
+        }}
+      />
     </Background>
   );
 };

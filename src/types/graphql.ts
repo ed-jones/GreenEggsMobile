@@ -2124,6 +2124,11 @@ export interface Notifications {
   notifications: Notifications_notifications;
 }
 
+export interface NotificationsVariables {
+  offset: number;
+  limit: number;
+}
+
 /* tslint:disable */
 /* eslint-disable */
 // @generated

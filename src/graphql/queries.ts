@@ -221,3 +221,18 @@ export const GET_FOLLOWED_USERS = gql`
   ${Fragments.UserFragment}
   ${Fragments.ErrorFragment}
 `;
+
+export const GET_NOTIFICATIONS = gql`
+  query Notifications {
+    notifications {
+      data {
+        ...NotificationFragment
+      }
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.NotificationFragment}
+  ${Fragments.ErrorFragment}
+`;

@@ -894,6 +894,54 @@ export interface UnfollowUserVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: ReadNotification
+// ====================================================
+
+export interface ReadNotification_readNotification_data_concerns {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface ReadNotification_readNotification_data {
+  __typename: "Notification";
+  id: string;
+  type: NotificationType;
+  concerns: ReadNotification_readNotification_data_concerns;
+  createdAt: string;
+  read: boolean;
+}
+
+export interface ReadNotification_readNotification_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface ReadNotification_readNotification {
+  __typename: "NotificationResult";
+  data: ReadNotification_readNotification_data | null;
+  error: ReadNotification_readNotification_error | null;
+}
+
+export interface ReadNotification {
+  readNotification: ReadNotification_readNotification;
+}
+
+export interface ReadNotificationVariables {
+  notificationId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: recipes
 // ====================================================
 
@@ -2038,6 +2086,50 @@ export interface FollowedUsersVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: Notifications
+// ====================================================
+
+export interface Notifications_notifications_data_concerns {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface Notifications_notifications_data {
+  __typename: "Notification";
+  id: string;
+  type: NotificationType;
+  concerns: Notifications_notifications_data_concerns;
+  createdAt: string;
+  read: boolean;
+}
+
+export interface Notifications_notifications_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface Notifications_notifications {
+  __typename: "NotificationsResult";
+  data: Notifications_notifications_data[];
+  error: Notifications_notifications_error | null;
+}
+
+export interface Notifications {
+  notifications: Notifications_notifications;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: UserFragment
 // ====================================================
 
@@ -2361,9 +2453,45 @@ export interface CategoryFragment {
 // @generated
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL fragment: NotificationFragment
+// ====================================================
+
+export interface NotificationFragment_concerns {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface NotificationFragment {
+  __typename: "Notification";
+  id: string;
+  type: NotificationType;
+  concerns: NotificationFragment_concerns;
+  createdAt: string;
+  read: boolean;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+export enum NotificationType {
+  COMMENT_LIKED = "COMMENT_LIKED",
+  COMMENT_REPLIED = "COMMENT_REPLIED",
+  RECIPE_COMMENTED = "RECIPE_COMMENTED",
+  RECIPE_LIKED = "RECIPE_LIKED",
+}
 
 export enum Privacy {
   FRIENDS = "FRIENDS",

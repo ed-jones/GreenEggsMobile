@@ -287,3 +287,18 @@ export const UNFOLLOW_USER = gql`
   ${Fragments.ErrorFragment}
   ${Fragments.UserFragment}
 `;
+
+export const READ_NOTIFICATIONS = gql`
+  mutation ReadNotification($notificationId: String!) {
+    readNotification(notificationId: $notificationId) {
+      data {
+        ...NotificationFragment
+      }
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.NotificationFragment}
+  ${Fragments.UserFragment}
+`;

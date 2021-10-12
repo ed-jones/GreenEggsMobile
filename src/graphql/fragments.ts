@@ -154,3 +154,16 @@ export const CategoryFragment = gql`
     coverImage
   }
 `;
+
+export const NotificationFragment = gql`
+  fragment NotificationFragment on Notification {
+    id
+    type
+    concerns {
+      ...UserFragment
+    }
+    createdAt
+    read
+  }
+  ${UserFragment}
+`;

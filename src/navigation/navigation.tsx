@@ -7,6 +7,7 @@ import {
   Home,
   MyProfile,
   SavedRecipes,
+  Notifications,
 } from "../screens";
 import { BottomTabBar} from "./bottom-tab-bar";
 
@@ -24,7 +25,7 @@ export function Navigation() {
       <Screen name="AddRecipe" component={AddRecipe} />
       <Screen
         name="Notifications"
-        component={NotFoundScreen}
+        component={Notifications}
         options={{ title: "Oops!" }}
       />
       <Screen name="Profile" component={MyProfile} />

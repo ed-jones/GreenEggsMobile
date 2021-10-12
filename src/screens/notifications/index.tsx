@@ -6,6 +6,7 @@ import {
   ListItemProps,
   ThemedComponentProps,
   withStyles,
+  Text,
 } from "@ui-kitten/components";
 import { useQuery } from "@apollo/client";
 import {
@@ -14,7 +15,7 @@ import {
   NotificationType as NotificationTypeEnum,
 } from "@greeneggs/types/graphql";
 import { Queries } from "@greeneggs/graphql";
-import { Background, Callout, TopNavigation } from "@greeneggs/ui";
+import { Background, Callout, Icons, TopNavigation } from "@greeneggs/ui";
 import { noAvatar } from "@greeneggs/assets";
 import { convertTimeEstimate, convertUserToFullname } from "@greeneggs/utils";
 import Svg, { Circle } from "react-native-svg";
@@ -29,12 +30,22 @@ const NotificationListItem = withStyles(
     concerns,
     createdAt,
     read,
+    title,
     ...props
   }: NotificationListItemProps & ThemedComponentProps) => {
     return (
       <ListItem
         {...props}
+        title={
+          <Text category="p1">
+            <Text category="p1" style={{ fontWeight: "bold" }}>
+              {convertUserToFullname(concerns)}
+            </Text>
+            {` ${title}`}
+          </Text>
+        }
         description={`${convertTimeEstimate(createdAt)} ago`}
+        accessoryRight={Icons.Forward}
         accessoryLeft={() => (
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             {!read && (
@@ -63,27 +74,13 @@ const NotificationListItem = withStyles(
 const CommentLikedNotificationListItem: FC<Notifications_notifications_data> = (
   notification: Notifications_notifications_data
 ) => {
-  return (
-    <NotificationListItem
-      {...notification}
-      title={`${convertUserToFullname(
-        notification.concerns
-      )} liked your comment.`}
-    />
-  );
+  return <NotificationListItem {...notification} title="liked your comment." />;
 };
 
 const RecipeLikedNotificationListItem: FC<Notifications_notifications_data> = (
   notification: Notifications_notifications_data
 ) => {
-  return (
-    <NotificationListItem
-      {...notification}
-      title={`${convertUserToFullname(
-        notification.concerns
-      )} liked your recipe.`}
-    />
-  );
+  return <NotificationListItem {...notification} title="liked your recipe." />;
 };
 
 const RecipeCommentedNotificationListItem: FC<Notifications_notifications_data> =
@@ -91,9 +88,7 @@ const RecipeCommentedNotificationListItem: FC<Notifications_notifications_data> 
     return (
       <NotificationListItem
         {...notification}
-        title={`${convertUserToFullname(
-          notification.concerns
-        )} commented on your recipe.`}
+        title="commented on your recipe."
       />
     );
   };
@@ -103,9 +98,7 @@ const CommentRepliedNotificationListItem: FC<Notifications_notifications_data> =
     return (
       <NotificationListItem
         {...notification}
-        title={`${convertUserToFullname(
-          notification.concerns
-        )} replied to your comment.`}
+        title="replied to your comment."
       />
     );
   };

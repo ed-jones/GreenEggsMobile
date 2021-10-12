@@ -16,15 +16,10 @@ import { Background, Callout, TopNavigation } from "@greeneggs/ui";
 import { noAvatar } from "@greeneggs/assets";
 import { convertTimeEstimate, convertUserToFullname } from "@greeneggs/utils";
 
-interface NotificationListItemProps extends ListItemProps {
-  read: boolean;
-  createdAt: string;
-  avatarURI: string | null;
-}
+type NotificationListItemProps = ListItemProps & Notifications_notifications_data;
 
 const NotificationListItem: FC<NotificationListItemProps> = ({
-  read,
-  avatarURI,
+  concerns,
   createdAt,
   ...props
 }) => {
@@ -33,7 +28,7 @@ const NotificationListItem: FC<NotificationListItemProps> = ({
       {...props}
       description={`${convertTimeEstimate(createdAt)} ago`}
       accessoryLeft={() => (
-        <Avatar source={avatarURI ? { uri: avatarURI } : noAvatar} />
+        <Avatar source={concerns.avatarURI ? { uri: concerns.avatarURI } : noAvatar} />
       )}
     />
   );
@@ -44,9 +39,7 @@ const CommentLikedNotificationListItem: FC<Notifications_notifications_data> = (
 ) => {
   return (
     <NotificationListItem
-      createdAt={notification.createdAt}
-      read={notification.read}
-      avatarURI={notification.concerns.avatarURI}
+      {...notification}
       title={`${convertUserToFullname(notification.concerns)} liked your comment.`}
     />
   );
@@ -57,9 +50,7 @@ const RecipeLikedNotificationListItem: FC<Notifications_notifications_data> = (
 ) => {
   return (
     <NotificationListItem
-      createdAt={notification.createdAt}
-      read={notification.read}
-      avatarURI={notification.concerns.avatarURI}
+      {...notification}
       title={`${convertUserToFullname(notification.concerns)} liked your recipe.`}
     />
   );
@@ -69,9 +60,7 @@ const RecipeCommentedNotificationListItem: FC<Notifications_notifications_data> 
   (notification: Notifications_notifications_data) => {
     return (
       <NotificationListItem
-        createdAt={notification.createdAt}
-        read={notification.read}
-        avatarURI={notification.concerns.avatarURI}
+        {...notification}
         title={`${convertUserToFullname(notification.concerns)} commented on your recipe.`}
       />
     );
@@ -81,9 +70,7 @@ const CommentRepliedNotificationListItem: FC<Notifications_notifications_data> =
   (notification: Notifications_notifications_data) => {
     return (
       <NotificationListItem
-        createdAt={notification.createdAt}
-        read={notification.read}
-        avatarURI={notification.concerns.avatarURI}
+        {...notification}
         title={`${convertUserToFullname(notification.concerns)} replied to your comment.`}
       />
     );

@@ -8,16 +8,15 @@ import {
   withStyles,
   Text,
 } from "@ui-kitten/components";
-import { useQuery } from "@apollo/client";
 import {
-  Notifications as NotificationsType,
-  NotificationsVariables,
-  Notifications_notifications_data,
+  notifications as notificationsType,
+  notificationsVariables,
+  notifications_notifications_data,
   NotificationType as NotificationTypeEnum,
   RecipeFilter,
   Sort,
 } from "@greeneggs/types/graphql";
-import { Queries } from "@greeneggs/graphql";
+import { Mutations, Queries } from "@greeneggs/graphql";
 import {
   Background,
   Callout,
@@ -28,10 +27,12 @@ import {
 import { noAvatar } from "@greeneggs/assets";
 import { convertTimeEstimate, convertUserToFullname } from "@greeneggs/utils";
 import Svg, { Circle } from "react-native-svg";
-import { View } from "react-native";
+import { GestureResponderEvent, View } from "react-native";
+import { useNavigation } from "@react-navigation/core";
+import { useMutation } from "@apollo/client";
 
 type NotificationListItemProps = ListItemProps &
-  Notifications_notifications_data;
+  notifications_notifications_data;
 
 const NotificationListItem = withStyles(
   ({
@@ -40,11 +41,26 @@ const NotificationListItem = withStyles(
     createdAt,
     read,
     title,
+    onPress,
+    id,
     ...props
   }: NotificationListItemProps & ThemedComponentProps) => {
+    const [markRead] = useMutation(Mutations.READ_NOTIFICATIONS, {
+      variables: {
+        notificationId: id,
+      },
+      refetchQueries: [Queries.GET_NOTIFICATIONS, "notifications"],
+    });
+
+    function handlePress(event: GestureResponderEvent) {
+      markRead();
+      onPress?.(event);
+    }
+
     return (
       <ListItem
         {...props}
+        onPress={handlePress}
         title={
           <Text category="p1">
             <Text category="p1" style={{ fontWeight: "bold" }}>
@@ -80,41 +96,67 @@ const NotificationListItem = withStyles(
   }
 );
 
-const CommentLikedNotificationListItem: FC<Notifications_notifications_data> = (
-  notification: Notifications_notifications_data
+const CommentLikedNotificationListItem: FC<notifications_notifications_data> = (
+  notification: notifications_notifications_data
 ) => {
-  return <NotificationListItem {...notification} title="liked your comment." />;
+  const navigation = useNavigation();
+  return (
+    <NotificationListItem
+      {...notification}
+      title="liked your comment."
+      onPress={() =>
+        navigation.navigate("Comment", { commentId: notification.linkId })
+      }
+    />
+  );
 };
 
-const RecipeLikedNotificationListItem: FC<Notifications_notifications_data> = (
-  notification: Notifications_notifications_data
+const RecipeLikedNotificationListItem: FC<notifications_notifications_data> = (
+  notification: notifications_notifications_data
 ) => {
-  return <NotificationListItem {...notification} title="liked your recipe." />;
+  const navigation = useNavigation();
+  return (
+    <NotificationListItem
+      {...notification}
+      title="liked your recipe."
+      onPress={() =>
+        navigation.navigate("Recipe", { recipeId: notification.linkId })
+      }
+    />
+  );
 };
 
-const RecipeCommentedNotificationListItem: FC<Notifications_notifications_data> =
-  (notification: Notifications_notifications_data) => {
+const RecipeCommentedNotificationListItem: FC<notifications_notifications_data> =
+  (notification: notifications_notifications_data) => {
+    const navigation = useNavigation();
     return (
       <NotificationListItem
         {...notification}
         title="commented on your recipe."
+        onPress={() =>
+          navigation.navigate("Comment", { commentId: notification.linkId })
+        }
       />
     );
   };
 
-const CommentRepliedNotificationListItem: FC<Notifications_notifications_data> =
-  (notification: Notifications_notifications_data) => {
+const CommentRepliedNotificationListItem: FC<notifications_notifications_data> =
+  (notification: notifications_notifications_data) => {
+    const navigation = useNavigation();
     return (
       <NotificationListItem
         {...notification}
         title="replied to your comment."
+        onPress={() =>
+          navigation.navigate("Comment", { commentId: notification.linkId })
+        }
       />
     );
   };
 
 const NOTIFICATION_LIST_ITEM_MAP: Record<
   NotificationTypeEnum,
-  FC<Notifications_notifications_data>
+  FC<notifications_notifications_data>
 > = {
   COMMENT_LIKED: CommentLikedNotificationListItem,
   RECIPE_LIKED: RecipeLikedNotificationListItem,
@@ -127,9 +169,9 @@ export const Notifications: FC = () => {
     <Background>
       <TopNavigation title="Notifications" accessoryLeft={undefined} />
       <LazyList<
-        NotificationsType,
-        NotificationsVariables,
-        Notifications_notifications_data,
+        notificationsType,
+        notificationsVariables,
+        notifications_notifications_data,
         Sort,
         RecipeFilter
       >

@@ -300,5 +300,5 @@ export const READ_NOTIFICATIONS = gql`
     }
   }
   ${Fragments.NotificationFragment}
-  ${Fragments.UserFragment}
+  ${Fragments.ErrorFragment}
 `;

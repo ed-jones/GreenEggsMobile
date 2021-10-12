@@ -5,24 +5,6 @@ import { Callout } from "@greeneggs/ui";
 import { LoadingScreen } from "../screens/loading-screen";
 import { ListRenderItem } from "react-native";
 
-export function useListRefresh<TData, TVariables>(
-  refetch: (
-    variables?: Partial<TVariables> | undefined
-  ) => Promise<ApolloQueryResult<TData>>
-) {
-  const [refreshing, setRefreshing] = useState(false);
-
-  const onRefresh = async () => {
-    setRefreshing(true);
-    const result = await refetch();
-    if (result.data) {
-      setRefreshing(false);
-    }
-  };
-
-  return { refreshing, onRefresh };
-}
-
 interface UseLazyListProps<TVariables, TData> {
   query: DocumentNode;
   variables: Partial<Omit<TVariables, "offset" | "limit">>;
@@ -39,6 +21,7 @@ export function useLazyList<
 >({ query, variables, dataKey, limit = 2 }: UseLazyListProps<TVariables, TData>) {
   const [done, setDone] = useState(false);
   const [data, setData] = useState<TDataType[]>([]);
+  const [refetching, setRefetching] = useState(false);
 
   useEffect(() => {
     setDone(false);
@@ -57,6 +40,13 @@ export function useLazyList<
       }
     },
   });
+
+  useEffect(() => {
+    const d = queryResult.data?.[dataKey]?.data;
+    if (d) {
+      setData(d);
+    }
+  }, [queryResult.data])
 
   async function nextPage() {
     if (!done) {
@@ -78,7 +68,15 @@ export function useLazyList<
     }
   }
 
-  return { ...queryResult, data, nextPage };
+  const refetch = async () => {
+    setRefetching(true);
+    const { data } = await queryResult.refetch();
+    if (data) {
+      setRefetching(false);
+    }
+  };
+
+  return { ...queryResult, refetch, refetching, data, nextPage };
 }
 
 export type TDataWithData<TData, TDataType> = {
@@ -116,14 +114,13 @@ export const LazyList = <
   emptyMessage,
   errorMessage,
 }: LazyListProps<TData, TVariables, TDataType>) => {
-  const { loading, error, data, refetch, nextPage } = useLazyList<
+  const { loading, error, data, refetch, refetching, nextPage } = useLazyList<
     TData,
     TVariables,
     TDataType,
     SortType,
     FilterType
   >({ query, variables, dataKey });
-  const { refreshing, onRefresh } = useListRefresh(refetch);
 
   if (loading) {
     return <LoadingScreen />;
@@ -155,11 +152,12 @@ export const LazyList = <
 
   return (
     <FlatList
-      refreshing={refreshing}
-      onRefresh={onRefresh}
+      refreshing={refetching}
+      onRefresh={refetch}
       onEndReached={() => nextPage()}
       onEndReachedThreshold={0.5}
       data={data}
+      extraData={data}
       renderItem={renderItem}
       keyExtractor={(_item, index) => index.toString()}
     />

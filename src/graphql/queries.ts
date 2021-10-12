@@ -223,7 +223,7 @@ export const GET_FOLLOWED_USERS = gql`
 `;
 
 export const GET_NOTIFICATIONS = gql`
-  query Notifications($offset: Int!, $limit: Int!) {
+  query notifications($offset: Int!, $limit: Int!) {
     notifications(offset: $offset, limit: $limit) {
       data {
         ...NotificationFragment

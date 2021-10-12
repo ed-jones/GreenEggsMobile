@@ -164,6 +164,7 @@ export const NotificationFragment = gql`
     }
     createdAt
     read
+    linkId
   }
   ${UserFragment}
 `;

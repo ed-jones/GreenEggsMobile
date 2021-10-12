@@ -915,6 +915,7 @@ export interface ReadNotification_readNotification_data {
   concerns: ReadNotification_readNotification_data_concerns;
   createdAt: string;
   read: boolean;
+  linkId: string | null;
 }
 
 export interface ReadNotification_readNotification_error {
@@ -2086,10 +2087,10 @@ export interface FollowedUsersVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: Notifications
+// GraphQL query operation: notifications
 // ====================================================
 
-export interface Notifications_notifications_data_concerns {
+export interface notifications_notifications_data_concerns {
   __typename: "User";
   id: string;
   firstName: string;
@@ -2100,31 +2101,32 @@ export interface Notifications_notifications_data_concerns {
   verified: boolean;
 }
 
-export interface Notifications_notifications_data {
+export interface notifications_notifications_data {
   __typename: "Notification";
   id: string;
   type: NotificationType;
-  concerns: Notifications_notifications_data_concerns;
+  concerns: notifications_notifications_data_concerns;
   createdAt: string;
   read: boolean;
+  linkId: string | null;
 }
 
-export interface Notifications_notifications_error {
+export interface notifications_notifications_error {
   __typename: "Error";
   message: string;
 }
 
-export interface Notifications_notifications {
+export interface notifications_notifications {
   __typename: "NotificationsResult";
-  data: Notifications_notifications_data[];
-  error: Notifications_notifications_error | null;
+  data: notifications_notifications_data[];
+  error: notifications_notifications_error | null;
 }
 
-export interface Notifications {
-  notifications: Notifications_notifications;
+export interface notifications {
+  notifications: notifications_notifications;
 }
 
-export interface NotificationsVariables {
+export interface notificationsVariables {
   offset: number;
   limit: number;
 }
@@ -2480,6 +2482,7 @@ export interface NotificationFragment {
   concerns: NotificationFragment_concerns;
   createdAt: string;
   read: boolean;
+  linkId: string | null;
 }
 
 /* tslint:disable */

@@ -37,6 +37,24 @@ export function useLazyList<
       offset: 0,
       limit,
     } as TVariables,
+    onCompleted: (data) => {
+      if ((data[dataKey].data?.length ?? limit) < limit) {
+        setDone(true);
+      } else {
+        queryResult.fetchMore<TData, TVariables>({
+          variables: {
+            ...variables,
+            offset: data[dataKey]?.data?.length ?? limit,
+            limit,
+          } as TVariables,
+        }).then((data) => {
+          console.log(data)
+          if (data.data[dataKey].data?.length === 0 ) {
+            setDone(true);
+          }
+        })
+      }
+    }
   });
 
   async function nextPage() {
@@ -143,6 +161,7 @@ export const LazyList = <
   return (
     <FlatList
       {...props}
+      initialNumToRender={limit}
       refreshing={refetching}
       onRefresh={refetch}
       onEndReached={() => nextPage()}

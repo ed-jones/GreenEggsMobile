@@ -15,3 +15,4 @@ import * as Icons from './icons';
 export { Icons };
 export * from './like-counter';
 export * from './comment-counter';
+export * from './save-recipe-button';

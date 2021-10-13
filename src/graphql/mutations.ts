@@ -247,22 +247,30 @@ export const DELETE_COMMENT = gql`
 export const SAVE_RECIPE = gql`
   mutation SaveRecipe($recipeId: String!) {
     saveRecipe(recipeId: $recipeId) {
+      data {
+        ...RecipeFragment
+      }
       error {
         ...ErrorFragment
       }
     }
   }
+  ${Fragments.RecipeFragment}
   ${Fragments.ErrorFragment}
 `;
 
 export const UNSAVE_RECIPE = gql`
   mutation UnsaveRecipe($recipeId: String!) {
     unsaveRecipe(recipeId: $recipeId) {
+      data {
+        ...RecipeFragment
+      }
       error {
         ...ErrorFragment
       }
     }
   }
+  ${Fragments.RecipeFragment}
   ${Fragments.ErrorFragment}
 `;
 

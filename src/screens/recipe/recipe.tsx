@@ -17,7 +17,7 @@ import { RecipeDirections } from "./recipe-directions";
 import { RecipeCommentList } from "./recipe-comment-list";
 import { LoadingScreen } from "../loading-screen";
 import { RecipeAddComment } from "./recipe-add-comment";
-import { TopNavigation, Background, ViewMore } from "@greeneggs/ui";
+import { TopNavigation, Background, ViewMore, SaveRecipeButton } from "@greeneggs/ui";
 
 const styles = StyleSheet.create({
   coverPhoto: {
@@ -62,16 +62,6 @@ export const Recipe = ({ route, navigation }: any) => {
     }
   );
 
-  const [saveRecipe] = useMutation(Mutations.SAVE_RECIPE, {
-    variables: { recipeId },
-    refetchQueries: [Queries.GET_RECIPE, "recipe", Queries.GET_SAVED_RECIPES],
-  });
-
-  const [unsaveRecipe] = useMutation(Mutations.UNSAVE_RECIPE, {
-    variables: { recipeId },
-    refetchQueries: [Queries.GET_RECIPE, "recipe", Queries.GET_SAVED_RECIPES],
-  });
-
   if (loading || !data || !data.recipe.data) return <LoadingScreen />;
   if (error || data.recipe.error)
     return <Text>{error?.message || data.recipe.error?.message}</Text>;
@@ -86,16 +76,7 @@ export const Recipe = ({ route, navigation }: any) => {
         <TopNavigation
           style={{ height: 64, alignItems: "flex-start" }}
           accessoryRight={() => (
-            <TopNavigationAction
-              icon={(iconProps) =>
-                recipe.saved ? (
-                  <Icon {...iconProps} name="bookmark" />
-                ) : (
-                  <Icon {...iconProps} name="bookmark-outline" />
-                )
-              }
-              onPress={() => (recipe.saved ? unsaveRecipe() : saveRecipe())}
-            />
+            <SaveRecipeButton recipeId={recipeId} saved={recipe.saved} />
           )}
         />
       )}

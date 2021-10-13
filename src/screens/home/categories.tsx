@@ -83,7 +83,6 @@ export const Categories: FC = () => {
         }}
         dataKey="categories"
         emptyMessage="No categories found."
-        errorMessage="No categories found."
         horizontal={false}
         numColumns={2}
         columnWrapperStyle={{ paddingHorizontal: 16 }}
@@ -95,6 +94,7 @@ export const Categories: FC = () => {
               }
               name={category.name}
               coverImage={category.coverImage}
+              key={category.id}
             />
           ) : null
         }

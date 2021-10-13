@@ -42,7 +42,6 @@ export const Category: FC = () => {
         }}
         dataKey="recipes"
         emptyMessage="No recipes found!"
-        errorMessage="No recipes found!"
         renderItem={({ item: myRecipe }) => (
           <View style={{ marginBottom: 16, marginHorizontal: 16 }}>
             <RecipeCardSmall

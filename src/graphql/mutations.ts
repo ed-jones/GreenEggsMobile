@@ -184,22 +184,30 @@ export const ADD_RECIPE_COMMENT_REPLY = gql`
 export const LIKE_RECIPE = gql`
   mutation LikeRecipe($recipeId: String!) {
     likeRecipe(recipeId: $recipeId) {
+      data {
+        ...RecipeFragment
+      }
       error {
         ...ErrorFragment
       }
     }
   }
+  ${Fragments.RecipeFragment}
   ${Fragments.ErrorFragment}
 `;
 
 export const UNLIKE_RECIPE = gql`
   mutation UnlikeRecipe($recipeId: String!) {
     unlikeRecipe(recipeId: $recipeId) {
+      data {
+        ...RecipeFragment
+      }
       error {
         ...ErrorFragment
       }
     }
   }
+  ${Fragments.RecipeFragment}
   ${Fragments.ErrorFragment}
 `;
 

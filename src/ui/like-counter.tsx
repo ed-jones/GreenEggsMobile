@@ -1,8 +1,8 @@
-import React, { FC, useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { Mutations, Queries } from '@greeneggs/graphql';
-import { LikeRecipe, UnlikeRecipe } from '@greeneggs/types/graphql';
-import { LabelledIcon } from './labelled-icon';
+import React, { FC, useState } from "react";
+import { useMutation } from "@apollo/client";
+import { Mutations } from "@greeneggs/graphql";
+import { LikeRecipe, UnlikeRecipe } from "@greeneggs/types/graphql";
+import { LabelledIcon } from "./labelled-icon";
 
 interface LikeCounterProps {
   likeCount: number;
@@ -10,7 +10,11 @@ interface LikeCounterProps {
   liked: boolean;
 }
 
-export const LikeCounter: FC<LikeCounterProps> = ({ likeCount, recipeId, liked }) => {
+export const LikeCounter: FC<LikeCounterProps> = ({
+  likeCount,
+  recipeId,
+  liked,
+}) => {
   // Use local state for instant feedback on slow networks
   const [likedState, setLikedState] = useState(liked);
   const [likeCountState, setLikeCountState] = useState(likeCount);
@@ -19,19 +23,17 @@ export const LikeCounter: FC<LikeCounterProps> = ({ likeCount, recipeId, liked }
     variables: {
       recipeId,
     },
-    refetchQueries: [Queries.GET_RECIPE, "recipe"],
   });
 
   const [unlikeRecipe] = useMutation<UnlikeRecipe>(Mutations.UNLIKE_RECIPE, {
     variables: {
-      recipeId: recipeId,
+      recipeId,
     },
-    refetchQueries: [Queries.GET_RECIPE, "recipe"],
   });
 
   function handleLikeRecipe() {
     setLikedState(true);
-    setLikeCountState(likeCountState + 1)
+    setLikeCountState(likeCountState + 1);
     likeRecipe().catch(() => {
       // Undo local state change if mutation fails
       setLikedState(false);
@@ -57,4 +59,4 @@ export const LikeCounter: FC<LikeCounterProps> = ({ likeCount, recipeId, liked }
       onPress={likedState ? handleUnlikeRecipe : handleLikeRecipe}
     />
   );
-}
+};

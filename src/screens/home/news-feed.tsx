@@ -40,7 +40,6 @@ export function NewsFeed() {
         variables={{}}
         dataKey="newsFeed"
         emptyMessage="News feed empty! Try following some users to see their latest recipes."
-        errorMessage="Error! No recipes found."
         renderItem={({ item: recipe, index }) => (
           <View
             key={recipe?.id}

@@ -22,10 +22,9 @@ export function useLazyList<
   query,
   variables,
   dataKey,
-  limit = 2,
+  limit = 5,
 }: UseLazyListProps<TVariables, TData>) {
   const [done, setDone] = useState(false);
-  const [data, setData] = useState<TDataType[]>([]);
   const [refetching, setRefetching] = useState(false);
 
   useEffect(() => {
@@ -38,36 +37,34 @@ export function useLazyList<
       offset: 0,
       limit,
     } as TVariables,
-    onCompleted: (data) => {
-      const d = data[dataKey]?.data;
-      if (d) {
-        setData(d);
-      }
-    },
   });
-
-  useEffect(() => {
-    const d = queryResult.data?.[dataKey]?.data;
-    if (d) {
-      setData(d);
-    }
-  }, [queryResult.data]);
 
   async function nextPage() {
     if (!done) {
       const result = await queryResult.fetchMore<TData, TVariables>({
         variables: {
           ...variables,
-          offset: data.length,
+          offset: queryResult?.data?.[dataKey]?.data?.length,
           limit,
         } as TVariables,
+        updateQuery: (prev, { fetchMoreResult }) => {
+          const merged = {
+            ...prev,
+            [dataKey]: {
+              error: null,
+              data: [
+                ...(prev?.[dataKey]?.data ?? []),
+                ...(fetchMoreResult?.[dataKey]?.data ?? []),
+              ],
+            },
+          };
+          return merged;
+        },
       });
       const d = result.data[dataKey]?.data;
       if (d) {
         if (d.length === 0) {
           setDone(true);
-        } else {
-          setData([...data, ...d]);
         }
       }
     }
@@ -81,7 +78,14 @@ export function useLazyList<
     }
   };
 
-  return { ...queryResult, refetch, refetching, data, nextPage, done };
+  return {
+    ...queryResult,
+    refetch,
+    refetching,
+    data: queryResult?.data?.[dataKey]?.data ?? [],
+    nextPage,
+    done,
+  };
 }
 
 export type TDataWithData<TData, TDataType> = {
@@ -147,12 +151,10 @@ export const LazyList = <
       keyExtractor={(_item, index) => index.toString()}
       contentContainerStyle={{ flexGrow: 1 }}
       ListEmptyComponent={
-        <View
-          style={{ flexGrow: 1,  justifyContent: "center" }}
-        >
+        <View style={{ flexGrow: 1, justifyContent: "center" }}>
           {loading ? (
-            <View style={{ alignItems: 'center' }}>
-              <Spinner/>
+            <View style={{ alignItems: "center" }}>
+              <Spinner />
             </View>
           ) : (
             <EmptyState title="Nothing here!" description={emptyMessage} />

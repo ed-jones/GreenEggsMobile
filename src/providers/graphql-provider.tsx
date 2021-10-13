@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext } from "react";
 import { onError } from "@apollo/client/link/error";
 import {
   ApolloClient,
@@ -9,7 +9,9 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { createUploadLink } from "apollo-upload-client";
 
-import { AuthContext } from './auth-provider';
+import { AuthContext } from "./auth-provider";
+import { offsetLimitPagination } from "@apollo/client/utilities";
+import { NewsFeed, NewsFeed_newsFeed_data, Trending } from "@greeneggs/types/graphql";
 
 export const GraphQLProvider: FC = ({ children }) => {
   const { token } = useContext(AuthContext);
@@ -44,10 +46,5 @@ export const GraphQLProvider: FC = ({ children }) => {
       : (uploadLink as unknown as ApolloLink),
   });
 
-  return (
-    <ApolloProvider client={client}>
-      {children}
-    </ApolloProvider>
-  )
-
-}
+  return <ApolloProvider client={client}>{children}</ApolloProvider>;
+};

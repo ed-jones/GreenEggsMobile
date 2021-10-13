@@ -1,6 +1,6 @@
 import React from "react";
 import { noAvatar } from '@greeneggs/assets';
-import { LabelledIcon, ViewMore } from "@greeneggs/ui";
+import { CommentCounter, LabelledIcon, ViewMore } from "@greeneggs/ui";
 import { Mutations, Queries } from '@greeneggs/graphql';
 import { convertTimeEstimate } from "@greeneggs/utils";
 import { View, StyleSheet, Pressable } from "react-native";
@@ -109,16 +109,7 @@ export const RecipeDetailsCard = ({
         </Pressable>
         <View style={styles.row}>
           <LikeCounter likeCount={likeCount} liked={liked} recipeId={id} />
-          <LabelledIcon
-            label={String(commentCount)}
-            iconName="message-square-outline"
-            onPress={() => {
-              navigation.navigate("RecipeAllComments", {
-                comments,
-                commentCount,
-              });
-            }}
-          />
+          <CommentCounter commentCount={commentCount} comments={comments} />
         </View>
       </View>
     </Card>

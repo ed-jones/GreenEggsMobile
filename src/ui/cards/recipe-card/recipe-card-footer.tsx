@@ -1,9 +1,10 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Text } from "@ui-kitten/components";
-import { LabelledIcon, LikeCounter } from "@greeneggs/ui";
-import { recipes_recipes_data } from "@greeneggs/types/graphql";
+import { CommentCounter, LabelledIcon, LikeCounter } from "@greeneggs/ui";
+import { recipes_recipes_data, recipes_recipes_data_comments } from "@greeneggs/types/graphql";
 import { convertTimeEstimate } from "@greeneggs/utils";
+import { useNavigation } from "@react-navigation/core";
 
 const styles = StyleSheet.create({
   view: {
@@ -36,6 +37,7 @@ export interface IRecipeCardFooterProps extends Partial<recipes_recipes_data> {
   timeEstimate: string;
   liked: boolean;
   id: string;
+  comments: recipes_recipes_data_comments[];
 }
 
 export const RecipeCardFooter = ({
@@ -47,7 +49,9 @@ export const RecipeCardFooter = ({
   createdAt,
   liked,
   id,
-}: IRecipeCardFooterProps) => (
+  comments,
+}: IRecipeCardFooterProps) => {
+  return (
   <View style={styles.view}>
     <View style={styles.labelledIcons}>
       <View>
@@ -71,11 +75,8 @@ export const RecipeCardFooter = ({
       </View>
       <View style={styles.labelledIconGroup}>
         <LikeCounter likeCount={likeCount} liked={liked} recipeId={id} />
-        <LabelledIcon
-          label={String(commentCount)}
-          iconName="message-square-outline"
-        />
+        <CommentCounter commentCount={commentCount} comments={comments} />
       </View>
     </View>
   </View>
-);
+)};

@@ -14,3 +14,4 @@ export * from './form';
 import * as Icons from './icons';
 export { Icons };
 export * from './like-counter';
+export * from './comment-counter';

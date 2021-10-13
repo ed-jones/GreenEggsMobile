@@ -176,7 +176,7 @@ export const Notifications: FC = () => {
         RecipeFilter
       >
         query={Queries.GET_NOTIFICATIONS}
-        limit={10}
+        limit={15}
         variables={{}}
         dataKey="notifications"
         emptyMessage="You don't have any notifications."

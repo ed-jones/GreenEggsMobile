@@ -54,6 +54,7 @@ export const Followers = () => {
         Sort,
         RecipeFilter
       >
+        limit={15}
         query={Queries.GET_FOLLOWED_USERS}
         variables={{
           userId,
@@ -61,7 +62,6 @@ export const Followers = () => {
         }}
         dataKey="followedUsers"
         emptyMessage="This user isn't being followed by anyone."
-        errorMessage="This user isn't being followed by anyone."
         renderItem={({ item: user }) => <UserListItem user={user} />}
       />
     </Background>

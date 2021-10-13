@@ -35,6 +35,7 @@ export function Trending() {
         Sort,
         RecipeFilter
       >
+        limit={4}
         query={Queries.TRENDING}
         variables={{}}
         dataKey="trending"

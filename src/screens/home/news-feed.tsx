@@ -35,6 +35,7 @@ export function NewsFeed() {
         Sort,
         RecipeFilter
       >
+        limit={4}
         query={Queries.NEWS_FEED}
         variables={{}}
         dataKey="newsFeed"

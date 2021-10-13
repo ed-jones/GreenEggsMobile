@@ -22,7 +22,7 @@ export function useLazyList<
   query,
   variables,
   dataKey,
-  limit = 5,
+  limit = 10,
 }: UseLazyListProps<TVariables, TData>) {
   const [done, setDone] = useState(false);
   const [refetching, setRefetching] = useState(false);

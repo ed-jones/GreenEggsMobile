@@ -12,8 +12,8 @@ const TopTabBar = ({ navigation, state }: MaterialTopTabBarProps) => (
     selectedIndex={state.index}
     onSelect={(index) => navigation.navigate(state.routeNames[index])}
   >
-    <Tab title="NEWS FEED" />
     <Tab title="TRENDING" />
+    <Tab title="NEWS FEED" />
     <Tab title="CATEGORIES" />
   </TabBar>
 );
@@ -26,8 +26,8 @@ export function HomeTabs() {
         <TopTabBar {...props} />
       )}
     >
-      <Screen name="NEWS FEED" component={NewsFeed} />
       <Screen name="TRENDING" component={Trending} />
+      <Screen name="NEWS FEED" component={NewsFeed} />
       <Screen name="CATEGORIES" component={Categories} />
     </Navigator>
   );

@@ -165,7 +165,7 @@ export const LazyList = <
             style={{
               alignItems: "center",
               justifyContent: "center",
-              marginBottom: 16,
+              marginVertical: 16,
             }}
           >
             {!done ? (

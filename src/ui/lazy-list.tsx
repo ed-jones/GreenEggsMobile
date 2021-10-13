@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FlatList, FlatListProps, View } from "react-native";
 import { Callout } from "@greeneggs/ui";
 import { Spinner, Text } from "@ui-kitten/components";
+import { EmptyState } from "./empty-state";
 
 interface UseLazyListProps<TVariables, TData> {
   query: DocumentNode;
@@ -101,7 +102,6 @@ export interface LazyListProps<TData, TVariables, TDataType>
   extends UseLazyListProps<TVariables, TData>,
     Omit<FlatListProps<TDataType>, "data"> {
   emptyMessage: string;
-  errorMessage: string;
 }
 
 export const LazyList = <
@@ -116,7 +116,6 @@ export const LazyList = <
   dataKey,
   renderItem,
   emptyMessage,
-  errorMessage,
   ...props
 }: LazyListProps<TData, TVariables, TDataType>) => {
   const { loading, error, data, refetch, refetching, nextPage, done } =
@@ -146,14 +145,19 @@ export const LazyList = <
       extraData={data}
       renderItem={renderItem}
       keyExtractor={(_item, index) => index.toString()}
+      contentContainerStyle={{ flexGrow: 1 }}
       ListEmptyComponent={
-        loading ? <Spinner /> : (
-          <Callout
-            style={{ marginHorizontal: 16 }}
-            message={errorMessage}
-            type="info"
-          />
-        )
+        <View
+          style={{ flexGrow: 1,  justifyContent: "center" }}
+        >
+          {loading ? (
+            <View style={{ alignItems: 'center' }}>
+              <Spinner/>
+            </View>
+          ) : (
+            <EmptyState title="Nothing here!" description={emptyMessage} />
+          )}
+        </View>
       }
       ListFooterComponent={
         data.length > 0 ? (

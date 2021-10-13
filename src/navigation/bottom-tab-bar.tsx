@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Alert, StyleSheet, View } from "react-native";
 import {
   BottomTabBarOptions,
@@ -10,9 +10,14 @@ import {
   Icon,
   ThemedComponentProps,
   withStyles,
+  BottomNavigationTabProps,
 } from "@ui-kitten/components";
 import Svg, { Circle } from "react-native-svg";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { CountCircle } from "@greeneggs/screens/search/common";
+import { useQuery } from "@apollo/client";
+import { Queries } from "@greeneggs/graphql";
+import { NotificationCount, notifications } from "@greeneggs/types/graphql";
 
 const styles = StyleSheet.create({
   primary: {
@@ -96,6 +101,56 @@ const BottomNavigationIcon = withStyles(
   }
 );
 
+interface NotificationIconProps extends BottomNavigationTabProps {
+  selected: boolean;
+}
+
+const NotificationIcon = withStyles(
+  ({
+    selected,
+    eva,
+    ...props
+  }: NotificationIconProps & ThemedComponentProps) => {
+    const { data } = useQuery<NotificationCount>(
+      Queries.GET_NOTIFICATION_COUNT, {
+        pollInterval: 10000,
+      }
+    );
+    console.log(data);
+    const notificationCount =
+      data?.notificationCount.data?.notificationCount ?? 0;
+
+    return (
+      <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+        {notificationCount > 0 && (
+          <Svg
+            height="8"
+            width="8"
+            style={{
+              position: "absolute",
+              zIndex: 1,
+              marginTop: -4,
+            }}
+          >
+            <Circle
+              cx="4"
+              cy="4"
+              r="4"
+              fill={eva?.theme?.["color-primary-500"]}
+            />
+          </Svg>
+        )}
+        <BottomNavigationIcon
+          {...props}
+          name="bell"
+          iconStyle={IconStyle.Secondary}
+          selected={selected}
+        />
+      </View>
+    );
+  }
+);
+
 export const BottomTabBar = withStyles(
   ({
     navigation,
@@ -171,12 +226,7 @@ export const BottomTabBar = withStyles(
         />
         <BottomNavigationTab
           icon={(props) => (
-            <BottomNavigationIcon
-              {...props}
-              name="bell"
-              iconStyle={IconStyle.Secondary}
-              selected={selectedIndex == 3}
-            />
+            <NotificationIcon {...props} selected={selectedIndex == 3} />
           )}
         />
         <BottomNavigationTab

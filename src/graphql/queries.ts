@@ -236,3 +236,17 @@ export const GET_NOTIFICATIONS = gql`
   ${Fragments.NotificationFragment}
   ${Fragments.ErrorFragment}
 `;
+
+export const GET_NOTIFICATION_COUNT = gql`
+  query NotificationCount {
+    notificationCount {
+      data {
+        notificationCount
+      }
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.ErrorFragment}
+`;

@@ -985,6 +985,115 @@ export interface DeleteCommentVariables {
 // GraphQL mutation operation: SaveRecipe
 // ====================================================
 
+export interface SaveRecipe_saveRecipe_data_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface SaveRecipe_saveRecipe_data_categories {
+  __typename: "Category";
+  name: string;
+}
+
+export interface SaveRecipe_saveRecipe_data_diets {
+  __typename: "Diet";
+  name: string;
+}
+
+export interface SaveRecipe_saveRecipe_data_allergies {
+  __typename: "Allergy";
+  name: string;
+}
+
+export interface SaveRecipe_saveRecipe_data_ingredients {
+  __typename: "Ingredient";
+  name: string;
+  description: string | null;
+  quantity: number | null;
+  unit: string | null;
+}
+
+export interface SaveRecipe_saveRecipe_data_steps {
+  __typename: "RecipeStep";
+  title: string;
+  description: string;
+  image: string | null;
+}
+
+export interface SaveRecipe_saveRecipe_data_comments_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface SaveRecipe_saveRecipe_data_comments_replies_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface SaveRecipe_saveRecipe_data_comments_replies {
+  __typename: "RecipeCommentReply";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  submittedBy: SaveRecipe_saveRecipe_data_comments_replies_submittedBy;
+}
+
+export interface SaveRecipe_saveRecipe_data_comments {
+  __typename: "RecipeComment";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  createdAt: string;
+  deleted: boolean;
+  submittedBy: SaveRecipe_saveRecipe_data_comments_submittedBy;
+  replies: SaveRecipe_saveRecipe_data_comments_replies[];
+}
+
+export interface SaveRecipe_saveRecipe_data {
+  __typename: "Recipe";
+  id: string;
+  subtitle: string;
+  title: string;
+  description: string;
+  submittedBy: SaveRecipe_saveRecipe_data_submittedBy;
+  commentCount: number;
+  likeCount: number;
+  createdAt: string;
+  servingCount: number;
+  timeEstimate: string;
+  coverImage: string;
+  liked: boolean;
+  saved: boolean;
+  categories: SaveRecipe_saveRecipe_data_categories[];
+  diets: SaveRecipe_saveRecipe_data_diets[];
+  allergies: SaveRecipe_saveRecipe_data_allergies[];
+  ingredients: SaveRecipe_saveRecipe_data_ingredients[];
+  steps: SaveRecipe_saveRecipe_data_steps[];
+  comments: SaveRecipe_saveRecipe_data_comments[];
+}
+
 export interface SaveRecipe_saveRecipe_error {
   __typename: "Error";
   message: string;
@@ -992,6 +1101,7 @@ export interface SaveRecipe_saveRecipe_error {
 
 export interface SaveRecipe_saveRecipe {
   __typename: "SaveRecipeResult";
+  data: SaveRecipe_saveRecipe_data | null;
   error: SaveRecipe_saveRecipe_error | null;
 }
 
@@ -1012,6 +1122,115 @@ export interface SaveRecipeVariables {
 // GraphQL mutation operation: UnsaveRecipe
 // ====================================================
 
+export interface UnsaveRecipe_unsaveRecipe_data_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface UnsaveRecipe_unsaveRecipe_data_categories {
+  __typename: "Category";
+  name: string;
+}
+
+export interface UnsaveRecipe_unsaveRecipe_data_diets {
+  __typename: "Diet";
+  name: string;
+}
+
+export interface UnsaveRecipe_unsaveRecipe_data_allergies {
+  __typename: "Allergy";
+  name: string;
+}
+
+export interface UnsaveRecipe_unsaveRecipe_data_ingredients {
+  __typename: "Ingredient";
+  name: string;
+  description: string | null;
+  quantity: number | null;
+  unit: string | null;
+}
+
+export interface UnsaveRecipe_unsaveRecipe_data_steps {
+  __typename: "RecipeStep";
+  title: string;
+  description: string;
+  image: string | null;
+}
+
+export interface UnsaveRecipe_unsaveRecipe_data_comments_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface UnsaveRecipe_unsaveRecipe_data_comments_replies_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface UnsaveRecipe_unsaveRecipe_data_comments_replies {
+  __typename: "RecipeCommentReply";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  submittedBy: UnsaveRecipe_unsaveRecipe_data_comments_replies_submittedBy;
+}
+
+export interface UnsaveRecipe_unsaveRecipe_data_comments {
+  __typename: "RecipeComment";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  createdAt: string;
+  deleted: boolean;
+  submittedBy: UnsaveRecipe_unsaveRecipe_data_comments_submittedBy;
+  replies: UnsaveRecipe_unsaveRecipe_data_comments_replies[];
+}
+
+export interface UnsaveRecipe_unsaveRecipe_data {
+  __typename: "Recipe";
+  id: string;
+  subtitle: string;
+  title: string;
+  description: string;
+  submittedBy: UnsaveRecipe_unsaveRecipe_data_submittedBy;
+  commentCount: number;
+  likeCount: number;
+  createdAt: string;
+  servingCount: number;
+  timeEstimate: string;
+  coverImage: string;
+  liked: boolean;
+  saved: boolean;
+  categories: UnsaveRecipe_unsaveRecipe_data_categories[];
+  diets: UnsaveRecipe_unsaveRecipe_data_diets[];
+  allergies: UnsaveRecipe_unsaveRecipe_data_allergies[];
+  ingredients: UnsaveRecipe_unsaveRecipe_data_ingredients[];
+  steps: UnsaveRecipe_unsaveRecipe_data_steps[];
+  comments: UnsaveRecipe_unsaveRecipe_data_comments[];
+}
+
 export interface UnsaveRecipe_unsaveRecipe_error {
   __typename: "Error";
   message: string;
@@ -1019,6 +1238,7 @@ export interface UnsaveRecipe_unsaveRecipe_error {
 
 export interface UnsaveRecipe_unsaveRecipe {
   __typename: "UnsaveRecipeResult";
+  data: UnsaveRecipe_unsaveRecipe_data | null;
   error: UnsaveRecipe_unsaveRecipe_error | null;
 }
 
@@ -2349,6 +2569,35 @@ export interface notifications {
 export interface notificationsVariables {
   offset: number;
   limit: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: NotificationCount
+// ====================================================
+
+export interface NotificationCount_notificationCount_data {
+  __typename: "NotificationCount";
+  notificationCount: number;
+}
+
+export interface NotificationCount_notificationCount_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface NotificationCount_notificationCount {
+  __typename: "NotificationCountResult";
+  data: NotificationCount_notificationCount_data | null;
+  error: NotificationCount_notificationCount_error | null;
+}
+
+export interface NotificationCount {
+  notificationCount: NotificationCount_notificationCount;
 }
 
 /* tslint:disable */

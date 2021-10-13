@@ -120,6 +120,7 @@ export const LazyList = <
   dataKey,
   renderItem,
   emptyMessage,
+  limit,
   ...props
 }: LazyListProps<TData, TVariables, TDataType>) => {
   const { loading, error, data, refetch, refetching, nextPage, done } =
@@ -127,6 +128,7 @@ export const LazyList = <
       query,
       variables,
       dataKey,
+      limit,
     });
 
   if (error) {

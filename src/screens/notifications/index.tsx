@@ -176,10 +176,10 @@ export const Notifications: FC = () => {
         RecipeFilter
       >
         query={Queries.GET_NOTIFICATIONS}
+        limit={10}
         variables={{}}
         dataKey="notifications"
         emptyMessage="You don't have any notifications."
-        errorMessage="You don't have any notifications."
         renderItem={({ item: notification, index }) => {
           const NotificationListItem =
             NOTIFICATION_LIST_ITEM_MAP[notification.type];

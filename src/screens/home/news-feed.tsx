@@ -8,9 +8,8 @@ import {
   Sort,
 } from "@greeneggs/types/graphql";
 import { Queries } from "@greeneggs/graphql";
-import { Background, LazyList } from "@greeneggs/ui";
+import { Background, LazyList, RecipeCard } from "@greeneggs/ui";
 import { useNavigation } from "@react-navigation/native";
-import { RecipeCard } from "./recipe-card";
 
 const CardVerticalMargin = 20;
 const CardHorizontalMargin = 24;

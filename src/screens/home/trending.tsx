@@ -9,10 +9,7 @@ import {
 } from "@greeneggs/types/graphql";
 import { Queries } from "@greeneggs/graphql";
 import { useNavigation } from "@react-navigation/core";
-import { Background, LazyList } from "@greeneggs/ui";
-
-import { RecipeCard} from "./recipe-card";
-
+import { Background, LazyList, RecipeCard } from "@greeneggs/ui";
 
 const CardVerticalMargin = 20;
 const CardHorizontalMargin = 24;
@@ -42,7 +39,6 @@ export function Trending() {
         variables={{}}
         dataKey="trending"
         emptyMessage="There are no trending recipes! This means nobody has uploaded a recipe for a while."
-        errorMessage="Error! No recipes found."
         renderItem={({ item: recipe, index }) => (
           <View
             key={recipe?.id}

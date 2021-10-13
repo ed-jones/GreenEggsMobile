@@ -90,5 +90,5 @@ export const LoggedInRoutes = [
   <Stack.Screen name="Following" component={Screens.Following} />,
   <Stack.Screen name="Followers" component={Screens.Followers} />,
   <Stack.Screen name="Category" component={Screens.Category} />,
-
+  <Stack.Screen name="AllCategories" component={Screens.AllCategories} />,
  ]

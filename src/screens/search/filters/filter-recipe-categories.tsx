@@ -65,7 +65,6 @@ export const FilterRecipeCategories: FC = () => {
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
         query={Queries.GET_CATEGORIES}
         emptyMessage={"No categories found"}
-        errorMessage={"Error"}
         variables={{
           query,
         }}

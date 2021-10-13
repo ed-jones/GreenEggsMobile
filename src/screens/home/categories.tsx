@@ -6,9 +6,12 @@ import {
   RecipeFilter,
   Sort,
   Categories as CategoriesType,
+  CategoriesWithImages,
+  CategoriesWithImagesVariables,
+  CategoriesWithImages_categoriesWithImages_data,
 } from "@greeneggs/types/graphql";
 import { Background, Icons, LazyList } from "@greeneggs/ui";
-import { ListItem, Text, TopNavigation } from "@ui-kitten/components";
+import { Button, ListItem, Text, TopNavigation } from "@ui-kitten/components";
 import { ImageBackground, Pressable, StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/core";
@@ -71,33 +74,43 @@ export const Categories: FC = () => {
   return (
     <Background>
       <LazyList<
-        CategoriesType,
-        CategoriesVariables,
-        Categories_categories_data,
+        CategoriesWithImages,
+        CategoriesWithImagesVariables,
+        CategoriesWithImages_categoriesWithImages_data,
         Sort,
         RecipeFilter
       >
-        query={Queries.GET_CATEGORIES}
+        limit={20}
+        ListFooterComponent={
+          <Button
+            style={{ margin: 24, alignItems: "flex-start" }}
+            onPress={() => navigation.navigate("AllCategories")}
+          >
+            View All
+          </Button>
+        }
+        query={Queries.GET_CATEGORIES_WITH_IMAGES}
         variables={{
           query: "",
         }}
-        dataKey="categories"
+        dataKey="categoriesWithImages"
         emptyMessage="No categories found."
         horizontal={false}
         numColumns={2}
         columnWrapperStyle={{ paddingHorizontal: 16 }}
-        renderItem={({ item: category, index }) =>
-          category.coverImage ? (
-            <CategoryWithImage
-              onPress={() =>
-                navigation.navigate("Category", { categoryId: category.id, categoryName: category.name })
-              }
-              name={category.name}
-              coverImage={category.coverImage}
-              key={category.id}
-            />
-          ) : null
-        }
+        renderItem={({ item: category }) => (
+          <CategoryWithImage
+            onPress={() =>
+              navigation.navigate("Category", {
+                categoryId: category.id,
+                categoryName: category.name,
+              })
+            }
+            name={category.name}
+            coverImage={category.coverImage ?? ""}
+            key={category.id}
+          />
+        )}
       />
     </Background>
   );

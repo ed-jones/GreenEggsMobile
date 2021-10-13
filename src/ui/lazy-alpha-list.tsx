@@ -4,7 +4,7 @@ import {
   LazyListProps,
   TDataWithData,
   useLazyList,
-  useListRefresh,
+  useListRefetch,
 } from "./lazy-list";
 import { LoadingScreen } from "../screens/loading-screen";
 import { AlphaList, buildAlphaListItems, CategoriseItem } from "./alpha-list";
@@ -31,14 +31,13 @@ export const LazyListAlpha = <
   emptyMessage,
   categoriseItem,
 }: LazyListAlphaProps<TData, TVariables, TDataType>) => {
-  const { loading, error, data, refetch, nextPage } = useLazyList<
+  const { loading, error, data, refetch: refetchLazyList, nextPage } = useLazyList<
     TData,
     TVariables,
     TDataType,
     SortType,
     FilterType
   >({ query, variables, dataKey, limit: 10 });
-  const { refreshing, onRefresh } = useListRefresh(refetch);
 
   if (loading) {
     return (
@@ -73,8 +72,6 @@ export const LazyListAlpha = <
 
   return (
     <AlphaList
-      refreshing={refreshing}
-      onRefresh={onRefresh}
       onEndReached={() => nextPage()}
       onEndReachedThreshold={0.5}
       items={items}

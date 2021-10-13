@@ -2401,6 +2401,43 @@ export interface CategoriesVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: CategoriesWithImages
+// ====================================================
+
+export interface CategoriesWithImages_categoriesWithImages_data {
+  __typename: "Category";
+  id: string;
+  name: string;
+  coverImage: string | null;
+}
+
+export interface CategoriesWithImages_categoriesWithImages_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface CategoriesWithImages_categoriesWithImages {
+  __typename: "CategoriesResult";
+  data: CategoriesWithImages_categoriesWithImages_data[];
+  error: CategoriesWithImages_categoriesWithImages_error | null;
+}
+
+export interface CategoriesWithImages {
+  categoriesWithImages: CategoriesWithImages_categoriesWithImages;
+}
+
+export interface CategoriesWithImagesVariables {
+  offset: number;
+  limit: number;
+  query: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: Users
 // ====================================================
 

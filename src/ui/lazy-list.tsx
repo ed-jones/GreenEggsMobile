@@ -1,5 +1,5 @@
-import { DocumentNode, useQuery } from "@apollo/client";
-import React, { useEffect, useState } from "react";
+import { ApolloQueryResult, DocumentNode, useQuery } from "@apollo/client";
+import React, { ReactNode, useEffect, useState } from "react";
 import { FlatList, FlatListProps, View } from "react-native";
 import { Callout } from "@greeneggs/ui";
 import { Spinner, Text } from "@ui-kitten/components";
@@ -10,6 +10,23 @@ interface UseLazyListProps<TVariables, TData> {
   variables: Partial<Omit<TVariables, "offset" | "limit">>;
   dataKey: keyof TData;
   limit?: number;
+}
+
+export function useListRefetch<TData, TVariables>(
+  refetchFunction: (
+    variables?: Partial<TVariables> | undefined
+  ) => Promise<ApolloQueryResult<TData>>
+) {
+  const [refetching, setRefetching] = useState(false);
+  const refetch = async () => {
+    setRefetching(true);
+    const { data } = await refetchFunction();
+    if (data) {
+      setRefetching(false);
+    }
+  };
+
+  return { refetching, refetch };
 }
 
 export function useLazyList<
@@ -25,7 +42,6 @@ export function useLazyList<
   limit = 10,
 }: UseLazyListProps<TVariables, TData>) {
   const [done, setDone] = useState(false);
-  const [refetching, setRefetching] = useState(false);
 
   useEffect(() => {
     setDone(false);
@@ -41,20 +57,22 @@ export function useLazyList<
       if ((data[dataKey].data?.length ?? limit) < limit) {
         setDone(true);
       } else {
-        queryResult.fetchMore<TData, TVariables>({
-          variables: {
-            ...variables,
-            offset: data[dataKey]?.data?.length ?? limit,
-            limit,
-          } as TVariables,
-        }).then((data) => {
-          console.log(data)
-          if (data.data[dataKey].data?.length === 0 ) {
-            setDone(true);
-          }
-        })
+        queryResult
+          .fetchMore<TData, TVariables>({
+            variables: {
+              ...variables,
+              offset: data[dataKey]?.data?.length ?? limit,
+              limit,
+            } as TVariables,
+          })
+          .then((data) => {
+            console.log(data);
+            if (data.data[dataKey].data?.length === 0) {
+              setDone(true);
+            }
+          });
       }
-    }
+    },
   });
 
   async function nextPage() {
@@ -88,13 +106,7 @@ export function useLazyList<
     }
   }
 
-  const refetch = async () => {
-    setRefetching(true);
-    const { data } = await queryResult.refetch();
-    if (data) {
-      setRefetching(false);
-    }
-  };
+  const { refetch, refetching } = useListRefetch(queryResult.refetch);
 
   return {
     ...queryResult,
@@ -139,6 +151,7 @@ export const LazyList = <
   renderItem,
   emptyMessage,
   limit,
+  ListFooterComponent,
   ...props
 }: LazyListProps<TData, TVariables, TDataType>) => {
   const { loading, error, data, refetch, refetching, nextPage, done } =
@@ -183,7 +196,8 @@ export const LazyList = <
         </View>
       }
       ListFooterComponent={
-        data.length > 0 ? (
+        ListFooterComponent ||
+        (data.length > 0 ? (
           <View
             style={{
               alignItems: "center",
@@ -199,7 +213,7 @@ export const LazyList = <
               </Text>
             )}
           </View>
-        ) : undefined
+        ) : undefined)
       }
     />
   );

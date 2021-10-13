@@ -38,3 +38,4 @@ export * from './profile/following';
 export * from './profile/followers';
 export * from './notifications';
 export * from './home/category';
+export * from './home/all-categories';

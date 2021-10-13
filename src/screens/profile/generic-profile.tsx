@@ -121,8 +121,7 @@ const MyRecipes: FC<MyRecipesProps> = ({ query, userId, ...props }) => {
         },
       }}
       dataKey="recipes"
-      emptyMessage="You haven't uploaded any recipes! Once you've uploaded some recipes they'll be shown here."
-      errorMessage="No recipes found!"
+      emptyMessage="This user hasn't uploaded any recipes."
       renderItem={({ item: myRecipe }) => (
         <View style={{ marginBottom: 16, marginHorizontal: 16 }}>
           <RecipeCardSmall

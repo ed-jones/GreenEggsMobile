@@ -4,7 +4,7 @@ import { Card, Text } from "@ui-kitten/components";
 import { View, StyleSheet, Image } from "react-native";
 import { convertTimeEstimate } from "@greeneggs/utils";
 import { imageNotFound } from "@greeneggs/assets";
-import { LabelledIcon } from '@greeneggs/ui';
+import { LabelledIcon, LikeCounter } from '@greeneggs/ui';
 
 const styles = StyleSheet.create({
   card: {
@@ -52,10 +52,7 @@ export const RecipeCardSmall: FC<IRecipeCardSmall> = ({ recipe, onPress }) => {
           <Text category="s1">{`${recipe.submittedBy.firstName} ${recipe.submittedBy.lastName}`}</Text>
           <Text>{`${convertTimeEstimate(recipe.createdAt)} ago`}</Text>
           <View style={styles.labelledIcons}>
-            <LabelledIcon
-              label={String(recipe.likeCount)}
-              iconName="heart-outline"
-            />
+            <LikeCounter likeCount={recipe.likeCount} liked={recipe.liked} recipeId={recipe.id} />
             <LabelledIcon
               label={String(recipe.commentCount)}
               iconName="message-square-outline"

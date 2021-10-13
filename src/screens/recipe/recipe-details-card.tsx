@@ -12,6 +12,7 @@ import {
 import { Text, Card, Avatar } from "@ui-kitten/components";
 import { useMutation } from "@apollo/client";
 import { RecipeCategoriesTags } from "./recipe-categories-tags";
+import { LikeCounter } from "@greeneggs/ui/like-counter";
 
 const styles = StyleSheet.create({
   cardSection: {
@@ -54,21 +55,6 @@ export const RecipeDetailsCard = ({
       submittedBy: submittedBy,
     });
   };
-
-  const [likeRecipe] = useMutation<LikeRecipe>(Mutations.LIKE_RECIPE, {
-    variables: {
-      recipeId: id,
-    },
-    refetchQueries: [Queries.GET_RECIPE, "recipe"],
-  });
-
-  const [unlikeRecipe] = useMutation<UnlikeRecipe>(Mutations.UNLIKE_RECIPE, {
-    variables: {
-      recipeId: id,
-    },
-    refetchQueries: [Queries.GET_RECIPE, "recipe"],
-  });
-
   return (
     <Card
       header={() => (
@@ -121,13 +107,8 @@ export const RecipeDetailsCard = ({
             >{`${submittedBy.firstName} ${submittedBy.lastName}`}</Text>
           </View>
         </Pressable>
-
         <View style={styles.row}>
-          <LabelledIcon
-            label={String(likeCount)}
-            iconName={liked ? "heart" : "heart-outline"}
-            onPress={liked ? unlikeRecipe : likeRecipe}
-          />
+          <LikeCounter likeCount={likeCount} liked={liked} recipeId={id} />
           <LabelledIcon
             label={String(commentCount)}
             iconName="message-square-outline"

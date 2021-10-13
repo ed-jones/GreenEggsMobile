@@ -13,3 +13,4 @@ export * from './cards';
 export * from './form';
 import * as Icons from './icons';
 export { Icons };
+export * from './like-counter';

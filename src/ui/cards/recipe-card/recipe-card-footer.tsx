@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Text } from "@ui-kitten/components";
-import { CommentCounter, LabelledIcon, LikeCounter } from "@greeneggs/ui";
+import { CommentCounter, LabelledIcon, RecipeLikeCounter } from "@greeneggs/ui";
 import { recipes_recipes_data, recipes_recipes_data_comments, recipes_recipes_data_submittedBy } from "@greeneggs/types/graphql";
 import { convertTimeEstimate } from "@greeneggs/utils";
 import { useNavigation } from "@react-navigation/core";
@@ -76,7 +76,7 @@ export const RecipeCardFooter = ({
         />
       </View>
       <View style={styles.labelledIconGroup}>
-        <LikeCounter likeCount={likeCount} liked={liked} recipeId={id} submittedById={submittedBy.id}/>
+        <RecipeLikeCounter likeCount={likeCount} liked={liked} recipeId={id} submittedById={submittedBy.id}/>
         <CommentCounter commentCount={commentCount} comments={comments} />
       </View>
     </View>

@@ -12,7 +12,7 @@ import {
 import { Text, Card, Avatar } from "@ui-kitten/components";
 import { useMutation } from "@apollo/client";
 import { RecipeCategoriesTags } from "./recipe-categories-tags";
-import { LikeCounter } from "@greeneggs/ui/like-counter";
+import { RecipeLikeCounter } from "@greeneggs/ui";
 import { useNavigateToProfile } from "@greeneggs/navigation";
 
 const styles = StyleSheet.create({
@@ -104,7 +104,7 @@ export const RecipeDetailsCard = ({
           </View>
         </Pressable>
         <View style={styles.row}>
-          <LikeCounter likeCount={likeCount} liked={liked} recipeId={id} submittedById={submittedBy.id}/>
+          <RecipeLikeCounter likeCount={likeCount} liked={liked} recipeId={id} submittedById={submittedBy.id}/>
           <CommentCounter commentCount={commentCount} comments={comments} />
         </View>
       </View>

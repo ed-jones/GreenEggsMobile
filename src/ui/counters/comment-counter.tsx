@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { recipes_recipes_data_comments } from '@greeneggs/types/graphql';
 import { useNavigation } from '@react-navigation/core';
-import { LabelledIcon } from './labelled-icon';
+import { LabelledIcon } from '../labelled-icon';
 
 interface CommentCounterProps {
   commentCount: number;

@@ -98,6 +98,7 @@ export const RecipeFragment = gql`
     liked
     saved
     categories {
+      id
       name
     }
     diets {

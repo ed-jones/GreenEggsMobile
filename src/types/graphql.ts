@@ -20,6 +20,7 @@ export interface addRecipe_addRecipe_data_submittedBy {
 
 export interface addRecipe_addRecipe_data_categories {
   __typename: "Category";
+  id: string;
   name: string;
 }
 
@@ -643,6 +644,7 @@ export interface LikeRecipe_likeRecipe_data_submittedBy {
 
 export interface LikeRecipe_likeRecipe_data_categories {
   __typename: "Category";
+  id: string;
   name: string;
 }
 
@@ -780,6 +782,7 @@ export interface UnlikeRecipe_unlikeRecipe_data_submittedBy {
 
 export interface UnlikeRecipe_unlikeRecipe_data_categories {
   __typename: "Category";
+  id: string;
   name: string;
 }
 
@@ -998,6 +1001,7 @@ export interface SaveRecipe_saveRecipe_data_submittedBy {
 
 export interface SaveRecipe_saveRecipe_data_categories {
   __typename: "Category";
+  id: string;
   name: string;
 }
 
@@ -1135,6 +1139,7 @@ export interface UnsaveRecipe_unsaveRecipe_data_submittedBy {
 
 export interface UnsaveRecipe_unsaveRecipe_data_categories {
   __typename: "Category";
+  id: string;
   name: string;
 }
 
@@ -1399,6 +1404,7 @@ export interface recipes_recipes_data_submittedBy {
 
 export interface recipes_recipes_data_categories {
   __typename: "Category";
+  id: string;
   name: string;
 }
 
@@ -1540,6 +1546,7 @@ export interface NewsFeed_newsFeed_data_submittedBy {
 
 export interface NewsFeed_newsFeed_data_categories {
   __typename: "Category";
+  id: string;
   name: string;
 }
 
@@ -1678,6 +1685,7 @@ export interface Trending_trending_data_submittedBy {
 
 export interface Trending_trending_data_categories {
   __typename: "Category";
+  id: string;
   name: string;
 }
 
@@ -1816,6 +1824,7 @@ export interface recipe_recipe_data_submittedBy {
 
 export interface recipe_recipe_data_categories {
   __typename: "Category";
+  id: string;
   name: string;
 }
 
@@ -2147,6 +2156,7 @@ export interface savedRecipes_savedRecipes_data_submittedBy {
 
 export interface savedRecipes_savedRecipes_data_categories {
   __typename: "Category";
+  id: string;
   name: string;
 }
 
@@ -2803,6 +2813,7 @@ export interface RecipeFragment_submittedBy {
 
 export interface RecipeFragment_categories {
   __typename: "Category";
+  id: string;
   name: string;
 }
 

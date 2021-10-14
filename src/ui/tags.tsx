@@ -35,6 +35,7 @@ export const Tags = withStyles(
             ...styles.tag,
             backgroundColor: eva?.theme && eva.theme["color-basic-600"],
           }}
+          onPress={tag.onPress}
         >
           {tag.name}
         </Text>

@@ -1,14 +1,15 @@
-import React, { FC, useState } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Mutations } from "@greeneggs/graphql";
 import { LikeRecipe, UnlikeRecipe } from "@greeneggs/types/graphql";
 import { LabelledIcon, LabelledIconProps } from "./labelled-icon";
+import { UserContext } from "@greeneggs/providers";
 
 interface LikeCounterProps {
   likeCount: number;
   recipeId: string;
   liked: boolean;
-  disabled?: boolean;
+  submittedById: string;
 }
 
 enum LikeCounterStates {
@@ -21,17 +22,20 @@ export const LikeCounter: FC<LikeCounterProps> = ({
   likeCount,
   recipeId,
   liked,
-  disabled = false,
+  submittedById,
 }) => {
   // Use local state for instant feedback on slow networks
   const [likeCounterState, setLikeCounterState] = useState(
-    disabled
-      ? LikeCounterStates.DISABLED
-      : liked
-      ? LikeCounterStates.LIKED
-      : LikeCounterStates.NOT_LIKED
+    liked ? LikeCounterStates.LIKED : LikeCounterStates.NOT_LIKED
   );
   const [likeCountState, setLikeCountState] = useState(likeCount);
+  const { me } = useContext(UserContext);
+
+  useEffect(() => {
+    if (submittedById === me?.id) {
+      setLikeCounterState(LikeCounterStates.DISABLED);
+    }
+  }, [me]);
 
   const [likeRecipe] = useMutation<LikeRecipe>(Mutations.LIKE_RECIPE, {
     variables: {
@@ -80,8 +84,8 @@ export const LikeCounter: FC<LikeCounterProps> = ({
       onPress: handleLikeRecipe,
     },
     [LikeCounterStates.DISABLED]: {
-      iconName: "heart",
-      fill: "grey",
+      iconName: "heart-outline",
+      fill: "black",
     },
   };
 

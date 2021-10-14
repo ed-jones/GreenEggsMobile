@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { CommentCounter, LabelledIcon, LikeCounter } from "@greeneggs/ui";
-import { recipes_recipes_data, recipes_recipes_data_comments } from "@greeneggs/types/graphql";
+import { recipes_recipes_data, recipes_recipes_data_comments, recipes_recipes_data_submittedBy } from "@greeneggs/types/graphql";
 import { convertTimeEstimate } from "@greeneggs/utils";
 import { useNavigation } from "@react-navigation/core";
 
@@ -38,6 +38,7 @@ export interface IRecipeCardFooterProps extends Partial<recipes_recipes_data> {
   liked: boolean;
   id: string;
   comments: recipes_recipes_data_comments[];
+  submittedBy: recipes_recipes_data_submittedBy;
 }
 
 export const RecipeCardFooter = ({
@@ -50,6 +51,7 @@ export const RecipeCardFooter = ({
   liked,
   id,
   comments,
+  submittedBy,
 }: IRecipeCardFooterProps) => {
   return (
   <View style={styles.view}>
@@ -74,7 +76,7 @@ export const RecipeCardFooter = ({
         />
       </View>
       <View style={styles.labelledIconGroup}>
-        <LikeCounter likeCount={likeCount} liked={liked} recipeId={id} />
+        <LikeCounter likeCount={likeCount} liked={liked} recipeId={id} submittedById={submittedBy.id}/>
         <CommentCounter commentCount={commentCount} comments={comments} />
       </View>
     </View>

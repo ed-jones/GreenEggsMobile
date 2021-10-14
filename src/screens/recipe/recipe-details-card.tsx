@@ -104,7 +104,7 @@ export const RecipeDetailsCard = ({
           </View>
         </Pressable>
         <View style={styles.row}>
-          <LikeCounter likeCount={likeCount} liked={liked} recipeId={id} />
+          <LikeCounter likeCount={likeCount} liked={liked} recipeId={id} submittedById={submittedBy.id}/>
           <CommentCounter commentCount={commentCount} comments={comments} />
         </View>
       </View>

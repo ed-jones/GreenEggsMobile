@@ -52,7 +52,7 @@ export const RecipeCardSmall: FC<IRecipeCardSmall> = ({ recipe, onPress }) => {
           <Text category="s1">{`${recipe.submittedBy.firstName} ${recipe.submittedBy.lastName}`}</Text>
           <Text>{`${convertTimeEstimate(recipe.createdAt)} ago`}</Text>
           <View style={styles.labelledIcons}>
-            <LikeCounter likeCount={recipe.likeCount} liked={recipe.liked} recipeId={recipe.id} />
+            <LikeCounter likeCount={recipe.likeCount} liked={recipe.liked} recipeId={recipe.id} submittedById={recipe.submittedBy.id} />
             <CommentCounter commentCount={recipe.commentCount} comments={recipe.comments} />
             <LabelledIcon
               label={convertTimeEstimate(recipe.timeEstimate).toUpperCase()}

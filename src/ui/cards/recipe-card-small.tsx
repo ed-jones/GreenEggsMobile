@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     width: undefined,
     height: 128,
     aspectRatio: 1,
+    marginLeft: 16,
   },
   labelledIcons: {
     flexDirection: "row",
@@ -48,7 +49,7 @@ export const RecipeCardSmall: FC<IRecipeCardSmall> = ({ recipe, onPress }) => {
             paddingRight: 24,
           }}
         >
-          <Text category="h6">{recipe.title}</Text>
+          <Text category="h6" numberOfLines={1}>{recipe.title}</Text>
           <Text category="s1">{`${recipe.submittedBy.firstName} ${recipe.submittedBy.lastName}`}</Text>
           <Text>{`${convertTimeEstimate(recipe.createdAt)} ago`}</Text>
           <View style={styles.labelledIcons}>

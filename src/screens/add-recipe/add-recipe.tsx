@@ -1,6 +1,12 @@
 import React from "react";
 import { View, Alert } from "react-native";
-import { Button, Divider, Layout, Spinner, withStyles } from "@ui-kitten/components";
+import {
+  Button,
+  Divider,
+  Layout,
+  Spinner,
+  withStyles,
+} from "@ui-kitten/components";
 import {
   addRecipe,
   addRecipeVariables,
@@ -24,7 +30,10 @@ import { AddRecipeStyles } from "./add-recipe-styles";
 
 export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>;
 
-export const AddRecipe = withStyles(function AddRecipe({ navigation, eva }: any) {
+export const AddRecipe = withStyles(function AddRecipe({
+  navigation,
+  eva,
+}: any) {
   const form = useRecipeForm();
   const Steps: Step[] = [
     {
@@ -91,7 +100,10 @@ export const AddRecipe = withStyles(function AddRecipe({ navigation, eva }: any)
 
   return (
     <Background>
-      <Layout level="1" style={{ ...AddRecipeStyles.view, marginTop: insets.top }}>
+      <Layout
+        level="1"
+        style={{ ...AddRecipeStyles.view, marginTop: insets.top }}
+      >
         <Stepper
           index={steps.index}
           length={steps.length}
@@ -101,10 +113,12 @@ export const AddRecipe = withStyles(function AddRecipe({ navigation, eva }: any)
       </Layout>
       <Divider />
       {steps.currentStep.component}
-      <View style={AddRecipeStyles.view}>
+      <Divider />
+      <Layout level="1" style={AddRecipeStyles.view}>
         <View style={AddRecipeStyles.buttonGroup}>
           {steps.isEnd ? (
             <Button
+              size="small"
               onPress={() => {
                 form.trigger().then((isValid) => {
                   if (isValid) {
@@ -123,6 +137,7 @@ export const AddRecipe = withStyles(function AddRecipe({ navigation, eva }: any)
             </Button>
           ) : (
             <Button
+              size="small"
               onPress={() => {
                 form.trigger().then((isValid) => {
                   if (isValid) steps.next();
@@ -135,6 +150,7 @@ export const AddRecipe = withStyles(function AddRecipe({ navigation, eva }: any)
           )}
           {steps.isStart ? null : (
             <Button
+              size="small"
               onPress={steps.previous}
               accessoryLeft={(props) => (
                 <Icons.Back
@@ -148,7 +164,7 @@ export const AddRecipe = withStyles(function AddRecipe({ navigation, eva }: any)
             </Button>
           )}
         </View>
-      </View>
+      </Layout>
     </Background>
   );
 });

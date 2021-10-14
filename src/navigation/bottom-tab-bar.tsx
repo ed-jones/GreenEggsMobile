@@ -112,7 +112,9 @@ const NotificationIcon = withStyles(
     eva,
     ...props
   }: NotificationIconProps & ThemedComponentProps) => {
-    const { notificationState: { unreadCount} } = useContext(NotificationContext)
+    const {
+      notificationState: { unreadCount },
+    } = useContext(NotificationContext);
 
     return (
       <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
@@ -145,95 +147,91 @@ const NotificationIcon = withStyles(
   }
 );
 
-export const BottomTabBar = withStyles(
-  ({
-    navigation,
-    state,
-    eva,
-  }: BottomTabBarProps<BottomTabBarOptions> & ThemedComponentProps) => {
-    const insets = useSafeAreaInsets();
-    const [selectedIndex, setSelectedIndex] = React.useState(0);
+export const BottomTabBar = ({
+  navigation,
+  state,
+}: BottomTabBarProps<BottomTabBarOptions>) => {
+  const insets = useSafeAreaInsets();
+  const navigationState = navigation.getState()
 
-    const interceptNavigate = (index: number, navigate: () => void) => {
-      if (index === selectedIndex) {
-        return;
-      }
-      if (selectedIndex === 2) {
-        Alert.alert(
-          "Exit without saving?",
-          "If you exit now you will lose your changes",
-          [
-            {
-              text: "Cancel",
-              style: "cancel",
-            },
-            { text: "OK", onPress: navigate },
-          ],
-          { cancelable: false }
-        );
-      } else {
-        navigate();
-      }
-    };
+  const interceptNavigate = (index: number, navigate: () => void) => {
+    if (index === navigationState.index) {
+      return;
+    }
+    if (navigationState.index === 2) {
+      Alert.alert(
+        "Exit without saving?",
+        "If you exit now you will lose your changes",
+        [
+          {
+            text: "Cancel",
+            style: "cancel",
+          },
+          { text: "OK", onPress: navigate },
+        ],
+        { cancelable: false }
+      );
+    } else {
+      navigate();
+    }
+  };
 
-    return (
-      <BottomNavigation
-        selectedIndex={state.index}
-        onSelect={(index) => {
-          interceptNavigate(index, () => {
-            navigation.navigate(state.routeNames[index]);
-            setSelectedIndex(index);
-          });
-        }}
-        appearance="noIndicator"
-        style={{ ...styles.navbar, paddingBottom: 24 + insets.bottom }}
-      >
-        <BottomNavigationTab
-          icon={(props) => (
-            <BottomNavigationIcon
-              {...props}
-              name="home"
-              iconStyle={IconStyle.Secondary}
-              selected={selectedIndex == 0}
-            />
-          )}
-        />
-        <BottomNavigationTab
-          icon={(props) => (
-            <BottomNavigationIcon
-              {...props}
-              name="bookmark"
-              iconStyle={IconStyle.Secondary}
-              selected={selectedIndex == 1}
-            />
-          )}
-        />
-        <BottomNavigationTab
-          icon={(props) => (
-            <BottomNavigationIcon
-              {...props}
-              name="plus"
-              iconStyle={IconStyle.Primary}
-              selected={selectedIndex == 2}
-            />
-          )}
-        />
-        <BottomNavigationTab
-          icon={(props) => (
-            <NotificationIcon {...props} selected={selectedIndex == 3} />
-          )}
-        />
-        <BottomNavigationTab
-          icon={(props) => (
-            <BottomNavigationIcon
-              {...props}
-              name="person"
-              iconStyle={IconStyle.Secondary}
-              selected={selectedIndex == 4}
-            />
-          )}
-        />
-      </BottomNavigation>
-    );
-  }
-);
+  return (
+    <BottomNavigation
+      selectedIndex={state.index}
+      onSelect={(index) => {
+        interceptNavigate(index, () => {
+          navigation.navigate(state.routeNames[index]);
+        });
+      }}
+      appearance="noIndicator"
+      style={{ ...styles.navbar, paddingBottom: 24 + insets.bottom }}
+    >
+      <BottomNavigationTab
+        icon={(props) => (
+          <BottomNavigationIcon
+            {...props}
+            name="home"
+            iconStyle={IconStyle.Secondary}
+            selected={navigationState.index == 0}
+          />
+        )}
+      />
+      <BottomNavigationTab
+        icon={(props) => (
+          <BottomNavigationIcon
+            {...props}
+            name="bookmark"
+            iconStyle={IconStyle.Secondary}
+            selected={navigationState.index == 1}
+          />
+        )}
+      />
+      <BottomNavigationTab
+        icon={(props) => (
+          <BottomNavigationIcon
+            {...props}
+            name="plus"
+            iconStyle={IconStyle.Primary}
+            selected={navigationState.index == 2}
+          />
+        )}
+      />
+      <BottomNavigationTab
+        icon={(props) => (
+          <NotificationIcon {...props} selected={navigationState.index == 3} />
+        )}
+      />
+      <BottomNavigationTab
+        icon={(props) => (
+          <BottomNavigationIcon
+            {...props}
+            name="person"
+            iconStyle={IconStyle.Secondary}
+            selected={navigationState.index == 4}
+          />
+        )}
+      />
+    </BottomNavigation>
+  );
+};

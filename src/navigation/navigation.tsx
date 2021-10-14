@@ -28,7 +28,7 @@ export function Navigation() {
         component={Notifications}
         options={{ title: "Oops!" }}
       />
-      <Screen name="Profile" component={MyProfile} />
+      <Screen name="MyProfile" component={MyProfile} />
       <Screen
         name="NotFound"
         component={NotFoundScreen}

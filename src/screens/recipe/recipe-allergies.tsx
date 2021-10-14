@@ -22,7 +22,6 @@ function stringifyAllergies(allergies: recipe_recipe_data_allergies[]) {
 }
 
 export const RecipeAllergies = ({ allergies }: IRecipeAllergies) => {
-  console.log(allergies);
   if (allergies.length > 0)
     return (
       <Callout

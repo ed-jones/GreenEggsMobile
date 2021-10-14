@@ -31,7 +31,6 @@ export const Login = ({ navigation }: any) => {
     if (token && !error) {
       SecureStore.setItemAsync("token", token);
       setToken && setToken(token);
-      navigation.navigate("Home");
     }
   }
 

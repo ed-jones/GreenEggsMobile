@@ -80,6 +80,7 @@ export const LoggedInRoutes = [
     component={Screens.SavedRecipes}
   />,
   <Stack.Screen name="Profile" component={Screens.Profile} />,
+  // <Stack.Screen name="MyProfile" component={Screens.MyProfile} />,
   <Stack.Screen name="RecipeSearchFilter" component={Screens.RecipeSearchFilter} />,
   <Stack.Screen name="FilterIngredientsIncluded" component={Screens.FilterIngredientsIncluded} />,
   <Stack.Screen name="FilterIngredientsExcluded" component={Screens.FilterIngredientsExcluded} />,

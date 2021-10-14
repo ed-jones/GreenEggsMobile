@@ -1,7 +1,7 @@
 import React from "react";
-import { noAvatar } from '@greeneggs/assets';
+import { noAvatar } from "@greeneggs/assets";
 import { CommentCounter, LabelledIcon, ViewMore } from "@greeneggs/ui";
-import { Mutations, Queries } from '@greeneggs/graphql';
+import { Mutations, Queries } from "@greeneggs/graphql";
 import { convertTimeEstimate } from "@greeneggs/utils";
 import { View, StyleSheet, Pressable } from "react-native";
 import {
@@ -13,6 +13,7 @@ import { Text, Card, Avatar } from "@ui-kitten/components";
 import { useMutation } from "@apollo/client";
 import { RecipeCategoriesTags } from "./recipe-categories-tags";
 import { LikeCounter } from "@greeneggs/ui/like-counter";
+import { useNavigateToProfile } from "@greeneggs/navigation";
 
 const styles = StyleSheet.create({
   cardSection: {
@@ -55,6 +56,7 @@ export const RecipeDetailsCard = ({
       submittedBy: submittedBy,
     });
   };
+  const navigateToProfile = useNavigateToProfile();
   return (
     <Card
       header={() => (
@@ -85,13 +87,7 @@ export const RecipeDetailsCard = ({
       )}
     >
       <View style={styles.row}>
-        <Pressable
-          onPress={() =>
-            navigation.navigate("Profile", {
-              userId: submittedBy.id,
-            })
-          }
-        >
+        <Pressable onPress={() => navigateToProfile(submittedBy.id)}>
           <View style={styles.row}>
             <Avatar
               size="small"

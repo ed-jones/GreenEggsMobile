@@ -3,8 +3,7 @@ import { View, StyleSheet, Pressable } from "react-native";
 import { Avatar, Text } from "@ui-kitten/components";
 import { recipes_recipes_data_submittedBy } from "@greeneggs/types/graphql";
 import { noAvatar } from "@greeneggs/assets";
-import { useNavigation } from "@react-navigation/core";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigateToProfile } from "@greeneggs/navigation";
 
 const styles = StyleSheet.create({
   view: {
@@ -47,12 +46,12 @@ export const RecipeCardHeader = ({
   lastName,
   id,
 }: IRecipeCardHeaderProps) => {
-  const navigation: StackNavigationProp<any, any> = useNavigation();
+  const navigateToProfile = useNavigateToProfile();
   return (
     <View style={styles.view}>
       <Pressable
         style={styles.leftElements}
-        onPress={() => navigation.push("Profile", { userId: id })}
+        onPress={() => navigateToProfile(id)}
       >
         <Avatar
           size="small"

@@ -1,15 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { LabelledIcon } from "@greeneggs/ui";
-import { Mutations, Queries } from '@greeneggs/graphql';
-import { noAvatar } from '@greeneggs/assets';
+import { Mutations, Queries } from "@greeneggs/graphql";
+import { noAvatar } from "@greeneggs/assets";
 import { convertTimeEstimate } from "@greeneggs/utils";
-import {
-  ListItem,
-  Button,
-  Divider,
-  Avatar,
-  Icon,
-} from "@ui-kitten/components";
+import { ListItem, Button, Divider, Avatar, Icon } from "@ui-kitten/components";
 import { View, Text, StyleSheet, Alert, Pressable } from "react-native";
 import {
   DeleteComment,
@@ -23,6 +17,8 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { useMutation, useQuery } from "@apollo/client";
 
 import { LoadingScreen } from "../loading-screen";
+import { UserContext } from "@greeneggs/providers";
+import { useNavigateToProfile } from "@greeneggs/navigation";
 
 const styles = StyleSheet.create({
   avatar: {
@@ -35,11 +31,9 @@ interface RecipeCommentProps {
   replyButton?: boolean;
 }
 
-export function RecipeComment({
-  comment,
-  replyButton,
-}: RecipeCommentProps) {
+export function RecipeComment({ comment, replyButton }: RecipeCommentProps) {
   const navigation: StackNavigationProp<any, any> = useNavigation();
+  const navigateToProfile = useNavigateToProfile();
 
   const [likeComment] = useMutation<LikeComment>(Mutations.LIKE_COMMENT, {
     variables: {
@@ -62,12 +56,7 @@ export function RecipeComment({
     refetchQueries: [Queries.GET_RECIPE, "recipe"],
   });
 
-  const { loading, error, data } = useQuery<Me>(Queries.ME);
-  if (loading) return <LoadingScreen />;
-  if (error) {
-    return <Text>Error! {error.message}</Text>;
-  }
-  const me = data?.me.data;
+  const { me } = useContext(UserContext);
 
   function handleDeleteComment() {
     Alert.alert(
@@ -99,13 +88,9 @@ export function RecipeComment({
             >
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Pressable
-                  onPress={() =>
-                    navigation.navigate("Profile", {
-                      userId: comment.submittedBy.id,
-                    })
-                  }
+                  onPress={() => navigateToProfile(comment.submittedBy.id)}
                 >
-                  <View style={{flexDirection: "row", alignItems: "center"}}>
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <Avatar
                       size="small"
                       source={

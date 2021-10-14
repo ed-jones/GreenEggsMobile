@@ -61,7 +61,6 @@ export const AddRecipe = withStyles(function AddRecipe({ navigation, eva }: any)
   const insets = useSafeAreaInsets();
 
   const onSubmit = async () => {
-    console.log(form.getValues());
     try {
       const { data } = await form.submitForm();
       if (data?.addRecipe.error) {

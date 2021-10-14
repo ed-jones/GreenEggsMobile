@@ -66,7 +66,6 @@ export function useLazyList<
             } as TVariables,
           })
           .then((data) => {
-            console.log(data);
             if (data.data[dataKey].data?.length === 0) {
               setDone(true);
             }

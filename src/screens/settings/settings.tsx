@@ -184,10 +184,6 @@ export const Settings = withStyles(
       },
     ];
 
-    const navigateBack = () => {
-      navigation.navigate("Home");
-    };
-
     return (
       <Background>
         <TopNavigation />

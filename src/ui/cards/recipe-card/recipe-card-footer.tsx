@@ -2,7 +2,11 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { CommentCounter, LabelledIcon, RecipeLikeCounter } from "@greeneggs/ui";
-import { recipes_recipes_data, recipes_recipes_data_comments, recipes_recipes_data_submittedBy } from "@greeneggs/types/graphql";
+import {
+  recipes_recipes_data,
+  recipes_recipes_data_comments,
+  recipes_recipes_data_submittedBy,
+} from "@greeneggs/types/graphql";
 import { convertTimeEstimate } from "@greeneggs/utils";
 import { useNavigation } from "@react-navigation/core";
 
@@ -13,6 +17,7 @@ const styles = StyleSheet.create({
   recipeTitle: {
     fontWeight: "bold",
     fontSize: 18,
+    flexShrink: 1,
   },
   recipeDescription: {
     marginBottom: 16,
@@ -21,6 +26,7 @@ const styles = StyleSheet.create({
   labelledIcons: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: 'center',
   },
   labelledIconGroup: {
     flexDirection: "row",
@@ -54,31 +60,33 @@ export const RecipeCardFooter = ({
   submittedBy,
 }: IRecipeCardFooterProps) => {
   return (
-  <View style={styles.view}>
-    <View style={styles.labelledIcons}>
-      <View>
+    <View style={styles.view}>
+      <View style={styles.labelledIcons}>
         <Text category="h1" style={styles.recipeTitle}>
           {title}
         </Text>
-        <Text category="s1" style={styles.recipeDescription}>
-          {subtitle}
-        </Text>
-      </View>
-      <View style={styles.labelledIconGroup}>
         <Text>{`${convertTimeEstimate(createdAt)} ago`}</Text>
       </View>
-    </View>
-    <View style={styles.labelledIcons}>
-      <View style={styles.labelledIconGroup}>
-        <LabelledIcon
-          label={convertTimeEstimate(timeEstimate)}
-          iconName="clock-outline"
-        />
+      <Text category="s1" style={styles.recipeDescription}>
+        {subtitle}
+      </Text>
+      <View style={styles.labelledIcons}>
+        <View style={styles.labelledIconGroup}>
+          <LabelledIcon
+            label={convertTimeEstimate(timeEstimate)}
+            iconName="clock-outline"
+          />
+        </View>
+        <View style={styles.labelledIconGroup}>
+          <RecipeLikeCounter
+            likeCount={likeCount}
+            liked={liked}
+            recipeId={id}
+            submittedById={submittedBy.id}
+          />
+          <CommentCounter commentCount={commentCount} comments={comments} />
+        </View>
       </View>
-      <View style={styles.labelledIconGroup}>
-        <RecipeLikeCounter likeCount={likeCount} liked={liked} recipeId={id} submittedById={submittedBy.id}/>
-        <CommentCounter commentCount={commentCount} comments={comments} />
-      </View>
     </View>
-  </View>
-)};
+  );
+};

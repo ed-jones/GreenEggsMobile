@@ -5,7 +5,7 @@ export interface Step {
     component: React.ReactNode;
 }
 
-type ISteps = {
+export type ISteps = {
     currentStep: Step,
     nextStep: Step | undefined,
     lastStep: Step | undefined,

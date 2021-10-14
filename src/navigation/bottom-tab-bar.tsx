@@ -19,7 +19,8 @@ import { CountCircle } from "@greeneggs/screens/search/common";
 import { useQuery } from "@apollo/client";
 import { Queries } from "@greeneggs/graphql";
 import { NotificationCount, notifications } from "@greeneggs/types/graphql";
-import { NotificationContext } from "@greeneggs/providers";
+import { AddRecipeContext, NotificationContext } from "@greeneggs/providers";
+import { useRecipeForm } from "@greeneggs/screens/add-recipe/use-recipe-form";
 
 const styles = StyleSheet.create({
   primary: {
@@ -154,6 +155,8 @@ export const BottomTabBar = ({
 }: BottomTabBarProps<BottomTabBarOptions>) => {
   const insets = useSafeAreaInsets();
   const navigationState = navigation.getState();
+  const { form, steps } = useContext(AddRecipeContext);
+
 
   const interceptNavigate = (index: number, navigate: () => void) => {
     if (index === navigationState.index) {
@@ -168,7 +171,11 @@ export const BottomTabBar = ({
             text: "Cancel",
             style: "cancel",
           },
-          { text: "OK", onPress: navigate },
+          { text: "OK", onPress: () => {
+            form?.reset();
+            steps?.reset();
+            navigate();
+          } },
         ],
         { cancelable: false }
       );

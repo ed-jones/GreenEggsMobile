@@ -8,17 +8,18 @@ import { RecipeForm } from "../add-recipe";
 import { AddRecipeStyles } from "../add-recipe-styles";
 import { EmptyState } from "@greeneggs/ui/empty-state";
 import { AddRecipePartTemplate } from "../add-recipe-part-template";
+import { useNavigation } from "@react-navigation/native";
 
 interface IAddRecipeDiets {
   form: RecipeForm;
-  navigation: any;
 }
 
-export const AddRecipeDiets = ({ form, navigation }: IAddRecipeDiets) => {
+export const AddRecipeDiets = ({ form }: IAddRecipeDiets) => {
   const { fields, remove, append } = useFieldArray({
     control: form.control,
     name: "diets",
   });
+  const navigation = useNavigation();
 
   return (
     <AddRecipePartTemplate

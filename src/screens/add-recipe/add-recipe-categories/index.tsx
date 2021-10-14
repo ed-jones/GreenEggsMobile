@@ -13,20 +13,20 @@ import { useFieldArray } from "react-hook-form";
 import { RecipeForm } from "../add-recipe";
 import { AddRecipeStyles } from "../add-recipe-styles";
 import { AddRecipePartTemplate } from "../add-recipe-part-template";
+import { useNavigation } from "@react-navigation/native";
 
 interface IAddRecipeCategories {
   form: RecipeForm;
-  navigation: any;
 }
 
 export const AddRecipeCategories = ({
   form,
-  navigation,
 }: IAddRecipeCategories) => {
   const { fields, remove, append } = useFieldArray({
     control: form.control,
     name: "categories",
   });
+  const navigation = useNavigation();
 
   return (
     <AddRecipePartTemplate

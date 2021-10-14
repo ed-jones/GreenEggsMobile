@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Alert } from "react-native";
 import {
   Button,
@@ -15,7 +15,6 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Icons, IForm, Background } from "@greeneggs/ui";
 
-import { useRecipeForm } from "./use-recipe-form";
 import { AddRecipeIngredients } from "./add-recipe-ingredients";
 import { AddRecipeDirections } from "./add-recipe-directions";
 import { AddRecipeCategories } from "./add-recipe-categories";
@@ -27,6 +26,8 @@ import { PublishRecipe } from "./publish-recipe";
 import { AddRecipeAllergies } from "./add-recipe-allergies";
 import { AddRecipeDiets } from "./add-recipe-diets";
 import { AddRecipeStyles } from "./add-recipe-styles";
+import { AddRecipeContext } from "@greeneggs/providers";
+import { LoadingScreen } from "../loading-screen";
 
 export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>;
 
@@ -34,39 +35,12 @@ export const AddRecipe = withStyles(function AddRecipe({
   navigation,
   eva,
 }: any) {
-  const form = useRecipeForm();
-  const Steps: Step[] = [
-    {
-      title: "Ingredients",
-      component: <AddRecipeIngredients {...{ form, navigation }} />,
-    },
-    {
-      title: "Directions",
-      component: <AddRecipeDirections {...{ form, navigation }} />,
-    },
-    {
-      title: "Categories",
-      component: <AddRecipeCategories {...{ form, navigation }} />,
-    },
-    {
-      title: "Allergies",
-      component: <AddRecipeAllergies {...{ form, navigation }} />,
-    },
-    {
-      title: "Diets",
-      component: <AddRecipeDiets {...{ form, navigation }} />,
-    },
-    {
-      title: "Details",
-      component: <AddRecipeDetails {...{ form, navigation }} />,
-    },
-    {
-      title: "Privacy",
-      component: <PublishRecipe {...{ form, navigation }} />,
-    },
-  ];
+  const { form, steps } = useContext(AddRecipeContext);
 
-  const steps = useSteps(Steps);
+  if (form === undefined || steps === undefined) {
+    return <LoadingScreen />
+  }
+
   const insets = useSafeAreaInsets();
 
   const onSubmit = async () => {

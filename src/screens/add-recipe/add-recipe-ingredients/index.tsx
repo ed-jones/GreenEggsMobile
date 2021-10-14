@@ -1,6 +1,5 @@
 import React from "react";
 import { RecipeInput } from "@greeneggs/types/graphql";
-import { StackNavigationProp } from "@react-navigation/stack";
 import {
   ControlledInput,
   InputType,
@@ -14,20 +13,20 @@ import { View } from "react-native";
 import { AddRecipeStyles } from "../add-recipe-styles";
 import { AddRecipePartTemplate } from "../add-recipe-part-template";
 import { RecipeForm } from "../add-recipe";
+import { useNavigation } from "@react-navigation/native";
 
 interface ICreateRecipeIngredients {
   form: RecipeForm;
-  navigation: StackNavigationProp<any>;
 }
 
 export const AddRecipeIngredients = ({
   form,
-  navigation,
 }: ICreateRecipeIngredients) => {
   const { fields, remove, append } = useFieldArray({
     control: form.control,
     name: "ingredients",
   });
+  const navigation = useNavigation();
 
   const ingredientsLength = fields?.length || 0;
   useEffect(() => {

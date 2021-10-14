@@ -6,20 +6,20 @@ import { Icons, Callout, AddListItem } from "@greeneggs/ui";
 import { useFieldArray } from "react-hook-form";
 import { AddRecipeStyles } from "../add-recipe-styles";
 import { AddRecipePartTemplate } from "../add-recipe-part-template";
+import { useNavigation } from "@react-navigation/native";
 
 interface IAddRecipeAllergies {
   form: RecipeForm;
-  navigation: any;
 }
 
 export const AddRecipeAllergies = ({
   form,
-  navigation,
 }: IAddRecipeAllergies) => {
   const { fields, remove, append } = useFieldArray({
     control: form.control,
     name: "allergies",
   });
+  const navigation = useNavigation();
 
   return (
     <AddRecipePartTemplate

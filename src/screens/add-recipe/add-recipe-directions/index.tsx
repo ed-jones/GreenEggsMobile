@@ -7,20 +7,20 @@ import { Icons } from "@greeneggs/ui";
 
 import { RecipeForm } from "../add-recipe";
 import { AddRecipePartTemplate } from "../add-recipe-part-template";
+import { useNavigation } from "@react-navigation/core";
 
 interface IAddRecipeDirections {
   form: RecipeForm;
-  navigation: any;
 }
 
 export const AddRecipeDirections = ({
   form,
-  navigation,
 }: IAddRecipeDirections) => {
   const { fields, remove, append } = useFieldArray({
     control: form.control,
     name: "steps",
   });
+  const navigation = useNavigation();
 
   const directionsLength = fields?.length || 0;
   useEffect(() => {

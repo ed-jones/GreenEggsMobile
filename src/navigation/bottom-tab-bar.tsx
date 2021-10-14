@@ -162,7 +162,7 @@ export const BottomTabBar = ({
     if (index === navigationState.index) {
       return;
     }
-    if (navigationState.index === 2) {
+    if (navigationState.index === 2 && form?.formState.isDirty) {
       Alert.alert(
         "Exit without saving?",
         "If you exit now you will lose your changes",

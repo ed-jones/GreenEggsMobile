@@ -53,9 +53,8 @@ export const AddRecipeIngredients = ({
           inputProps={{
             // textAlign: "right",
             label: "SERVES",
-            placeholder: "4",
+            placeholder: "4 people",
             defaultValue: "",
-            caption: "How many people can this recipe serve?",
             style: {
               ...AddRecipeStyles.input,
               paddingHorizontal: 16,

@@ -10,8 +10,6 @@ import { setContext } from "@apollo/client/link/context";
 import { createUploadLink } from "apollo-upload-client";
 
 import { AuthContext } from "./auth-provider";
-import { offsetLimitPagination } from "@apollo/client/utilities";
-import { NewsFeed, NewsFeed_newsFeed_data, Trending } from "@greeneggs/types/graphql";
 
 export const GraphQLProvider: FC = ({ children }) => {
   const { token } = useContext(AuthContext);

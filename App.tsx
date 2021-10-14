@@ -1,6 +1,6 @@
 import React from "react";
 import "react-native-gesture-handler";
-import { CachedResourcesProvider, GraphQLProvider, EvaProvider, AuthProvider, SearchStateProvider, NotificationStateProvider } from "@greeneggs/providers";
+import { CachedResourcesProvider, GraphQLProvider, EvaProvider, AuthProvider, SearchStateProvider, NotificationStateProvider, UserStateProvider } from "@greeneggs/providers";
 import { Router } from "@greeneggs/navigation";
 
 export default function App() {
@@ -8,13 +8,15 @@ export default function App() {
     <CachedResourcesProvider>
       <AuthProvider>
         <GraphQLProvider>
-          <EvaProvider>
-            <SearchStateProvider>
-              <NotificationStateProvider>
-                <Router />
-              </NotificationStateProvider>
-            </SearchStateProvider>
-          </EvaProvider>
+          <UserStateProvider>
+            <EvaProvider>
+              <SearchStateProvider>
+                <NotificationStateProvider>
+                  <Router />
+                </NotificationStateProvider>
+              </SearchStateProvider>
+            </EvaProvider>
+          </UserStateProvider>
         </GraphQLProvider>
       </AuthProvider>
     </CachedResourcesProvider>

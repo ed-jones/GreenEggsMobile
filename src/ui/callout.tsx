@@ -44,8 +44,8 @@ export const Callout = withStyles(
           {
             flexDirection: "row",
             alignItems: "flex-start",
-            paddingVertical: 16,
-            paddingRight: 64,
+            paddingVertical: 24,
+            paddingRight: 16,
           },
           style
         )}
@@ -54,7 +54,7 @@ export const Callout = withStyles(
           style={{ width: 48, height: 48, marginRight: 10 }}
           {...IconNameFromAlertType[type]}
         />
-        <View style={{ justifyContent: "center", minHeight: 48 }}>
+        <View style={{ justifyContent: "center", minHeight: 48, flexShrink: 1 }}>
           <Text>{message}</Text>
         </View>
       </View>

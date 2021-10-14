@@ -64,7 +64,7 @@ export const RecipeCardFooter = ({
         <Text category="h1" style={styles.recipeTitle}>
           {title}
         </Text>
-        <Text>{`${convertSubmittedAt(createdAt)} ago`}</Text>
+        <Text style={{marginLeft: 8}}>{`${convertSubmittedAt(createdAt)} ago`}</Text>
       </View>
       <Text category="s1" style={styles.recipeDescription}>
         {subtitle}
@@ -72,7 +72,7 @@ export const RecipeCardFooter = ({
       <View style={styles.labelledIcons}>
         <View style={styles.labelledIconGroup}>
           <LabelledIcon
-            label={convertTimeEstimate(timeEstimate)}
+            label={convertTimeEstimate(timeEstimate).toUpperCase()}
             iconName="clock-outline"
           />
         </View>

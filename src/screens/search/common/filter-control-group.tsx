@@ -1,9 +1,5 @@
 import React, { FC } from "react";
-import {
-  Text,
-  Button,
-  Layout,
-} from "@ui-kitten/components";
+import { Text, Button, Layout, Divider } from "@ui-kitten/components";
 import { View } from "react-native";
 
 interface SimpleButtonProps {
@@ -17,20 +13,30 @@ export interface FilterControlGroupProps {
   applyButton: SimpleButtonProps;
 }
 
-export const FilterControlGroup: FC<FilterControlGroupProps> = 
-  ({
-    label,
-    clearButton,
-    applyButton,
-  }) => {
-    return (
-      <Layout style={{padding: 16}} level="4">
-        <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16}}>
+export const FilterControlGroup: FC<FilterControlGroupProps> = ({
+  label,
+  clearButton,
+  applyButton,
+}) => {
+  return (
+    <>
+      <Divider />
+      <Layout style={{ padding: 16 }} level="1">
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 16,
+          }}
+        >
           <Text category="label">{label}</Text>
-          <Button size="small" status="basic" onPress={clearButton.onPress}>{clearButton.title}</Button>
+          <Button size="small" status="basic" onPress={clearButton.onPress}>
+            {clearButton.title}
+          </Button>
         </View>
         <Button onPress={applyButton.onPress}>{applyButton.title}</Button>
       </Layout>
-    );
-  }
-
+    </>
+  );
+};

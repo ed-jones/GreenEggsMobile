@@ -180,6 +180,7 @@ export const BottomTabBar = ({
         { cancelable: false }
       );
     } else {
+      steps?.reset();
       navigate();
     }
   };

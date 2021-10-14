@@ -1,17 +1,16 @@
 import React from 'react';
 import { Avatar, ListItem } from '@ui-kitten/components';
 import { Users_users_data } from '@greeneggs/types/graphql';
-import { useNavigation } from '@react-navigation/core';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { Icons } from '@greeneggs/ui';
 import { noAvatar } from '@greeneggs/assets';
+import { useNavigateToProfile } from '@greeneggs/navigation';
 
 interface UserListItemProps {
   user: Users_users_data
 }
 
 export const UserListItem = ({ user }: UserListItemProps) => {
-  const navigation: StackNavigationProp<any, any> = useNavigation();
+  const navigateToProfile = useNavigateToProfile();
   return (
     <ListItem
       title={`${user.firstName} ${user.lastName}`}
@@ -22,7 +21,7 @@ export const UserListItem = ({ user }: UserListItemProps) => {
         />
       )}
       accessoryRight={Icons.Forward}
-      onPress={() => navigation.push("Profile", { userId: user.id })}
+      onPress={() => navigateToProfile(user.id)}
     />
   )
 }

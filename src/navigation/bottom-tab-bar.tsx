@@ -11,6 +11,7 @@ import {
   ThemedComponentProps,
   withStyles,
   BottomNavigationTabProps,
+  Divider,
 } from "@ui-kitten/components";
 import Svg, { Circle } from "react-native-svg";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -152,7 +153,7 @@ export const BottomTabBar = ({
   state,
 }: BottomTabBarProps<BottomTabBarOptions>) => {
   const insets = useSafeAreaInsets();
-  const navigationState = navigation.getState()
+  const navigationState = navigation.getState();
 
   const interceptNavigate = (index: number, navigate: () => void) => {
     if (index === navigationState.index) {
@@ -177,61 +178,67 @@ export const BottomTabBar = ({
   };
 
   return (
-    <BottomNavigation
-      selectedIndex={state.index}
-      onSelect={(index) => {
-        interceptNavigate(index, () => {
-          navigation.navigate(state.routeNames[index]);
-        });
-      }}
-      appearance="noIndicator"
-      style={{ ...styles.navbar, paddingBottom: 24 + insets.bottom }}
-    >
-      <BottomNavigationTab
-        icon={(props) => (
-          <BottomNavigationIcon
-            {...props}
-            name="home"
-            iconStyle={IconStyle.Secondary}
-            selected={navigationState.index == 0}
-          />
-        )}
-      />
-      <BottomNavigationTab
-        icon={(props) => (
-          <BottomNavigationIcon
-            {...props}
-            name="bookmark"
-            iconStyle={IconStyle.Secondary}
-            selected={navigationState.index == 1}
-          />
-        )}
-      />
-      <BottomNavigationTab
-        icon={(props) => (
-          <BottomNavigationIcon
-            {...props}
-            name="plus"
-            iconStyle={IconStyle.Primary}
-            selected={navigationState.index == 2}
-          />
-        )}
-      />
-      <BottomNavigationTab
-        icon={(props) => (
-          <NotificationIcon {...props} selected={navigationState.index == 3} />
-        )}
-      />
-      <BottomNavigationTab
-        icon={(props) => (
-          <BottomNavigationIcon
-            {...props}
-            name="person"
-            iconStyle={IconStyle.Secondary}
-            selected={navigationState.index == 4}
-          />
-        )}
-      />
-    </BottomNavigation>
+    <>
+      <Divider />
+      <BottomNavigation
+        selectedIndex={state.index}
+        onSelect={(index) => {
+          interceptNavigate(index, () => {
+            navigation.navigate(state.routeNames[index]);
+          });
+        }}
+        appearance="noIndicator"
+        style={{ ...styles.navbar, paddingBottom: 24 + insets.bottom }}
+      >
+        <BottomNavigationTab
+          icon={(props) => (
+            <BottomNavigationIcon
+              {...props}
+              name="home"
+              iconStyle={IconStyle.Secondary}
+              selected={navigationState.index == 0}
+            />
+          )}
+        />
+        <BottomNavigationTab
+          icon={(props) => (
+            <BottomNavigationIcon
+              {...props}
+              name="bookmark"
+              iconStyle={IconStyle.Secondary}
+              selected={navigationState.index == 1}
+            />
+          )}
+        />
+        <BottomNavigationTab
+          icon={(props) => (
+            <BottomNavigationIcon
+              {...props}
+              name="plus"
+              iconStyle={IconStyle.Primary}
+              selected={navigationState.index == 2}
+            />
+          )}
+        />
+        <BottomNavigationTab
+          icon={(props) => (
+            <NotificationIcon
+              {...props}
+              selected={navigationState.index == 3}
+            />
+          )}
+        />
+        <BottomNavigationTab
+          icon={(props) => (
+            <BottomNavigationIcon
+              {...props}
+              name="person"
+              iconStyle={IconStyle.Secondary}
+              selected={navigationState.index == 4}
+            />
+          )}
+        />
+      </BottomNavigation>
+    </>
   );
 };

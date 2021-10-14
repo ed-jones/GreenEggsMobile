@@ -12,10 +12,6 @@ interface ICreateRecipeDetails {
 
 export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
   <ScrollView style={{ paddingHorizontal: 16 }}>
-    <Callout
-      type="info"
-      message="Add details such as a title, subtitle, description, time estimate and cover photo."
-    />
     <Text category="h5" style={AddRecipeStyles.heading}>
       Details
     </Text>

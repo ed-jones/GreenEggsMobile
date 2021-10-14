@@ -37,9 +37,9 @@ export const Stepper = withStyles(
         color={eva?.theme && eva.theme["color-primary-500"]}
         shadowColor={eva?.theme && eva.theme["color-success-500"]}
         borderWidth={5}
-        bgColor={eva?.theme && eva.theme["color-basic-300"]}
+        bgColor="white"
       >
-        <Text category="label">{`${index + 1} OF ${length}`}</Text>
+        <Text category="label" style={{fontWeight: 'bold'}}>{`${index + 1} OF ${length}`}</Text>
       </ProgressCircle>
       <View>
         <Text style={styles.text} category="h6">

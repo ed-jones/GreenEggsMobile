@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Alert } from "react-native";
-import { Button, Spinner, withStyles } from "@ui-kitten/components";
+import { Button, Divider, Layout, Spinner, withStyles } from "@ui-kitten/components";
 import {
   addRecipe,
   addRecipeVariables,
@@ -91,14 +91,15 @@ export const AddRecipe = withStyles(function AddRecipe({ navigation, eva }: any)
 
   return (
     <Background>
-      <View style={{ ...AddRecipeStyles.view, marginTop: insets.top }}>
+      <Layout level="1" style={{ ...AddRecipeStyles.view, marginTop: insets.top }}>
         <Stepper
           index={steps.index}
           length={steps.length}
           currentStep={steps.currentStep.title}
           nextStep={steps.nextStep?.title}
         />
-      </View>
+      </Layout>
+      <Divider />
       {steps.currentStep.component}
       <View style={AddRecipeStyles.view}>
         <View style={AddRecipeStyles.buttonGroup}>
@@ -123,28 +124,13 @@ export const AddRecipe = withStyles(function AddRecipe({ navigation, eva }: any)
           ) : (
             <Button
               onPress={() => {
-                // Manual form validation for ingredients list
-                // Make sure that there is at least 1 ingreident
-                if (!form.getValues("ingredients")?.length) {
-                  form.setError("ingredients", {
-                    type: "required",
-                    message: "You must add at least 1 ingredient",
-                  });
-                }
-
-                // if (!form.getValues("steps")?.length) {
-                //   form.setError("steps", {
-                //     type: "required",
-                //     message: "You must add at least 1 step",
-                //   });
-                // }
                 form.trigger().then((isValid) => {
                   if (isValid) steps.next();
                 });
               }}
               accessoryRight={Icons.Forward}
             >
-              {steps.nextStep?.title.toUpperCase()}
+              NEXT
             </Button>
           )}
           {steps.isStart ? null : (
@@ -158,7 +144,7 @@ export const AddRecipe = withStyles(function AddRecipe({ navigation, eva }: any)
               )}
               status="basic"
             >
-              {steps.lastStep?.title.toUpperCase()}
+              PREVIOUS
             </Button>
           )}
         </View>

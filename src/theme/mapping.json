@@ -263,7 +263,7 @@
                 "borderColor": "color-success-default-border",
                 "backgroundColor": "color-success-default",
                 "textColor": "color-primary-default",
-                "iconTintColor": "text-control-color",
+                "iconTintColor": "color-primary-default",
                 "state": {
                   "focused": {
                     "borderColor": "color-success-focus-border",

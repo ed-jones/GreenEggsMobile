@@ -1,23 +1,25 @@
 import React, { FC } from "react";
-import { Icon, Text } from "@ui-kitten/components";
+import { Icon, Text, TextElement } from "@ui-kitten/components";
 import { View } from "react-native";
 
 interface EmptyStateProps {
-  title: string;
-  description: string;
+  title?: React.ReactText | TextElement;
+  description: React.ReactText | TextElement;
 }
 
-export const EmptyState: FC<EmptyStateProps> = ({ title, description }) => {
+const color = '#6B7280'
+
+export const EmptyState: FC<EmptyStateProps> = ({ title = "Nothing here!", description }) => {
   return (
-    <View style={{ flexDirection: "row", paddingHorizontal: 32 }}>
+    <View style={{ flexDirection: "column", paddingHorizontal: 32, alignItems: 'center' }}>
       <Icon
-        fill="black"
-        name="loader-outline"
-        style={{ width: 32, height: 32, marginRight: 16 }}
+        fill={color}
+        name="alert-circle-outline"
+        style={{ width: 38, height: 38, marginBottom: 8 }}
       />
       <View style={{flexShrink: 1}}>
-        <Text category="h6" style={{paddingBottom: 8}}>{title}</Text>
-        <Text category="p1">{description}</Text>
+        <Text style={{color, paddingBottom: 8, textAlign: "center"}} category="h6">{title}</Text>
+        <Text style={{color, textAlign: "center"}} category="p1">{description}</Text>
       </View>
     </View>
   );

@@ -1,13 +1,19 @@
 import React from "react";
-import { List, Text } from "@ui-kitten/components";
-import { ScrollView, View } from "react-native";
 import { RecipeInput } from "@greeneggs/types/graphql";
-import { RecipeForm } from "../add-recipe";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { Callout, AddListItem, ControlledInput, InputType, Rules, IngredientListItem } from "@greeneggs/ui";
+import {
+  ControlledInput,
+  InputType,
+  Rules,
+  IngredientListItem,
+} from "@greeneggs/ui";
 import { useEffect } from "react";
-import { FieldError, useFieldArray } from "react-hook-form";
+import { useFieldArray } from "react-hook-form";
+import { View } from "react-native";
+
 import { AddRecipeStyles } from "../add-recipe-styles";
+import { AddRecipePartTemplate } from "../add-recipe-part-template";
+import { RecipeForm } from "../add-recipe";
 
 interface ICreateRecipeIngredients {
   form: RecipeForm;
@@ -31,71 +37,55 @@ export const AddRecipeIngredients = ({
   }, [ingredientsLength]);
 
   return (
-    <ScrollView>
-      <Callout
-        type="info"
-        message="Include ingredients needed to make this recipe."
-        style={AddRecipeStyles.view}
-      />
-      <View style={{ flexDirection: "row" }}>
-        <ControlledInput<RecipeInput>
-          controllerProps={{
-            name: "servingCount",
-            control: form.control,
-            rules: {
-              ...Rules.REQUIRED,
-              max: {
-                value: 99,
-                message: "Serving count must be below 100 ",
+    <AddRecipePartTemplate
+      title="Ingredients"
+      createButtonTitle="ADD INGREDIENT"
+      onPressCreate={() =>
+        navigation.navigate("CreateIngredient", {
+          append,
+        })
+      }
+      emptyStateTitle="No ingredients"
+      emptyStateDescription="Make sure to add any ingredients this recipe might need."
+      header={
+        <View style={{ flexDirection: "row" }}>
+          <ControlledInput<RecipeInput>
+            controllerProps={{
+              name: "servingCount",
+              control: form.control,
+              rules: {
+                ...Rules.REQUIRED,
+                max: {
+                  value: 99,
+                  message: "Serving count must be below 100 ",
+                },
               },
-            },
-          }}
-          inputProps={{
-            // textAlign: "right",
-            label: "SERVES",
-            placeholder: "4 people",
-            defaultValue: "",
-            style: {
-              ...AddRecipeStyles.input,
-              paddingHorizontal: 16,
-              width: "100%",
-            },
-          }}
-          submitError={form.formResult.data?.addRecipe.error}
-          type={InputType.NUMERIC}
-        />
-      </View>
-
-      <Text
-        category="h5"
-        style={{ ...AddRecipeStyles.heading, ...AddRecipeStyles.view }}
-      >
-        Ingredients
-      </Text>
-      <List
-        data={fields}
-        renderItem={({ item, index }) =>
-          item && (
-            <IngredientListItem
-              ingredient={{ ...item, __typename: "Ingredient" }}
-              remove={() => remove(index)}
-            />
-          )
-        }
-      />
-      <AddListItem
-        error={
-          (form.formState.errors.ingredients as unknown as FieldError)?.message
-            ? (form.formState.errors.ingredients as unknown as FieldError)
-            : undefined
-        }
-        label={`ADD INGREDIENT`}
-        onPress={() =>
-          navigation.navigate("CreateIngredient", {
-            append,
-          })
-        }
-      />
-    </ScrollView>
+            }}
+            inputProps={{
+              // textAlign: "right",
+              label: "SERVES",
+              placeholder: "4 people",
+              defaultValue: "",
+              style: {
+                ...AddRecipeStyles.input,
+                paddingHorizontal: 16,
+                width: "100%",
+              },
+            }}
+            submitError={form.formResult.data?.addRecipe.error}
+            type={InputType.NUMERIC}
+          />
+        </View>
+      }
+      listItem={({ item, index }) =>
+        item && (
+          <IngredientListItem
+            ingredient={{ ...item, __typename: "Ingredient" }}
+            remove={() => remove(index)}
+          />
+        )
+      }
+      data={fields}
+    />
   );
 };

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import { Alert, StyleSheet, View } from "react-native";
 import {
   BottomTabBarOptions,
@@ -18,6 +18,7 @@ import { CountCircle } from "@greeneggs/screens/search/common";
 import { useQuery } from "@apollo/client";
 import { Queries } from "@greeneggs/graphql";
 import { NotificationCount, notifications } from "@greeneggs/types/graphql";
+import { NotificationContext } from "@greeneggs/providers";
 
 const styles = StyleSheet.create({
   primary: {
@@ -111,18 +112,11 @@ const NotificationIcon = withStyles(
     eva,
     ...props
   }: NotificationIconProps & ThemedComponentProps) => {
-    const { data } = useQuery<NotificationCount>(
-      Queries.GET_NOTIFICATION_COUNT, {
-        pollInterval: 10000,
-      }
-    );
-    console.log(data);
-    const notificationCount =
-      data?.notificationCount.data?.notificationCount ?? 0;
+    const { notificationState: { unreadCount} } = useContext(NotificationContext)
 
     return (
       <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-        {notificationCount > 0 && (
+        {unreadCount > 0 && (
           <Svg
             height="8"
             width="8"

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import {
   Avatar,
   Divider,
@@ -30,6 +30,7 @@ import Svg, { Circle } from "react-native-svg";
 import { GestureResponderEvent, View } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { useMutation } from "@apollo/client";
+import { NotificationContext } from "@greeneggs/providers";
 
 type NotificationListItemProps = ListItemProps &
   notifications_notifications_data;
@@ -45,6 +46,7 @@ const NotificationListItem = withStyles(
     id,
     ...props
   }: NotificationListItemProps & ThemedComponentProps) => {
+    const { refetchNotificationState } = useContext(NotificationContext);
     const [markRead] = useMutation(Mutations.READ_NOTIFICATIONS, {
       variables: {
         notificationId: id,
@@ -55,6 +57,7 @@ const NotificationListItem = withStyles(
     function handlePress(event: GestureResponderEvent) {
       markRead();
       onPress?.(event);
+      refetchNotificationState?.();
     }
 
     return (
@@ -165,6 +168,8 @@ const NOTIFICATION_LIST_ITEM_MAP: Record<
 };
 
 export const Notifications: FC = () => {
+
+
   return (
     <Background>
       <TopNavigation title="Notifications" accessoryLeft={undefined} />

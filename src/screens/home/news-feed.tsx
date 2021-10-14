@@ -39,7 +39,7 @@ export function NewsFeed() {
         query={Queries.NEWS_FEED}
         variables={{}}
         dataKey="newsFeed"
-        emptyMessage="News feed empty! Try following some users to see their latest recipes."
+        emptyMessage="Try following some users to see their latest recipes."
         renderItem={({ item: recipe, index }) => (
           <View
             key={recipe?.id}

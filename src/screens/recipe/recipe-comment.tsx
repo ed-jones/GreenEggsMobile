@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { CommentLikeCounter, LabelledIcon } from "@greeneggs/ui";
 import { Mutations, Queries } from "@greeneggs/graphql";
 import { noAvatar } from "@greeneggs/assets";
-import { convertTimeEstimate } from "@greeneggs/utils";
+import { convertSubmittedAt } from "@greeneggs/utils";
 import { ListItem, Button, Divider, Avatar, Icon } from "@ui-kitten/components";
 import { View, Text, StyleSheet, Alert, Pressable } from "react-native";
 import {
@@ -88,7 +88,7 @@ export function RecipeComment({ comment, replyButton }: RecipeCommentProps) {
                   </View>
                 </Pressable>
                 <Text style={{ marginLeft: 6 }}>
-                  {convertTimeEstimate(comment.createdAt)} ago
+                  {convertSubmittedAt(comment.createdAt)} ago
                 </Text>
               </View>
               <View style={{ flexDirection: "row" }}>

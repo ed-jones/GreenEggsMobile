@@ -7,8 +7,7 @@ import {
   recipes_recipes_data_comments,
   recipes_recipes_data_submittedBy,
 } from "@greeneggs/types/graphql";
-import { convertTimeEstimate } from "@greeneggs/utils";
-import { useNavigation } from "@react-navigation/core";
+import { convertTimeEstimate, convertSubmittedAt } from "@greeneggs/utils";
 
 const styles = StyleSheet.create({
   view: {
@@ -65,7 +64,7 @@ export const RecipeCardFooter = ({
         <Text category="h1" style={styles.recipeTitle}>
           {title}
         </Text>
-        <Text>{`${convertTimeEstimate(createdAt)} ago`}</Text>
+        <Text>{`${convertSubmittedAt(createdAt)} ago`}</Text>
       </View>
       <Text category="s1" style={styles.recipeDescription}>
         {subtitle}

@@ -4,30 +4,47 @@ export function toTitleCase(input: string): string {
   return `${input.toUpperCase()[0]}${input.toLowerCase().slice(1)}`
 }
 
+export function convertSubmittedAt(submittedAt: string): string {
+  const timeInMilliseconds = Date.now() - Number(submittedAt) 
+  return convertTimeInMilliseconds(timeInMilliseconds)
+
+}
+
 export function convertTimeEstimate(timeEstimate: string): string {
-  const minuteEstimate = new Date(Number(timeEstimate)).getMinutes();
-  if (!timeEstimate) {
+  const timeInMilliseconds = Number(timeEstimate) 
+  return convertTimeInMilliseconds(timeInMilliseconds)
+}
+
+function convertTimeInMilliseconds(timeInMilliseconds: number): string {
+  const minute = 60 * 1000;
+  const hour = 60 * minute;
+  const day = 24 * hour;
+  const week = 7 * day;
+  const month = 30 * day;
+  const year = 365.25 * day;
+
+  if (timeInMilliseconds === NaN) {
     return '0 sec'
   }
-  if (minuteEstimate < 60) {
-    return `${minuteEstimate} mins`;
+  if (timeInMilliseconds < hour) {
+    return `${Math.floor(timeInMilliseconds / minute)} mins`;
   }
-  if (minuteEstimate === 60) {
+  if (timeInMilliseconds === hour) {
     return '1 hour';
   }
-  if (minuteEstimate < 24 * 60) {
-    return `${Math.floor(minuteEstimate / 60)} hours`;
+  if (timeInMilliseconds < day) {
+    return `${Math.floor(timeInMilliseconds / hour)} hours`;
   }
-  if (minuteEstimate < 24 * 60 * 7) {
-    return `${Math.floor(minuteEstimate / (60 * 24))} days`;
+  if (timeInMilliseconds < week) {
+    return `${Math.floor(timeInMilliseconds / day)} days`;
   }
-  if (minuteEstimate < 24 * 60 * 30) {
-    return `${Math.floor(minuteEstimate / (60 * 24 * 7))} weeks`;
+  if (timeInMilliseconds < month) {
+    return `${Math.floor(timeInMilliseconds / week)} weeks`;
   }
-  if (minuteEstimate < 24 * 60 * 30) {
-    return `${Math.floor(minuteEstimate / (60 * 24 * 30))} months`;
+  if (timeInMilliseconds < year) {
+    return `${Math.floor(timeInMilliseconds / month)} months`;
   }
-  return `${Math.floor(minuteEstimate / (60 * 24 * 365))} years`;
+  return `${Math.floor(timeInMilliseconds / year)} years`;
 }
 
 export function convertUserToFullname(user: UserFragment) {

@@ -1,16 +1,10 @@
 import React from "react";
 import { noAvatar } from "@greeneggs/assets";
 import { CommentCounter, LabelledIcon, ViewMore } from "@greeneggs/ui";
-import { Mutations, Queries } from "@greeneggs/graphql";
 import { convertTimeEstimate } from "@greeneggs/utils";
 import { View, StyleSheet, Pressable } from "react-native";
-import {
-  LikeRecipe,
-  recipe_recipe_data,
-  UnlikeRecipe,
-} from "@greeneggs/types/graphql";
+import { recipe_recipe_data } from "@greeneggs/types/graphql";
 import { Text, Card, Avatar } from "@ui-kitten/components";
-import { useMutation } from "@apollo/client";
 import { RecipeCategoriesTags } from "./recipe-categories-tags";
 import { RecipeLikeCounter } from "@greeneggs/ui";
 import { useNavigateToProfile } from "@greeneggs/navigation";
@@ -104,7 +98,12 @@ export const RecipeDetailsCard = ({
           </View>
         </Pressable>
         <View style={styles.row}>
-          <RecipeLikeCounter likeCount={likeCount} liked={liked} recipeId={id} submittedById={submittedBy.id}/>
+          <RecipeLikeCounter
+            likeCount={likeCount}
+            liked={liked}
+            recipeId={id}
+            submittedById={submittedBy.id}
+          />
           <CommentCounter commentCount={commentCount} comments={comments} />
         </View>
       </View>

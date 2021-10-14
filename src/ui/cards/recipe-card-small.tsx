@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { recipes_recipes_data } from "@greeneggs/types/graphql";
 import { Card, Text } from "@ui-kitten/components";
 import { View, StyleSheet, Image } from "react-native";
-import { convertTimeEstimate } from "@greeneggs/utils";
+import { convertTimeEstimate, convertSubmittedAt } from "@greeneggs/utils";
 import { imageNotFound } from "@greeneggs/assets";
 import { CommentCounter, LabelledIcon, RecipeLikeCounter } from '@greeneggs/ui';
 
@@ -51,7 +51,7 @@ export const RecipeCardSmall: FC<IRecipeCardSmall> = ({ recipe, onPress }) => {
         >
           <Text category="h6" numberOfLines={1}>{recipe.title}</Text>
           <Text category="s1">{`${recipe.submittedBy.firstName} ${recipe.submittedBy.lastName}`}</Text>
-          <Text>{`${convertTimeEstimate(recipe.createdAt)} ago`}</Text>
+          <Text>{`${convertSubmittedAt(recipe.createdAt)} ago`}</Text>
           <View style={styles.labelledIcons}>
             <RecipeLikeCounter likeCount={recipe.likeCount} liked={recipe.liked} recipeId={recipe.id} submittedById={recipe.submittedBy.id} />
             <CommentCounter commentCount={recipe.commentCount} comments={recipe.comments} />

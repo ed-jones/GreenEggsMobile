@@ -25,7 +25,7 @@ import {
   TopNavigation,
 } from "@greeneggs/ui";
 import { noAvatar } from "@greeneggs/assets";
-import { convertTimeEstimate, convertUserToFullname } from "@greeneggs/utils";
+import { convertSubmittedAt, convertUserToFullname } from "@greeneggs/utils";
 import Svg, { Circle } from "react-native-svg";
 import { GestureResponderEvent, View } from "react-native";
 import { useNavigation } from "@react-navigation/core";
@@ -72,7 +72,7 @@ const NotificationListItem = withStyles(
             {` ${title}`}
           </Text>
         }
-        description={`${convertTimeEstimate(createdAt)} ago`}
+        description={`${convertSubmittedAt(createdAt)} ago`}
         accessoryRight={Icons.Forward}
         accessoryLeft={() => (
           <View style={{ flexDirection: "row", alignItems: "center" }}>

@@ -56,15 +56,13 @@ export const RecipeDetailsCard = ({
       header={() => (
         <View style={styles.cardSection}>
           <View style={styles.row}>
-            <View>
-              <Text category="h5">{title}</Text>
-              <Text category="s1">{subtitle}</Text>
-            </View>
+              <Text category="h5" style={{flexShrink: 1}}>{title}</Text>
             <LabelledIcon
-              label={convertTimeEstimate(timeEstimate)}
+              label={convertTimeEstimate(timeEstimate).toUpperCase()}
               iconName="clock-outline"
             />
           </View>
+          <Text category="s1">{subtitle}</Text>
           <View style={{ ...styles.row, marginTop: 8 }}>
             <RecipeCategoriesTags categories={categories} />
           </View>

@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
 });
 
-interface ILabelledIconProps {
+export interface LabelledIconProps {
   iconName: string;
   label: string;
   onPress?: () => void;
@@ -30,7 +30,7 @@ export const LabelledIcon = ({
   label,
   onPress,
   fill,
-}: ILabelledIconProps) => (
+}: LabelledIconProps) => (
   <Pressable onPress={onPress}>
     <View style={styles.view}>
       <Icon style={styles.icon} name={iconName} fill={fill || "black"} />

@@ -43,6 +43,7 @@ export const CreateDiet = () => {
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
         value={query}
+        autoFocus
       />
       <LazyListAlpha<
         Diets,

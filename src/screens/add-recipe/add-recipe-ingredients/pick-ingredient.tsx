@@ -37,6 +37,7 @@ export const PickIngredient: FC = () => {
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
         value={query}
+        autoFocus
       />
       <LazyListAlpha<
         Ingredients,

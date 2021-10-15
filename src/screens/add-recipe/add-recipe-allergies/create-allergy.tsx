@@ -39,6 +39,7 @@ export const CreateAllergy = () => {
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
         value={query}
+        autoFocus
       />
       <LazyListAlpha<
         Allergies,

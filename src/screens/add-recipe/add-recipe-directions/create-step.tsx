@@ -37,6 +37,7 @@ export const CreateStep = () => {
             placeholder: "After washing the carrots, finely dice them...",
             defaultValue: "",
             style: AddRecipeStyles.input,
+            autoFocus: true,
           }}
           type={InputType.TEXTAREA}
         />

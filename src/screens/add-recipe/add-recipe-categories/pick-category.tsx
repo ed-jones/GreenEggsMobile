@@ -45,6 +45,7 @@ export const PickCategory: FC = () => {
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
         value={query}
+        autoFocus
       />
       <LazyListAlpha<
         Categories,

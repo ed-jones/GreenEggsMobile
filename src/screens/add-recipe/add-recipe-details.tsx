@@ -69,6 +69,27 @@ export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
     />
     <ControlledInput<RecipeInput>
       controllerProps={{
+        name: "servingCount",
+        control: form.control,
+        rules: {
+          ...Rules.REQUIRED,
+          max: {
+            value: 99,
+            message: "Serving count must be below 100 ",
+          },
+        },
+      }}
+      inputProps={{
+        label: "SERVES",
+        placeholder: "How many people does your recipe serve?",
+        defaultValue: "",
+        style: AddRecipeStyles.input,
+      }}
+      submitError={form.formResult.data?.addRecipe.error}
+      type={InputType.NUMERIC}
+    />
+    <ControlledInput<RecipeInput>
+      controllerProps={{
         name: "timeEstimate",
         control: form.control,
         rules: {

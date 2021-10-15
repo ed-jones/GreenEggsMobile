@@ -18,3 +18,4 @@ export * from './counters/comment-like-counter';
 export * from './counters/comment-counter';
 export * from './save-recipe-button';
 export * from './empty-state';
+export * from './hide-on-keyboard';

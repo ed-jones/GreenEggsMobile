@@ -13,7 +13,7 @@ interface ICreateRecipeDetails {
 export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
   <ScrollView style={{ paddingHorizontal: 16 }}>
     <Text category="h5" style={AddRecipeStyles.heading}>
-      Details
+      Create New Recipe
     </Text>
     <ControlledInput<RecipeInput>
       controllerProps={{
@@ -36,9 +36,6 @@ export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
       controllerProps={{
         name: "subtitle",
         control: form.control,
-        rules: {
-          ...Rules.REQUIRED,
-        },
       }}
       inputProps={{
         label: "SUBTITLE",
@@ -53,9 +50,6 @@ export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
       controllerProps={{
         name: "description",
         control: form.control,
-        rules: {
-          ...Rules.REQUIRED,
-        },
       }}
       inputProps={{
         label: "DESCRIPTION",
@@ -72,7 +66,6 @@ export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
         name: "servingCount",
         control: form.control,
         rules: {
-          ...Rules.REQUIRED,
           max: {
             value: 99,
             message: "Serving count must be below 100 ",
@@ -92,9 +85,6 @@ export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
       controllerProps={{
         name: "timeEstimate",
         control: form.control,
-        rules: {
-          ...Rules.REQUIRED,
-        },
       }}
       inputProps={{
         label: "TIME ESTIMATE",
@@ -105,18 +95,6 @@ export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
       }}
       submitError={form.formResult.data?.addRecipe.error}
       type={InputType.TIME}
-    />
-    <ControlledInput<RecipeInput>
-      controllerProps={{
-        name: "coverImage",
-        control: form.control,
-        rules: {
-          ...Rules.REQUIRED,
-        },
-      }}
-      inputProps={{ label: "COVER IMAGE " }}
-      submitError={form.formResult.data?.addRecipe.error}
-      type={InputType.PHOTO}
     />
   </ScrollView>
 );

@@ -37,6 +37,10 @@ export const AddRecipeStateProvider: FC = ({ children }) => {
 
   const Steps: Step[] = [
     {
+      title: "Details",
+      component: <AddRecipeDetails form={form} />,
+    },
+    {
       title: "Ingredients",
       component: <AddRecipeIngredients form={form} />,
     },
@@ -57,11 +61,7 @@ export const AddRecipeStateProvider: FC = ({ children }) => {
       component: <AddRecipeDiets form={form} />,
     },
     {
-      title: "Details",
-      component: <AddRecipeDetails form={form} />,
-    },
-    {
-      title: "Privacy",
+      title: "Cover Image",
       component: <PublishRecipe form={form} />,
     },
   ];

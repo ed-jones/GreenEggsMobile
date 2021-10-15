@@ -1,70 +1,28 @@
 import React from "react";
+import { Text } from "@ui-kitten/components";
 import { ScrollView } from "react-native";
-import { RecipeForm } from "./add-recipe";
-import { ControlledInput, InputType, Rules, Callout } from "@greeneggs/ui";
+import { InputType, Rules, ControlledInput, Callout } from "@greeneggs/ui";
 import { RecipeInput } from "@greeneggs/types/graphql";
+import { RecipeForm } from "./add-recipe";
 import { AddRecipeStyles } from "./add-recipe-styles";
 
-interface IPublishRecipe {
+interface ICreateRecipeDetails {
   form: RecipeForm;
 }
 
-export const PublishRecipe = ({ form }: IPublishRecipe) => (
-  <ScrollView style={{ paddingHorizontal: 16 }}>
-    <Callout
-      type="warning"
-      message="Control who is able to see, like and comment on your recipe."
-    />
+export const PublishRecipe = ({ form }: ICreateRecipeDetails) => (
+  <ScrollView style={{ padding: 16 }}>
     <ControlledInput<RecipeInput>
       controllerProps={{
-        name: `visibility`,
+        name: "coverImage",
         control: form.control,
         rules: {
           ...Rules.REQUIRED,
         },
       }}
-      inputProps={{
-        label: "RECIPE PRIVACY",
-        defaultValue: "",
-        style: AddRecipeStyles.input,
-        caption: "Who is able to see your recipe?",
-      }}
+      inputProps={{ label: "COVER IMAGE" }}
       submitError={form.formResult.data?.addRecipe.error}
-      type={InputType.PRIVACY}
-    />
-    <ControlledInput<RecipeInput>
-      controllerProps={{
-        name: `commentability`,
-        control: form.control,
-        rules: {
-          ...Rules.REQUIRED,
-        },
-      }}
-      inputProps={{
-        label: "COMMENT PRIVILEGES",
-        defaultValue: "",
-        style: AddRecipeStyles.input,
-        caption: "Who is able to comment on your recipe?",
-      }}
-      submitError={form.formResult.data?.addRecipe.error}
-      type={InputType.PRIVACY}
-    />
-    <ControlledInput<RecipeInput>
-      controllerProps={{
-        name: `likeability`,
-        control: form.control,
-        rules: {
-          ...Rules.REQUIRED,
-        },
-      }}
-      inputProps={{
-        label: "LIKE PRIVILEGES",
-        defaultValue: "",
-        style: AddRecipeStyles.input,
-        caption: "Who is able to like your recipe?",
-      }}
-      submitError={form.formResult.data?.addRecipe.error}
-      type={InputType.PRIVACY}
+      type={InputType.PHOTO}
     />
   </ScrollView>
 );

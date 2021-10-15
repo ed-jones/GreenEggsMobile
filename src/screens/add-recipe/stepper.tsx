@@ -46,7 +46,7 @@ export const Stepper = withStyles(
           {currentStep}
         </Text>
         <Text style={styles.text}>
-          {nextStep ? `Next: ${nextStep}` : undefined}
+          {nextStep ? `Next: ${nextStep}` : "Next: Publish"}
         </Text>
       </View>
     </View>

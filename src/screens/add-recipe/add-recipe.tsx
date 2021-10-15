@@ -14,17 +14,7 @@ import {
 } from "@greeneggs/types/graphql";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Icons, IForm, Background } from "@greeneggs/ui";
-
-import { AddRecipeIngredients } from "./add-recipe-ingredients";
-import { AddRecipeDirections } from "./add-recipe-directions";
-import { AddRecipeCategories } from "./add-recipe-categories";
-import { AddRecipeDetails } from "./add-recipe-details";
 import { Stepper } from "./stepper";
-import { useSteps, Step } from "./use-steps";
-import { PublishRecipe } from "./publish-recipe";
-
-import { AddRecipeAllergies } from "./add-recipe-allergies";
-import { AddRecipeDiets } from "./add-recipe-diets";
 import { AddRecipeStyles } from "./add-recipe-styles";
 import { AddRecipeContext } from "@greeneggs/providers";
 import { LoadingScreen } from "../loading-screen";

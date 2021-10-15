@@ -155,14 +155,32 @@ export const BottomTabBar = ({
 }: BottomTabBarProps<BottomTabBarOptions>) => {
   const insets = useSafeAreaInsets();
   const navigationState = navigation.getState();
-  const { form, steps } = useContext(AddRecipeContext);
+  const {
+    form,
+    steps,
+    categoriesFieldArray,
+    ingredientsFieldArray,
+    stepsFieldArray,
+    allergiesFieldArray,
+    dietsFieldArray,
+  } = useContext(AddRecipeContext);
 
+  function isFormDirty() {
+    return (
+      form?.formState.isDirty ||
+      categoriesFieldArray?.fields ||
+      ingredientsFieldArray?.fields ||
+      stepsFieldArray?.fields ||
+      allergiesFieldArray?.fields ||
+      dietsFieldArray?.fields
+    );
+  }
 
   const interceptNavigate = (index: number, navigate: () => void) => {
     if (index === navigationState.index) {
       return;
     }
-    if (navigationState.index === 2 && form?.formState.isDirty) {
+    if (navigationState.index === 2 && isFormDirty()) {
       Alert.alert(
         "Exit without saving?",
         "If you exit now you will lose your changes",
@@ -171,11 +189,14 @@ export const BottomTabBar = ({
             text: "Cancel",
             style: "cancel",
           },
-          { text: "OK", onPress: () => {
-            form?.reset();
-            steps?.reset();
-            navigate();
-          } },
+          {
+            text: "OK",
+            onPress: () => {
+              form?.reset();
+              steps?.reset();
+              navigate();
+            },
+          },
         ],
         { cancelable: false }
       );

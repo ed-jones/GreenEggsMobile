@@ -50,11 +50,15 @@ export const RecipeCardSmall: FC<IRecipeCardSmall> = ({ recipe, onPress }) => {
           }}
         >
           <Text category="h6" numberOfLines={1}>{recipe.title}</Text>
-          <Text category="s1">{`${recipe.submittedBy.firstName} ${recipe.submittedBy.lastName}`}</Text>
-          <Text>{`${convertSubmittedAt(recipe.createdAt)} ago`}</Text>
-          <View style={styles.labelledIcons}>
-            <RecipeLikeCounter likeCount={recipe.likeCount} liked={recipe.liked} recipeId={recipe.id} submittedById={recipe.submittedBy.id} />
-            <CommentCounter commentCount={recipe.commentCount} comments={recipe.comments} />
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+            <Text category="s1" numberOfLines={1} style={{flexShrink: 1}}>{`${recipe.submittedBy.firstName} ${recipe.submittedBy.lastName}`}</Text>
+            <Text style={{marginLeft: 8}}>{`${convertSubmittedAt(recipe.createdAt)} ago`}</Text>
+          </View>
+          <View style={{ ...styles.labelledIcons, justifyContent: 'space-between' }}>
+            <View style={{...styles.labelledIcons, marginBottom: 8}}>
+              <RecipeLikeCounter likeCount={recipe.likeCount} liked={recipe.liked} recipeId={recipe.id} submittedById={recipe.submittedBy.id} />
+              <CommentCounter commentCount={recipe.commentCount} comments={recipe.comments} />
+            </View>
             <LabelledIcon
               label={convertTimeEstimate(recipe.timeEstimate).toUpperCase()}
               iconName="clock-outline"

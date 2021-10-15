@@ -4,7 +4,7 @@ import { View } from "react-native";
 
 interface EmptyStateProps {
   title?: React.ReactText | TextElement;
-  description: React.ReactText | TextElement;
+  description?: React.ReactText | TextElement;
 }
 
 const color = '#6B7280'

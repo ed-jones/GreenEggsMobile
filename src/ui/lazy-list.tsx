@@ -134,7 +134,8 @@ export interface CommonVariables<SortType, FilterType> {
 export interface LazyListProps<TData, TVariables, TDataType>
   extends UseLazyListProps<TVariables, TData>,
     Omit<FlatListProps<TDataType>, "data"> {
-  emptyMessage: string;
+  emptyMessage?: string;
+  emptyState?: ReactNode;
 }
 
 export const LazyList = <
@@ -149,6 +150,7 @@ export const LazyList = <
   dataKey,
   renderItem,
   emptyMessage,
+  emptyState,
   limit,
   ListFooterComponent,
   ...props
@@ -172,17 +174,6 @@ export const LazyList = <
 
   return (
     <FlatList
-      {...props}
-      initialNumToRender={limit}
-      refreshing={refetching}
-      onRefresh={refetch}
-      onEndReached={() => nextPage()}
-      onEndReachedThreshold={0.5}
-      data={data}
-      extraData={data}
-      renderItem={renderItem}
-      keyExtractor={(_item, index) => index.toString()}
-      contentContainerStyle={{ flexGrow: 1 }}
       ListEmptyComponent={
         <View style={{ flexGrow: 1, justifyContent: "center" }}>
           {loading ? (
@@ -194,6 +185,17 @@ export const LazyList = <
           )}
         </View>
       }
+      {...props}
+      initialNumToRender={limit}
+      refreshing={refetching}
+      onRefresh={refetch}
+      onEndReached={() => nextPage()}
+      onEndReachedThreshold={0.5}
+      data={data}
+      extraData={data}
+      renderItem={renderItem}
+      keyExtractor={(_item, index) => index.toString()}
+      contentContainerStyle={{ flexGrow: 1 }}
       ListFooterComponent={
         ListFooterComponent ||
         (data.length > 0 ? (

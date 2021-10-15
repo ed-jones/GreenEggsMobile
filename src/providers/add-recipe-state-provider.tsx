@@ -10,16 +10,19 @@ import { AddRecipeDirections } from '@greeneggs/screens/add-recipe/add-recipe-di
 import { AddRecipeIngredients } from '@greeneggs/screens/add-recipe/add-recipe-ingredients';
 import { PublishRecipe } from '@greeneggs/screens/add-recipe/publish-recipe';
 import { ISteps, Step, useSteps } from '@greeneggs/screens/add-recipe/use-steps';
+import { useFieldArray, UseFieldArrayReturn } from 'react-hook-form';
 
 
 export interface AddRecipeContextInterface {
-  form: IForm<RecipeInput, addRecipe, addRecipeVariables> | undefined;
-  steps: ISteps | undefined;
+  form?: IForm<RecipeInput, addRecipe, addRecipeVariables>;
+  steps?: ISteps;
+  categoriesFieldArray?: UseFieldArrayReturn<RecipeInput, "categories", "id">;
 }
 
 export const AddRecipeContext = createContext<AddRecipeContextInterface>({
   form: undefined,
   steps: undefined,
+  categoriesFieldArray: undefined,
 });
 
 export const AddRecipeStateProvider: FC = ({ children }) => {
@@ -58,8 +61,13 @@ export const AddRecipeStateProvider: FC = ({ children }) => {
 
   const steps = useSteps(Steps);
 
+  const categoriesFieldArray = useFieldArray({
+    control: form.control,
+    name: "categories",
+  });
+
   return (
-    <AddRecipeContext.Provider value={{ form, steps }}>
+    <AddRecipeContext.Provider value={{ form, steps, categoriesFieldArray }}>
       {children}
     </AddRecipeContext.Provider>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, List, ListItem, Text } from "@ui-kitten/components";
 import { ScrollView, View } from "react-native";
 import {
@@ -14,6 +14,7 @@ import { RecipeForm } from "../add-recipe";
 import { AddRecipeStyles } from "../add-recipe-styles";
 import { AddRecipePartTemplate } from "../add-recipe-part-template";
 import { useNavigation } from "@react-navigation/native";
+import { AddRecipeContext } from "@greeneggs/providers";
 
 interface IAddRecipeCategories {
   form: RecipeForm;
@@ -22,10 +23,7 @@ interface IAddRecipeCategories {
 export const AddRecipeCategories = ({
   form,
 }: IAddRecipeCategories) => {
-  const { fields, remove, append } = useFieldArray({
-    control: form.control,
-    name: "categories",
-  });
+  const { categoriesFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation();
 
   return (
@@ -42,12 +40,12 @@ export const AddRecipeCategories = ({
           <ListItem
             title={item.name}
             accessoryRight={(props) => (
-              <Icons.Cross {...props} onPress={() => remove(index)} />
+              <Icons.Cross {...props} onPress={() => categoriesFieldArray?.remove(index)} />
             )}
           />
         </>
       )}
-      data={fields}
+      data={categoriesFieldArray?.fields}
     />
   );
 };

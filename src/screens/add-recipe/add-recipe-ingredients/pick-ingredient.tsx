@@ -33,7 +33,7 @@ export const PickIngredient: FC = () => {
       <TopNavigation title="Pick an ingredient" />
       <Input
         style={{ padding: 16, backgroundColor: "white" }}
-        placeholder="Search Ingredients"
+        placeholder="Search ingredients..."
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
         value={query}

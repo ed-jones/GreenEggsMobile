@@ -28,7 +28,6 @@ import { toTitleCase } from "@greeneggs/utils";
 
 export const PickCategory: FC = () => {
   const [query, setQuery] = useState("");
-  const form = useForm<CategoryInput>({ mode: "all" });
   const { categoriesFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation();
 

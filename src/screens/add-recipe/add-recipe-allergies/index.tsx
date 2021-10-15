@@ -1,12 +1,10 @@
-import React from "react";
-import { List, ListItem, Text } from "@ui-kitten/components";
-import { ScrollView } from "react-native";
+import React, { useContext } from "react";
+import { ListItem } from "@ui-kitten/components";
 import { RecipeForm } from "../add-recipe";
-import { Icons, Callout, AddListItem } from "@greeneggs/ui";
-import { useFieldArray } from "react-hook-form";
-import { AddRecipeStyles } from "../add-recipe-styles";
+import { Icons } from "@greeneggs/ui";
 import { AddRecipePartTemplate } from "../add-recipe-part-template";
 import { useNavigation } from "@react-navigation/native";
+import { AddRecipeContext } from "@greeneggs/providers";
 
 interface IAddRecipeAllergies {
   form: RecipeForm;
@@ -15,10 +13,8 @@ interface IAddRecipeAllergies {
 export const AddRecipeAllergies = ({
   form,
 }: IAddRecipeAllergies) => {
-  const { fields, remove, append } = useFieldArray({
-    control: form.control,
-    name: "allergies",
-  });
+  const { allergiesFieldArray } = useContext(AddRecipeContext);
+
   const navigation = useNavigation();
 
   return (
@@ -26,9 +22,7 @@ export const AddRecipeAllergies = ({
       title="Allergies"
       createButtonTitle="ADD ALLERGIES"
       onPressCreate={() =>
-        navigation.navigate("CreateAllergy", {
-          append,
-        })
+        navigation.navigate("CreateAllergy")
       }
       emptyStateTitle="No allergies"
       emptyStateDescription="Add any potential allergies your recipe may trigger."
@@ -37,12 +31,12 @@ export const AddRecipeAllergies = ({
           <ListItem
             title={item.name}
             accessoryRight={(props) => (
-              <Icons.Cross {...props} onPress={() => remove(index)} />
+              <Icons.Cross {...props} onPress={() => allergiesFieldArray?.remove(index)} />
             )}
           />
         </>
       )}
-      data={fields}
+      data={allergiesFieldArray?.fields}
     />
   );
 };

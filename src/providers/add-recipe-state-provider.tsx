@@ -1,17 +1,24 @@
-import React, { useState, FC, createContext } from 'react';
-import { addRecipe, addRecipeVariables, RecipeInput } from '@greeneggs/types/graphql';
-import { IForm } from '@greeneggs/ui';
-import { useRecipeForm } from '@greeneggs/screens/add-recipe/use-recipe-form';
-import { AddRecipeAllergies } from '@greeneggs/screens/add-recipe/add-recipe-allergies';
-import { AddRecipeCategories } from '@greeneggs/screens/add-recipe/add-recipe-categories';
-import { AddRecipeDetails } from '@greeneggs/screens/add-recipe/add-recipe-details';
-import { AddRecipeDiets } from '@greeneggs/screens/add-recipe/add-recipe-diets';
-import { AddRecipeDirections } from '@greeneggs/screens/add-recipe/add-recipe-directions';
-import { AddRecipeIngredients } from '@greeneggs/screens/add-recipe/add-recipe-ingredients';
-import { PublishRecipe } from '@greeneggs/screens/add-recipe/publish-recipe';
-import { ISteps, Step, useSteps } from '@greeneggs/screens/add-recipe/use-steps';
-import { useFieldArray, UseFieldArrayReturn } from 'react-hook-form';
-
+import React, { useState, FC, createContext } from "react";
+import {
+  addRecipe,
+  addRecipeVariables,
+  RecipeInput,
+} from "@greeneggs/types/graphql";
+import { IForm } from "@greeneggs/ui";
+import { useRecipeForm } from "@greeneggs/screens/add-recipe/use-recipe-form";
+import { AddRecipeAllergies } from "@greeneggs/screens/add-recipe/add-recipe-allergies";
+import { AddRecipeCategories } from "@greeneggs/screens/add-recipe/add-recipe-categories";
+import { AddRecipeDetails } from "@greeneggs/screens/add-recipe/add-recipe-details";
+import { AddRecipeDiets } from "@greeneggs/screens/add-recipe/add-recipe-diets";
+import { AddRecipeDirections } from "@greeneggs/screens/add-recipe/add-recipe-directions";
+import { AddRecipeIngredients } from "@greeneggs/screens/add-recipe/add-recipe-ingredients";
+import { PublishRecipe } from "@greeneggs/screens/add-recipe/publish-recipe";
+import {
+  ISteps,
+  Step,
+  useSteps,
+} from "@greeneggs/screens/add-recipe/use-steps";
+import { useFieldArray, UseFieldArrayReturn } from "react-hook-form";
 
 export interface AddRecipeContextInterface {
   form?: IForm<RecipeInput, addRecipe, addRecipeVariables>;
@@ -19,13 +26,11 @@ export interface AddRecipeContextInterface {
   categoriesFieldArray?: UseFieldArrayReturn<RecipeInput, "categories", "id">;
   ingredientsFieldArray?: UseFieldArrayReturn<RecipeInput, "ingredients", "id">;
   stepsFieldArray?: UseFieldArrayReturn<RecipeInput, "steps", "id">;
+  allergiesFieldArray?: UseFieldArrayReturn<RecipeInput, "allergies", "id">;
+  dietsFieldArray?: UseFieldArrayReturn<RecipeInput, "diets", "id">;
 }
 
-export const AddRecipeContext = createContext<AddRecipeContextInterface>({
-  form: undefined,
-  steps: undefined,
-  categoriesFieldArray: undefined,
-});
+export const AddRecipeContext = createContext<AddRecipeContextInterface>({});
 
 export const AddRecipeStateProvider: FC = ({ children }) => {
   const form = useRecipeForm();
@@ -36,7 +41,7 @@ export const AddRecipeStateProvider: FC = ({ children }) => {
       component: <AddRecipeIngredients form={form} />,
     },
     {
-      title: "Directions",
+      title: "Steps",
       component: <AddRecipeDirections form={form} />,
     },
     {
@@ -78,8 +83,28 @@ export const AddRecipeStateProvider: FC = ({ children }) => {
     name: "steps",
   });
 
+  const allergiesFieldArray = useFieldArray({
+    control: form.control,
+    name: "allergies",
+  });
+
+  const dietsFieldArray = useFieldArray({
+    control: form.control,
+    name: "diets",
+  });
+
   return (
-    <AddRecipeContext.Provider value={{ form, steps, categoriesFieldArray, ingredientsFieldArray, stepsFieldArray }}>
+    <AddRecipeContext.Provider
+      value={{
+        form,
+        steps,
+        categoriesFieldArray,
+        ingredientsFieldArray,
+        stepsFieldArray,
+        allergiesFieldArray,
+        dietsFieldArray,
+      }}
+    >
       {children}
     </AddRecipeContext.Provider>
   );

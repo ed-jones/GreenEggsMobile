@@ -92,7 +92,7 @@ export const AddIngredientDetails = () => {
               navigation.navigate("AddRecipe");
             }}
           >
-            SKIP DETAILS
+            SKIP ADD DETAILS
           </Button>
           <Button
             accessoryLeft={Icons.Add}

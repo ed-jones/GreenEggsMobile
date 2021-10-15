@@ -1,56 +1,70 @@
-import React from "react";
-import { Button } from "@ui-kitten/components";
-import { ControlledInput, InputType, Rules } from "@greeneggs/ui";
-import { AllergyInput } from "@greeneggs/types/graphql";
-import CreateRecipePartTemplate, {
-  RecipeFormPart,
-} from "../create-recipe-part-template";
-import { useForm } from "react-hook-form";
-import { AddRecipeStyles } from "../add-recipe-styles";
+import React, { useContext, useState } from "react";
+import { Divider, ListItem } from "@ui-kitten/components";
+import {
+  AlphabetType,
+  Background,
+  Icons,
+  Input,
+  LazyListAlpha,
+  TopNavigation,
+} from "@greeneggs/ui";
+import {
+  Allergies,
+  AllergiesVariables,
+  Allergies_allergies_data,
+  AllergyInput,
+  RecipeFilter,
+  Sort,
+} from "@greeneggs/types/graphql";
+import { Queries } from "@greeneggs/graphql";
+import { AddRecipeContext } from "@greeneggs/providers";
+import { useNavigation } from "@react-navigation/core";
 
-export const CreateAllergy = ({ navigation, route }: any) => (
-  <CreateRecipePartTemplate
-    title="Create Ingredient"
-    navigation={navigation}
-    route={route}
-    formComponent={CreateAllergyForm}
-  />
-);
+export const CreateAllergy = () => {
+  const [query, setQuery] = useState("");
+  const { allergiesFieldArray } = useContext(AddRecipeContext);
+  const navigation = useNavigation();
 
-const CreateAllergyForm = ({ append, navigation }: RecipeFormPart) => {
-  const form = useForm<AllergyInput>({ mode: "all" });
+  function pick(allergy: AllergyInput) {
+    allergiesFieldArray?.append(allergy);
+    navigation.goBack();
+  }
 
   return (
-    <>
-      <ControlledInput<AllergyInput>
-        controllerProps={{
-          name: `name`,
-          control: form.control,
-          rules: {
-            ...Rules.UNDER100CHARS,
-            ...Rules.REQUIRED,
-          },
-        }}
-        inputProps={{
-          label: "ALLERGY",
-          placeholder: "Dairy",
-          defaultValue: "",
-          style: AddRecipeStyles.input,
-        }}
-        type={InputType.TEXT}
+    <Background>
+      <TopNavigation title="Choose an allergy" />
+      <Input
+        style={{ padding: 16 }}
+        placeholder="Search allergies..."
+        accessoryLeft={Icons.Search}
+        onChangeText={setQuery}
+        value={query}
       />
-      <Button
-        onPress={() => {
-          form.trigger("name").then((isValid) => {
-            if (isValid) {
-              append(form.getValues());
-              navigation.goBack();
-            }
-          });
-        }}
+      <LazyListAlpha<
+        Allergies,
+        AllergiesVariables,
+        Allergies_allergies_data,
+        Sort,
+        RecipeFilter
       >
-        ADD ALLERGY
-      </Button>
-    </>
+        renderItem={(item) => (
+          <>
+            <ListItem
+              title={item.name}
+              onPress={() => {
+                pick(item);
+              }}
+            />
+            <Divider />
+          </>
+        )}
+        categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
+        query={Queries.GET_ALLERGIES}
+        variables={{
+          query,
+        }}
+        dataKey="allergies"
+      />
+    </Background>
   );
 };

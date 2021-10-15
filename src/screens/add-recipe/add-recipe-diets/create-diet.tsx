@@ -1,57 +1,74 @@
-import React from "react";
-import { Button } from "@ui-kitten/components";
-import { ControlledInput, InputType, Rules } from "@greeneggs/ui";
-import { DietInput } from "@greeneggs/types/graphql";
+import React, { useContext, useState } from "react";
+import { Divider, ListItem } from "@ui-kitten/components";
 import {
-  CreateRecipePartTemplate,
-  RecipeFormPart,
-} from "../create-recipe-part-template";
-import { useForm } from "react-hook-form";
-import { AddRecipeStyles } from "../add-recipe-styles";
+  AlphabetType,
+  Background,
+  Icons,
+  Input,
+  LazyListAlpha,
+  TopNavigation,
+} from "@greeneggs/ui";
+import {
+  Allergies,
+  AllergiesVariables,
+  Allergies_allergies_data,
+  AllergyInput,
+  DietInput,
+  Diets,
+  DietsVariables,
+  Diets_diets_data,
+  RecipeFilter,
+  Sort,
+} from "@greeneggs/types/graphql";
+import { Queries } from "@greeneggs/graphql";
+import { AddRecipeContext } from "@greeneggs/providers";
+import { useNavigation } from "@react-navigation/core";
 
-export const CreateDiet = ({ navigation, route }: any) => (
-  <CreateRecipePartTemplate
-    title="Create Diet"
-    navigation={navigation}
-    route={route}
-    formComponent={CreateDietForm}
-  />
-);
+export const CreateDiet = () => {
+  const [query, setQuery] = useState("");
+  const { dietsFieldArray } = useContext(AddRecipeContext);
+  const navigation = useNavigation();
 
-const CreateDietForm = ({ append, navigation }: RecipeFormPart) => {
-  const form = useForm<DietInput>({ mode: "all" });
+  function pick(diet: DietInput) {
+    dietsFieldArray?.append(diet);
+    navigation.goBack();
+  }
 
   return (
-    <>
-      <ControlledInput<DietInput>
-        controllerProps={{
-          name: `name`,
-          control: form.control,
-          rules: {
-            ...Rules.UNDER100CHARS,
-            ...Rules.REQUIRED,
-          },
-        }}
-        inputProps={{
-          label: "DIET",
-          placeholder: "Vegetarian",
-          defaultValue: "",
-          style: AddRecipeStyles.input,
-        }}
-        type={InputType.TEXT}
+    <Background>
+      <TopNavigation title="Choose a diet" />
+      <Input
+        style={{ padding: 16 }}
+        placeholder="Search diets..."
+        accessoryLeft={Icons.Search}
+        onChangeText={setQuery}
+        value={query}
       />
-      <Button
-        onPress={() => {
-          form.trigger("name").then((isValid) => {
-            if (isValid) {
-              append(form.getValues());
-              navigation.goBack();
-            }
-          });
-        }}
+      <LazyListAlpha<
+        Diets,
+        DietsVariables,
+        Diets_diets_data,
+        Sort,
+        RecipeFilter
       >
-        ADD DIET
-      </Button>
-    </>
+        renderItem={(item) => (
+          <>
+            <ListItem
+              title={item.name}
+              onPress={() => {
+                pick(item);
+              }}
+            />
+            <Divider />
+          </>
+        )}
+        categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
+        query={Queries.GET_DIETS}
+        variables={{
+          query,
+        }}
+        dataKey="diets"
+      />
+    </Background>
   );
 };

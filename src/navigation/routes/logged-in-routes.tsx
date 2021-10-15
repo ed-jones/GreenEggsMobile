@@ -11,10 +11,6 @@ export const LoggedInRoutes = [
     component={Screens.RecipeDescription}
   />,
   <Stack.Screen
-    name="CreateIngredient"
-    component={Screens.CreateIngredient}
-  />,
-  <Stack.Screen
     name="CreateStep"
     component={Screens.CreateStep}
   />,
@@ -76,7 +72,6 @@ export const LoggedInRoutes = [
     component={Screens.SavedRecipes}
   />,
   <Stack.Screen name="Profile" component={Screens.Profile} />,
-  // <Stack.Screen name="MyProfile" component={Screens.MyProfile} />,
   <Stack.Screen name="RecipeSearchFilter" component={Screens.RecipeSearchFilter} />,
   <Stack.Screen name="FilterIngredientsIncluded" component={Screens.FilterIngredientsIncluded} />,
   <Stack.Screen name="FilterIngredientsExcluded" component={Screens.FilterIngredientsExcluded} />,
@@ -90,4 +85,8 @@ export const LoggedInRoutes = [
   <Stack.Screen name="AllCategories" component={Screens.AllCategories} />,
   <Stack.Screen name="PickCategory" component={Screens.PickCategory} />,
   <Stack.Screen name="PickIngredient" component={Screens.PickIngredient} />,
+  <Stack.Screen
+    name="AddIngredientDetails"
+    component={Screens.AddIngredientDetails}
+  />,
  ]

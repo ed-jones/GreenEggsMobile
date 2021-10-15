@@ -41,36 +41,36 @@ export const AddRecipeIngredients = ({
       }
       emptyStateTitle="No ingredients"
       emptyStateDescription="Make sure to add any ingredients this recipe might need."
-      header={
-        <View style={{ flexDirection: "row" }}>
-          <ControlledInput<RecipeInput>
-            controllerProps={{
-              name: "servingCount",
-              control: form.control,
-              rules: {
-                ...Rules.REQUIRED,
-                max: {
-                  value: 99,
-                  message: "Serving count must be below 100 ",
-                },
-              },
-            }}
-            inputProps={{
-              // textAlign: "right",
-              label: "SERVES",
-              placeholder: "4 people",
-              defaultValue: "",
-              style: {
-                ...AddRecipeStyles.input,
-                paddingHorizontal: 16,
-                width: "100%",
-              },
-            }}
-            submitError={form.formResult.data?.addRecipe.error}
-            type={InputType.NUMERIC}
-          />
-        </View>
-      }
+      // header={
+      //   <View style={{ flexDirection: "row" }}>
+      //     <ControlledInput<RecipeInput>
+      //       controllerProps={{
+      //         name: "servingCount",
+      //         control: form.control,
+      //         rules: {
+      //           ...Rules.REQUIRED,
+      //           max: {
+      //             value: 99,
+      //             message: "Serving count must be below 100 ",
+      //           },
+      //         },
+      //       }}
+      //       inputProps={{
+      //         // textAlign: "right",
+      //         label: "SERVES",
+      //         placeholder: "4 people",
+      //         defaultValue: "",
+      //         style: {
+      //           ...AddRecipeStyles.input,
+      //           paddingHorizontal: 16,
+      //           width: "100%",
+      //         },
+      //       }}
+      //       submitError={form.formResult.data?.addRecipe.error}
+      //       type={InputType.NUMERIC}
+      //     />
+      //   </View>
+      // }
       listItem={({ item, index }) =>
         item && (
           <IngredientListItem

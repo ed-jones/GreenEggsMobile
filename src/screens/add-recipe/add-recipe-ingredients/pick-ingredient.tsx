@@ -19,16 +19,13 @@ import { Button, Divider, ListItem } from "@ui-kitten/components";
 import { Queries } from "@greeneggs/graphql";
 import { toTitleCase } from "@greeneggs/utils";
 import { useNavigation } from "@react-navigation/core";
-import { AddRecipeContext } from "@greeneggs/providers";
 
 export const PickIngredient: FC = () => {
   const [query, setQuery] = useState("");
   const navigation = useNavigation();
-  const { ingredientsFieldArray } = useContext(AddRecipeContext);
 
   function pick(ingredient: IngredientInput) {
-    ingredientsFieldArray?.append(ingredient);
-    navigation.goBack();
+    navigation.navigate("AddIngredientDetails", { name: ingredient.name });
   }
 
   return (

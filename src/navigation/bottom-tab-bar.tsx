@@ -1,5 +1,5 @@
-import React, { FC, useContext } from "react";
-import { Alert, StyleSheet, View } from "react-native";
+import React, { FC, useContext, useState } from "react";
+import { Alert, Animated, Platform, StyleSheet, View } from "react-native";
 import {
   BottomTabBarOptions,
   BottomTabBarProps,
@@ -21,6 +21,7 @@ import { Queries } from "@greeneggs/graphql";
 import { NotificationCount, notifications } from "@greeneggs/types/graphql";
 import { AddRecipeContext, NotificationContext } from "@greeneggs/providers";
 import { useRecipeForm } from "@greeneggs/screens/add-recipe/use-recipe-form";
+import useIsKeyboardShown from "../../node_modules/@react-navigation/bottom-tabs/src/utils/useIsKeyboardShown";
 
 const styles = StyleSheet.create({
   primary: {
@@ -148,10 +149,12 @@ const NotificationIcon = withStyles(
     );
   }
 );
+const useNativeDriver = Platform.OS !== "web";
 
 export const BottomTabBar = ({
   navigation,
   state,
+  ...props
 }: BottomTabBarProps<BottomTabBarOptions>) => {
   const insets = useSafeAreaInsets();
   const navigationState = navigation.getState();
@@ -205,9 +208,85 @@ export const BottomTabBar = ({
       navigate();
     }
   };
+  const isKeyboardShown = useIsKeyboardShown();
+  const focusedRoute = state.routes[state.index];
+  const focusedDescriptor = props.descriptors[focusedRoute.key];
+  const focusedOptions = focusedDescriptor.options;
+
+  const shouldShowTabBar =
+    focusedOptions.tabBarVisible !== false && !isKeyboardShown;
+
+  const visibilityAnimationConfigRef = React.useRef(
+    focusedOptions.tabBarVisibilityAnimationConfig
+  );
+
+  React.useEffect(() => {
+    visibilityAnimationConfigRef.current =
+      focusedOptions.tabBarVisibilityAnimationConfig;
+  });
+
+  const [isTabBarHidden, setIsTabBarHidden] = React.useState(!shouldShowTabBar);
+
+  const [visible] = React.useState(
+    () => new Animated.Value(shouldShowTabBar ? 1 : 0)
+  );
+
+  React.useEffect(() => {
+    const visibilityAnimationConfig = visibilityAnimationConfigRef.current;
+
+    if (shouldShowTabBar) {
+      const animation =
+        visibilityAnimationConfig?.show?.animation === "spring"
+          ? Animated.spring
+          : Animated.timing;
+
+      animation(visible, {
+        toValue: 1,
+        useNativeDriver,
+        duration: 250,
+        ...visibilityAnimationConfig?.show?.config,
+      }).start(({ finished }) => {
+        if (finished) {
+          setIsTabBarHidden(false);
+        }
+      });
+    } else {
+      setIsTabBarHidden(true);
+
+      const animation =
+        visibilityAnimationConfig?.hide?.animation === "spring"
+          ? Animated.spring
+          : Animated.timing;
+
+      animation(visible, {
+        toValue: 0,
+        useNativeDriver,
+        duration: 200,
+        ...visibilityAnimationConfig?.hide?.config,
+      }).start();
+    }
+  }, [visible, shouldShowTabBar]);
 
   return (
-    <>
+    <Animated.View
+      style={{
+        left: 0,
+        right: 0,
+        bottom: 0,
+        elevation: 8,
+        transform: [
+          {
+            translateY: visible.interpolate({
+              inputRange: [0, 1],
+              outputRange: [100, 0],
+            }),
+          },
+        ],
+        // Absolutely position the tab bar so that the content is below it
+        // This is needed to avoid gap at bottom when the tab bar is hidden
+        position: isTabBarHidden ? "absolute" : (null as any),
+      }}
+    >
       <Divider />
       <BottomNavigation
         selectedIndex={state.index}
@@ -268,6 +347,6 @@ export const BottomTabBar = ({
           )}
         />
       </BottomNavigation>
-    </>
+    </Animated.View>
   );
 };

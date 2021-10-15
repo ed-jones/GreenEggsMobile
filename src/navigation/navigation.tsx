@@ -15,7 +15,9 @@ const { Navigator, Screen } = createBottomTabNavigator();
 
 export function Navigation() {
   return (
-    <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
+    <Navigator 
+    tabBar={(props) => <BottomTabBar {...props} />} 
+    >
       <Screen name="Home" component={Home} />
       <Screen
         name="SavedRecipes"

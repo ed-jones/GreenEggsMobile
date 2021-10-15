@@ -66,7 +66,6 @@ export const TimeInput = <FieldValues,>({
   onChange,
 }: ITimeInput<FieldValues> & ThemedComponentProps) => {
   const theme = useTheme()
-  console.log(theme)
   const handleChange = ({
     hours: newHours,
     minutes: newMinutes,

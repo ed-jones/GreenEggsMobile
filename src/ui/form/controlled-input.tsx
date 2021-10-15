@@ -199,6 +199,7 @@ export const ControlledInput = <
         } else {
           return (
             <Input
+              returnKeyType="next"
               numberOfLines={type === InputType.TEXTAREA ? 4 : 1}
               multiline={type === InputType.TEXTAREA}
               onBlur={onBlur}

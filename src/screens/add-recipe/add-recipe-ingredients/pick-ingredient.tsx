@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import {
   AlphabetType,
   Background,
@@ -8,21 +8,32 @@ import {
   TopNavigation,
 } from "@greeneggs/ui";
 import {
+  IngredientInput,
   Ingredients,
   IngredientsVariables,
   Ingredients_ingredients_data,
   RecipeFilter,
   Sort,
 } from "@greeneggs/types/graphql";
-import { Divider } from "react-native-elements";
-import { ListItem } from "@ui-kitten/components";
+import { Button, Divider, ListItem } from "@ui-kitten/components";
 import { Queries } from "@greeneggs/graphql";
+import { toTitleCase } from "@greeneggs/utils";
+import { useNavigation } from "@react-navigation/core";
+import { AddRecipeContext } from "@greeneggs/providers";
 
-export const IngredientList: FC = () => {
+export const PickIngredient: FC = () => {
   const [query, setQuery] = useState("");
+  const navigation = useNavigation();
+  const { ingredientsFieldArray } = useContext(AddRecipeContext);
+
+  function pick(ingredient: IngredientInput) {
+    ingredientsFieldArray?.append(ingredient);
+    navigation.goBack();
+  }
+
   return (
     <Background>
-      <TopNavigation title="Ingredients (included)" />
+      <TopNavigation title="Pick an ingredient" />
       <Input
         style={{ padding: 16, backgroundColor: "white" }}
         placeholder="Search Ingredients"
@@ -39,13 +50,22 @@ export const IngredientList: FC = () => {
       >
         renderItem={(item) => (
           <>
-            <ListItem title={item.name} />
+            <ListItem title={item.name} onPress={() => pick(item)} />
             <Divider />
           </>
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
         query={Queries.GET_INGREDIENTS}
-        emptyMessage={"No ingredients found"}
+        ListFooterComponent={
+          query.length > 0 ? (
+            <Button
+              style={{ marginHorizontal: 16, marginTop: 16 }}
+              onPress={() => pick({ name: toTitleCase(query) })}
+            >
+              {`CREATE "${query.toUpperCase()}"`}
+            </Button>
+          ) : undefined
+        }
         variables={{
           query,
         }}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { RecipeInput } from "@greeneggs/types/graphql";
 import {
   ControlledInput,
@@ -7,13 +7,13 @@ import {
   IngredientListItem,
 } from "@greeneggs/ui";
 import { useEffect } from "react";
-import { useFieldArray } from "react-hook-form";
 import { View } from "react-native";
 
 import { AddRecipeStyles } from "../add-recipe-styles";
 import { AddRecipePartTemplate } from "../add-recipe-part-template";
 import { RecipeForm } from "../add-recipe";
 import { useNavigation } from "@react-navigation/native";
+import { AddRecipeContext } from "@greeneggs/providers";
 
 interface ICreateRecipeIngredients {
   form: RecipeForm;
@@ -22,13 +22,10 @@ interface ICreateRecipeIngredients {
 export const AddRecipeIngredients = ({
   form,
 }: ICreateRecipeIngredients) => {
-  const { fields, remove, append } = useFieldArray({
-    control: form.control,
-    name: "ingredients",
-  });
+  const { ingredientsFieldArray } = useContext(AddRecipeContext);
   const navigation = useNavigation();
 
-  const ingredientsLength = fields?.length || 0;
+  const ingredientsLength = ingredientsFieldArray?.fields?.length || 0;
   useEffect(() => {
     if (ingredientsLength > 0) {
       form.clearErrors("ingredients");
@@ -40,9 +37,7 @@ export const AddRecipeIngredients = ({
       title="Ingredients"
       createButtonTitle="ADD INGREDIENT"
       onPressCreate={() =>
-        navigation.navigate("CreateIngredient", {
-          append,
-        })
+        navigation.navigate("PickIngredient")
       }
       emptyStateTitle="No ingredients"
       emptyStateDescription="Make sure to add any ingredients this recipe might need."
@@ -80,11 +75,11 @@ export const AddRecipeIngredients = ({
         item && (
           <IngredientListItem
             ingredient={{ ...item, __typename: "Ingredient" }}
-            remove={() => remove(index)}
+            remove={() => ingredientsFieldArray?.remove(index)}
           />
         )
       }
-      data={fields}
+      data={ingredientsFieldArray?.fields}
     />
   );
 };

@@ -89,4 +89,5 @@ export const LoggedInRoutes = [
   <Stack.Screen name="Category" component={Screens.Category} />,
   <Stack.Screen name="AllCategories" component={Screens.AllCategories} />,
   <Stack.Screen name="PickCategory" component={Screens.PickCategory} />,
+  <Stack.Screen name="PickIngredient" component={Screens.PickIngredient} />,
  ]

@@ -54,7 +54,7 @@ export function buildAlphaListItems <T, >({ items, categoriseItem }: BuildAlphaL
   return alphaListItems;
 }
 
-interface AlphaListProps<T> extends Omit<SectionListProps<T, AlphaListItem<T>>, 'renderItem' | 'sections'> {
+export interface AlphaListProps<T> extends Omit<SectionListProps<T, AlphaListItem<T>>, 'renderItem' | 'sections'> {
   items: AlphaListItems<T>;
   renderItem: FC<T>;
 }

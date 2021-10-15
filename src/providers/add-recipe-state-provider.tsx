@@ -17,6 +17,7 @@ export interface AddRecipeContextInterface {
   form?: IForm<RecipeInput, addRecipe, addRecipeVariables>;
   steps?: ISteps;
   categoriesFieldArray?: UseFieldArrayReturn<RecipeInput, "categories", "id">;
+  ingredientsFieldArray?: UseFieldArrayReturn<RecipeInput, "ingredients", "id">
 }
 
 export const AddRecipeContext = createContext<AddRecipeContextInterface>({
@@ -66,8 +67,13 @@ export const AddRecipeStateProvider: FC = ({ children }) => {
     name: "categories",
   });
 
+  const ingredientsFieldArray = useFieldArray({
+    control: form.control,
+    name: "ingredients",
+  });
+
   return (
-    <AddRecipeContext.Provider value={{ form, steps, categoriesFieldArray }}>
+    <AddRecipeContext.Provider value={{ form, steps, categoriesFieldArray, ingredientsFieldArray }}>
       {children}
     </AddRecipeContext.Provider>
   );

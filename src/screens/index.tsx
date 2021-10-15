@@ -15,6 +15,7 @@ export * from "@greeneggs/screens/settings/settings";
 export * from "@greeneggs/screens/add-recipe/add-recipe-directions/create-step";
 export * from "@greeneggs/screens/add-recipe/add-recipe-allergies/create-allergy";
 export * from "@greeneggs/screens/add-recipe/add-recipe-categories/pick-category";
+export * from "@greeneggs/screens/add-recipe/add-recipe-ingredients/pick-ingredient";
 export * from "@greeneggs/screens/add-recipe/add-recipe-diets/create-diet";
 export * from "@greeneggs/screens/recipe/recipe-all-comments";
 export * from "@greeneggs/screens/recipe/recipe-comment-replies";

@@ -64,13 +64,14 @@ export const PickCategory: FC = () => {
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
         query={Queries.GET_CATEGORIES}
-        ListEmptyComponent={
+        ListFooterComponent={query.length > 0 ? (
           <Button
-            style={{ marginHorizontal: 16 }}
+            style={{ marginHorizontal: 16, marginTop: 16 }}
             onPress={() => pick({ name: toTitleCase(query) })}
           >
-            {`ADD "${query.toUpperCase()}"`}
+            {`CREATE "${query.toUpperCase()}"`}
           </Button>
+        ) : undefined
         }
         variables={{
           query,

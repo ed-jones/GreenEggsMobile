@@ -4,15 +4,12 @@ import {
   LazyListProps,
   TDataWithData,
   useLazyList,
-  useListRefetch,
 } from "./lazy-list";
 import { LoadingScreen } from "../screens/loading-screen";
-import { AlphaList, buildAlphaListItems, CategoriseItem } from "./alpha-list";
-import { View } from "react-native";
-import { Background, Callout, EmptyState } from '@greeneggs/ui';
+import { AlphaList, AlphaListProps, buildAlphaListItems, CategoriseItem } from "./alpha-list";
 
 interface LazyListAlphaProps<TData, TVariables, TDataType>
-  extends Omit<LazyListProps<TData, TVariables, TDataType>, "renderItem"> {
+  extends Omit<AlphaListProps<TDataType>, 'items'>, Pick<LazyListProps<TData, TVariables, TDataType>, 'query' | 'variables' | 'dataKey' | 'limit'> {
   renderItem: FC<TDataType>;
   categoriseItem: CategoriseItem<TDataType>;
 }
@@ -28,9 +25,9 @@ export const LazyListAlpha = <
   variables,
   dataKey,
   renderItem,
-  emptyMessage,
   categoriseItem,
-  ListEmptyComponent,
+  limit = 15,
+  ...props
 }: LazyListAlphaProps<TData, TVariables, TDataType>) => {
   const { loading, data, refetch: nextPage } = useLazyList<
     TData,
@@ -38,25 +35,13 @@ export const LazyListAlpha = <
     TDataType,
     SortType,
     FilterType
-  >({ query, variables, dataKey, limit: 10 });
+  >({ query, variables, dataKey, limit, });
 
   if (loading) {
     return (
       <LoadingScreen />
     );
   }
-
-  if (data === null || data === undefined || data.length === 0) {
-    if (ListEmptyComponent) {
-      return <>{ListEmptyComponent}</>
-    }
-    return (
-      <View style={{flex: 1}}>
-        <EmptyState description={emptyMessage} />
-      </View>
-    );
-  }
-
   const items = buildAlphaListItems({
     items: data,
     categoriseItem,
@@ -64,6 +49,7 @@ export const LazyListAlpha = <
 
   return (
     <AlphaList
+      {...props}
       onEndReached={() => nextPage()}
       onEndReachedThreshold={0.5}
       items={items}

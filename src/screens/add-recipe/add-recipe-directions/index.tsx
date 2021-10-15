@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { ListItem } from "@ui-kitten/components";
 import { Image, View } from "react-native";
 import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
@@ -8,6 +8,7 @@ import { Icons } from "@greeneggs/ui";
 import { RecipeForm } from "../add-recipe";
 import { AddRecipePartTemplate } from "../add-recipe-part-template";
 import { useNavigation } from "@react-navigation/core";
+import { AddRecipeContext } from "@greeneggs/providers";
 
 interface IAddRecipeDirections {
   form: RecipeForm;
@@ -16,13 +17,10 @@ interface IAddRecipeDirections {
 export const AddRecipeDirections = ({
   form,
 }: IAddRecipeDirections) => {
-  const { fields, remove, append } = useFieldArray({
-    control: form.control,
-    name: "steps",
-  });
+  const { stepsFieldArray } = useContext(AddRecipeContext);
   const navigation = useNavigation();
 
-  const directionsLength = fields?.length || 0;
+  const directionsLength = stepsFieldArray?.fields?.length || 0;
   useEffect(() => {
     if (directionsLength > 0) {
       form.clearErrors("steps");
@@ -33,17 +31,13 @@ export const AddRecipeDirections = ({
     <AddRecipePartTemplate
       title="Steps"
       createButtonTitle="ADD STEP"
-      onPressCreate={() =>
-        navigation.navigate("CreateStep", {
-          append,
-        })
-      }
+      onPressCreate={() => navigation.navigate("CreateStep")}
       emptyStateTitle="No steps"
       emptyStateDescription="Include any steps that must be completed in order to follow this recipe."
       listItem={({ item, index }) =>
         item ? (
           <ListItem
-            title={item.title ?? undefined}
+            title={`Step ${index + 1}`}
             description={item.description}
             accessoryRight={(props) => (
               <>
@@ -53,13 +47,13 @@ export const AddRecipeDirections = ({
                   }}
                   style={{ width: 48, height: 48 }}
                 />
-                <Icons.Cross {...props} onPress={() => remove(index)} />
+                <Icons.Cross {...props} onPress={() => stepsFieldArray?.remove(index)} />
               </>
             )}
           />
         ) : null
       }
-      data={fields}
+      data={stepsFieldArray?.fields}
     />
   );
 };

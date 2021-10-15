@@ -29,7 +29,7 @@ export const LazyListAlpha = <
   limit = 15,
   ...props
 }: LazyListAlphaProps<TData, TVariables, TDataType>) => {
-  const { loading, data,  nextPage } = useLazyList<
+  const { loading, data, nextPage } = useLazyList<
     TData,
     TVariables,
     TDataType,

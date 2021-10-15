@@ -1,15 +1,15 @@
 import React, { FC } from "react";
 import {
   CommonVariables,
-  LazyListProps,
   TDataWithData,
   useLazyList,
+  UseLazyListProps,
 } from "./lazy-list";
 import { LoadingScreen } from "../screens/loading-screen";
 import { AlphaList, AlphaListProps, buildAlphaListItems, CategoriseItem } from "./alpha-list";
 
 interface LazyListAlphaProps<TData, TVariables, TDataType>
-  extends Omit<AlphaListProps<TDataType>, 'items'>, Pick<LazyListProps<TData, TVariables, TDataType>, 'query' | 'variables' | 'dataKey' | 'limit'> {
+  extends Omit<AlphaListProps<TDataType>, 'items'>, UseLazyListProps<TVariables, TData> {
   renderItem: FC<TDataType>;
   categoriseItem: CategoriseItem<TDataType>;
 }
@@ -29,7 +29,7 @@ export const LazyListAlpha = <
   limit = 15,
   ...props
 }: LazyListAlphaProps<TData, TVariables, TDataType>) => {
-  const { loading, data, refetch: nextPage } = useLazyList<
+  const { loading, data,  nextPage } = useLazyList<
     TData,
     TVariables,
     TDataType,

@@ -5,7 +5,7 @@ import { Callout } from "@greeneggs/ui";
 import { Spinner, Text } from "@ui-kitten/components";
 import { EmptyState } from "./empty-state";
 
-interface UseLazyListProps<TVariables, TData> {
+export interface UseLazyListProps<TVariables, TData> {
   query: DocumentNode;
   variables: Partial<Omit<TVariables, "offset" | "limit">>;
   dataKey: keyof TData;

@@ -33,7 +33,7 @@ export const AddRecipeCategories = ({
       title="Categories"
       createButtonTitle="ADD CATEGORY"
       onPressCreate={() =>
-        navigation.navigate("ChooseCategory")
+        navigation.navigate("PickCategory")
       }
       emptyStateTitle="No categories"
       emptyStateDescription="Adding categories will help people find your recipe."

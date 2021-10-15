@@ -14,11 +14,10 @@ import {
   RecipeFilter,
   Sort,
 } from "@greeneggs/types/graphql";
-import { Divider } from "react-native-elements";
-import { ListItem } from "@ui-kitten/components";
+import { Divider, ListItem } from "@ui-kitten/components";
 import { Queries } from "@greeneggs/graphql";
 
-export const ChooseCategory: FC = () => {
+export const PickCategory: FC = () => {
   const [query, setQuery] = useState("");
   return (
     <Background>
@@ -26,7 +25,7 @@ export const ChooseCategory: FC = () => {
       <Input
         style={{ padding: 16 }}
         placeholder="Search categories..."
-        // accessoryLeft={Icons.Search}
+        accessoryLeft={Icons.Search}
         onChangeText={setQuery}
         value={query}
       />

@@ -1,5 +1,5 @@
-import { InputProps, Text } from "@ui-kitten/components";
-import React from "react";
+import { InputProps, Text, ThemedComponentProps, useTheme, withStyles } from "@ui-kitten/components";
+import React, { useState } from "react";
 import {
   DeepMap,
   DeepPartial,
@@ -22,11 +22,11 @@ interface ITimeInput<FieldValues> {
   value: PathValue<FieldValues, Path<FieldValues>>;
   onChange: (...event: any[]) => void;
   error?:
-    | DeepMap<
-        DeepPartial<UnionLike<PathValue<FieldValues, Path<FieldValues>>>>,
-        FieldError
-      >
-    | undefined;
+  | DeepMap<
+      DeepPartial<UnionLike<PathValue<FieldValues, Path<FieldValues>>>>,
+      FieldError
+    >
+  | undefined;
   inputProps?: InputProps;
   onBlur: () => void;
 }
@@ -64,7 +64,9 @@ export const TimeInput = <FieldValues,>({
   inputProps,
   error,
   onChange,
-}: ITimeInput<FieldValues>) => {
+}: ITimeInput<FieldValues> & ThemedComponentProps) => {
+  const theme = useTheme()
+  console.log(theme)
   const handleChange = ({
     hours: newHours,
     minutes: newMinutes,
@@ -80,6 +82,10 @@ export const TimeInput = <FieldValues,>({
     onChange(numberToString(milliseconds));
   };
 
+  const TextColor = error
+  ? theme?.["color-danger-500"]
+  : theme?.["color-basic-400"];
+
   return (
     <>
       <Text appearance="hint" category="label" style={{ marginBottom: 4 }}>
@@ -88,17 +94,20 @@ export const TimeInput = <FieldValues,>({
       <View
         style={{
           flexDirection: "row",
-          marginBottom: 16,
+          backgroundColor: 'white',
+          borderRadius: 4,
+          alignItems: 'center',
+          borderWidth: 1,
+          borderColor: TextColor
         }}
       >
         <Input
           {...{
             ...inputProps,
             label: undefined,
-            // style: { marginRight: 16 },
+            style: { borderWidth: 0 },
             placeholder: "0",
             status: error ? "danger" : undefined,
-            caption: error?.message || "Hours",
             value: numberToString<FieldValues>(
               millisecondsToHoursAndMinutes(value).hours || null
             ),
@@ -106,13 +115,14 @@ export const TimeInput = <FieldValues,>({
               handleChange({ hours: stringToNumber(hours) }),
           }}
         />
+        <Text style={{color: theme?.["color-basic-600"]}}>:</Text>
         <Input
           {...{
             ...inputProps,
             label: undefined,
-            placeholder: "0",
+            placeholder: "00",
             status: error ? "danger" : undefined,
-            caption: error?.message || "Minutes",
+            style: {borderWidth: 0, flexGrow: 1},
             value: numberToString<FieldValues>(
               millisecondsToHoursAndMinutes(value).minutes || null
             ),
@@ -121,6 +131,16 @@ export const TimeInput = <FieldValues,>({
           }}
         />
       </View>
+      <Text
+          category="c1"
+          style={{
+            marginTop: 6,
+            color: TextColor,
+            marginBottom: 6,
+          }}
+        >
+          {error?.message}
+        </Text>
     </>
   );
 };

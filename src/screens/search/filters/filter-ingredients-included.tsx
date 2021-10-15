@@ -77,7 +77,6 @@ export const FilterIngredientsIncluded: FC = () => {
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
         query={Queries.GET_INGREDIENTS}
         emptyMessage={"No ingredients found"}
-        errorMessage={"Error"}
         variables={{
           query,
         }}

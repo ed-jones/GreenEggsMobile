@@ -19,7 +19,7 @@ export const TopNavigation: FC<TopNavigationProps> = ({ style, ...props }) => {
         />
       }
       {...props}
-      style={[{ backgroundColor: "transparent", paddingTop: insets.top }, style]}
+      style={[{ backgroundColor: "transparent", marginTop: insets.top }, style]}
     />
   )
 }

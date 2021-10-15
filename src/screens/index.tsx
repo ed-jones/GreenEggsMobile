@@ -39,3 +39,4 @@ export * from './profile/followers';
 export * from './notifications';
 export * from './home/category';
 export * from './home/all-categories';
+export * from './add-recipe/add-recipe-categories/choose-category';

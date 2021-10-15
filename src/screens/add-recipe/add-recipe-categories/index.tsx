@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Button, List, ListItem, Text } from "@ui-kitten/components";
+import { Button, Divider, List, ListItem, Text } from "@ui-kitten/components";
 import { ScrollView, View } from "react-native";
 import {
   Icons,
@@ -43,6 +43,7 @@ export const AddRecipeCategories = ({
               <Icons.Cross {...props} onPress={() => categoriesFieldArray?.remove(index)} />
             )}
           />
+          <Divider />
         </>
       )}
       data={categoriesFieldArray?.fields}

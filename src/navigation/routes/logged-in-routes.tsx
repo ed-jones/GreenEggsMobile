@@ -19,10 +19,6 @@ export const LoggedInRoutes = [
     component={Screens.CreateStep}
   />,
   <Stack.Screen
-    name="CreateCategory"
-    component={Screens.CreateCategory}
-  />,
-  <Stack.Screen
     name="CreateDiet"
     component={Screens.CreateDiet}
   />,

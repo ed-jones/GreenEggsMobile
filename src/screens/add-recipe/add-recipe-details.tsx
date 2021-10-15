@@ -25,7 +25,7 @@ export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
       }}
       inputProps={{
         label: "TITLE",
-        placeholder: "Spaghetti Carbonara",
+        placeholder: "Name of your recipe",
         defaultValue: "",
         style: AddRecipeStyles.input,
       }}
@@ -42,7 +42,7 @@ export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
       }}
       inputProps={{
         label: "SUBTITLE",
-        placeholder: "A quick, healthy and delicious meal",
+        placeholder: "Describe your recipe in one sentence",
         defaultValue: "",
         style: AddRecipeStyles.input,
       }}
@@ -60,7 +60,7 @@ export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
       inputProps={{
         label: "DESCRIPTION",
         placeholder:
-          "When I was a little girl growing up in the mountains of Italy...",
+          "Tell us a little about yourself and your recipe",
         defaultValue: "",
         style: AddRecipeStyles.input,
       }}

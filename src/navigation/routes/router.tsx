@@ -30,6 +30,7 @@ export const Router: FC = () => {
       Boolean(data?.me.data)
         ? setSessionState(SessionStates.LOGGED_IN)
         : setSessionState(SessionStates.LOGGED_OUT),
+    onError: () => setSessionState(SessionStates.LOGGED_OUT)
   });
 
   return (

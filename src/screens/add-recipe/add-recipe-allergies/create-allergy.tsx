@@ -53,7 +53,7 @@ export const CreateAllergy = () => {
             <ListItem
               title={item.name}
               onPress={() => {
-                pick(item);
+                pick({ name: item.name });
               }}
             />
             <Divider />

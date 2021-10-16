@@ -57,7 +57,7 @@ export const PickCategory: FC = () => {
         renderItem={(item) => (
           <>
             <ListItem title={item.name} onPress={() => {
-              pick(item);
+              pick({ name: item.name });
             }}/>
             <Divider />
           </>

@@ -18,7 +18,6 @@ import { Stepper } from "./stepper";
 import { AddRecipeStyles } from "./add-recipe-styles";
 import { AddRecipeContext } from "@greeneggs/providers";
 import { LoadingScreen } from "../loading-screen";
-import { HideOnKeyboard } from "@greeneggs/ui";
 
 export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>;
 

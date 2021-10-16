@@ -172,6 +172,11 @@ export const BottomTabBar = ({
     );
   }
 
+  function resetForm() {
+    form?.reset();
+    steps?.reset();
+  }
+
   const interceptNavigate = (index: number, navigate: () => void) => {
     if (index === navigationState.index) {
       return;
@@ -188,8 +193,7 @@ export const BottomTabBar = ({
           {
             text: "OK",
             onPress: () => {
-              form?.reset();
-              steps?.reset();
+              resetForm();
               navigate();
             },
           },

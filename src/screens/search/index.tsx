@@ -23,7 +23,13 @@ import {
   Tab,
   TabBar,
 } from "@ui-kitten/components";
-import { Select, Background, LazyList, RecipeCardSmall, UserListItem } from "@greeneggs/ui";
+import {
+  Select,
+  Background,
+  LazyList,
+  RecipeCardSmall,
+  UserListItem,
+} from "@greeneggs/ui";
 import {
   createMaterialTopTabNavigator,
   MaterialTopTabBarProps,
@@ -43,6 +49,7 @@ export const RecipeSearch: FC = () => {
         Sort,
         RecipeFilter
       >
+        style={{paddingTop: 16}}
         query={Queries.GET_RECIPES}
         variables={{
           query: searchState.query,
@@ -50,8 +57,7 @@ export const RecipeSearch: FC = () => {
           filter: searchState.filter,
         }}
         dataKey="recipes"
-        emptyMessage="No recipes found!"
-        errorMessage="No recipes found!"
+        emptyMessage="Couldn't find any recipes."
         renderItem={({ item: myRecipe }) => (
           <View style={{ marginBottom: 16, marginHorizontal: 16 }}>
             <RecipeCardSmall
@@ -74,14 +80,14 @@ const UserSearch: FC = () => {
   return (
     <Background>
       <LazyList<Users, UsersVariables, Users_users_data, Sort, RecipeFilter>
+        style={{paddingTop: 16}}
         query={Queries.GET_USERS}
         variables={{
           query: searchState.query,
           sort: searchState.sort ?? Sort.NEW,
         }}
         dataKey="users"
-        emptyMessage="No users found!"
-        errorMessage="No users found!"
+        emptyMessage="Couldn't find any users."
         renderItem={({ item: user }) => (
           <>
             <UserListItem user={user} />
@@ -125,7 +131,6 @@ export const Search: FC = () => {
         <View
           style={{
             flexDirection: "row",
-            paddingBottom: 16,
             marginHorizontal: 16,
           }}
         >

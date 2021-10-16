@@ -25,26 +25,27 @@ const styles = StyleSheet.create({
   labelledIcons: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: 'center',
+    alignItems: "center",
   },
   labelledIconGroup: {
     flexDirection: "row",
   },
 });
 
-export interface IRecipeCardFooterProps extends Partial<recipes_recipes_data> {
-  title: string;
-  subtitle: string;
-  commentCount: number;
-  likeCount: number;
-  createdAt: string;
-  servingCount: number;
-  timeEstimate: string;
-  liked: boolean;
-  id: string;
-  comments: recipes_recipes_data_comments[];
-  submittedBy: recipes_recipes_data_submittedBy;
-}
+export type IRecipeCardFooterProps = Pick<
+  recipes_recipes_data,
+  | "title"
+  | "subtitle"
+  | "commentCount"
+  | "likeCount"
+  | "createdAt"
+  | "servingCount"
+  | "timeEstimate"
+  | "liked"
+  | "id"
+  | "comments"
+  | "submittedBy"
+>;
 
 export const RecipeCardFooter = ({
   title,
@@ -64,18 +65,24 @@ export const RecipeCardFooter = ({
         <Text category="h1" style={styles.recipeTitle}>
           {title}
         </Text>
-        <Text style={{marginLeft: 8}}>{`${convertSubmittedAt(createdAt)} ago`}</Text>
+        <Text style={{ marginLeft: 8 }}>{`${convertSubmittedAt(
+          createdAt
+        )} ago`}</Text>
       </View>
-      <Text category="s1" style={styles.recipeDescription}>
-        {subtitle}
-      </Text>
+      {subtitle && (
+        <Text category="s1" style={styles.recipeDescription}>
+          {subtitle}
+        </Text>
+      )}
       <View style={styles.labelledIcons}>
-        <View style={styles.labelledIconGroup}>
-          <LabelledIcon
-            label={convertTimeEstimate(timeEstimate).toUpperCase()}
-            iconName="clock-outline"
-          />
-        </View>
+        {timeEstimate && (
+          <View style={styles.labelledIconGroup}>
+            <LabelledIcon
+              label={convertTimeEstimate(timeEstimate).toUpperCase()}
+              iconName="clock-outline"
+            />
+          </View>
+        )}
         <View style={styles.labelledIconGroup}>
           <RecipeLikeCounter
             likeCount={likeCount}

@@ -32,13 +32,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export interface IRecipeCardHeaderProps
-  extends Partial<recipes_recipes_data_submittedBy> {
-  avatarURI?: string | null;
-  firstName: string;
-  lastName: string;
-  id: string;
-}
+export type IRecipeCardHeaderProps = Pick<recipes_recipes_data_submittedBy, 'avatarURI' | 'firstName' | 'lastName' | 'id'>;
 
 export const RecipeCardHeader = ({
   avatarURI,

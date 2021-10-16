@@ -97,15 +97,15 @@ export interface addRecipe_addRecipe_data_comments {
 export interface addRecipe_addRecipe_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string;
+  subtitle: string | null;
   title: string;
-  description: string;
+  description: string | null;
   submittedBy: addRecipe_addRecipe_data_submittedBy;
   commentCount: number;
   likeCount: number;
   createdAt: string;
-  servingCount: number;
-  timeEstimate: string;
+  servingCount: number | null;
+  timeEstimate: string | null;
   coverImage: string;
   liked: boolean;
   saved: boolean;
@@ -721,15 +721,15 @@ export interface LikeRecipe_likeRecipe_data_comments {
 export interface LikeRecipe_likeRecipe_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string;
+  subtitle: string | null;
   title: string;
-  description: string;
+  description: string | null;
   submittedBy: LikeRecipe_likeRecipe_data_submittedBy;
   commentCount: number;
   likeCount: number;
   createdAt: string;
-  servingCount: number;
-  timeEstimate: string;
+  servingCount: number | null;
+  timeEstimate: string | null;
   coverImage: string;
   liked: boolean;
   saved: boolean;
@@ -859,15 +859,15 @@ export interface UnlikeRecipe_unlikeRecipe_data_comments {
 export interface UnlikeRecipe_unlikeRecipe_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string;
+  subtitle: string | null;
   title: string;
-  description: string;
+  description: string | null;
   submittedBy: UnlikeRecipe_unlikeRecipe_data_submittedBy;
   commentCount: number;
   likeCount: number;
   createdAt: string;
-  servingCount: number;
-  timeEstimate: string;
+  servingCount: number | null;
+  timeEstimate: string | null;
   coverImage: string;
   liked: boolean;
   saved: boolean;
@@ -1078,15 +1078,15 @@ export interface SaveRecipe_saveRecipe_data_comments {
 export interface SaveRecipe_saveRecipe_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string;
+  subtitle: string | null;
   title: string;
-  description: string;
+  description: string | null;
   submittedBy: SaveRecipe_saveRecipe_data_submittedBy;
   commentCount: number;
   likeCount: number;
   createdAt: string;
-  servingCount: number;
-  timeEstimate: string;
+  servingCount: number | null;
+  timeEstimate: string | null;
   coverImage: string;
   liked: boolean;
   saved: boolean;
@@ -1216,15 +1216,15 @@ export interface UnsaveRecipe_unsaveRecipe_data_comments {
 export interface UnsaveRecipe_unsaveRecipe_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string;
+  subtitle: string | null;
   title: string;
-  description: string;
+  description: string | null;
   submittedBy: UnsaveRecipe_unsaveRecipe_data_submittedBy;
   commentCount: number;
   likeCount: number;
   createdAt: string;
-  servingCount: number;
-  timeEstimate: string;
+  servingCount: number | null;
+  timeEstimate: string | null;
   coverImage: string;
   liked: boolean;
   saved: boolean;
@@ -1481,15 +1481,15 @@ export interface recipes_recipes_data_comments {
 export interface recipes_recipes_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string;
+  subtitle: string | null;
   title: string;
-  description: string;
+  description: string | null;
   submittedBy: recipes_recipes_data_submittedBy;
   commentCount: number;
   likeCount: number;
   createdAt: string;
-  servingCount: number;
-  timeEstimate: string;
+  servingCount: number | null;
+  timeEstimate: string | null;
   coverImage: string;
   liked: boolean;
   saved: boolean;
@@ -1623,15 +1623,15 @@ export interface NewsFeed_newsFeed_data_comments {
 export interface NewsFeed_newsFeed_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string;
+  subtitle: string | null;
   title: string;
-  description: string;
+  description: string | null;
   submittedBy: NewsFeed_newsFeed_data_submittedBy;
   commentCount: number;
   likeCount: number;
   createdAt: string;
-  servingCount: number;
-  timeEstimate: string;
+  servingCount: number | null;
+  timeEstimate: string | null;
   coverImage: string;
   liked: boolean;
   saved: boolean;
@@ -1762,15 +1762,15 @@ export interface Trending_trending_data_comments {
 export interface Trending_trending_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string;
+  subtitle: string | null;
   title: string;
-  description: string;
+  description: string | null;
   submittedBy: Trending_trending_data_submittedBy;
   commentCount: number;
   likeCount: number;
   createdAt: string;
-  servingCount: number;
-  timeEstimate: string;
+  servingCount: number | null;
+  timeEstimate: string | null;
   coverImage: string;
   liked: boolean;
   saved: boolean;
@@ -1901,15 +1901,15 @@ export interface recipe_recipe_data_comments {
 export interface recipe_recipe_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string;
+  subtitle: string | null;
   title: string;
-  description: string;
+  description: string | null;
   submittedBy: recipe_recipe_data_submittedBy;
   commentCount: number;
   likeCount: number;
   createdAt: string;
-  servingCount: number;
-  timeEstimate: string;
+  servingCount: number | null;
+  timeEstimate: string | null;
   coverImage: string;
   liked: boolean;
   saved: boolean;
@@ -2233,15 +2233,15 @@ export interface savedRecipes_savedRecipes_data_comments {
 export interface savedRecipes_savedRecipes_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string;
+  subtitle: string | null;
   title: string;
-  description: string;
+  description: string | null;
   submittedBy: savedRecipes_savedRecipes_data_submittedBy;
   commentCount: number;
   likeCount: number;
   createdAt: string;
-  servingCount: number;
-  timeEstimate: string;
+  servingCount: number | null;
+  timeEstimate: string | null;
   coverImage: string;
   liked: boolean;
   saved: boolean;
@@ -2890,15 +2890,15 @@ export interface RecipeFragment_comments {
 export interface RecipeFragment {
   __typename: "Recipe";
   id: string;
-  subtitle: string;
+  subtitle: string | null;
   title: string;
-  description: string;
+  description: string | null;
   submittedBy: RecipeFragment_submittedBy;
   commentCount: number;
   likeCount: number;
   createdAt: string;
-  servingCount: number;
-  timeEstimate: string;
+  servingCount: number | null;
+  timeEstimate: string | null;
   coverImage: string;
   liked: boolean;
   saved: boolean;
@@ -3095,19 +3095,16 @@ export interface RecipeFilter {
 
 export interface RecipeInput {
   title: string;
-  subtitle: string;
-  description: string;
-  servingCount: number;
-  timeEstimate: string;
+  subtitle?: string | null;
+  description?: string | null;
+  servingCount?: number | null;
+  timeEstimate?: string | null;
   coverImage: any;
-  categories: CategoryInput[];
-  diets: DietInput[];
-  allergies: AllergyInput[];
-  ingredients: IngredientInput[];
-  steps: RecipeStepInput[];
-  visibility: Privacy;
-  likeability: Privacy;
-  commentability: Privacy;
+  categories?: CategoryInput[] | null;
+  diets?: DietInput[] | null;
+  allergies?: AllergyInput[] | null;
+  ingredients?: IngredientInput[] | null;
+  steps?: RecipeStepInput[] | null;
 }
 
 export interface RecipeStepInput {

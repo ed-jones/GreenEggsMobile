@@ -215,7 +215,7 @@ export const GenericProfile = ({
           <>
             <View style={styles.avatarContainer}>
               <Pressable
-                onPress={() => navigation.navigate("EditProfilePicture")}
+                onPress={() => isMe && navigation.navigate("EditProfilePicture")}
               >
                 <Avatar
                   style={styles.avatar}

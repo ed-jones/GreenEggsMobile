@@ -196,10 +196,10 @@ export const Settings = withStyles(
             Dietary Preferences
           </Text>
           {DietaryPreferences.map(SettingsListItem)}
-          <Text category="h6" style={styles.header}>
+          {/* <Text category="h6" style={styles.header}>
             Privacy
           </Text>
-          {PrivacySettings.map(SettingsListItem)}
+          {PrivacySettings.map(SettingsListItem)} */}
           <Text category="h6" style={styles.header}>
             About
           </Text>

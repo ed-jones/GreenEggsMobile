@@ -7,6 +7,7 @@ import { Categories, CategoriesVariables, Categories_categories_data, RecipeFilt
 import { SearchContext } from '@greeneggs/providers/search-state-provider';
 
 import { AddToFilter } from '../common';
+import { View } from 'react-native';
 
 export const FilterRecipeCategories: FC = () => {
   const navigation = useNavigation();
@@ -64,7 +65,12 @@ export const FilterRecipeCategories: FC = () => {
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
         query={Queries.GET_CATEGORIES}
-        ListEmptyComponent={<EmptyState description="Couldn't find any categories." />}
+        contentContainerStyle={{ flexGrow: 1 }}
+        ListEmptyComponent={
+          <View style={{ flexGrow: 1, justifyContent: "center" }}>
+            <EmptyState description="Couldn't find any categories." />
+          </View>
+        }
         variables={{
           query,
         }}

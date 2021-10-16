@@ -19,6 +19,7 @@ import {
   Callout,
   LazyList,
   RecipeCardSmall,
+  EmptyState,
 } from "@greeneggs/ui";
 
 const SavedRecipesHeader = () => (
@@ -47,25 +48,7 @@ export const SavedRecipes: FC = () => {
     );
   }
   const recipes = data?.savedRecipes.data;
-  if (recipes === undefined || recipes === null) {
-    return (
-      <Background>
-        <Text>Error! Recipe not found</Text>
-      </Background>
-    );
-  }
-  if (recipes.length === 0) {
-    return (
-      <Background>
-        <SavedRecipesHeader />
-        <Callout
-          style={{ padding: 16 }}
-          message="You haven't saved any recipes yet! Save some recipes and they will appear here."
-          type="info"
-        />
-      </Background>
-    );
-  }
+
   return (
     <Background>
       <SavedRecipesHeader />
@@ -79,8 +62,7 @@ export const SavedRecipes: FC = () => {
         query={Queries.GET_SAVED_RECIPES}
         variables={{}}
         dataKey="savedRecipes"
-        emptyMessage="ou haven't saved any recipes yet! Save some recipes and they will appear here."
-        errorMessage="Error! No recipes found."
+        emptyMessage="You haven't saved any recipes yet! Save some recipes and they will appear here."
         renderItem={({ item: recipe }) => (
           <View style={{ paddingHorizontal: 16, marginBottom: 16 }}>
             <RecipeCardSmall

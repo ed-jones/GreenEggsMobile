@@ -211,7 +211,7 @@ export const GenericProfile = ({
         query={myRecipeQuery}
         userId={profile.id}
         extraData={myRecipeQuery}
-        ListHeaderComponent={(
+        ListHeaderComponent={
           <>
             <View style={styles.avatarContainer}>
               <Pressable
@@ -251,9 +251,11 @@ export const GenericProfile = ({
                 </Button>
               )}
             </View>
-            <Text style={styles.description} numberOfLines={2}>
-              {optional(profile.bio)}
-            </Text>
+            {profile.bio && (
+              <Text style={styles.description} numberOfLines={2}>
+                {optional(profile.bio)}
+              </Text>
+            )}
             <View style={styles.statContainer}>
               <ProfileStat
                 label="Following"
@@ -280,7 +282,7 @@ export const GenericProfile = ({
               onChangeText={(newText) => setMyRecipeQuery(newText)}
             />
           </>
-        )}
+        }
       />
     </Background>
   );

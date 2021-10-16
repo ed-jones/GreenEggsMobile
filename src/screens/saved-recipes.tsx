@@ -13,7 +13,13 @@ import {
 } from "@greeneggs/types/graphql";
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/core";
-import { TopNavigation, Background, Callout, LazyList, RecipeCardSmall } from "@greeneggs/ui";
+import {
+  TopNavigation,
+  Background,
+  Callout,
+  LazyList,
+  RecipeCardSmall,
+} from "@greeneggs/ui";
 
 const SavedRecipesHeader = () => (
   <TopNavigation title="Saved Recipes" accessoryLeft={undefined} />
@@ -34,22 +40,30 @@ export const SavedRecipes: FC = () => {
     return <LoadingScreen />;
   }
   if (error) {
-    return <Text>Error! {error.message}</Text>;
+    return (
+      <Background>
+        <Text>Error! {error.message}</Text>
+      </Background>
+    );
   }
   const recipes = data?.savedRecipes.data;
   if (recipes === undefined || recipes === null) {
-    return <Text>Error! Recipe not found</Text>;
+    return (
+      <Background>
+        <Text>Error! Recipe not found</Text>
+      </Background>
+    );
   }
   if (recipes.length === 0) {
     return (
-      <>
+      <Background>
         <SavedRecipesHeader />
         <Callout
           style={{ padding: 16 }}
           message="You haven't saved any recipes yet! Save some recipes and they will appear here."
           type="info"
         />
-      </>
+      </Background>
     );
   }
   return (

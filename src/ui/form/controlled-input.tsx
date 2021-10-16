@@ -89,12 +89,16 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
       textContentType: "password",
       autoCompleteType: "password",
       secureTextEntry: true,
-      placeholder: "********",
+      placeholder: "**********",
     },
     controllerProps: {
       rules: {
         ...Rules.REQUIRED,
         ...Rules.UNDER100CHARS,
+        pattern: {
+          value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
+          message: "Password must contain at least 8 characters, upper and lowercase letters, a number and a special character.",
+        },
         minLength: { value: 4, message: "Must be over 4 characters" },
       },
     },

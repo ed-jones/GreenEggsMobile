@@ -77,7 +77,7 @@ export const RecipeSearchFilter: FC = () => {
       to: "FilterRecipeDiets",
       count: searchState.filter.diets?.length ?? 0,
     },
-    { title: "Cook Time", to: "FilterRecipeCookTime", count: 0 },
+    // { title: "Cook Time", to: "FilterRecipeCookTime", count: 0 },
   ];
 
   return (

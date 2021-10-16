@@ -4,8 +4,9 @@ import { Divider } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/core';
 import { Allergies, AllergiesVariables, Allergies_allergies_data, RecipeFilter, Sort } from '@greeneggs/types/graphql';
 import { SearchContext } from '@greeneggs/providers/search-state-provider';
-import { Input, TopNavigation, Background, Icons, SelectableListItem, AlphabetType, LazyListAlpha } from '@greeneggs/ui';
+import { Input, TopNavigation, Background, Icons, SelectableListItem, AlphabetType, LazyListAlpha, EmptyState } from '@greeneggs/ui';
 import { AddToFilter } from '../common';
+import { View } from 'react-native';
 
 export const FilterRecipeAllergies: FC = () => {
   const navigation = useNavigation();
@@ -40,7 +41,7 @@ export const FilterRecipeAllergies: FC = () => {
       <TopNavigation title="Allergies" />
       <Input
         style={{ padding: 16, backgroundColor: 'white' }}
-        placeholder="Search Allergies"
+        placeholder="Search allergies..."
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
         value={query}
@@ -64,8 +65,12 @@ export const FilterRecipeAllergies: FC = () => {
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
         query={Queries.GET_ALLERGIES}
-        emptyMessage={"No allergies found"}
-        errorMessage={"Error"}
+        contentContainerStyle={{ flexGrow: 1 }}
+        ListEmptyComponent={
+          <View style={{ flexGrow: 1, justifyContent: "center" }}>
+            <EmptyState description="Couldn't find any allergies." />
+          </View>
+        }
         variables={{
           query,
         }}

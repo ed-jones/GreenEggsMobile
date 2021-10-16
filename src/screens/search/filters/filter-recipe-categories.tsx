@@ -1,7 +1,7 @@
 import React, { FC, useContext, useState } from 'react';
 import { Queries } from "@greeneggs/graphql";
 import { Divider } from '@ui-kitten/components';
-import { Input, TopNavigation, Background, Icons, LazyListAlpha, AlphabetType, SelectableListItem } from '@greeneggs/ui';
+import { Input, TopNavigation, Background, Icons, LazyListAlpha, AlphabetType, SelectableListItem, EmptyState } from '@greeneggs/ui';
 import { useNavigation } from '@react-navigation/core';
 import { Categories, CategoriesVariables, Categories_categories_data, RecipeFilter, Sort } from '@greeneggs/types/graphql';
 import { SearchContext } from '@greeneggs/providers/search-state-provider';
@@ -40,7 +40,7 @@ export const FilterRecipeCategories: FC = () => {
       <TopNavigation title="Categories" />
       <Input
         style={{ padding: 16, backgroundColor: 'white' }}
-        placeholder="Search Categories"
+        placeholder="Search categories..."
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
         value={query}
@@ -64,7 +64,7 @@ export const FilterRecipeCategories: FC = () => {
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
         query={Queries.GET_CATEGORIES}
-        emptyMessage={"No categories found"}
+        ListEmptyComponent={<EmptyState description="Couldn't find any categories." />}
         variables={{
           query,
         }}

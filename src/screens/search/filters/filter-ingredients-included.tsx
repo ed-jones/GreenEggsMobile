@@ -3,7 +3,7 @@ import { Queries } from "@greeneggs/graphql";
 import {
   Divider,
 } from "@ui-kitten/components";
-import { Input, Icons } from '@greeneggs/ui';
+import { Input, Icons, EmptyState } from '@greeneggs/ui';
 import { useNavigation } from "@react-navigation/core";
 import {
   Ingredients,
@@ -16,6 +16,7 @@ import { SearchContext } from "@greeneggs/providers/search-state-provider";
 import { TopNavigation, Background, AlphabetType, LazyListAlpha, SelectableListItem } from "@greeneggs/ui";
 
 import { AddToFilter } from "../common";
+import { View } from "react-native";
 
 export const FilterIngredientsIncluded: FC = () => {
   const navigation = useNavigation();
@@ -52,7 +53,7 @@ export const FilterIngredientsIncluded: FC = () => {
       <TopNavigation title="Ingredients (included)" />
       <Input
         style={{ padding: 16, backgroundColor: "white" }}
-        placeholder="Search Ingredients"
+        placeholder="Search ingredients..."
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
         value={query}
@@ -76,7 +77,12 @@ export const FilterIngredientsIncluded: FC = () => {
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
         query={Queries.GET_INGREDIENTS}
-        emptyMessage={"No ingredients found"}
+        contentContainerStyle={{ flexGrow: 1 }}
+        ListEmptyComponent={
+          <View style={{ flexGrow: 1, justifyContent: "center" }}>
+            <EmptyState description="Couldn't find any ingredients." />
+          </View>
+        }
         variables={{
           query,
         }}

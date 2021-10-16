@@ -1,11 +1,12 @@
 import React, { FC, useContext, useState } from 'react';
 import { Queries } from "@greeneggs/graphql";
 import { Divider } from '@ui-kitten/components';
-import { Input, TopNavigation, Background, Icons, LazyListAlpha, AlphabetType, SelectableListItem } from '@greeneggs/ui';
+import { Input, TopNavigation, Background, Icons, LazyListAlpha, AlphabetType, SelectableListItem, EmptyState } from '@greeneggs/ui';
 import { useNavigation } from '@react-navigation/core';
 import { Diets, DietsVariables, Diets_diets_data, RecipeFilter, Sort } from '@greeneggs/types/graphql';
 import { AddToFilter} from '../common';
 import { SearchContext } from '@greeneggs/providers/search-state-provider';
+import { View } from 'react-native';
 
 export const FilterRecipeDiets: FC = () => {
   const navigation = useNavigation();
@@ -39,7 +40,7 @@ export const FilterRecipeDiets: FC = () => {
       <TopNavigation title="Diets" />
       <Input
         style={{ padding: 16, backgroundColor: 'white' }}
-        placeholder="Search Diets"
+        placeholder="Search diets..."
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
         value={query}
@@ -63,8 +64,12 @@ export const FilterRecipeDiets: FC = () => {
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
         query={Queries.GET_DIETS}
-        emptyMessage={"No diets found"}
-        errorMessage={"Error"}
+        contentContainerStyle={{ flexGrow: 1 }}
+        ListEmptyComponent={
+          <View style={{ flexGrow: 1, justifyContent: "center" }}>
+            <EmptyState description="Couldn't find any diets." />
+          </View>
+        }
         variables={{
           query,
         }}

@@ -38,7 +38,7 @@ export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
         control: form.control,
       }}
       inputProps={{
-        label: "SUBTITLE",
+        label: "SUBTITLE (OPTIONAL)",
         placeholder: "Describe your recipe in one sentence",
         defaultValue: "",
         style: AddRecipeStyles.input,
@@ -52,7 +52,7 @@ export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
         control: form.control,
       }}
       inputProps={{
-        label: "DESCRIPTION",
+        label: "DESCRIPTION (OPTIONAL)",
         placeholder:
           "Tell us a little about yourself and your recipe",
         defaultValue: "",
@@ -73,7 +73,7 @@ export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
         },
       }}
       inputProps={{
-        label: "SERVES",
+        label: "SERVES (OPTIONAL)",
         placeholder: "How many people does your recipe serve?",
         defaultValue: "",
         style: AddRecipeStyles.input,
@@ -87,7 +87,7 @@ export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
         control: form.control,
       }}
       inputProps={{
-        label: "TIME ESTIMATE",
+        label: "TIME ESTIMATE (OPTIONAL)",
         placeholder: "5 hours",
         defaultValue: "",
         style: AddRecipeStyles.input,

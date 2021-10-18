@@ -251,11 +251,11 @@ export const GenericProfile = ({
                 </Button>
               )}
             </View>
-            {profile.bio && (
+            {profile.bio ? (
               <Text style={styles.description} numberOfLines={2}>
                 {optional(profile.bio)}
               </Text>
-            )}
+            ) : undefined}
             <View style={styles.statContainer}>
               <ProfileStat
                 label="Following"

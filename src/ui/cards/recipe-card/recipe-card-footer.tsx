@@ -70,7 +70,7 @@ export const RecipeCardFooter = ({
         )} ago`}</Text>
       </View>
       {subtitle && (
-        <Text category="s1" style={styles.recipeDescription}>
+        <Text category="s1" numberOfLines={2} style={styles.recipeDescription}>
           {subtitle}
         </Text>
       )}

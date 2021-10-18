@@ -108,21 +108,18 @@ export const Recipe = ({ route, navigation }: any) => {
           </View>
         )}
         <Text category="h5" style={styles.heading}>
-          Directions
+          Steps
         </Text>
         {recipe.steps.length > 0 ? (
           <RecipeDirections directions={recipe.steps} />
         ) : (
           <View style={{ paddingVertical: 16 }}>
-            <EmptyState description="This recipe has no directions." />
+            <EmptyState description="This recipe has no steps." />
           </View>
         )}
         <Text category="h5" style={styles.heading}>
           {`Comments (${recipe.commentCount.toString()})`}
         </Text>
-        <View style={{ marginBottom: 24 }}>
-          <RecipeAddComment recipeId={recipe.id} />
-        </View>
         <RecipeCommentList comments={recipe.comments.slice(0, 3)} />
         {recipe.comments.length >= 3 && (
           <ViewMore
@@ -136,6 +133,9 @@ export const Recipe = ({ route, navigation }: any) => {
             }
           />
         )}
+        <View style={{ marginTop: 24 }}>
+          <RecipeAddComment recipeId={recipe.id} />
+        </View>
       </Background>
     </ParallaxHeader>
   );

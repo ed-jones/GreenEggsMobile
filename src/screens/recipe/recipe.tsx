@@ -2,11 +2,7 @@ import React from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { ImageBackground, View, StyleSheet } from "react-native";
 import { Mutations, Queries } from "@greeneggs/graphql";
-import {
-  Icon,
-  Text,
-  TopNavigationAction,
-} from "@ui-kitten/components";
+import { Icon, Text, TopNavigationAction } from "@ui-kitten/components";
 import { recipe, recipeVariables } from "@greeneggs/types/graphql";
 import ParallaxHeader from "@fabfit/react-native-parallax-header";
 import { LinearGradient } from "expo-linear-gradient";
@@ -17,7 +13,13 @@ import { RecipeDirections } from "./recipe-directions";
 import { RecipeCommentList } from "./recipe-comment-list";
 import { LoadingScreen } from "../loading-screen";
 import { RecipeAddComment } from "./recipe-add-comment";
-import { TopNavigation, Background, ViewMore, SaveRecipeButton } from "@greeneggs/ui";
+import {
+  TopNavigation,
+  Background,
+  ViewMore,
+  SaveRecipeButton,
+  EmptyState,
+} from "@greeneggs/ui";
 
 const styles = StyleSheet.create({
   coverPhoto: {
@@ -41,7 +43,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   heading: {
-    marginVertical: 16,
+    marginVertical: 24,
   },
   gradient: {
     position: "absolute",
@@ -98,11 +100,23 @@ export const Recipe = ({ route, navigation }: any) => {
         <Text category="h5" style={styles.heading}>
           Ingredients
         </Text>
-        <RecipeIngredients ingredients={recipe.ingredients} />
+        {recipe.ingredients.length > 0 ? (
+          <RecipeIngredients ingredients={recipe.ingredients} />
+        ) : (
+          <View style={{ paddingVertical: 16 }}>
+            <EmptyState description="This recipe has no ingredients." />
+          </View>
+        )}
         <Text category="h5" style={styles.heading}>
           Directions
         </Text>
-        <RecipeDirections directions={recipe.steps} />
+        {recipe.steps.length > 0 ? (
+          <RecipeDirections directions={recipe.steps} />
+        ) : (
+          <View style={{ paddingVertical: 16 }}>
+            <EmptyState description="This recipe has no directions." />
+          </View>
+        )}
         <Text category="h5" style={styles.heading}>
           {`Comments (${recipe.commentCount.toString()})`}
         </Text>

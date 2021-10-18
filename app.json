@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "GreenEggsMobile",
-    "slug": "GreenEggsMobile",
+    "name": "Green Eggs",
+    "slug": "greenEggsMobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
@@ -29,7 +29,7 @@
       "package": "app.greeneggs.mobile"
     },
     "web": {
-      "favicon": "./src/assets/images/favicon.png"
+      "favicon": "./src/assets/images/icon.png"
     }
   }
 }

@@ -97,7 +97,6 @@ export interface addRecipe_addRecipe_data_comments {
 export interface addRecipe_addRecipe_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string | null;
   title: string;
   description: string | null;
   submittedBy: addRecipe_addRecipe_data_submittedBy;
@@ -721,7 +720,6 @@ export interface LikeRecipe_likeRecipe_data_comments {
 export interface LikeRecipe_likeRecipe_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string | null;
   title: string;
   description: string | null;
   submittedBy: LikeRecipe_likeRecipe_data_submittedBy;
@@ -859,7 +857,6 @@ export interface UnlikeRecipe_unlikeRecipe_data_comments {
 export interface UnlikeRecipe_unlikeRecipe_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string | null;
   title: string;
   description: string | null;
   submittedBy: UnlikeRecipe_unlikeRecipe_data_submittedBy;
@@ -1078,7 +1075,6 @@ export interface SaveRecipe_saveRecipe_data_comments {
 export interface SaveRecipe_saveRecipe_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string | null;
   title: string;
   description: string | null;
   submittedBy: SaveRecipe_saveRecipe_data_submittedBy;
@@ -1216,7 +1212,6 @@ export interface UnsaveRecipe_unsaveRecipe_data_comments {
 export interface UnsaveRecipe_unsaveRecipe_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string | null;
   title: string;
   description: string | null;
   submittedBy: UnsaveRecipe_unsaveRecipe_data_submittedBy;
@@ -1481,7 +1476,6 @@ export interface recipes_recipes_data_comments {
 export interface recipes_recipes_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string | null;
   title: string;
   description: string | null;
   submittedBy: recipes_recipes_data_submittedBy;
@@ -1623,7 +1617,6 @@ export interface NewsFeed_newsFeed_data_comments {
 export interface NewsFeed_newsFeed_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string | null;
   title: string;
   description: string | null;
   submittedBy: NewsFeed_newsFeed_data_submittedBy;
@@ -1762,7 +1755,6 @@ export interface Trending_trending_data_comments {
 export interface Trending_trending_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string | null;
   title: string;
   description: string | null;
   submittedBy: Trending_trending_data_submittedBy;
@@ -1901,7 +1893,6 @@ export interface recipe_recipe_data_comments {
 export interface recipe_recipe_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string | null;
   title: string;
   description: string | null;
   submittedBy: recipe_recipe_data_submittedBy;
@@ -2233,7 +2224,6 @@ export interface savedRecipes_savedRecipes_data_comments {
 export interface savedRecipes_savedRecipes_data {
   __typename: "Recipe";
   id: string;
-  subtitle: string | null;
   title: string;
   description: string | null;
   submittedBy: savedRecipes_savedRecipes_data_submittedBy;
@@ -2890,7 +2880,6 @@ export interface RecipeFragment_comments {
 export interface RecipeFragment {
   __typename: "Recipe";
   id: string;
-  subtitle: string | null;
   title: string;
   description: string | null;
   submittedBy: RecipeFragment_submittedBy;
@@ -3095,7 +3084,6 @@ export interface RecipeFilter {
 
 export interface RecipeInput {
   title: string;
-  subtitle?: string | null;
   description?: string | null;
   servingCount?: number | null;
   timeEstimate?: string | null;

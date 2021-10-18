@@ -30,7 +30,6 @@ interface IRecipeDetailsCard extends recipe_recipe_data {
 export const RecipeDetailsCard = ({
   navigation,
   title,
-  subtitle,
   timeEstimate,
   description,
   createdAt,
@@ -56,13 +55,16 @@ export const RecipeDetailsCard = ({
       header={() => (
         <View style={styles.cardSection}>
           <View style={styles.row}>
-              <Text category="h5" style={{flexShrink: 1}}>{title}</Text>
-            <LabelledIcon
-              label={convertTimeEstimate(timeEstimate).toUpperCase()}
-              iconName="clock-outline"
-            />
+            <Text category="h5" style={{ flexShrink: 1 }}>
+              {title}
+            </Text>
+            {timeEstimate ? (
+              <LabelledIcon
+                label={convertTimeEstimate(timeEstimate).toUpperCase()}
+                iconName="clock-outline"
+              />
+            ) : undefined}
           </View>
-          <Text category="s1">{subtitle}</Text>
           <View style={{ ...styles.row, marginTop: 8 }}>
             <RecipeCategoriesTags categories={categories} />
           </View>
@@ -70,7 +72,9 @@ export const RecipeDetailsCard = ({
       )}
       footer={() => (
         <View style={styles.cardSection}>
-          <Text numberOfLines={2}>{description}</Text>
+          {description ? (
+            <Text numberOfLines={2}>{description}</Text>
+          ) : undefined}
           <ViewMore
             style={{ paddingHorizontal: 0, marginTop: 8 }}
             onPress={navigateToDescription}

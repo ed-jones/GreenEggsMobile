@@ -83,7 +83,6 @@ export const RecipeCommentFragment = gql`
 export const RecipeFragment = gql`
   fragment RecipeFragment on Recipe {
     id
-    subtitle
     title
     description
     submittedBy {

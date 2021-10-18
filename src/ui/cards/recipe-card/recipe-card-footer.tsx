@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 export type IRecipeCardFooterProps = Pick<
   recipes_recipes_data,
   | "title"
-  | "subtitle"
+  | "description"
   | "commentCount"
   | "likeCount"
   | "createdAt"
@@ -49,7 +49,7 @@ export type IRecipeCardFooterProps = Pick<
 
 export const RecipeCardFooter = ({
   title,
-  subtitle,
+  description,
   commentCount,
   likeCount,
   timeEstimate,
@@ -69,11 +69,11 @@ export const RecipeCardFooter = ({
           createdAt
         )} ago`}</Text>
       </View>
-      {subtitle && (
+      {description ? (
         <Text category="s1" numberOfLines={2} style={styles.recipeDescription}>
-          {subtitle}
+          {description}
         </Text>
-      )}
+      ) : undefined}
       <View style={styles.labelledIcons}>
         {timeEstimate && (
           <View style={styles.labelledIconGroup}>

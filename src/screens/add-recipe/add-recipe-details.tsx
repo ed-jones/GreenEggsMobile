@@ -34,20 +34,6 @@ export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
     />
     <ControlledInput<RecipeInput>
       controllerProps={{
-        name: "subtitle",
-        control: form.control,
-      }}
-      inputProps={{
-        label: "SUBTITLE (OPTIONAL)",
-        placeholder: "Describe your recipe in one sentence",
-        defaultValue: "",
-        style: AddRecipeStyles.input,
-      }}
-      submitError={form.formResult.data?.addRecipe.error}
-      type={InputType.TEXT}
-    />
-    <ControlledInput<RecipeInput>
-      controllerProps={{
         name: "description",
         control: form.control,
       }}

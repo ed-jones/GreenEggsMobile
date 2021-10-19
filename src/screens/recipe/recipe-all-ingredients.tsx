@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 });
 
 export const RecipeAllIngredients = ({ route }: any) => {
-  const { ingredients } = route.params;
+  const { ingredients, multiplier } = route.params;
 
   return (
     <Background>
@@ -20,7 +20,12 @@ export const RecipeAllIngredients = ({ route }: any) => {
         <List
           data={ingredients}
           renderItem={({ item }: { item: recipe_recipe_data_ingredients }) => (
-            <IngredientListItem ingredient={item} />
+            <IngredientListItem
+              ingredient={{
+                ...item,
+                quantity: item.quantity ? item.quantity * multiplier : null,
+              }}
+            />
           )}
         />
         <Divider />

@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { ImageBackground, View, StyleSheet } from "react-native";
 import { Mutations, Queries } from "@greeneggs/graphql";
-import { Icon, Text, TopNavigationAction } from "@ui-kitten/components";
+import {
+  Icon,
+  IndexPath,
+  SelectItem,
+  Text,
+  TopNavigationAction,
+} from "@ui-kitten/components";
 import { recipe, recipeVariables } from "@greeneggs/types/graphql";
 import ParallaxHeader from "@fabfit/react-native-parallax-header";
 import { LinearGradient } from "expo-linear-gradient";
@@ -19,6 +25,7 @@ import {
   ViewMore,
   SaveRecipeButton,
   EmptyState,
+  Select,
 } from "@greeneggs/ui";
 
 const styles = StyleSheet.create({
@@ -56,11 +63,13 @@ const styles = StyleSheet.create({
 
 export const Recipe = ({ route, navigation }: any) => {
   const { recipeId } = route.params;
-
+  const [servingCount, setServingCount] = useState<number | undefined>(undefined);
+  const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(new IndexPath(0))
   const { loading, error, data } = useQuery<recipe, recipeVariables>(
     Queries.GET_RECIPE,
     {
       variables: { recipeId },
+      onCompleted: (data) => setServingCount(data.recipe.data?.servingCount ?? undefined)
     }
   );
 
@@ -97,11 +106,36 @@ export const Recipe = ({ route, navigation }: any) => {
       <Background style={styles.content}>
         <RecipeDetailsCard {...recipe} navigation={navigation} />
         <RecipeAllergies allergies={recipe.allergies} />
-        <Text category="h5" style={styles.heading}>
-          Ingredients
-        </Text>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Text category="h5" style={styles.heading}>
+            Ingredients
+          </Text>
+          {servingCount && recipe.servingCount ? (
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Text category="label" style={{marginRight: 16 }}>SERVES</Text>
+              <Select
+                selectedIndex={selectedIndex}
+                onSelect={(args) => {
+                  setSelectedIndex(args);
+                  setServingCount(Number(args.toString()))
+                }}
+                value={() => <Text>{selectedIndex.toString()}</Text>}
+                >
+                {[...Array(Math.max(recipe.servingCount, 10)).keys()].map((number) => (
+                  <SelectItem title={number + 1}/>
+                ))}
+              </Select>
+            </View>
+          ) : undefined}
+        </View>
         {recipe.ingredients.length > 0 ? (
-          <RecipeIngredients ingredients={recipe.ingredients} />
+          <RecipeIngredients ingredients={recipe.ingredients} servingCount={servingCount} defaultServingCount={recipe.servingCount} />
         ) : (
           <View style={{ paddingVertical: 16 }}>
             <EmptyState description="This recipe has no ingredients." />

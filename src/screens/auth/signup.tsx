@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import { StyleSheet } from "react-native";
-import { Button, Spinner } from "@ui-kitten/components";
+import { Button, CheckBox, Spinner, Text } from "@ui-kitten/components";
 import { ControlledInput, InputType } from "@greeneggs/ui";
 import { SignupInput } from "@greeneggs/types/graphql";
 import { AuthContext } from "@greeneggs/providers/auth-provider";
@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
 export const Signup = ({ navigation }: any) => {
   const { formResult, handleSubmit, control, submitForm } = useSignupForm();
   const { setToken } = useContext(AuthContext);
+  const [consent, setConsent] = useState(false);
 
   async function handleSignupFormSubmit() {
     const result = await submitForm();
@@ -105,9 +106,19 @@ export const Signup = ({ navigation }: any) => {
         submitError={formResult.data?.signup.error}
         type={InputType.PASSWORD}
       />
+      <CheckBox
+        checked={consent}
+        style={{ paddingVertical: 16 }}
+        onChange={(nextChecked) => setConsent(nextChecked)}
+      >
+        <Text>
+          I have read and agreed to the{" "}
+          <Text style={{ fontWeight: "bold" }} onPress={() => navigation.navigate("Privacy")}>Privacy Policy</Text>
+        </Text>
+      </CheckBox>
       <Button
         onPress={handleSubmit(handleSignupFormSubmit)}
-        disabled={formResult.loading}
+        disabled={formResult.loading || !consent}
         accessoryLeft={
           formResult.loading ? () => <Spinner size="small" /> : undefined
         }

@@ -40,3 +40,4 @@ export * from './notifications';
 export * from './home/category';
 export * from './home/all-categories';
 export * from './add-recipe/add-recipe-ingredients/add-ingredient-details';
+export * from './auth/privacy-policy';

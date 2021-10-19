@@ -318,3 +318,18 @@ export const READ_NOTIFICATIONS = gql`
   ${Fragments.NotificationFragment}
   ${Fragments.ErrorFragment}
 `;
+
+export const DELETE_RECIPE = gql`
+  mutation DeleteRecipe($recipeId: String!) {
+    deleteRecipe(recipeId: $recipeId) {
+      data {
+        ...RecipeFragment
+      }
+      error {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${Fragments.RecipeFragment}
+  ${Fragments.ErrorFragment}
+`;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { ImageBackground, View, StyleSheet } from "react-native";
 import { Mutations, Queries } from "@greeneggs/graphql";
@@ -27,6 +27,8 @@ import {
   EmptyState,
   Select,
 } from "@greeneggs/ui";
+import { RecipeMoreButton } from "./recipe-more-button";
+import { UserContext } from "@greeneggs/providers";
 
 const styles = StyleSheet.create({
   coverPhoto: {
@@ -64,7 +66,8 @@ const styles = StyleSheet.create({
 export const Recipe = ({ route, navigation }: any) => {
   const { recipeId } = route.params;
   const [servingCount, setServingCount] = useState<number | undefined>(undefined);
-  const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(new IndexPath(0))
+  const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(new IndexPath(0));
+  const { me } = useContext(UserContext);
   const { loading, error, data } = useQuery<recipe, recipeVariables>(
     Queries.GET_RECIPE,
     {
@@ -87,7 +90,10 @@ export const Recipe = ({ route, navigation }: any) => {
         <TopNavigation
           style={{ height: 64, alignItems: "flex-start" }}
           accessoryRight={() => (
-            <SaveRecipeButton recipeId={recipeId} saved={recipe.saved} />
+            <>
+              <SaveRecipeButton recipeId={recipeId} saved={recipe.saved} />
+              { me?.id === recipe.submittedBy.id ? <RecipeMoreButton recipeId={recipeId} /> : undefined }
+            </>
           )}
         />
       )}

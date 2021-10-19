@@ -2643,6 +2643,143 @@ export interface NotificationCount {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: DeleteRecipe
+// ====================================================
+
+export interface DeleteRecipe_deleteRecipe_data_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface DeleteRecipe_deleteRecipe_data_categories {
+  __typename: "Category";
+  id: string;
+  name: string;
+}
+
+export interface DeleteRecipe_deleteRecipe_data_diets {
+  __typename: "Diet";
+  name: string;
+}
+
+export interface DeleteRecipe_deleteRecipe_data_allergies {
+  __typename: "Allergy";
+  name: string;
+}
+
+export interface DeleteRecipe_deleteRecipe_data_ingredients {
+  __typename: "Ingredient";
+  name: string;
+  description: string | null;
+  quantity: number | null;
+  unit: string | null;
+}
+
+export interface DeleteRecipe_deleteRecipe_data_steps {
+  __typename: "RecipeStep";
+  title: string;
+  description: string;
+  image: string | null;
+}
+
+export interface DeleteRecipe_deleteRecipe_data_comments_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface DeleteRecipe_deleteRecipe_data_comments_replies_submittedBy {
+  __typename: "User";
+  id: string;
+  firstName: string;
+  lastName: string;
+  bio: string | null;
+  email: string;
+  avatarURI: string | null;
+  verified: boolean;
+}
+
+export interface DeleteRecipe_deleteRecipe_data_comments_replies {
+  __typename: "RecipeCommentReply";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  submittedBy: DeleteRecipe_deleteRecipe_data_comments_replies_submittedBy;
+}
+
+export interface DeleteRecipe_deleteRecipe_data_comments {
+  __typename: "RecipeComment";
+  id: string;
+  contents: string;
+  likeCount: number;
+  replyCount: number;
+  liked: boolean;
+  createdAt: string;
+  deleted: boolean;
+  submittedBy: DeleteRecipe_deleteRecipe_data_comments_submittedBy;
+  replies: DeleteRecipe_deleteRecipe_data_comments_replies[];
+}
+
+export interface DeleteRecipe_deleteRecipe_data {
+  __typename: "Recipe";
+  id: string;
+  title: string;
+  description: string | null;
+  submittedBy: DeleteRecipe_deleteRecipe_data_submittedBy;
+  commentCount: number;
+  likeCount: number;
+  createdAt: string;
+  servingCount: number | null;
+  timeEstimate: string | null;
+  coverImage: string;
+  liked: boolean;
+  saved: boolean;
+  categories: DeleteRecipe_deleteRecipe_data_categories[];
+  diets: DeleteRecipe_deleteRecipe_data_diets[];
+  allergies: DeleteRecipe_deleteRecipe_data_allergies[];
+  ingredients: DeleteRecipe_deleteRecipe_data_ingredients[];
+  steps: DeleteRecipe_deleteRecipe_data_steps[];
+  comments: DeleteRecipe_deleteRecipe_data_comments[];
+}
+
+export interface DeleteRecipe_deleteRecipe_error {
+  __typename: "Error";
+  message: string;
+}
+
+export interface DeleteRecipe_deleteRecipe {
+  __typename: "DeleteRecipeResult";
+  data: DeleteRecipe_deleteRecipe_data | null;
+  error: DeleteRecipe_deleteRecipe_error | null;
+}
+
+export interface DeleteRecipe {
+  deleteRecipe: DeleteRecipe_deleteRecipe;
+}
+
+export interface DeleteRecipeVariables {
+  recipeId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: UserFragment
 // ====================================================
 

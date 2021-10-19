@@ -164,11 +164,11 @@ export const BottomTabBar = ({
   function isFormDirty() {
     return (
       form?.formState.isDirty ||
-      categoriesFieldArray?.fields ||
-      ingredientsFieldArray?.fields ||
-      stepsFieldArray?.fields ||
-      allergiesFieldArray?.fields ||
-      dietsFieldArray?.fields
+      categoriesFieldArray?.fields.length ||
+      ingredientsFieldArray?.fields.length ||
+      stepsFieldArray?.fields.length ||
+      allergiesFieldArray?.fields.length ||
+      dietsFieldArray?.fields.length
     );
   }
 

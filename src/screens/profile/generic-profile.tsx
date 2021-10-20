@@ -15,6 +15,7 @@ import {
   Callout,
   Icons,
   LazyListProps,
+  FollowButton,
 } from "@greeneggs/ui";
 import { useMutation, useQuery } from "@apollo/client";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -155,20 +156,6 @@ export const GenericProfile = ({
     },
   });
 
-  const [followUser] = useMutation<FollowUser>(Mutations.FOLLOW_USER, {
-    variables: {
-      userId,
-    },
-    refetchQueries: [Queries.GET_PROFILE, "profile"],
-  });
-
-  const [unfollowUser] = useMutation<FollowUser>(Mutations.UNFOLLOW_USER, {
-    variables: {
-      userId,
-    },
-    refetchQueries: [Queries.GET_PROFILE, "profile"],
-  });
-
   const [myRecipeQuery, setMyRecipeQuery] = useState("");
 
   if (profileResult.loading) {
@@ -239,16 +226,7 @@ export const GenericProfile = ({
                   EDIT
                 </Button>
               ) : (
-                <Button
-                  size="small"
-                  onPress={
-                    profile.isFollowing
-                      ? () => unfollowUser()
-                      : () => followUser()
-                  }
-                >
-                  {profile.isFollowing ? "UNFOLLOW" : "FOLLOW"}
-                </Button>
+                <FollowButton isFollowing={profile.isFollowing ?? false} userId={userId} />
               )}
             </View>
             {profile.bio ? (

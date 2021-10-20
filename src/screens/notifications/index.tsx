@@ -137,7 +137,7 @@ const RecipeCommentedNotificationListItem: FC<notifications_notifications_data> 
         {...notification}
         title="commented on your recipe."
         onPress={() =>
-          navigation.navigate("Comment", { commentId: notification.linkId })
+          navigation.navigate("RecipeCommentReplies", { commentId: notification.linkId })
         }
       />
     );
@@ -151,7 +151,7 @@ const CommentRepliedNotificationListItem: FC<notifications_notifications_data> =
         {...notification}
         title="replied to your comment."
         onPress={() =>
-          navigation.navigate("Comment", { commentId: notification.linkId })
+          navigation.navigate("RecipeCommentReplies", { commentId: notification.linkId })
         }
       />
     );

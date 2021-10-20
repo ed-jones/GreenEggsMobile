@@ -65,14 +65,13 @@ const styles = StyleSheet.create({
 
 export const Recipe = ({ route, navigation }: any) => {
   const { recipeId } = route.params;
-  const [servingCount, setServingCount] = useState<number | undefined>(undefined);
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(new IndexPath(0));
   const { me } = useContext(UserContext);
   const { loading, error, data } = useQuery<recipe, recipeVariables>(
     Queries.GET_RECIPE,
     {
       variables: { recipeId },
-      onCompleted: (data) => setServingCount(data.recipe.data?.servingCount ?? undefined)
+      onCompleted: (data) => setSelectedIndex(new IndexPath((data.recipe.data?.servingCount ?? 0) - 1))
     }
   );
 
@@ -122,14 +121,13 @@ export const Recipe = ({ route, navigation }: any) => {
           <Text category="h5" style={styles.heading}>
             Ingredients
           </Text>
-          {servingCount && recipe.servingCount ? (
+          {recipe.servingCount ? (
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Text category="label" style={{marginRight: 16 }}>SERVES</Text>
               <Select
                 selectedIndex={selectedIndex}
                 onSelect={(args) => {
                   setSelectedIndex(args);
-                  setServingCount(Number(args.toString()))
                 }}
                 value={() => <Text>{selectedIndex.toString()}</Text>}
                 >
@@ -141,7 +139,7 @@ export const Recipe = ({ route, navigation }: any) => {
           ) : undefined}
         </View>
         {recipe.ingredients.length > 0 ? (
-          <RecipeIngredients ingredients={recipe.ingredients} servingCount={servingCount} defaultServingCount={recipe.servingCount} />
+          <RecipeIngredients ingredients={recipe.ingredients} servingCount={Number(selectedIndex) + 1} defaultServingCount={recipe.servingCount} />
         ) : (
           <View style={{ paddingVertical: 16 }}>
             <EmptyState description="This recipe has no ingredients." />

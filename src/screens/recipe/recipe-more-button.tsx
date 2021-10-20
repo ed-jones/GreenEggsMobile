@@ -17,6 +17,7 @@ export const RecipeMoreButton: FC<RecipeMoreButtonProps> = ({ recipeId }) => {
     variables: {
       recipeId,
     },
+    refetchQueries: [Queries.ME, "me"]
   });
 
   function handleDeleteRecipe() {

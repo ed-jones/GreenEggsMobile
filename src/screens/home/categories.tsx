@@ -86,7 +86,7 @@ export const Categories: FC = () => {
             style={{ margin: 24, alignItems: "flex-start" }}
             onPress={() => navigation.navigate("AllCategories")}
           >
-            View All
+            VIEW ALL
           </Button>
         }
         query={Queries.GET_CATEGORIES_WITH_IMAGES}

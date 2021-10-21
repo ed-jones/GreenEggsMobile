@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import { ListItem } from "@ui-kitten/components";
 import React, { FC } from "react";
 import { SectionList, SectionListProps } from "react-native";

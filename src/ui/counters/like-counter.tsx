@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { FC, useContext, useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Mutations } from "@greeneggs/graphql";

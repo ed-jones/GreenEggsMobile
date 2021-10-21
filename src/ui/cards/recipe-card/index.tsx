@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React from "react";
 import { StyleSheet, Image, View } from "react-native";
 import { Card } from "@ui-kitten/components";

@@ -1,3 +1,6 @@
+/**
+ * Author: Andrew Wilkie
+ */
 import React, { FC, useState } from "react";
 import { View, StyleSheet, Pressable } from "react-native";
 import {

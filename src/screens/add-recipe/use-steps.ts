@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { useState } from "react";
 
 export interface Step {

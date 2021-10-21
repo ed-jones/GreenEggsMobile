@@ -1,6 +1,8 @@
-import { DocumentNode, FetchResult, MutationFunctionOptions, MutationHookOptions, MutationResult, MutationTuple, useMutation } from '@apollo/client';
-import { useState } from 'react';
-import { Path, SubmitErrorHandler, SubmitHandler, useForm as useReactHookForm, UseFormHandleSubmit, UseFormProps, UseFormReturn } from 'react-hook-form';
+/**
+ * Author: Edward Jones
+ */
+import { DocumentNode, FetchResult, MutationFunctionOptions, MutationHookOptions, MutationResult, useMutation } from '@apollo/client';
+import { useForm as useReactHookForm, UseFormProps, UseFormReturn } from 'react-hook-form';
 
 export interface IForm<InputType, MutationType, MutationVariables> extends UseFormReturn<InputType> {
   formResult: MutationResult<MutationType>;

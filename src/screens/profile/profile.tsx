@@ -1,3 +1,6 @@
+/**
+ * Author: Andrew Wilkie
+ */
 import React from "react";
 import { GenericProfile } from "./generic-profile";
 

@@ -1,3 +1,6 @@
+/**
+ * Author: Victor Ying
+ */
 import React, { FC, useContext, useState } from 'react';
 import { Queries } from "@greeneggs/graphql";
 import { Divider } from '@ui-kitten/components';

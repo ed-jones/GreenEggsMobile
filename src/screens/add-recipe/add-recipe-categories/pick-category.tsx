@@ -1,13 +1,13 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { FC, useContext, useState } from "react";
 import {
   AlphabetType,
   Background,
-  ControlledInput,
   Icons,
   Input,
-  InputType,
   LazyListAlpha,
-  Rules,
   TopNavigation,
 } from "@greeneggs/ui";
 import {
@@ -20,10 +20,8 @@ import {
 } from "@greeneggs/types/graphql";
 import { Button, Divider, ListItem } from "@ui-kitten/components";
 import { Queries } from "@greeneggs/graphql";
-import { useForm } from "react-hook-form";
 import { AddRecipeContext } from "@greeneggs/providers";
 import { useNavigation } from "@react-navigation/core";
-import { AddRecipeStyles } from "../add-recipe-styles";
 import { toTitleCase } from "@greeneggs/utils";
 
 export const PickCategory: FC = () => {

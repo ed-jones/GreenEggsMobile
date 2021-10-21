@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import { Background, TopNavigation } from "@greeneggs/ui";
 import React, { FC } from "react";
 import { WebView } from "react-native-webview";

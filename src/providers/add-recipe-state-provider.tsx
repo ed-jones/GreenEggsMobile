@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { useState, FC, createContext } from "react";
 import {
   addRecipe,

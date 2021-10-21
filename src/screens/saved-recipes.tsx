@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { FC } from "react";
 import { useQuery } from "@apollo/client";
 import { Queries } from "@greeneggs/graphql";

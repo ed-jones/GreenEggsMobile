@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React from 'react';
 import { createMaterialTopTabNavigator, MaterialTopTabBarProps } from '@react-navigation/material-top-tabs';
 import { TabBar, Tab } from '@ui-kitten/components';

@@ -1,3 +1,6 @@
+/**
+ * Author: Victor Ying
+ */
 import React, { FC } from "react";
 import { Text, Button, Layout, Divider } from "@ui-kitten/components";
 import { View } from "react-native";

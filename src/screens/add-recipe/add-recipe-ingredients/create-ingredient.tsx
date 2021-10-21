@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React from "react";
 import { Button } from "@ui-kitten/components";
 import { ControlledInput, InputType, Rules } from "@greeneggs/ui";

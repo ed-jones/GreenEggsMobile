@@ -1,3 +1,6 @@
+/**
+ * Author: Dimitri Zvolinski
+ */
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Mutations, Queries } from "@greeneggs/graphql";

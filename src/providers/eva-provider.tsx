@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { FC } from 'react';
 import * as eva from "@eva-design/eva";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";

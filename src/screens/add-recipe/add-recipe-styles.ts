@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import { StyleSheet } from "react-native";
 
 export const AddRecipeStyles = StyleSheet.create({

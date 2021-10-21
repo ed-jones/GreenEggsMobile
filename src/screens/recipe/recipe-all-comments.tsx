@@ -1,3 +1,6 @@
+/**
+ * Author: Dimitri Zvolinski
+ */
 import React from "react";
 import { RecipeCommentList } from "./recipe-comment-list";
 import { View, StyleSheet, ScrollView } from "react-native";

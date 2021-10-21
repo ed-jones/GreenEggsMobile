@@ -1,3 +1,6 @@
+/**
+ * Author: Dimitri Zvolinski
+ */
 import React, { useContext, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { ImageBackground, View, StyleSheet } from "react-native";

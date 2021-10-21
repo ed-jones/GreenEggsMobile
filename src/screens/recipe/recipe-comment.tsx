@@ -1,3 +1,6 @@
+/**
+ * Author: Dimitri Zvolinski
+ */
 import React, { useContext } from "react";
 import { CommentLikeCounter, LabelledIcon } from "@greeneggs/ui";
 import { Mutations, Queries } from "@greeneggs/graphql";

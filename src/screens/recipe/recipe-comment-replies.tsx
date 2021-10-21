@@ -1,3 +1,6 @@
+/**
+ * Author: Dimitri Zvolinski
+ */
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { Queries } from "@greeneggs/graphql";

@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { FC } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';

@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { useContext, useState } from "react";
 
 import { StyleSheet } from "react-native";

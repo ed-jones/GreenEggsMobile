@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { FC, useContext } from "react";
 import { onError } from "@apollo/client/link/error";
 import {

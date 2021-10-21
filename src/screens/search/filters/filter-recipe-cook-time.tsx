@@ -1,3 +1,6 @@
+/**
+ * Author: Victor Ying
+ */
 import React, { FC } from 'react';
 import { Text } from '@ui-kitten/components';
 import { TopNavigation, Background } from '@greeneggs/ui';

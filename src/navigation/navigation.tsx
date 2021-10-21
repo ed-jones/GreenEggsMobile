@@ -1,4 +1,7 @@
-import React, { FC, ReactElement, ReactNode } from "react";
+/**
+ * Author: Edward Jones
+ */
+import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import {

@@ -1,3 +1,6 @@
+/**
+ * Author: Andrew Wilkie
+ */
 import React from "react";
 import { Text } from "@ui-kitten/components";
 import { useQuery } from "@apollo/client";

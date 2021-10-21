@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { useContext, useState } from "react";
 import { Divider, ListItem } from "@ui-kitten/components";
 import {

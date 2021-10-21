@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 export { default as logo } from './images/logo512.png';
 export { default as noAvatar } from './images/noavatar.jpg';
 export { default as imageNotFound } from './images/imagenotfound.jpg';

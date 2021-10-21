@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 export * from './auth-provider';
 export * from './cached-resources-provider';
 export * from './eva-provider';

@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { FC, useState, ReactNode } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { useQuery } from "@apollo/client";

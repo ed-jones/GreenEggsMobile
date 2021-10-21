@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { useContext, useState } from "react";
 import { Divider, ListItem } from "@ui-kitten/components";
 import {
@@ -9,10 +12,6 @@ import {
   TopNavigation,
 } from "@greeneggs/ui";
 import {
-  Allergies,
-  AllergiesVariables,
-  Allergies_allergies_data,
-  AllergyInput,
   DietInput,
   Diets,
   DietsVariables,

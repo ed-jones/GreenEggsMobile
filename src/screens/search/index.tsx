@@ -1,3 +1,6 @@
+/**
+ * Author: Victor Ying
+ */
 import { Queries } from "@greeneggs/graphql";
 import React, { FC, useContext, useState } from "react";
 import {

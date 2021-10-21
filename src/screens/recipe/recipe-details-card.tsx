@@ -1,3 +1,6 @@
+/**
+ * Author: Dimitri Zvolinski
+ */
 import React from "react";
 import { noAvatar } from "@greeneggs/assets";
 import { CommentCounter, LabelledIcon, ViewMore } from "@greeneggs/ui";

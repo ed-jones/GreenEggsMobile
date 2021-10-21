@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import { useContext } from "react";
 import { UserContext } from "@greeneggs/providers";
 import { useNavigation } from "@react-navigation/core";

@@ -1,10 +1,11 @@
+/**
+ * Author: Edward Jones
+ */
 import React from "react";
-import { Text } from "@ui-kitten/components";
 import { ScrollView } from "react-native";
-import { InputType, Rules, ControlledInput, Callout } from "@greeneggs/ui";
+import { InputType, Rules, ControlledInput } from "@greeneggs/ui";
 import { RecipeInput } from "@greeneggs/types/graphql";
 import { RecipeForm } from "./add-recipe";
-import { AddRecipeStyles } from "./add-recipe-styles";
 
 interface ICreateRecipeDetails {
   form: RecipeForm;

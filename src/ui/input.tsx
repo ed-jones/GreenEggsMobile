@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { FC } from "react";
 import { Input as UIKittenInput, InputProps } from "@ui-kitten/components";
 

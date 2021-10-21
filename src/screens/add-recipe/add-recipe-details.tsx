@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React from "react";
 import { Text } from "@ui-kitten/components";
 import { ScrollView } from "react-native";

@@ -1,3 +1,6 @@
+/**
+ * Author: Dimitri Zvolinski
+ */
 import React from "react";
 import { Divider } from "@ui-kitten/components";
 import { View } from "react-native";

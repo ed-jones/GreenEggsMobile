@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { FC } from 'react';
 import { Layout, LayoutProps } from '@ui-kitten/components';
 

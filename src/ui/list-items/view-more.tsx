@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React from "react";
 import { ListItem, ListItemProps, Text } from "@ui-kitten/components";
 import { Icons } from '@greeneggs/ui';

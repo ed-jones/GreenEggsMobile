@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { FC, useState } from "react";
 import { Queries } from "@greeneggs/graphql";
 import {
@@ -53,7 +56,6 @@ export const AllCategories: FC = () => {
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
         query={Queries.GET_CATEGORIES}
-        emptyMessage={"No categories found"}
         variables={{
           query,
         }}

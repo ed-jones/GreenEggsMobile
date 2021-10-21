@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import { ListItem, ListItemProps, Icon, Text } from "@ui-kitten/components";
 import { RenderProp } from "@ui-kitten/components/devsupport";
 import React, { FC } from "react";

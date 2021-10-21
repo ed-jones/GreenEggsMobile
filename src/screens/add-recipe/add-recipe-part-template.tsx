@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { ReactNode } from "react";
 import { Button, List, Text, TextElement } from "@ui-kitten/components";
 import { ListRenderItem, View } from "react-native";

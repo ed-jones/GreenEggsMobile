@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
 import {

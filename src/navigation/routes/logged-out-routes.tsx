@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React from 'react';
 import { Stack } from '../stack';
 import * as Screens from "../../screens";

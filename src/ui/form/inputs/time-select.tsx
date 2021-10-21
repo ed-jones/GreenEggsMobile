@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import { InputProps, Text, ThemedComponentProps, useTheme, withStyles } from "@ui-kitten/components";
 import React, { useState } from "react";
 import {

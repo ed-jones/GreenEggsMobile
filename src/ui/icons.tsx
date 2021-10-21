@@ -1,4 +1,6 @@
-/* eslint-disable react/jsx-props-no-spreading */
+/**
+ * Author: Edward Jones
+ */
 import React from "react";
 import { Icon, IconProps } from "@ui-kitten/components";
 

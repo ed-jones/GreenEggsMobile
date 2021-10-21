@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { FC } from "react";
 import { recipes_recipes_data } from "@greeneggs/types/graphql";
 import { Card, Text } from "@ui-kitten/components";

@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import { ApolloQueryResult, DocumentNode, useQuery } from "@apollo/client";
 import React, { ReactNode, useEffect, useState } from "react";
 import { FlatList, FlatListProps, View } from "react-native";

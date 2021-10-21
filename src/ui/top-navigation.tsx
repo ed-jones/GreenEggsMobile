@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { FC } from 'react';
 import { TopNavigation as UIKittenTopNavigation, TopNavigationAction, TopNavigationProps } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/core';

@@ -1,8 +1,10 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { useContext, useEffect } from "react";
 import { ListItem } from "@ui-kitten/components";
-import { Image, View } from "react-native";
+import { Image } from "react-native";
 import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
-import { useFieldArray } from "react-hook-form";
 import { Icons } from "@greeneggs/ui";
 
 import { RecipeForm } from "../add-recipe";

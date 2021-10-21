@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { useState, FC, Dispatch, SetStateAction, createContext } from 'react';
 import * as SecureStore from 'expo-secure-store';
 

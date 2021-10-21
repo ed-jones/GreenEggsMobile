@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { FC } from 'react';
 import { Animated, Platform } from 'react-native';
 import useIsKeyboardShown from "@react-navigation/bottom-tabs/src/utils/useIsKeyboardShown";

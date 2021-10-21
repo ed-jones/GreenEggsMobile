@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import * as React from 'react';
 import {
   StyleSheet, Text, TouchableOpacity, View,

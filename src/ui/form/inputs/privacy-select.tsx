@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import { IndexPath, SelectItem } from "@ui-kitten/components";
 import React from "react";
 import {

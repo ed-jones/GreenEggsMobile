@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import { FieldPath, UseFormReturn } from "react-hook-form";
 
 interface IValidate<InputType> {

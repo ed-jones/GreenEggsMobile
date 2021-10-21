@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React from "react";
 import { Text, ThemedComponentProps, withStyles } from "@ui-kitten/components";
 import { View, StyleSheet } from "react-native";

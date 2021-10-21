@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { useEffect } from "react";
 import { Platform, View } from "react-native";
 import {

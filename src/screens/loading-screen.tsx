@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React from 'react';
 import { Spinner } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';

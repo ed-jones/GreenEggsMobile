@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 export * from './use-form';
 export * from './partial-validate';
 export * from './controlled-input';

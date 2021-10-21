@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { FC } from 'react';
 import { Select as UIKittenSelect, SelectProps } from "@ui-kitten/components";
 

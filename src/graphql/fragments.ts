@@ -1,5 +1,7 @@
+/**
+ * Author: Edward Jones
+ */
 import { gql } from '@apollo/client';
-import { G } from 'react-native-svg';
 
 export const UserFragment = gql`
   fragment UserFragment on User {

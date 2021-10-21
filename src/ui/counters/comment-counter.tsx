@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { FC } from 'react';
 import { recipes_recipes_data_comments } from '@greeneggs/types/graphql';
 import { useNavigation } from '@react-navigation/core';

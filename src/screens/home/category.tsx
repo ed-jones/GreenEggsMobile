@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { FC, useState } from "react";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/core";
 import { Queries } from "@greeneggs/graphql";

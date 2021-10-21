@@ -1,3 +1,6 @@
+/**
+ * Author: Dimitri Zvolinski
+ */
 import React, { FC, useState } from "react";
 import { Icon, Menu, MenuItem, Popover } from "@ui-kitten/components";
 import { View } from "react-native";

@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { FC, useState } from 'react';
 import { Icon, TopNavigationAction } from '@ui-kitten/components';
 import { useMutation } from '@apollo/client';

@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 export * from "./not-found-screen";
 export * from "./add-recipe/add-recipe";
 export * from "./home/home";

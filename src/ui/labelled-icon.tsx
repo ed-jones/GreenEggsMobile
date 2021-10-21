@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React from "react";
 import { Text, Icon } from "@ui-kitten/components";
 import { View, StyleSheet, Pressable } from "react-native";

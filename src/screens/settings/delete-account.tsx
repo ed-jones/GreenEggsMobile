@@ -1,3 +1,6 @@
+/**
+ * Author: Wambugu Mutahi
+ */
 import React, { useContext, useEffect } from "react";
 import { Mutations, Queries } from "@greeneggs/graphql";
 import { ScrollView, StyleSheet, View, Alert as RNAlert } from "react-native";

@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { useState, FC, Dispatch, SetStateAction, createContext, useEffect } from 'react';
 import { Me as MeQuery, Me_me_data } from '@greeneggs/types/graphql';
 import { useQuery } from '@apollo/client';

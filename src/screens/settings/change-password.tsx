@@ -1,3 +1,6 @@
+/**
+ * Author: Wambugu Mutahi
+ */
 import React from "react";
 import { Mutations } from "@greeneggs/graphql";
 import { ScrollView, StyleSheet } from "react-native";

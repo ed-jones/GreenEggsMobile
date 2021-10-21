@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { useState, FC, createContext, useEffect } from 'react';
 import { NotificationCount } from '@greeneggs/types/graphql';
 import { ApolloQueryResult, OperationVariables, useQuery } from '@apollo/client';

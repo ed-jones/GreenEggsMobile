@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { useContext } from "react";
 import { Button } from "@ui-kitten/components";
 import {

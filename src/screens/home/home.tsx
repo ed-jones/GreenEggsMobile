@@ -1,3 +1,6 @@
+/**
+ * Author: Edward Jones
+ */
 import React, { useContext } from 'react';
 import { Background } from '@greeneggs/ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

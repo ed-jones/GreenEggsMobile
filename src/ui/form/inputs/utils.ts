@@ -1,8 +1,10 @@
-
-// Function that converts JS numbers to strings in a way
+/**
+ * Author: Edward Jones
+ */
 
 import { Path, PathValue } from "react-hook-form";
 
+// Function that converts JS numbers to strings in a way
 // that avoids NaN, undefined, etc.
 export function numberToString<FieldValues>(
     number: PathValue<FieldValues, Path<FieldValues>> | number | null

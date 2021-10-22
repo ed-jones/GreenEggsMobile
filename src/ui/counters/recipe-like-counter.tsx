@@ -16,6 +16,9 @@ interface RecipeLikeCounterProps {
   disabled?: boolean;
 }
 
+/**
+ * Displays number of likes and allows for liking of a recipe.
+ */
 export const RecipeLikeCounter: FC<RecipeLikeCounterProps> = ({
   likeCount,
   recipeId,

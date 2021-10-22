@@ -17,7 +17,6 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import { TopNavigation, Background } from "@greeneggs/ui";
-import {  } from "@greeneggs/ui";
 import { logo, banner } from '@greeneggs/assets';
 
 const styles = StyleSheet.create({
@@ -73,6 +72,10 @@ interface IAuthPageTemplateProps {
   children: React.ReactNode;
 }
 
+/**
+ * Template screen for all authentication screens.
+ * Shows the brand logo and background, followed by a form.
+ */
 export const AuthPageTemplate = withStyles(
   ({
     message,

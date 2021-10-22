@@ -12,6 +12,9 @@ interface IRecipeDirections {
   directions: recipe_recipe_data_steps[];
 }
 
+/**
+ * Carousel for displaying recipe steps.
+ */
 export const RecipeDirections = ({ directions }: IRecipeDirections) => {
   const navigation = useNavigation();
 

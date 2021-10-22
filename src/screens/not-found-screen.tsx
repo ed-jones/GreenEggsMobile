@@ -28,6 +28,10 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * View to display in the very exceptional edge case that a route is missing.
+ * Prevents the app from crashing and provides an error message to the user.
+ */
 export function NotFoundScreen() {
   return (
     <View style={styles.container}>

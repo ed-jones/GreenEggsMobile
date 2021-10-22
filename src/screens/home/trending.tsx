@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Screen that shows a list of the most popular new recipes within the app.
+ */
 export function Trending() {
   const navigation = useNavigation();
   return (

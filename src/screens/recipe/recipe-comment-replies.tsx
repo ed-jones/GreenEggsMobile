@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Screen for showing a recipe comment and all of its replies.
+ */
 export function RecipeCommentReplies({ route }: any) {
   const { commentId, replying } = route.params;
   const [visibleCommentCount, setVisibleCommentCount] = useState<number>(3);

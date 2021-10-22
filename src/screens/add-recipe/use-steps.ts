@@ -21,6 +21,9 @@ export type ISteps = {
     length: number,
 };
 
+/**
+ * Hook that lets a component reuse stateful step logic
+ */
 export function useSteps(steps: Step[]): ISteps {
     const [index, setIndex] = useState<number>(0);
     const currentStep = steps[index];

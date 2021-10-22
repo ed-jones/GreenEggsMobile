@@ -30,6 +30,9 @@ interface IRecipeDetailsCard extends recipe_recipe_data {
   navigation: any;
 }
 
+/**
+ * Card for displaying simple recipe details, such as title, abbreviated description and stats.
+ */
 export const RecipeDetailsCard = ({
   navigation,
   title,

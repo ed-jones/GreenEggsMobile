@@ -48,6 +48,9 @@ interface IBottonNavigationIcon {
   selected: boolean;
 }
 
+/**
+ * Component for the bottom tab bar. Includes home, saved recipes, create recipe, notifications and profile.
+ */
 const BottomNavigationIcon = withStyles(
   ({
     name,

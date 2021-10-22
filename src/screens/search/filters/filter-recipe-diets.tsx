@@ -11,6 +11,9 @@ import { AddToFilter} from '../common';
 import { SearchContext } from '@greeneggs/providers/search-state-provider';
 import { View } from 'react-native';
 
+/**
+ * Screen for requiring diets in a recipe search
+ */
 export const FilterRecipeDiets: FC = () => {
   const navigation = useNavigation();
   const [query, setQuery] = useState("");

@@ -47,6 +47,10 @@ function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
   return Number(selectedIndex.toString()) - 1;
 }
 
+/**
+ * Screen that lets a user update their allergy preferences.
+ * For instance, a user may want to only see gluten free recipes globally in the app.
+ */
 export const AllergyPreferences = () => {
   const getAllergy = useQuery<Allergies>(Queries.GET_ALLERGIES, {
     variables: {

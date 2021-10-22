@@ -20,6 +20,9 @@ import { SearchContext } from "@greeneggs/providers/search-state-provider";
 import { AddToFilter } from "../common";
 import { View } from "react-native";
 
+/**
+ * Screen for filtering out ingredients from a search
+ */
 export const FilterIngredientsExcluded: FC = () => {
   const navigation = useNavigation();
   const [query, setQuery] = useState("");

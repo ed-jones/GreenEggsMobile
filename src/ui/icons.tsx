@@ -1,5 +1,8 @@
 /**
  * Author: Edward Jones
+ * 
+ * This file contains a list of commonly used icons within Green Eggs.
+ * Simplifies the use of icons in UI Kitten components.
  */
 import React from "react";
 import { Icon, IconProps } from "@ui-kitten/components";

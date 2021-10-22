@@ -15,6 +15,9 @@ export interface UseLazyListProps<TVariables, TData> {
   limit?: number;
 }
 
+/**
+ * Hook that manages refreshing state for lists
+ */
 export function useListRefetch<TData, TVariables>(
   refetchFunction: (
     variables?: Partial<TVariables> | undefined
@@ -32,6 +35,9 @@ export function useListRefetch<TData, TVariables>(
   return { refetching, refetch };
 }
 
+/**
+ * Hook that manages stateful logic for lazy list components
+ */
 export function useLazyList<
   TData extends TDataWithData<TData, TDataType>,
   TVariables extends Partial<CommonVariables<SortType, FilterType>>,
@@ -141,6 +147,9 @@ export interface LazyListProps<TData, TVariables, TDataType>
   emptyState?: ReactNode;
 }
 
+/**
+ * Component that renders the result of a GraphQL query as an infinite scrolling list.
+ */
 export const LazyList = <
   TData extends TDataWithData<TData, TDataType>,
   TVariables extends Partial<CommonVariables<SortType, FilterType>>,

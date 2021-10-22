@@ -38,6 +38,12 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Note: Privacy features are not currently all implemented, so this screen is disabled.
+ * 
+ * Setting screen for profile visibility.
+ * Lets the user edit who can see their profile.
+ */
 export const ProfileVisibility = () => {
   const navigation = useNavigation();
 

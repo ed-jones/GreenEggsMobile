@@ -24,6 +24,9 @@ const SESSION_STATE_ROUTE_MAP: Record<SessionStates, ReactNode> = {
   [SessionStates.LOGGED_OUT]: LoggedOutRoutes,
 };
 
+/**
+ * Component that switches the accessible routes based on session state.
+ */
 export const Router: FC = () => {
   const [sessionState, setSessionState] = useState<SessionStates>(
     SessionStates.LOADING

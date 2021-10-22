@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Screen that displays a list of all ingredients for a recipe.
+ */
 export const RecipeAllIngredients = ({ route }: any) => {
   const { ingredients, multiplier } = route.params;
 

@@ -21,6 +21,9 @@ import { TopNavigation, Background, AlphabetType, LazyListAlpha, SelectableListI
 import { AddToFilter } from "../common";
 import { View } from "react-native";
 
+/**
+ * Screen for requiring ingredients in a search
+ */
 export const FilterIngredientsIncluded: FC = () => {
   const navigation = useNavigation();
   const [query, setQuery] = useState("");

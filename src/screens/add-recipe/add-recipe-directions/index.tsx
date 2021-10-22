@@ -16,6 +16,9 @@ interface IAddRecipeDirections {
   form: RecipeForm;
 }
 
+/**
+ * Screen that displays a list of all steps that will be added to a recipe.
+ */
 export const AddRecipeDirections = ({
   form,
 }: IAddRecipeDirections) => {

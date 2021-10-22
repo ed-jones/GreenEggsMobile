@@ -8,6 +8,10 @@ import { StackNavigationProp } from "@react-navigation/stack";
 
 type NavigateToProfile = (userId: string) => void;
 
+/**
+ * Function that provides better logic when navigating to a user profile.
+ * If the selected user profile is the logged in user, redirect to the profile screen.
+ */
 export function useNavigateToProfile(): NavigateToProfile {
   const { me } = useContext(UserContext);
   const navigation: StackNavigationProp<any, any> = useNavigation();

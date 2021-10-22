@@ -38,6 +38,9 @@ interface IImageUpload {
     | undefined;
 }
 
+/**
+ * Input component for uploading images
+ */
 export const ImageUpload = withStyles(
   ({
     label,

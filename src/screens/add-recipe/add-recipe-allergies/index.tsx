@@ -13,6 +13,10 @@ interface IAddRecipeAllergies {
   form: RecipeForm;
 }
 
+/**
+ * Screen that shows a list of all allergies that will
+ * be added to a recipe.
+ */
 export const AddRecipeAllergies = ({
   form,
 }: IAddRecipeAllergies) => {

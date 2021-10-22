@@ -21,7 +21,9 @@ interface AddRecipePartTemplateProps {
   listItem: ListRenderItem<any> | null | undefined
   data: readonly any[] | null | undefined
 }
-
+/**
+ * Template for screens that create larger sections of the recipe, i.e. all ingredients.
+ */
 export const AddRecipePartTemplate = ({
   title,
   createButtonTitle,

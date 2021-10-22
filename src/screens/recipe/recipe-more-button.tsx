@@ -13,6 +13,10 @@ interface RecipeMoreButtonProps {
   recipeId: string;
 }
 
+/**
+ * More icon that opens a context menu with options for that recipe.
+ * Includes delete. In the future could include edit and privacy options.
+ */
 export const RecipeMoreButton: FC<RecipeMoreButtonProps> = ({ recipeId }) => {
   const [visible, setVisible] = useState(false);
   const navigation = useNavigation();

@@ -23,6 +23,10 @@ import { Queries } from "@greeneggs/graphql";
 import { AddRecipeContext } from "@greeneggs/providers";
 import { useNavigation } from "@react-navigation/core";
 
+/**
+ * Screen with an infinite scrolling alphabetised list of allergies that
+ * can be selected and added to a new recipe. 
+ */
 export const CreateAllergy = () => {
   const [query, setQuery] = useState("");
   const { allergiesFieldArray } = useContext(AddRecipeContext);

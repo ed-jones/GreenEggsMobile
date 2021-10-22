@@ -17,6 +17,9 @@ import { useNavigation } from "@react-navigation/core";
 import { AddRecipeContext } from "@greeneggs/providers";
 import { ScrollView } from "react-native";
 
+/**
+ * Screen that lets a user create a new step. Includes an image and a description.
+ */
 export const CreateStep = () => {
   const form = useForm<RecipeStepInput>({ mode: "all" });
   const navigation = useNavigation();

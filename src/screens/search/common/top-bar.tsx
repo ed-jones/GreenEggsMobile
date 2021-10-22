@@ -41,6 +41,9 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Search bar and associated buttons displayed on the home page and search page.
+ */
 export const TopBar = withStyles(({ eva }: ThemedComponentProps) => {
   const navigation = useNavigation();
   const { searchState, setSearchState } = useContext(SearchContext);

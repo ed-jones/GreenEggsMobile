@@ -6,6 +6,9 @@ import { Stack } from '../stack';
 import * as Screens from "../../screens";
 import { Navigation } from "@greeneggs/navigation";
 
+/**
+ * Array containing a list of all screens accessible to logged in users.
+ */
 export const LoggedInRoutes = [
   <Stack.Screen name="Home" component={Navigation} />,
   <Stack.Screen name="Recipe" component={Screens.Recipe} />,

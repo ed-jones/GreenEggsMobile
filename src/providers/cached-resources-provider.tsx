@@ -8,6 +8,9 @@ import * as SplashScreen from 'expo-splash-screen';
 import { logo } from '@greeneggs/assets';
 import { Image, View } from 'react-native';
 
+/**
+ * Hook that loads and provides loading state for cached resources, including fonts.
+ */
 function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
 

@@ -35,6 +35,9 @@ export interface AddRecipeContextInterface {
 
 export const AddRecipeContext = createContext<AddRecipeContextInterface>({});
 
+/**
+ * State provider that lets all child components control the state of a recipe form.
+ */
 export const AddRecipeStateProvider: FC = ({ children }) => {
   const form = useRecipeForm();
 

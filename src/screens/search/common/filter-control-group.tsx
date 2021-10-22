@@ -16,6 +16,9 @@ export interface FilterControlGroupProps {
   applyButton: SimpleButtonProps;
 }
 
+/**
+ * Generic control group component with a label and 2 buttons.
+ */
 export const FilterControlGroup: FC<FilterControlGroupProps> = ({
   label,
   clearButton,

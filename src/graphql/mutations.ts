@@ -1,5 +1,7 @@
 /**
  * Author: Edward Jones
+ * 
+ *  Contains the definitions for all mutations used by Apollo within the app
  */
 import { gql } from '@apollo/client';
 import * as Fragments from './fragments';

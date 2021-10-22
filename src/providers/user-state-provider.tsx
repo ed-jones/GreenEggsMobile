@@ -14,6 +14,9 @@ export const UserContext = createContext({
   setMe: undefined as SetMe,
 });
 
+/**
+ * Provider that lets all child components access details about the current logged in user.
+ */
 export const UserStateProvider: FC = ({ children }) => {
   const [me, setMe] = useState<Me>();
   const { data } = useQuery<MeQuery>(Queries.ME)

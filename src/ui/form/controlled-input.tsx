@@ -147,6 +147,9 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
   },
 });
 
+/**
+ * Generic component that renders an input component controlled and validated with react-hook-form
+ */
 export const ControlledInput = <
   FieldValues extends Partial<
     Record<keyof FieldValues, string | number | object | null>

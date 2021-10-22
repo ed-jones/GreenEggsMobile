@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Stateless component that, when controlled, shows the current state of a multi-step form in a mobile friendly manor.
+ */
 export const Stepper = withStyles(
   ({
     currentStep,

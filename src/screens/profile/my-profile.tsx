@@ -10,6 +10,11 @@ import { Me } from "@greeneggs/types/graphql";
 import { LoadingScreen } from "../loading-screen";
 import { GenericProfile } from "./generic-profile";
 
+/**
+ * Screen for displaying the profile details for the logged in user.
+ * Lets the user access the settings page, a full list of their upload recipes,
+ * and lets the user edit their profile.
+ */
 export const MyProfile = () => {
   const meResult = useQuery<Me>(Queries.ME);
 

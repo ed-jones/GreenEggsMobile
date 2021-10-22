@@ -10,6 +10,9 @@ import { Categories } from './categories';
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 
+/**
+ * Tab bar that lets a user switch between trending, news feed and categories on the home page.
+ */
 const TopTabBar = ({ navigation, state }: MaterialTopTabBarProps) => (
   <TabBar
     selectedIndex={state.index}
@@ -21,6 +24,9 @@ const TopTabBar = ({ navigation, state }: MaterialTopTabBarProps) => (
   </TabBar>
 );
 
+/**
+ * Provides navigation logic for the rendered tab bar.
+ */
 export function HomeTabs() {
   return (
     <Navigator

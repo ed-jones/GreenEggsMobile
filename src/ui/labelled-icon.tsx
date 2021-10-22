@@ -28,6 +28,9 @@ export interface LabelledIconProps {
   fill?: string;
 }
 
+/**
+ * Component that renders an icon with a label
+ */
 export const LabelledIcon = ({
   iconName,
   label,

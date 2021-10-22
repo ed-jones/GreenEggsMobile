@@ -14,6 +14,9 @@ import { createUploadLink } from "apollo-upload-client";
 
 import { AuthContext } from "./auth-provider";
 
+/**
+ * Provider that lets all child componets use apollo queries and mutations.
+ */
 export const GraphQLProvider: FC = ({ children }) => {
   const { token } = useContext(AuthContext);
 

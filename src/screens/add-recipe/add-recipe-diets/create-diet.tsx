@@ -23,6 +23,10 @@ import { Queries } from "@greeneggs/graphql";
 import { AddRecipeContext } from "@greeneggs/providers";
 import { useNavigation } from "@react-navigation/core";
 
+/**
+ * Screen that lets a user select a diet from an infinite scrolling alphabetised list
+ * to add to a recipe.
+ */
 export const CreateDiet = () => {
   const [query, setQuery] = useState("");
   const { dietsFieldArray } = useContext(AddRecipeContext);

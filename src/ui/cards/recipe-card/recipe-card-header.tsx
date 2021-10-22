@@ -37,6 +37,10 @@ const styles = StyleSheet.create({
 
 export type IRecipeCardHeaderProps = Pick<recipes_recipes_data_submittedBy, 'avatarURI' | 'firstName' | 'lastName' | 'id'>;
 
+/**
+ * Header for the recipe card component.
+ * Displays user info.
+ */
 export const RecipeCardHeader = ({
   avatarURI,
   firstName,

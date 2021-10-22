@@ -24,6 +24,10 @@ import { AddRecipeContext } from "@greeneggs/providers";
 import { useNavigation } from "@react-navigation/core";
 import { toTitleCase } from "@greeneggs/utils";
 
+/**
+ * Screen with an infinite scrolling alphabetised list of categories that
+ * can be selected and added to a new recipe. 
+ */
 export const PickCategory: FC = () => {
   const [query, setQuery] = useState("");
   const { categoriesFieldArray } = useContext(AddRecipeContext)

@@ -12,6 +12,9 @@ interface IIngredientListItem {
   remove?: () => void;
 }
 
+/**
+ * Component that renders a GraphQL ingredient as a list item.
+ */
 export const IngredientListItem = ({ ingredient, remove }: IIngredientListItem) => {
   if (ingredient.name) {
     return (

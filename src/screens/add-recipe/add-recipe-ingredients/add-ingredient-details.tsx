@@ -18,6 +18,10 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/core";
 import { AddRecipeContext } from "@greeneggs/providers";
 import { AddRecipeStyles } from "../add-recipe-styles";
 
+/**
+ * Screen for adding details to a selected ingredient, including
+ * a description, quantity and unit (for the quantity).
+ */
 export const AddIngredientDetails = () => {
   const form = useForm<IngredientInput>({ mode: "all" });
   const { ingredientsFieldArray } = useContext(AddRecipeContext);

@@ -11,6 +11,10 @@ interface ICreateRecipeDetails {
   form: RecipeForm;
 }
 
+/**
+ * Last screen in the recipe creation process.
+ * Lets a user add a cover photo for a recipe and publish.
+ */
 export const PublishRecipe = ({ form }: ICreateRecipeDetails) => (
   <ScrollView style={{ padding: 16 }}>
     <ControlledInput<RecipeInput>

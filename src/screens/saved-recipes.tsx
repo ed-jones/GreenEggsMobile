@@ -29,6 +29,9 @@ const SavedRecipesHeader = () => (
   <TopNavigation title="Saved Recipes" accessoryLeft={undefined} />
 );
 
+/**
+ * View for displaying recipes a user has saved.
+ */
 export const SavedRecipes: FC = () => {
   const navigation = useNavigation();
   const { data, loading, error } = useQuery<

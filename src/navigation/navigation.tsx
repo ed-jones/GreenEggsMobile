@@ -16,6 +16,9 @@ import { BottomTabBar} from "./bottom-tab-bar";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
+/**
+ * Navigation logic for the bottom tab bar
+ */
 export function Navigation() {
   return (
     <Navigator 

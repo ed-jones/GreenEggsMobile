@@ -11,6 +11,9 @@ interface SaveRecipeButtonProps {
   saved: boolean;
 }
 
+/**
+ * Icon button that when pressed triggers the recipe to be saved. Uses local state to improve responsiveness.
+ */
 export const SaveRecipeButton: FC<SaveRecipeButtonProps> = ({ recipeId, saved }) => {
   const [savedState, setSavedState] = useState(saved);
   

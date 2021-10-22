@@ -2,15 +2,13 @@
  * Author: Dimitri Zvolinski
  */
 import React, { useContext, useState } from "react";
-import { useMutation, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { ImageBackground, View, StyleSheet } from "react-native";
-import { Mutations, Queries } from "@greeneggs/graphql";
+import {  Queries } from "@greeneggs/graphql";
 import {
-  Icon,
   IndexPath,
   SelectItem,
   Text,
-  TopNavigationAction,
 } from "@ui-kitten/components";
 import { recipe, recipeVariables } from "@greeneggs/types/graphql";
 import ParallaxHeader from "@fabfit/react-native-parallax-header";
@@ -66,6 +64,9 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Screen to display a recipe, its steps and associated comments.
+ */
 export const Recipe = ({ route, navigation }: any) => {
   const { recipeId } = route.params;
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(new IndexPath(0));

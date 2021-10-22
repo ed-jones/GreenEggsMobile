@@ -14,7 +14,6 @@ import { Alert, ScrollView, StyleSheet } from "react-native";
 import { Icons } from '@greeneggs/ui';
 import Svg, { Circle } from "react-native-svg";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as SecureStore from "expo-secure-store";
 import { AuthContext } from "@greeneggs/providers/auth-provider";
 import { TopNavigation, Background } from "@greeneggs/ui";
@@ -32,6 +31,9 @@ interface ListItemProps {
   key: Key;
 }
 
+/**
+ * List item that links to a setting page.
+ */
 const SettingsListItem = ({
   onPress,
   title,
@@ -69,12 +71,14 @@ const SettingsListItem = ({
   </>
 );
 
+/**
+ * Screen that displays a complete list of settings and about details.
+ */
 export const Settings = withStyles(
   ({
     navigation,
     eva,
   }: { navigation: StackNavigationProp<any> } & ThemedComponentProps) => {
-    const insets = useSafeAreaInsets();
     const { setToken } = useContext(AuthContext);
 
     const Colors = {

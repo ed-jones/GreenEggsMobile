@@ -27,6 +27,9 @@ interface IRecipeCategoryTags {
   tags: Tag[];
 }
 
+/**
+ * Displays a horizontally scrolling list of tags
+ */
 export const Tags = withStyles(
   ({ tags, eva }: IRecipeCategoryTags & ThemedComponentProps) => (
     <View style={styles.tags}>

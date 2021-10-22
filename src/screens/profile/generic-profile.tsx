@@ -20,12 +20,11 @@ import {
   LazyListProps,
   FollowButton,
 } from "@greeneggs/ui";
-import { useMutation, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { noAvatar } from "@greeneggs/assets";
-import { Queries, Mutations } from "@greeneggs/graphql";
+import { Queries } from "@greeneggs/graphql";
 import {
-  FollowUser,
   profile,
   RecipeFilter,
   recipes,
@@ -104,6 +103,9 @@ interface MyRecipesProps
   userId: string;
 }
 
+/**
+ * Abstract screen for displaying a user's profile information.
+ */
 const MyRecipes: FC<MyRecipesProps> = ({ query, userId, ...props }) => {
   const navigation = useNavigation();
 

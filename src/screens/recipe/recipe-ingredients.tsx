@@ -14,6 +14,9 @@ interface IRecipeIngredients {
   defaultServingCount?: number | null;
 }
 
+/**
+ * Component for displaying an abbreviated list of ingredients, with the option to view more in a new screen.
+ */
 export const RecipeIngredients = ({
   ingredients,
   servingCount,

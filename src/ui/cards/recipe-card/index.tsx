@@ -31,6 +31,10 @@ interface IRecipeCard {
   onPress: () => void;
 }
 
+/**
+ * Displays recipe details in a card format with heavy emphasis on the cover image.
+ * Used for trending and news feed.
+ */
 export const RecipeCard = ({ recipe, onPress }: IRecipeCard) => (
   <Card
     appearance="filled"

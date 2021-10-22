@@ -23,6 +23,10 @@ import { Queries } from "@greeneggs/graphql";
 import { toTitleCase } from "@greeneggs/utils";
 import { useNavigation } from "@react-navigation/core";
 
+/**
+ * Screen that shows an infinite scrolling list of all generic ingredients
+ * in the database that a user can select from or create a new one to add to their recipe.
+ */
 export const PickIngredient: FC = () => {
   const [query, setQuery] = useState("");
   const navigation = useNavigation();

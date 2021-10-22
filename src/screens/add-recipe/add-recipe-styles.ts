@@ -3,6 +3,9 @@
  */
 import { StyleSheet } from "react-native";
 
+/**
+ * Styles used throughout the add recipe process
+ */
 export const AddRecipeStyles = StyleSheet.create({
   view: {
     padding: 16,

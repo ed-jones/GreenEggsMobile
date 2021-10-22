@@ -8,6 +8,9 @@ import { ScrollView, Image } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { TopNavigation, Background } from "@greeneggs/ui";
 
+/**
+ * Expanded view for recipe steps. Useful when a step has a long description.
+ */
 export const RecipeDirectionExpanded = ({ route }: any) => {
   const { direction }: { direction: recipe_recipe_data_steps } = route.params;
   const insets = useSafeAreaInsets();

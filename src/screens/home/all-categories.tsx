@@ -15,13 +15,15 @@ import {
   Background,
   Icons,
   Input,
-  LazyList,
   LazyListAlpha,
   TopNavigation,
 } from "@greeneggs/ui";
-import { Divider, ListItem } from "@ui-kitten/components";
+import { ListItem } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/core";
 
+/**
+ * Displays a searchable infinite scrolling list of all categories within the app, and links to associated category views.
+ */
 export const AllCategories: FC = () => {
   const [query, setQuery] = useState("");
   const navigation = useNavigation();

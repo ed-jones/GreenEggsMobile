@@ -11,6 +11,9 @@ interface CommentCounterProps {
   comments: recipes_recipes_data_comments[];
 }
 
+/**
+ * Displays the number of comments on a post, and links to the list of comments
+ */
 export const CommentCounter: FC<CommentCounterProps> = ({ commentCount, comments }) => {
   const navigation = useNavigation();
 

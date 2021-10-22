@@ -11,6 +11,9 @@ import { Input, TopNavigation, Background, Icons, SelectableListItem, AlphabetTy
 import { AddToFilter } from '../common';
 import { View } from 'react-native';
 
+/**
+ * Screen for requiring certain allergy requirements in a search
+ */
 export const FilterRecipeAllergies: FC = () => {
   const navigation = useNavigation();
   const [query, setQuery] = useState("");

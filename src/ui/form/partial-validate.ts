@@ -10,6 +10,9 @@ interface IValidate<InputType> {
   onValid: () => void;
 }
 
+/**
+ * Function that will partially validate a react-hook-form form
+ */
 export const partialValidate = <InputType>({form, validate, register, onValid }: IValidate<InputType>) => {
   form.trigger(validate).then((isValid) => {
       if (isValid) {

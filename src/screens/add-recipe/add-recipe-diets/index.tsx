@@ -14,6 +14,10 @@ interface IAddRecipeDiets {
   form: RecipeForm;
 }
 
+/**
+ * Screen that shows a list of all selected diets that will
+ * be added to a recipe.
+ */
 export const AddRecipeDiets = ({ form }: IAddRecipeDiets) => {
   const { dietsFieldArray } = useContext(AddRecipeContext);
   const navigation = useNavigation();

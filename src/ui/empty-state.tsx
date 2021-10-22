@@ -12,6 +12,9 @@ interface EmptyStateProps {
 
 const color = '#6B7280'
 
+/**
+ * Component to display during the absence of content. Takes an optional title and description.
+ */
 export const EmptyState: FC<EmptyStateProps> = ({ title = "Nothing here!", description }) => {
   return (
     <View style={{ flexDirection: "column", paddingHorizontal: 32, alignItems: 'center' }}>

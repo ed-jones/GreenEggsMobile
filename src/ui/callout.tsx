@@ -20,6 +20,9 @@ interface IAlert {
   style?: StyleProp<ViewStyle>;
 }
 
+/**
+ * Displays an important message that should stand out from the rest of the view.
+ */
 export const Callout = withStyles(
   ({ type, message, eva, style }: IAlert & ThemedComponentProps) => {
     const IconNameFromAlertType: Record<AlertType, IconProps> = {

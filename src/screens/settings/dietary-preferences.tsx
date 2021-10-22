@@ -48,6 +48,10 @@ function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
   return Number(selectedIndex.toString()) - 1;
 }
 
+/**
+ * Screen that lets a user edit their dietary preferences.
+ * For instance, a user can choose to filter out all non-vegan recipes globally in the app.
+ */
 export const DietaryPreferences = () => {
   const getDiet = useQuery<Diets>(Queries.GET_DIETS, {
     variables: {

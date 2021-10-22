@@ -62,6 +62,9 @@ export const hoursAndMinutesToMilliseconds = ({
   return hoursAsMilliseconds + minutesAsMilliseconds;
 };
 
+/**
+ * Input component for time fields
+ */
 export const TimeInput = <FieldValues,>({
   value,
   inputProps,

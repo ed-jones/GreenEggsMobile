@@ -26,6 +26,9 @@ interface ICreateRecipePartTemplate {
   formComponent: (props: RecipeFormPart) => React.ReactElement;
 }
 
+/**
+ * Template for screens that allow for the creation of array elements in a recipe, i.e. single ingredients, categories, allergies, diets.
+ */
 export const CreateRecipePartTemplate = ({
   title,
   navigation,

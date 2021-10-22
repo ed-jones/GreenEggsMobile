@@ -23,6 +23,9 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Screen that enables a user to log into Green Eggs with an email and password.
+ */
 export const Login = ({ navigation }: any) => {
   const { formResult, handleSubmit, control, submitForm } = useLoginForm();
   const { setToken } = useContext(AuthContext);

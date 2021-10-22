@@ -13,6 +13,10 @@ interface FollowButtonProps {
 
 }
 
+/**
+ * Button that when pressed, follows or unfollows a user.
+ * Uses local state to improve responsiveness.
+ */
 export const FollowButton: FC<FollowButtonProps> = ({ userId, isFollowing }) => {
   const [isFollowingState, setIsFollowingState] = useState(isFollowing);
   const [followUser] = useMutation<FollowUser>(Mutations.FOLLOW_USER, {

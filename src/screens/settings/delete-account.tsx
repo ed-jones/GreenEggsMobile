@@ -34,6 +34,10 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Screen that lets a user delete their account.
+ * Requires the user to to re-enter their password.
+ */
 export function DeleteAccount() {
   const navigation = useNavigation();
   const { loading, error, data } = useQuery<Me>(Queries.ME);

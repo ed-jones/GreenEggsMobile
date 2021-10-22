@@ -14,6 +14,9 @@ interface ICreateRecipeIngredients {
   form: RecipeForm;
 }
 
+/**
+ * Screen that shows a list of all ingredients that will be added to a recipe.
+ */
 export const AddRecipeIngredients = ({ form }: ICreateRecipeIngredients) => {
   const { ingredientsFieldArray } = useContext(AddRecipeContext);
   const navigation = useNavigation();

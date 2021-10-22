@@ -43,6 +43,9 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Displays an infinite scrolling list of categories that are important enough to have an associated image.
+ */
 const CategoryWithImage: FC<CategoryWithImageProps> = ({
   name,
   coverImage,

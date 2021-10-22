@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Screen that enables a user to sign up to Green Eggs.
+ */
 export const Signup = ({ navigation }: any) => {
   const { formResult, handleSubmit, control, submitForm } = useSignupForm();
   const { setToken } = useContext(AuthContext);

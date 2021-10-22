@@ -50,6 +50,10 @@ export type IRecipeCardFooterProps = Pick<
   | "submittedBy"
 >;
 
+/**
+ * Footer component for the main recipe card.
+ * Displays meta information such as title, description and statistics.
+ */
 export const RecipeCardFooter = ({
   title,
   description,

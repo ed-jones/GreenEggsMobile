@@ -25,6 +25,9 @@ interface SelectableListItemProps extends Omit<ListItemProps, 'title'> {
   title: string;
 }
 
+/**
+ * Component for rendering a list item that can be selected and deselected.
+ */
 export const SelectableListItem: FC<SelectableListItemProps> = ({
   selected,
   setSelected,

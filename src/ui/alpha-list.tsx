@@ -49,6 +49,9 @@ interface BuildAlphaListItemProps<T> {
   categoriseItem: CategoriseItem<T>
 }
 
+/**
+ * Function that converts a list of items to an alphabetised list using a categoriseItem function
+ */
 export function buildAlphaListItems <T, >({ items, categoriseItem }: BuildAlphaListItemProps<T>): AlphaListItems<T> {
   const alphaListItems: AlphaListItems<T> = AlphabetArray.map((letter) => ({ letter, data: [] as T[] }));
   items.forEach((item) => {
@@ -62,6 +65,9 @@ export interface AlphaListProps<T> extends Omit<SectionListProps<T, AlphaListIte
   renderItem: FC<T>;
 }
 
+/**
+ * Renders a list of items as an alphabetised list.
+ */
 export const AlphaList = <T,>({ items, renderItem, ...props }: AlphaListProps<T>) => {
   return (
     <SectionList

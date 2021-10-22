@@ -17,6 +17,9 @@ interface LazyListAlphaProps<TData, TVariables, TDataType>
   categoriseItem: CategoriseItem<TDataType>;
 }
 
+/**
+ * Component that takes the result of a GraphQL query and renders it as an infinite scrolling alphabetised list
+ */
 export const LazyListAlpha = <
   TData extends TDataWithData<TData, TDataType>,
   TVariables extends Partial<CommonVariables<SortType, FilterType>>,

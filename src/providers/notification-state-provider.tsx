@@ -26,6 +26,9 @@ export const NotificationContext = createContext<NotificationContextInterface>({
   refetchNotificationState: undefined,
 });
 
+/**
+ * Provider that lets all child components access the notification state
+ */
 export const NotificationStateProvider: FC = ({ children }) => {
   const [notificationState, setNotificationState] = useState<NotificationState>(defaultNotificationState);
 

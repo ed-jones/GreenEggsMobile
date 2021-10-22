@@ -37,6 +37,9 @@ const Options: Option[] = [
   { title: "ONLY ME", value: Privacy.PRIVATE },
 ];
 
+/**
+ * Input component for selecting a privacy option
+ */
 export const PrivacySelect = ({
   label,
   caption,

@@ -1,5 +1,7 @@
 /**
  * Author: Edward Jones
+ * 
+ * Contains the definitions for all fragments used by Apollo within the app
  */
 import { gql } from '@apollo/client';
 

@@ -30,6 +30,9 @@ interface RecipeCommentProps {
   replyButton?: boolean;
 }
 
+/**
+ * Component for displaying an individual recipe comment
+ */
 export function RecipeComment({ comment, replyButton }: RecipeCommentProps) {
   const navigation: StackNavigationProp<any, any> = useNavigation();
   const navigateToProfile = useNavigateToProfile();

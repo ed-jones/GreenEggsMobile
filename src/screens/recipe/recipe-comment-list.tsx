@@ -16,6 +16,9 @@ interface RecipeCommentListProps {
     | recipe_recipe_data_comments_replies[];
 }
 
+/**
+ * Component that generates a list of comments.
+ */
 export const RecipeCommentList = ({ comments }: RecipeCommentListProps) => {
   return (
     <View style={{ marginHorizontal: -16 }}>

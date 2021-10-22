@@ -12,6 +12,9 @@ import { SearchContext } from '@greeneggs/providers/search-state-provider';
 import { AddToFilter } from '../common';
 import { View } from 'react-native';
 
+/**
+ * Screen for requiring certain categories in a recipe search.
+ */
 export const FilterRecipeCategories: FC = () => {
   const navigation = useNavigation();
   const [query, setQuery] = useState("");

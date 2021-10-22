@@ -54,6 +54,11 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Screen that welcomes the user to the Green Eggs app.
+ * This is the first screen a user sees upon opening the app.
+ * Instructs a user to sign up or log in.
+ */
 export const Welcome = ({ navigation }: any & ThemedComponentProps) => (
   <Background
     style={{

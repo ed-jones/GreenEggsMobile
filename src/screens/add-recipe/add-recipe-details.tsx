@@ -13,6 +13,10 @@ interface ICreateRecipeDetails {
   form: RecipeForm;
 }
 
+/**
+ * Screen for adding all recipe details, including name, description, serving count
+ * and time estimate.
+ */
 export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
   <ScrollView style={{ paddingHorizontal: 16 }}>
     <Text category="h5" style={AddRecipeStyles.heading}>

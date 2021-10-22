@@ -10,6 +10,9 @@ interface IRecipeCategoriesTags {
   categories: recipe_recipe_data_categories[];
 }
 
+/**
+ * Component that displays a horizontal scrolling list of categories in the form of tags.
+ */
 export const RecipeCategoriesTags = ({ categories }: IRecipeCategoriesTags) => {
   const navigation = useNavigation();
   return (

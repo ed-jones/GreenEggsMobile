@@ -24,6 +24,9 @@ function stringifyAllergies(allergies: recipe_recipe_data_allergies[]) {
   return allergyString;
 }
 
+/**
+ * Screen that displays a callout if a recipe might trigger certain allergies.
+ */
 export const RecipeAllergies = ({ allergies }: IRecipeAllergies) => {
   if (allergies.length > 0)
     return (

@@ -13,6 +13,9 @@ import { SearchContext, SearchState } from "@greeneggs/providers/search-state-pr
 import { View } from "react-native";
 import { TopNavigation, Background, Icons } from "@greeneggs/ui";
 
+/**
+ * Helper function that counts the number of active filters being applied based on the search state.
+ */
 export function countActiveFilters(searchState: SearchState) {
   let activeFilterCount = 0;
 
@@ -45,6 +48,9 @@ interface FilterListItemProps {
   count: number;
 }
 
+/**
+ * Screen that shows a list of all available filter options.
+ */
 export const RecipeSearchFilter: FC = () => {
   const navigation = useNavigation();
   const { searchState, setSearchState } = useContext(SearchContext);
@@ -80,7 +86,8 @@ export const RecipeSearchFilter: FC = () => {
       to: "FilterRecipeDiets",
       count: searchState.filter.diets?.length ?? 0,
     },
-    // { title: "Cook Time", to: "FilterRecipeCookTime", count: 0 },
+    // Recipe filtering is disabled because it was not implemented in time
+    // { title: "Cook Time", to: "FilterRecipeCookTime", count: 0 }, 
   ];
 
   return (

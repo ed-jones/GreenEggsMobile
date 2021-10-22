@@ -21,6 +21,9 @@ import {
 } from "@greeneggs/ui";
 import { View } from "react-native";
 
+/**
+ * Screen that shows an infinite scrolling list of recipes for a given category.
+ */
 export const Category: FC = () => {
   const {
     params: { categoryId, categoryName },

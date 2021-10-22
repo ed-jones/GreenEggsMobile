@@ -38,6 +38,9 @@ const useEditProfile = () =>
     "profileDetails"
   );
 
+/**
+ * Screen that lets a user edit their profile picture.
+ */
 export function EditProfilePicture() {
   const form = useEditProfile();
   const navigation = useNavigation();

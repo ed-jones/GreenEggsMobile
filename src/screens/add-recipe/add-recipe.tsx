@@ -24,6 +24,10 @@ import { LoadingScreen } from "../loading-screen";
 
 export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>;
 
+/**
+ * Screen that enables the creation of recipes.
+ * Contains the multi-step form.
+ */
 export const AddRecipe = withStyles(function AddRecipe({
   navigation,
   eva,

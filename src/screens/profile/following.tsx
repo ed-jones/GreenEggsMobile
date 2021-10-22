@@ -33,6 +33,9 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Screen that shows a list of users a user is following.
+ */
 export const Following = () => {
   const [query, setQuery] = useState("");
   const {

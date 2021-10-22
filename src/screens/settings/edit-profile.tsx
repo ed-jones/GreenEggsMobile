@@ -42,6 +42,10 @@ const useEditProfile = () =>
     "profileDetails"
   );
 
+/**
+ * Screen that lets a user edit their basic profile details,
+ * including First Name, Last Name and Bio.
+ */
 export function EditProfile() {
   const form = useEditProfile();
   const navigation = useNavigation();

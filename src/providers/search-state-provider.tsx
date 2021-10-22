@@ -33,6 +33,9 @@ export const SearchContext = createContext<ISearchContext>({
   setSearchState: undefined 
 });
 
+/**
+ * Provider that lets all child components access the search state, including query, sorting and filtering.
+ */
 export const SearchStateProvider: FC = ({ children }) => {
   const [searchState, setSearchState] = useState<SearchState>(defaultSearchState);
 

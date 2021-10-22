@@ -12,6 +12,9 @@ interface UserListItemProps {
   user: Users_users_data
 }
 
+/**
+ * List item component used to consistently display GraphQL user data as a list item
+ */
 export const UserListItem = ({ user }: UserListItemProps) => {
   const navigateToProfile = useNavigateToProfile();
   return (

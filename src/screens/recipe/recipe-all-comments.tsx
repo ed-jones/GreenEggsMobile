@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Screen that displays a list of all comments for a recipe.
+ */
 export function RecipeAllComments({ route }: any) {
   const { comments, commentCount, isReply } = route.params;
 

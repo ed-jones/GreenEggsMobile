@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Screen that shows an infinite scrolling list of recipes from users that the logged in user follows.
+ */
 export function NewsFeed() {
   const navigation = useNavigation();
   return (

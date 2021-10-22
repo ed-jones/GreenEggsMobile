@@ -18,6 +18,9 @@ interface IAddListItem {
   error?: FieldError | undefined;
 }
 
+/**
+ * List item for creating a new list item when pressed.
+ */
 export const AddListItem = withStyles(
   ({ label, onPress, eva, error }: IAddListItem & ThemedComponentProps) => (
     <>

@@ -1,12 +1,8 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC, useContext, useEffect, useState } from "react";
-import { useMutation } from "@apollo/client";
-import { Mutations } from "@greeneggs/graphql";
-import { LikeRecipe, UnlikeRecipe } from "@greeneggs/types/graphql";
+import React, { FC, useState } from "react";
 import { LabelledIcon, LabelledIconProps } from "../labelled-icon";
-import { UserContext } from "@greeneggs/providers";
 
 interface LikeCounterProps {
   likeCount: number;
@@ -22,6 +18,10 @@ enum LikeCounterStates {
   DISABLED,
 }
 
+/**
+ * Abstract component that displays number of likes and allows for liking of something.
+ * Uses local state for better responsiveness.
+ */
 export const LikeCounter: FC<LikeCounterProps> = ({
   likeCount,
   liked,

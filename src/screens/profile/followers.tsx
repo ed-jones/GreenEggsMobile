@@ -33,6 +33,9 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Screen that shows a list of followers for a user.
+ */
 export const Followers = () => {
   const [query, setQuery] = useState("");
   const {

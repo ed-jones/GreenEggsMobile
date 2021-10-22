@@ -2,14 +2,17 @@
  * Author: Victor Ying
  */
 import { ThemedComponentProps, withStyles } from '@ui-kitten/components';
-import React, { FC } from 'react';
-import { View } from 'react-native';
+import React from 'react';
 import Svg, { Circle, SvgProps, Text } from 'react-native-svg';
 
 export interface CountCircleProps extends Omit<SvgProps, 'children'> {
   children: number
 }
 
+/**
+ * Simple circle that displays a number.
+ * Used to display the number of applied filters.
+ */
 export const CountCircle = withStyles(({ children, eva, ...props}: CountCircleProps & ThemedComponentProps) => {
   return (
     <Svg {...props} width="18" height="18">

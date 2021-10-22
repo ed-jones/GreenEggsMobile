@@ -13,6 +13,10 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Screen to display when main content is loading.
+ * Displays a centered spinning animation.
+ */
 export const LoadingScreen = () => (
   <Background style={styles.container}>
     <Spinner />

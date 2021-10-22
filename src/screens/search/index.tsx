@@ -40,6 +40,9 @@ import {
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 
+/**
+ * Shows a list of recipes as the result of a search
+ */
 export const RecipeSearch: FC = () => {
   const navigation = useNavigation();
   const { searchState } = useContext<ISearchContext>(SearchContext);
@@ -78,6 +81,9 @@ export const RecipeSearch: FC = () => {
   );
 };
 
+/**
+ * Shows a list of users as the result of a search
+ */
 const UserSearch: FC = () => {
   const { searchState } = useContext<ISearchContext>(SearchContext);
   return (
@@ -102,6 +108,9 @@ const UserSearch: FC = () => {
   );
 };
 
+/**
+ * Tabs that can be switched between to show search results for recipes or users.
+ */
 export const SearchTabBar = ({ navigation, state }: MaterialTopTabBarProps) => (
   <TabBar
     selectedIndex={state.index}
@@ -112,6 +121,9 @@ export const SearchTabBar = ({ navigation, state }: MaterialTopTabBarProps) => (
   </TabBar>
 );
 
+/**
+ * Screen for searching recipes and users.
+ */
 export const Search: FC = () => {
   const { searchState, setSearchState } =
     useContext<ISearchContext>(SearchContext);

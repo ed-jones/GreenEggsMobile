@@ -40,6 +40,10 @@ interface IRecipeCardSmall {
   onPress: () => void;
 }
 
+/**
+ * Displays recipes in a more compact form. 
+ * Designed to be used outside of trending and news feed.
+ */
 export const RecipeCardSmall: FC<IRecipeCardSmall> = ({ recipe, onPress }) => {
   return (
     <Card appearance="filled" style={styles.card} onPress={onPress}>

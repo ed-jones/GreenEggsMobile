@@ -38,6 +38,9 @@ import { NotificationContext } from "@greeneggs/providers";
 type NotificationListItemProps = ListItemProps &
   notifications_notifications_data;
 
+/**
+ * Screen for displaying a list of all notifications a user has received.
+ */
 const NotificationListItem = withStyles(
   ({
     eva,

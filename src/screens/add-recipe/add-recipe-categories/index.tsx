@@ -14,6 +14,10 @@ interface IAddRecipeCategories {
   form: RecipeForm;
 }
 
+/**
+ * Screen that shows a list of all selected categories that will
+ * be added to a recipe.
+ */
 export const AddRecipeCategories = ({ form }: IAddRecipeCategories) => {
   const { categoriesFieldArray } = useContext(AddRecipeContext);
   const navigation = useNavigation();

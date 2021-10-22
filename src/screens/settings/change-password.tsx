@@ -32,6 +32,9 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Screen that lets a user change their password.
+ */
 export function ChangePassword() {
   const form = useForm<
     ChangePasswordDetails,

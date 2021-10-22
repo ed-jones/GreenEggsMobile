@@ -12,6 +12,10 @@ export const AuthContext = createContext({
   setToken: undefined as SetToken,
 });
 
+/**
+ * State provider that lets all child components control the 
+ * authentication token of the logged in user.
+ */
 export const AuthProvider: FC = ({ children }) => {
   const [token, setToken] = useState<Token>();
   SecureStore.getItemAsync("token").then((resolvedToken: Token) =>

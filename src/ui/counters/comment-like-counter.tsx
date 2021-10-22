@@ -16,6 +16,11 @@ interface CommentLikeCounterProps {
   disabled?: boolean;
 }
 
+/**
+ * Displays the number of likes for a comment.
+ * Links to the commenter profile.
+ * Enables the liking of comments. Uses local state for better responsiveness.
+ */
 export const CommentLikeCounter: FC<CommentLikeCounterProps> = ({
   likeCount,
   commentId,

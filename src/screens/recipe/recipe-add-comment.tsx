@@ -45,6 +45,9 @@ interface RecipeAddCommentProps {
   active?: boolean;
 }
 
+/**
+ * Input component for adding a recipe comment.
+ */
 export function RecipeAddComment({
   recipeId,
   commentId,

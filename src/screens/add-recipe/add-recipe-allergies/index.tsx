@@ -1,38 +1,34 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from "react";
-import { ListItem } from "@ui-kitten/components";
-import { RecipeForm } from "../add-recipe";
-import { Icons } from "@greeneggs/ui";
-import { AddRecipePartTemplate } from "../add-recipe-part-template";
-import { useNavigation } from "@react-navigation/native";
-import { AddRecipeContext } from "@greeneggs/providers";
+import React, { useContext } from 'react'
+import { ListItem } from '@ui-kitten/components'
+import { RecipeForm } from '../add-recipe'
+import { Icons } from '@greeneggs/ui'
+import { AddRecipePartTemplate } from '../add-recipe-part-template'
+import { useNavigation } from '@react-navigation/native'
+import { AddRecipeContext } from '@greeneggs/providers'
 
 interface IAddRecipeAllergies {
-  form: RecipeForm;
+  form: RecipeForm
 }
 
 /**
  * Screen that shows a list of all allergies that will
  * be added to a recipe.
  */
-export const AddRecipeAllergies = ({
-  form,
-}: IAddRecipeAllergies) => {
-  const { allergiesFieldArray } = useContext(AddRecipeContext);
+export const AddRecipeAllergies = ({ form }: IAddRecipeAllergies) => {
+  const { allergiesFieldArray } = useContext(AddRecipeContext)
 
-  const navigation = useNavigation();
+  const navigation = useNavigation()
 
   return (
     <AddRecipePartTemplate
-      title="Allergies"
-      createButtonTitle="ADD ALLERGIES"
-      onPressCreate={() =>
-        navigation.navigate("CreateAllergy")
-      }
-      emptyStateTitle="No allergies"
-      emptyStateDescription="Add any potential allergies your recipe may trigger."
+      title='Allergies'
+      createButtonTitle='ADD ALLERGIES'
+      onPressCreate={() => navigation.navigate('CreateAllergy')}
+      emptyStateTitle='No allergies'
+      emptyStateDescription='Add any potential allergies your recipe may trigger.'
       listItem={({ item, index }) => (
         <>
           <ListItem
@@ -45,5 +41,5 @@ export const AddRecipeAllergies = ({
       )}
       data={allergiesFieldArray?.fields}
     />
-  );
-};
+  )
+}

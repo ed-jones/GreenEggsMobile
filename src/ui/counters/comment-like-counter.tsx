@@ -1,19 +1,19 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC, useContext, useEffect, useState } from "react";
-import { useMutation } from "@apollo/client";
-import { Mutations } from "@greeneggs/graphql";
-import { LikeRecipe, UnlikeRecipe } from "@greeneggs/types/graphql";
-import { UserContext } from "@greeneggs/providers";
-import { LikeCounter } from "./like-counter";
+import React, { FC, useContext, useEffect, useState } from 'react'
+import { useMutation } from '@apollo/client'
+import { Mutations } from '@greeneggs/graphql'
+import { LikeRecipe, UnlikeRecipe } from '@greeneggs/types/graphql'
+import { UserContext } from '@greeneggs/providers'
+import { LikeCounter } from './like-counter'
 
 interface CommentLikeCounterProps {
-  likeCount: number;
-  commentId: string;
-  liked: boolean;
-  submittedById: string;
-  disabled?: boolean;
+  likeCount: number
+  commentId: string
+  liked: boolean
+  submittedById: string
+  disabled?: boolean
 }
 
 /**
@@ -29,19 +29,19 @@ export const CommentLikeCounter: FC<CommentLikeCounterProps> = ({
   disabled,
 }) => {
   // Use local state for instant feedback on slow networks
-  const { me } = useContext(UserContext);
+  const { me } = useContext(UserContext)
 
   const [likeComment] = useMutation<LikeRecipe>(Mutations.LIKE_COMMENT, {
     variables: {
       commentId,
     },
-  });
+  })
 
   const [unlikeComment] = useMutation<UnlikeRecipe>(Mutations.UNLIKE_COMMENT, {
     variables: {
       commentId,
     },
-  });
+  })
 
   return (
     <LikeCounter
@@ -51,5 +51,5 @@ export const CommentLikeCounter: FC<CommentLikeCounterProps> = ({
       liked={liked}
       likeCount={likeCount}
     />
-  );
-};
+  )
+}

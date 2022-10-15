@@ -1,23 +1,13 @@
 /**
  * Author: Edward Jones
  */
-import React from "react";
-import {
-  View,
-  StyleSheet,
-  ImageBackground,
-  Image,
-  ScrollView,
-} from "react-native";
-import {
-  Text,
-  withStyles,
-  ThemedComponentProps,
-} from "@ui-kitten/components";
-import { LinearGradient } from "expo-linear-gradient";
-import { StatusBar } from "expo-status-bar";
-import { TopNavigation, Background } from "@greeneggs/ui";
-import { logo, banner } from '@greeneggs/assets';
+import React from 'react'
+import { View, StyleSheet, ImageBackground, Image, ScrollView } from 'react-native'
+import { Text, withStyles, ThemedComponentProps } from '@ui-kitten/components'
+import { LinearGradient } from 'expo-linear-gradient'
+import { StatusBar } from 'expo-status-bar'
+import { TopNavigation, Background } from '@greeneggs/ui'
+import { logo, banner } from '@greeneggs/assets'
 
 const styles = StyleSheet.create({
   logo: {
@@ -31,45 +21,45 @@ const styles = StyleSheet.create({
     // height: "100%",
   },
   gradient: {
-    position: "absolute",
+    position: 'absolute',
     left: 0,
     right: 0,
     top: 0,
-    height: "100%",
+    height: '100%',
   },
   bannerContainer: {
     height: 200,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   bannerContent: {
-    alignItems: "center",
+    alignItems: 'center',
     paddingBottom: 64,
   },
   banner: {
-    resizeMode: "cover",
-    height: "100%",
-    justifyContent: "flex-start",
+    resizeMode: 'cover',
+    height: '100%',
+    justifyContent: 'flex-start',
   },
   logoText: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   centerText: {
-    textAlign: "center",
+    textAlign: 'center',
   },
   forgotPassword: {
-    fontWeight: "bold",
-    textAlign: "right",
+    fontWeight: 'bold',
+    textAlign: 'right',
     paddingTop: 8,
     paddingBottom: 10,
   },
-});
+})
 
 interface IAuthPageTemplateProps {
-  navigation: any;
-  message: string;
-  children: React.ReactNode;
+  navigation: any
+  message: string
+  children: React.ReactNode
 }
 
 /**
@@ -77,25 +67,21 @@ interface IAuthPageTemplateProps {
  * Shows the brand logo and background, followed by a form.
  */
 export const AuthPageTemplate = withStyles(
-  ({
-    message,
-    children,
-    eva,
-  }: IAuthPageTemplateProps & ThemedComponentProps) => (
+  ({ message, children, eva }: IAuthPageTemplateProps & ThemedComponentProps) => (
     <Background>
-      <StatusBar style="dark" />
+      <StatusBar style='dark' />
       <View style={styles.bannerContainer}>
         <ImageBackground source={banner} style={styles.banner}>
           <LinearGradient
-            colors={["rgba(247, 249, 252,0.5)", "rgba(247, 249, 252,1)"]}
+            colors={['rgba(247, 249, 252,0.5)', 'rgba(247, 249, 252,1)']}
             style={styles.gradient}
           />
           <TopNavigation />
           <View style={styles.logoText}>
-            <Text category="h1">Green Eggs</Text>
+            <Text category='h1'>Green Eggs</Text>
             <Image source={logo} style={styles.logo} />
           </View>
-          <Text style={styles.centerText} category="s1">
+          <Text style={styles.centerText} category='s1'>
             {message}
           </Text>
         </ImageBackground>
@@ -103,11 +89,11 @@ export const AuthPageTemplate = withStyles(
       <ScrollView
         style={{
           ...styles.form,
-          backgroundColor: eva?.theme && eva.theme["color-basic-200"],
+          backgroundColor: eva?.theme && eva.theme['color-basic-200'],
         }}
       >
         {children}
       </ScrollView>
     </Background>
   )
-);
+)

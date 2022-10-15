@@ -1,8 +1,8 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC } from "react";
-import { Queries } from "@greeneggs/graphql";
+import React, { FC } from 'react'
+import { Queries } from '@greeneggs/graphql'
 import {
   CategoriesVariables,
   Categories_categories_data,
@@ -12,45 +12,41 @@ import {
   CategoriesWithImages,
   CategoriesWithImagesVariables,
   CategoriesWithImages_categoriesWithImages_data,
-} from "@greeneggs/types/graphql";
-import { Background, Icons, LazyList } from "@greeneggs/ui";
-import { Button, ListItem, Text, TopNavigation } from "@ui-kitten/components";
-import { ImageBackground, Pressable, StyleSheet, View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { useNavigation } from "@react-navigation/core";
+} from '@greeneggs/types/graphql'
+import { Background, Icons, LazyList } from '@greeneggs/ui'
+import { Button, ListItem, Text, TopNavigation } from '@ui-kitten/components'
+import { ImageBackground, Pressable, StyleSheet, View } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient'
+import { useNavigation } from '@react-navigation/core'
 
 interface CategoryWithImageProps {
-  name: string;
-  coverImage: string;
-  onPress: () => void;
+  name: string
+  coverImage: string
+  onPress: () => void
 }
 
 const styles = StyleSheet.create({
   categoryCard: {
-    width: "100%",
+    width: '100%',
     height: 75,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 12,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   gradient: {
-    position: "absolute",
+    position: 'absolute',
     left: 0,
     right: 0,
     top: 0,
-    height: "100%",
+    height: '100%',
   },
-});
+})
 
 /**
  * Displays an infinite scrolling list of categories that are important enough to have an associated image.
  */
-const CategoryWithImage: FC<CategoryWithImageProps> = ({
-  name,
-  coverImage,
-  onPress,
-}) => {
+const CategoryWithImage: FC<CategoryWithImageProps> = ({ name, coverImage, onPress }) => {
   return (
     <Pressable
       onPress={onPress}
@@ -58,24 +54,21 @@ const CategoryWithImage: FC<CategoryWithImageProps> = ({
         paddingHorizontal: 8,
         marginTop: 16,
         flexGrow: 1,
-        width: "50%",
+        width: '50%',
       }}
     >
       <ImageBackground source={{ uri: coverImage }} style={styles.categoryCard}>
-        <LinearGradient
-          colors={["transparent", "rgba(0, 0, 0, 0.8)"]}
-          style={styles.gradient}
-        />
-        <Text category="h5" style={{ color: "white" }}>
+        <LinearGradient colors={['transparent', 'rgba(0, 0, 0, 0.8)']} style={styles.gradient} />
+        <Text category='h5' style={{ color: 'white' }}>
           {name.toUpperCase()}
         </Text>
       </ImageBackground>
     </Pressable>
-  );
-};
+  )
+}
 
 export const Categories: FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
 
   return (
     <Background>
@@ -89,35 +82,35 @@ export const Categories: FC = () => {
         limit={20}
         ListFooterComponent={
           <Button
-            style={{ margin: 24, alignItems: "flex-start" }}
-            onPress={() => navigation.navigate("AllCategories")}
+            style={{ margin: 24, alignItems: 'flex-start' }}
+            onPress={() => navigation.navigate('AllCategories')}
           >
             VIEW ALL
           </Button>
         }
         query={Queries.GET_CATEGORIES_WITH_IMAGES}
         variables={{
-          query: "",
+          query: '',
         }}
-        dataKey="categoriesWithImages"
-        emptyMessage="No categories found."
+        dataKey='categoriesWithImages'
+        emptyMessage='No categories found.'
         horizontal={false}
         numColumns={2}
         columnWrapperStyle={{ paddingHorizontal: 16 }}
         renderItem={({ item: category }) => (
           <CategoryWithImage
             onPress={() =>
-              navigation.navigate("Category", {
+              navigation.navigate('Category', {
                 categoryId: category.id,
                 categoryName: category.name,
               })
             }
             name={category.name}
-            coverImage={category.coverImage ?? ""}
+            coverImage={category.coverImage ?? ''}
             key={category.id}
           />
         )}
       />
     </Background>
-  );
-};
+  )
+}

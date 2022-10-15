@@ -1,80 +1,64 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from "react";
-import { View, Alert } from "react-native";
-import {
-  Button,
-  Divider,
-  Layout,
-  Spinner,
-  withStyles,
-} from "@ui-kitten/components";
-import {
-  addRecipe,
-  addRecipeVariables,
-  RecipeInput,
-} from "@greeneggs/types/graphql";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Icons, IForm, Background } from "@greeneggs/ui";
-import { Stepper } from "./stepper";
-import { AddRecipeStyles } from "./add-recipe-styles";
-import { AddRecipeContext } from "@greeneggs/providers";
-import { LoadingScreen } from "../loading-screen";
+import React, { useContext } from 'react'
+import { View, Alert } from 'react-native'
+import { Button, Divider, Layout, Spinner, withStyles } from '@ui-kitten/components'
+import { addRecipe, addRecipeVariables, RecipeInput } from '@greeneggs/types/graphql'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { Icons, IForm, Background } from '@greeneggs/ui'
+import { Stepper } from './stepper'
+import { AddRecipeStyles } from './add-recipe-styles'
+import { AddRecipeContext } from '@greeneggs/providers'
+import { LoadingScreen } from '../loading-screen'
 
-export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>;
+export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>
 
 /**
  * Screen that enables the creation of recipes.
  * Contains the multi-step form.
  */
-export const AddRecipe = withStyles(function AddRecipe({
-  navigation,
-  eva,
-}: any) {
-  const { form, steps } = useContext(AddRecipeContext);
+export const AddRecipe = withStyles(function AddRecipe({ navigation, eva }: any) {
+  const { form, steps } = useContext(AddRecipeContext)
 
   if (form === undefined || steps === undefined) {
     return <LoadingScreen />
   }
 
-  const insets = useSafeAreaInsets();
+  const insets = useSafeAreaInsets()
 
   const onSubmit = async () => {
     try {
-      const { data } = await form.submitForm();
+      const { data } = await form.submitForm()
       if (data?.addRecipe.error) {
       } else {
-        form.reset();
-        steps.reset();
-        navigation.push("Recipe", { recipeId: data?.addRecipe.data?.id });
+        form.reset()
+        steps.reset()
+        navigation.push('Recipe', { recipeId: data?.addRecipe.data?.id })
       }
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   function publish() {
     Alert.alert(
-      "Publish recipe",
-      "Are you sure you want to publish this recipe?",
+      'Publish recipe',
+      'Are you sure you want to publish this recipe?',
       [
         {
-          text: "Cancel",
-          style: "cancel",
+          text: 'Cancel',
+          style: 'cancel',
         },
-        { text: "OK", onPress: () => onSubmit() },
+        { text: 'OK', onPress: () => onSubmit() },
       ],
       { cancelable: false }
-    );
+    )
   }
 
   return (
     <Background>
-      <Layout
-        level="1"
-        style={{ ...AddRecipeStyles.view, marginTop: insets.top }}
-      >
+      <Layout level='1' style={{ ...AddRecipeStyles.view, marginTop: insets.top }}>
         <Stepper
           index={steps.index}
           length={steps.length}
@@ -85,22 +69,22 @@ export const AddRecipe = withStyles(function AddRecipe({
       <Divider />
       {steps.currentStep.component}
       <Divider />
-      <Layout level="1" style={AddRecipeStyles.view}>
+      <Layout level='1' style={AddRecipeStyles.view}>
         <View style={AddRecipeStyles.buttonGroup}>
           {steps.isEnd ? (
             <Button
-              size="small"
+              size='small'
               onPress={() => {
                 form.trigger().then((isValid) => {
                   if (isValid) {
-                    publish();
+                    publish()
                   }
-                });
+                })
               }}
-              status="success"
+              status='success'
               accessoryRight={
                 form.formResult.loading
-                  ? () => <Spinner size="small" status="control" />
+                  ? () => <Spinner size='small' status='control' />
                   : Icons.Publish
               }
             >
@@ -108,11 +92,11 @@ export const AddRecipe = withStyles(function AddRecipe({
             </Button>
           ) : (
             <Button
-              size="small"
+              size='small'
               onPress={() => {
                 form.trigger().then((isValid) => {
-                  if (isValid) steps.next();
-                });
+                  if (isValid) steps.next()
+                })
               }}
               accessoryRight={Icons.Forward}
             >
@@ -121,15 +105,12 @@ export const AddRecipe = withStyles(function AddRecipe({
           )}
           {steps.isStart ? null : (
             <Button
-              size="small"
+              size='small'
               onPress={steps.previous}
               accessoryLeft={(props) => (
-                <Icons.Back
-                  {...props}
-                  fill={eva?.theme && eva.theme["color-primary-500"]}
-                />
+                <Icons.Back {...props} fill={eva?.theme && eva.theme['color-primary-500']} />
               )}
-              status="basic"
+              status='basic'
             >
               PREVIOUS
             </Button>
@@ -137,5 +118,5 @@ export const AddRecipe = withStyles(function AddRecipe({
         </View>
       </Layout>
     </Background>
-  );
-});
+  )
+})

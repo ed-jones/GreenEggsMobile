@@ -1,8 +1,8 @@
 /**
  * Author: Edward Jones
  */
-import React, { useEffect } from "react";
-import { Platform, View } from "react-native";
+import React, { useEffect } from 'react'
+import { Platform, View } from 'react-native'
 import {
   Menu,
   MenuItem,
@@ -10,11 +10,11 @@ import {
   Text,
   ThemedComponentProps,
   withStyles,
-} from "@ui-kitten/components";
-import * as ImagePicker from "expo-image-picker";
-import { ReactNativeFile } from "apollo-upload-client";
-import { ImageBackground } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+} from '@ui-kitten/components'
+import * as ImagePicker from 'expo-image-picker'
+import { ReactNativeFile } from 'apollo-upload-client'
+import { ImageBackground } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient'
 import {
   DeepMap,
   DeepPartial,
@@ -23,62 +23,47 @@ import {
   Path,
   PathValue,
   UnionLike,
-} from "react-hook-form";
-import { Icons } from '@greeneggs/ui';
+} from 'react-hook-form'
+import { Icons } from '@greeneggs/ui'
 
 interface IImageUpload {
-  label?: string;
-  uri?: string;
-  onChange: (...event: any[]) => void;
+  label?: string
+  uri?: string
+  onChange: (...event: any[]) => void
   error?:
-    | DeepMap<
-        DeepPartial<UnionLike<PathValue<FieldValues, Path<FieldValues>>>>,
-        FieldError
-      >
-    | undefined;
+    | DeepMap<DeepPartial<UnionLike<PathValue<FieldValues, Path<FieldValues>>>>, FieldError>
+    | undefined
 }
 
 /**
  * Input component for uploading images
  */
 export const ImageUpload = withStyles(
-  ({
-    label,
-    uri,
-    onChange,
-    error,
-    eva,
-  }: IImageUpload & ThemedComponentProps) => {
-    const [modalVisible, setModalVisible] = React.useState(false);
+  ({ label, uri, onChange, error, eva }: IImageUpload & ThemedComponentProps) => {
+    const [modalVisible, setModalVisible] = React.useState(false)
 
-    type ImageSource = "gallery" | "camera";
+    type ImageSource = 'gallery' | 'camera'
 
-    const pickImage = async (
-      source: ImageSource,
-      onChange: (...event: any[]) => void
-    ) => {
-      cancelModal();
+    const pickImage = async (source: ImageSource, onChange: (...event: any[]) => void) => {
+      cancelModal()
 
-      if (Platform.OS !== "web") {
-        if (source === "camera") {
-          const { status } = await ImagePicker.requestCameraPermissionsAsync();
-          if (status !== "granted") {
-            alert("Sorry, we need camera roll permissions to make this work!");
+      if (Platform.OS !== 'web') {
+        if (source === 'camera') {
+          const { status } = await ImagePicker.requestCameraPermissionsAsync()
+          if (status !== 'granted') {
+            alert('Sorry, we need camera roll permissions to make this work!')
           }
         }
 
-        if (source === "gallery") {
-          const { status } =
-            await ImagePicker.requestMediaLibraryPermissionsAsync();
-          if (status !== "granted") {
-            alert(
-              "Sorry, we need media library permissions to make this work!"
-            );
+        if (source === 'gallery') {
+          const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+          if (status !== 'granted') {
+            alert('Sorry, we need media library permissions to make this work!')
           }
         }
       }
 
-      const result = await (source === "camera"
+      const result = await (source === 'camera'
         ? ImagePicker.launchCameraAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
@@ -90,95 +75,89 @@ export const ImageUpload = withStyles(
             allowsEditing: true,
             aspect: [1, 1],
             quality: 0.5,
-          }));
+          }))
 
       if (!result.cancelled) {
         const newFile = {
           uri: result.uri,
-          name: `${result.uri.substr(result.uri.lastIndexOf("/") + 1)}`,
-          type: "image/jpeg",
-        };
-        onChange(new ReactNativeFile(newFile));
+          name: `${result.uri.substr(result.uri.lastIndexOf('/') + 1)}`,
+          type: 'image/jpeg',
+        }
+        onChange(new ReactNativeFile(newFile))
       }
-    };
+    }
 
     const cancelModal = () => {
-      setModalVisible(false);
-    };
+      setModalVisible(false)
+    }
 
-    const TextColor = error
-      ? eva?.theme?.["color-danger-500"]
-      : eva?.theme?.["color-basic-600"];
+    const TextColor = error ? eva?.theme?.['color-danger-500'] : eva?.theme?.['color-basic-600']
 
     return (
       <View style={{ marginBottom: 16 }}>
         <Modal
           visible={modalVisible}
           onBackdropPress={cancelModal}
-          backdropStyle={{ backgroundColor: "rgba(0, 0, 0,0.4)" }}
+          backdropStyle={{ backgroundColor: 'rgba(0, 0, 0,0.4)' }}
         >
           <View style={{ width: 132 }}>
             <Menu>
               <MenuItem
-                title="CAMERA"
+                title='CAMERA'
                 accessoryLeft={Icons.Camera}
-                onPress={() => pickImage("camera", onChange)}
+                onPress={() => pickImage('camera', onChange)}
               />
               <MenuItem
-                title="GALLERY"
+                title='GALLERY'
                 accessoryLeft={Icons.Image}
-                onPress={() => pickImage("gallery", onChange)}
+                onPress={() => pickImage('gallery', onChange)}
               />
-              <MenuItem
-                title="CANCEL"
-                accessoryLeft={Icons.Cross}
-                onPress={cancelModal}
-              />
+              <MenuItem title='CANCEL' accessoryLeft={Icons.Cross} onPress={cancelModal} />
             </Menu>
           </View>
         </Modal>
         {label && (
-          <Text category="label" appearance="hint" style={{ marginBottom: 6 }}>
+          <Text category='label' appearance='hint' style={{ marginBottom: 6 }}>
             {label}
           </Text>
         )}
         <View
           style={{
-            width: "100%",
+            width: '100%',
             aspectRatio: 1 / 1,
             borderWidth: 2,
             borderRadius: 4,
-            borderStyle: "dashed",
+            borderStyle: 'dashed',
             borderColor: TextColor,
-            alignItems: "center",
-            justifyContent: "center",
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
           {uri ? (
             <View
               style={{
-                alignItems: "center",
+                alignItems: 'center',
                 padding: 4,
-                justifyContent: "center",
+                justifyContent: 'center',
               }}
             >
               <ImageBackground
                 source={{ uri }}
                 style={{
-                  width: "100%",
+                  width: '100%',
                   aspectRatio: 1 / 1,
-                  alignItems: "center",
-                  justifyContent: "center",
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
                 <LinearGradient
-                  colors={["rgba(255, 255, 255,0)", "rgba(0, 0, 0,0.2)"]}
+                  colors={['rgba(255, 255, 255,0)', 'rgba(0, 0, 0,0.2)']}
                   style={{
-                    position: "absolute",
+                    position: 'absolute',
                     left: 0,
                     right: 0,
                     top: 0,
-                    height: "100%",
+                    height: '100%',
                   }}
                 />
                 <Icons.Cross
@@ -187,7 +166,7 @@ export const ImageUpload = withStyles(
                     width: 64,
                     height: 64,
                   }}
-                  fill="white"
+                  fill='white'
                   onPress={() => onChange(undefined)}
                 />
               </ImageBackground>
@@ -200,14 +179,14 @@ export const ImageUpload = withStyles(
                   width: 64,
                   height: 64,
                 }}
-                fill={eva?.theme && eva.theme["color-basic-600"]}
+                fill={eva?.theme && eva.theme['color-basic-600']}
               />
-              <Text appearance="hint">Upload an image</Text>
+              <Text appearance='hint'>Upload an image</Text>
             </>
           )}
         </View>
         <Text
-          category="c1"
+          category='c1'
           style={{
             marginTop: 6,
             color: TextColor,
@@ -216,6 +195,6 @@ export const ImageUpload = withStyles(
           {error?.message}
         </Text>
       </View>
-    );
+    )
   }
-);
+)

@@ -1,23 +1,23 @@
 /**
  * Author: Edward Jones
  */
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import { Text } from "@ui-kitten/components";
-import { CommentCounter, LabelledIcon, RecipeLikeCounter } from "@greeneggs/ui";
+import React from 'react'
+import { View, StyleSheet } from 'react-native'
+import { Text } from '@ui-kitten/components'
+import { CommentCounter, LabelledIcon, RecipeLikeCounter } from '@greeneggs/ui'
 import {
   recipes_recipes_data,
   recipes_recipes_data_comments,
   recipes_recipes_data_submittedBy,
-} from "@greeneggs/types/graphql";
-import { convertTimeEstimate, convertSubmittedAt } from "@greeneggs/utils";
+} from '@greeneggs/types/graphql'
+import { convertTimeEstimate, convertSubmittedAt } from '@greeneggs/utils'
 
 const styles = StyleSheet.create({
   view: {
     padding: 14,
   },
   recipeTitle: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 18,
     flexShrink: 1,
   },
@@ -26,29 +26,29 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   labelledIcons: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   labelledIconGroup: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
-});
+})
 
 export type IRecipeCardFooterProps = Pick<
   recipes_recipes_data,
-  | "title"
-  | "description"
-  | "commentCount"
-  | "likeCount"
-  | "createdAt"
-  | "servingCount"
-  | "timeEstimate"
-  | "liked"
-  | "id"
-  | "comments"
-  | "submittedBy"
->;
+  | 'title'
+  | 'description'
+  | 'commentCount'
+  | 'likeCount'
+  | 'createdAt'
+  | 'servingCount'
+  | 'timeEstimate'
+  | 'liked'
+  | 'id'
+  | 'comments'
+  | 'submittedBy'
+>
 
 /**
  * Footer component for the main recipe card.
@@ -69,15 +69,13 @@ export const RecipeCardFooter = ({
   return (
     <View style={styles.view}>
       <View style={styles.labelledIcons}>
-        <Text category="h1" style={styles.recipeTitle}>
+        <Text category='h1' style={styles.recipeTitle}>
           {title}
         </Text>
-        <Text style={{ marginLeft: 8 }}>{`${convertSubmittedAt(
-          createdAt
-        )} ago`}</Text>
+        <Text style={{ marginLeft: 8 }}>{`${convertSubmittedAt(createdAt)} ago`}</Text>
       </View>
       {description ? (
-        <Text category="s1" numberOfLines={2} style={styles.recipeDescription}>
+        <Text category='s1' numberOfLines={2} style={styles.recipeDescription}>
           {description}
         </Text>
       ) : undefined}
@@ -86,7 +84,7 @@ export const RecipeCardFooter = ({
           <View style={styles.labelledIconGroup}>
             <LabelledIcon
               label={convertTimeEstimate(timeEstimate).toUpperCase()}
-              iconName="clock-outline"
+              iconName='clock-outline'
             />
           </View>
         )}
@@ -101,5 +99,5 @@ export const RecipeCardFooter = ({
         </View>
       </View>
     </View>
-  );
-};
+  )
+}

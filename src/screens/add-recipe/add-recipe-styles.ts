@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native'
 
 /**
  * Styles used throughout the add recipe process
@@ -11,8 +11,8 @@ export const AddRecipeStyles = StyleSheet.create({
     padding: 16,
   },
   buttonGroup: {
-    flexDirection: "row-reverse",
-    justifyContent: "space-between",
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
   },
   heading: {
     paddingVertical: 16,
@@ -20,4 +20,4 @@ export const AddRecipeStyles = StyleSheet.create({
   input: {
     marginBottom: 10,
   },
-});
+})

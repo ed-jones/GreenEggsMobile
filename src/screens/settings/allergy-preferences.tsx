@@ -1,20 +1,12 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React, { useState } from "react";
-import {
-  Button,
-  IndexPath,
-  List,
-  ListItem,
-  SelectItem,
-  Spinner,
-  Text,
-} from "@ui-kitten/components";
-import { Select, TopNavigation, Background, Callout, Icons } from "@greeneggs/ui";
-import { StyleSheet, View } from "react-native";
-import { Mutations, Queries } from "@greeneggs/graphql";
-import { useMutation, useQuery } from "@apollo/client";
+import React, { useState } from 'react'
+import { Button, IndexPath, List, ListItem, SelectItem, Spinner, Text } from '@ui-kitten/components'
+import { Select, TopNavigation, Background, Callout, Icons } from '@greeneggs/ui'
+import { StyleSheet, View } from 'react-native'
+import { Mutations, Queries } from '@greeneggs/graphql'
+import { useMutation, useQuery } from '@apollo/client'
 import {
   Allergies,
   Allergies_allergies_data,
@@ -23,17 +15,17 @@ import {
   RemoveAllergyPreferencesVariables,
   UpdateAllergyPreferences,
   UpdateAllergyPreferencesVariables,
-} from "@greeneggs/types/graphql";
-import { LoadingScreen } from "../loading-screen";
-import { FullUserFragment } from "@greeneggs/graphql/fragments";
+} from '@greeneggs/types/graphql'
+import { LoadingScreen } from '../loading-screen'
+import { FullUserFragment } from '@greeneggs/graphql/fragments'
 
 const styles = StyleSheet.create({
   view: {
     padding: 16,
   },
   buttonGroup: {
-    flexDirection: "row-reverse",
-    justifyContent: "space-between",
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
   },
   heading: {
     paddingVertical: 16,
@@ -41,10 +33,10 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: 10,
   },
-});
+})
 
 function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
-  return Number(selectedIndex.toString()) - 1;
+  return Number(selectedIndex.toString()) - 1
 }
 
 /**
@@ -57,34 +49,32 @@ export const AllergyPreferences = () => {
       query: '',
       offset: 0,
       limit: 100,
-    }
-  });
-  const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(
-    new IndexPath(0)
-  );
-  const getMe = useQuery<Me>(Queries.ME);
+    },
+  })
+  const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(new IndexPath(0))
+  const getMe = useQuery<Me>(Queries.ME)
 
   const [removeAllergyPreferences] = useMutation<
     RemoveAllergyPreferences,
     RemoveAllergyPreferencesVariables
-  >(Mutations.REMOVE_ALLERGY_PREFERENCES);
-  const [updateAllergyPreferences, updateAllergyPreferencesResult] =
-    useMutation<UpdateAllergyPreferences, UpdateAllergyPreferencesVariables>(
-      Mutations.UPDATE_ALLERGY_PREFERENCES
-    );
+  >(Mutations.REMOVE_ALLERGY_PREFERENCES)
+  const [updateAllergyPreferences, updateAllergyPreferencesResult] = useMutation<
+    UpdateAllergyPreferences,
+    UpdateAllergyPreferencesVariables
+  >(Mutations.UPDATE_ALLERGY_PREFERENCES)
 
-  if (getAllergy.loading || getMe.loading) return <LoadingScreen />;
+  if (getAllergy.loading || getMe.loading) return <LoadingScreen />
   if (getAllergy.error) {
-    return <Text>Error! {getAllergy.error.message}</Text>;
+    return <Text>Error! {getAllergy.error.message}</Text>
   }
   if (getMe.error) {
-    return <Text>Error! {getMe.error.message}</Text>;
+    return <Text>Error! {getMe.error.message}</Text>
   }
-  const me = getMe.data?.me.data;
-  const allergies = getAllergy.data?.allergies.data || [];
+  const me = getMe.data?.me.data
+  const allergies = getAllergy.data?.allergies.data || []
   const unselectedAllergies = allergies.filter(
     (allergy) => !me?.allergyPreferences.includes(allergy)
-  );
+  )
 
   function handleSubmit() {
     if (me?.allergyPreferences) {
@@ -92,9 +82,7 @@ export const AllergyPreferences = () => {
         variables: {
           allergyPreferences: {
             allergies: [
-              ...me.allergyPreferences.map(
-                (selectedAllergy) => selectedAllergy.id
-              ),
+              ...me.allergyPreferences.map((selectedAllergy) => selectedAllergy.id),
               unselectedAllergies[indexToNumber(selectedIndex)].id,
             ],
           },
@@ -112,12 +100,12 @@ export const AllergyPreferences = () => {
               ],
             },
             fragment: FullUserFragment,
-            fragmentName: "FullUserFragment",
-          });
+            fragmentName: 'FullUserFragment',
+          })
         },
-      });
+      })
     }
-    setSelectedIndex(new IndexPath(0));
+    setSelectedIndex(new IndexPath(0))
   }
 
   function removeAllergy(allergy: Allergies_allergies_data) {
@@ -138,30 +126,29 @@ export const AllergyPreferences = () => {
               ),
             },
             fragment: FullUserFragment,
-            fragmentName: "FullUserFragment",
-          });
+            fragmentName: 'FullUserFragment',
+          })
         },
-      });
+      })
     }
   }
   return (
     <Background>
-      <TopNavigation title="Allergy Preferences" />
+      <TopNavigation title='Allergy Preferences' />
       <View>
         <View style={styles.view}>
           <Callout
-            message="Here you can tell us if you have any allergies so that we can better show you recipes relevant to you."
-            type="info"
+            message='Here you can tell us if you have any allergies so that we can better show you recipes relevant to you.'
+            type='info'
           />
-          <View style={{ flexDirection: "row" }}>
+          <View style={{ flexDirection: 'row' }}>
             <Select
               style={{ flex: 1, marginHorizontal: 8 }}
               onSelect={(index) => setSelectedIndex(index)}
               selectedIndex={selectedIndex}
               disabled={unselectedAllergies.length === 0}
               value={
-                unselectedAllergies[indexToNumber(selectedIndex)]?.name ||
-                "NO ALLERGIES FOUND"
+                unselectedAllergies[indexToNumber(selectedIndex)]?.name || 'NO ALLERGIES FOUND'
               }
             >
               {unselectedAllergies.map((allergy) => (
@@ -169,12 +156,12 @@ export const AllergyPreferences = () => {
               ))}
             </Select>
             <Button
-              size="small"
+              size='small'
               onPress={handleSubmit}
               disabled={unselectedAllergies.length === 0}
               accessoryLeft={
                 updateAllergyPreferencesResult.loading
-                  ? () => <Spinner size="small" status="control" />
+                  ? () => <Spinner size='small' status='control' />
                   : Icons.Add
               }
             >
@@ -195,5 +182,5 @@ export const AllergyPreferences = () => {
         />
       </View>
     </Background>
-  );
-};
+  )
+}

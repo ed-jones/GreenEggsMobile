@@ -1,50 +1,50 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { useState } from "react";
-import { useQuery } from "@apollo/client";
-import { Queries } from "@greeneggs/graphql";
-import { TopNavigation, ViewMore } from "@greeneggs/ui";
-import { comment } from "@greeneggs/types/graphql";
-import { Text } from "@ui-kitten/components";
-import { View, StyleSheet, ScrollView } from "react-native";
-import { LoadingScreen } from "../loading-screen";
-import { RecipeAddComment } from "./recipe-add-comment";
-import { RecipeComment } from "./recipe-comment";
-import { RecipeCommentList} from "./recipe-comment-list";
+import React, { useState } from 'react'
+import { useQuery } from '@apollo/client'
+import { Queries } from '@greeneggs/graphql'
+import { TopNavigation, ViewMore } from '@greeneggs/ui'
+import { comment } from '@greeneggs/types/graphql'
+import { Text } from '@ui-kitten/components'
+import { View, StyleSheet, ScrollView } from 'react-native'
+import { LoadingScreen } from '../loading-screen'
+import { RecipeAddComment } from './recipe-add-comment'
+import { RecipeComment } from './recipe-comment'
+import { RecipeCommentList } from './recipe-comment-list'
 
 const styles = StyleSheet.create({
   content: {
     padding: 16,
   },
-});
+})
 
 /**
  * Screen for showing a recipe comment and all of its replies.
  */
 export function RecipeCommentReplies({ route }: any) {
-  const { commentId, replying } = route.params;
-  const [visibleCommentCount, setVisibleCommentCount] = useState<number>(3);
+  const { commentId, replying } = route.params
+  const [visibleCommentCount, setVisibleCommentCount] = useState<number>(3)
 
   const { data, loading, error } = useQuery<comment>(Queries.GET_COMMENT, {
     variables: {
       commentId,
     },
-  });
+  })
 
   if (loading || !data?.comment.data) {
-    return <LoadingScreen />;
+    return <LoadingScreen />
   }
 
   if (error) {
-    return <Text>Error! {error.message}</Text>;
+    return <Text>Error! {error.message}</Text>
   }
 
-  const comment = data.comment.data;
+  const comment = data.comment.data
 
   return (
     <>
-      <TopNavigation title="Comment Thread" />
+      <TopNavigation title='Comment Thread' />
       <ScrollView>
         <RecipeComment comment={comment} />
         <View style={styles.content}>
@@ -55,12 +55,10 @@ export function RecipeCommentReplies({ route }: any) {
           )}
           {comment.replies.length > 0 && (
             <>
-              <Text category="h6" style={{ marginBottom: 16 }}>
+              <Text category='h6' style={{ marginBottom: 16 }}>
                 {`All Replies (${comment.replyCount})`}
               </Text>
-              <RecipeCommentList
-                comments={comment.replies.slice(0, visibleCommentCount)}
-              />
+              <RecipeCommentList comments={comment.replies.slice(0, visibleCommentCount)} />
             </>
           )}
           {comment.replies.length > visibleCommentCount && (
@@ -72,5 +70,5 @@ export function RecipeCommentReplies({ route }: any) {
         </View>
       </ScrollView>
     </>
-  );
+  )
 }

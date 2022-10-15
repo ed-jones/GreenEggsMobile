@@ -1,21 +1,21 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from 'react';
-import { Background } from '@greeneggs/ui';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { View } from 'react-native';
-import { SearchContext } from '@greeneggs/providers/search-state-provider';
+import React, { useContext } from 'react'
+import { Background } from '@greeneggs/ui'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { View } from 'react-native'
+import { SearchContext } from '@greeneggs/providers/search-state-provider'
 
-import { HomeTabs } from './home-tabs';
-import { Search } from '../search';
-import { TopBar} from '../search/common/top-bar';
+import { HomeTabs } from './home-tabs'
+import { Search } from '../search'
+import { TopBar } from '../search/common/top-bar'
 
 /**
  * Home view that displays tabs for trending, news feed and categories. Also contains the search bar that when typed into, initiates the search screen.
  */
-export const Home = () => { 
-  const insets = useSafeAreaInsets();
+export const Home = () => {
+  const insets = useSafeAreaInsets()
   const { searchState } = useContext(SearchContext)
 
   return (
@@ -23,9 +23,7 @@ export const Home = () => {
       <View style={{ paddingTop: insets.top }}>
         <TopBar />
       </View>
-      { searchState.query === undefined ? (
-        <HomeTabs/>
-      ): <Search />}
+      {searchState.query === undefined ? <HomeTabs /> : <Search />}
     </Background>
   )
-};
+}

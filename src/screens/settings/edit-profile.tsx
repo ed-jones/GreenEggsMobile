@@ -1,32 +1,31 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React from "react";
-import { Mutations, Queries } from "@greeneggs/graphql";
-import { ScrollView, StyleSheet } from "react-native";
+import React from 'react'
+import { Mutations, Queries } from '@greeneggs/graphql'
+import { ScrollView, StyleSheet } from 'react-native'
+import { editProfile, editProfileVariables, ProfileDetails } from '@greeneggs/types/graphql'
+import { Button, Text, Spinner } from '@ui-kitten/components'
+import { useNavigation } from '@react-navigation/core'
+import { useQuery } from '@apollo/client'
+import { Me } from '@greeneggs/types/graphql'
+import { LoadingScreen } from '../loading-screen'
 import {
-  editProfile,
-  editProfileVariables,
-  ProfileDetails,
-} from "@greeneggs/types/graphql";
-import {
-  Button,
-  Text,
-  Spinner,
-} from "@ui-kitten/components";
- import { useNavigation } from "@react-navigation/core";
-import { useQuery } from "@apollo/client";
-import { Me } from "@greeneggs/types/graphql";
-import { LoadingScreen } from "../loading-screen";
-import { TopNavigation, Background, Icons, ControlledInput, InputType, useForm } from "@greeneggs/ui";
+  TopNavigation,
+  Background,
+  Icons,
+  ControlledInput,
+  InputType,
+  useForm,
+} from '@greeneggs/ui'
 
 const styles = StyleSheet.create({
   view: {
     padding: 16,
   },
   buttonGroup: {
-    flexDirection: "row-reverse",
-    justifyContent: "space-between",
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
   },
   heading: {
     paddingVertical: 16,
@@ -34,46 +33,46 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: 10,
   },
-});
+})
 
 const useEditProfile = () =>
   useForm<ProfileDetails, editProfile, editProfileVariables>(
     Mutations.EDIT_PROFILE,
-    "profileDetails"
-  );
+    'profileDetails'
+  )
 
 /**
  * Screen that lets a user edit their basic profile details,
  * including First Name, Last Name and Bio.
  */
 export function EditProfile() {
-  const form = useEditProfile();
-  const navigation = useNavigation();
-  const { loading, error, data } = useQuery<Me>(Queries.ME);
+  const form = useEditProfile()
+  const navigation = useNavigation()
+  const { loading, error, data } = useQuery<Me>(Queries.ME)
 
-  if (loading) return <LoadingScreen />;
+  if (loading) return <LoadingScreen />
   if (error) {
-    return <Text>Error! {error.message}</Text>;
+    return <Text>Error! {error.message}</Text>
   }
 
   function onSubmit() {
     form.submitForm().then(() => {
-      navigation.goBack();
-    });
+      navigation.goBack()
+    })
   }
 
   return (
     <Background>
-      <TopNavigation title="Edit Profile" />
+      <TopNavigation title='Edit Profile' />
       <ScrollView style={styles.view}>
         <ControlledInput<ProfileDetails>
           controllerProps={{
-            name: "firstName",
+            name: 'firstName',
             control: form.control,
             defaultValue: data?.me.data?.firstName,
           }}
           inputProps={{
-            label: "FIRST NAME",
+            label: 'FIRST NAME',
             style: {
               ...styles.input,
             },
@@ -83,12 +82,12 @@ export function EditProfile() {
         />
         <ControlledInput<ProfileDetails>
           controllerProps={{
-            name: "lastName",
+            name: 'lastName',
             control: form.control,
             defaultValue: data?.me.data?.lastName,
           }}
           inputProps={{
-            label: "LAST NAME",
+            label: 'LAST NAME',
             style: {
               ...styles.input,
             },
@@ -98,12 +97,12 @@ export function EditProfile() {
         />
         <ControlledInput<ProfileDetails>
           controllerProps={{
-            name: "bio",
+            name: 'bio',
             control: form.control,
-            defaultValue: data?.me.data?.bio ?? "",
+            defaultValue: data?.me.data?.bio ?? '',
           }}
           inputProps={{
-            label: "BIO",
+            label: 'BIO',
             style: {
               ...styles.input,
             },
@@ -113,9 +112,7 @@ export function EditProfile() {
         />
         <Button
           accessoryRight={
-            form.formResult.loading
-              ? () => <Spinner size="small" status="control" />
-              : Icons.Save
+            form.formResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Save
           }
           onPress={form.handleSubmit(onSubmit)}
         >
@@ -123,5 +120,5 @@ export function EditProfile() {
         </Button>
       </ScrollView>
     </Background>
-  );
+  )
 }

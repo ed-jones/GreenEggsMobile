@@ -1,49 +1,60 @@
 /**
  * Author: Edward Jones
  */
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 export interface Step {
-    title: string;
-    component: React.ReactNode;
+  title: string
+  component: React.ReactNode
 }
 
 export type ISteps = {
-    currentStep: Step,
-    nextStep: Step | undefined,
-    lastStep: Step | undefined,
-    previous: () => void,
-    next: () => void,
-    reset: () => void,
-    isStart: boolean,
-    isEnd: boolean,
-    index: number,
-    length: number,
-};
+  currentStep: Step
+  nextStep: Step | undefined
+  lastStep: Step | undefined
+  previous: () => void
+  next: () => void
+  reset: () => void
+  isStart: boolean
+  isEnd: boolean
+  index: number
+  length: number
+}
 
 /**
  * Hook that lets a component reuse stateful step logic
  */
 export function useSteps(steps: Step[]): ISteps {
-    const [index, setIndex] = useState<number>(0);
-    const currentStep = steps[index];
-    const nextStep = (index < steps.length) ? steps[index+1] : undefined;
-    const lastStep = (index > 0) ? steps[index-1] : undefined;
-    const isStart = index <= 0;
-    const isEnd = index >= steps.length - 1;
-    const length = steps.length;
+  const [index, setIndex] = useState<number>(0)
+  const currentStep = steps[index]
+  const nextStep = index < steps.length ? steps[index + 1] : undefined
+  const lastStep = index > 0 ? steps[index - 1] : undefined
+  const isStart = index <= 0
+  const isEnd = index >= steps.length - 1
+  const length = steps.length
 
-    const next = () => {
-        if (index < steps.length) setIndex(index + 1);
-    }
+  const next = () => {
+    if (index < steps.length) setIndex(index + 1)
+  }
 
-    const previous = () => {
-        if (index > 0) setIndex(index - 1);
-    }
+  const previous = () => {
+    if (index > 0) setIndex(index - 1)
+  }
 
-    const reset = () => {
-        setIndex(0);
-    }
+  const reset = () => {
+    setIndex(0)
+  }
 
-    return {currentStep, nextStep, lastStep, next, previous, isStart, isEnd, index, length, reset};
+  return {
+    currentStep,
+    nextStep,
+    lastStep,
+    next,
+    previous,
+    isStart,
+    isEnd,
+    index,
+    length,
+    reset,
+  }
 }

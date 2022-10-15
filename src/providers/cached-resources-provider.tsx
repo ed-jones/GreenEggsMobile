@@ -1,24 +1,24 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC } from 'react';
-import { Ionicons } from '@expo/vector-icons';
-import * as Font from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
-import { logo } from '@greeneggs/assets';
-import { Image, View } from 'react-native';
+import React, { FC } from 'react'
+import { Ionicons } from '@expo/vector-icons'
+import * as Font from 'expo-font'
+import * as SplashScreen from 'expo-splash-screen'
+import { logo } from '@greeneggs/assets'
+import { Image, View } from 'react-native'
 
 /**
  * Hook that loads and provides loading state for cached resources, including fonts.
  */
 function useCachedResources() {
-  const [isLoadingComplete, setLoadingComplete] = React.useState(false);
+  const [isLoadingComplete, setLoadingComplete] = React.useState(false)
 
   // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
-        SplashScreen.preventAutoHideAsync();
+        SplashScreen.preventAutoHideAsync()
 
         // Load fonts
         await Font.loadAsync({
@@ -35,34 +35,30 @@ function useCachedResources() {
           'Lato-ThinItalic': require('@greeneggs/assets/fonts/Lato-ThinItalic.ttf'),
           'Lato-SemiBold': require('@greeneggs/assets/fonts/Lato-SemiBold.ttf'),
           'RobotoSlab-Medium': require('@greeneggs/assets/fonts/RobotoSlab-Medium.ttf'),
-        });
+        })
       } catch (e) {
         // We might want to provide this error information to an error reporting service
-        console.warn(e);
+        console.warn(e)
       } finally {
-        setLoadingComplete(true);
-        SplashScreen.hideAsync();
+        setLoadingComplete(true)
+        SplashScreen.hideAsync()
       }
     }
 
-    loadResourcesAndDataAsync();
-  }, []);
+    loadResourcesAndDataAsync()
+  }, [])
 
-  return isLoadingComplete;
+  return isLoadingComplete
 }
 
 export const CachedResourcesProvider: FC = ({ children }) => {
-  const isLoadingComplete = useCachedResources();
+  const isLoadingComplete = useCachedResources()
   if (!isLoadingComplete) {
     return (
       <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         <Image source={logo} style={{ width: 100, height: 100 }} />
       </View>
-    );
+    )
   }
-  return (
-    <>
-      {children}
-    </>
-  );
+  return <>{children}</>
 }

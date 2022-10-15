@@ -1,20 +1,16 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC } from "react";
-import {
-  CommonVariables,
-  TDataWithData,
-  useLazyList,
-  UseLazyListProps,
-} from "./lazy-list";
-import { LoadingScreen } from "../screens/loading-screen";
-import { AlphaList, AlphaListProps, buildAlphaListItems, CategoriseItem } from "./alpha-list";
+import React, { FC } from 'react'
+import { CommonVariables, TDataWithData, useLazyList, UseLazyListProps } from './lazy-list'
+import { LoadingScreen } from '../screens/loading-screen'
+import { AlphaList, AlphaListProps, buildAlphaListItems, CategoriseItem } from './alpha-list'
 
 interface LazyListAlphaProps<TData, TVariables, TDataType>
-  extends Omit<AlphaListProps<TDataType>, 'items'>, UseLazyListProps<TVariables, TData> {
-  renderItem: FC<TDataType>;
-  categoriseItem: CategoriseItem<TDataType>;
+  extends Omit<AlphaListProps<TDataType>, 'items'>,
+    UseLazyListProps<TVariables, TData> {
+  renderItem: FC<TDataType>
+  categoriseItem: CategoriseItem<TDataType>
 }
 
 /**
@@ -41,17 +37,15 @@ export const LazyListAlpha = <
     TDataType,
     SortType,
     FilterType
-  >({ query, variables, dataKey, limit, });
+  >({ query, variables, dataKey, limit })
 
   if (loading) {
-    return (
-      <LoadingScreen />
-    );
+    return <LoadingScreen />
   }
   const items = buildAlphaListItems({
     items: data,
     categoriseItem,
-  });
+  })
 
   return (
     <AlphaList
@@ -61,5 +55,5 @@ export const LazyListAlpha = <
       items={items}
       renderItem={renderItem}
     />
-  );
-};
+  )
+}

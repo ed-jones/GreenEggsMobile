@@ -1,56 +1,56 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext, useState } from "react";
+import React, { useContext, useState } from 'react'
 
-import { StyleSheet } from "react-native";
-import { Button, CheckBox, Spinner, Text } from "@ui-kitten/components";
-import { ControlledInput, InputType } from "@greeneggs/ui";
-import { SignupInput } from "@greeneggs/types/graphql";
-import { AuthContext } from "@greeneggs/providers/auth-provider";
-import * as SecureStore from "expo-secure-store";
+import { StyleSheet } from 'react-native'
+import { Button, CheckBox, Spinner, Text } from '@ui-kitten/components'
+import { ControlledInput, InputType } from '@greeneggs/ui'
+import { SignupInput } from '@greeneggs/types/graphql'
+import { AuthContext } from '@greeneggs/providers/auth-provider'
+import * as SecureStore from 'expo-secure-store'
 
-import { useSignupForm } from "./use-sign-up-form";
-import { AuthPageTemplate } from "./auth-page-template";
+import { useSignupForm } from './use-sign-up-form'
+import { AuthPageTemplate } from './auth-page-template'
 
 const styles = StyleSheet.create({
   input: {
     marginBottom: 10,
   },
-});
+})
 
 /**
  * Screen that enables a user to sign up to Green Eggs.
  */
 export const Signup = ({ navigation }: any) => {
-  const { formResult, handleSubmit, control, submitForm } = useSignupForm();
-  const { setToken } = useContext(AuthContext);
-  const [consent, setConsent] = useState(false);
+  const { formResult, handleSubmit, control, submitForm } = useSignupForm()
+  const { setToken } = useContext(AuthContext)
+  const [consent, setConsent] = useState(false)
 
   async function handleSignupFormSubmit() {
-    const result = await submitForm();
-    const token = result.data?.signup.data?.token;
-    const error = result.data?.signup.error;
+    const result = await submitForm()
+    const token = result.data?.signup.data?.token
+    const error = result.data?.signup.error
     if (token && !error) {
-      SecureStore.setItemAsync("token", token);
-      setToken && setToken(token);
+      SecureStore.setItemAsync('token', token)
+      setToken && setToken(token)
     }
   }
 
   return (
     <AuthPageTemplate
       navigation={navigation}
-      message="Sign up to view and share recipes with your friends"
+      message='Sign up to view and share recipes with your friends'
     >
       {/* FIRST NAME */}
       <ControlledInput<SignupInput>
         controllerProps={{
           control,
-          name: "firstName",
+          name: 'firstName',
         }}
         inputProps={{
-          label: "FIRST NAME",
-          defaultValue: "",
+          label: 'FIRST NAME',
+          defaultValue: '',
           style: styles.input,
           autoFocus: true,
         }}
@@ -61,11 +61,11 @@ export const Signup = ({ navigation }: any) => {
       <ControlledInput<SignupInput>
         controllerProps={{
           control,
-          name: "lastName",
+          name: 'lastName',
         }}
         inputProps={{
-          label: "LAST NAME",
-          defaultValue: "",
+          label: 'LAST NAME',
+          defaultValue: '',
           style: styles.input,
         }}
         submitError={formResult.data?.signup.error}
@@ -77,8 +77,8 @@ export const Signup = ({ navigation }: any) => {
           style: styles.input,
         }}
         controllerProps={{
-          name: "email",
-          defaultValue: "",
+          name: 'email',
+          defaultValue: '',
           control,
         }}
         submitError={formResult.data?.signup.error}
@@ -88,11 +88,11 @@ export const Signup = ({ navigation }: any) => {
       <ControlledInput<SignupInput>
         inputProps={{
           style: styles.input,
-          label: "PASSWORD",
+          label: 'PASSWORD',
         }}
         controllerProps={{
-          name: "password",
-          defaultValue: "",
+          name: 'password',
+          defaultValue: '',
           control,
         }}
         submitError={formResult.data?.signup.error}
@@ -102,11 +102,11 @@ export const Signup = ({ navigation }: any) => {
       <ControlledInput<SignupInput>
         inputProps={{
           style: styles.input,
-          label: "CONFIRM PASSWORD",
+          label: 'CONFIRM PASSWORD',
         }}
         controllerProps={{
-          name: "confirmPassword",
-          defaultValue: "",
+          name: 'confirmPassword',
+          defaultValue: '',
           control,
         }}
         submitError={formResult.data?.signup.error}
@@ -118,19 +118,19 @@ export const Signup = ({ navigation }: any) => {
         onChange={(nextChecked) => setConsent(nextChecked)}
       >
         <Text>
-          I have read and agreed to the{" "}
-          <Text style={{ fontWeight: "bold" }} onPress={() => navigation.navigate("Privacy")}>Privacy Policy</Text>
+          I have read and agreed to the{' '}
+          <Text style={{ fontWeight: 'bold' }} onPress={() => navigation.navigate('Privacy')}>
+            Privacy Policy
+          </Text>
         </Text>
       </CheckBox>
       <Button
         onPress={handleSubmit(handleSignupFormSubmit)}
         disabled={formResult.loading || !consent}
-        accessoryLeft={
-          formResult.loading ? () => <Spinner size="small" /> : undefined
-        }
+        accessoryLeft={formResult.loading ? () => <Spinner size='small' /> : undefined}
       >
         SIGN UP
       </Button>
     </AuthPageTemplate>
-  );
-};
+  )
+}

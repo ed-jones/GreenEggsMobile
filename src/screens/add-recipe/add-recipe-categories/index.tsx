@@ -1,17 +1,17 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from "react";
-import { Divider, ListItem } from "@ui-kitten/components";
-import { Icons } from "@greeneggs/ui";
+import React, { useContext } from 'react'
+import { Divider, ListItem } from '@ui-kitten/components'
+import { Icons } from '@greeneggs/ui'
 
-import { RecipeForm } from "../add-recipe";
-import { AddRecipePartTemplate } from "../add-recipe-part-template";
-import { useNavigation } from "@react-navigation/native";
-import { AddRecipeContext } from "@greeneggs/providers";
+import { RecipeForm } from '../add-recipe'
+import { AddRecipePartTemplate } from '../add-recipe-part-template'
+import { useNavigation } from '@react-navigation/native'
+import { AddRecipeContext } from '@greeneggs/providers'
 
 interface IAddRecipeCategories {
-  form: RecipeForm;
+  form: RecipeForm
 }
 
 /**
@@ -19,25 +19,22 @@ interface IAddRecipeCategories {
  * be added to a recipe.
  */
 export const AddRecipeCategories = ({ form }: IAddRecipeCategories) => {
-  const { categoriesFieldArray } = useContext(AddRecipeContext);
-  const navigation = useNavigation();
+  const { categoriesFieldArray } = useContext(AddRecipeContext)
+  const navigation = useNavigation()
 
   return (
     <AddRecipePartTemplate
-      title="Categories"
-      createButtonTitle="ADD CATEGORY"
-      onPressCreate={() => navigation.navigate("PickCategory")}
-      emptyStateTitle="No categories"
-      emptyStateDescription="Adding categories will help people find your recipe."
+      title='Categories'
+      createButtonTitle='ADD CATEGORY'
+      onPressCreate={() => navigation.navigate('PickCategory')}
+      emptyStateTitle='No categories'
+      emptyStateDescription='Adding categories will help people find your recipe.'
       listItem={({ item, index }) => (
         <>
           <ListItem
             title={item.name}
             accessoryRight={(props) => (
-              <Icons.Cross
-                {...props}
-                onPress={() => categoriesFieldArray?.remove(index)}
-              />
+              <Icons.Cross {...props} onPress={() => categoriesFieldArray?.remove(index)} />
             )}
           />
           <Divider />
@@ -45,5 +42,5 @@ export const AddRecipeCategories = ({ form }: IAddRecipeCategories) => {
       )}
       data={categoriesFieldArray?.fields}
     />
-  );
-};
+  )
+}

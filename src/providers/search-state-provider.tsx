@@ -1,20 +1,20 @@
 /**
  * Author: Edward Jones
  */
-import React, { useState, FC, createContext } from 'react';
-import { RecipeFilter, Sort } from '@greeneggs/types/graphql';
+import React, { useState, FC, createContext } from 'react'
+import { RecipeFilter, Sort } from '@greeneggs/types/graphql'
 
 export interface SearchState {
-  query?: string;
-  filter: RecipeFilter;
-  sort: Sort;
+  query?: string
+  filter: RecipeFilter
+  sort: Sort
 }
 
 export const defaultSearchState: SearchState = {
   query: undefined,
   filter: {
     ingredients: undefined,
-    categories:undefined,
+    categories: undefined,
     allergies: undefined,
     diets: undefined,
     cookTime: undefined,
@@ -24,24 +24,24 @@ export const defaultSearchState: SearchState = {
 }
 
 export interface ISearchContext {
-  searchState: SearchState,
-  setSearchState?: (searchState: SearchState) => void,
+  searchState: SearchState
+  setSearchState?: (searchState: SearchState) => void
 }
 
 export const SearchContext = createContext<ISearchContext>({
   searchState: defaultSearchState,
-  setSearchState: undefined 
-});
+  setSearchState: undefined,
+})
 
 /**
  * Provider that lets all child components access the search state, including query, sorting and filtering.
  */
 export const SearchStateProvider: FC = ({ children }) => {
-  const [searchState, setSearchState] = useState<SearchState>(defaultSearchState);
+  const [searchState, setSearchState] = useState<SearchState>(defaultSearchState)
 
   return (
-    <SearchContext.Provider value={{searchState, setSearchState}}>
+    <SearchContext.Provider value={{ searchState, setSearchState }}>
       {children}
     </SearchContext.Provider>
-  );
-};
+  )
+}

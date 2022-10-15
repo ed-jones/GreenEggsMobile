@@ -1,34 +1,49 @@
 /**
  * Author: Victor Ying
  */
-import React, { FC, useContext, useState } from 'react';
-import { Queries } from "@greeneggs/graphql";
-import { Divider } from '@ui-kitten/components';
-import { useNavigation } from '@react-navigation/core';
-import { Allergies, AllergiesVariables, Allergies_allergies_data, RecipeFilter, Sort } from '@greeneggs/types/graphql';
-import { SearchContext } from '@greeneggs/providers/search-state-provider';
-import { Input, TopNavigation, Background, Icons, SelectableListItem, AlphabetType, LazyListAlpha, EmptyState } from '@greeneggs/ui';
-import { AddToFilter } from '../common';
-import { View } from 'react-native';
+import React, { FC, useContext, useState } from 'react'
+import { Queries } from '@greeneggs/graphql'
+import { Divider } from '@ui-kitten/components'
+import { useNavigation } from '@react-navigation/core'
+import {
+  Allergies,
+  AllergiesVariables,
+  Allergies_allergies_data,
+  RecipeFilter,
+  Sort,
+} from '@greeneggs/types/graphql'
+import { SearchContext } from '@greeneggs/providers/search-state-provider'
+import {
+  Input,
+  TopNavigation,
+  Background,
+  Icons,
+  SelectableListItem,
+  AlphabetType,
+  LazyListAlpha,
+  EmptyState,
+} from '@greeneggs/ui'
+import { AddToFilter } from '../common'
+import { View } from 'react-native'
 
 /**
  * Screen for requiring certain allergy requirements in a search
  */
 export const FilterRecipeAllergies: FC = () => {
-  const navigation = useNavigation();
-  const [query, setQuery] = useState("");
-  const { searchState, setSearchState } = useContext(SearchContext);
+  const navigation = useNavigation()
+  const [query, setQuery] = useState('')
+  const { searchState, setSearchState } = useContext(SearchContext)
   const [selectedAllergies, setSelectedAllergies] = useState<string[]>(
     searchState.filter.allergies ?? []
-  );
+  )
 
   const setSelected = (selected: boolean, id: string) => {
     setSelectedAllergies(
       selected
         ? [...selectedAllergies, id]
         : [...selectedAllergies.filter((allergies) => allergies !== id)]
-    );
-  };
+    )
+  }
 
   const addToFilter = () => {
     setSearchState?.({
@@ -37,28 +52,21 @@ export const FilterRecipeAllergies: FC = () => {
         ...searchState.filter,
         allergies: selectedAllergies,
       },
-    });
-    navigation.goBack();
-  };
-
+    })
+    navigation.goBack()
+  }
 
   return (
     <Background>
-      <TopNavigation title="Allergies" />
+      <TopNavigation title='Allergies' />
       <Input
         style={{ padding: 16, backgroundColor: 'white' }}
-        placeholder="Search allergies..."
+        placeholder='Search allergies...'
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
         value={query}
       />
-      <LazyListAlpha<
-        Allergies,
-        AllergiesVariables,
-        Allergies_allergies_data,
-        Sort,
-        RecipeFilter
-      >
+      <LazyListAlpha<Allergies, AllergiesVariables, Allergies_allergies_data, Sort, RecipeFilter>
         renderItem={(item) => (
           <>
             <SelectableListItem
@@ -73,14 +81,14 @@ export const FilterRecipeAllergies: FC = () => {
         query={Queries.GET_ALLERGIES}
         contentContainerStyle={{ flexGrow: 1 }}
         ListEmptyComponent={
-          <View style={{ flexGrow: 1, justifyContent: "center" }}>
+          <View style={{ flexGrow: 1, justifyContent: 'center' }}>
             <EmptyState description="Couldn't find any allergies." />
           </View>
         }
         variables={{
           query,
         }}
-        dataKey="allergies"
+        dataKey='allergies'
       />
       <AddToFilter
         clearFilters={() => setSelectedAllergies([])}
@@ -88,5 +96,5 @@ export const FilterRecipeAllergies: FC = () => {
         addToFilter={addToFilter}
       />
     </Background>
-  );
+  )
 }

@@ -1,26 +1,30 @@
 /**
  * Author: Edward Jones
  */
-import { FieldPath, UseFormReturn } from "react-hook-form";
+import { FieldPath, UseFormReturn } from 'react-hook-form'
 
 interface IValidate<InputType> {
-  form: UseFormReturn<InputType>;
-  validate: FieldPath<InputType>[] | FieldPath<InputType>;
-  register: FieldPath<InputType>;
-  onValid: () => void;
+  form: UseFormReturn<InputType>
+  validate: FieldPath<InputType>[] | FieldPath<InputType>
+  register: FieldPath<InputType>
+  onValid: () => void
 }
 
 /**
  * Function that will partially validate a react-hook-form form
  */
-export const partialValidate = <InputType>({form, validate, register, onValid }: IValidate<InputType>) => {
+export const partialValidate = <InputType>({
+  form,
+  validate,
+  register,
+  onValid,
+}: IValidate<InputType>) => {
   form.trigger(validate).then((isValid) => {
-      if (isValid) {
-        form.register(register, {
-          value: form.getValues(register),
-        });
-        onValid();
-      }
+    if (isValid) {
+      form.register(register, {
+        value: form.getValues(register),
+      })
+      onValid()
     }
-  );
+  })
 }

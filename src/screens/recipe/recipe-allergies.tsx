@@ -1,27 +1,27 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React from "react";
-import { recipe_recipe_data_allergies } from "@greeneggs/types/graphql";
-import { Text } from "@ui-kitten/components";
-import { Callout } from '@greeneggs/ui';
+import React from 'react'
+import { recipe_recipe_data_allergies } from '@greeneggs/types/graphql'
+import { Text } from '@ui-kitten/components'
+import { Callout } from '@greeneggs/ui'
 
 interface IRecipeAllergies {
-  allergies: recipe_recipe_data_allergies[];
+  allergies: recipe_recipe_data_allergies[]
 }
 
 function stringifyAllergies(allergies: recipe_recipe_data_allergies[]) {
-  let allergyString = "";
+  let allergyString = ''
   allergies.forEach((allergy, index) => {
     if (index === 0) {
-      allergyString = allergy.name.toLowerCase();
+      allergyString = allergy.name.toLowerCase()
     } else if (index < allergies.length - 1) {
-      allergyString = `${allergyString}, ${allergy.name.toLowerCase()}`;
+      allergyString = `${allergyString}, ${allergy.name.toLowerCase()}`
     } else {
-      allergyString = `${allergyString} and ${allergy.name.toLowerCase()}.`;
+      allergyString = `${allergyString} and ${allergy.name.toLowerCase()}.`
     }
-  });
-  return allergyString;
+  })
+  return allergyString
 }
 
 /**
@@ -31,19 +31,17 @@ export const RecipeAllergies = ({ allergies }: IRecipeAllergies) => {
   if (allergies.length > 0)
     return (
       <Callout
-        type="danger"
+        type='danger'
         message={
           <Text>
-            This recipe is unsuitable for those with allergies to{" "}
-            <Text style={{ fontWeight: "bold" }}>
-              {stringifyAllergies(allergies)}
-            </Text>
+            This recipe is unsuitable for those with allergies to{' '}
+            <Text style={{ fontWeight: 'bold' }}>{stringifyAllergies(allergies)}</Text>
           </Text>
         }
         // message={`This recipe is unsuitable for those with allergies to${allergies.map(
         //   (allergy) => ` ${allergy.name.toLowerCase()}`
         // )}.`}
       />
-    );
-  return null;
-};
+    )
+  return null
+}

@@ -1,44 +1,42 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext, useEffect } from "react";
-import { ListItem } from "@ui-kitten/components";
-import { Image } from "react-native";
-import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
-import { Icons } from "@greeneggs/ui";
+import React, { useContext, useEffect } from 'react'
+import { ListItem } from '@ui-kitten/components'
+import { Image } from 'react-native'
+import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types'
+import { Icons } from '@greeneggs/ui'
 
-import { RecipeForm } from "../add-recipe";
-import { AddRecipePartTemplate } from "../add-recipe-part-template";
-import { useNavigation } from "@react-navigation/core";
-import { AddRecipeContext } from "@greeneggs/providers";
+import { RecipeForm } from '../add-recipe'
+import { AddRecipePartTemplate } from '../add-recipe-part-template'
+import { useNavigation } from '@react-navigation/core'
+import { AddRecipeContext } from '@greeneggs/providers'
 
 interface IAddRecipeDirections {
-  form: RecipeForm;
+  form: RecipeForm
 }
 
 /**
  * Screen that displays a list of all steps that will be added to a recipe.
  */
-export const AddRecipeDirections = ({
-  form,
-}: IAddRecipeDirections) => {
-  const { stepsFieldArray } = useContext(AddRecipeContext);
-  const navigation = useNavigation();
+export const AddRecipeDirections = ({ form }: IAddRecipeDirections) => {
+  const { stepsFieldArray } = useContext(AddRecipeContext)
+  const navigation = useNavigation()
 
-  const directionsLength = stepsFieldArray?.fields?.length || 0;
+  const directionsLength = stepsFieldArray?.fields?.length || 0
   useEffect(() => {
     if (directionsLength > 0) {
-      form.clearErrors("steps");
+      form.clearErrors('steps')
     }
-  }, [directionsLength]);
+  }, [directionsLength])
 
   return (
     <AddRecipePartTemplate
-      title="Steps"
-      createButtonTitle="ADD STEP"
-      onPressCreate={() => navigation.navigate("CreateStep")}
-      emptyStateTitle="No steps"
-      emptyStateDescription="Include any steps that must be completed in order to follow this recipe."
+      title='Steps'
+      createButtonTitle='ADD STEP'
+      onPressCreate={() => navigation.navigate('CreateStep')}
+      emptyStateTitle='No steps'
+      emptyStateDescription='Include any steps that must be completed in order to follow this recipe.'
       listItem={({ item, index }) =>
         item ? (
           <ListItem
@@ -60,5 +58,5 @@ export const AddRecipeDirections = ({
       }
       data={stepsFieldArray?.fields}
     />
-  );
-};
+  )
+}

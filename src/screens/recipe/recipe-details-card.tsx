@@ -1,33 +1,33 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React from "react";
-import { noAvatar } from "@greeneggs/assets";
-import { CommentCounter, LabelledIcon, ViewMore } from "@greeneggs/ui";
-import { convertTimeEstimate } from "@greeneggs/utils";
-import { View, StyleSheet, Pressable } from "react-native";
-import { recipe_recipe_data } from "@greeneggs/types/graphql";
-import { Text, Card, Avatar } from "@ui-kitten/components";
-import { RecipeCategoriesTags } from "./recipe-categories-tags";
-import { RecipeLikeCounter } from "@greeneggs/ui";
-import { useNavigateToProfile } from "@greeneggs/navigation";
+import React from 'react'
+import { noAvatar } from '@greeneggs/assets'
+import { CommentCounter, LabelledIcon, ViewMore } from '@greeneggs/ui'
+import { convertTimeEstimate } from '@greeneggs/utils'
+import { View, StyleSheet, Pressable } from 'react-native'
+import { recipe_recipe_data } from '@greeneggs/types/graphql'
+import { Text, Card, Avatar } from '@ui-kitten/components'
+import { RecipeCategoriesTags } from './recipe-categories-tags'
+import { RecipeLikeCounter } from '@greeneggs/ui'
+import { useNavigateToProfile } from '@greeneggs/navigation'
 
 const styles = StyleSheet.create({
   cardSection: {
     padding: 16,
   },
   row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   avatar: {
     marginRight: 10,
   },
-});
+})
 
 interface IRecipeDetailsCard extends recipe_recipe_data {
-  navigation: any;
+  navigation: any
 }
 
 /**
@@ -48,26 +48,26 @@ export const RecipeDetailsCard = ({
   comments,
 }: IRecipeDetailsCard) => {
   const navigateToDescription = () => {
-    navigation.navigate("RecipeDescription", {
+    navigation.navigate('RecipeDescription', {
       description: description,
       createdAt: createdAt,
       title: title,
       submittedBy: submittedBy,
-    });
-  };
-  const navigateToProfile = useNavigateToProfile();
+    })
+  }
+  const navigateToProfile = useNavigateToProfile()
   return (
     <Card
       header={() => (
         <View style={styles.cardSection}>
           <View style={styles.row}>
-            <Text category="h5" style={{ flexShrink: 1 }}>
+            <Text category='h5' style={{ flexShrink: 1 }}>
               {title}
             </Text>
             {timeEstimate ? (
               <LabelledIcon
                 label={convertTimeEstimate(timeEstimate).toUpperCase()}
-                iconName="clock-outline"
+                iconName='clock-outline'
               />
             ) : undefined}
           </View>
@@ -78,9 +78,7 @@ export const RecipeDetailsCard = ({
       )}
       footer={() => (
         <View style={styles.cardSection}>
-          {description ? (
-            <Text numberOfLines={2}>{description}</Text>
-          ) : undefined}
+          {description ? <Text numberOfLines={2}>{description}</Text> : undefined}
           <ViewMore
             style={{ paddingHorizontal: 0, marginTop: 8 }}
             onPress={navigateToDescription}
@@ -92,16 +90,12 @@ export const RecipeDetailsCard = ({
         <Pressable onPress={() => navigateToProfile(submittedBy.id)}>
           <View style={styles.row}>
             <Avatar
-              size="small"
-              source={
-                submittedBy.avatarURI
-                  ? { uri: submittedBy.avatarURI }
-                  : noAvatar
-              }
+              size='small'
+              source={submittedBy.avatarURI ? { uri: submittedBy.avatarURI } : noAvatar}
               style={styles.avatar}
             />
             <Text
-              style={{ fontWeight: "bold" }}
+              style={{ fontWeight: 'bold' }}
             >{`${submittedBy.firstName} ${submittedBy.lastName}`}</Text>
           </View>
         </Pressable>
@@ -116,5 +110,5 @@ export const RecipeDetailsCard = ({
         </View>
       </View>
     </Card>
-  );
-};
+  )
+}

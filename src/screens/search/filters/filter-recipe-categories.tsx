@@ -1,35 +1,50 @@
 /**
  * Author: Victor Ying
  */
-import React, { FC, useContext, useState } from 'react';
-import { Queries } from "@greeneggs/graphql";
-import { Divider } from '@ui-kitten/components';
-import { Input, TopNavigation, Background, Icons, LazyListAlpha, AlphabetType, SelectableListItem, EmptyState } from '@greeneggs/ui';
-import { useNavigation } from '@react-navigation/core';
-import { Categories, CategoriesVariables, Categories_categories_data, RecipeFilter, Sort } from '@greeneggs/types/graphql';
-import { SearchContext } from '@greeneggs/providers/search-state-provider';
+import React, { FC, useContext, useState } from 'react'
+import { Queries } from '@greeneggs/graphql'
+import { Divider } from '@ui-kitten/components'
+import {
+  Input,
+  TopNavigation,
+  Background,
+  Icons,
+  LazyListAlpha,
+  AlphabetType,
+  SelectableListItem,
+  EmptyState,
+} from '@greeneggs/ui'
+import { useNavigation } from '@react-navigation/core'
+import {
+  Categories,
+  CategoriesVariables,
+  Categories_categories_data,
+  RecipeFilter,
+  Sort,
+} from '@greeneggs/types/graphql'
+import { SearchContext } from '@greeneggs/providers/search-state-provider'
 
-import { AddToFilter } from '../common';
-import { View } from 'react-native';
+import { AddToFilter } from '../common'
+import { View } from 'react-native'
 
 /**
  * Screen for requiring certain categories in a recipe search.
  */
 export const FilterRecipeCategories: FC = () => {
-  const navigation = useNavigation();
-  const [query, setQuery] = useState("");
-  const { searchState, setSearchState } = useContext(SearchContext);
+  const navigation = useNavigation()
+  const [query, setQuery] = useState('')
+  const { searchState, setSearchState } = useContext(SearchContext)
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
     searchState.filter.categories ?? []
-  );
+  )
 
   const setSelected = (selected: boolean, id: string) => {
     setSelectedCategories(
       selected
         ? [...selectedCategories, id]
         : [...selectedCategories.filter((categories) => categories !== id)]
-    );
-  };
+    )
+  }
 
   const addToFilter = () => {
     setSearchState?.({
@@ -38,16 +53,16 @@ export const FilterRecipeCategories: FC = () => {
         ...searchState.filter,
         categories: selectedCategories,
       },
-    });
-    navigation.goBack();
-  };
+    })
+    navigation.goBack()
+  }
 
   return (
     <Background>
-      <TopNavigation title="Categories" />
+      <TopNavigation title='Categories' />
       <Input
         style={{ padding: 16, backgroundColor: 'white' }}
-        placeholder="Search categories..."
+        placeholder='Search categories...'
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
         value={query}
@@ -73,14 +88,14 @@ export const FilterRecipeCategories: FC = () => {
         query={Queries.GET_CATEGORIES}
         contentContainerStyle={{ flexGrow: 1 }}
         ListEmptyComponent={
-          <View style={{ flexGrow: 1, justifyContent: "center" }}>
+          <View style={{ flexGrow: 1, justifyContent: 'center' }}>
             <EmptyState description="Couldn't find any categories." />
           </View>
         }
         variables={{
           query,
         }}
-        dataKey="categories"
+        dataKey='categories'
       />
       <AddToFilter
         clearFilters={() => setSelectedCategories([])}
@@ -88,5 +103,5 @@ export const FilterRecipeCategories: FC = () => {
         addToFilter={addToFilter}
       />
     </Background>
-  );
+  )
 }

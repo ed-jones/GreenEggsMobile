@@ -1,86 +1,81 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { useContext } from "react";
-import { CommentLikeCounter, LabelledIcon } from "@greeneggs/ui";
-import { Mutations, Queries } from "@greeneggs/graphql";
-import { noAvatar } from "@greeneggs/assets";
-import { convertSubmittedAt } from "@greeneggs/utils";
-import { ListItem, Button, Divider, Avatar, Icon } from "@ui-kitten/components";
-import { View, Text, StyleSheet, Alert, Pressable } from "react-native";
-import {
-  DeleteComment,
-  recipe_recipe_data_comments,
-} from "@greeneggs/types/graphql";
-import { useNavigation } from "@react-navigation/core";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { useMutation } from "@apollo/client";
+import React, { useContext } from 'react'
+import { CommentLikeCounter, LabelledIcon } from '@greeneggs/ui'
+import { Mutations, Queries } from '@greeneggs/graphql'
+import { noAvatar } from '@greeneggs/assets'
+import { convertSubmittedAt } from '@greeneggs/utils'
+import { ListItem, Button, Divider, Avatar, Icon } from '@ui-kitten/components'
+import { View, Text, StyleSheet, Alert, Pressable } from 'react-native'
+import { DeleteComment, recipe_recipe_data_comments } from '@greeneggs/types/graphql'
+import { useNavigation } from '@react-navigation/core'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { useMutation } from '@apollo/client'
 
-import { UserContext } from "@greeneggs/providers";
-import { useNavigateToProfile } from "@greeneggs/navigation";
+import { UserContext } from '@greeneggs/providers'
+import { useNavigateToProfile } from '@greeneggs/navigation'
 
 const styles = StyleSheet.create({
   avatar: {
     marginRight: 10,
   },
-});
+})
 
 interface RecipeCommentProps {
-  comment: recipe_recipe_data_comments;
-  replyButton?: boolean;
+  comment: recipe_recipe_data_comments
+  replyButton?: boolean
 }
 
 /**
  * Component for displaying an individual recipe comment
  */
 export function RecipeComment({ comment, replyButton }: RecipeCommentProps) {
-  const navigation: StackNavigationProp<any, any> = useNavigation();
-  const navigateToProfile = useNavigateToProfile();
+  const navigation: StackNavigationProp<any, any> = useNavigation()
+  const navigateToProfile = useNavigateToProfile()
 
   const [deleteComment] = useMutation<DeleteComment>(Mutations.DELETE_COMMENT, {
     variables: {
       commentId: comment.id,
     },
-    refetchQueries: [Queries.GET_RECIPE, "recipe"],
-  });
+    refetchQueries: [Queries.GET_RECIPE, 'recipe'],
+  })
 
-  const { me } = useContext(UserContext);
+  const { me } = useContext(UserContext)
 
   function handleDeleteComment() {
     Alert.alert(
-      "Delete comment",
-      "This action cannot be undone",
+      'Delete comment',
+      'This action cannot be undone',
       [
         {
-          text: "Cancel",
-          style: "cancel",
+          text: 'Cancel',
+          style: 'cancel',
         },
-        { text: "OK", onPress: () => deleteComment() },
+        { text: 'OK', onPress: () => deleteComment() },
       ],
       { cancelable: false }
-    );
+    )
   }
 
   return (
     <>
       <ListItem>
-        <View style={{ flexDirection: "column", padding: 10, width: "100%" }}>
+        <View style={{ flexDirection: 'column', padding: 10, width: '100%' }}>
           {!comment.deleted && (
             <View
               style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
                 marginBottom: 16,
               }}
             >
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Pressable
-                  onPress={() => navigateToProfile(comment.submittedBy.id)}
-                >
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Pressable onPress={() => navigateToProfile(comment.submittedBy.id)}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Avatar
-                      size="small"
+                      size='small'
                       source={
                         comment.submittedBy.avatarURI
                           ? { uri: comment.submittedBy.avatarURI }
@@ -89,15 +84,13 @@ export function RecipeComment({ comment, replyButton }: RecipeCommentProps) {
                       style={styles.avatar}
                     />
                     <Text
-                      style={{ fontWeight: "bold" }}
+                      style={{ fontWeight: 'bold' }}
                     >{`${comment.submittedBy.firstName} ${comment.submittedBy.lastName}`}</Text>
                   </View>
                 </Pressable>
-                <Text style={{ marginLeft: 6 }}>
-                  {convertSubmittedAt(comment.createdAt)} ago
-                </Text>
+                <Text style={{ marginLeft: 6 }}>{convertSubmittedAt(comment.createdAt)} ago</Text>
               </View>
-              <View style={{ flexDirection: "row" }}>
+              <View style={{ flexDirection: 'row' }}>
                 <CommentLikeCounter
                   likeCount={comment.likeCount}
                   commentId={comment.id}
@@ -105,10 +98,10 @@ export function RecipeComment({ comment, replyButton }: RecipeCommentProps) {
                   submittedById={comment.submittedBy.id}
                 />
                 <LabelledIcon
-                  label="Reply"
-                  iconName="message-square-outline"
+                  label='Reply'
+                  iconName='message-square-outline'
                   onPress={() =>
-                    navigation.navigate("RecipeCommentReplies", {
+                    navigation.navigate('RecipeCommentReplies', {
                       commentId: comment.id,
                       replying: true,
                     })
@@ -116,8 +109,8 @@ export function RecipeComment({ comment, replyButton }: RecipeCommentProps) {
                 />
                 {me?.id === comment.submittedBy.id && (
                   <Icon
-                    name="trash-2-outline"
-                    fill="red"
+                    name='trash-2-outline'
+                    fill='red'
                     style={{ width: 24, height: 24, marginRight: 8 }}
                     onPress={handleDeleteComment}
                   />
@@ -129,20 +122,20 @@ export function RecipeComment({ comment, replyButton }: RecipeCommentProps) {
           {comment.replyCount > 0 && replyButton && (
             <View
               style={{
-                flexDirection: "row",
-                justifyContent: "flex-end",
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
                 marginTop: 16,
               }}
             >
               <Button
                 onPress={() =>
-                  navigation.push("RecipeCommentReplies", {
+                  navigation.push('RecipeCommentReplies', {
                     commentId: comment.id,
                     replying: false,
                   })
                 }
-                size="small"
-                status="basic"
+                size='small'
+                status='basic'
               >{`SHOW ALL REPLIES (${comment.replyCount.toString()})`}</Button>
             </View>
           )}
@@ -150,5 +143,5 @@ export function RecipeComment({ comment, replyButton }: RecipeCommentProps) {
       </ListItem>
       <Divider />
     </>
-  );
+  )
 }

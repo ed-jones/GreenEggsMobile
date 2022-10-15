@@ -1,98 +1,94 @@
 /**
  * Author: Victor Ying
  */
-import React, { FC, useContext } from "react";
-import {
-  Divider,
-  List,
-  ListItem,
-} from "@ui-kitten/components";
-import { useNavigation } from "@react-navigation/core";
-import { FilterControlGroup, CountCircle } from "./common";
-import { SearchContext, SearchState } from "@greeneggs/providers/search-state-provider";
-import { View } from "react-native";
-import { TopNavigation, Background, Icons } from "@greeneggs/ui";
+import React, { FC, useContext } from 'react'
+import { Divider, List, ListItem } from '@ui-kitten/components'
+import { useNavigation } from '@react-navigation/core'
+import { FilterControlGroup, CountCircle } from './common'
+import { SearchContext, SearchState } from '@greeneggs/providers/search-state-provider'
+import { View } from 'react-native'
+import { TopNavigation, Background, Icons } from '@greeneggs/ui'
 
 /**
  * Helper function that counts the number of active filters being applied based on the search state.
  */
 export function countActiveFilters(searchState: SearchState) {
-  let activeFilterCount = 0;
+  let activeFilterCount = 0
 
   if (searchState.filter.allergies?.length ?? 0 > 0) {
-    activeFilterCount++;
+    activeFilterCount++
   }
 
   if (searchState.filter.categories?.length ?? 0 > 0) {
-    activeFilterCount++;
+    activeFilterCount++
   }
 
   if (searchState.filter.diets?.length ?? 0 > 0) {
-    activeFilterCount++;
+    activeFilterCount++
   }
 
   if (searchState.filter.ingredients?.excludes?.length ?? 0 > 0) {
-    activeFilterCount++;
+    activeFilterCount++
   }
 
   if (searchState.filter.ingredients?.includes?.length ?? 0 > 0) {
-    activeFilterCount++;
+    activeFilterCount++
   }
 
-  return activeFilterCount;
+  return activeFilterCount
 }
 
 interface FilterListItemProps {
-  title: string;
-  to: string;
-  count: number;
+  title: string
+  to: string
+  count: number
 }
 
 /**
  * Screen that shows a list of all available filter options.
  */
 export const RecipeSearchFilter: FC = () => {
-  const navigation = useNavigation();
-  const { searchState, setSearchState } = useContext(SearchContext);
+  const navigation = useNavigation()
+  const { searchState, setSearchState } = useContext(SearchContext)
 
   function applyAllFilters() {
-    setSearchState?.(searchState);
-    navigation.goBack();
+    setSearchState?.(searchState)
+    navigation.goBack()
   }
 
   const FilterOptions: FilterListItemProps[] = [
     {
-      title: "Ingredients (Included)",
-      to: "FilterIngredientsIncluded",
+      title: 'Ingredients (Included)',
+      to: 'FilterIngredientsIncluded',
       count: searchState.filter.ingredients?.includes?.length ?? 0,
     },
     {
-      title: "Ingredients (Excluded)",
-      to: "FilterIngredientsExcluded",
+      title: 'Ingredients (Excluded)',
+      to: 'FilterIngredientsExcluded',
       count: searchState.filter.ingredients?.excludes?.length ?? 0,
     },
     {
-      title: "Categories",
-      to: "FilterRecipeCategories",
+      title: 'Categories',
+      to: 'FilterRecipeCategories',
       count: searchState.filter.categories?.length ?? 0,
     },
     {
-      title: "Allergies",
-      to: "FilterRecipeAllergies",
+      title: 'Allergies',
+      to: 'FilterRecipeAllergies',
       count: searchState.filter.allergies?.length ?? 0,
     },
     {
-      title: "Diets",
-      to: "FilterRecipeDiets",
+      title: 'Diets',
+      to: 'FilterRecipeDiets',
       count: searchState.filter.diets?.length ?? 0,
     },
     // Recipe filtering is disabled because it was not implemented in time
-    // { title: "Cook Time", to: "FilterRecipeCookTime", count: 0 }, 
-  ];
+    // { title: "Cook Time", to: "FilterRecipeCookTime", count: 0 },
+  ]
 
   return (
     <Background>
-      <TopNavigation title="Filter Search" />
+      <TopNavigation title='Filter Search' />
       <List
         data={FilterOptions}
         renderItem={({ item }) => (
@@ -100,8 +96,8 @@ export const RecipeSearchFilter: FC = () => {
             <ListItem
               title={item.title}
               accessoryRight={(props) => (
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  { item.count > 0 && <CountCircle {...props}>{item.count}</CountCircle> }
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  {item.count > 0 && <CountCircle {...props}>{item.count}</CountCircle>}
                   <Icons.Forward {...props} />
                 </View>
               )}
@@ -114,11 +110,11 @@ export const RecipeSearchFilter: FC = () => {
       <FilterControlGroup
         label={`${countActiveFilters(searchState)} CATEGORIES SELECTED`}
         clearButton={{
-          title: "CLEAR ALL",
+          title: 'CLEAR ALL',
           onPress: () => setSearchState?.({ ...searchState, filter: {} }),
         }}
-        applyButton={{ title: "APPLY ALL FILTERS", onPress: applyAllFilters }}
+        applyButton={{ title: 'APPLY ALL FILTERS', onPress: applyAllFilters }}
       />
     </Background>
-  );
-};
+  )
+}

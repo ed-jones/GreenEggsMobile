@@ -6,15 +6,15 @@ on:
       - main
 
 env:
-  NODE_VERSION: "15.14.0"
-  EXPO_VERSION: "4.x"
+  NODE_VERSION: '15.14.0'
+  EXPO_VERSION: '4.x'
   API_URI: ${{ secrets.API_URI }}
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: "Checkout GitHub Action"
+      - name: 'Checkout GitHub Action'
         uses: actions/checkout@v2
 
       - name: Setup Node ${{ env.NODE_VERSION }} Environment
@@ -22,14 +22,14 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: "Resolve Project Dependencies Using Yarn"
+      - name: 'Resolve Project Dependencies Using Yarn'
         shell: bash
         run: |
           pushd .
           yarn install
           popd
 
-      - name: "Run Tests"
+      - name: 'Run Tests'
         shell: bash
         run: |
           pushd .

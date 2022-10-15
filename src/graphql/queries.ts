@@ -1,13 +1,19 @@
 /**
  * Author: Edward Jones
- * 
+ *
  * Contains the definitions for all queries used by Apollo within the app
  */
-import { gql } from '@apollo/client';
-import * as Fragments from './fragments';
+import { gql } from '@apollo/client'
+import * as Fragments from './fragments'
 
 export const GET_RECIPES = gql`
-  query recipes($offset: Int!, $limit: Int!, $query: String!, $sort: Sort!, $filter: RecipeFilter!) {
+  query recipes(
+    $offset: Int!
+    $limit: Int!
+    $query: String!
+    $sort: Sort!
+    $filter: RecipeFilter!
+  ) {
     recipes(offset: $offset, limit: $limit, query: $query, sort: $sort, filter: $filter) {
       data {
         ...RecipeFragment
@@ -19,7 +25,7 @@ export const GET_RECIPES = gql`
   }
   ${Fragments.RecipeFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const NEWS_FEED = gql`
   query NewsFeed($offset: Int!, $limit: Int!) {
@@ -34,13 +40,13 @@ export const NEWS_FEED = gql`
   }
   ${Fragments.RecipeFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const TRENDING = gql`
   query Trending($offset: Int!, $limit: Int!) {
     trending(offset: $offset, limit: $limit) {
       data {
-      ...RecipeFragment
+        ...RecipeFragment
       }
       error {
         ...ErrorFragment
@@ -49,7 +55,7 @@ export const TRENDING = gql`
   }
   ${Fragments.RecipeFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const GET_RECIPE = gql`
   query recipe($recipeId: String!) {
@@ -64,7 +70,7 @@ export const GET_RECIPE = gql`
   }
   ${Fragments.RecipeFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const ME = gql`
   query Me {
@@ -75,7 +81,7 @@ export const ME = gql`
     }
   }
   ${Fragments.FullUserFragment}
-`;
+`
 
 export const GET_DIETS = gql`
   query Diets($offset: Int!, $limit: Int!, $query: String!) {
@@ -90,7 +96,7 @@ export const GET_DIETS = gql`
   }
   ${Fragments.DietFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const GET_ALLERGIES = gql`
   query Allergies($offset: Int!, $limit: Int!, $query: String!) {
@@ -105,7 +111,7 @@ export const GET_ALLERGIES = gql`
   }
   ${Fragments.AllergyFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const GET_COMMENT = gql`
   query comment($commentId: String!) {
@@ -120,13 +126,13 @@ export const GET_COMMENT = gql`
   }
   ${Fragments.RecipeCommentFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const GET_SAVED_RECIPES = gql`
   query savedRecipes($offset: Int!, $limit: Int!) {
     savedRecipes(offset: $offset, limit: $limit) {
       data {
-      ...RecipeFragment
+        ...RecipeFragment
       }
       error {
         ...ErrorFragment
@@ -135,7 +141,7 @@ export const GET_SAVED_RECIPES = gql`
   }
   ${Fragments.RecipeFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const GET_PROFILE = gql`
   query profile($userId: String!) {
@@ -150,7 +156,7 @@ export const GET_PROFILE = gql`
   }
   ${Fragments.FullUserFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const GET_INGREDIENTS = gql`
   query Ingredients($offset: Int!, $limit: Int!, $query: String!) {
@@ -165,7 +171,7 @@ export const GET_INGREDIENTS = gql`
   }
   ${Fragments.GenericIngredientFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const GET_CATEGORIES = gql`
   query Categories($offset: Int!, $limit: Int!, $query: String!) {
@@ -180,7 +186,7 @@ export const GET_CATEGORIES = gql`
   }
   ${Fragments.CategoryFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const GET_CATEGORIES_WITH_IMAGES = gql`
   query CategoriesWithImages($offset: Int!, $limit: Int!, $query: String!) {
@@ -195,7 +201,7 @@ export const GET_CATEGORIES_WITH_IMAGES = gql`
   }
   ${Fragments.CategoryFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const GET_USERS = gql`
   query Users($offset: Int!, $limit: Int!, $query: String!, $sort: Sort!) {
@@ -210,7 +216,7 @@ export const GET_USERS = gql`
   }
   ${Fragments.UserFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const GET_FOLLOWING_USERS = gql`
   query FollowingUsers($userId: String!, $offset: Int!, $limit: Int!, $query: String!) {
@@ -225,7 +231,7 @@ export const GET_FOLLOWING_USERS = gql`
   }
   ${Fragments.UserFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const GET_FOLLOWED_USERS = gql`
   query FollowedUsers($userId: String!, $offset: Int!, $limit: Int!, $query: String!) {
@@ -240,7 +246,7 @@ export const GET_FOLLOWED_USERS = gql`
   }
   ${Fragments.UserFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const GET_NOTIFICATIONS = gql`
   query notifications($offset: Int!, $limit: Int!) {
@@ -255,7 +261,7 @@ export const GET_NOTIFICATIONS = gql`
   }
   ${Fragments.NotificationFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const GET_NOTIFICATION_COUNT = gql`
   query NotificationCount {
@@ -269,4 +275,4 @@ export const GET_NOTIFICATION_COUNT = gql`
     }
   }
   ${Fragments.ErrorFragment}
-`;
+`

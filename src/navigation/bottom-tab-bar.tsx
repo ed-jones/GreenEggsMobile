@@ -1,12 +1,9 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from "react";
-import { Alert, StyleSheet, View } from "react-native";
-import {
-  BottomTabBarOptions,
-  BottomTabBarProps,
-} from "@react-navigation/bottom-tabs";
+import React, { useContext } from 'react'
+import { Alert, StyleSheet, View } from 'react-native'
+import { BottomTabBarOptions, BottomTabBarProps } from '@react-navigation/bottom-tabs'
 import {
   BottomNavigation,
   BottomNavigationTab,
@@ -15,11 +12,11 @@ import {
   withStyles,
   BottomNavigationTabProps,
   Divider,
-} from "@ui-kitten/components";
-import Svg, { Circle } from "react-native-svg";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { AddRecipeContext, NotificationContext } from "@greeneggs/providers";
-import { HideOnKeyboard } from "@greeneggs/ui";
+} from '@ui-kitten/components'
+import Svg, { Circle } from 'react-native-svg'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { AddRecipeContext, NotificationContext } from '@greeneggs/providers'
+import { HideOnKeyboard } from '@greeneggs/ui'
 
 const styles = StyleSheet.create({
   primary: {
@@ -35,51 +32,45 @@ const styles = StyleSheet.create({
   navbar: {
     paddingTop: 12,
   },
-});
+})
 
 enum IconStyle {
-  Primary = "primary",
-  Secondary = "secondary",
+  Primary = 'primary',
+  Secondary = 'secondary',
 }
 
 interface IBottonNavigationIcon {
-  name: string;
-  iconStyle: IconStyle;
-  selected: boolean;
+  name: string
+  iconStyle: IconStyle
+  selected: boolean
 }
 
 /**
  * Component for the bottom tab bar. Includes home, saved recipes, create recipe, notifications and profile.
  */
 const BottomNavigationIcon = withStyles(
-  ({
-    name,
-    iconStyle,
-    eva,
-    selected,
-    ...rest
-  }: IBottonNavigationIcon & ThemedComponentProps) => {
-    const iconName = `${name}${!selected ? "-outline" : ""}`;
+  ({ name, iconStyle, eva, selected, ...rest }: IBottonNavigationIcon & ThemedComponentProps) => {
+    const iconName = `${name}${!selected ? '-outline' : ''}`
     if (iconStyle === IconStyle.Primary) {
       return (
         <View style={{ marginTop: -16 }}>
           <Svg
-            height="72"
-            width="72"
+            height='72'
+            width='72'
             style={{
-              position: "absolute",
+              position: 'absolute',
               marginLeft: -4,
               marginTop: -4,
             }}
           >
             <Circle
-              cx="36"
-              cy="36"
-              r="36"
+              cx='36'
+              cy='36'
+              r='36'
               fill={
                 selected
-                  ? eva?.theme && eva.theme["color-primary-500"]
-                  : eva?.theme && eva.theme["color-success-500"]
+                  ? eva?.theme && eva.theme['color-primary-500']
+                  : eva?.theme && eva.theme['color-success-500']
               }
             />
           </Svg>
@@ -87,76 +78,62 @@ const BottomNavigationIcon = withStyles(
             {...rest}
             name={iconName}
             style={styles.primary}
-            fill={
-              selected ? "white" : eva?.theme && eva.theme["color-primary-500"]
-            }
+            fill={selected ? 'white' : eva?.theme && eva.theme['color-primary-500']}
           />
         </View>
-      );
+      )
     } else {
       return (
         <Icon
           {...rest}
           style={styles[iconStyle]}
           name={iconName}
-          fill={eva?.theme && eva.theme["text-primary-color"]}
+          fill={eva?.theme && eva.theme['text-primary-color']}
         />
-      );
+      )
     }
   }
-);
+)
 
 interface NotificationIconProps extends BottomNavigationTabProps {
-  selected: boolean;
+  selected: boolean
 }
 
 const NotificationIcon = withStyles(
-  ({
-    selected,
-    eva,
-    ...props
-  }: NotificationIconProps & ThemedComponentProps) => {
+  ({ selected, eva, ...props }: NotificationIconProps & ThemedComponentProps) => {
     const {
       notificationState: { unreadCount },
-    } = useContext(NotificationContext);
+    } = useContext(NotificationContext)
 
     return (
-      <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
         {unreadCount > 0 && (
           <Svg
-            height="8"
-            width="8"
+            height='8'
+            width='8'
             style={{
-              position: "absolute",
+              position: 'absolute',
               zIndex: 1,
               marginTop: -4,
             }}
           >
-            <Circle
-              cx="4"
-              cy="4"
-              r="4"
-              fill={eva?.theme?.["color-primary-500"]}
-            />
+            <Circle cx='4' cy='4' r='4' fill={eva?.theme?.['color-primary-500']} />
           </Svg>
         )}
         <BottomNavigationIcon
           {...props}
-          name="bell"
+          name='bell'
           iconStyle={IconStyle.Secondary}
           selected={selected}
         />
       </View>
-    );
+    )
   }
-);
+)
 
-export const BottomTabBar = ({
-  navigation,
-  state,
-}: BottomTabBarProps<BottomTabBarOptions>) => {
-  const insets = useSafeAreaInsets();
-  const navigationState = navigation.getState();
+export const BottomTabBar = ({ navigation, state }: BottomTabBarProps<BottomTabBarOptions>) => {
+  const insets = useSafeAreaInsets()
+  const navigationState = navigation.getState()
   const {
     form,
     steps,
@@ -165,7 +142,7 @@ export const BottomTabBar = ({
     stepsFieldArray,
     allergiesFieldArray,
     dietsFieldArray,
-  } = useContext(AddRecipeContext);
+  } = useContext(AddRecipeContext)
 
   function isFormDirty() {
     return (
@@ -175,42 +152,42 @@ export const BottomTabBar = ({
       stepsFieldArray?.fields.length ||
       allergiesFieldArray?.fields.length ||
       dietsFieldArray?.fields.length
-    );
+    )
   }
 
   function resetForm() {
-    form?.reset();
-    steps?.reset();
+    form?.reset()
+    steps?.reset()
   }
 
   const interceptNavigate = (index: number, navigate: () => void) => {
     if (index === navigationState.index) {
-      return;
+      return
     }
     if (navigationState.index === 2 && isFormDirty()) {
       Alert.alert(
-        "Exit without saving?",
-        "If you exit now you will lose your changes",
+        'Exit without saving?',
+        'If you exit now you will lose your changes',
         [
           {
-            text: "Cancel",
-            style: "cancel",
+            text: 'Cancel',
+            style: 'cancel',
           },
           {
-            text: "OK",
+            text: 'OK',
             onPress: () => {
-              resetForm();
-              navigate();
+              resetForm()
+              navigate()
             },
           },
         ],
         { cancelable: false }
-      );
+      )
     } else {
-      steps?.reset();
-      navigate();
+      steps?.reset()
+      navigate()
     }
-  };
+  }
 
   return (
     <HideOnKeyboard>
@@ -219,17 +196,17 @@ export const BottomTabBar = ({
         selectedIndex={state.index}
         onSelect={(index) => {
           interceptNavigate(index, () => {
-            navigation.navigate(state.routeNames[index]);
-          });
+            navigation.navigate(state.routeNames[index])
+          })
         }}
-        appearance="noIndicator"
+        appearance='noIndicator'
         style={{ ...styles.navbar, paddingBottom: 24 + insets.bottom }}
       >
         <BottomNavigationTab
           icon={(props) => (
             <BottomNavigationIcon
               {...props}
-              name="home"
+              name='home'
               iconStyle={IconStyle.Secondary}
               selected={navigationState.index == 0}
             />
@@ -239,7 +216,7 @@ export const BottomTabBar = ({
           icon={(props) => (
             <BottomNavigationIcon
               {...props}
-              name="bookmark"
+              name='bookmark'
               iconStyle={IconStyle.Secondary}
               selected={navigationState.index == 1}
             />
@@ -249,25 +226,20 @@ export const BottomTabBar = ({
           icon={(props) => (
             <BottomNavigationIcon
               {...props}
-              name="plus"
+              name='plus'
               iconStyle={IconStyle.Primary}
               selected={navigationState.index == 2}
             />
           )}
         />
         <BottomNavigationTab
-          icon={(props) => (
-            <NotificationIcon
-              {...props}
-              selected={navigationState.index == 3}
-            />
-          )}
+          icon={(props) => <NotificationIcon {...props} selected={navigationState.index == 3} />}
         />
         <BottomNavigationTab
           icon={(props) => (
             <BottomNavigationIcon
               {...props}
-              name="person"
+              name='person'
               iconStyle={IconStyle.Secondary}
               selected={navigationState.index == 4}
             />
@@ -275,5 +247,5 @@ export const BottomTabBar = ({
         />
       </BottomNavigation>
     </HideOnKeyboard>
-  );
-};
+  )
+}

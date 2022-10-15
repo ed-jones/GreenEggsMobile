@@ -1,10 +1,8 @@
 /**
  * Author: Edward Jones
  */
-import * as React from 'react';
-import {
-  StyleSheet, Text, TouchableOpacity, View,
-} from 'react-native';
+import * as React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
@@ -26,7 +24,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#2e78b7',
   },
-});
+})
 
 /**
  * View to display in the very exceptional edge case that a route is missing.
@@ -40,5 +38,5 @@ export function NotFoundScreen() {
         <Text style={styles.linkText}>Go to home screen!</Text>
       </TouchableOpacity>
     </View>
-  );
+  )
 }

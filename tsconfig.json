@@ -2,10 +2,7 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "jsx": "react-native",
-    "lib": [
-      "dom",
-      "esnext"
-    ],
+    "lib": ["dom", "esnext"],
     "target": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -14,14 +11,9 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@greeneggs/*": [
-        "src/*"
-      ]
+      "@greeneggs/*": ["src/*"]
     }
   },
-  "include": [
-    "src",
-    "App.tsx"
-  ],
+  "include": ["src", "App.tsx"],
   "extends": "expo/tsconfig.base"
 }

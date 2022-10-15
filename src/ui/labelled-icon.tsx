@@ -1,14 +1,14 @@
 /**
  * Author: Edward Jones
  */
-import React from "react";
-import { Text, Icon } from "@ui-kitten/components";
-import { View, StyleSheet, Pressable } from "react-native";
+import React from 'react'
+import { Text, Icon } from '@ui-kitten/components'
+import { View, StyleSheet, Pressable } from 'react-native'
 
 const styles = StyleSheet.create({
   view: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginRight: 8,
   },
   icon: {
@@ -17,30 +17,25 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   label: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
-});
+})
 
 export interface LabelledIconProps {
-  iconName: string;
-  label: string;
-  onPress?: () => void;
-  fill?: string;
+  iconName: string
+  label: string
+  onPress?: () => void
+  fill?: string
 }
 
 /**
  * Component that renders an icon with a label
  */
-export const LabelledIcon = ({
-  iconName,
-  label,
-  onPress,
-  fill,
-}: LabelledIconProps) => (
+export const LabelledIcon = ({ iconName, label, onPress, fill }: LabelledIconProps) => (
   <Pressable onPress={onPress}>
     <View style={styles.view}>
-      <Icon style={styles.icon} name={iconName} fill={fill || "black"} />
+      <Icon style={styles.icon} name={iconName} fill={fill || 'black'} />
       <Text style={styles.label}>{label}</Text>
     </View>
   </Pressable>
-);
+)

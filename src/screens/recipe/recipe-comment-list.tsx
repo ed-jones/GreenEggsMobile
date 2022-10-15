@@ -1,19 +1,17 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React from "react";
-import { Divider } from "@ui-kitten/components";
-import { View } from "react-native";
+import React from 'react'
+import { Divider } from '@ui-kitten/components'
+import { View } from 'react-native'
 import {
   recipe_recipe_data_comments,
   recipe_recipe_data_comments_replies,
-} from "@greeneggs/types/graphql";
-import { RecipeComment } from "./recipe-comment";
+} from '@greeneggs/types/graphql'
+import { RecipeComment } from './recipe-comment'
 
 interface RecipeCommentListProps {
-  comments:
-    | recipe_recipe_data_comments[]
-    | recipe_recipe_data_comments_replies[];
+  comments: recipe_recipe_data_comments[] | recipe_recipe_data_comments_replies[]
 }
 
 /**
@@ -27,5 +25,5 @@ export const RecipeCommentList = ({ comments }: RecipeCommentListProps) => {
       ))}
       <Divider />
     </View>
-  );
-};
+  )
+}

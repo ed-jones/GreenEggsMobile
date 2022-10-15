@@ -1,11 +1,11 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC } from "react";
-import { useQuery } from "@apollo/client";
-import { Queries } from "@greeneggs/graphql";
-import { LoadingScreen } from "./loading-screen";
-import { Text } from "@ui-kitten/components";
+import React, { FC } from 'react'
+import { useQuery } from '@apollo/client'
+import { Queries } from '@greeneggs/graphql'
+import { LoadingScreen } from './loading-screen'
+import { Text } from '@ui-kitten/components'
 import {
   RecipeFilter,
   savedRecipes,
@@ -13,9 +13,9 @@ import {
   savedRecipes_savedRecipes_data,
   Sort,
   savedRecipes as SavedRecipesType,
-} from "@greeneggs/types/graphql";
-import { View } from "react-native";
-import { useNavigation } from "@react-navigation/core";
+} from '@greeneggs/types/graphql'
+import { View } from 'react-native'
+import { useNavigation } from '@react-navigation/core'
 import {
   TopNavigation,
   Background,
@@ -23,37 +23,35 @@ import {
   LazyList,
   RecipeCardSmall,
   EmptyState,
-} from "@greeneggs/ui";
+} from '@greeneggs/ui'
 
-const SavedRecipesHeader = () => (
-  <TopNavigation title="Saved Recipes" accessoryLeft={undefined} />
-);
+const SavedRecipesHeader = () => <TopNavigation title='Saved Recipes' accessoryLeft={undefined} />
 
 /**
  * View for displaying recipes a user has saved.
  */
 export const SavedRecipes: FC = () => {
-  const navigation = useNavigation();
-  const { data, loading, error } = useQuery<
-    savedRecipes,
-    savedRecipesVariables
-  >(Queries.GET_SAVED_RECIPES, {
-    variables: {
-      offset: 0,
-      limit: 10,
-    },
-  });
+  const navigation = useNavigation()
+  const { data, loading, error } = useQuery<savedRecipes, savedRecipesVariables>(
+    Queries.GET_SAVED_RECIPES,
+    {
+      variables: {
+        offset: 0,
+        limit: 10,
+      },
+    }
+  )
   if (loading) {
-    return <LoadingScreen />;
+    return <LoadingScreen />
   }
   if (error) {
     return (
       <Background>
         <Text>Error! {error.message}</Text>
       </Background>
-    );
+    )
   }
-  const recipes = data?.savedRecipes.data;
+  const recipes = data?.savedRecipes.data
 
   return (
     <Background>
@@ -67,14 +65,14 @@ export const SavedRecipes: FC = () => {
       >
         query={Queries.GET_SAVED_RECIPES}
         variables={{}}
-        dataKey="savedRecipes"
+        dataKey='savedRecipes'
         emptyMessage="You haven't saved any recipes yet! Save some recipes and they will appear here."
         renderItem={({ item: recipe }) => (
           <View style={{ paddingHorizontal: 16, marginBottom: 16 }}>
             <RecipeCardSmall
               recipe={recipe}
               onPress={() =>
-                navigation.navigate("Recipe", {
+                navigation.navigate('Recipe', {
                   recipeId: recipe.id,
                 })
               }
@@ -83,5 +81,5 @@ export const SavedRecipes: FC = () => {
         )}
       />
     </Background>
-  );
-};
+  )
+}

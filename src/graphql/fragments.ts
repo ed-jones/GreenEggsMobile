@@ -1,9 +1,9 @@
 /**
  * Author: Edward Jones
- * 
+ *
  * Contains the definitions for all fragments used by Apollo within the app
  */
-import { gql } from '@apollo/client';
+import { gql } from '@apollo/client'
 
 export const UserFragment = gql`
   fragment UserFragment on User {
@@ -15,21 +15,21 @@ export const UserFragment = gql`
     avatarURI
     verified
   }
-`;
+`
 
 export const DietFragment = gql`
   fragment DietFragment on Diet {
     id
     name
   }
-`;
+`
 
 export const AllergyFragment = gql`
   fragment AllergyFragment on Allergy {
     id
     name
   }
-`;
+`
 
 export const FullUserFragment = gql`
   fragment FullUserFragment on FullUser {
@@ -55,8 +55,7 @@ export const FullUserFragment = gql`
   }
   ${DietFragment}
   ${AllergyFragment}
-`;
-
+`
 
 export const RecipeCommentFragment = gql`
   fragment RecipeCommentFragment on RecipeComment {
@@ -82,7 +81,7 @@ export const RecipeCommentFragment = gql`
     }
   }
   ${UserFragment}
-`;
+`
 
 export const RecipeFragment = gql`
   fragment RecipeFragment on Recipe {
@@ -127,13 +126,13 @@ export const RecipeFragment = gql`
   }
   ${UserFragment}
   ${RecipeCommentFragment}
-`;
+`
 
 export const ErrorFragment = gql`
   fragment ErrorFragment on Error {
     message
   }
-`;
+`
 
 export const IngredientFragment = gql`
   fragment IngredientFragment on Ingredient {
@@ -142,14 +141,14 @@ export const IngredientFragment = gql`
     quantity
     unit
   }
-`;
+`
 
 export const GenericIngredientFragment = gql`
   fragment GenericIngredientFragment on GenericIngredient {
     id
     name
   }
-`;
+`
 
 export const CategoryFragment = gql`
   fragment CategoryFragment on Category {
@@ -157,7 +156,7 @@ export const CategoryFragment = gql`
     name
     coverImage
   }
-`;
+`
 
 export const NotificationFragment = gql`
   fragment NotificationFragment on Notification {
@@ -171,4 +170,4 @@ export const NotificationFragment = gql`
     linkId
   }
   ${UserFragment}
-`;
+`

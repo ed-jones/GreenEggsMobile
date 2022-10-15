@@ -1,21 +1,21 @@
 /**
  * Author: Edward Jones
  */
-import * as React from "react";
-import { StyleSheet, View } from "react-native";
+import * as React from 'react'
+import { StyleSheet, View } from 'react-native'
 import {
   NewsFeed as NewsFeedType,
   NewsFeedVariables,
   NewsFeed_newsFeed_data,
   RecipeFilter,
   Sort,
-} from "@greeneggs/types/graphql";
-import { Queries } from "@greeneggs/graphql";
-import { Background, LazyList, RecipeCard } from "@greeneggs/ui";
-import { useNavigation } from "@react-navigation/native";
+} from '@greeneggs/types/graphql'
+import { Queries } from '@greeneggs/graphql'
+import { Background, LazyList, RecipeCard } from '@greeneggs/ui'
+import { useNavigation } from '@react-navigation/native'
 
-const CardVerticalMargin = 20;
-const CardHorizontalMargin = 24;
+const CardVerticalMargin = 20
+const CardHorizontalMargin = 24
 
 const styles = StyleSheet.create({
   firstCard: {
@@ -25,43 +25,33 @@ const styles = StyleSheet.create({
     marginBottom: CardVerticalMargin,
     marginHorizontal: CardHorizontalMargin,
   },
-});
+})
 
 /**
  * Screen that shows an infinite scrolling list of recipes from users that the logged in user follows.
  */
 export function NewsFeed() {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
   return (
     <Background>
-      <LazyList<
-        NewsFeedType,
-        NewsFeedVariables,
-        NewsFeed_newsFeed_data,
-        Sort,
-        RecipeFilter
-      >
+      <LazyList<NewsFeedType, NewsFeedVariables, NewsFeed_newsFeed_data, Sort, RecipeFilter>
         limit={4}
         query={Queries.NEWS_FEED}
         variables={{}}
-        dataKey="newsFeed"
-        emptyMessage="Try following some users to see their latest recipes."
+        dataKey='newsFeed'
+        emptyMessage='Try following some users to see their latest recipes.'
         renderItem={({ item: recipe, index }) => (
           <View
             key={recipe?.id}
-            style={
-              index === 0 ? { ...styles.firstCard, ...styles.card } : styles.card
-            }
+            style={index === 0 ? { ...styles.firstCard, ...styles.card } : styles.card}
           >
             <RecipeCard
               recipe={recipe}
-              onPress={() =>
-                navigation.navigate("Recipe", { recipeId: recipe?.id })
-              }
+              onPress={() => navigation.navigate('Recipe', { recipeId: recipe?.id })}
             />
           </View>
         )}
       />
     </Background>
-  );
+  )
 }

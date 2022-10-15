@@ -1,15 +1,8 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC, useState } from "react";
-import {
-  AlphabetType,
-  Background,
-  Icons,
-  Input,
-  LazyListAlpha,
-  TopNavigation,
-} from "@greeneggs/ui";
+import React, { FC, useState } from 'react'
+import { AlphabetType, Background, Icons, Input, LazyListAlpha, TopNavigation } from '@greeneggs/ui'
 import {
   IngredientInput,
   Ingredients,
@@ -17,30 +10,30 @@ import {
   Ingredients_ingredients_data,
   RecipeFilter,
   Sort,
-} from "@greeneggs/types/graphql";
-import { Button, Divider, ListItem } from "@ui-kitten/components";
-import { Queries } from "@greeneggs/graphql";
-import { toTitleCase } from "@greeneggs/utils";
-import { useNavigation } from "@react-navigation/core";
+} from '@greeneggs/types/graphql'
+import { Button, Divider, ListItem } from '@ui-kitten/components'
+import { Queries } from '@greeneggs/graphql'
+import { toTitleCase } from '@greeneggs/utils'
+import { useNavigation } from '@react-navigation/core'
 
 /**
  * Screen that shows an infinite scrolling list of all generic ingredients
  * in the database that a user can select from or create a new one to add to their recipe.
  */
 export const PickIngredient: FC = () => {
-  const [query, setQuery] = useState("");
-  const navigation = useNavigation();
+  const [query, setQuery] = useState('')
+  const navigation = useNavigation()
 
   function pick(ingredient: IngredientInput) {
-    navigation.navigate("AddIngredientDetails", { name: ingredient.name });
+    navigation.navigate('AddIngredientDetails', { name: ingredient.name })
   }
 
   return (
     <Background>
-      <TopNavigation title="Pick an ingredient" />
+      <TopNavigation title='Pick an ingredient' />
       <Input
-        style={{ padding: 16, backgroundColor: "white" }}
-        placeholder="Search ingredients..."
+        style={{ padding: 16, backgroundColor: 'white' }}
+        placeholder='Search ingredients...'
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
         value={query}
@@ -74,8 +67,8 @@ export const PickIngredient: FC = () => {
         variables={{
           query,
         }}
-        dataKey="ingredients"
+        dataKey='ingredients'
       />
     </Background>
-  );
-};
+  )
+}

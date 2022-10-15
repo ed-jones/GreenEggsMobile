@@ -1,38 +1,31 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC, useState } from "react";
-import { Queries } from "@greeneggs/graphql";
+import React, { FC, useState } from 'react'
+import { Queries } from '@greeneggs/graphql'
 import {
   Categories,
   CategoriesVariables,
   Categories_categories_data,
   RecipeFilter,
   Sort,
-} from "@greeneggs/types/graphql";
-import {
-  AlphabetType,
-  Background,
-  Icons,
-  Input,
-  LazyListAlpha,
-  TopNavigation,
-} from "@greeneggs/ui";
-import { ListItem } from "@ui-kitten/components";
-import { useNavigation } from "@react-navigation/core";
+} from '@greeneggs/types/graphql'
+import { AlphabetType, Background, Icons, Input, LazyListAlpha, TopNavigation } from '@greeneggs/ui'
+import { ListItem } from '@ui-kitten/components'
+import { useNavigation } from '@react-navigation/core'
 
 /**
  * Displays a searchable infinite scrolling list of all categories within the app, and links to associated category views.
  */
 export const AllCategories: FC = () => {
-  const [query, setQuery] = useState("");
-  const navigation = useNavigation();
+  const [query, setQuery] = useState('')
+  const navigation = useNavigation()
   return (
     <Background>
-      <TopNavigation title="All Categories" />
+      <TopNavigation title='All Categories' />
       <Input
-        placeholder="Search categories"
-        size="large"
+        placeholder='Search categories'
+        size='large'
         accessoryLeft={Icons.Search}
         value={query}
         onChangeText={setQuery}
@@ -49,7 +42,7 @@ export const AllCategories: FC = () => {
           <ListItem
             title={item.name}
             onPress={() =>
-              navigation.navigate("Category", {
+              navigation.navigate('Category', {
                 categoryId: item.id,
                 categoryName: item.name,
               })
@@ -61,8 +54,8 @@ export const AllCategories: FC = () => {
         variables={{
           query,
         }}
-        dataKey="categories"
+        dataKey='categories'
       />
     </Background>
-  );
-};
+  )
+}

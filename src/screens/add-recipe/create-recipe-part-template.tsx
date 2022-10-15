@@ -1,29 +1,29 @@
 /**
  * Author: Edward Jones
  */
-import React from "react";
+import React from 'react'
 
-import { TopNavigation, Background } from "@greeneggs/ui";
-import { useFocusEffect } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { FieldArrayMethodProps } from "react-hook-form";
-import { Alert, BackHandler, ScrollView } from "react-native";
+import { TopNavigation, Background } from '@greeneggs/ui'
+import { useFocusEffect } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { FieldArrayMethodProps } from 'react-hook-form'
+import { Alert, BackHandler, ScrollView } from 'react-native'
 
 type AppendType = (
   value: Partial<unknown> | Partial<unknown>[],
   options?: FieldArrayMethodProps | undefined
-) => void;
+) => void
 
 export interface RecipeFormPart {
-  navigation: any;
-  append: AppendType;
+  navigation: any
+  append: AppendType
 }
 
 interface ICreateRecipePartTemplate {
-  title: string;
-  navigation: StackNavigationProp<any>;
-  route: any;
-  formComponent: (props: RecipeFormPart) => React.ReactElement;
+  title: string
+  navigation: StackNavigationProp<any>
+  route: any
+  formComponent: (props: RecipeFormPart) => React.ReactElement
 }
 
 /**
@@ -36,44 +36,43 @@ export const CreateRecipePartTemplate = ({
   formComponent,
 }: ICreateRecipePartTemplate) => {
   const { append } = route.params as {
-    append: AppendType;
-  };
+    append: AppendType
+  }
 
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
-        goBack();
-        return true;
-      };
+        goBack()
+        return true
+      }
 
-      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+      BackHandler.addEventListener('hardwareBackPress', onBackPress)
 
-      return () =>
-        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+      return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress)
     }, [])
-  );
+  )
 
   async function goBackAlert(): Promise<boolean> {
     return new Promise<boolean>(function (resolve) {
       Alert.alert(
-        "Exit without saving?",
-        "If you go back now you will lose your changes",
+        'Exit without saving?',
+        'If you go back now you will lose your changes',
         [
           {
-            text: "Cancel",
-            style: "cancel",
+            text: 'Cancel',
+            style: 'cancel',
             onPress: () => resolve(false),
           },
-          { text: "OK", onPress: () => resolve(true) },
+          { text: 'OK', onPress: () => resolve(true) },
         ],
         { cancelable: false }
-      );
-    });
+      )
+    })
   }
 
   async function goBack() {
     if (await goBackAlert()) {
-      navigation.goBack();
+      navigation.goBack()
     }
   }
   return (
@@ -86,5 +85,5 @@ export const CreateRecipePartTemplate = ({
         })}
       </ScrollView>
     </Background>
-  );
-};
+  )
+}

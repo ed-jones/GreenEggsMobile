@@ -1,16 +1,9 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext, useState } from "react";
-import { Divider, ListItem } from "@ui-kitten/components";
-import {
-  AlphabetType,
-  Background,
-  Icons,
-  Input,
-  LazyListAlpha,
-  TopNavigation,
-} from "@greeneggs/ui";
+import React, { useContext, useState } from 'react'
+import { Divider, ListItem } from '@ui-kitten/components'
+import { AlphabetType, Background, Icons, Input, LazyListAlpha, TopNavigation } from '@greeneggs/ui'
 import {
   Allergies,
   AllergiesVariables,
@@ -18,49 +11,43 @@ import {
   AllergyInput,
   RecipeFilter,
   Sort,
-} from "@greeneggs/types/graphql";
-import { Queries } from "@greeneggs/graphql";
-import { AddRecipeContext } from "@greeneggs/providers";
-import { useNavigation } from "@react-navigation/core";
+} from '@greeneggs/types/graphql'
+import { Queries } from '@greeneggs/graphql'
+import { AddRecipeContext } from '@greeneggs/providers'
+import { useNavigation } from '@react-navigation/core'
 
 /**
  * Screen with an infinite scrolling alphabetised list of allergies that
- * can be selected and added to a new recipe. 
+ * can be selected and added to a new recipe.
  */
 export const CreateAllergy = () => {
-  const [query, setQuery] = useState("");
-  const { allergiesFieldArray } = useContext(AddRecipeContext);
-  const navigation = useNavigation();
+  const [query, setQuery] = useState('')
+  const { allergiesFieldArray } = useContext(AddRecipeContext)
+  const navigation = useNavigation()
 
   function pick(allergy: AllergyInput) {
-    allergiesFieldArray?.append(allergy);
-    navigation.goBack();
+    allergiesFieldArray?.append(allergy)
+    navigation.goBack()
   }
 
   return (
     <Background>
-      <TopNavigation title="Choose an allergy" />
+      <TopNavigation title='Choose an allergy' />
       <Input
         style={{ padding: 16 }}
-        placeholder="Search allergies..."
+        placeholder='Search allergies...'
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
         value={query}
         autoFocus
       />
-      <LazyListAlpha<
-        Allergies,
-        AllergiesVariables,
-        Allergies_allergies_data,
-        Sort,
-        RecipeFilter
-      >
+      <LazyListAlpha<Allergies, AllergiesVariables, Allergies_allergies_data, Sort, RecipeFilter>
         renderItem={(item) => (
           <>
             <ListItem
               title={item.name}
               onPress={() => {
-                pick({ name: item.name });
+                pick({ name: item.name })
               }}
             />
             <Divider />
@@ -71,8 +58,8 @@ export const CreateAllergy = () => {
         variables={{
           query,
         }}
-        dataKey="allergies"
+        dataKey='allergies'
       />
     </Background>
-  );
-};
+  )
+}

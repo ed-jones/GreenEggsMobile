@@ -1,34 +1,28 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from "react";
-import { Button } from "@ui-kitten/components";
-import {
-  Background,
-  ControlledInput,
-  InputType,
-  Rules,
-  TopNavigation,
-} from "@greeneggs/ui";
-import { RecipeStepInput } from "@greeneggs/types/graphql";
-import { useForm } from "react-hook-form";
-import { AddRecipeStyles } from "../add-recipe-styles";
-import { useNavigation } from "@react-navigation/core";
-import { AddRecipeContext } from "@greeneggs/providers";
-import { ScrollView } from "react-native";
+import React, { useContext } from 'react'
+import { Button } from '@ui-kitten/components'
+import { Background, ControlledInput, InputType, Rules, TopNavigation } from '@greeneggs/ui'
+import { RecipeStepInput } from '@greeneggs/types/graphql'
+import { useForm } from 'react-hook-form'
+import { AddRecipeStyles } from '../add-recipe-styles'
+import { useNavigation } from '@react-navigation/core'
+import { AddRecipeContext } from '@greeneggs/providers'
+import { ScrollView } from 'react-native'
 
 /**
  * Screen that lets a user create a new step. Includes an image and a description.
  */
 export const CreateStep = () => {
-  const form = useForm<RecipeStepInput>({ mode: "all" });
-  const navigation = useNavigation();
-  const { stepsFieldArray } = useContext(AddRecipeContext);
+  const form = useForm<RecipeStepInput>({ mode: 'all' })
+  const navigation = useNavigation()
+  const { stepsFieldArray } = useContext(AddRecipeContext)
 
   return (
     <Background>
-      <TopNavigation title="Create step"/>
-      <ScrollView style={{paddingHorizontal: 16}}>
+      <TopNavigation title='Create step' />
+      <ScrollView style={{ paddingHorizontal: 16 }}>
         <ControlledInput<RecipeStepInput>
           controllerProps={{
             name: `description`,
@@ -39,9 +33,9 @@ export const CreateStep = () => {
             },
           }}
           inputProps={{
-            label: "DESCRIPTION",
-            placeholder: "After washing the carrots, finely dice them...",
-            defaultValue: "",
+            label: 'DESCRIPTION',
+            placeholder: 'After washing the carrots, finely dice them...',
+            defaultValue: '',
             style: AddRecipeStyles.input,
             autoFocus: true,
           }}
@@ -53,7 +47,7 @@ export const CreateStep = () => {
             control: form.control,
           }}
           inputProps={{
-            label: "IMAGE (OPTIONAL)",
+            label: 'IMAGE (OPTIONAL)',
           }}
           type={InputType.PHOTO}
         />
@@ -61,15 +55,15 @@ export const CreateStep = () => {
           onPress={() => {
             form.trigger([`description`, `image`]).then((isValid) => {
               if (isValid) {
-                stepsFieldArray?.append(form.getValues());
-                navigation.goBack();
+                stepsFieldArray?.append(form.getValues())
+                navigation.goBack()
               }
-            });
+            })
           }}
         >
           ADD STEP
         </Button>
       </ScrollView>
     </Background>
-  );
-};
+  )
+}

@@ -1,10 +1,10 @@
 /**
  * Author: Edward Jones
- * 
+ *
  *  Contains the definitions for all mutations used by Apollo within the app
  */
-import { gql } from '@apollo/client';
-import * as Fragments from './fragments';
+import { gql } from '@apollo/client'
+import * as Fragments from './fragments'
 
 export const ADD_RECIPE = gql`
   mutation addRecipe($recipe: RecipeInput!) {
@@ -19,7 +19,7 @@ export const ADD_RECIPE = gql`
   }
   ${Fragments.RecipeFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const LOGIN = gql`
   mutation login($loginDetails: LoginInput!) {
@@ -33,7 +33,7 @@ export const LOGIN = gql`
     }
   }
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const SIGNUP = gql`
   mutation signup($signupDetails: SignupInput!) {
@@ -47,7 +47,7 @@ export const SIGNUP = gql`
     }
   }
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const EDIT_PROFILE = gql`
   mutation editProfile($profileDetails: ProfileDetails!) {
@@ -62,7 +62,7 @@ export const EDIT_PROFILE = gql`
   }
   ${Fragments.ErrorFragment}
   ${Fragments.FullUserFragment}
-`;
+`
 
 export const CHANGE_PASSWORD = gql`
   mutation changePassword($changePasswordDetails: ChangePasswordDetails!) {
@@ -72,7 +72,7 @@ export const CHANGE_PASSWORD = gql`
       }
     }
   }
-`;
+`
 
 export const DELETE_USER = gql`
   mutation deleteUser {
@@ -82,7 +82,7 @@ export const DELETE_USER = gql`
       }
     }
   }
-`;
+`
 
 export const UPDATE_DIETARY_PREFERENCES = gql`
   mutation UpdateDietaryPreferences($dietaryPreferences: DietaryPreferenceDetails!) {
@@ -97,7 +97,7 @@ export const UPDATE_DIETARY_PREFERENCES = gql`
   }
   ${Fragments.DietFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const REMOVE_DIETARY_PREFERENCES = gql`
   mutation RemoveDietaryPreferences($dietaryPreferences: DietaryPreferenceDetails!) {
@@ -112,7 +112,7 @@ export const REMOVE_DIETARY_PREFERENCES = gql`
   }
   ${Fragments.DietFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const UPDATE_ALLERGY_PREFERENCES = gql`
   mutation UpdateAllergyPreferences($allergyPreferences: AllergyPreferenceDetails!) {
@@ -127,7 +127,7 @@ export const UPDATE_ALLERGY_PREFERENCES = gql`
   }
   ${Fragments.AllergyFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const REMOVE_ALLERGY_PREFERENCES = gql`
   mutation RemoveAllergyPreferences($allergyPreferences: AllergyPreferenceDetails!) {
@@ -142,7 +142,7 @@ export const REMOVE_ALLERGY_PREFERENCES = gql`
   }
   ${Fragments.AllergyFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const UPDATE_PROFILE_VISIBILITY = gql`
   mutation UpdateProfileVisibility($profileVisibilityDetails: ProfileVisibilityDetails!) {
@@ -153,7 +153,7 @@ export const UPDATE_PROFILE_VISIBILITY = gql`
     }
   }
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const ADD_RECIPE_COMMENT = gql`
   mutation AddRecipeComment($recipeId: String!, $comment: String!) {
@@ -168,7 +168,7 @@ export const ADD_RECIPE_COMMENT = gql`
   }
   ${Fragments.RecipeCommentFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const ADD_RECIPE_COMMENT_REPLY = gql`
   mutation AddRecipeCommentReply($commentId: String!, $comment: String!) {
@@ -183,7 +183,7 @@ export const ADD_RECIPE_COMMENT_REPLY = gql`
   }
   ${Fragments.RecipeCommentFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const LIKE_RECIPE = gql`
   mutation LikeRecipe($recipeId: String!) {
@@ -198,7 +198,7 @@ export const LIKE_RECIPE = gql`
   }
   ${Fragments.RecipeFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const UNLIKE_RECIPE = gql`
   mutation UnlikeRecipe($recipeId: String!) {
@@ -213,7 +213,7 @@ export const UNLIKE_RECIPE = gql`
   }
   ${Fragments.RecipeFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const LIKE_COMMENT = gql`
   mutation LikeComment($commentId: String!) {
@@ -224,7 +224,7 @@ export const LIKE_COMMENT = gql`
     }
   }
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const UNLIKE_COMMENT = gql`
   mutation UnlikeComment($commentId: String!) {
@@ -235,7 +235,7 @@ export const UNLIKE_COMMENT = gql`
     }
   }
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const DELETE_COMMENT = gql`
   mutation DeleteComment($commentId: String!) {
@@ -246,7 +246,7 @@ export const DELETE_COMMENT = gql`
     }
   }
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const SAVE_RECIPE = gql`
   mutation SaveRecipe($recipeId: String!) {
@@ -261,7 +261,7 @@ export const SAVE_RECIPE = gql`
   }
   ${Fragments.RecipeFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const UNSAVE_RECIPE = gql`
   mutation UnsaveRecipe($recipeId: String!) {
@@ -276,7 +276,7 @@ export const UNSAVE_RECIPE = gql`
   }
   ${Fragments.RecipeFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const FOLLOW_USER = gql`
   mutation FollowUser($userId: String!) {
@@ -291,7 +291,7 @@ export const FOLLOW_USER = gql`
   }
   ${Fragments.ErrorFragment}
   ${Fragments.UserFragment}
-`;
+`
 
 export const UNFOLLOW_USER = gql`
   mutation UnfollowUser($userId: String!) {
@@ -306,7 +306,7 @@ export const UNFOLLOW_USER = gql`
   }
   ${Fragments.ErrorFragment}
   ${Fragments.UserFragment}
-`;
+`
 
 export const READ_NOTIFICATIONS = gql`
   mutation ReadNotification($notificationId: String!) {
@@ -321,7 +321,7 @@ export const READ_NOTIFICATIONS = gql`
   }
   ${Fragments.NotificationFragment}
   ${Fragments.ErrorFragment}
-`;
+`
 
 export const DELETE_RECIPE = gql`
   mutation DeleteRecipe($recipeId: String!) {
@@ -336,4 +336,4 @@ export const DELETE_RECIPE = gql`
   }
   ${Fragments.RecipeFragment}
   ${Fragments.ErrorFragment}
-`;
+`

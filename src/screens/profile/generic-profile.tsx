@@ -1,15 +1,9 @@
 /**
  * Author: Andrew Wilkie
  */
-import React, { FC, useState } from "react";
-import { View, StyleSheet, Pressable } from "react-native";
-import {
-  Text,
-  Button,
-  TopNavigation,
-  TopNavigationAction,
-  Avatar,
-} from "@ui-kitten/components";
+import React, { FC, useState } from 'react'
+import { View, StyleSheet, Pressable } from 'react-native'
+import { Text, Button, TopNavigation, TopNavigationAction, Avatar } from '@ui-kitten/components'
 import {
   Input,
   Background,
@@ -19,11 +13,11 @@ import {
   Icons,
   LazyListProps,
   FollowButton,
-} from "@greeneggs/ui";
-import { useQuery } from "@apollo/client";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { noAvatar } from "@greeneggs/assets";
-import { Queries } from "@greeneggs/graphql";
+} from '@greeneggs/ui'
+import { useQuery } from '@apollo/client'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { noAvatar } from '@greeneggs/assets'
+import { Queries } from '@greeneggs/graphql'
 import {
   profile,
   RecipeFilter,
@@ -31,14 +25,14 @@ import {
   recipesVariables,
   recipes_recipes_data,
   Sort,
-} from "@greeneggs/types/graphql";
-import { LoadingScreen } from "../loading-screen";
-import { useNavigation } from "@react-navigation/core";
+} from '@greeneggs/types/graphql'
+import { LoadingScreen } from '../loading-screen'
+import { useNavigation } from '@react-navigation/core'
 
 const styles = StyleSheet.create({
   avatarContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   avatar: {
     margin: 8,
@@ -46,7 +40,7 @@ const styles = StyleSheet.create({
     height: 120,
   },
   view: {
-    height: "100%",
+    height: '100%',
   },
   description: {
     paddingHorizontal: 16,
@@ -56,67 +50,58 @@ const styles = StyleSheet.create({
   topButton: {
     width: 24,
     height: 24,
-    backgroundColor: "transparent",
-    borderColor: "transparent",
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
   },
   profileContainer: {
     padding: 16,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   statContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
     padding: 16,
   },
   statBox: {
-    flexDirection: "column",
-    alignItems: "center",
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   search: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     margin: 16,
   },
-});
+})
 
 interface IProfileStat {
-  label: string;
-  value: string;
-  onPress?: () => void;
+  label: string
+  value: string
+  onPress?: () => void
 }
 
 const ProfileStat = ({ label, value, onPress }: IProfileStat) => (
   <Pressable onPress={onPress}>
     <View style={styles.statBox}>
-      <Text category="label">{value}</Text>
-      <Text category="c1">{label}</Text>
+      <Text category='label'>{value}</Text>
+      <Text category='c1'>{label}</Text>
     </View>
   </Pressable>
-);
+)
 
 interface MyRecipesProps
-  extends Omit<
-    Partial<LazyListProps<recipes, recipesVariables, recipes_recipes_data>>,
-    "query"
-  > {
-  query: string;
-  userId: string;
+  extends Omit<Partial<LazyListProps<recipes, recipesVariables, recipes_recipes_data>>, 'query'> {
+  query: string
+  userId: string
 }
 
 /**
  * Abstract screen for displaying a user's profile information.
  */
 const MyRecipes: FC<MyRecipesProps> = ({ query, userId, ...props }) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
 
   return (
-    <LazyList<
-      recipes,
-      recipesVariables,
-      recipes_recipes_data,
-      Sort,
-      RecipeFilter
-    >
+    <LazyList<recipes, recipesVariables, recipes_recipes_data, Sort, RecipeFilter>
       {...props}
       query={Queries.GET_RECIPES}
       variables={{
@@ -126,14 +111,14 @@ const MyRecipes: FC<MyRecipesProps> = ({ query, userId, ...props }) => {
           user: userId,
         },
       }}
-      dataKey="recipes"
+      dataKey='recipes'
       emptyMessage="This user hasn't uploaded any recipes."
       renderItem={({ item: myRecipe }) => (
         <View style={{ marginBottom: 16, marginHorizontal: 16 }}>
           <RecipeCardSmall
             recipe={myRecipe}
             onPress={() =>
-              navigation.navigate("Recipe", {
+              navigation.navigate('Recipe', {
                 recipeId: myRecipe.id,
               })
             }
@@ -141,62 +126,56 @@ const MyRecipes: FC<MyRecipesProps> = ({ query, userId, ...props }) => {
         </View>
       )}
     />
-  );
-};
-
-interface GenericProfileProps {
-  userId: string;
-  isMe?: boolean;
+  )
 }
 
-export const GenericProfile = ({
-  userId,
-  isMe = false,
-}: GenericProfileProps) => {
-  const insets = useSafeAreaInsets();
-  const navigation = useNavigation();
+interface GenericProfileProps {
+  userId: string
+  isMe?: boolean
+}
+
+export const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) => {
+  const insets = useSafeAreaInsets()
+  const navigation = useNavigation()
   const profileResult = useQuery<profile>(Queries.GET_PROFILE, {
     variables: {
       userId,
     },
-  });
+  })
 
-  const [myRecipeQuery, setMyRecipeQuery] = useState("");
+  const [myRecipeQuery, setMyRecipeQuery] = useState('')
 
   if (profileResult.loading) {
-    return <LoadingScreen />;
+    return <LoadingScreen />
   }
 
   if (profileResult.error) {
-    return <Callout message="There was an error" type="danger" />;
+    return <Callout message='There was an error' type='danger' />
   }
 
-  const profile = profileResult.data?.profile.data;
+  const profile = profileResult.data?.profile.data
 
   if (profile === undefined || profile === null) {
-    return <Text>Error! User not found</Text>;
+    return <Text>Error! User not found</Text>
   }
 
   function optional(value: string | number | null | undefined) {
-    return value?.toString() || "";
+    return value?.toString() || ''
   }
 
   return (
     <Background style={{ ...styles.view }}>
       <TopNavigation
-        style={{ backgroundColor: "transparent", paddingTop: insets.top }}
+        style={{ backgroundColor: 'transparent', paddingTop: insets.top }}
         accessoryLeft={() => {
           return isMe ? (
             <TopNavigationAction
               icon={Icons.Settings}
-              onPress={() => navigation.navigate("Settings")}
+              onPress={() => navigation.navigate('Settings')}
             />
           ) : (
-            <TopNavigationAction
-              icon={Icons.Back}
-              onPress={() => navigation.goBack()}
-            />
-          );
+            <TopNavigationAction icon={Icons.Back} onPress={() => navigation.goBack()} />
+          )
         }}
       />
       <MyRecipes
@@ -206,27 +185,23 @@ export const GenericProfile = ({
         ListHeaderComponent={
           <>
             <View style={styles.avatarContainer}>
-              <Pressable
-                onPress={() => isMe && navigation.navigate("EditProfilePicture")}
-              >
+              <Pressable onPress={() => isMe && navigation.navigate('EditProfilePicture')}>
                 <Avatar
                   style={styles.avatar}
-                  shape="round"
-                  size="giant"
-                  source={
-                    profile.avatarURI ? { uri: profile.avatarURI } : noAvatar
-                  }
+                  shape='round'
+                  size='giant'
+                  source={profile.avatarURI ? { uri: profile.avatarURI } : noAvatar}
                 />
               </Pressable>
             </View>
             <View style={styles.profileContainer}>
-              <Text category="h5">{`${profile.firstName} ${profile.lastName}`}</Text>
+              <Text category='h5'>{`${profile.firstName} ${profile.lastName}`}</Text>
               {isMe ? (
                 <Button
-                  size="small"
+                  size='small'
                   style={styles.button}
                   accessoryLeft={Icons.Edit}
-                  onPress={() => navigation.navigate("EditProfile")}
+                  onPress={() => navigation.navigate('EditProfile')}
                 >
                   EDIT
                 </Button>
@@ -241,24 +216,21 @@ export const GenericProfile = ({
             ) : undefined}
             <View style={styles.statContainer}>
               <ProfileStat
-                label="Following"
+                label='Following'
                 value={profile.followingCount.toString()}
-                onPress={() => navigation.navigate("Following", { userId })}
+                onPress={() => navigation.navigate('Following', { userId })}
               />
               <ProfileStat
-                label="Followers"
+                label='Followers'
                 value={profile.followerCount.toString()}
-                onPress={() => navigation.navigate("Followers", { userId })}
+                onPress={() => navigation.navigate('Followers', { userId })}
               />
-              <ProfileStat
-                label="Recipes"
-                value={profile.recipeCount.toString()}
-              />
-              <ProfileStat label="Likes" value={profile.likeCount.toString()} />
+              <ProfileStat label='Recipes' value={profile.recipeCount.toString()} />
+              <ProfileStat label='Likes' value={profile.likeCount.toString()} />
             </View>
             <Input
-              placeholder="Search recipes"
-              size="large"
+              placeholder='Search recipes'
+              size='large'
               style={styles.search}
               accessoryLeft={Icons.Search}
               value={myRecipeQuery}
@@ -268,5 +240,5 @@ export const GenericProfile = ({
         }
       />
     </Background>
-  );
-};
+  )
+}

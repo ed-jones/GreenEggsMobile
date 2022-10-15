@@ -1,16 +1,9 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext, useState } from "react";
-import { Divider, ListItem } from "@ui-kitten/components";
-import {
-  AlphabetType,
-  Background,
-  Icons,
-  Input,
-  LazyListAlpha,
-  TopNavigation,
-} from "@greeneggs/ui";
+import React, { useContext, useState } from 'react'
+import { Divider, ListItem } from '@ui-kitten/components'
+import { AlphabetType, Background, Icons, Input, LazyListAlpha, TopNavigation } from '@greeneggs/ui'
 import {
   DietInput,
   Diets,
@@ -18,49 +11,43 @@ import {
   Diets_diets_data,
   RecipeFilter,
   Sort,
-} from "@greeneggs/types/graphql";
-import { Queries } from "@greeneggs/graphql";
-import { AddRecipeContext } from "@greeneggs/providers";
-import { useNavigation } from "@react-navigation/core";
+} from '@greeneggs/types/graphql'
+import { Queries } from '@greeneggs/graphql'
+import { AddRecipeContext } from '@greeneggs/providers'
+import { useNavigation } from '@react-navigation/core'
 
 /**
  * Screen that lets a user select a diet from an infinite scrolling alphabetised list
  * to add to a recipe.
  */
 export const CreateDiet = () => {
-  const [query, setQuery] = useState("");
-  const { dietsFieldArray } = useContext(AddRecipeContext);
-  const navigation = useNavigation();
+  const [query, setQuery] = useState('')
+  const { dietsFieldArray } = useContext(AddRecipeContext)
+  const navigation = useNavigation()
 
   function pick(diet: DietInput) {
-    dietsFieldArray?.append(diet);
-    navigation.goBack();
+    dietsFieldArray?.append(diet)
+    navigation.goBack()
   }
 
   return (
     <Background>
-      <TopNavigation title="Choose a diet" />
+      <TopNavigation title='Choose a diet' />
       <Input
         style={{ padding: 16 }}
-        placeholder="Search diets..."
+        placeholder='Search diets...'
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
         value={query}
         autoFocus
       />
-      <LazyListAlpha<
-        Diets,
-        DietsVariables,
-        Diets_diets_data,
-        Sort,
-        RecipeFilter
-      >
+      <LazyListAlpha<Diets, DietsVariables, Diets_diets_data, Sort, RecipeFilter>
         renderItem={(item) => (
           <>
             <ListItem
               title={item.name}
               onPress={() => {
-                pick({ name: item.name });
+                pick({ name: item.name })
               }}
             />
             <Divider />
@@ -71,8 +58,8 @@ export const CreateDiet = () => {
         variables={{
           query,
         }}
-        dataKey="diets"
+        dataKey='diets'
       />
     </Background>
-  );
-};
+  )
+}

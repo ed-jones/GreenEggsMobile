@@ -8,131 +8,131 @@
 // ====================================================
 
 export interface addRecipe_addRecipe_data_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface addRecipe_addRecipe_data_categories {
-  __typename: "Category";
-  id: string;
-  name: string;
+  __typename: 'Category'
+  id: string
+  name: string
 }
 
 export interface addRecipe_addRecipe_data_diets {
-  __typename: "Diet";
-  name: string;
+  __typename: 'Diet'
+  name: string
 }
 
 export interface addRecipe_addRecipe_data_allergies {
-  __typename: "Allergy";
-  name: string;
+  __typename: 'Allergy'
+  name: string
 }
 
 export interface addRecipe_addRecipe_data_ingredients {
-  __typename: "Ingredient";
-  name: string;
-  description: string | null;
-  quantity: number | null;
-  unit: string | null;
+  __typename: 'Ingredient'
+  name: string
+  description: string | null
+  quantity: number | null
+  unit: string | null
 }
 
 export interface addRecipe_addRecipe_data_steps {
-  __typename: "RecipeStep";
-  title: string;
-  description: string;
-  image: string | null;
+  __typename: 'RecipeStep'
+  title: string
+  description: string
+  image: string | null
 }
 
 export interface addRecipe_addRecipe_data_comments_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface addRecipe_addRecipe_data_comments_replies_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface addRecipe_addRecipe_data_comments_replies {
-  __typename: "RecipeCommentReply";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  submittedBy: addRecipe_addRecipe_data_comments_replies_submittedBy;
+  __typename: 'RecipeCommentReply'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  submittedBy: addRecipe_addRecipe_data_comments_replies_submittedBy
 }
 
 export interface addRecipe_addRecipe_data_comments {
-  __typename: "RecipeComment";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  createdAt: string;
-  deleted: boolean;
-  submittedBy: addRecipe_addRecipe_data_comments_submittedBy;
-  replies: addRecipe_addRecipe_data_comments_replies[];
+  __typename: 'RecipeComment'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  createdAt: string
+  deleted: boolean
+  submittedBy: addRecipe_addRecipe_data_comments_submittedBy
+  replies: addRecipe_addRecipe_data_comments_replies[]
 }
 
 export interface addRecipe_addRecipe_data {
-  __typename: "Recipe";
-  id: string;
-  title: string;
-  description: string | null;
-  submittedBy: addRecipe_addRecipe_data_submittedBy;
-  commentCount: number;
-  likeCount: number;
-  createdAt: string;
-  servingCount: number | null;
-  timeEstimate: string | null;
-  coverImage: string;
-  liked: boolean;
-  saved: boolean;
-  categories: addRecipe_addRecipe_data_categories[];
-  diets: addRecipe_addRecipe_data_diets[];
-  allergies: addRecipe_addRecipe_data_allergies[];
-  ingredients: addRecipe_addRecipe_data_ingredients[];
-  steps: addRecipe_addRecipe_data_steps[];
-  comments: addRecipe_addRecipe_data_comments[];
+  __typename: 'Recipe'
+  id: string
+  title: string
+  description: string | null
+  submittedBy: addRecipe_addRecipe_data_submittedBy
+  commentCount: number
+  likeCount: number
+  createdAt: string
+  servingCount: number | null
+  timeEstimate: string | null
+  coverImage: string
+  liked: boolean
+  saved: boolean
+  categories: addRecipe_addRecipe_data_categories[]
+  diets: addRecipe_addRecipe_data_diets[]
+  allergies: addRecipe_addRecipe_data_allergies[]
+  ingredients: addRecipe_addRecipe_data_ingredients[]
+  steps: addRecipe_addRecipe_data_steps[]
+  comments: addRecipe_addRecipe_data_comments[]
 }
 
 export interface addRecipe_addRecipe_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface addRecipe_addRecipe {
-  __typename: "RecipeResult";
-  data: addRecipe_addRecipe_data | null;
-  error: addRecipe_addRecipe_error | null;
+  __typename: 'RecipeResult'
+  data: addRecipe_addRecipe_data | null
+  error: addRecipe_addRecipe_error | null
 }
 
 export interface addRecipe {
-  addRecipe: addRecipe_addRecipe;
+  addRecipe: addRecipe_addRecipe
 }
 
 export interface addRecipeVariables {
-  recipe: RecipeInput;
+  recipe: RecipeInput
 }
 
 /* tslint:disable */
@@ -145,27 +145,27 @@ export interface addRecipeVariables {
 // ====================================================
 
 export interface login_login_data {
-  __typename: "AuthResultData";
-  token: string;
+  __typename: 'AuthResultData'
+  token: string
 }
 
 export interface login_login_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface login_login {
-  __typename: "AuthResult";
-  data: login_login_data | null;
-  error: login_login_error | null;
+  __typename: 'AuthResult'
+  data: login_login_data | null
+  error: login_login_error | null
 }
 
 export interface login {
-  login: login_login;
+  login: login_login
 }
 
 export interface loginVariables {
-  loginDetails: LoginInput;
+  loginDetails: LoginInput
 }
 
 /* tslint:disable */
@@ -178,27 +178,27 @@ export interface loginVariables {
 // ====================================================
 
 export interface signup_signup_data {
-  __typename: "AuthResultData";
-  token: string;
+  __typename: 'AuthResultData'
+  token: string
 }
 
 export interface signup_signup_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface signup_signup {
-  __typename: "AuthResult";
-  data: signup_signup_data | null;
-  error: signup_signup_error | null;
+  __typename: 'AuthResult'
+  data: signup_signup_data | null
+  error: signup_signup_error | null
 }
 
 export interface signup {
-  signup: signup_signup;
+  signup: signup_signup
 }
 
 export interface signupVariables {
-  signupDetails: SignupInput;
+  signupDetails: SignupInput
 }
 
 /* tslint:disable */
@@ -211,53 +211,53 @@ export interface signupVariables {
 // ====================================================
 
 export interface editProfile_editProfile_data_dietaryPreferences {
-  __typename: "Diet";
-  id: string;
-  name: string;
+  __typename: 'Diet'
+  id: string
+  name: string
 }
 
 export interface editProfile_editProfile_data_allergyPreferences {
-  __typename: "Allergy";
-  id: string;
-  name: string;
+  __typename: 'Allergy'
+  id: string
+  name: string
 }
 
 export interface editProfile_editProfile_data {
-  __typename: "FullUser";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
-  likeCount: number;
-  followerCount: number;
-  followingCount: number;
-  recipeCount: number;
-  isFollowing: boolean | null;
-  dietaryPreferences: editProfile_editProfile_data_dietaryPreferences[];
-  allergyPreferences: editProfile_editProfile_data_allergyPreferences[];
-  visibility: Privacy;
+  __typename: 'FullUser'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
+  likeCount: number
+  followerCount: number
+  followingCount: number
+  recipeCount: number
+  isFollowing: boolean | null
+  dietaryPreferences: editProfile_editProfile_data_dietaryPreferences[]
+  allergyPreferences: editProfile_editProfile_data_allergyPreferences[]
+  visibility: Privacy
 }
 
 export interface editProfile_editProfile_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface editProfile_editProfile {
-  __typename: "EditProfileResult";
-  data: editProfile_editProfile_data | null;
-  error: editProfile_editProfile_error | null;
+  __typename: 'EditProfileResult'
+  data: editProfile_editProfile_data | null
+  error: editProfile_editProfile_error | null
 }
 
 export interface editProfile {
-  editProfile: editProfile_editProfile;
+  editProfile: editProfile_editProfile
 }
 
 export interface editProfileVariables {
-  profileDetails: ProfileDetails;
+  profileDetails: ProfileDetails
 }
 
 /* tslint:disable */
@@ -270,21 +270,21 @@ export interface editProfileVariables {
 // ====================================================
 
 export interface changePassword_changePassword_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface changePassword_changePassword {
-  __typename: "ChangePasswordResult";
-  error: changePassword_changePassword_error | null;
+  __typename: 'ChangePasswordResult'
+  error: changePassword_changePassword_error | null
 }
 
 export interface changePassword {
-  changePassword: changePassword_changePassword;
+  changePassword: changePassword_changePassword
 }
 
 export interface changePasswordVariables {
-  changePasswordDetails: ChangePasswordDetails;
+  changePasswordDetails: ChangePasswordDetails
 }
 
 /* tslint:disable */
@@ -297,17 +297,17 @@ export interface changePasswordVariables {
 // ====================================================
 
 export interface deleteUser_deleteAccount_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface deleteUser_deleteAccount {
-  __typename: "DeleteAccountResult";
-  error: deleteUser_deleteAccount_error | null;
+  __typename: 'DeleteAccountResult'
+  error: deleteUser_deleteAccount_error | null
 }
 
 export interface deleteUser {
-  deleteAccount: deleteUser_deleteAccount;
+  deleteAccount: deleteUser_deleteAccount
 }
 
 /* tslint:disable */
@@ -320,28 +320,28 @@ export interface deleteUser {
 // ====================================================
 
 export interface UpdateDietaryPreferences_updateDietaryPreferences_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface UpdateDietaryPreferences_updateDietaryPreferences_data {
-  __typename: "Diet";
-  id: string;
-  name: string;
+  __typename: 'Diet'
+  id: string
+  name: string
 }
 
 export interface UpdateDietaryPreferences_updateDietaryPreferences {
-  __typename: "UpdateDietaryPreferencesResult";
-  error: UpdateDietaryPreferences_updateDietaryPreferences_error | null;
-  data: UpdateDietaryPreferences_updateDietaryPreferences_data[] | null;
+  __typename: 'UpdateDietaryPreferencesResult'
+  error: UpdateDietaryPreferences_updateDietaryPreferences_error | null
+  data: UpdateDietaryPreferences_updateDietaryPreferences_data[] | null
 }
 
 export interface UpdateDietaryPreferences {
-  updateDietaryPreferences: UpdateDietaryPreferences_updateDietaryPreferences;
+  updateDietaryPreferences: UpdateDietaryPreferences_updateDietaryPreferences
 }
 
 export interface UpdateDietaryPreferencesVariables {
-  dietaryPreferences: DietaryPreferenceDetails;
+  dietaryPreferences: DietaryPreferenceDetails
 }
 
 /* tslint:disable */
@@ -354,28 +354,28 @@ export interface UpdateDietaryPreferencesVariables {
 // ====================================================
 
 export interface RemoveDietaryPreferences_removeDietaryPreferences_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface RemoveDietaryPreferences_removeDietaryPreferences_data {
-  __typename: "Diet";
-  id: string;
-  name: string;
+  __typename: 'Diet'
+  id: string
+  name: string
 }
 
 export interface RemoveDietaryPreferences_removeDietaryPreferences {
-  __typename: "RemoveDietaryPreferencesResult";
-  error: RemoveDietaryPreferences_removeDietaryPreferences_error | null;
-  data: RemoveDietaryPreferences_removeDietaryPreferences_data[] | null;
+  __typename: 'RemoveDietaryPreferencesResult'
+  error: RemoveDietaryPreferences_removeDietaryPreferences_error | null
+  data: RemoveDietaryPreferences_removeDietaryPreferences_data[] | null
 }
 
 export interface RemoveDietaryPreferences {
-  removeDietaryPreferences: RemoveDietaryPreferences_removeDietaryPreferences;
+  removeDietaryPreferences: RemoveDietaryPreferences_removeDietaryPreferences
 }
 
 export interface RemoveDietaryPreferencesVariables {
-  dietaryPreferences: DietaryPreferenceDetails;
+  dietaryPreferences: DietaryPreferenceDetails
 }
 
 /* tslint:disable */
@@ -388,28 +388,28 @@ export interface RemoveDietaryPreferencesVariables {
 // ====================================================
 
 export interface UpdateAllergyPreferences_updateAllergyPreferences_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface UpdateAllergyPreferences_updateAllergyPreferences_data {
-  __typename: "Allergy";
-  id: string;
-  name: string;
+  __typename: 'Allergy'
+  id: string
+  name: string
 }
 
 export interface UpdateAllergyPreferences_updateAllergyPreferences {
-  __typename: "UpdateAllergyPreferencesResult";
-  error: UpdateAllergyPreferences_updateAllergyPreferences_error | null;
-  data: UpdateAllergyPreferences_updateAllergyPreferences_data[] | null;
+  __typename: 'UpdateAllergyPreferencesResult'
+  error: UpdateAllergyPreferences_updateAllergyPreferences_error | null
+  data: UpdateAllergyPreferences_updateAllergyPreferences_data[] | null
 }
 
 export interface UpdateAllergyPreferences {
-  updateAllergyPreferences: UpdateAllergyPreferences_updateAllergyPreferences;
+  updateAllergyPreferences: UpdateAllergyPreferences_updateAllergyPreferences
 }
 
 export interface UpdateAllergyPreferencesVariables {
-  allergyPreferences: AllergyPreferenceDetails;
+  allergyPreferences: AllergyPreferenceDetails
 }
 
 /* tslint:disable */
@@ -422,28 +422,28 @@ export interface UpdateAllergyPreferencesVariables {
 // ====================================================
 
 export interface RemoveAllergyPreferences_removeAllergyPreferences_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface RemoveAllergyPreferences_removeAllergyPreferences_data {
-  __typename: "Allergy";
-  id: string;
-  name: string;
+  __typename: 'Allergy'
+  id: string
+  name: string
 }
 
 export interface RemoveAllergyPreferences_removeAllergyPreferences {
-  __typename: "RemoveAllergyPreferencesResult";
-  error: RemoveAllergyPreferences_removeAllergyPreferences_error | null;
-  data: RemoveAllergyPreferences_removeAllergyPreferences_data[] | null;
+  __typename: 'RemoveAllergyPreferencesResult'
+  error: RemoveAllergyPreferences_removeAllergyPreferences_error | null
+  data: RemoveAllergyPreferences_removeAllergyPreferences_data[] | null
 }
 
 export interface RemoveAllergyPreferences {
-  removeAllergyPreferences: RemoveAllergyPreferences_removeAllergyPreferences;
+  removeAllergyPreferences: RemoveAllergyPreferences_removeAllergyPreferences
 }
 
 export interface RemoveAllergyPreferencesVariables {
-  allergyPreferences: AllergyPreferenceDetails;
+  allergyPreferences: AllergyPreferenceDetails
 }
 
 /* tslint:disable */
@@ -456,21 +456,21 @@ export interface RemoveAllergyPreferencesVariables {
 // ====================================================
 
 export interface UpdateProfileVisibility_updateProfileVisibility_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface UpdateProfileVisibility_updateProfileVisibility {
-  __typename: "UpdateProfileVisibilityResult";
-  error: UpdateProfileVisibility_updateProfileVisibility_error | null;
+  __typename: 'UpdateProfileVisibilityResult'
+  error: UpdateProfileVisibility_updateProfileVisibility_error | null
 }
 
 export interface UpdateProfileVisibility {
-  updateProfileVisibility: UpdateProfileVisibility_updateProfileVisibility;
+  updateProfileVisibility: UpdateProfileVisibility_updateProfileVisibility
 }
 
 export interface UpdateProfileVisibilityVariables {
-  profileVisibilityDetails: ProfileVisibilityDetails;
+  profileVisibilityDetails: ProfileVisibilityDetails
 }
 
 /* tslint:disable */
@@ -483,68 +483,68 @@ export interface UpdateProfileVisibilityVariables {
 // ====================================================
 
 export interface AddRecipeComment_addComment_data_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface AddRecipeComment_addComment_data_replies_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface AddRecipeComment_addComment_data_replies {
-  __typename: "RecipeCommentReply";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  submittedBy: AddRecipeComment_addComment_data_replies_submittedBy;
+  __typename: 'RecipeCommentReply'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  submittedBy: AddRecipeComment_addComment_data_replies_submittedBy
 }
 
 export interface AddRecipeComment_addComment_data {
-  __typename: "RecipeComment";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  createdAt: string;
-  deleted: boolean;
-  submittedBy: AddRecipeComment_addComment_data_submittedBy;
-  replies: AddRecipeComment_addComment_data_replies[];
+  __typename: 'RecipeComment'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  createdAt: string
+  deleted: boolean
+  submittedBy: AddRecipeComment_addComment_data_submittedBy
+  replies: AddRecipeComment_addComment_data_replies[]
 }
 
 export interface AddRecipeComment_addComment_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface AddRecipeComment_addComment {
-  __typename: "CommentResult";
-  data: AddRecipeComment_addComment_data | null;
-  error: AddRecipeComment_addComment_error | null;
+  __typename: 'CommentResult'
+  data: AddRecipeComment_addComment_data | null
+  error: AddRecipeComment_addComment_error | null
 }
 
 export interface AddRecipeComment {
-  addComment: AddRecipeComment_addComment;
+  addComment: AddRecipeComment_addComment
 }
 
 export interface AddRecipeCommentVariables {
-  recipeId: string;
-  comment: string;
+  recipeId: string
+  comment: string
 }
 
 /* tslint:disable */
@@ -557,68 +557,68 @@ export interface AddRecipeCommentVariables {
 // ====================================================
 
 export interface AddRecipeCommentReply_replyToComment_data_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface AddRecipeCommentReply_replyToComment_data_replies_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface AddRecipeCommentReply_replyToComment_data_replies {
-  __typename: "RecipeCommentReply";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  submittedBy: AddRecipeCommentReply_replyToComment_data_replies_submittedBy;
+  __typename: 'RecipeCommentReply'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  submittedBy: AddRecipeCommentReply_replyToComment_data_replies_submittedBy
 }
 
 export interface AddRecipeCommentReply_replyToComment_data {
-  __typename: "RecipeComment";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  createdAt: string;
-  deleted: boolean;
-  submittedBy: AddRecipeCommentReply_replyToComment_data_submittedBy;
-  replies: AddRecipeCommentReply_replyToComment_data_replies[];
+  __typename: 'RecipeComment'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  createdAt: string
+  deleted: boolean
+  submittedBy: AddRecipeCommentReply_replyToComment_data_submittedBy
+  replies: AddRecipeCommentReply_replyToComment_data_replies[]
 }
 
 export interface AddRecipeCommentReply_replyToComment_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface AddRecipeCommentReply_replyToComment {
-  __typename: "CommentResult";
-  data: AddRecipeCommentReply_replyToComment_data | null;
-  error: AddRecipeCommentReply_replyToComment_error | null;
+  __typename: 'CommentResult'
+  data: AddRecipeCommentReply_replyToComment_data | null
+  error: AddRecipeCommentReply_replyToComment_error | null
 }
 
 export interface AddRecipeCommentReply {
-  replyToComment: AddRecipeCommentReply_replyToComment;
+  replyToComment: AddRecipeCommentReply_replyToComment
 }
 
 export interface AddRecipeCommentReplyVariables {
-  commentId: string;
-  comment: string;
+  commentId: string
+  comment: string
 }
 
 /* tslint:disable */
@@ -631,131 +631,131 @@ export interface AddRecipeCommentReplyVariables {
 // ====================================================
 
 export interface LikeRecipe_likeRecipe_data_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface LikeRecipe_likeRecipe_data_categories {
-  __typename: "Category";
-  id: string;
-  name: string;
+  __typename: 'Category'
+  id: string
+  name: string
 }
 
 export interface LikeRecipe_likeRecipe_data_diets {
-  __typename: "Diet";
-  name: string;
+  __typename: 'Diet'
+  name: string
 }
 
 export interface LikeRecipe_likeRecipe_data_allergies {
-  __typename: "Allergy";
-  name: string;
+  __typename: 'Allergy'
+  name: string
 }
 
 export interface LikeRecipe_likeRecipe_data_ingredients {
-  __typename: "Ingredient";
-  name: string;
-  description: string | null;
-  quantity: number | null;
-  unit: string | null;
+  __typename: 'Ingredient'
+  name: string
+  description: string | null
+  quantity: number | null
+  unit: string | null
 }
 
 export interface LikeRecipe_likeRecipe_data_steps {
-  __typename: "RecipeStep";
-  title: string;
-  description: string;
-  image: string | null;
+  __typename: 'RecipeStep'
+  title: string
+  description: string
+  image: string | null
 }
 
 export interface LikeRecipe_likeRecipe_data_comments_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface LikeRecipe_likeRecipe_data_comments_replies_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface LikeRecipe_likeRecipe_data_comments_replies {
-  __typename: "RecipeCommentReply";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  submittedBy: LikeRecipe_likeRecipe_data_comments_replies_submittedBy;
+  __typename: 'RecipeCommentReply'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  submittedBy: LikeRecipe_likeRecipe_data_comments_replies_submittedBy
 }
 
 export interface LikeRecipe_likeRecipe_data_comments {
-  __typename: "RecipeComment";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  createdAt: string;
-  deleted: boolean;
-  submittedBy: LikeRecipe_likeRecipe_data_comments_submittedBy;
-  replies: LikeRecipe_likeRecipe_data_comments_replies[];
+  __typename: 'RecipeComment'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  createdAt: string
+  deleted: boolean
+  submittedBy: LikeRecipe_likeRecipe_data_comments_submittedBy
+  replies: LikeRecipe_likeRecipe_data_comments_replies[]
 }
 
 export interface LikeRecipe_likeRecipe_data {
-  __typename: "Recipe";
-  id: string;
-  title: string;
-  description: string | null;
-  submittedBy: LikeRecipe_likeRecipe_data_submittedBy;
-  commentCount: number;
-  likeCount: number;
-  createdAt: string;
-  servingCount: number | null;
-  timeEstimate: string | null;
-  coverImage: string;
-  liked: boolean;
-  saved: boolean;
-  categories: LikeRecipe_likeRecipe_data_categories[];
-  diets: LikeRecipe_likeRecipe_data_diets[];
-  allergies: LikeRecipe_likeRecipe_data_allergies[];
-  ingredients: LikeRecipe_likeRecipe_data_ingredients[];
-  steps: LikeRecipe_likeRecipe_data_steps[];
-  comments: LikeRecipe_likeRecipe_data_comments[];
+  __typename: 'Recipe'
+  id: string
+  title: string
+  description: string | null
+  submittedBy: LikeRecipe_likeRecipe_data_submittedBy
+  commentCount: number
+  likeCount: number
+  createdAt: string
+  servingCount: number | null
+  timeEstimate: string | null
+  coverImage: string
+  liked: boolean
+  saved: boolean
+  categories: LikeRecipe_likeRecipe_data_categories[]
+  diets: LikeRecipe_likeRecipe_data_diets[]
+  allergies: LikeRecipe_likeRecipe_data_allergies[]
+  ingredients: LikeRecipe_likeRecipe_data_ingredients[]
+  steps: LikeRecipe_likeRecipe_data_steps[]
+  comments: LikeRecipe_likeRecipe_data_comments[]
 }
 
 export interface LikeRecipe_likeRecipe_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface LikeRecipe_likeRecipe {
-  __typename: "LikeRecipeResult";
-  data: LikeRecipe_likeRecipe_data | null;
-  error: LikeRecipe_likeRecipe_error | null;
+  __typename: 'LikeRecipeResult'
+  data: LikeRecipe_likeRecipe_data | null
+  error: LikeRecipe_likeRecipe_error | null
 }
 
 export interface LikeRecipe {
-  likeRecipe: LikeRecipe_likeRecipe;
+  likeRecipe: LikeRecipe_likeRecipe
 }
 
 export interface LikeRecipeVariables {
-  recipeId: string;
+  recipeId: string
 }
 
 /* tslint:disable */
@@ -768,131 +768,131 @@ export interface LikeRecipeVariables {
 // ====================================================
 
 export interface UnlikeRecipe_unlikeRecipe_data_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface UnlikeRecipe_unlikeRecipe_data_categories {
-  __typename: "Category";
-  id: string;
-  name: string;
+  __typename: 'Category'
+  id: string
+  name: string
 }
 
 export interface UnlikeRecipe_unlikeRecipe_data_diets {
-  __typename: "Diet";
-  name: string;
+  __typename: 'Diet'
+  name: string
 }
 
 export interface UnlikeRecipe_unlikeRecipe_data_allergies {
-  __typename: "Allergy";
-  name: string;
+  __typename: 'Allergy'
+  name: string
 }
 
 export interface UnlikeRecipe_unlikeRecipe_data_ingredients {
-  __typename: "Ingredient";
-  name: string;
-  description: string | null;
-  quantity: number | null;
-  unit: string | null;
+  __typename: 'Ingredient'
+  name: string
+  description: string | null
+  quantity: number | null
+  unit: string | null
 }
 
 export interface UnlikeRecipe_unlikeRecipe_data_steps {
-  __typename: "RecipeStep";
-  title: string;
-  description: string;
-  image: string | null;
+  __typename: 'RecipeStep'
+  title: string
+  description: string
+  image: string | null
 }
 
 export interface UnlikeRecipe_unlikeRecipe_data_comments_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface UnlikeRecipe_unlikeRecipe_data_comments_replies_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface UnlikeRecipe_unlikeRecipe_data_comments_replies {
-  __typename: "RecipeCommentReply";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  submittedBy: UnlikeRecipe_unlikeRecipe_data_comments_replies_submittedBy;
+  __typename: 'RecipeCommentReply'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  submittedBy: UnlikeRecipe_unlikeRecipe_data_comments_replies_submittedBy
 }
 
 export interface UnlikeRecipe_unlikeRecipe_data_comments {
-  __typename: "RecipeComment";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  createdAt: string;
-  deleted: boolean;
-  submittedBy: UnlikeRecipe_unlikeRecipe_data_comments_submittedBy;
-  replies: UnlikeRecipe_unlikeRecipe_data_comments_replies[];
+  __typename: 'RecipeComment'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  createdAt: string
+  deleted: boolean
+  submittedBy: UnlikeRecipe_unlikeRecipe_data_comments_submittedBy
+  replies: UnlikeRecipe_unlikeRecipe_data_comments_replies[]
 }
 
 export interface UnlikeRecipe_unlikeRecipe_data {
-  __typename: "Recipe";
-  id: string;
-  title: string;
-  description: string | null;
-  submittedBy: UnlikeRecipe_unlikeRecipe_data_submittedBy;
-  commentCount: number;
-  likeCount: number;
-  createdAt: string;
-  servingCount: number | null;
-  timeEstimate: string | null;
-  coverImage: string;
-  liked: boolean;
-  saved: boolean;
-  categories: UnlikeRecipe_unlikeRecipe_data_categories[];
-  diets: UnlikeRecipe_unlikeRecipe_data_diets[];
-  allergies: UnlikeRecipe_unlikeRecipe_data_allergies[];
-  ingredients: UnlikeRecipe_unlikeRecipe_data_ingredients[];
-  steps: UnlikeRecipe_unlikeRecipe_data_steps[];
-  comments: UnlikeRecipe_unlikeRecipe_data_comments[];
+  __typename: 'Recipe'
+  id: string
+  title: string
+  description: string | null
+  submittedBy: UnlikeRecipe_unlikeRecipe_data_submittedBy
+  commentCount: number
+  likeCount: number
+  createdAt: string
+  servingCount: number | null
+  timeEstimate: string | null
+  coverImage: string
+  liked: boolean
+  saved: boolean
+  categories: UnlikeRecipe_unlikeRecipe_data_categories[]
+  diets: UnlikeRecipe_unlikeRecipe_data_diets[]
+  allergies: UnlikeRecipe_unlikeRecipe_data_allergies[]
+  ingredients: UnlikeRecipe_unlikeRecipe_data_ingredients[]
+  steps: UnlikeRecipe_unlikeRecipe_data_steps[]
+  comments: UnlikeRecipe_unlikeRecipe_data_comments[]
 }
 
 export interface UnlikeRecipe_unlikeRecipe_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface UnlikeRecipe_unlikeRecipe {
-  __typename: "UnlikeRecipeResult";
-  data: UnlikeRecipe_unlikeRecipe_data | null;
-  error: UnlikeRecipe_unlikeRecipe_error | null;
+  __typename: 'UnlikeRecipeResult'
+  data: UnlikeRecipe_unlikeRecipe_data | null
+  error: UnlikeRecipe_unlikeRecipe_error | null
 }
 
 export interface UnlikeRecipe {
-  unlikeRecipe: UnlikeRecipe_unlikeRecipe;
+  unlikeRecipe: UnlikeRecipe_unlikeRecipe
 }
 
 export interface UnlikeRecipeVariables {
-  recipeId: string;
+  recipeId: string
 }
 
 /* tslint:disable */
@@ -905,21 +905,21 @@ export interface UnlikeRecipeVariables {
 // ====================================================
 
 export interface LikeComment_likeComment_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface LikeComment_likeComment {
-  __typename: "LikeCommentResult";
-  error: LikeComment_likeComment_error | null;
+  __typename: 'LikeCommentResult'
+  error: LikeComment_likeComment_error | null
 }
 
 export interface LikeComment {
-  likeComment: LikeComment_likeComment;
+  likeComment: LikeComment_likeComment
 }
 
 export interface LikeCommentVariables {
-  commentId: string;
+  commentId: string
 }
 
 /* tslint:disable */
@@ -932,21 +932,21 @@ export interface LikeCommentVariables {
 // ====================================================
 
 export interface UnlikeComment_unlikeComment_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface UnlikeComment_unlikeComment {
-  __typename: "UnlikeCommentResult";
-  error: UnlikeComment_unlikeComment_error | null;
+  __typename: 'UnlikeCommentResult'
+  error: UnlikeComment_unlikeComment_error | null
 }
 
 export interface UnlikeComment {
-  unlikeComment: UnlikeComment_unlikeComment;
+  unlikeComment: UnlikeComment_unlikeComment
 }
 
 export interface UnlikeCommentVariables {
-  commentId: string;
+  commentId: string
 }
 
 /* tslint:disable */
@@ -959,21 +959,21 @@ export interface UnlikeCommentVariables {
 // ====================================================
 
 export interface DeleteComment_deleteComment_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface DeleteComment_deleteComment {
-  __typename: "DeleteCommentResult";
-  error: DeleteComment_deleteComment_error | null;
+  __typename: 'DeleteCommentResult'
+  error: DeleteComment_deleteComment_error | null
 }
 
 export interface DeleteComment {
-  deleteComment: DeleteComment_deleteComment;
+  deleteComment: DeleteComment_deleteComment
 }
 
 export interface DeleteCommentVariables {
-  commentId: string;
+  commentId: string
 }
 
 /* tslint:disable */
@@ -986,131 +986,131 @@ export interface DeleteCommentVariables {
 // ====================================================
 
 export interface SaveRecipe_saveRecipe_data_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface SaveRecipe_saveRecipe_data_categories {
-  __typename: "Category";
-  id: string;
-  name: string;
+  __typename: 'Category'
+  id: string
+  name: string
 }
 
 export interface SaveRecipe_saveRecipe_data_diets {
-  __typename: "Diet";
-  name: string;
+  __typename: 'Diet'
+  name: string
 }
 
 export interface SaveRecipe_saveRecipe_data_allergies {
-  __typename: "Allergy";
-  name: string;
+  __typename: 'Allergy'
+  name: string
 }
 
 export interface SaveRecipe_saveRecipe_data_ingredients {
-  __typename: "Ingredient";
-  name: string;
-  description: string | null;
-  quantity: number | null;
-  unit: string | null;
+  __typename: 'Ingredient'
+  name: string
+  description: string | null
+  quantity: number | null
+  unit: string | null
 }
 
 export interface SaveRecipe_saveRecipe_data_steps {
-  __typename: "RecipeStep";
-  title: string;
-  description: string;
-  image: string | null;
+  __typename: 'RecipeStep'
+  title: string
+  description: string
+  image: string | null
 }
 
 export interface SaveRecipe_saveRecipe_data_comments_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface SaveRecipe_saveRecipe_data_comments_replies_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface SaveRecipe_saveRecipe_data_comments_replies {
-  __typename: "RecipeCommentReply";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  submittedBy: SaveRecipe_saveRecipe_data_comments_replies_submittedBy;
+  __typename: 'RecipeCommentReply'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  submittedBy: SaveRecipe_saveRecipe_data_comments_replies_submittedBy
 }
 
 export interface SaveRecipe_saveRecipe_data_comments {
-  __typename: "RecipeComment";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  createdAt: string;
-  deleted: boolean;
-  submittedBy: SaveRecipe_saveRecipe_data_comments_submittedBy;
-  replies: SaveRecipe_saveRecipe_data_comments_replies[];
+  __typename: 'RecipeComment'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  createdAt: string
+  deleted: boolean
+  submittedBy: SaveRecipe_saveRecipe_data_comments_submittedBy
+  replies: SaveRecipe_saveRecipe_data_comments_replies[]
 }
 
 export interface SaveRecipe_saveRecipe_data {
-  __typename: "Recipe";
-  id: string;
-  title: string;
-  description: string | null;
-  submittedBy: SaveRecipe_saveRecipe_data_submittedBy;
-  commentCount: number;
-  likeCount: number;
-  createdAt: string;
-  servingCount: number | null;
-  timeEstimate: string | null;
-  coverImage: string;
-  liked: boolean;
-  saved: boolean;
-  categories: SaveRecipe_saveRecipe_data_categories[];
-  diets: SaveRecipe_saveRecipe_data_diets[];
-  allergies: SaveRecipe_saveRecipe_data_allergies[];
-  ingredients: SaveRecipe_saveRecipe_data_ingredients[];
-  steps: SaveRecipe_saveRecipe_data_steps[];
-  comments: SaveRecipe_saveRecipe_data_comments[];
+  __typename: 'Recipe'
+  id: string
+  title: string
+  description: string | null
+  submittedBy: SaveRecipe_saveRecipe_data_submittedBy
+  commentCount: number
+  likeCount: number
+  createdAt: string
+  servingCount: number | null
+  timeEstimate: string | null
+  coverImage: string
+  liked: boolean
+  saved: boolean
+  categories: SaveRecipe_saveRecipe_data_categories[]
+  diets: SaveRecipe_saveRecipe_data_diets[]
+  allergies: SaveRecipe_saveRecipe_data_allergies[]
+  ingredients: SaveRecipe_saveRecipe_data_ingredients[]
+  steps: SaveRecipe_saveRecipe_data_steps[]
+  comments: SaveRecipe_saveRecipe_data_comments[]
 }
 
 export interface SaveRecipe_saveRecipe_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface SaveRecipe_saveRecipe {
-  __typename: "SaveRecipeResult";
-  data: SaveRecipe_saveRecipe_data | null;
-  error: SaveRecipe_saveRecipe_error | null;
+  __typename: 'SaveRecipeResult'
+  data: SaveRecipe_saveRecipe_data | null
+  error: SaveRecipe_saveRecipe_error | null
 }
 
 export interface SaveRecipe {
-  saveRecipe: SaveRecipe_saveRecipe;
+  saveRecipe: SaveRecipe_saveRecipe
 }
 
 export interface SaveRecipeVariables {
-  recipeId: string;
+  recipeId: string
 }
 
 /* tslint:disable */
@@ -1123,131 +1123,131 @@ export interface SaveRecipeVariables {
 // ====================================================
 
 export interface UnsaveRecipe_unsaveRecipe_data_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface UnsaveRecipe_unsaveRecipe_data_categories {
-  __typename: "Category";
-  id: string;
-  name: string;
+  __typename: 'Category'
+  id: string
+  name: string
 }
 
 export interface UnsaveRecipe_unsaveRecipe_data_diets {
-  __typename: "Diet";
-  name: string;
+  __typename: 'Diet'
+  name: string
 }
 
 export interface UnsaveRecipe_unsaveRecipe_data_allergies {
-  __typename: "Allergy";
-  name: string;
+  __typename: 'Allergy'
+  name: string
 }
 
 export interface UnsaveRecipe_unsaveRecipe_data_ingredients {
-  __typename: "Ingredient";
-  name: string;
-  description: string | null;
-  quantity: number | null;
-  unit: string | null;
+  __typename: 'Ingredient'
+  name: string
+  description: string | null
+  quantity: number | null
+  unit: string | null
 }
 
 export interface UnsaveRecipe_unsaveRecipe_data_steps {
-  __typename: "RecipeStep";
-  title: string;
-  description: string;
-  image: string | null;
+  __typename: 'RecipeStep'
+  title: string
+  description: string
+  image: string | null
 }
 
 export interface UnsaveRecipe_unsaveRecipe_data_comments_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface UnsaveRecipe_unsaveRecipe_data_comments_replies_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface UnsaveRecipe_unsaveRecipe_data_comments_replies {
-  __typename: "RecipeCommentReply";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  submittedBy: UnsaveRecipe_unsaveRecipe_data_comments_replies_submittedBy;
+  __typename: 'RecipeCommentReply'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  submittedBy: UnsaveRecipe_unsaveRecipe_data_comments_replies_submittedBy
 }
 
 export interface UnsaveRecipe_unsaveRecipe_data_comments {
-  __typename: "RecipeComment";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  createdAt: string;
-  deleted: boolean;
-  submittedBy: UnsaveRecipe_unsaveRecipe_data_comments_submittedBy;
-  replies: UnsaveRecipe_unsaveRecipe_data_comments_replies[];
+  __typename: 'RecipeComment'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  createdAt: string
+  deleted: boolean
+  submittedBy: UnsaveRecipe_unsaveRecipe_data_comments_submittedBy
+  replies: UnsaveRecipe_unsaveRecipe_data_comments_replies[]
 }
 
 export interface UnsaveRecipe_unsaveRecipe_data {
-  __typename: "Recipe";
-  id: string;
-  title: string;
-  description: string | null;
-  submittedBy: UnsaveRecipe_unsaveRecipe_data_submittedBy;
-  commentCount: number;
-  likeCount: number;
-  createdAt: string;
-  servingCount: number | null;
-  timeEstimate: string | null;
-  coverImage: string;
-  liked: boolean;
-  saved: boolean;
-  categories: UnsaveRecipe_unsaveRecipe_data_categories[];
-  diets: UnsaveRecipe_unsaveRecipe_data_diets[];
-  allergies: UnsaveRecipe_unsaveRecipe_data_allergies[];
-  ingredients: UnsaveRecipe_unsaveRecipe_data_ingredients[];
-  steps: UnsaveRecipe_unsaveRecipe_data_steps[];
-  comments: UnsaveRecipe_unsaveRecipe_data_comments[];
+  __typename: 'Recipe'
+  id: string
+  title: string
+  description: string | null
+  submittedBy: UnsaveRecipe_unsaveRecipe_data_submittedBy
+  commentCount: number
+  likeCount: number
+  createdAt: string
+  servingCount: number | null
+  timeEstimate: string | null
+  coverImage: string
+  liked: boolean
+  saved: boolean
+  categories: UnsaveRecipe_unsaveRecipe_data_categories[]
+  diets: UnsaveRecipe_unsaveRecipe_data_diets[]
+  allergies: UnsaveRecipe_unsaveRecipe_data_allergies[]
+  ingredients: UnsaveRecipe_unsaveRecipe_data_ingredients[]
+  steps: UnsaveRecipe_unsaveRecipe_data_steps[]
+  comments: UnsaveRecipe_unsaveRecipe_data_comments[]
 }
 
 export interface UnsaveRecipe_unsaveRecipe_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface UnsaveRecipe_unsaveRecipe {
-  __typename: "UnsaveRecipeResult";
-  data: UnsaveRecipe_unsaveRecipe_data | null;
-  error: UnsaveRecipe_unsaveRecipe_error | null;
+  __typename: 'UnsaveRecipeResult'
+  data: UnsaveRecipe_unsaveRecipe_data | null
+  error: UnsaveRecipe_unsaveRecipe_error | null
 }
 
 export interface UnsaveRecipe {
-  unsaveRecipe: UnsaveRecipe_unsaveRecipe;
+  unsaveRecipe: UnsaveRecipe_unsaveRecipe
 }
 
 export interface UnsaveRecipeVariables {
-  recipeId: string;
+  recipeId: string
 }
 
 /* tslint:disable */
@@ -1260,33 +1260,33 @@ export interface UnsaveRecipeVariables {
 // ====================================================
 
 export interface FollowUser_followUser_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface FollowUser_followUser_data {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface FollowUser_followUser {
-  __typename: "FollowUserResult";
-  error: FollowUser_followUser_error | null;
-  data: FollowUser_followUser_data | null;
+  __typename: 'FollowUserResult'
+  error: FollowUser_followUser_error | null
+  data: FollowUser_followUser_data | null
 }
 
 export interface FollowUser {
-  followUser: FollowUser_followUser;
+  followUser: FollowUser_followUser
 }
 
 export interface FollowUserVariables {
-  userId: string;
+  userId: string
 }
 
 /* tslint:disable */
@@ -1299,33 +1299,33 @@ export interface FollowUserVariables {
 // ====================================================
 
 export interface UnfollowUser_unfollowUser_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface UnfollowUser_unfollowUser_data {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface UnfollowUser_unfollowUser {
-  __typename: "UnfollowUserResult";
-  error: UnfollowUser_unfollowUser_error | null;
-  data: UnfollowUser_unfollowUser_data | null;
+  __typename: 'UnfollowUserResult'
+  error: UnfollowUser_unfollowUser_error | null
+  data: UnfollowUser_unfollowUser_data | null
 }
 
 export interface UnfollowUser {
-  unfollowUser: UnfollowUser_unfollowUser;
+  unfollowUser: UnfollowUser_unfollowUser
 }
 
 export interface UnfollowUserVariables {
-  userId: string;
+  userId: string
 }
 
 /* tslint:disable */
@@ -1338,43 +1338,43 @@ export interface UnfollowUserVariables {
 // ====================================================
 
 export interface ReadNotification_readNotification_data_concerns {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface ReadNotification_readNotification_data {
-  __typename: "Notification";
-  id: string;
-  type: NotificationType;
-  concerns: ReadNotification_readNotification_data_concerns;
-  createdAt: string;
-  read: boolean;
-  linkId: string | null;
+  __typename: 'Notification'
+  id: string
+  type: NotificationType
+  concerns: ReadNotification_readNotification_data_concerns
+  createdAt: string
+  read: boolean
+  linkId: string | null
 }
 
 export interface ReadNotification_readNotification_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface ReadNotification_readNotification {
-  __typename: "NotificationResult";
-  data: ReadNotification_readNotification_data | null;
-  error: ReadNotification_readNotification_error | null;
+  __typename: 'NotificationResult'
+  data: ReadNotification_readNotification_data | null
+  error: ReadNotification_readNotification_error | null
 }
 
 export interface ReadNotification {
-  readNotification: ReadNotification_readNotification;
+  readNotification: ReadNotification_readNotification
 }
 
 export interface ReadNotificationVariables {
-  notificationId: string;
+  notificationId: string
 }
 
 /* tslint:disable */
@@ -1387,135 +1387,135 @@ export interface ReadNotificationVariables {
 // ====================================================
 
 export interface recipes_recipes_data_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface recipes_recipes_data_categories {
-  __typename: "Category";
-  id: string;
-  name: string;
+  __typename: 'Category'
+  id: string
+  name: string
 }
 
 export interface recipes_recipes_data_diets {
-  __typename: "Diet";
-  name: string;
+  __typename: 'Diet'
+  name: string
 }
 
 export interface recipes_recipes_data_allergies {
-  __typename: "Allergy";
-  name: string;
+  __typename: 'Allergy'
+  name: string
 }
 
 export interface recipes_recipes_data_ingredients {
-  __typename: "Ingredient";
-  name: string;
-  description: string | null;
-  quantity: number | null;
-  unit: string | null;
+  __typename: 'Ingredient'
+  name: string
+  description: string | null
+  quantity: number | null
+  unit: string | null
 }
 
 export interface recipes_recipes_data_steps {
-  __typename: "RecipeStep";
-  title: string;
-  description: string;
-  image: string | null;
+  __typename: 'RecipeStep'
+  title: string
+  description: string
+  image: string | null
 }
 
 export interface recipes_recipes_data_comments_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface recipes_recipes_data_comments_replies_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface recipes_recipes_data_comments_replies {
-  __typename: "RecipeCommentReply";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  submittedBy: recipes_recipes_data_comments_replies_submittedBy;
+  __typename: 'RecipeCommentReply'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  submittedBy: recipes_recipes_data_comments_replies_submittedBy
 }
 
 export interface recipes_recipes_data_comments {
-  __typename: "RecipeComment";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  createdAt: string;
-  deleted: boolean;
-  submittedBy: recipes_recipes_data_comments_submittedBy;
-  replies: recipes_recipes_data_comments_replies[];
+  __typename: 'RecipeComment'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  createdAt: string
+  deleted: boolean
+  submittedBy: recipes_recipes_data_comments_submittedBy
+  replies: recipes_recipes_data_comments_replies[]
 }
 
 export interface recipes_recipes_data {
-  __typename: "Recipe";
-  id: string;
-  title: string;
-  description: string | null;
-  submittedBy: recipes_recipes_data_submittedBy;
-  commentCount: number;
-  likeCount: number;
-  createdAt: string;
-  servingCount: number | null;
-  timeEstimate: string | null;
-  coverImage: string;
-  liked: boolean;
-  saved: boolean;
-  categories: recipes_recipes_data_categories[];
-  diets: recipes_recipes_data_diets[];
-  allergies: recipes_recipes_data_allergies[];
-  ingredients: recipes_recipes_data_ingredients[];
-  steps: recipes_recipes_data_steps[];
-  comments: recipes_recipes_data_comments[];
+  __typename: 'Recipe'
+  id: string
+  title: string
+  description: string | null
+  submittedBy: recipes_recipes_data_submittedBy
+  commentCount: number
+  likeCount: number
+  createdAt: string
+  servingCount: number | null
+  timeEstimate: string | null
+  coverImage: string
+  liked: boolean
+  saved: boolean
+  categories: recipes_recipes_data_categories[]
+  diets: recipes_recipes_data_diets[]
+  allergies: recipes_recipes_data_allergies[]
+  ingredients: recipes_recipes_data_ingredients[]
+  steps: recipes_recipes_data_steps[]
+  comments: recipes_recipes_data_comments[]
 }
 
 export interface recipes_recipes_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface recipes_recipes {
-  __typename: "RecipesResult";
-  data: recipes_recipes_data[] | null;
-  error: recipes_recipes_error | null;
+  __typename: 'RecipesResult'
+  data: recipes_recipes_data[] | null
+  error: recipes_recipes_error | null
 }
 
 export interface recipes {
-  recipes: recipes_recipes;
+  recipes: recipes_recipes
 }
 
 export interface recipesVariables {
-  offset: number;
-  limit: number;
-  query: string;
-  sort: Sort;
-  filter: RecipeFilter;
+  offset: number
+  limit: number
+  query: string
+  sort: Sort
+  filter: RecipeFilter
 }
 
 /* tslint:disable */
@@ -1528,132 +1528,132 @@ export interface recipesVariables {
 // ====================================================
 
 export interface NewsFeed_newsFeed_data_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface NewsFeed_newsFeed_data_categories {
-  __typename: "Category";
-  id: string;
-  name: string;
+  __typename: 'Category'
+  id: string
+  name: string
 }
 
 export interface NewsFeed_newsFeed_data_diets {
-  __typename: "Diet";
-  name: string;
+  __typename: 'Diet'
+  name: string
 }
 
 export interface NewsFeed_newsFeed_data_allergies {
-  __typename: "Allergy";
-  name: string;
+  __typename: 'Allergy'
+  name: string
 }
 
 export interface NewsFeed_newsFeed_data_ingredients {
-  __typename: "Ingredient";
-  name: string;
-  description: string | null;
-  quantity: number | null;
-  unit: string | null;
+  __typename: 'Ingredient'
+  name: string
+  description: string | null
+  quantity: number | null
+  unit: string | null
 }
 
 export interface NewsFeed_newsFeed_data_steps {
-  __typename: "RecipeStep";
-  title: string;
-  description: string;
-  image: string | null;
+  __typename: 'RecipeStep'
+  title: string
+  description: string
+  image: string | null
 }
 
 export interface NewsFeed_newsFeed_data_comments_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface NewsFeed_newsFeed_data_comments_replies_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface NewsFeed_newsFeed_data_comments_replies {
-  __typename: "RecipeCommentReply";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  submittedBy: NewsFeed_newsFeed_data_comments_replies_submittedBy;
+  __typename: 'RecipeCommentReply'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  submittedBy: NewsFeed_newsFeed_data_comments_replies_submittedBy
 }
 
 export interface NewsFeed_newsFeed_data_comments {
-  __typename: "RecipeComment";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  createdAt: string;
-  deleted: boolean;
-  submittedBy: NewsFeed_newsFeed_data_comments_submittedBy;
-  replies: NewsFeed_newsFeed_data_comments_replies[];
+  __typename: 'RecipeComment'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  createdAt: string
+  deleted: boolean
+  submittedBy: NewsFeed_newsFeed_data_comments_submittedBy
+  replies: NewsFeed_newsFeed_data_comments_replies[]
 }
 
 export interface NewsFeed_newsFeed_data {
-  __typename: "Recipe";
-  id: string;
-  title: string;
-  description: string | null;
-  submittedBy: NewsFeed_newsFeed_data_submittedBy;
-  commentCount: number;
-  likeCount: number;
-  createdAt: string;
-  servingCount: number | null;
-  timeEstimate: string | null;
-  coverImage: string;
-  liked: boolean;
-  saved: boolean;
-  categories: NewsFeed_newsFeed_data_categories[];
-  diets: NewsFeed_newsFeed_data_diets[];
-  allergies: NewsFeed_newsFeed_data_allergies[];
-  ingredients: NewsFeed_newsFeed_data_ingredients[];
-  steps: NewsFeed_newsFeed_data_steps[];
-  comments: NewsFeed_newsFeed_data_comments[];
+  __typename: 'Recipe'
+  id: string
+  title: string
+  description: string | null
+  submittedBy: NewsFeed_newsFeed_data_submittedBy
+  commentCount: number
+  likeCount: number
+  createdAt: string
+  servingCount: number | null
+  timeEstimate: string | null
+  coverImage: string
+  liked: boolean
+  saved: boolean
+  categories: NewsFeed_newsFeed_data_categories[]
+  diets: NewsFeed_newsFeed_data_diets[]
+  allergies: NewsFeed_newsFeed_data_allergies[]
+  ingredients: NewsFeed_newsFeed_data_ingredients[]
+  steps: NewsFeed_newsFeed_data_steps[]
+  comments: NewsFeed_newsFeed_data_comments[]
 }
 
 export interface NewsFeed_newsFeed_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface NewsFeed_newsFeed {
-  __typename: "RecipesResult";
-  data: NewsFeed_newsFeed_data[] | null;
-  error: NewsFeed_newsFeed_error | null;
+  __typename: 'RecipesResult'
+  data: NewsFeed_newsFeed_data[] | null
+  error: NewsFeed_newsFeed_error | null
 }
 
 export interface NewsFeed {
-  newsFeed: NewsFeed_newsFeed;
+  newsFeed: NewsFeed_newsFeed
 }
 
 export interface NewsFeedVariables {
-  offset: number;
-  limit: number;
+  offset: number
+  limit: number
 }
 
 /* tslint:disable */
@@ -1666,132 +1666,132 @@ export interface NewsFeedVariables {
 // ====================================================
 
 export interface Trending_trending_data_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface Trending_trending_data_categories {
-  __typename: "Category";
-  id: string;
-  name: string;
+  __typename: 'Category'
+  id: string
+  name: string
 }
 
 export interface Trending_trending_data_diets {
-  __typename: "Diet";
-  name: string;
+  __typename: 'Diet'
+  name: string
 }
 
 export interface Trending_trending_data_allergies {
-  __typename: "Allergy";
-  name: string;
+  __typename: 'Allergy'
+  name: string
 }
 
 export interface Trending_trending_data_ingredients {
-  __typename: "Ingredient";
-  name: string;
-  description: string | null;
-  quantity: number | null;
-  unit: string | null;
+  __typename: 'Ingredient'
+  name: string
+  description: string | null
+  quantity: number | null
+  unit: string | null
 }
 
 export interface Trending_trending_data_steps {
-  __typename: "RecipeStep";
-  title: string;
-  description: string;
-  image: string | null;
+  __typename: 'RecipeStep'
+  title: string
+  description: string
+  image: string | null
 }
 
 export interface Trending_trending_data_comments_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface Trending_trending_data_comments_replies_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface Trending_trending_data_comments_replies {
-  __typename: "RecipeCommentReply";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  submittedBy: Trending_trending_data_comments_replies_submittedBy;
+  __typename: 'RecipeCommentReply'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  submittedBy: Trending_trending_data_comments_replies_submittedBy
 }
 
 export interface Trending_trending_data_comments {
-  __typename: "RecipeComment";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  createdAt: string;
-  deleted: boolean;
-  submittedBy: Trending_trending_data_comments_submittedBy;
-  replies: Trending_trending_data_comments_replies[];
+  __typename: 'RecipeComment'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  createdAt: string
+  deleted: boolean
+  submittedBy: Trending_trending_data_comments_submittedBy
+  replies: Trending_trending_data_comments_replies[]
 }
 
 export interface Trending_trending_data {
-  __typename: "Recipe";
-  id: string;
-  title: string;
-  description: string | null;
-  submittedBy: Trending_trending_data_submittedBy;
-  commentCount: number;
-  likeCount: number;
-  createdAt: string;
-  servingCount: number | null;
-  timeEstimate: string | null;
-  coverImage: string;
-  liked: boolean;
-  saved: boolean;
-  categories: Trending_trending_data_categories[];
-  diets: Trending_trending_data_diets[];
-  allergies: Trending_trending_data_allergies[];
-  ingredients: Trending_trending_data_ingredients[];
-  steps: Trending_trending_data_steps[];
-  comments: Trending_trending_data_comments[];
+  __typename: 'Recipe'
+  id: string
+  title: string
+  description: string | null
+  submittedBy: Trending_trending_data_submittedBy
+  commentCount: number
+  likeCount: number
+  createdAt: string
+  servingCount: number | null
+  timeEstimate: string | null
+  coverImage: string
+  liked: boolean
+  saved: boolean
+  categories: Trending_trending_data_categories[]
+  diets: Trending_trending_data_diets[]
+  allergies: Trending_trending_data_allergies[]
+  ingredients: Trending_trending_data_ingredients[]
+  steps: Trending_trending_data_steps[]
+  comments: Trending_trending_data_comments[]
 }
 
 export interface Trending_trending_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface Trending_trending {
-  __typename: "RecipesResult";
-  data: Trending_trending_data[] | null;
-  error: Trending_trending_error | null;
+  __typename: 'RecipesResult'
+  data: Trending_trending_data[] | null
+  error: Trending_trending_error | null
 }
 
 export interface Trending {
-  trending: Trending_trending;
+  trending: Trending_trending
 }
 
 export interface TrendingVariables {
-  offset: number;
-  limit: number;
+  offset: number
+  limit: number
 }
 
 /* tslint:disable */
@@ -1804,131 +1804,131 @@ export interface TrendingVariables {
 // ====================================================
 
 export interface recipe_recipe_data_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface recipe_recipe_data_categories {
-  __typename: "Category";
-  id: string;
-  name: string;
+  __typename: 'Category'
+  id: string
+  name: string
 }
 
 export interface recipe_recipe_data_diets {
-  __typename: "Diet";
-  name: string;
+  __typename: 'Diet'
+  name: string
 }
 
 export interface recipe_recipe_data_allergies {
-  __typename: "Allergy";
-  name: string;
+  __typename: 'Allergy'
+  name: string
 }
 
 export interface recipe_recipe_data_ingredients {
-  __typename: "Ingredient";
-  name: string;
-  description: string | null;
-  quantity: number | null;
-  unit: string | null;
+  __typename: 'Ingredient'
+  name: string
+  description: string | null
+  quantity: number | null
+  unit: string | null
 }
 
 export interface recipe_recipe_data_steps {
-  __typename: "RecipeStep";
-  title: string;
-  description: string;
-  image: string | null;
+  __typename: 'RecipeStep'
+  title: string
+  description: string
+  image: string | null
 }
 
 export interface recipe_recipe_data_comments_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface recipe_recipe_data_comments_replies_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface recipe_recipe_data_comments_replies {
-  __typename: "RecipeCommentReply";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  submittedBy: recipe_recipe_data_comments_replies_submittedBy;
+  __typename: 'RecipeCommentReply'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  submittedBy: recipe_recipe_data_comments_replies_submittedBy
 }
 
 export interface recipe_recipe_data_comments {
-  __typename: "RecipeComment";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  createdAt: string;
-  deleted: boolean;
-  submittedBy: recipe_recipe_data_comments_submittedBy;
-  replies: recipe_recipe_data_comments_replies[];
+  __typename: 'RecipeComment'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  createdAt: string
+  deleted: boolean
+  submittedBy: recipe_recipe_data_comments_submittedBy
+  replies: recipe_recipe_data_comments_replies[]
 }
 
 export interface recipe_recipe_data {
-  __typename: "Recipe";
-  id: string;
-  title: string;
-  description: string | null;
-  submittedBy: recipe_recipe_data_submittedBy;
-  commentCount: number;
-  likeCount: number;
-  createdAt: string;
-  servingCount: number | null;
-  timeEstimate: string | null;
-  coverImage: string;
-  liked: boolean;
-  saved: boolean;
-  categories: recipe_recipe_data_categories[];
-  diets: recipe_recipe_data_diets[];
-  allergies: recipe_recipe_data_allergies[];
-  ingredients: recipe_recipe_data_ingredients[];
-  steps: recipe_recipe_data_steps[];
-  comments: recipe_recipe_data_comments[];
+  __typename: 'Recipe'
+  id: string
+  title: string
+  description: string | null
+  submittedBy: recipe_recipe_data_submittedBy
+  commentCount: number
+  likeCount: number
+  createdAt: string
+  servingCount: number | null
+  timeEstimate: string | null
+  coverImage: string
+  liked: boolean
+  saved: boolean
+  categories: recipe_recipe_data_categories[]
+  diets: recipe_recipe_data_diets[]
+  allergies: recipe_recipe_data_allergies[]
+  ingredients: recipe_recipe_data_ingredients[]
+  steps: recipe_recipe_data_steps[]
+  comments: recipe_recipe_data_comments[]
 }
 
 export interface recipe_recipe_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface recipe_recipe {
-  __typename: "RecipeResult";
-  data: recipe_recipe_data | null;
-  error: recipe_recipe_error | null;
+  __typename: 'RecipeResult'
+  data: recipe_recipe_data | null
+  error: recipe_recipe_error | null
 }
 
 export interface recipe {
-  recipe: recipe_recipe;
+  recipe: recipe_recipe
 }
 
 export interface recipeVariables {
-  recipeId: string;
+  recipeId: string
 }
 
 /* tslint:disable */
@@ -1941,43 +1941,43 @@ export interface recipeVariables {
 // ====================================================
 
 export interface Me_me_data_dietaryPreferences {
-  __typename: "Diet";
-  id: string;
-  name: string;
+  __typename: 'Diet'
+  id: string
+  name: string
 }
 
 export interface Me_me_data_allergyPreferences {
-  __typename: "Allergy";
-  id: string;
-  name: string;
+  __typename: 'Allergy'
+  id: string
+  name: string
 }
 
 export interface Me_me_data {
-  __typename: "FullUser";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
-  likeCount: number;
-  followerCount: number;
-  followingCount: number;
-  recipeCount: number;
-  isFollowing: boolean | null;
-  dietaryPreferences: Me_me_data_dietaryPreferences[];
-  allergyPreferences: Me_me_data_allergyPreferences[];
-  visibility: Privacy;
+  __typename: 'FullUser'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
+  likeCount: number
+  followerCount: number
+  followingCount: number
+  recipeCount: number
+  isFollowing: boolean | null
+  dietaryPreferences: Me_me_data_dietaryPreferences[]
+  allergyPreferences: Me_me_data_allergyPreferences[]
+  visibility: Privacy
 }
 
 export interface Me_me {
-  __typename: "FullUserResult";
-  data: Me_me_data | null;
+  __typename: 'FullUserResult'
+  data: Me_me_data | null
 }
 
 export interface Me {
-  me: Me_me;
+  me: Me_me
 }
 
 /* tslint:disable */
@@ -1990,30 +1990,30 @@ export interface Me {
 // ====================================================
 
 export interface Diets_diets_data {
-  __typename: "Diet";
-  id: string;
-  name: string;
+  __typename: 'Diet'
+  id: string
+  name: string
 }
 
 export interface Diets_diets_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface Diets_diets {
-  __typename: "DietsResult";
-  data: Diets_diets_data[];
-  error: Diets_diets_error | null;
+  __typename: 'DietsResult'
+  data: Diets_diets_data[]
+  error: Diets_diets_error | null
 }
 
 export interface Diets {
-  diets: Diets_diets;
+  diets: Diets_diets
 }
 
 export interface DietsVariables {
-  offset: number;
-  limit: number;
-  query: string;
+  offset: number
+  limit: number
+  query: string
 }
 
 /* tslint:disable */
@@ -2026,30 +2026,30 @@ export interface DietsVariables {
 // ====================================================
 
 export interface Allergies_allergies_data {
-  __typename: "Allergy";
-  id: string;
-  name: string;
+  __typename: 'Allergy'
+  id: string
+  name: string
 }
 
 export interface Allergies_allergies_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface Allergies_allergies {
-  __typename: "AllergiesResult";
-  data: Allergies_allergies_data[];
-  error: Allergies_allergies_error | null;
+  __typename: 'AllergiesResult'
+  data: Allergies_allergies_data[]
+  error: Allergies_allergies_error | null
 }
 
 export interface Allergies {
-  allergies: Allergies_allergies;
+  allergies: Allergies_allergies
 }
 
 export interface AllergiesVariables {
-  offset: number;
-  limit: number;
-  query: string;
+  offset: number
+  limit: number
+  query: string
 }
 
 /* tslint:disable */
@@ -2062,67 +2062,67 @@ export interface AllergiesVariables {
 // ====================================================
 
 export interface comment_comment_data_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface comment_comment_data_replies_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface comment_comment_data_replies {
-  __typename: "RecipeCommentReply";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  submittedBy: comment_comment_data_replies_submittedBy;
+  __typename: 'RecipeCommentReply'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  submittedBy: comment_comment_data_replies_submittedBy
 }
 
 export interface comment_comment_data {
-  __typename: "RecipeComment";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  createdAt: string;
-  deleted: boolean;
-  submittedBy: comment_comment_data_submittedBy;
-  replies: comment_comment_data_replies[];
+  __typename: 'RecipeComment'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  createdAt: string
+  deleted: boolean
+  submittedBy: comment_comment_data_submittedBy
+  replies: comment_comment_data_replies[]
 }
 
 export interface comment_comment_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface comment_comment {
-  __typename: "CommentResult";
-  data: comment_comment_data | null;
-  error: comment_comment_error | null;
+  __typename: 'CommentResult'
+  data: comment_comment_data | null
+  error: comment_comment_error | null
 }
 
 export interface comment {
-  comment: comment_comment;
+  comment: comment_comment
 }
 
 export interface commentVariables {
-  commentId: string;
+  commentId: string
 }
 
 /* tslint:disable */
@@ -2135,132 +2135,132 @@ export interface commentVariables {
 // ====================================================
 
 export interface savedRecipes_savedRecipes_data_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface savedRecipes_savedRecipes_data_categories {
-  __typename: "Category";
-  id: string;
-  name: string;
+  __typename: 'Category'
+  id: string
+  name: string
 }
 
 export interface savedRecipes_savedRecipes_data_diets {
-  __typename: "Diet";
-  name: string;
+  __typename: 'Diet'
+  name: string
 }
 
 export interface savedRecipes_savedRecipes_data_allergies {
-  __typename: "Allergy";
-  name: string;
+  __typename: 'Allergy'
+  name: string
 }
 
 export interface savedRecipes_savedRecipes_data_ingredients {
-  __typename: "Ingredient";
-  name: string;
-  description: string | null;
-  quantity: number | null;
-  unit: string | null;
+  __typename: 'Ingredient'
+  name: string
+  description: string | null
+  quantity: number | null
+  unit: string | null
 }
 
 export interface savedRecipes_savedRecipes_data_steps {
-  __typename: "RecipeStep";
-  title: string;
-  description: string;
-  image: string | null;
+  __typename: 'RecipeStep'
+  title: string
+  description: string
+  image: string | null
 }
 
 export interface savedRecipes_savedRecipes_data_comments_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface savedRecipes_savedRecipes_data_comments_replies_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface savedRecipes_savedRecipes_data_comments_replies {
-  __typename: "RecipeCommentReply";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  submittedBy: savedRecipes_savedRecipes_data_comments_replies_submittedBy;
+  __typename: 'RecipeCommentReply'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  submittedBy: savedRecipes_savedRecipes_data_comments_replies_submittedBy
 }
 
 export interface savedRecipes_savedRecipes_data_comments {
-  __typename: "RecipeComment";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  createdAt: string;
-  deleted: boolean;
-  submittedBy: savedRecipes_savedRecipes_data_comments_submittedBy;
-  replies: savedRecipes_savedRecipes_data_comments_replies[];
+  __typename: 'RecipeComment'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  createdAt: string
+  deleted: boolean
+  submittedBy: savedRecipes_savedRecipes_data_comments_submittedBy
+  replies: savedRecipes_savedRecipes_data_comments_replies[]
 }
 
 export interface savedRecipes_savedRecipes_data {
-  __typename: "Recipe";
-  id: string;
-  title: string;
-  description: string | null;
-  submittedBy: savedRecipes_savedRecipes_data_submittedBy;
-  commentCount: number;
-  likeCount: number;
-  createdAt: string;
-  servingCount: number | null;
-  timeEstimate: string | null;
-  coverImage: string;
-  liked: boolean;
-  saved: boolean;
-  categories: savedRecipes_savedRecipes_data_categories[];
-  diets: savedRecipes_savedRecipes_data_diets[];
-  allergies: savedRecipes_savedRecipes_data_allergies[];
-  ingredients: savedRecipes_savedRecipes_data_ingredients[];
-  steps: savedRecipes_savedRecipes_data_steps[];
-  comments: savedRecipes_savedRecipes_data_comments[];
+  __typename: 'Recipe'
+  id: string
+  title: string
+  description: string | null
+  submittedBy: savedRecipes_savedRecipes_data_submittedBy
+  commentCount: number
+  likeCount: number
+  createdAt: string
+  servingCount: number | null
+  timeEstimate: string | null
+  coverImage: string
+  liked: boolean
+  saved: boolean
+  categories: savedRecipes_savedRecipes_data_categories[]
+  diets: savedRecipes_savedRecipes_data_diets[]
+  allergies: savedRecipes_savedRecipes_data_allergies[]
+  ingredients: savedRecipes_savedRecipes_data_ingredients[]
+  steps: savedRecipes_savedRecipes_data_steps[]
+  comments: savedRecipes_savedRecipes_data_comments[]
 }
 
 export interface savedRecipes_savedRecipes_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface savedRecipes_savedRecipes {
-  __typename: "RecipesResult";
-  data: savedRecipes_savedRecipes_data[] | null;
-  error: savedRecipes_savedRecipes_error | null;
+  __typename: 'RecipesResult'
+  data: savedRecipes_savedRecipes_data[] | null
+  error: savedRecipes_savedRecipes_error | null
 }
 
 export interface savedRecipes {
-  savedRecipes: savedRecipes_savedRecipes;
+  savedRecipes: savedRecipes_savedRecipes
 }
 
 export interface savedRecipesVariables {
-  offset: number;
-  limit: number;
+  offset: number
+  limit: number
 }
 
 /* tslint:disable */
@@ -2273,53 +2273,53 @@ export interface savedRecipesVariables {
 // ====================================================
 
 export interface profile_profile_data_dietaryPreferences {
-  __typename: "Diet";
-  id: string;
-  name: string;
+  __typename: 'Diet'
+  id: string
+  name: string
 }
 
 export interface profile_profile_data_allergyPreferences {
-  __typename: "Allergy";
-  id: string;
-  name: string;
+  __typename: 'Allergy'
+  id: string
+  name: string
 }
 
 export interface profile_profile_data {
-  __typename: "FullUser";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
-  likeCount: number;
-  followerCount: number;
-  followingCount: number;
-  recipeCount: number;
-  isFollowing: boolean | null;
-  dietaryPreferences: profile_profile_data_dietaryPreferences[];
-  allergyPreferences: profile_profile_data_allergyPreferences[];
-  visibility: Privacy;
+  __typename: 'FullUser'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
+  likeCount: number
+  followerCount: number
+  followingCount: number
+  recipeCount: number
+  isFollowing: boolean | null
+  dietaryPreferences: profile_profile_data_dietaryPreferences[]
+  allergyPreferences: profile_profile_data_allergyPreferences[]
+  visibility: Privacy
 }
 
 export interface profile_profile_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface profile_profile {
-  __typename: "FullUserResult";
-  data: profile_profile_data | null;
-  error: profile_profile_error | null;
+  __typename: 'FullUserResult'
+  data: profile_profile_data | null
+  error: profile_profile_error | null
 }
 
 export interface profile {
-  profile: profile_profile;
+  profile: profile_profile
 }
 
 export interface profileVariables {
-  userId: string;
+  userId: string
 }
 
 /* tslint:disable */
@@ -2332,30 +2332,30 @@ export interface profileVariables {
 // ====================================================
 
 export interface Ingredients_ingredients_data {
-  __typename: "GenericIngredient";
-  id: string;
-  name: string;
+  __typename: 'GenericIngredient'
+  id: string
+  name: string
 }
 
 export interface Ingredients_ingredients_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface Ingredients_ingredients {
-  __typename: "IngredientsResult";
-  data: Ingredients_ingredients_data[];
-  error: Ingredients_ingredients_error | null;
+  __typename: 'IngredientsResult'
+  data: Ingredients_ingredients_data[]
+  error: Ingredients_ingredients_error | null
 }
 
 export interface Ingredients {
-  ingredients: Ingredients_ingredients;
+  ingredients: Ingredients_ingredients
 }
 
 export interface IngredientsVariables {
-  offset: number;
-  limit: number;
-  query: string;
+  offset: number
+  limit: number
+  query: string
 }
 
 /* tslint:disable */
@@ -2368,31 +2368,31 @@ export interface IngredientsVariables {
 // ====================================================
 
 export interface Categories_categories_data {
-  __typename: "Category";
-  id: string;
-  name: string;
-  coverImage: string | null;
+  __typename: 'Category'
+  id: string
+  name: string
+  coverImage: string | null
 }
 
 export interface Categories_categories_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface Categories_categories {
-  __typename: "CategoriesResult";
-  data: Categories_categories_data[];
-  error: Categories_categories_error | null;
+  __typename: 'CategoriesResult'
+  data: Categories_categories_data[]
+  error: Categories_categories_error | null
 }
 
 export interface Categories {
-  categories: Categories_categories;
+  categories: Categories_categories
 }
 
 export interface CategoriesVariables {
-  offset: number;
-  limit: number;
-  query: string;
+  offset: number
+  limit: number
+  query: string
 }
 
 /* tslint:disable */
@@ -2405,31 +2405,31 @@ export interface CategoriesVariables {
 // ====================================================
 
 export interface CategoriesWithImages_categoriesWithImages_data {
-  __typename: "Category";
-  id: string;
-  name: string;
-  coverImage: string | null;
+  __typename: 'Category'
+  id: string
+  name: string
+  coverImage: string | null
 }
 
 export interface CategoriesWithImages_categoriesWithImages_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface CategoriesWithImages_categoriesWithImages {
-  __typename: "CategoriesResult";
-  data: CategoriesWithImages_categoriesWithImages_data[];
-  error: CategoriesWithImages_categoriesWithImages_error | null;
+  __typename: 'CategoriesResult'
+  data: CategoriesWithImages_categoriesWithImages_data[]
+  error: CategoriesWithImages_categoriesWithImages_error | null
 }
 
 export interface CategoriesWithImages {
-  categoriesWithImages: CategoriesWithImages_categoriesWithImages;
+  categoriesWithImages: CategoriesWithImages_categoriesWithImages
 }
 
 export interface CategoriesWithImagesVariables {
-  offset: number;
-  limit: number;
-  query: string;
+  offset: number
+  limit: number
+  query: string
 }
 
 /* tslint:disable */
@@ -2442,36 +2442,36 @@ export interface CategoriesWithImagesVariables {
 // ====================================================
 
 export interface Users_users_data {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface Users_users_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface Users_users {
-  __typename: "UsersResult";
-  data: Users_users_data[] | null;
-  error: Users_users_error | null;
+  __typename: 'UsersResult'
+  data: Users_users_data[] | null
+  error: Users_users_error | null
 }
 
 export interface Users {
-  users: Users_users;
+  users: Users_users
 }
 
 export interface UsersVariables {
-  offset: number;
-  limit: number;
-  query: string;
-  sort: Sort;
+  offset: number
+  limit: number
+  query: string
+  sort: Sort
 }
 
 /* tslint:disable */
@@ -2484,36 +2484,36 @@ export interface UsersVariables {
 // ====================================================
 
 export interface FollowingUsers_followingUsers_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface FollowingUsers_followingUsers_data {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface FollowingUsers_followingUsers {
-  __typename: "UsersResult";
-  error: FollowingUsers_followingUsers_error | null;
-  data: FollowingUsers_followingUsers_data[] | null;
+  __typename: 'UsersResult'
+  error: FollowingUsers_followingUsers_error | null
+  data: FollowingUsers_followingUsers_data[] | null
 }
 
 export interface FollowingUsers {
-  followingUsers: FollowingUsers_followingUsers;
+  followingUsers: FollowingUsers_followingUsers
 }
 
 export interface FollowingUsersVariables {
-  userId: string;
-  offset: number;
-  limit: number;
-  query: string;
+  userId: string
+  offset: number
+  limit: number
+  query: string
 }
 
 /* tslint:disable */
@@ -2526,36 +2526,36 @@ export interface FollowingUsersVariables {
 // ====================================================
 
 export interface FollowedUsers_followedUsers_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface FollowedUsers_followedUsers_data {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface FollowedUsers_followedUsers {
-  __typename: "UsersResult";
-  error: FollowedUsers_followedUsers_error | null;
-  data: FollowedUsers_followedUsers_data[] | null;
+  __typename: 'UsersResult'
+  error: FollowedUsers_followedUsers_error | null
+  data: FollowedUsers_followedUsers_data[] | null
 }
 
 export interface FollowedUsers {
-  followedUsers: FollowedUsers_followedUsers;
+  followedUsers: FollowedUsers_followedUsers
 }
 
 export interface FollowedUsersVariables {
-  userId: string;
-  offset: number;
-  limit: number;
-  query: string;
+  userId: string
+  offset: number
+  limit: number
+  query: string
 }
 
 /* tslint:disable */
@@ -2568,44 +2568,44 @@ export interface FollowedUsersVariables {
 // ====================================================
 
 export interface notifications_notifications_data_concerns {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface notifications_notifications_data {
-  __typename: "Notification";
-  id: string;
-  type: NotificationType;
-  concerns: notifications_notifications_data_concerns;
-  createdAt: string;
-  read: boolean;
-  linkId: string | null;
+  __typename: 'Notification'
+  id: string
+  type: NotificationType
+  concerns: notifications_notifications_data_concerns
+  createdAt: string
+  read: boolean
+  linkId: string | null
 }
 
 export interface notifications_notifications_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface notifications_notifications {
-  __typename: "NotificationsResult";
-  data: notifications_notifications_data[];
-  error: notifications_notifications_error | null;
+  __typename: 'NotificationsResult'
+  data: notifications_notifications_data[]
+  error: notifications_notifications_error | null
 }
 
 export interface notifications {
-  notifications: notifications_notifications;
+  notifications: notifications_notifications
 }
 
 export interface notificationsVariables {
-  offset: number;
-  limit: number;
+  offset: number
+  limit: number
 }
 
 /* tslint:disable */
@@ -2618,23 +2618,23 @@ export interface notificationsVariables {
 // ====================================================
 
 export interface NotificationCount_notificationCount_data {
-  __typename: "NotificationCount";
-  notificationCount: number;
+  __typename: 'NotificationCount'
+  notificationCount: number
 }
 
 export interface NotificationCount_notificationCount_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface NotificationCount_notificationCount {
-  __typename: "NotificationCountResult";
-  data: NotificationCount_notificationCount_data | null;
-  error: NotificationCount_notificationCount_error | null;
+  __typename: 'NotificationCountResult'
+  data: NotificationCount_notificationCount_data | null
+  error: NotificationCount_notificationCount_error | null
 }
 
 export interface NotificationCount {
-  notificationCount: NotificationCount_notificationCount;
+  notificationCount: NotificationCount_notificationCount
 }
 
 /* tslint:disable */
@@ -2647,131 +2647,131 @@ export interface NotificationCount {
 // ====================================================
 
 export interface DeleteRecipe_deleteRecipe_data_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface DeleteRecipe_deleteRecipe_data_categories {
-  __typename: "Category";
-  id: string;
-  name: string;
+  __typename: 'Category'
+  id: string
+  name: string
 }
 
 export interface DeleteRecipe_deleteRecipe_data_diets {
-  __typename: "Diet";
-  name: string;
+  __typename: 'Diet'
+  name: string
 }
 
 export interface DeleteRecipe_deleteRecipe_data_allergies {
-  __typename: "Allergy";
-  name: string;
+  __typename: 'Allergy'
+  name: string
 }
 
 export interface DeleteRecipe_deleteRecipe_data_ingredients {
-  __typename: "Ingredient";
-  name: string;
-  description: string | null;
-  quantity: number | null;
-  unit: string | null;
+  __typename: 'Ingredient'
+  name: string
+  description: string | null
+  quantity: number | null
+  unit: string | null
 }
 
 export interface DeleteRecipe_deleteRecipe_data_steps {
-  __typename: "RecipeStep";
-  title: string;
-  description: string;
-  image: string | null;
+  __typename: 'RecipeStep'
+  title: string
+  description: string
+  image: string | null
 }
 
 export interface DeleteRecipe_deleteRecipe_data_comments_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface DeleteRecipe_deleteRecipe_data_comments_replies_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface DeleteRecipe_deleteRecipe_data_comments_replies {
-  __typename: "RecipeCommentReply";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  submittedBy: DeleteRecipe_deleteRecipe_data_comments_replies_submittedBy;
+  __typename: 'RecipeCommentReply'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  submittedBy: DeleteRecipe_deleteRecipe_data_comments_replies_submittedBy
 }
 
 export interface DeleteRecipe_deleteRecipe_data_comments {
-  __typename: "RecipeComment";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  createdAt: string;
-  deleted: boolean;
-  submittedBy: DeleteRecipe_deleteRecipe_data_comments_submittedBy;
-  replies: DeleteRecipe_deleteRecipe_data_comments_replies[];
+  __typename: 'RecipeComment'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  createdAt: string
+  deleted: boolean
+  submittedBy: DeleteRecipe_deleteRecipe_data_comments_submittedBy
+  replies: DeleteRecipe_deleteRecipe_data_comments_replies[]
 }
 
 export interface DeleteRecipe_deleteRecipe_data {
-  __typename: "Recipe";
-  id: string;
-  title: string;
-  description: string | null;
-  submittedBy: DeleteRecipe_deleteRecipe_data_submittedBy;
-  commentCount: number;
-  likeCount: number;
-  createdAt: string;
-  servingCount: number | null;
-  timeEstimate: string | null;
-  coverImage: string;
-  liked: boolean;
-  saved: boolean;
-  categories: DeleteRecipe_deleteRecipe_data_categories[];
-  diets: DeleteRecipe_deleteRecipe_data_diets[];
-  allergies: DeleteRecipe_deleteRecipe_data_allergies[];
-  ingredients: DeleteRecipe_deleteRecipe_data_ingredients[];
-  steps: DeleteRecipe_deleteRecipe_data_steps[];
-  comments: DeleteRecipe_deleteRecipe_data_comments[];
+  __typename: 'Recipe'
+  id: string
+  title: string
+  description: string | null
+  submittedBy: DeleteRecipe_deleteRecipe_data_submittedBy
+  commentCount: number
+  likeCount: number
+  createdAt: string
+  servingCount: number | null
+  timeEstimate: string | null
+  coverImage: string
+  liked: boolean
+  saved: boolean
+  categories: DeleteRecipe_deleteRecipe_data_categories[]
+  diets: DeleteRecipe_deleteRecipe_data_diets[]
+  allergies: DeleteRecipe_deleteRecipe_data_allergies[]
+  ingredients: DeleteRecipe_deleteRecipe_data_ingredients[]
+  steps: DeleteRecipe_deleteRecipe_data_steps[]
+  comments: DeleteRecipe_deleteRecipe_data_comments[]
 }
 
 export interface DeleteRecipe_deleteRecipe_error {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 export interface DeleteRecipe_deleteRecipe {
-  __typename: "DeleteRecipeResult";
-  data: DeleteRecipe_deleteRecipe_data | null;
-  error: DeleteRecipe_deleteRecipe_error | null;
+  __typename: 'DeleteRecipeResult'
+  data: DeleteRecipe_deleteRecipe_data | null
+  error: DeleteRecipe_deleteRecipe_error | null
 }
 
 export interface DeleteRecipe {
-  deleteRecipe: DeleteRecipe_deleteRecipe;
+  deleteRecipe: DeleteRecipe_deleteRecipe
 }
 
 export interface DeleteRecipeVariables {
-  recipeId: string;
+  recipeId: string
 }
 
 /* tslint:disable */
@@ -2784,14 +2784,14 @@ export interface DeleteRecipeVariables {
 // ====================================================
 
 export interface UserFragment {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 /* tslint:disable */
@@ -2804,9 +2804,9 @@ export interface UserFragment {
 // ====================================================
 
 export interface DietFragment {
-  __typename: "Diet";
-  id: string;
-  name: string;
+  __typename: 'Diet'
+  id: string
+  name: string
 }
 
 /* tslint:disable */
@@ -2819,9 +2819,9 @@ export interface DietFragment {
 // ====================================================
 
 export interface AllergyFragment {
-  __typename: "Allergy";
-  id: string;
-  name: string;
+  __typename: 'Allergy'
+  id: string
+  name: string
 }
 
 /* tslint:disable */
@@ -2834,34 +2834,34 @@ export interface AllergyFragment {
 // ====================================================
 
 export interface FullUserFragment_dietaryPreferences {
-  __typename: "Diet";
-  id: string;
-  name: string;
+  __typename: 'Diet'
+  id: string
+  name: string
 }
 
 export interface FullUserFragment_allergyPreferences {
-  __typename: "Allergy";
-  id: string;
-  name: string;
+  __typename: 'Allergy'
+  id: string
+  name: string
 }
 
 export interface FullUserFragment {
-  __typename: "FullUser";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
-  likeCount: number;
-  followerCount: number;
-  followingCount: number;
-  recipeCount: number;
-  isFollowing: boolean | null;
-  dietaryPreferences: FullUserFragment_dietaryPreferences[];
-  allergyPreferences: FullUserFragment_allergyPreferences[];
-  visibility: Privacy;
+  __typename: 'FullUser'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
+  likeCount: number
+  followerCount: number
+  followingCount: number
+  recipeCount: number
+  isFollowing: boolean | null
+  dietaryPreferences: FullUserFragment_dietaryPreferences[]
+  allergyPreferences: FullUserFragment_allergyPreferences[]
+  visibility: Privacy
 }
 
 /* tslint:disable */
@@ -2874,48 +2874,48 @@ export interface FullUserFragment {
 // ====================================================
 
 export interface RecipeCommentFragment_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface RecipeCommentFragment_replies_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface RecipeCommentFragment_replies {
-  __typename: "RecipeCommentReply";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  submittedBy: RecipeCommentFragment_replies_submittedBy;
+  __typename: 'RecipeCommentReply'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  submittedBy: RecipeCommentFragment_replies_submittedBy
 }
 
 export interface RecipeCommentFragment {
-  __typename: "RecipeComment";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  createdAt: string;
-  deleted: boolean;
-  submittedBy: RecipeCommentFragment_submittedBy;
-  replies: RecipeCommentFragment_replies[];
+  __typename: 'RecipeComment'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  createdAt: string
+  deleted: boolean
+  submittedBy: RecipeCommentFragment_submittedBy
+  replies: RecipeCommentFragment_replies[]
 }
 
 /* tslint:disable */
@@ -2928,112 +2928,112 @@ export interface RecipeCommentFragment {
 // ====================================================
 
 export interface RecipeFragment_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface RecipeFragment_categories {
-  __typename: "Category";
-  id: string;
-  name: string;
+  __typename: 'Category'
+  id: string
+  name: string
 }
 
 export interface RecipeFragment_diets {
-  __typename: "Diet";
-  name: string;
+  __typename: 'Diet'
+  name: string
 }
 
 export interface RecipeFragment_allergies {
-  __typename: "Allergy";
-  name: string;
+  __typename: 'Allergy'
+  name: string
 }
 
 export interface RecipeFragment_ingredients {
-  __typename: "Ingredient";
-  name: string;
-  description: string | null;
-  quantity: number | null;
-  unit: string | null;
+  __typename: 'Ingredient'
+  name: string
+  description: string | null
+  quantity: number | null
+  unit: string | null
 }
 
 export interface RecipeFragment_steps {
-  __typename: "RecipeStep";
-  title: string;
-  description: string;
-  image: string | null;
+  __typename: 'RecipeStep'
+  title: string
+  description: string
+  image: string | null
 }
 
 export interface RecipeFragment_comments_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface RecipeFragment_comments_replies_submittedBy {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface RecipeFragment_comments_replies {
-  __typename: "RecipeCommentReply";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  submittedBy: RecipeFragment_comments_replies_submittedBy;
+  __typename: 'RecipeCommentReply'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  submittedBy: RecipeFragment_comments_replies_submittedBy
 }
 
 export interface RecipeFragment_comments {
-  __typename: "RecipeComment";
-  id: string;
-  contents: string;
-  likeCount: number;
-  replyCount: number;
-  liked: boolean;
-  createdAt: string;
-  deleted: boolean;
-  submittedBy: RecipeFragment_comments_submittedBy;
-  replies: RecipeFragment_comments_replies[];
+  __typename: 'RecipeComment'
+  id: string
+  contents: string
+  likeCount: number
+  replyCount: number
+  liked: boolean
+  createdAt: string
+  deleted: boolean
+  submittedBy: RecipeFragment_comments_submittedBy
+  replies: RecipeFragment_comments_replies[]
 }
 
 export interface RecipeFragment {
-  __typename: "Recipe";
-  id: string;
-  title: string;
-  description: string | null;
-  submittedBy: RecipeFragment_submittedBy;
-  commentCount: number;
-  likeCount: number;
-  createdAt: string;
-  servingCount: number | null;
-  timeEstimate: string | null;
-  coverImage: string;
-  liked: boolean;
-  saved: boolean;
-  categories: RecipeFragment_categories[];
-  diets: RecipeFragment_diets[];
-  allergies: RecipeFragment_allergies[];
-  ingredients: RecipeFragment_ingredients[];
-  steps: RecipeFragment_steps[];
-  comments: RecipeFragment_comments[];
+  __typename: 'Recipe'
+  id: string
+  title: string
+  description: string | null
+  submittedBy: RecipeFragment_submittedBy
+  commentCount: number
+  likeCount: number
+  createdAt: string
+  servingCount: number | null
+  timeEstimate: string | null
+  coverImage: string
+  liked: boolean
+  saved: boolean
+  categories: RecipeFragment_categories[]
+  diets: RecipeFragment_diets[]
+  allergies: RecipeFragment_allergies[]
+  ingredients: RecipeFragment_ingredients[]
+  steps: RecipeFragment_steps[]
+  comments: RecipeFragment_comments[]
 }
 
 /* tslint:disable */
@@ -3046,8 +3046,8 @@ export interface RecipeFragment {
 // ====================================================
 
 export interface ErrorFragment {
-  __typename: "Error";
-  message: string;
+  __typename: 'Error'
+  message: string
 }
 
 /* tslint:disable */
@@ -3060,11 +3060,11 @@ export interface ErrorFragment {
 // ====================================================
 
 export interface IngredientFragment {
-  __typename: "Ingredient";
-  name: string;
-  description: string | null;
-  quantity: number | null;
-  unit: string | null;
+  __typename: 'Ingredient'
+  name: string
+  description: string | null
+  quantity: number | null
+  unit: string | null
 }
 
 /* tslint:disable */
@@ -3077,9 +3077,9 @@ export interface IngredientFragment {
 // ====================================================
 
 export interface GenericIngredientFragment {
-  __typename: "GenericIngredient";
-  id: string;
-  name: string;
+  __typename: 'GenericIngredient'
+  id: string
+  name: string
 }
 
 /* tslint:disable */
@@ -3092,10 +3092,10 @@ export interface GenericIngredientFragment {
 // ====================================================
 
 export interface CategoryFragment {
-  __typename: "Category";
-  id: string;
-  name: string;
-  coverImage: string | null;
+  __typename: 'Category'
+  id: string
+  name: string
+  coverImage: string | null
 }
 
 /* tslint:disable */
@@ -3108,24 +3108,24 @@ export interface CategoryFragment {
 // ====================================================
 
 export interface NotificationFragment_concerns {
-  __typename: "User";
-  id: string;
-  firstName: string;
-  lastName: string;
-  bio: string | null;
-  email: string;
-  avatarURI: string | null;
-  verified: boolean;
+  __typename: 'User'
+  id: string
+  firstName: string
+  lastName: string
+  bio: string | null
+  email: string
+  avatarURI: string | null
+  verified: boolean
 }
 
 export interface NotificationFragment {
-  __typename: "Notification";
-  id: string;
-  type: NotificationType;
-  concerns: NotificationFragment_concerns;
-  createdAt: string;
-  read: boolean;
-  linkId: string | null;
+  __typename: 'Notification'
+  id: string
+  type: NotificationType
+  concerns: NotificationFragment_concerns
+  createdAt: string
+  read: boolean
+  linkId: string | null
 }
 
 /* tslint:disable */
@@ -3138,112 +3138,112 @@ export interface NotificationFragment {
 //==============================================================
 
 export enum NotificationType {
-  COMMENT_LIKED = "COMMENT_LIKED",
-  COMMENT_REPLIED = "COMMENT_REPLIED",
-  RECIPE_COMMENTED = "RECIPE_COMMENTED",
-  RECIPE_LIKED = "RECIPE_LIKED",
+  COMMENT_LIKED = 'COMMENT_LIKED',
+  COMMENT_REPLIED = 'COMMENT_REPLIED',
+  RECIPE_COMMENTED = 'RECIPE_COMMENTED',
+  RECIPE_LIKED = 'RECIPE_LIKED',
 }
 
 export enum Privacy {
-  FRIENDS = "FRIENDS",
-  PRIVATE = "PRIVATE",
-  PUBLIC = "PUBLIC",
+  FRIENDS = 'FRIENDS',
+  PRIVATE = 'PRIVATE',
+  PUBLIC = 'PUBLIC',
 }
 
 export enum Sort {
-  NEW = "NEW",
-  POPULAR = "POPULAR",
-  RELEVANT = "RELEVANT",
+  NEW = 'NEW',
+  POPULAR = 'POPULAR',
+  RELEVANT = 'RELEVANT',
 }
 
 export interface AllergyInput {
-  name: string;
+  name: string
 }
 
 export interface AllergyPreferenceDetails {
-  allergies: string[];
+  allergies: string[]
 }
 
 export interface CategoryInput {
-  name: string;
+  name: string
 }
 
 export interface ChangePasswordDetails {
-  oldPassword: string;
-  newPassword: string;
-  confirmNewPassword: string;
+  oldPassword: string
+  newPassword: string
+  confirmNewPassword: string
 }
 
 export interface DietInput {
-  name: string;
+  name: string
 }
 
 export interface DietaryPreferenceDetails {
-  diets: string[];
+  diets: string[]
 }
 
 export interface IngredientInput {
-  name: string;
-  description?: string | null;
-  quantity?: number | null;
-  unit?: string | null;
+  name: string
+  description?: string | null
+  quantity?: number | null
+  unit?: string | null
 }
 
 export interface IngredientsFilter {
-  includes?: string[] | null;
-  excludes?: string[] | null;
+  includes?: string[] | null
+  excludes?: string[] | null
 }
 
 export interface LoginInput {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
 
 export interface ProfileDetails {
-  firstName?: string | null;
-  lastName?: string | null;
-  bio?: string | null;
-  profileImage?: any | null;
+  firstName?: string | null
+  lastName?: string | null
+  bio?: string | null
+  profileImage?: any | null
 }
 
 export interface ProfileVisibilityDetails {
-  visibility: Privacy;
+  visibility: Privacy
 }
 
 export interface RecipeFilter {
-  ingredients?: IngredientsFilter | null;
-  categories?: string[] | null;
-  allergies?: string[] | null;
-  diets?: string[] | null;
-  cookTime?: string | null;
-  user?: string | null;
+  ingredients?: IngredientsFilter | null
+  categories?: string[] | null
+  allergies?: string[] | null
+  diets?: string[] | null
+  cookTime?: string | null
+  user?: string | null
 }
 
 export interface RecipeInput {
-  title: string;
-  description?: string | null;
-  servingCount?: number | null;
-  timeEstimate?: string | null;
-  coverImage: any;
-  categories?: CategoryInput[] | null;
-  diets?: DietInput[] | null;
-  allergies?: AllergyInput[] | null;
-  ingredients?: IngredientInput[] | null;
-  steps?: RecipeStepInput[] | null;
+  title: string
+  description?: string | null
+  servingCount?: number | null
+  timeEstimate?: string | null
+  coverImage: any
+  categories?: CategoryInput[] | null
+  diets?: DietInput[] | null
+  allergies?: AllergyInput[] | null
+  ingredients?: IngredientInput[] | null
+  steps?: RecipeStepInput[] | null
 }
 
 export interface RecipeStepInput {
-  image?: any | null;
-  title?: string | null;
-  description: string;
+  image?: any | null
+  title?: string | null
+  description: string
 }
 
 export interface SignupInput {
-  email: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-  confirmPassword: string;
+  email: string
+  firstName: string
+  lastName: string
+  password: string
+  confirmPassword: string
 }
 
 //==============================================================

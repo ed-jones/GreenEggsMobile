@@ -1,8 +1,8 @@
 /**
  * Author: Edward Jones
  */
-import React from "react";
-import "react-native-gesture-handler";
+import React from 'react'
+import 'react-native-gesture-handler'
 import {
   CachedResourcesProvider,
   GraphQLProvider,
@@ -12,8 +12,8 @@ import {
   NotificationStateProvider,
   UserStateProvider,
   AddRecipeStateProvider,
-} from "@greeneggs/providers";
-import { Router } from "@greeneggs/navigation";
+} from '@greeneggs/providers'
+import { Router } from '@greeneggs/navigation'
 
 export default function App() {
   return (
@@ -34,5 +34,5 @@ export default function App() {
         </GraphQLProvider>
       </AuthProvider>
     </CachedResourcesProvider>
-  );
+  )
 }

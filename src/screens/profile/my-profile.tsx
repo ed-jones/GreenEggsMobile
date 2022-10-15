@@ -1,14 +1,14 @@
 /**
  * Author: Andrew Wilkie
  */
-import React from "react";
-import { Text } from "@ui-kitten/components";
-import { useQuery } from "@apollo/client";
-import { Callout } from "@greeneggs/ui";
-import { Queries } from '@greeneggs/graphql';
-import { Me } from "@greeneggs/types/graphql";
-import { LoadingScreen } from "../loading-screen";
-import { GenericProfile } from "./generic-profile";
+import React from 'react'
+import { Text } from '@ui-kitten/components'
+import { useQuery } from '@apollo/client'
+import { Callout } from '@greeneggs/ui'
+import { Queries } from '@greeneggs/graphql'
+import { Me } from '@greeneggs/types/graphql'
+import { LoadingScreen } from '../loading-screen'
+import { GenericProfile } from './generic-profile'
 
 /**
  * Screen for displaying the profile details for the logged in user.
@@ -16,21 +16,21 @@ import { GenericProfile } from "./generic-profile";
  * and lets the user edit their profile.
  */
 export const MyProfile = () => {
-  const meResult = useQuery<Me>(Queries.ME);
+  const meResult = useQuery<Me>(Queries.ME)
 
   if (meResult.loading) {
-    return <LoadingScreen />;
+    return <LoadingScreen />
   }
 
   if (meResult.error) {
-    return <Callout message="There was an error" type="danger" />;
+    return <Callout message='There was an error' type='danger' />
   }
 
-  const me = meResult.data?.me.data;
+  const me = meResult.data?.me.data
 
   if (me === undefined || me === null) {
-    return <Text>Error! User not found</Text>;
+    return <Text>Error! User not found</Text>
   }
 
-  return <GenericProfile userId={me.id} isMe />;
-};
+  return <GenericProfile userId={me.id} isMe />
+}

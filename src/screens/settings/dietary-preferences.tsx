@@ -1,20 +1,12 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React, { useState } from "react";
-import {
-  Button,
-  IndexPath,
-  List,
-  ListItem,
-  Spinner,
-  Text,
-  SelectItem,
-} from "@ui-kitten/components";
-import { StyleSheet, View } from "react-native";
-import { Mutations, Queries } from "@greeneggs/graphql";
-import {  } from "@ui-kitten/components";
-import { useMutation, useQuery } from "@apollo/client";
+import React, { useState } from 'react'
+import { Button, IndexPath, List, ListItem, Spinner, Text, SelectItem } from '@ui-kitten/components'
+import { StyleSheet, View } from 'react-native'
+import { Mutations, Queries } from '@greeneggs/graphql'
+import {} from '@ui-kitten/components'
+import { useMutation, useQuery } from '@apollo/client'
 import {
   Diets,
   Diets_diets_data,
@@ -23,18 +15,18 @@ import {
   RemoveDietaryPreferencesVariables,
   UpdateDietaryPreferences,
   UpdateDietaryPreferencesVariables,
-} from "@greeneggs/types/graphql";
-import { LoadingScreen } from "../loading-screen";
-import { FullUserFragment } from "@greeneggs/graphql/fragments";
-import { TopNavigation, Select, Background, Callout, Icons } from "@greeneggs/ui";
+} from '@greeneggs/types/graphql'
+import { LoadingScreen } from '../loading-screen'
+import { FullUserFragment } from '@greeneggs/graphql/fragments'
+import { TopNavigation, Select, Background, Callout, Icons } from '@greeneggs/ui'
 
 const styles = StyleSheet.create({
   view: {
     padding: 16,
   },
   buttonGroup: {
-    flexDirection: "row-reverse",
-    justifyContent: "space-between",
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
   },
   heading: {
     paddingVertical: 16,
@@ -42,10 +34,10 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: 10,
   },
-});
+})
 
 function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
-  return Number(selectedIndex.toString()) - 1;
+  return Number(selectedIndex.toString()) - 1
 }
 
 /**
@@ -58,34 +50,30 @@ export const DietaryPreferences = () => {
       query: '',
       offset: 0,
       limit: 100,
-    }
-  });
-  const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(
-    new IndexPath(0)
-  );
-  const getMe = useQuery<Me>(Queries.ME);
+    },
+  })
+  const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(new IndexPath(0))
+  const getMe = useQuery<Me>(Queries.ME)
 
   const [removeDietaryPreferences] = useMutation<
     RemoveDietaryPreferences,
     RemoveDietaryPreferencesVariables
-  >(Mutations.REMOVE_DIETARY_PREFERENCES);
-  const [updateDietaryPreferences, updateDietaryPreferencesResult] =
-    useMutation<UpdateDietaryPreferences, UpdateDietaryPreferencesVariables>(
-      Mutations.UPDATE_DIETARY_PREFERENCES
-    );
+  >(Mutations.REMOVE_DIETARY_PREFERENCES)
+  const [updateDietaryPreferences, updateDietaryPreferencesResult] = useMutation<
+    UpdateDietaryPreferences,
+    UpdateDietaryPreferencesVariables
+  >(Mutations.UPDATE_DIETARY_PREFERENCES)
 
-  if (getDiet.loading || getMe.loading) return <LoadingScreen />;
+  if (getDiet.loading || getMe.loading) return <LoadingScreen />
   if (getDiet.error) {
-    return <Text>Error! {getDiet.error.message}</Text>;
+    return <Text>Error! {getDiet.error.message}</Text>
   }
   if (getMe.error) {
-    return <Text>Error! {getMe.error.message}</Text>;
+    return <Text>Error! {getMe.error.message}</Text>
   }
-  const me = getMe.data?.me.data;
-  const diets = getDiet.data?.diets.data || [];
-  const unselectedDiets = diets.filter(
-    (diet) => !me?.dietaryPreferences.includes(diet)
-  );
+  const me = getMe.data?.me.data
+  const diets = getDiet.data?.diets.data || []
+  const unselectedDiets = diets.filter((diet) => !me?.dietaryPreferences.includes(diet))
 
   function handleSubmit() {
     if (me?.dietaryPreferences) {
@@ -111,12 +99,12 @@ export const DietaryPreferences = () => {
               ],
             },
             fragment: FullUserFragment,
-            fragmentName: "FullUserFragment",
-          });
+            fragmentName: 'FullUserFragment',
+          })
         },
-      });
+      })
     }
-    setSelectedIndex(new IndexPath(0));
+    setSelectedIndex(new IndexPath(0))
   }
 
   function removeDiet(diet: Diets_diets_data) {
@@ -137,44 +125,41 @@ export const DietaryPreferences = () => {
               ),
             },
             fragment: FullUserFragment,
-            fragmentName: "FullUserFragment",
-          });
+            fragmentName: 'FullUserFragment',
+          })
         },
-      });
+      })
     }
   }
 
   return (
     <Background>
-      <TopNavigation title="Dietary Preferences" />
+      <TopNavigation title='Dietary Preferences' />
       <View>
         <View style={styles.view}>
           <Callout
-            message="Here you can tell us your dietary preferences so that we can better show you recipes relevant to you."
-            type="info"
+            message='Here you can tell us your dietary preferences so that we can better show you recipes relevant to you.'
+            type='info'
           />
-          <View style={{ flexDirection: "row" }}>
+          <View style={{ flexDirection: 'row' }}>
             <Select
               style={{ flex: 1, marginHorizontal: 8 }}
               onSelect={(index) => setSelectedIndex(index)}
               selectedIndex={selectedIndex}
               disabled={unselectedDiets.length === 0}
-              value={
-                unselectedDiets[indexToNumber(selectedIndex)]?.name ||
-                "NO DIETS FOUND"
-              }
+              value={unselectedDiets[indexToNumber(selectedIndex)]?.name || 'NO DIETS FOUND'}
             >
               {unselectedDiets.map((diet) => (
                 <SelectItem key={diet.id} title={diet.name} />
               ))}
             </Select>
             <Button
-              size="small"
+              size='small'
               onPress={handleSubmit}
               disabled={unselectedDiets.length === 0}
               accessoryLeft={
                 updateDietaryPreferencesResult.loading
-                  ? () => <Spinner size="small" status="control" />
+                  ? () => <Spinner size='small' status='control' />
                   : Icons.Add
               }
             >
@@ -195,5 +180,5 @@ export const DietaryPreferences = () => {
         />
       </View>
     </Background>
-  );
-};
+  )
+}

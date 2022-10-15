@@ -1,43 +1,50 @@
 /**
  * Author: Victor Ying
  */
-import React, { FC, useContext, useState } from "react";
-import { Queries } from "@greeneggs/graphql";
+import React, { FC, useContext, useState } from 'react'
+import { Queries } from '@greeneggs/graphql'
+import { Divider } from '@ui-kitten/components'
 import {
-  Divider,
-} from "@ui-kitten/components";
-import { Input, TopNavigation, Background, Icons, LazyListAlpha, AlphabetType, SelectableListItem, EmptyState } from '@greeneggs/ui';
-import { useNavigation } from "@react-navigation/core";
+  Input,
+  TopNavigation,
+  Background,
+  Icons,
+  LazyListAlpha,
+  AlphabetType,
+  SelectableListItem,
+  EmptyState,
+} from '@greeneggs/ui'
+import { useNavigation } from '@react-navigation/core'
 import {
   Ingredients,
   IngredientsVariables,
   Ingredients_ingredients_data,
   RecipeFilter,
   Sort,
-} from "@greeneggs/types/graphql";
-import { SearchContext } from "@greeneggs/providers/search-state-provider";
+} from '@greeneggs/types/graphql'
+import { SearchContext } from '@greeneggs/providers/search-state-provider'
 
-import { AddToFilter } from "../common";
-import { View } from "react-native";
+import { AddToFilter } from '../common'
+import { View } from 'react-native'
 
 /**
  * Screen for filtering out ingredients from a search
  */
 export const FilterIngredientsExcluded: FC = () => {
-  const navigation = useNavigation();
-  const [query, setQuery] = useState("");
-  const { searchState, setSearchState } = useContext(SearchContext);
+  const navigation = useNavigation()
+  const [query, setQuery] = useState('')
+  const { searchState, setSearchState } = useContext(SearchContext)
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>(
     searchState.filter.ingredients?.excludes ?? []
-  );
+  )
 
   const setSelected = (selected: boolean, id: string) => {
     setSelectedIngredients(
       selected
         ? [...selectedIngredients, id]
         : [...selectedIngredients.filter((excludes) => excludes !== id)]
-    );
-  };
+    )
+  }
 
   const addToFilter = () => {
     setSearchState?.({
@@ -49,16 +56,16 @@ export const FilterIngredientsExcluded: FC = () => {
           excludes: selectedIngredients,
         },
       },
-    });
-    navigation.goBack();
-  };
+    })
+    navigation.goBack()
+  }
 
   return (
     <Background>
-      <TopNavigation title="Ingredients (Excluded)" />
+      <TopNavigation title='Ingredients (Excluded)' />
       <Input
         style={{ padding: 16, backgroundColor: 'white' }}
-        placeholder="Search ingredients..."
+        placeholder='Search ingredients...'
         accessoryLeft={Icons.Search}
         onChangeText={setQuery}
         value={query}
@@ -84,14 +91,14 @@ export const FilterIngredientsExcluded: FC = () => {
         query={Queries.GET_INGREDIENTS}
         contentContainerStyle={{ flexGrow: 1 }}
         ListEmptyComponent={
-          <View style={{ flexGrow: 1, justifyContent: "center" }}>
+          <View style={{ flexGrow: 1, justifyContent: 'center' }}>
             <EmptyState description="Couldn't find any ingredients." />
           </View>
         }
         variables={{
           query,
         }}
-        dataKey="ingredients"
+        dataKey='ingredients'
       />
       <AddToFilter
         clearFilters={() => setSelectedIngredients([])}
@@ -99,5 +106,5 @@ export const FilterIngredientsExcluded: FC = () => {
         addToFilter={addToFilter}
       />
     </Background>
-  );
-};
+  )
+}

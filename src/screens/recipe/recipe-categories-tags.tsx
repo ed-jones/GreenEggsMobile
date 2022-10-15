@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Tags } from '@greeneggs/ui'
 import { recipe_recipe_data_categories } from '@greeneggs/types/graphql'
 import { useNavigation } from '@react-navigation/core'
@@ -13,7 +13,7 @@ interface IRecipeCategoriesTags {
 /**
  * Component that displays a horizontal scrolling list of categories in the form of tags.
  */
-export const RecipeCategoriesTags = ({ categories }: IRecipeCategoriesTags) => {
+export const RecipeCategoriesTags = ({ categories }: IRecipeCategoriesTags): ReactElement => {
   const navigation = useNavigation()
   return (
     <Tags

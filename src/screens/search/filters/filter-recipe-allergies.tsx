@@ -5,13 +5,7 @@ import React, { FC, useContext, useState } from 'react'
 import { Queries } from '@greeneggs/graphql'
 import { Divider } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
-import {
-  Allergies,
-  AllergiesVariables,
-  Allergies_allergies_data,
-  RecipeFilter,
-  Sort,
-} from '@greeneggs/types/graphql'
+import { Allergies, AllergiesVariables, Allergies_allergies_data, RecipeFilter, Sort } from '@greeneggs/types/graphql'
 import { SearchContext } from '@greeneggs/providers/search-state-provider'
 import {
   Input,
@@ -33,15 +27,11 @@ export const FilterRecipeAllergies: FC = () => {
   const navigation = useNavigation()
   const [query, setQuery] = useState('')
   const { searchState, setSearchState } = useContext(SearchContext)
-  const [selectedAllergies, setSelectedAllergies] = useState<string[]>(
-    searchState.filter.allergies ?? []
-  )
+  const [selectedAllergies, setSelectedAllergies] = useState<string[]>(searchState.filter.allergies ?? [])
 
   const setSelected = (selected: boolean, id: string) => {
     setSelectedAllergies(
-      selected
-        ? [...selectedAllergies, id]
-        : [...selectedAllergies.filter((allergies) => allergies !== id)]
+      selected ? [...selectedAllergies, id] : [...selectedAllergies.filter((allergies) => allergies !== id)]
     )
   }
 

@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import 'react-native-gesture-handler'
 import {
   CachedResourcesProvider,
@@ -15,7 +15,7 @@ import {
 } from '@greeneggs/providers'
 import { Router } from '@greeneggs/navigation'
 
-export default function App() {
+export default function App(): ReactElement {
   return (
     <CachedResourcesProvider>
       <AuthProvider>

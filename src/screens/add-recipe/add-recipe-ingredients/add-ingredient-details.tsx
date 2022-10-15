@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import { Button, Text } from '@ui-kitten/components'
 import { Background, ControlledInput, Icons, InputType, Rules, TopNavigation } from '@greeneggs/ui'
 import { IngredientInput } from '@greeneggs/types/graphql'
@@ -15,7 +15,7 @@ import { AddRecipeStyles } from '../add-recipe-styles'
  * Screen for adding details to a selected ingredient, including
  * a description, quantity and unit (for the quantity).
  */
-export const AddIngredientDetails = () => {
+export const AddIngredientDetails = (): ReactElement => {
   const form = useForm<IngredientInput>({ mode: 'all' })
   const { ingredientsFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation()

@@ -39,13 +39,7 @@ export const PickIngredient: FC = () => {
         value={query}
         autoFocus
       />
-      <LazyListAlpha<
-        Ingredients,
-        IngredientsVariables,
-        Ingredients_ingredients_data,
-        Sort,
-        RecipeFilter
-      >
+      <LazyListAlpha<Ingredients, IngredientsVariables, Ingredients_ingredients_data, Sort, RecipeFilter>
         renderItem={(item) => (
           <>
             <ListItem title={item.name} onPress={() => pick(item)} />
@@ -56,10 +50,7 @@ export const PickIngredient: FC = () => {
         query={Queries.GET_INGREDIENTS}
         ListFooterComponent={
           query.length > 0 ? (
-            <Button
-              style={{ marginHorizontal: 16, marginTop: 16 }}
-              onPress={() => pick({ name: toTitleCase(query) })}
-            >
+            <Button style={{ marginHorizontal: 16, marginTop: 16 }} onPress={() => pick({ name: toTitleCase(query) })}>
               {`CREATE "${query.toUpperCase()}"`}
             </Button>
           ) : undefined

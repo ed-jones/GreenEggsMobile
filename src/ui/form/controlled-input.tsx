@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Controller, ControllerProps, RegisterOptions } from 'react-hook-form'
 import { InputProps } from '@ui-kitten/components'
 import { ErrorFragment } from '@greeneggs/types/graphql'
@@ -34,10 +34,7 @@ export interface IControlledInput<FieldValues> {
 }
 
 // This object exists in order to reuse common form validation rules
-export const Rules: Record<
-  string,
-  Omit<RegisterOptions, 'valueAsNumber' | 'valueAsDate' | 'setValueAs'>
-> = {
+export const Rules: Record<string, Omit<RegisterOptions, 'valueAsNumber' | 'valueAsDate' | 'setValueAs'>> = {
   REQUIRED: { required: { value: true, message: 'This field is required' } },
   UNDER100CHARS: {
     maxLength: { value: 100, message: 'Must be under 100 characters' },
@@ -54,10 +51,7 @@ interface IInputTypeDefaultProps<FieldValues> {
 // This object stores the default props associated with each input type
 // These values can be overwritten
 // Example props include form validation rules for emails and passwords
-const InputTypeDefaultProps = <FieldValues,>(): Record<
-  InputType,
-  IInputTypeDefaultProps<FieldValues>
-> => ({
+const InputTypeDefaultProps = <FieldValues,>(): Record<InputType, IInputTypeDefaultProps<FieldValues>> => ({
   Email: {
     inputProps: {
       label: 'EMAIL',
@@ -73,7 +67,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
         ...Rules.UNDER100CHARS,
         pattern: {
           value:
-            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
           message: 'Not an email address',
         },
       },
@@ -148,13 +142,13 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<
  * Generic component that renders an input component controlled and validated with react-hook-form
  */
 export const ControlledInput = <
-  FieldValues extends Partial<Record<keyof FieldValues, string | number | object | null>>
+  FieldValues extends Partial<Record<keyof FieldValues, string | number | Record<string, unknown> | null>>
 >({
   controllerProps,
   inputProps,
   type,
   submitError,
-}: IControlledInput<FieldValues>) => {
+}: IControlledInput<FieldValues>): ReactElement => {
   const inputTypeDefaultProps = InputTypeDefaultProps<FieldValues>()[type]
   const { caption, ...unionInputProps } = {
     ...inputTypeDefaultProps.inputProps,
@@ -179,13 +173,7 @@ export const ControlledInput = <
           )
         } else if (type === InputType.TIME) {
           return (
-            <TimeInput
-              inputProps={unionInputProps}
-              onChange={onChange}
-              onBlur={onBlur}
-              error={error}
-              value={value}
-            />
+            <TimeInput inputProps={unionInputProps} onChange={onChange} onBlur={onBlur} error={error} value={value} />
           )
         } else if (type === InputType.PRIVACY) {
           return (
@@ -206,13 +194,9 @@ export const ControlledInput = <
               multiline={type === InputType.TEXTAREA}
               onBlur={onBlur}
               textAlignVertical={type === InputType.TEXTAREA ? 'top' : undefined}
-              onChangeText={(e) =>
-                type === InputType.NUMERIC ? onChange(stringToNumber(e)) : onChange(e)
-              }
+              onChangeText={(e) => (type === InputType.NUMERIC ? onChange(stringToNumber(e)) : onChange(e))}
               value={
-                type === InputType.NUMERIC
-                  ? (value && numberToString(value)) || ''
-                  : (value && String(value)) || ''
+                type === InputType.NUMERIC ? (value && numberToString(value)) || '' : (value && String(value)) || ''
               }
               status={error || !!submitError ? 'danger' : undefined}
               caption={submitError ? submitError?.message : error?.message || caption}

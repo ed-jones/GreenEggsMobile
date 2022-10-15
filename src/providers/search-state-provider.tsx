@@ -39,9 +39,5 @@ export const SearchContext = createContext<ISearchContext>({
 export const SearchStateProvider: FC = ({ children }) => {
   const [searchState, setSearchState] = useState<SearchState>(defaultSearchState)
 
-  return (
-    <SearchContext.Provider value={{ searchState, setSearchState }}>
-      {children}
-    </SearchContext.Provider>
-  )
+  return <SearchContext.Provider value={{ searchState, setSearchState }}>{children}</SearchContext.Provider>
 }

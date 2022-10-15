@@ -1,10 +1,12 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Card, Text } from '@ui-kitten/components'
 import { TopNavigation, Background } from '@greeneggs/ui'
+import { RouteProp, useRoute } from '@react-navigation/native'
+import { Users_users_data } from '@greeneggs/types/graphql'
 
 const styles = StyleSheet.create({
   cardElement: {
@@ -13,10 +15,16 @@ const styles = StyleSheet.create({
   },
 })
 
+type RecipeRoute = RouteProp<
+  { params: { description: string; createdAt: string; title: string; submittedBy: Users_users_data } },
+  'params'
+>
+
 /**
  * Screen for displaying a recipe's complete description and recipe upload date.
  */
-export const RecipeDescription = ({ route }: any) => {
+export const RecipeDescription = (): ReactElement => {
+  const route = useRoute<RecipeRoute>()
   const { description, createdAt, title, submittedBy } = route.params
 
   return (
@@ -29,9 +37,7 @@ export const RecipeDescription = ({ route }: any) => {
             <Text category='s1'>{`Created by ${submittedBy.firstName} ${submittedBy.lastName}`}</Text>
           </View>
         )}
-        footer={() => (
-          <Text style={styles.cardElement}>{new Date(Number(createdAt)).toDateString()}</Text>
-        )}
+        footer={() => <Text style={styles.cardElement}>{new Date(Number(createdAt)).toDateString()}</Text>}
       >
         <Text>{description}</Text>
       </Card>

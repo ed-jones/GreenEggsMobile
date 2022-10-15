@@ -1,14 +1,15 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { View, Image, StyleSheet, ImageBackground } from 'react-native'
-import { Text, Button, ThemedComponentProps } from '@ui-kitten/components'
+import { Text, Button } from '@ui-kitten/components'
 import Logo from '../../assets/images/icon.png'
 import Banner from '../../assets/images/banner.jpg'
 import { LinearGradient } from 'expo-linear-gradient'
 import { StatusBar } from 'expo-status-bar'
 import { Background } from '@greeneggs/ui'
+import { useNavigation } from '@react-navigation/native'
 
 const styles = StyleSheet.create({
   logo: {
@@ -59,36 +60,35 @@ const styles = StyleSheet.create({
  * This is the first screen a user sees upon opening the app.
  * Instructs a user to sign up or log in.
  */
-export const Welcome = ({ navigation }: any & ThemedComponentProps) => (
-  <Background
-    style={{
-      ...styles.view,
-    }}
-  >
-    <StatusBar style='light' />
-    <View style={styles.bannerContainer}>
-      <ImageBackground source={Banner} style={styles.banner}>
-        <LinearGradient colors={['transparent', 'rgba(247, 249, 252,1)']} style={styles.gradient} />
-        <View style={styles.bannerContent}>
-          <Image source={Logo} style={styles.logo} />
-          <Text category='h1'>Green Eggs</Text>
-          <Text category='s1'>A friendly recipe sharing experience</Text>
-        </View>
-      </ImageBackground>
-    </View>
-    <View style={styles.buttonContainer}>
-      <View>
-        <Button
-          style={styles.button}
-          onPress={() => navigation.navigate('Signup')}
-          status='success'
-        >
-          CREATE ACCOUNT
-        </Button>
-        <Button style={styles.button} onPress={() => navigation.navigate('Login')} status='basic'>
-          LOGIN
-        </Button>
+export const Welcome = (): ReactElement => {
+  const navigation = useNavigation()
+  return (
+    <Background
+      style={{
+        ...styles.view,
+      }}
+    >
+      <StatusBar style='light' />
+      <View style={styles.bannerContainer}>
+        <ImageBackground source={Banner} style={styles.banner}>
+          <LinearGradient colors={['transparent', 'rgba(247, 249, 252,1)']} style={styles.gradient} />
+          <View style={styles.bannerContent}>
+            <Image source={Logo} style={styles.logo} />
+            <Text category='h1'>Green Eggs</Text>
+            <Text category='s1'>A friendly recipe sharing experience</Text>
+          </View>
+        </ImageBackground>
       </View>
-    </View>
-  </Background>
-)
+      <View style={styles.buttonContainer}>
+        <View>
+          <Button style={styles.button} onPress={() => navigation.navigate('Signup')} status='success'>
+            CREATE ACCOUNT
+          </Button>
+          <Button style={styles.button} onPress={() => navigation.navigate('Login')} status='basic'>
+            LOGIN
+          </Button>
+        </View>
+      </View>
+    </Background>
+  )
+}

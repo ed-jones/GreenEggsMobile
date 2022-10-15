@@ -2,7 +2,7 @@
  * Author: Edward Jones
  */
 import { ListItem } from '@ui-kitten/components'
-import React, { FC } from 'react'
+import React, { FC, ReactElement } from 'react'
 import { SectionList, SectionListProps } from 'react-native'
 
 export const AlphabetArray = [
@@ -52,24 +52,18 @@ interface BuildAlphaListItemProps<T> {
 /**
  * Function that converts a list of items to an alphabetised list using a categoriseItem function
  */
-export function buildAlphaListItems<T>({
-  items,
-  categoriseItem,
-}: BuildAlphaListItemProps<T>): AlphaListItems<T> {
+export function buildAlphaListItems<T>({ items, categoriseItem }: BuildAlphaListItemProps<T>): AlphaListItems<T> {
   const alphaListItems: AlphaListItems<T> = AlphabetArray.map((letter) => ({
     letter,
     data: [] as T[],
   }))
   items.forEach((item) => {
-    alphaListItems
-      ?.find((alphaListItem) => alphaListItem.letter === categoriseItem(item))
-      ?.data.push(item)
+    alphaListItems?.find((alphaListItem) => alphaListItem.letter === categoriseItem(item))?.data.push(item)
   })
   return alphaListItems
 }
 
-export interface AlphaListProps<T>
-  extends Omit<SectionListProps<T, AlphaListItem<T>>, 'renderItem' | 'sections'> {
+export interface AlphaListProps<T> extends Omit<SectionListProps<T, AlphaListItem<T>>, 'renderItem' | 'sections'> {
   items: AlphaListItems<T>
   renderItem: FC<T>
 }
@@ -77,7 +71,7 @@ export interface AlphaListProps<T>
 /**
  * Renders a list of items as an alphabetised list.
  */
-export const AlphaList = <T,>({ items, renderItem, ...props }: AlphaListProps<T>) => {
+export const AlphaList = <T,>({ items, renderItem, ...props }: AlphaListProps<T>): ReactElement => {
   return (
     <SectionList
       {...props}

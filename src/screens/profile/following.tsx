@@ -1,7 +1,7 @@
 /**
  * Author: Andrew Wilkie
  */
-import React, { useState } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { Background, Icons, LazyList, TopNavigation, UserListItem, Input } from '@greeneggs/ui'
 import {
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 /**
  * Screen that shows a list of users a user is following.
  */
-export const Following = () => {
+export const Following = (): ReactElement => {
   const [query, setQuery] = useState('')
   const {
     params: { userId },
@@ -46,13 +46,7 @@ export const Following = () => {
         value={query}
         onChangeText={(newText) => setQuery(newText)}
       />
-      <LazyList<
-        FollowingUsers,
-        FollowingUsersVariables,
-        FollowingUsers_followingUsers_data,
-        Sort,
-        RecipeFilter
-      >
+      <LazyList<FollowingUsers, FollowingUsersVariables, FollowingUsers_followingUsers_data, Sort, RecipeFilter>
         limit={15}
         query={Queries.GET_FOLLOWING_USERS}
         variables={{

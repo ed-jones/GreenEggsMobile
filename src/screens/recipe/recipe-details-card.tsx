@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { noAvatar } from '@greeneggs/assets'
 import { CommentCounter, LabelledIcon, ViewMore } from '@greeneggs/ui'
 import { convertTimeEstimate } from '@greeneggs/utils'
@@ -11,6 +11,7 @@ import { Text, Card, Avatar } from '@ui-kitten/components'
 import { RecipeCategoriesTags } from './recipe-categories-tags'
 import { RecipeLikeCounter } from '@greeneggs/ui'
 import { useNavigateToProfile } from '@greeneggs/navigation'
+import { useNavigation } from '@react-navigation/native'
 
 const styles = StyleSheet.create({
   cardSection: {
@@ -25,16 +26,10 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
 })
-
-interface IRecipeDetailsCard extends recipe_recipe_data {
-  navigation: any
-}
-
 /**
  * Card for displaying simple recipe details, such as title, abbreviated description and stats.
  */
 export const RecipeDetailsCard = ({
-  navigation,
   title,
   timeEstimate,
   description,
@@ -46,7 +41,8 @@ export const RecipeDetailsCard = ({
   id,
   liked,
   comments,
-}: IRecipeDetailsCard) => {
+}: recipe_recipe_data): ReactElement => {
+  const navigation = useNavigation()
   const navigateToDescription = () => {
     navigation.navigate('RecipeDescription', {
       description: description,
@@ -65,10 +61,7 @@ export const RecipeDetailsCard = ({
               {title}
             </Text>
             {timeEstimate ? (
-              <LabelledIcon
-                label={convertTimeEstimate(timeEstimate).toUpperCase()}
-                iconName='clock-outline'
-              />
+              <LabelledIcon label={convertTimeEstimate(timeEstimate).toUpperCase()} iconName='clock-outline' />
             ) : undefined}
           </View>
           <View style={{ ...styles.row, marginTop: 8 }}>
@@ -79,10 +72,7 @@ export const RecipeDetailsCard = ({
       footer={() => (
         <View style={styles.cardSection}>
           {description ? <Text numberOfLines={2}>{description}</Text> : undefined}
-          <ViewMore
-            style={{ paddingHorizontal: 0, marginTop: 8 }}
-            onPress={navigateToDescription}
-          />
+          <ViewMore style={{ paddingHorizontal: 0, marginTop: 8 }} onPress={navigateToDescription} />
         </View>
       )}
     >
@@ -94,18 +84,11 @@ export const RecipeDetailsCard = ({
               source={submittedBy.avatarURI ? { uri: submittedBy.avatarURI } : noAvatar}
               style={styles.avatar}
             />
-            <Text
-              style={{ fontWeight: 'bold' }}
-            >{`${submittedBy.firstName} ${submittedBy.lastName}`}</Text>
+            <Text style={{ fontWeight: 'bold' }}>{`${submittedBy.firstName} ${submittedBy.lastName}`}</Text>
           </View>
         </Pressable>
         <View style={styles.row}>
-          <RecipeLikeCounter
-            likeCount={likeCount}
-            liked={liked}
-            recipeId={id}
-            submittedById={submittedBy.id}
-          />
+          <RecipeLikeCounter likeCount={likeCount} liked={liked} recipeId={id} submittedById={submittedBy.id} />
           <CommentCounter commentCount={commentCount} comments={comments} />
         </View>
       </View>

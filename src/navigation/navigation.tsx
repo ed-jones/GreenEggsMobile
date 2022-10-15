@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import { NotFoundScreen, AddRecipe, Home, MyProfile, SavedRecipes, Notifications } from '../screens'
@@ -12,7 +12,7 @@ const { Navigator, Screen } = createBottomTabNavigator()
 /**
  * Navigation logic for the bottom tab bar
  */
-export function Navigation() {
+export function Navigation(): ReactElement {
   return (
     <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
       <Screen name='Home' component={Home} />

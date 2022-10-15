@@ -15,13 +15,7 @@ import {
   EmptyState,
 } from '@greeneggs/ui'
 import { useNavigation } from '@react-navigation/core'
-import {
-  Diets,
-  DietsVariables,
-  Diets_diets_data,
-  RecipeFilter,
-  Sort,
-} from '@greeneggs/types/graphql'
+import { Diets, DietsVariables, Diets_diets_data, RecipeFilter, Sort } from '@greeneggs/types/graphql'
 import { AddToFilter } from '../common'
 import { SearchContext } from '@greeneggs/providers/search-state-provider'
 import { View } from 'react-native'
@@ -36,9 +30,7 @@ export const FilterRecipeDiets: FC = () => {
   const [selectedDiets, setSelectedDiets] = useState<string[]>(searchState.filter.diets ?? [])
 
   const setSelected = (selected: boolean, id: string) => {
-    setSelectedDiets(
-      selected ? [...selectedDiets, id] : [...selectedDiets.filter((diets) => diets !== id)]
-    )
+    setSelectedDiets(selected ? [...selectedDiets, id] : [...selectedDiets.filter((diets) => diets !== id)])
   }
 
   const addToFilter = () => {

@@ -14,13 +14,7 @@ import {
   Sort,
 } from '@greeneggs/types/graphql'
 import { SearchContext } from '@greeneggs/providers/search-state-provider'
-import {
-  TopNavigation,
-  Background,
-  AlphabetType,
-  LazyListAlpha,
-  SelectableListItem,
-} from '@greeneggs/ui'
+import { TopNavigation, Background, AlphabetType, LazyListAlpha, SelectableListItem } from '@greeneggs/ui'
 
 import { AddToFilter } from '../common'
 import { View } from 'react-native'
@@ -38,9 +32,7 @@ export const FilterIngredientsIncluded: FC = () => {
 
   const setSelected = (selected: boolean, id: string) => {
     setSelectedIngredients(
-      selected
-        ? [...selectedIngredients, id]
-        : [...selectedIngredients.filter((excludes) => excludes !== id)]
+      selected ? [...selectedIngredients, id] : [...selectedIngredients.filter((excludes) => excludes !== id)]
     )
   }
 
@@ -68,13 +60,7 @@ export const FilterIngredientsIncluded: FC = () => {
         onChangeText={setQuery}
         value={query}
       />
-      <LazyListAlpha<
-        Ingredients,
-        IngredientsVariables,
-        Ingredients_ingredients_data,
-        Sort,
-        RecipeFilter
-      >
+      <LazyListAlpha<Ingredients, IngredientsVariables, Ingredients_ingredients_data, Sort, RecipeFilter>
         renderItem={(item) => (
           <>
             <SelectableListItem

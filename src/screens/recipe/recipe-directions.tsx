@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { recipe_recipe_data_steps } from '@greeneggs/types/graphql'
 import { Card, Text } from '@ui-kitten/components'
 import { Dimensions, View, Image } from 'react-native'
@@ -15,7 +15,7 @@ interface IRecipeDirections {
 /**
  * Carousel for displaying recipe steps.
  */
-export const RecipeDirections = ({ directions }: IRecipeDirections) => {
+export const RecipeDirections = ({ directions }: IRecipeDirections): ReactElement => {
   const navigation = useNavigation()
 
   return (

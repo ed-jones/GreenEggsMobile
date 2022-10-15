@@ -42,13 +42,7 @@ export const PickCategory: FC = () => {
         value={query}
         autoFocus
       />
-      <LazyListAlpha<
-        Categories,
-        CategoriesVariables,
-        Categories_categories_data,
-        Sort,
-        RecipeFilter
-      >
+      <LazyListAlpha<Categories, CategoriesVariables, Categories_categories_data, Sort, RecipeFilter>
         renderItem={(item) => (
           <>
             <ListItem
@@ -64,10 +58,7 @@ export const PickCategory: FC = () => {
         query={Queries.GET_CATEGORIES}
         ListFooterComponent={
           query.length > 0 ? (
-            <Button
-              style={{ marginHorizontal: 16, marginTop: 16 }}
-              onPress={() => pick({ name: toTitleCase(query) })}
-            >
+            <Button style={{ marginHorizontal: 16, marginTop: 16 }} onPress={() => pick({ name: toTitleCase(query) })}>
               {`CREATE "${query.toUpperCase()}"`}
             </Button>
           ) : undefined

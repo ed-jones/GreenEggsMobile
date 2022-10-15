@@ -49,10 +49,7 @@ export const FollowButton: FC<FollowButtonProps> = ({ userId, isFollowing }) => 
   }
 
   return (
-    <Button
-      size='small'
-      onPress={isFollowingState ? () => handleUnfollowUser() : () => handleFollowUser()}
-    >
+    <Button size='small' onPress={isFollowingState ? () => handleUnfollowUser() : () => handleFollowUser()}>
       {isFollowingState ? 'UNFOLLOW' : 'FOLLOW'}
     </Button>
   )

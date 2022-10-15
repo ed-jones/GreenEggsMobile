@@ -1,20 +1,13 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Mutations } from '@greeneggs/graphql'
 import { ScrollView, StyleSheet } from 'react-native'
 import { editProfile, editProfileVariables, ProfileDetails } from '@greeneggs/types/graphql'
 import { Button, Spinner } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
-import {
-  TopNavigation,
-  Background,
-  Icons,
-  ControlledInput,
-  InputType,
-  useForm,
-} from '@greeneggs/ui'
+import { TopNavigation, Background, Icons, ControlledInput, InputType, useForm } from '@greeneggs/ui'
 
 const styles = StyleSheet.create({
   view: {
@@ -33,15 +26,12 @@ const styles = StyleSheet.create({
 })
 
 const useEditProfile = () =>
-  useForm<ProfileDetails, editProfile, editProfileVariables>(
-    Mutations.EDIT_PROFILE,
-    'profileDetails'
-  )
+  useForm<ProfileDetails, editProfile, editProfileVariables>(Mutations.EDIT_PROFILE, 'profileDetails')
 
 /**
  * Screen that lets a user edit their profile picture.
  */
-export function EditProfilePicture() {
+export function EditProfilePicture(): ReactElement {
   const form = useEditProfile()
   const navigation = useNavigation()
 
@@ -69,9 +59,7 @@ export function EditProfilePicture() {
           type={InputType.PHOTO}
         />
         <Button
-          accessoryRight={
-            form.formResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Save
-          }
+          accessoryRight={form.formResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Save}
           onPress={form.handleSubmit(onSubmit)}
         >
           SAVE CHANGES

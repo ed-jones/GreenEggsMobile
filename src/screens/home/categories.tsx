@@ -4,18 +4,15 @@
 import React, { FC } from 'react'
 import { Queries } from '@greeneggs/graphql'
 import {
-  CategoriesVariables,
-  Categories_categories_data,
   RecipeFilter,
   Sort,
-  Categories as CategoriesType,
   CategoriesWithImages,
   CategoriesWithImagesVariables,
   CategoriesWithImages_categoriesWithImages_data,
 } from '@greeneggs/types/graphql'
-import { Background, Icons, LazyList } from '@greeneggs/ui'
-import { Button, ListItem, Text, TopNavigation } from '@ui-kitten/components'
-import { ImageBackground, Pressable, StyleSheet, View } from 'react-native'
+import { Background, LazyList } from '@greeneggs/ui'
+import { Button, Text } from '@ui-kitten/components'
+import { ImageBackground, Pressable, StyleSheet } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useNavigation } from '@react-navigation/core'
 
@@ -81,10 +78,7 @@ export const Categories: FC = () => {
       >
         limit={20}
         ListFooterComponent={
-          <Button
-            style={{ margin: 24, alignItems: 'flex-start' }}
-            onPress={() => navigation.navigate('AllCategories')}
-          >
+          <Button style={{ margin: 24, alignItems: 'flex-start' }} onPress={() => navigation.navigate('AllCategories')}>
             VIEW ALL
           </Button>
         }

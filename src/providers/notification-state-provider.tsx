@@ -32,15 +32,11 @@ export const NotificationContext = createContext<NotificationContextInterface>({
  * Provider that lets all child components access the notification state
  */
 export const NotificationStateProvider: FC = ({ children }) => {
-  const [notificationState, setNotificationState] =
-    useState<NotificationState>(defaultNotificationState)
+  const [notificationState, setNotificationState] = useState<NotificationState>(defaultNotificationState)
 
-  const { data, refetch: refetchNotificationState } = useQuery<NotificationCount>(
-    Queries.GET_NOTIFICATION_COUNT,
-    {
-      pollInterval: 10000,
-    }
-  )
+  const { data, refetch: refetchNotificationState } = useQuery<NotificationCount>(Queries.GET_NOTIFICATION_COUNT, {
+    pollInterval: 10000,
+  })
 
   useEffect(() => {
     setNotificationState({

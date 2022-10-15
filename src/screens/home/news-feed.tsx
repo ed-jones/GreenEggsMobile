@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import * as React from 'react'
+import React, { ReactElement } from 'react'
 import { StyleSheet, View } from 'react-native'
 import {
   NewsFeed as NewsFeedType,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 /**
  * Screen that shows an infinite scrolling list of recipes from users that the logged in user follows.
  */
-export function NewsFeed() {
+export function NewsFeed(): ReactElement {
   const navigation = useNavigation()
   return (
     <Background>
@@ -41,14 +41,8 @@ export function NewsFeed() {
         dataKey='newsFeed'
         emptyMessage='Try following some users to see their latest recipes.'
         renderItem={({ item: recipe, index }) => (
-          <View
-            key={recipe?.id}
-            style={index === 0 ? { ...styles.firstCard, ...styles.card } : styles.card}
-          >
-            <RecipeCard
-              recipe={recipe}
-              onPress={() => navigation.navigate('Recipe', { recipeId: recipe?.id })}
-            />
+          <View key={recipe?.id} style={index === 0 ? { ...styles.firstCard, ...styles.card } : styles.card}>
+            <RecipeCard recipe={recipe} onPress={() => navigation.navigate('Recipe', { recipeId: recipe?.id })} />
           </View>
         )}
       />

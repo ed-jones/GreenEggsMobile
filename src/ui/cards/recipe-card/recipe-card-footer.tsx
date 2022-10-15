@@ -1,15 +1,11 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Text } from '@ui-kitten/components'
 import { CommentCounter, LabelledIcon, RecipeLikeCounter } from '@greeneggs/ui'
-import {
-  recipes_recipes_data,
-  recipes_recipes_data_comments,
-  recipes_recipes_data_submittedBy,
-} from '@greeneggs/types/graphql'
+import { recipes_recipes_data } from '@greeneggs/types/graphql'
 import { convertTimeEstimate, convertSubmittedAt } from '@greeneggs/utils'
 
 const styles = StyleSheet.create({
@@ -65,7 +61,7 @@ export const RecipeCardFooter = ({
   id,
   comments,
   submittedBy,
-}: IRecipeCardFooterProps) => {
+}: IRecipeCardFooterProps): ReactElement => {
   return (
     <View style={styles.view}>
       <View style={styles.labelledIcons}>
@@ -82,19 +78,11 @@ export const RecipeCardFooter = ({
       <View style={styles.labelledIcons}>
         {timeEstimate && (
           <View style={styles.labelledIconGroup}>
-            <LabelledIcon
-              label={convertTimeEstimate(timeEstimate).toUpperCase()}
-              iconName='clock-outline'
-            />
+            <LabelledIcon label={convertTimeEstimate(timeEstimate).toUpperCase()} iconName='clock-outline' />
           </View>
         )}
         <View style={styles.labelledIconGroup}>
-          <RecipeLikeCounter
-            likeCount={likeCount}
-            liked={liked}
-            recipeId={id}
-            submittedById={submittedBy.id}
-          />
+          <RecipeLikeCounter likeCount={likeCount} liked={liked} recipeId={id} submittedById={submittedBy.id} />
           <CommentCounter commentCount={commentCount} comments={comments} />
         </View>
       </View>

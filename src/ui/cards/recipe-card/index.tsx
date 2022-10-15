@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { StyleSheet, Image, View } from 'react-native'
 import { Card } from '@ui-kitten/components'
 import { recipes_recipes_data } from '@greeneggs/types/graphql'
@@ -35,7 +35,7 @@ interface IRecipeCard {
  * Displays recipe details in a card format with heavy emphasis on the cover image.
  * Used for trending and news feed.
  */
-export const RecipeCard = ({ recipe, onPress }: IRecipeCard) => (
+export const RecipeCard = ({ recipe, onPress }: IRecipeCard): ReactElement => (
   <Card
     appearance='filled'
     style={styles.card}
@@ -50,10 +50,7 @@ export const RecipeCard = ({ recipe, onPress }: IRecipeCard) => (
     onPress={onPress}
   >
     <View style={styles.imageContainer}>
-      <Image
-        style={styles.image}
-        source={recipe.coverImage ? { uri: recipe.coverImage } : imageNotFound}
-      />
+      <Image style={styles.image} source={recipe.coverImage ? { uri: recipe.coverImage } : imageNotFound} />
     </View>
   </Card>
 )

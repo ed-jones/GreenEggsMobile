@@ -34,6 +34,7 @@ export const Tags = withStyles(({ tags, eva }: IRecipeCategoryTags & ThemedCompo
   <View style={styles.tags}>
     {tags.map((tag: Tag) => (
       <Text
+        key={tag.name}
         category='label'
         appearance='alternative'
         style={{

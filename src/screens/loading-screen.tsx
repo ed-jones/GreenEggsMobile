@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Spinner } from '@ui-kitten/components'
 import { StyleSheet } from 'react-native'
 import { Background } from '@greeneggs/ui'
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
  * Screen to display when main content is loading.
  * Displays a centered spinning animation.
  */
-export const LoadingScreen = () => (
+export const LoadingScreen = (): ReactElement => (
   <Background style={styles.container}>
     <Spinner />
   </Background>

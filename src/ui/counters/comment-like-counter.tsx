@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC, useContext, useEffect, useState } from 'react'
+import React, { FC, useContext } from 'react'
 import { useMutation } from '@apollo/client'
 import { Mutations } from '@greeneggs/graphql'
 import { LikeRecipe, UnlikeRecipe } from '@greeneggs/types/graphql'

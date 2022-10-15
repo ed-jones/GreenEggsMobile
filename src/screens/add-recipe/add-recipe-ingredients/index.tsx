@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import { IngredientListItem } from '@greeneggs/ui'
 import { useEffect } from 'react'
 
@@ -17,7 +17,7 @@ interface ICreateRecipeIngredients {
 /**
  * Screen that shows a list of all ingredients that will be added to a recipe.
  */
-export const AddRecipeIngredients = ({ form }: ICreateRecipeIngredients) => {
+export const AddRecipeIngredients = ({ form }: ICreateRecipeIngredients): ReactElement => {
   const { ingredientsFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation()
 

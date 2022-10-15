@@ -1,10 +1,10 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Text } from '@ui-kitten/components'
 import { ScrollView } from 'react-native'
-import { InputType, Rules, ControlledInput, Callout } from '@greeneggs/ui'
+import { InputType, Rules, ControlledInput } from '@greeneggs/ui'
 import { RecipeInput } from '@greeneggs/types/graphql'
 import { RecipeForm } from './add-recipe'
 import { AddRecipeStyles } from './add-recipe-styles'
@@ -17,7 +17,7 @@ interface ICreateRecipeDetails {
  * Screen for adding all recipe details, including name, description, serving count
  * and time estimate.
  */
-export const AddRecipeDetails = ({ form }: ICreateRecipeDetails) => (
+export const AddRecipeDetails = ({ form }: ICreateRecipeDetails): ReactElement => (
   <ScrollView style={{ paddingHorizontal: 16 }}>
     <Text category='h5' style={AddRecipeStyles.heading}>
       Create New Recipe

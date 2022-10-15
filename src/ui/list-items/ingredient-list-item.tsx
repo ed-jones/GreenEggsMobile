@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { ListItem, Text } from '@ui-kitten/components'
 import { recipe_recipe_data_ingredients } from '@greeneggs/types/graphql'
 import { Icons } from '@greeneggs/ui'
@@ -15,7 +15,7 @@ interface IIngredientListItem {
 /**
  * Component that renders a GraphQL ingredient as a list item.
  */
-export const IngredientListItem = ({ ingredient, remove }: IIngredientListItem) => {
+export const IngredientListItem = ({ ingredient, remove }: IIngredientListItem): ReactElement => {
   if (ingredient.name) {
     return (
       <ListItem

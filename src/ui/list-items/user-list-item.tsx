@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Avatar, ListItem } from '@ui-kitten/components'
 import { Users_users_data } from '@greeneggs/types/graphql'
 import { Icons } from '@greeneggs/ui'
@@ -15,7 +15,7 @@ interface UserListItemProps {
 /**
  * List item component used to consistently display GraphQL user data as a list item
  */
-export const UserListItem = ({ user }: UserListItemProps) => {
+export const UserListItem = ({ user }: UserListItemProps): ReactElement => {
   const navigateToProfile = useNavigateToProfile()
   return (
     <ListItem

@@ -24,11 +24,7 @@ export const EmptyState: FC<EmptyStateProps> = ({ title = 'Nothing here!', descr
         alignItems: 'center',
       }}
     >
-      <Icon
-        fill={color}
-        name='alert-circle-outline'
-        style={{ width: 38, height: 38, marginBottom: 8 }}
-      />
+      <Icon fill={color} name='alert-circle-outline' style={{ width: 38, height: 38, marginBottom: 8 }} />
       <View style={{ flexShrink: 1 }}>
         <Text style={{ color, paddingBottom: 8, textAlign: 'center' }} category='h6'>
           {title}

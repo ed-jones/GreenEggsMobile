@@ -1,11 +1,13 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { RecipeCommentList } from './recipe-comment-list'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { Text } from '@ui-kitten/components'
 import { TopNavigation } from '@greeneggs/ui'
+import { recipe_recipe_data_comments } from '@greeneggs/types/graphql'
+import { RouteProp, useRoute } from '@react-navigation/native'
 
 const styles = StyleSheet.create({
   content: {
@@ -13,10 +15,16 @@ const styles = StyleSheet.create({
   },
 })
 
+type RecipeAllCommentsRoute = RouteProp<
+  { params: { comments: recipe_recipe_data_comments[]; commentCount: number; isReply: boolean } },
+  'params'
+>
+
 /**
  * Screen that displays a list of all comments for a recipe.
  */
-export function RecipeAllComments({ route }: any) {
+export function RecipeAllComments(): ReactElement {
+  const route = useRoute<RecipeAllCommentsRoute>()
   const { comments, commentCount, isReply } = route.params
 
   return (

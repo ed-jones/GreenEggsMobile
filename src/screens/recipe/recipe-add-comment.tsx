@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { useState } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { noAvatar } from '@greeneggs/assets'
@@ -48,7 +48,7 @@ interface RecipeAddCommentProps {
 /**
  * Input component for adding a recipe comment.
  */
-export function RecipeAddComment({ recipeId, commentId, isReply, active }: RecipeAddCommentProps) {
+export function RecipeAddComment({ recipeId, commentId, isReply, active }: RecipeAddCommentProps): ReactElement {
   const [comment, setComment] = useState<string>('')
   const client = useApolloClient()
   const { loading, error, data } = useQuery<Me>(Queries.ME)
@@ -108,11 +108,7 @@ export function RecipeAddComment({ recipeId, commentId, isReply, active }: Recip
             height: '100%',
           }}
         >
-          <Avatar
-            size='small'
-            source={me?.avatarURI ? { uri: me?.avatarURI } : noAvatar}
-            style={styles.avatar}
-          />
+          <Avatar size='small' source={me?.avatarURI ? { uri: me?.avatarURI } : noAvatar} style={styles.avatar} />
         </View>
         <Input
           autoFocus={active}

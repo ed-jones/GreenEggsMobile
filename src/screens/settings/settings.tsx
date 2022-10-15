@@ -2,14 +2,7 @@
  * Author: Wambugu Mutahi
  */
 import React, { Key, useContext } from 'react'
-import {
-  Text,
-  ListItem,
-  Icon,
-  Divider,
-  withStyles,
-  ThemedComponentProps,
-} from '@ui-kitten/components'
+import { Text, ListItem, Icon, Divider, withStyles, ThemedComponentProps } from '@ui-kitten/components'
 import { Alert, ScrollView, StyleSheet } from 'react-native'
 import { Icons } from '@greeneggs/ui'
 import Svg, { Circle } from 'react-native-svg'
@@ -64,7 +57,7 @@ const SettingsListItem = ({ onPress, title, rightText, color, icon, key }: ListI
  * Screen that displays a complete list of settings and about details.
  */
 export const Settings = withStyles(
-  ({ navigation, eva }: { navigation: StackNavigationProp<any> } & ThemedComponentProps) => {
+  ({ navigation, eva }: { navigation: StackNavigationProp<unknown> } & ThemedComponentProps) => {
     const { setToken } = useContext(AuthContext)
 
     const Colors = {
@@ -147,16 +140,6 @@ export const Settings = withStyles(
         color: Colors.green,
         onPress: () => navigation.navigate('Allergies'),
         key: 'allergies',
-      },
-    ]
-
-    const PrivacySettings: ListItemProps[] = [
-      {
-        title: 'Profile Visibility',
-        icon: 'person-outline',
-        color: Colors.green,
-        onPress: () => navigation.navigate('ProfileVisibility'),
-        key: 'profileVisibility',
       },
     ]
 

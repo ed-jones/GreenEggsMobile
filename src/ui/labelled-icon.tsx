@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Text, Icon } from '@ui-kitten/components'
 import { View, StyleSheet, Pressable } from 'react-native'
 
@@ -31,7 +31,7 @@ export interface LabelledIconProps {
 /**
  * Component that renders an icon with a label
  */
-export const LabelledIcon = ({ iconName, label, onPress, fill }: LabelledIconProps) => (
+export const LabelledIcon = ({ iconName, label, onPress, fill }: LabelledIconProps): ReactElement => (
   <Pressable onPress={onPress}>
     <View style={styles.view}>
       <Icon style={styles.icon} name={iconName} fill={fill || 'black'} />

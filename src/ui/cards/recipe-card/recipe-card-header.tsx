@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { View, StyleSheet, Pressable } from 'react-native'
 import { Avatar, Text } from '@ui-kitten/components'
 import { recipes_recipes_data_submittedBy } from '@greeneggs/types/graphql'
@@ -44,21 +44,12 @@ export type IRecipeCardHeaderProps = Pick<
  * Header for the recipe card component.
  * Displays user info.
  */
-export const RecipeCardHeader = ({
-  avatarURI,
-  firstName,
-  lastName,
-  id,
-}: IRecipeCardHeaderProps) => {
+export const RecipeCardHeader = ({ avatarURI, firstName, lastName, id }: IRecipeCardHeaderProps): ReactElement => {
   const navigateToProfile = useNavigateToProfile()
   return (
     <View style={styles.view}>
       <Pressable style={styles.leftElements} onPress={() => navigateToProfile(id)}>
-        <Avatar
-          size='small'
-          source={avatarURI ? { uri: avatarURI } : noAvatar}
-          style={styles.avatar}
-        />
+        <Avatar size='small' source={avatarURI ? { uri: avatarURI } : noAvatar} style={styles.avatar} />
         <Text style={styles.username}>{`${firstName} ${lastName}`}</Text>
       </Pressable>
     </View>

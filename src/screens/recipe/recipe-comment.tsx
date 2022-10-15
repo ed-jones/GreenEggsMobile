@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { useContext } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import { CommentLikeCounter, LabelledIcon } from '@greeneggs/ui'
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { noAvatar } from '@greeneggs/assets'
@@ -30,8 +30,8 @@ interface RecipeCommentProps {
 /**
  * Component for displaying an individual recipe comment
  */
-export function RecipeComment({ comment, replyButton }: RecipeCommentProps) {
-  const navigation: StackNavigationProp<any, any> = useNavigation()
+export function RecipeComment({ comment, replyButton }: RecipeCommentProps): ReactElement {
+  const navigation: StackNavigationProp<Record<string, Record<string, unknown>>, string> = useNavigation()
   const navigateToProfile = useNavigateToProfile()
 
   const [deleteComment] = useMutation<DeleteComment>(Mutations.DELETE_COMMENT, {
@@ -76,11 +76,7 @@ export function RecipeComment({ comment, replyButton }: RecipeCommentProps) {
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Avatar
                       size='small'
-                      source={
-                        comment.submittedBy.avatarURI
-                          ? { uri: comment.submittedBy.avatarURI }
-                          : noAvatar
-                      }
+                      source={comment.submittedBy.avatarURI ? { uri: comment.submittedBy.avatarURI } : noAvatar}
                       style={styles.avatar}
                     />
                     <Text

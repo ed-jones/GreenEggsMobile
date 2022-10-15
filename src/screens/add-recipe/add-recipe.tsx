@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import { View, Alert } from 'react-native'
 import { Button, Divider, Layout, Spinner, withStyles } from '@ui-kitten/components'
 import { addRecipe, addRecipeVariables, RecipeInput } from '@greeneggs/types/graphql'
@@ -11,6 +11,8 @@ import { Stepper } from './stepper'
 import { AddRecipeStyles } from './add-recipe-styles'
 import { AddRecipeContext } from '@greeneggs/providers'
 import { LoadingScreen } from '../loading-screen'
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>
 
@@ -18,7 +20,8 @@ export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>
  * Screen that enables the creation of recipes.
  * Contains the multi-step form.
  */
-export const AddRecipe = withStyles(function AddRecipe({ navigation, eva }: any) {
+export const AddRecipe = withStyles(({ eva }): ReactElement => {
+  const navigation: StackNavigationProp<Record<string, Record<string, unknown>>, string> = useNavigation()
   const { form, steps } = useContext(AddRecipeContext)
 
   if (form === undefined || steps === undefined) {
@@ -28,16 +31,11 @@ export const AddRecipe = withStyles(function AddRecipe({ navigation, eva }: any)
   const insets = useSafeAreaInsets()
 
   const onSubmit = async () => {
-    try {
-      const { data } = await form.submitForm()
-      if (data?.addRecipe.error) {
-      } else {
-        form.reset()
-        steps.reset()
-        navigation.push('Recipe', { recipeId: data?.addRecipe.data?.id })
-      }
-    } catch (error) {
-      console.error(error)
+    const { data } = await form.submitForm()
+    if (!data?.addRecipe.error) {
+      form.reset()
+      steps.reset()
+      navigation.push('Recipe', { recipeId: data?.addRecipe.data?.id })
     }
   }
 
@@ -82,11 +80,7 @@ export const AddRecipe = withStyles(function AddRecipe({ navigation, eva }: any)
                 })
               }}
               status='success'
-              accessoryRight={
-                form.formResult.loading
-                  ? () => <Spinner size='small' status='control' />
-                  : Icons.Publish
-              }
+              accessoryRight={form.formResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Publish}
             >
               PUBLISH
             </Button>
@@ -107,9 +101,7 @@ export const AddRecipe = withStyles(function AddRecipe({ navigation, eva }: any)
             <Button
               size='small'
               onPress={steps.previous}
-              accessoryLeft={(props) => (
-                <Icons.Back {...props} fill={eva?.theme && eva.theme['color-primary-500']} />
-              )}
+              accessoryLeft={(props) => <Icons.Back {...props} fill={eva?.theme && eva.theme['color-primary-500']} />}
               status='basic'
             >
               PREVIOUS

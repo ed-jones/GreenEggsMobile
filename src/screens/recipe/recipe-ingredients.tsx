@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { recipe_recipe_data_ingredients } from '@greeneggs/types/graphql'
 import { View } from 'react-native'
 import { Divider } from '@ui-kitten/components'
@@ -21,7 +21,7 @@ export const RecipeIngredients = ({
   ingredients,
   servingCount,
   defaultServingCount,
-}: IRecipeIngredients) => {
+}: IRecipeIngredients): ReactElement => {
   const navigation = useNavigation()
   let multiplier = 1
   if (servingCount && defaultServingCount) {

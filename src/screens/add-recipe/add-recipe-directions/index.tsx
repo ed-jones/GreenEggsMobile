@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext, useEffect } from 'react'
+import React, { ReactElement, useContext, useEffect } from 'react'
 import { ListItem } from '@ui-kitten/components'
 import { Image } from 'react-native'
 import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types'
@@ -19,7 +19,7 @@ interface IAddRecipeDirections {
 /**
  * Screen that displays a list of all steps that will be added to a recipe.
  */
-export const AddRecipeDirections = ({ form }: IAddRecipeDirections) => {
+export const AddRecipeDirections = ({ form }: IAddRecipeDirections): ReactElement => {
   const { stepsFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation()
 

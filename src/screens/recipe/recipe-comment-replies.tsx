@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { useState } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { Queries } from '@greeneggs/graphql'
 import { TopNavigation, ViewMore } from '@greeneggs/ui'
@@ -12,6 +12,7 @@ import { LoadingScreen } from '../loading-screen'
 import { RecipeAddComment } from './recipe-add-comment'
 import { RecipeComment } from './recipe-comment'
 import { RecipeCommentList } from './recipe-comment-list'
+import { RouteProp, useRoute } from '@react-navigation/native'
 
 const styles = StyleSheet.create({
   content: {
@@ -19,10 +20,13 @@ const styles = StyleSheet.create({
   },
 })
 
+type RecipeCommentRepliesRoute = RouteProp<{ params: { commentId: string; replying: boolean } }, 'params'>
+
 /**
  * Screen for showing a recipe comment and all of its replies.
  */
-export function RecipeCommentReplies({ route }: any) {
+export function RecipeCommentReplies(): ReactElement {
+  const route = useRoute<RecipeCommentRepliesRoute>()
   const { commentId, replying } = route.params
   const [visibleCommentCount, setVisibleCommentCount] = useState<number>(3)
 

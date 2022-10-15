@@ -1,6 +1,7 @@
 /**
  * Author: Edward Jones
  */
+import { ReactElement } from 'react'
 import { FieldPath, UseFormReturn } from 'react-hook-form'
 
 interface IValidate<InputType> {
@@ -18,7 +19,7 @@ export const partialValidate = <InputType>({
   validate,
   register,
   onValid,
-}: IValidate<InputType>) => {
+}: IValidate<InputType>): ReactElement => {
   form.trigger(validate).then((isValid) => {
     if (isValid) {
       form.register(register, {

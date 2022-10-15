@@ -31,9 +31,7 @@ export const Router: FC = () => {
   const [sessionState, setSessionState] = useState<SessionStates>(SessionStates.LOADING)
   useQuery<Me>(Queries.ME, {
     onCompleted: (data) =>
-      Boolean(data?.me.data)
-        ? setSessionState(SessionStates.LOGGED_IN)
-        : setSessionState(SessionStates.LOGGED_OUT),
+      data?.me.data ? setSessionState(SessionStates.LOGGED_IN) : setSessionState(SessionStates.LOGGED_OUT),
     onError: () => setSessionState(SessionStates.LOGGED_OUT),
   })
 

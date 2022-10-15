@@ -40,11 +40,7 @@ export const SaveRecipeButton: FC<SaveRecipeButtonProps> = ({ recipeId, saved })
   return (
     <TopNavigationAction
       icon={(iconProps) =>
-        savedState ? (
-          <Icon {...iconProps} name='bookmark' />
-        ) : (
-          <Icon {...iconProps} name='bookmark-outline' />
-        )
+        savedState ? <Icon {...iconProps} name='bookmark' /> : <Icon {...iconProps} name='bookmark-outline' />
       }
       onPress={() => (savedState ? handleUnsaveRecipe() : handleSaveRecipe())}
     />

@@ -1,24 +1,19 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import { ListItem } from '@ui-kitten/components'
 import { Icons } from '@greeneggs/ui'
 
-import { RecipeForm } from '../add-recipe'
 import { AddRecipePartTemplate } from '../add-recipe-part-template'
 import { useNavigation } from '@react-navigation/native'
 import { AddRecipeContext } from '@greeneggs/providers'
-
-interface IAddRecipeDiets {
-  form: RecipeForm
-}
 
 /**
  * Screen that shows a list of all selected diets that will
  * be added to a recipe.
  */
-export const AddRecipeDiets = ({ form }: IAddRecipeDiets) => {
+export const AddRecipeDiets = (): ReactElement => {
   const { dietsFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation()
 
@@ -33,9 +28,7 @@ export const AddRecipeDiets = ({ form }: IAddRecipeDiets) => {
         <>
           <ListItem
             title={item.name}
-            accessoryRight={(props) => (
-              <Icons.Cross {...props} onPress={() => dietsFieldArray?.remove(index)} />
-            )}
+            accessoryRight={(props) => <Icons.Cross {...props} onPress={() => dietsFieldArray?.remove(index)} />}
           />
         </>
       )}

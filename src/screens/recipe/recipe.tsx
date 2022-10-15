@@ -16,16 +16,11 @@ import { RecipeDirections } from './recipe-directions'
 import { RecipeCommentList } from './recipe-comment-list'
 import { LoadingScreen } from '../loading-screen'
 import { RecipeAddComment } from './recipe-add-comment'
-import {
-  TopNavigation,
-  Background,
-  ViewMore,
-  SaveRecipeButton,
-  EmptyState,
-  Select,
-} from '@greeneggs/ui'
+import { TopNavigation, Background, ViewMore, SaveRecipeButton, EmptyState, Select } from '@greeneggs/ui'
 import { RecipeMoreButton } from './recipe-more-button'
 import { UserContext } from '@greeneggs/providers'
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
+import { ReactElement } from 'react'
 
 const styles = StyleSheet.create({
   coverPhoto: {
@@ -60,17 +55,21 @@ const styles = StyleSheet.create({
   },
 })
 
+type RecipeRoute = RouteProp<{ params: { recipeId: string } }, 'params'>
+
 /**
  * Screen to display a recipe, its steps and associated comments.
  */
-export const Recipe = ({ route, navigation }: any) => {
+export const Recipe = (): ReactElement => {
+  const route = useRoute<RecipeRoute>()
+  const navigation = useNavigation()
+  if (!route.params) throw new Error('Could not find route params')
   const { recipeId } = route.params
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(new IndexPath(0))
   const { me } = useContext(UserContext)
   const { loading, error, data } = useQuery<recipe, recipeVariables>(Queries.GET_RECIPE, {
     variables: { recipeId },
-    onCompleted: (data) =>
-      setSelectedIndex(new IndexPath((data.recipe.data?.servingCount ?? 0) - 1)),
+    onCompleted: (data) => setSelectedIndex(new IndexPath((data.recipe.data?.servingCount ?? 0) - 1)),
   })
 
   if (loading || !data || !data.recipe.data) return <LoadingScreen />
@@ -88,24 +87,19 @@ export const Recipe = ({ route, navigation }: any) => {
           accessoryRight={() => (
             <>
               <SaveRecipeButton recipeId={recipeId} saved={recipe.saved} />
-              {me?.id === recipe.submittedBy.id ? (
-                <RecipeMoreButton recipeId={recipeId} />
-              ) : undefined}
+              {me?.id === recipe.submittedBy.id ? <RecipeMoreButton recipeId={recipeId} /> : undefined}
             </>
           )}
         />
       )}
       renderHeader={() => (
         <ImageBackground source={{ uri: recipe.coverImage }} style={styles.coverPhoto}>
-          <LinearGradient
-            colors={['rgba(247, 249, 252,0.4)', 'rgba(247, 249, 252,0)']}
-            style={styles.gradient}
-          />
+          <LinearGradient colors={['rgba(247, 249, 252,0.4)', 'rgba(247, 249, 252,0)']} style={styles.gradient} />
         </ImageBackground>
       )}
     >
       <Background style={styles.content}>
-        <RecipeDetailsCard {...recipe} navigation={navigation} />
+        <RecipeDetailsCard {...recipe} />
         <RecipeAllergies allergies={recipe.allergies} />
         <View
           style={{
@@ -130,7 +124,7 @@ export const Recipe = ({ route, navigation }: any) => {
                 value={() => <Text>{selectedIndex.toString()}</Text>}
               >
                 {[...Array(Math.max(recipe.servingCount, 10)).keys()].map((number) => (
-                  <SelectItem title={number + 1} />
+                  <SelectItem title={number + 1} key={number} />
                 ))}
               </Select>
             </View>

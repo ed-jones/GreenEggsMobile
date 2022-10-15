@@ -1,8 +1,8 @@
 /**
  * Author: Edward Jones
  */
-import { ApolloQueryResult, DocumentNode, useQuery } from '@apollo/client'
-import React, { ReactNode, useEffect, useState } from 'react'
+import { ApolloQueryResult, DocumentNode, QueryResult, useQuery } from '@apollo/client'
+import React, { ReactElement, ReactNode, useEffect, useState } from 'react'
 import { FlatList, FlatListProps, View } from 'react-native'
 import { Callout } from '@greeneggs/ui'
 import { Spinner, Text } from '@ui-kitten/components'
@@ -15,14 +15,17 @@ export interface UseLazyListProps<TVariables, TData> {
   limit?: number
 }
 
+interface UseListRefetchResult {
+  refetching: boolean
+  refetch: () => Promise<void>
+}
+
 /**
  * Hook that manages refreshing state for lists
  */
 export function useListRefetch<TData, TVariables>(
-  refetchFunction: (
-    variables?: Partial<TVariables> | undefined
-  ) => Promise<ApolloQueryResult<TData>>
-) {
+  refetchFunction: (variables?: Partial<TVariables> | undefined) => Promise<ApolloQueryResult<TData>>
+): UseListRefetchResult {
   const [refetching, setRefetching] = useState(false)
   const refetch = async () => {
     setRefetching(true)
@@ -35,6 +38,14 @@ export function useListRefetch<TData, TVariables>(
   return { refetching, refetch }
 }
 
+interface UseLazyListResult<TData, TVariables, TDataType>
+  extends Omit<QueryResult<TData, TVariables>, 'refetch' | 'data'>,
+    UseListRefetchResult {
+  data: TDataType[]
+  nextPage: () => Promise<void>
+  done: boolean
+}
+
 /**
  * Hook that manages stateful logic for lazy list components
  */
@@ -44,7 +55,12 @@ export function useLazyList<
   TDataType,
   SortType,
   FilterType
->({ query, variables, dataKey, limit = 10 }: UseLazyListProps<TVariables, TData>) {
+>({
+  query,
+  variables,
+  dataKey,
+  limit = 10,
+}: UseLazyListProps<TVariables, TData>): UseLazyListResult<TData, TVariables, TDataType> {
   const [done, setDone] = useState(false)
 
   useEffect(() => {
@@ -158,7 +174,7 @@ export const LazyList = <
   limit,
   ListFooterComponent,
   ...props
-}: LazyListProps<TData, TVariables, TDataType>) => {
+}: LazyListProps<TData, TVariables, TDataType>): ReactElement => {
   const { loading, error, data, refetch, refetching, nextPage, done } = useLazyList<
     TData,
     TVariables,
@@ -215,11 +231,7 @@ export const LazyList = <
               marginVertical: 16,
             }}
           >
-            {!done ? (
-              <Spinner />
-            ) : (
-              <Text style={{ marginVertical: 16 }}>Found {data.length} items.</Text>
-            )}
+            {!done ? <Spinner /> : <Text style={{ marginVertical: 16 }}>Found {data.length} items.</Text>}
           </View>
         ) : undefined)
       }

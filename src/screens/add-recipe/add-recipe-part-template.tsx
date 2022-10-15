@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactNode } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import { Button, List, Text, TextElement } from '@ui-kitten/components'
 import { ListRenderItem, View } from 'react-native'
 import { Icons, Background } from '@greeneggs/ui'
@@ -15,8 +15,8 @@ interface AddRecipePartTemplateProps {
   emptyStateTitle: React.ReactText | TextElement
   emptyStateDescription: React.ReactText | TextElement
   header?: ReactNode
-  listItem: ListRenderItem<any> | null | undefined
-  data: readonly any[] | null | undefined
+  listItem: ListRenderItem<unknown> | null | undefined
+  data: readonly unknown[] | null | undefined
 }
 /**
  * Template for screens that create larger sections of the recipe, i.e. all ingredients.
@@ -30,7 +30,7 @@ export const AddRecipePartTemplate = ({
   header,
   listItem,
   data,
-}: AddRecipePartTemplateProps) => {
+}: AddRecipePartTemplateProps): ReactElement => {
   return (
     <Background>
       <List

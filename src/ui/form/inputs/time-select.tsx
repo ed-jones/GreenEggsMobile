@@ -1,8 +1,8 @@
 /**
  * Author: Edward Jones
  */
-import { InputProps, Text, ThemedComponentProps, useTheme, withStyles } from '@ui-kitten/components'
-import React, { useState } from 'react'
+import { InputProps, Text, ThemedComponentProps, useTheme } from '@ui-kitten/components'
+import React, { ReactElement } from 'react'
 import { DeepMap, DeepPartial, FieldError, Path, PathValue, UnionLike } from 'react-hook-form'
 import { View } from 'react-native'
 import { Input } from '@greeneggs/ui'
@@ -16,10 +16,8 @@ interface ITimeFields {
 
 interface ITimeInput<FieldValues> {
   value: PathValue<FieldValues, Path<FieldValues>>
-  onChange: (...event: any[]) => void
-  error?:
-    | DeepMap<DeepPartial<UnionLike<PathValue<FieldValues, Path<FieldValues>>>>, FieldError>
-    | undefined
+  onChange: (...event: unknown[]) => void
+  error?: DeepMap<DeepPartial<UnionLike<PathValue<FieldValues, Path<FieldValues>>>>, FieldError> | undefined
   inputProps?: InputProps
   onBlur: () => void
 }
@@ -57,7 +55,7 @@ export const TimeInput = <FieldValues,>({
   inputProps,
   error,
   onChange,
-}: ITimeInput<FieldValues> & ThemedComponentProps) => {
+}: ITimeInput<FieldValues> & ThemedComponentProps): ReactElement => {
   const theme = useTheme()
   const handleChange = ({ hours: newHours, minutes: newMinutes }: ITimeFields) => {
     const { hours: oldHours, minutes: oldMinutes } = millisecondsToHoursAndMinutes(value)
@@ -106,9 +104,7 @@ export const TimeInput = <FieldValues,>({
             placeholder: '00',
             status: error ? 'danger' : undefined,
             style: { borderWidth: 0, flexGrow: 1 },
-            value: numberToString<FieldValues>(
-              millisecondsToHoursAndMinutes(value).minutes || null
-            ),
+            value: numberToString<FieldValues>(millisecondsToHoursAndMinutes(value).minutes || null),
             onChangeText: (minutes) => handleChange({ minutes: stringToNumber(minutes) }),
           }}
         />

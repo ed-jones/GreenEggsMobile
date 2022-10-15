@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
 })
 
 interface IAuthPageTemplateProps {
-  navigation: any
   message: string
   children: React.ReactNode
 }
@@ -72,10 +71,7 @@ export const AuthPageTemplate = withStyles(
       <StatusBar style='dark' />
       <View style={styles.bannerContainer}>
         <ImageBackground source={banner} style={styles.banner}>
-          <LinearGradient
-            colors={['rgba(247, 249, 252,0.5)', 'rgba(247, 249, 252,1)']}
-            style={styles.gradient}
-          />
+          <LinearGradient colors={['rgba(247, 249, 252,0.5)', 'rgba(247, 249, 252,1)']} style={styles.gradient} />
           <TopNavigation />
           <View style={styles.logoText}>
             <Text category='h1'>Green Eggs</Text>

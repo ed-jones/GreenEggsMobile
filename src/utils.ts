@@ -37,7 +37,7 @@ function convertTimeInMilliseconds(timeInMilliseconds: number): string {
   const month = 30 * day
   const year = 365.25 * day
 
-  if (timeInMilliseconds === NaN) {
+  if (Number.isNaN(timeInMilliseconds)) {
     return '0 sec'
   }
   if (timeInMilliseconds < hour) {
@@ -64,6 +64,6 @@ function convertTimeInMilliseconds(timeInMilliseconds: number): string {
 /**
  * Takes a user fragment and returns a concatenated full name (first name + last name)
  */
-export function convertUserToFullname(user: UserFragment) {
+export function convertUserToFullName(user: UserFragment): string {
   return `${user.firstName} ${user.lastName}`
 }

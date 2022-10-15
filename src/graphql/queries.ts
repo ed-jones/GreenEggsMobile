@@ -7,13 +7,7 @@ import { gql } from '@apollo/client'
 import * as Fragments from './fragments'
 
 export const GET_RECIPES = gql`
-  query recipes(
-    $offset: Int!
-    $limit: Int!
-    $query: String!
-    $sort: Sort!
-    $filter: RecipeFilter!
-  ) {
+  query recipes($offset: Int!, $limit: Int!, $query: String!, $sort: Sort!, $filter: RecipeFilter!) {
     recipes(offset: $offset, limit: $limit, query: $query, sort: $sort, filter: $filter) {
       data {
         ...RecipeFragment

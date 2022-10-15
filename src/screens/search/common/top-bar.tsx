@@ -2,13 +2,7 @@
  * Author: Victor Ying
  */
 import React, { useContext } from 'react'
-import {
-  Button,
-  Icon,
-  ThemedComponentProps,
-  TopNavigationAction,
-  withStyles,
-} from '@ui-kitten/components'
+import { Button, Icon, ThemedComponentProps, TopNavigationAction, withStyles } from '@ui-kitten/components'
 import { Input, Icons } from '@greeneggs/ui'
 import { StyleSheet, View, Image } from 'react-native'
 
@@ -73,9 +67,7 @@ export const TopBar = withStyles(({ eva }: ThemedComponentProps) => {
           )}
           <Button
             style={{ width: 50 }}
-            accessoryLeft={(props) => (
-              <Icons.Filter {...props} fill={eva?.theme?.['color-primary-800']} />
-            )}
+            accessoryLeft={(props) => <Icons.Filter {...props} fill={eva?.theme?.['color-primary-800']} />}
             status='basic'
             onPress={() => navigation.navigate('RecipeSearchFilter')}
           />

@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { ScrollView } from 'react-native'
 import { InputType, Rules, ControlledInput } from '@greeneggs/ui'
 import { RecipeInput } from '@greeneggs/types/graphql'
@@ -15,7 +15,7 @@ interface ICreateRecipeDetails {
  * Last screen in the recipe creation process.
  * Lets a user add a cover photo for a recipe and publish.
  */
-export const PublishRecipe = ({ form }: ICreateRecipeDetails) => (
+export const PublishRecipe = ({ form }: ICreateRecipeDetails): ReactElement => (
   <ScrollView style={{ padding: 16 }}>
     <ControlledInput<RecipeInput>
       controllerProps={{

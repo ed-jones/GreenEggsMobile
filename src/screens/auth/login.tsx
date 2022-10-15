@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import { StyleSheet } from 'react-native'
 import { Button, Spinner } from '@ui-kitten/components'
 import { useLoginForm } from './use-login-form'
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 /**
  * Screen that enables a user to log into Green Eggs with an email and password.
  */
-export const Login = ({ navigation }: any) => {
+export const Login = (): ReactElement => {
   const { formResult, handleSubmit, control, submitForm } = useLoginForm()
   const { setToken } = useContext(AuthContext)
 
@@ -41,10 +41,7 @@ export const Login = ({ navigation }: any) => {
   }
 
   return (
-    <AuthPageTemplate
-      navigation={navigation}
-      message='Log in to view and share recipes with your friends'
-    >
+    <AuthPageTemplate message='Log in to view and share recipes with your friends'>
       <ControlledInput<LoginInput>
         inputProps={{
           autoFocus: true,

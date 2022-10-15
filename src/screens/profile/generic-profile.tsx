@@ -1,7 +1,7 @@
 /**
  * Author: Andrew Wilkie
  */
-import React, { FC, useState } from 'react'
+import React, { FC, ReactElement, useState } from 'react'
 import { View, StyleSheet, Pressable } from 'react-native'
 import { Text, Button, TopNavigation, TopNavigationAction, Avatar } from '@ui-kitten/components'
 import {
@@ -18,14 +18,7 @@ import { useQuery } from '@apollo/client'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { noAvatar } from '@greeneggs/assets'
 import { Queries } from '@greeneggs/graphql'
-import {
-  profile,
-  RecipeFilter,
-  recipes,
-  recipesVariables,
-  recipes_recipes_data,
-  Sort,
-} from '@greeneggs/types/graphql'
+import { profile, RecipeFilter, recipes, recipesVariables, recipes_recipes_data, Sort } from '@greeneggs/types/graphql'
 import { LoadingScreen } from '../loading-screen'
 import { useNavigation } from '@react-navigation/core'
 
@@ -134,7 +127,7 @@ interface GenericProfileProps {
   isMe?: boolean
 }
 
-export const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) => {
+export const GenericProfile = ({ userId, isMe = false }: GenericProfileProps): ReactElement => {
   const insets = useSafeAreaInsets()
   const navigation = useNavigation()
   const profileResult = useQuery<profile>(Queries.GET_PROFILE, {
@@ -169,10 +162,7 @@ export const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) =>
         style={{ backgroundColor: 'transparent', paddingTop: insets.top }}
         accessoryLeft={() => {
           return isMe ? (
-            <TopNavigationAction
-              icon={Icons.Settings}
-              onPress={() => navigation.navigate('Settings')}
-            />
+            <TopNavigationAction icon={Icons.Settings} onPress={() => navigation.navigate('Settings')} />
           ) : (
             <TopNavigationAction icon={Icons.Back} onPress={() => navigation.goBack()} />
           )

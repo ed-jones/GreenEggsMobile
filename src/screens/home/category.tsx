@@ -4,15 +4,11 @@
 import React, { FC, useState } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/core'
 import { Queries } from '@greeneggs/graphql'
-import {
-  recipes,
-  recipesVariables,
-  recipes_recipes_data,
-  Sort,
-  RecipeFilter,
-} from '@greeneggs/types/graphql'
+import { recipes, recipesVariables, recipes_recipes_data, Sort, RecipeFilter } from '@greeneggs/types/graphql'
 import { Background, Icons, Input, LazyList, RecipeCardSmall, TopNavigation } from '@greeneggs/ui'
 import { View } from 'react-native'
+
+type CategoryRoute = RouteProp<{ params: { categoryId: string; categoryName: string } }, 'params'>
 
 /**
  * Screen that shows an infinite scrolling list of recipes for a given category.
@@ -20,7 +16,7 @@ import { View } from 'react-native'
 export const Category: FC = () => {
   const {
     params: { categoryId, categoryName },
-  } = useRoute<RouteProp<{ params: { categoryId: string; categoryName: string } }, 'params'>>()
+  } = useRoute<CategoryRoute>()
   const navigation = useNavigation()
   const [query, setQuery] = useState('')
 

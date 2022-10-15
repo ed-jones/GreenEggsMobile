@@ -10,7 +10,9 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "echo \"No tests yet...\"",
-    "codegen": "./scripts/updategraphql.sh"
+    "codegen": "./scripts/updategraphql.sh",
+    "lint": "eslint . --ext .ts,.tsx",
+    "pretty": "prettier --write ."
   },
   "jest": {
     "preset": "jest-expo"

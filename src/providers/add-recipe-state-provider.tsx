@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useState, FC, createContext } from 'react'
+import React, { FC, createContext } from 'react'
 import { addRecipe, addRecipeVariables, RecipeInput } from '@greeneggs/types/graphql'
 import { IForm } from '@greeneggs/ui'
 import { useRecipeForm } from '@greeneggs/screens/add-recipe/use-recipe-form'
@@ -48,15 +48,15 @@ export const AddRecipeStateProvider: FC = ({ children }) => {
     },
     {
       title: 'Categories',
-      component: <AddRecipeCategories form={form} />,
+      component: <AddRecipeCategories />,
     },
     {
       title: 'Allergies',
-      component: <AddRecipeAllergies form={form} />,
+      component: <AddRecipeAllergies />,
     },
     {
       title: 'Diets',
-      component: <AddRecipeDiets form={form} />,
+      component: <AddRecipeDiets />,
     },
     {
       title: 'Cover Image',

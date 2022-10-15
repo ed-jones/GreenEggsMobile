@@ -5,9 +5,9 @@ import React, { FC } from 'react'
 import { recipes_recipes_data } from '@greeneggs/types/graphql'
 import { Card, Text } from '@ui-kitten/components'
 import { View, StyleSheet, Image } from 'react-native'
-import { convertTimeEstimate, convertSubmittedAt } from '@greeneggs/utils'
+import { convertSubmittedAt } from '@greeneggs/utils'
 import { imageNotFound } from '@greeneggs/assets'
-import { CommentCounter, LabelledIcon, RecipeLikeCounter } from '@greeneggs/ui'
+import { CommentCounter, RecipeLikeCounter } from '@greeneggs/ui'
 
 const styles = StyleSheet.create({
   card: {
@@ -86,10 +86,7 @@ export const RecipeCardSmall: FC<IRecipeCardSmall> = ({ recipe, onPress }) => {
           </View>
         </View>
         <View style={styles.imageContainer}>
-          <Image
-            style={styles.image}
-            source={recipe.coverImage ? { uri: recipe.coverImage } : imageNotFound}
-          />
+          <Image style={styles.image} source={recipe.coverImage ? { uri: recipe.coverImage } : imageNotFound} />
         </View>
       </View>
     </Card>

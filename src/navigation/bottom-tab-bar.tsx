@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import { Alert, StyleSheet, View } from 'react-native'
 import { BottomTabBarOptions, BottomTabBarProps } from '@react-navigation/bottom-tabs'
 import {
@@ -68,9 +68,7 @@ const BottomNavigationIcon = withStyles(
               cy='36'
               r='36'
               fill={
-                selected
-                  ? eva?.theme && eva.theme['color-primary-500']
-                  : eva?.theme && eva.theme['color-success-500']
+                selected ? eva?.theme && eva.theme['color-primary-500'] : eva?.theme && eva.theme['color-success-500']
               }
             />
           </Svg>
@@ -99,39 +97,32 @@ interface NotificationIconProps extends BottomNavigationTabProps {
   selected: boolean
 }
 
-const NotificationIcon = withStyles(
-  ({ selected, eva, ...props }: NotificationIconProps & ThemedComponentProps) => {
-    const {
-      notificationState: { unreadCount },
-    } = useContext(NotificationContext)
+const NotificationIcon = withStyles(({ selected, eva, ...props }: NotificationIconProps & ThemedComponentProps) => {
+  const {
+    notificationState: { unreadCount },
+  } = useContext(NotificationContext)
 
-    return (
-      <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-        {unreadCount > 0 && (
-          <Svg
-            height='8'
-            width='8'
-            style={{
-              position: 'absolute',
-              zIndex: 1,
-              marginTop: -4,
-            }}
-          >
-            <Circle cx='4' cy='4' r='4' fill={eva?.theme?.['color-primary-500']} />
-          </Svg>
-        )}
-        <BottomNavigationIcon
-          {...props}
-          name='bell'
-          iconStyle={IconStyle.Secondary}
-          selected={selected}
-        />
-      </View>
-    )
-  }
-)
+  return (
+    <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+      {unreadCount > 0 && (
+        <Svg
+          height='8'
+          width='8'
+          style={{
+            position: 'absolute',
+            zIndex: 1,
+            marginTop: -4,
+          }}
+        >
+          <Circle cx='4' cy='4' r='4' fill={eva?.theme?.['color-primary-500']} />
+        </Svg>
+      )}
+      <BottomNavigationIcon {...props} name='bell' iconStyle={IconStyle.Secondary} selected={selected} />
+    </View>
+  )
+})
 
-export const BottomTabBar = ({ navigation, state }: BottomTabBarProps<BottomTabBarOptions>) => {
+export const BottomTabBar = ({ navigation, state }: BottomTabBarProps<BottomTabBarOptions>): ReactElement => {
   const insets = useSafeAreaInsets()
   const navigationState = navigation.getState()
   const {
@@ -232,9 +223,7 @@ export const BottomTabBar = ({ navigation, state }: BottomTabBarProps<BottomTabB
             />
           )}
         />
-        <BottomNavigationTab
-          icon={(props) => <NotificationIcon {...props} selected={navigationState.index == 3} />}
-        />
+        <BottomNavigationTab icon={(props) => <NotificationIcon {...props} selected={navigationState.index == 3} />} />
         <BottomNavigationTab
           icon={(props) => (
             <BottomNavigationIcon

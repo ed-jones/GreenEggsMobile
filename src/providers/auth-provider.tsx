@@ -20,9 +20,5 @@ export const AuthProvider: FC = ({ children }) => {
   const [token, setToken] = useState<Token>()
   SecureStore.getItemAsync('token').then((resolvedToken: Token) => setToken(resolvedToken))
 
-  return (
-    <AuthContext.Provider value={{ token: token, setToken: setToken }}>
-      {children}
-    </AuthContext.Provider>
-  )
+  return <AuthContext.Provider value={{ token: token, setToken: setToken }}>{children}</AuthContext.Provider>
 }

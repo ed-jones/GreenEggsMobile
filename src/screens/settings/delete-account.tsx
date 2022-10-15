@@ -1,7 +1,7 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, ReactElement } from 'react'
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { ScrollView, StyleSheet, View, Alert as RNAlert } from 'react-native'
 import { deleteUser, LoginInput } from '@greeneggs/types/graphql'
@@ -13,14 +13,7 @@ import { LoadingScreen } from '../loading-screen'
 import { useLoginForm } from '../auth/use-login-form'
 import { AuthContext } from '@greeneggs/providers/auth-provider'
 import * as SecureStore from 'expo-secure-store'
-import {
-  TopNavigation,
-  Background,
-  Callout,
-  Icons,
-  ControlledInput,
-  InputType,
-} from '@greeneggs/ui'
+import { TopNavigation, Background, Callout, Icons, ControlledInput, InputType } from '@greeneggs/ui'
 
 const styles = StyleSheet.create({
   view: {
@@ -42,7 +35,7 @@ const styles = StyleSheet.create({
  * Screen that lets a user delete their account.
  * Requires the user to to re-enter their password.
  */
-export function DeleteAccount() {
+export function DeleteAccount(): ReactElement {
   const navigation = useNavigation()
   const { loading, error, data } = useQuery<Me>(Queries.ME)
   const { formResult, handleSubmit, control, submitForm, register, setValue } = useLoginForm()
@@ -101,7 +94,7 @@ export function DeleteAccount() {
           message={
             <Text>
               If you delete your account you will lose all
-              <Text style={{ fontWeight: 'bold' }}>{` ${me?.recipeCount}\u00a0recipes `}</Text>
+              <Text style={{ fontWeight: 'bold' }}>{` ${me?.recipeCount ?? 0}\u00a0recipes `}</Text>
               all other personal data. This action cannot be undone.
               {'\n'}
               {'\n'}

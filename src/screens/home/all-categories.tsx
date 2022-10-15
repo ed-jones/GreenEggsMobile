@@ -31,13 +31,7 @@ export const AllCategories: FC = () => {
         onChangeText={setQuery}
         style={{ padding: 16 }}
       />
-      <LazyListAlpha<
-        Categories,
-        CategoriesVariables,
-        Categories_categories_data,
-        Sort,
-        RecipeFilter
-      >
+      <LazyListAlpha<Categories, CategoriesVariables, Categories_categories_data, Sort, RecipeFilter>
         renderItem={(item) => (
           <ListItem
             title={item.name}

@@ -36,9 +36,6 @@ function useCachedResources() {
           'Lato-SemiBold': require('@greeneggs/assets/fonts/Lato-SemiBold.ttf'),
           'RobotoSlab-Medium': require('@greeneggs/assets/fonts/RobotoSlab-Medium.ttf'),
         })
-      } catch (e) {
-        // We might want to provide this error information to an error reporting service
-        console.warn(e)
       } finally {
         setLoadingComplete(true)
         SplashScreen.hideAsync()

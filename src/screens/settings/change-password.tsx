@@ -1,24 +1,13 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Mutations } from '@greeneggs/graphql'
 import { ScrollView, StyleSheet } from 'react-native'
-import {
-  ChangePasswordDetails,
-  changePasswordVariables,
-  changePassword,
-} from '@greeneggs/types/graphql'
+import { ChangePasswordDetails, changePasswordVariables, changePassword } from '@greeneggs/types/graphql'
 import { Button, Spinner } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
-import {
-  TopNavigation,
-  Background,
-  Icons,
-  ControlledInput,
-  InputType,
-  useForm,
-} from '@greeneggs/ui'
+import { TopNavigation, Background, Icons, ControlledInput, InputType, useForm } from '@greeneggs/ui'
 
 const styles = StyleSheet.create({
   view: {
@@ -39,7 +28,7 @@ const styles = StyleSheet.create({
 /**
  * Screen that lets a user change their password.
  */
-export function ChangePassword() {
+export function ChangePassword(): ReactElement {
   const form = useForm<ChangePasswordDetails, changePassword, changePasswordVariables>(
     Mutations.CHANGE_PASSWORD,
     'changePasswordDetails'
@@ -101,9 +90,7 @@ export function ChangePassword() {
           type={InputType.PASSWORD}
         />
         <Button
-          accessoryRight={
-            form.formResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Save
-          }
+          accessoryRight={form.formResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Save}
           onPress={form.handleSubmit(onSubmit)}
         >
           SAVE CHANGES

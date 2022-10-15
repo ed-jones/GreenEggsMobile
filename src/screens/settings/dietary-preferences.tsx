@@ -1,7 +1,7 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React, { useState } from 'react'
+import React, { useState, ReactElement } from 'react'
 import { Button, IndexPath, List, ListItem, Spinner, Text, SelectItem } from '@ui-kitten/components'
 import { StyleSheet, View } from 'react-native'
 import { Mutations, Queries } from '@greeneggs/graphql'
@@ -44,7 +44,7 @@ function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
  * Screen that lets a user edit their dietary preferences.
  * For instance, a user can choose to filter out all non-vegan recipes globally in the app.
  */
-export const DietaryPreferences = () => {
+export const DietaryPreferences = (): ReactElement => {
   const getDiet = useQuery<Diets>(Queries.GET_DIETS, {
     variables: {
       query: '',
@@ -55,10 +55,9 @@ export const DietaryPreferences = () => {
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(new IndexPath(0))
   const getMe = useQuery<Me>(Queries.ME)
 
-  const [removeDietaryPreferences] = useMutation<
-    RemoveDietaryPreferences,
-    RemoveDietaryPreferencesVariables
-  >(Mutations.REMOVE_DIETARY_PREFERENCES)
+  const [removeDietaryPreferences] = useMutation<RemoveDietaryPreferences, RemoveDietaryPreferencesVariables>(
+    Mutations.REMOVE_DIETARY_PREFERENCES
+  )
   const [updateDietaryPreferences, updateDietaryPreferencesResult] = useMutation<
     UpdateDietaryPreferences,
     UpdateDietaryPreferencesVariables
@@ -92,10 +91,7 @@ export const DietaryPreferences = () => {
             data: {
               ...me,
               dietaryPreferences: [
-                ...new Set([
-                  ...me.dietaryPreferences,
-                  unselectedDiets[indexToNumber(selectedIndex)],
-                ]),
+                ...new Set([...me.dietaryPreferences, unselectedDiets[indexToNumber(selectedIndex)]]),
               ],
             },
             fragment: FullUserFragment,
@@ -120,9 +116,7 @@ export const DietaryPreferences = () => {
             id: `FullUser:${me.id}`,
             data: {
               ...me,
-              dietaryPreferences: me.dietaryPreferences.filter(
-                (allDiets) => allDiets.id !== diet.id
-              ),
+              dietaryPreferences: me.dietaryPreferences.filter((allDiets) => allDiets.id !== diet.id),
             },
             fragment: FullUserFragment,
             fragmentName: 'FullUserFragment',
@@ -158,9 +152,7 @@ export const DietaryPreferences = () => {
               onPress={handleSubmit}
               disabled={unselectedDiets.length === 0}
               accessoryLeft={
-                updateDietaryPreferencesResult.loading
-                  ? () => <Spinner size='small' status='control' />
-                  : Icons.Add
+                updateDietaryPreferencesResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Add
               }
             >
               Add
@@ -172,9 +164,7 @@ export const DietaryPreferences = () => {
           renderItem={({ item }: { item: Diets_diets_data }) => (
             <ListItem
               title={item.name}
-              accessoryRight={(props) => (
-                <Icons.Cross {...props} onPress={() => removeDiet(item)} />
-              )}
+              accessoryRight={(props) => <Icons.Cross {...props} onPress={() => removeDiet(item)} />}
             />
           )}
         />

@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import { Button } from '@ui-kitten/components'
 import { Background, ControlledInput, InputType, Rules, TopNavigation } from '@greeneggs/ui'
 import { RecipeStepInput } from '@greeneggs/types/graphql'
@@ -14,7 +14,7 @@ import { ScrollView } from 'react-native'
 /**
  * Screen that lets a user create a new step. Includes an image and a description.
  */
-export const CreateStep = () => {
+export const CreateStep = (): ReactElement => {
   const form = useForm<RecipeStepInput>({ mode: 'all' })
   const navigation = useNavigation()
   const { stepsFieldArray } = useContext(AddRecipeContext)

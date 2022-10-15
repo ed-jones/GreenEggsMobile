@@ -2,7 +2,7 @@
  * Author: Victor Ying
  */
 import { Queries } from '@greeneggs/graphql'
-import React, { FC, useContext, useState } from 'react'
+import React, { FC, useContext, useState, ReactElement } from 'react'
 import {
   RecipeFilter,
   recipes,
@@ -18,10 +18,7 @@ import { View } from 'react-native'
 import { ISearchContext, SearchContext } from '@greeneggs/providers/search-state-provider'
 import { Divider, IndexPath, SelectItem, Tab, TabBar } from '@ui-kitten/components'
 import { Select, Background, LazyList, RecipeCardSmall, UserListItem } from '@greeneggs/ui'
-import {
-  createMaterialTopTabNavigator,
-  MaterialTopTabBarProps,
-} from '@react-navigation/material-top-tabs'
+import { createMaterialTopTabNavigator, MaterialTopTabBarProps } from '@react-navigation/material-top-tabs'
 
 const { Navigator, Screen } = createMaterialTopTabNavigator()
 
@@ -90,11 +87,8 @@ const UserSearch: FC = () => {
 /**
  * Tabs that can be switched between to show search results for recipes or users.
  */
-export const SearchTabBar = ({ navigation, state }: MaterialTopTabBarProps) => (
-  <TabBar
-    selectedIndex={state.index}
-    onSelect={(index) => navigation.navigate(state.routeNames[index])}
-  >
+export const SearchTabBar = ({ navigation, state }: MaterialTopTabBarProps): ReactElement => (
+  <TabBar selectedIndex={state.index} onSelect={(index) => navigation.navigate(state.routeNames[index])}>
     <Tab title='RECIPES' />
     <Tab title='USERS' />
   </TabBar>
@@ -137,7 +131,7 @@ export const Search: FC = () => {
             value={getSortFromIndex(selectedIndex)}
           >
             {Object.values(Sort).map((sortType) => (
-              <SelectItem title={sortType} />
+              <SelectItem title={sortType} key={sortType} />
             ))}
           </Select>
         </View>

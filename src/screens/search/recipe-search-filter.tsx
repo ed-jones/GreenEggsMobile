@@ -12,7 +12,7 @@ import { TopNavigation, Background, Icons } from '@greeneggs/ui'
 /**
  * Helper function that counts the number of active filters being applied based on the search state.
  */
-export function countActiveFilters(searchState: SearchState) {
+export function countActiveFilters(searchState: SearchState): number {
   let activeFilterCount = 0
 
   if (searchState.filter.allergies?.length ?? 0 > 0) {

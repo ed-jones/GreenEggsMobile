@@ -40,9 +40,7 @@ export const FilterIngredientsExcluded: FC = () => {
 
   const setSelected = (selected: boolean, id: string) => {
     setSelectedIngredients(
-      selected
-        ? [...selectedIngredients, id]
-        : [...selectedIngredients.filter((excludes) => excludes !== id)]
+      selected ? [...selectedIngredients, id] : [...selectedIngredients.filter((excludes) => excludes !== id)]
     )
   }
 
@@ -70,13 +68,7 @@ export const FilterIngredientsExcluded: FC = () => {
         onChangeText={setQuery}
         value={query}
       />
-      <LazyListAlpha<
-        Ingredients,
-        IngredientsVariables,
-        Ingredients_ingredients_data,
-        Sort,
-        RecipeFilter
-      >
+      <LazyListAlpha<Ingredients, IngredientsVariables, Ingredients_ingredients_data, Sort, RecipeFilter>
         renderItem={(item) => (
           <>
             <SelectableListItem

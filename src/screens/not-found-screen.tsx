@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import * as React from 'react'
+import React, { ReactElement } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 const styles = StyleSheet.create({
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
  * View to display in the very exceptional edge case that a route is missing.
  * Prevents the app from crashing and provides an error message to the user.
  */
-export function NotFoundScreen() {
+export function NotFoundScreen(): ReactElement {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>This screen doesn&apos;t exist.</Text>

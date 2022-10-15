@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext, useState } from 'react'
+import React, { ReactElement, useContext, useState } from 'react'
 
 import { StyleSheet } from 'react-native'
 import { Button, CheckBox, Spinner, Text } from '@ui-kitten/components'
@@ -12,6 +12,7 @@ import * as SecureStore from 'expo-secure-store'
 
 import { useSignupForm } from './use-sign-up-form'
 import { AuthPageTemplate } from './auth-page-template'
+import { useNavigation } from '@react-navigation/native'
 
 const styles = StyleSheet.create({
   input: {
@@ -22,7 +23,8 @@ const styles = StyleSheet.create({
 /**
  * Screen that enables a user to sign up to Green Eggs.
  */
-export const Signup = ({ navigation }: any) => {
+export const Signup = (): ReactElement => {
+  const navigation = useNavigation()
   const { formResult, handleSubmit, control, submitForm } = useSignupForm()
   const { setToken } = useContext(AuthContext)
   const [consent, setConsent] = useState(false)
@@ -38,10 +40,7 @@ export const Signup = ({ navigation }: any) => {
   }
 
   return (
-    <AuthPageTemplate
-      navigation={navigation}
-      message='Sign up to view and share recipes with your friends'
-    >
+    <AuthPageTemplate message='Sign up to view and share recipes with your friends'>
       {/* FIRST NAME */}
       <ControlledInput<SignupInput>
         controllerProps={{
@@ -112,11 +111,7 @@ export const Signup = ({ navigation }: any) => {
         submitError={formResult.data?.signup.error}
         type={InputType.PASSWORD}
       />
-      <CheckBox
-        checked={consent}
-        style={{ paddingVertical: 16 }}
-        onChange={(nextChecked) => setConsent(nextChecked)}
-      >
+      <CheckBox checked={consent} style={{ paddingVertical: 16 }} onChange={(nextChecked) => setConsent(nextChecked)}>
         <Text>
           I have read and agreed to the{' '}
           <Text style={{ fontWeight: 'bold' }} onPress={() => navigation.navigate('Privacy')}>

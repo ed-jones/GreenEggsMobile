@@ -1,7 +1,7 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { ScrollView, StyleSheet } from 'react-native'
 import { editProfile, editProfileVariables, ProfileDetails } from '@greeneggs/types/graphql'
@@ -10,14 +10,7 @@ import { useNavigation } from '@react-navigation/core'
 import { useQuery } from '@apollo/client'
 import { Me } from '@greeneggs/types/graphql'
 import { LoadingScreen } from '../loading-screen'
-import {
-  TopNavigation,
-  Background,
-  Icons,
-  ControlledInput,
-  InputType,
-  useForm,
-} from '@greeneggs/ui'
+import { TopNavigation, Background, Icons, ControlledInput, InputType, useForm } from '@greeneggs/ui'
 
 const styles = StyleSheet.create({
   view: {
@@ -36,16 +29,13 @@ const styles = StyleSheet.create({
 })
 
 const useEditProfile = () =>
-  useForm<ProfileDetails, editProfile, editProfileVariables>(
-    Mutations.EDIT_PROFILE,
-    'profileDetails'
-  )
+  useForm<ProfileDetails, editProfile, editProfileVariables>(Mutations.EDIT_PROFILE, 'profileDetails')
 
 /**
  * Screen that lets a user edit their basic profile details,
  * including First Name, Last Name and Bio.
  */
-export function EditProfile() {
+export function EditProfile(): ReactElement {
   const form = useEditProfile()
   const navigation = useNavigation()
   const { loading, error, data } = useQuery<Me>(Queries.ME)
@@ -111,9 +101,7 @@ export function EditProfile() {
           type={InputType.TEXTAREA}
         />
         <Button
-          accessoryRight={
-            form.formResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Save
-          }
+          accessoryRight={form.formResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Save}
           onPress={form.handleSubmit(onSubmit)}
         >
           SAVE CHANGES

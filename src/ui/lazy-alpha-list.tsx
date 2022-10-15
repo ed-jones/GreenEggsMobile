@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC } from 'react'
+import React, { FC, ReactElement } from 'react'
 import { CommonVariables, TDataWithData, useLazyList, UseLazyListProps } from './lazy-list'
 import { LoadingScreen } from '../screens/loading-screen'
 import { AlphaList, AlphaListProps, buildAlphaListItems, CategoriseItem } from './alpha-list'
@@ -30,14 +30,13 @@ export const LazyListAlpha = <
   categoriseItem,
   limit = 15,
   ...props
-}: LazyListAlphaProps<TData, TVariables, TDataType>) => {
-  const { loading, data, nextPage } = useLazyList<
-    TData,
-    TVariables,
-    TDataType,
-    SortType,
-    FilterType
-  >({ query, variables, dataKey, limit })
+}: LazyListAlphaProps<TData, TVariables, TDataType>): ReactElement => {
+  const { loading, data, nextPage } = useLazyList<TData, TVariables, TDataType, SortType, FilterType>({
+    query,
+    variables,
+    dataKey,
+    limit,
+  })
 
   if (loading) {
     return <LoadingScreen />

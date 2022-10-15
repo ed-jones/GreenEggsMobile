@@ -1,40 +1,30 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 
 import { TopNavigation, Background } from '@greeneggs/ui'
-import { useFocusEffect } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { FieldArrayMethodProps } from 'react-hook-form'
 import { Alert, BackHandler, ScrollView } from 'react-native'
 
-type AppendType = (
-  value: Partial<unknown> | Partial<unknown>[],
-  options?: FieldArrayMethodProps | undefined
-) => void
+type AppendType = (value: Partial<unknown> | Partial<unknown>[], options?: FieldArrayMethodProps | undefined) => void
 
 export interface RecipeFormPart {
-  navigation: any
   append: AppendType
 }
 
 interface ICreateRecipePartTemplate {
   title: string
-  navigation: StackNavigationProp<any>
-  route: any
   formComponent: (props: RecipeFormPart) => React.ReactElement
 }
 
 /**
  * Template for screens that allow for the creation of array elements in a recipe, i.e. single ingredients, categories, allergies, diets.
  */
-export const CreateRecipePartTemplate = ({
-  title,
-  navigation,
-  route,
-  formComponent,
-}: ICreateRecipePartTemplate) => {
+export const CreateRecipePartTemplate = ({ title, formComponent }: ICreateRecipePartTemplate): ReactElement => {
+  const navigation = useNavigation()
+  const route = useRoute()
   const { append } = route.params as {
     append: AppendType
   }

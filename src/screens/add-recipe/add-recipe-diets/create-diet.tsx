@@ -1,17 +1,10 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext, useState } from 'react'
+import React, { ReactElement, useContext, useState } from 'react'
 import { Divider, ListItem } from '@ui-kitten/components'
 import { AlphabetType, Background, Icons, Input, LazyListAlpha, TopNavigation } from '@greeneggs/ui'
-import {
-  DietInput,
-  Diets,
-  DietsVariables,
-  Diets_diets_data,
-  RecipeFilter,
-  Sort,
-} from '@greeneggs/types/graphql'
+import { DietInput, Diets, DietsVariables, Diets_diets_data, RecipeFilter, Sort } from '@greeneggs/types/graphql'
 import { Queries } from '@greeneggs/graphql'
 import { AddRecipeContext } from '@greeneggs/providers'
 import { useNavigation } from '@react-navigation/core'
@@ -20,7 +13,7 @@ import { useNavigation } from '@react-navigation/core'
  * Screen that lets a user select a diet from an infinite scrolling alphabetised list
  * to add to a recipe.
  */
-export const CreateDiet = () => {
+export const CreateDiet = (): ReactElement => {
   const [query, setQuery] = useState('')
   const { dietsFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation()

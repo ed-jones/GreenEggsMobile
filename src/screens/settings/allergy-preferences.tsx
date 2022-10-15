@@ -43,7 +43,7 @@ function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
  * Screen that lets a user update their allergy preferences.
  * For instance, a user may want to only see gluten free recipes globally in the app.
  */
-export const AllergyPreferences = () => {
+export const AllergyPreferences = (): ReactElement => {
   const getAllergy = useQuery<Allergies>(Queries.GET_ALLERGIES, {
     variables: {
       query: '',
@@ -54,10 +54,9 @@ export const AllergyPreferences = () => {
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(new IndexPath(0))
   const getMe = useQuery<Me>(Queries.ME)
 
-  const [removeAllergyPreferences] = useMutation<
-    RemoveAllergyPreferences,
-    RemoveAllergyPreferencesVariables
-  >(Mutations.REMOVE_ALLERGY_PREFERENCES)
+  const [removeAllergyPreferences] = useMutation<RemoveAllergyPreferences, RemoveAllergyPreferencesVariables>(
+    Mutations.REMOVE_ALLERGY_PREFERENCES
+  )
   const [updateAllergyPreferences, updateAllergyPreferencesResult] = useMutation<
     UpdateAllergyPreferences,
     UpdateAllergyPreferencesVariables
@@ -72,9 +71,7 @@ export const AllergyPreferences = () => {
   }
   const me = getMe.data?.me.data
   const allergies = getAllergy.data?.allergies.data || []
-  const unselectedAllergies = allergies.filter(
-    (allergy) => !me?.allergyPreferences.includes(allergy)
-  )
+  const unselectedAllergies = allergies.filter((allergy) => !me?.allergyPreferences.includes(allergy))
 
   function handleSubmit() {
     if (me?.allergyPreferences) {
@@ -93,10 +90,7 @@ export const AllergyPreferences = () => {
             data: {
               ...me,
               allergyPreferences: [
-                ...new Set([
-                  ...me.allergyPreferences,
-                  unselectedAllergies[indexToNumber(selectedIndex)],
-                ]),
+                ...new Set([...me.allergyPreferences, unselectedAllergies[indexToNumber(selectedIndex)]]),
               ],
             },
             fragment: FullUserFragment,
@@ -121,9 +115,7 @@ export const AllergyPreferences = () => {
             id: `FullUser:${me.id}`,
             data: {
               ...me,
-              allergyPreferences: me.allergyPreferences.filter(
-                (allAllergies) => allAllergies.id !== allergy.id
-              ),
+              allergyPreferences: me.allergyPreferences.filter((allAllergies) => allAllergies.id !== allergy.id),
             },
             fragment: FullUserFragment,
             fragmentName: 'FullUserFragment',
@@ -147,9 +139,7 @@ export const AllergyPreferences = () => {
               onSelect={(index) => setSelectedIndex(index)}
               selectedIndex={selectedIndex}
               disabled={unselectedAllergies.length === 0}
-              value={
-                unselectedAllergies[indexToNumber(selectedIndex)]?.name || 'NO ALLERGIES FOUND'
-              }
+              value={unselectedAllergies[indexToNumber(selectedIndex)]?.name || 'NO ALLERGIES FOUND'}
             >
               {unselectedAllergies.map((allergy) => (
                 <SelectItem key={allergy.id} title={allergy.name} />
@@ -160,9 +150,7 @@ export const AllergyPreferences = () => {
               onPress={handleSubmit}
               disabled={unselectedAllergies.length === 0}
               accessoryLeft={
-                updateAllergyPreferencesResult.loading
-                  ? () => <Spinner size='small' status='control' />
-                  : Icons.Add
+                updateAllergyPreferencesResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Add
               }
             >
               Add
@@ -174,9 +162,7 @@ export const AllergyPreferences = () => {
           renderItem={({ item }: { item: Allergies_allergies_data }) => (
             <ListItem
               title={item.name}
-              accessoryRight={(props) => (
-                <Icons.Cross {...props} onPress={() => removeAllergy(item)} />
-              )}
+              accessoryRight={(props) => <Icons.Cross {...props} onPress={() => removeAllergy(item)} />}
             />
           )}
         />

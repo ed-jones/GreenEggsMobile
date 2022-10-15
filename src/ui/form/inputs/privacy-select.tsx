@@ -2,27 +2,17 @@
  * Author: Edward Jones
  */
 import { IndexPath, SelectItem } from '@ui-kitten/components'
-import React from 'react'
-import {
-  DeepMap,
-  DeepPartial,
-  FieldError,
-  FieldValues,
-  Path,
-  PathValue,
-  UnionLike,
-} from 'react-hook-form'
+import React, { ReactElement } from 'react'
+import { DeepMap, DeepPartial, FieldError, FieldValues, Path, PathValue, UnionLike } from 'react-hook-form'
 import { Privacy } from '@greeneggs/types/graphql'
 import { Select } from '@greeneggs/ui'
 interface IPrivacySelect {
   label?: string
   caption?: string
   value: PathValue<FieldValues, Path<FieldValues>>
-  onChange: (...event: any[]) => void
+  onChange: (...event: unknown[]) => void
   placeholder?: string
-  error?:
-    | DeepMap<DeepPartial<UnionLike<PathValue<FieldValues, Path<FieldValues>>>>, FieldError>
-    | undefined
+  error?: DeepMap<DeepPartial<UnionLike<PathValue<FieldValues, Path<FieldValues>>>>, FieldError> | undefined
 }
 interface Option {
   title: string
@@ -44,12 +34,10 @@ export const PrivacySelect = ({
   onChange,
   placeholder,
   error,
-}: IPrivacySelect) => (
+}: IPrivacySelect): ReactElement => (
   <Select
     status={error ? 'danger' : undefined}
-    value={
-      Options.find((option) => option.value === value)?.title || placeholder || 'SELECT OPTION'
-    }
+    value={Options.find((option) => option.value === value)?.title || placeholder || 'SELECT OPTION'}
     style={{ marginBottom: 16 }}
     selectedIndex={new IndexPath(Options.findIndex((option) => option.value === value))}
     onSelect={(index) => (!Array.isArray(index) ? onChange(Options[index.row].value) : undefined)}

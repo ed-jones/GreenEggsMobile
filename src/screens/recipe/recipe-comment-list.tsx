@@ -1,13 +1,10 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Divider } from '@ui-kitten/components'
 import { View } from 'react-native'
-import {
-  recipe_recipe_data_comments,
-  recipe_recipe_data_comments_replies,
-} from '@greeneggs/types/graphql'
+import { recipe_recipe_data_comments, recipe_recipe_data_comments_replies } from '@greeneggs/types/graphql'
 import { RecipeComment } from './recipe-comment'
 
 interface RecipeCommentListProps {
@@ -17,11 +14,11 @@ interface RecipeCommentListProps {
 /**
  * Component that generates a list of comments.
  */
-export const RecipeCommentList = ({ comments }: RecipeCommentListProps) => {
+export const RecipeCommentList = ({ comments }: RecipeCommentListProps): ReactElement => {
   return (
     <View style={{ marginHorizontal: -16 }}>
-      {comments.map((comment, index) => (
-        <RecipeComment comment={comment} replyButton key={index.toString()} />
+      {(comments as unknown as recipe_recipe_data_comments[]).map((comment) => (
+        <RecipeComment comment={comment} replyButton key={comment.id} />
       ))}
       <Divider />
     </View>

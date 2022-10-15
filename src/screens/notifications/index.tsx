@@ -2,15 +2,7 @@
  * Author: Xiaoyao Zhang
  */
 import React, { FC, useContext } from 'react'
-import {
-  Avatar,
-  Divider,
-  ListItem,
-  ListItemProps,
-  ThemedComponentProps,
-  withStyles,
-  Text,
-} from '@ui-kitten/components'
+import { Avatar, Divider, ListItem, ListItemProps, ThemedComponentProps, withStyles, Text } from '@ui-kitten/components'
 import {
   notifications as notificationsType,
   notificationsVariables,
@@ -20,9 +12,9 @@ import {
   Sort,
 } from '@greeneggs/types/graphql'
 import { Mutations, Queries } from '@greeneggs/graphql'
-import { Background, Callout, Icons, LazyList, TopNavigation } from '@greeneggs/ui'
+import { Background, Icons, LazyList, TopNavigation } from '@greeneggs/ui'
 import { noAvatar } from '@greeneggs/assets'
-import { convertSubmittedAt, convertUserToFullname } from '@greeneggs/utils'
+import { convertSubmittedAt, convertUserToFullName } from '@greeneggs/utils'
 import Svg, { Circle } from 'react-native-svg'
 import { GestureResponderEvent, View } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
@@ -65,10 +57,12 @@ const NotificationListItem = withStyles(
         onPress={handlePress}
         title={
           <Text category='p1'>
-            <Text category='p1' style={{ fontWeight: 'bold' }}>
-              {convertUserToFullname(concerns)}
-            </Text>
-            {` ${title}`}
+            <>
+              <Text category='p1' style={{ fontWeight: 'bold' }}>
+                {convertUserToFullName(concerns)}
+              </Text>
+              {typeof title === 'number' || typeof title === 'string' ? ` ${title}` : title}
+            </>
           </Text>
         }
         description={`${convertSubmittedAt(createdAt)} ago`}
@@ -151,10 +145,7 @@ const CommentRepliedNotificationListItem: FC<notifications_notifications_data> =
   )
 }
 
-const NOTIFICATION_LIST_ITEM_MAP: Record<
-  NotificationTypeEnum,
-  FC<notifications_notifications_data>
-> = {
+const NOTIFICATION_LIST_ITEM_MAP: Record<NotificationTypeEnum, FC<notifications_notifications_data>> = {
   COMMENT_LIKED: CommentLikedNotificationListItem,
   RECIPE_LIKED: RecipeLikedNotificationListItem,
   RECIPE_COMMENTED: RecipeCommentedNotificationListItem,
@@ -165,13 +156,7 @@ export const Notifications: FC = () => {
   return (
     <Background>
       <TopNavigation title='Notifications' accessoryLeft={undefined} />
-      <LazyList<
-        notificationsType,
-        notificationsVariables,
-        notifications_notifications_data,
-        Sort,
-        RecipeFilter
-      >
+      <LazyList<notificationsType, notificationsVariables, notifications_notifications_data, Sort, RecipeFilter>
         query={Queries.GET_NOTIFICATIONS}
         limit={15}
         variables={{}}

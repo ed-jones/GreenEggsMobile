@@ -1,7 +1,7 @@
 /**
  * Author: Andrew Wilkie
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Text } from '@ui-kitten/components'
 import { useQuery } from '@apollo/client'
 import { Callout } from '@greeneggs/ui'
@@ -15,7 +15,7 @@ import { GenericProfile } from './generic-profile'
  * Lets the user access the settings page, a full list of their upload recipes,
  * and lets the user edit their profile.
  */
-export const MyProfile = () => {
+export const MyProfile = (): ReactElement => {
   const meResult = useQuery<Me>(Queries.ME)
 
   if (meResult.loading) {

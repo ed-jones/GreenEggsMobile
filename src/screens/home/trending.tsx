@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import * as React from 'react'
+import React, { ReactElement } from 'react'
 import { StyleSheet, View } from 'react-native'
 import {
   RecipeFilter,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 /**
  * Screen that shows a list of the most popular new recipes within the app.
  */
-export function Trending() {
+export function Trending(): ReactElement {
   const navigation = useNavigation()
   return (
     <Background>
@@ -41,14 +41,8 @@ export function Trending() {
         dataKey='trending'
         emptyMessage='There are no trending recipes! This means nobody has uploaded a recipe for a while.'
         renderItem={({ item: recipe, index }) => (
-          <View
-            key={recipe?.id}
-            style={index === 0 ? { ...styles.firstCard, ...styles.card } : styles.card}
-          >
-            <RecipeCard
-              recipe={recipe}
-              onPress={() => navigation.navigate('Recipe', { recipeId: recipe?.id })}
-            />
+          <View key={recipe?.id} style={index === 0 ? { ...styles.firstCard, ...styles.card } : styles.card}>
+            <RecipeCard recipe={recipe} onPress={() => navigation.navigate('Recipe', { recipeId: recipe?.id })} />
           </View>
         )}
       />

@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext, useState } from 'react'
+import React, { ReactElement, useContext, useState } from 'react'
 import { Divider, ListItem } from '@ui-kitten/components'
 import { AlphabetType, Background, Icons, Input, LazyListAlpha, TopNavigation } from '@greeneggs/ui'
 import {
@@ -20,7 +20,7 @@ import { useNavigation } from '@react-navigation/core'
  * Screen with an infinite scrolling alphabetised list of allergies that
  * can be selected and added to a new recipe.
  */
-export const CreateAllergy = () => {
+export const CreateAllergy = (): ReactElement => {
   const [query, setQuery] = useState('')
   const { allergiesFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation()

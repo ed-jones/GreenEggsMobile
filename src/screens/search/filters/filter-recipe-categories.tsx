@@ -34,15 +34,11 @@ export const FilterRecipeCategories: FC = () => {
   const navigation = useNavigation()
   const [query, setQuery] = useState('')
   const { searchState, setSearchState } = useContext(SearchContext)
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(
-    searchState.filter.categories ?? []
-  )
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(searchState.filter.categories ?? [])
 
   const setSelected = (selected: boolean, id: string) => {
     setSelectedCategories(
-      selected
-        ? [...selectedCategories, id]
-        : [...selectedCategories.filter((categories) => categories !== id)]
+      selected ? [...selectedCategories, id] : [...selectedCategories.filter((categories) => categories !== id)]
     )
   }
 
@@ -67,13 +63,7 @@ export const FilterRecipeCategories: FC = () => {
         onChangeText={setQuery}
         value={query}
       />
-      <LazyListAlpha<
-        Categories,
-        CategoriesVariables,
-        Categories_categories_data,
-        Sort,
-        RecipeFilter
-      >
+      <LazyListAlpha<Categories, CategoriesVariables, Categories_categories_data, Sort, RecipeFilter>
         renderItem={(item) => (
           <>
             <SelectableListItem

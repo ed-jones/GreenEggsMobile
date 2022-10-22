@@ -5,7 +5,7 @@ import React, { ReactElement } from 'react'
 import { recipe_recipe_data_steps } from '@greeneggs/types/graphql'
 import { Card, Text } from '@ui-kitten/components'
 import { Dimensions, View, Image } from 'react-native'
-import Carousel from 'react-native-snap-carousel'
+// import Carousel from 'react-native-snap-carousel'
 import { useNavigation } from '@react-navigation/core'
 
 interface IRecipeDirections {
@@ -15,12 +15,13 @@ interface IRecipeDirections {
 /**
  * Carousel for displaying recipe steps.
  */
+// TODO: Replace `react-native-snap-carousel` with another library
 export const RecipeDirections = ({ directions }: IRecipeDirections): ReactElement => {
   const navigation = useNavigation()
 
   return (
     <View style={{ marginHorizontal: -16 }}>
-      <Carousel
+      {/* <Carousel
         sliderWidth={Dimensions.get('window').width}
         itemWidth={Dimensions.get('window').width * 0.8}
         data={directions}
@@ -56,7 +57,7 @@ export const RecipeDirections = ({ directions }: IRecipeDirections): ReactElemen
             <Text category='h6'>{item.title}</Text>
           </Card>
         )}
-      />
+      /> */}
     </View>
   )
 }

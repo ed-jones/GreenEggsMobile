@@ -4,7 +4,7 @@
 import React from 'react'
 import { Text, ThemedComponentProps, withStyles } from '@ui-kitten/components'
 import { View, StyleSheet } from 'react-native'
-import ProgressCircle from 'react-native-progress-circle'
+// import ProgressCircle from 'react-native-progress-circle'
 
 interface IStepperProps {
   currentStep: string
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 export const Stepper = withStyles(
   ({ currentStep, nextStep, index, length, eva }: IStepperProps & ThemedComponentProps) => (
     <View style={styles.row}>
-      <ProgressCircle
+      {/* <ProgressCircle
         percent={(100 * (index + 1)) / length}
         radius={32}
         color={eva?.theme && eva.theme['color-primary-500']}
@@ -40,7 +40,7 @@ export const Stepper = withStyles(
         bgColor='white'
       >
         <Text category='label' style={{ fontWeight: 'bold' }}>{`${index + 1} OF ${length}`}</Text>
-      </ProgressCircle>
+      </ProgressCircle> */}
       <View>
         <Text style={styles.text} category='h6'>
           {currentStep}

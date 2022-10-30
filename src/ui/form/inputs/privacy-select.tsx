@@ -3,7 +3,7 @@
  */
 import { IndexPath, SelectItem } from '@ui-kitten/components'
 import React, { ReactElement } from 'react'
-import { DeepMap, DeepPartial, FieldError, FieldValues, Path, PathValue, UnionLike } from 'react-hook-form'
+import { FieldError, FieldValues, Path, PathValue } from 'react-hook-form'
 import { Privacy } from '@greeneggs/types/graphql'
 import { Select } from '@greeneggs/ui'
 interface IPrivacySelect {
@@ -12,7 +12,7 @@ interface IPrivacySelect {
   value: PathValue<FieldValues, Path<FieldValues>>
   onChange: (...event: unknown[]) => void
   placeholder?: string
-  error?: DeepMap<DeepPartial<UnionLike<PathValue<FieldValues, Path<FieldValues>>>>, FieldError> | undefined
+  error?: FieldError
 }
 interface Option {
   title: string

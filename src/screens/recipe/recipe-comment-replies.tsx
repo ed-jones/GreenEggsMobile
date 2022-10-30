@@ -13,6 +13,7 @@ import { RecipeAddComment } from './recipe-add-comment'
 import { RecipeComment } from './recipe-comment'
 import { RecipeCommentList } from './recipe-comment-list'
 import { RouteProp, useRoute } from '@react-navigation/native'
+import { LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-routes'
 
 const styles = StyleSheet.create({
   content: {
@@ -20,13 +21,11 @@ const styles = StyleSheet.create({
   },
 })
 
-type RecipeCommentRepliesRoute = RouteProp<{ params: { commentId: string; replying: boolean } }, 'params'>
-
 /**
  * Screen for showing a recipe comment and all of its replies.
  */
 export function RecipeCommentReplies(): ReactElement {
-  const route = useRoute<RecipeCommentRepliesRoute>()
+  const route = useRoute<RouteProp<LoggedInRouteParams, 'RecipeCommentReplies'>>()
   const { commentId, replying } = route.params
   const [visibleCommentCount, setVisibleCommentCount] = useState<number>(3)
 

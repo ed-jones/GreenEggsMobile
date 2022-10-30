@@ -10,7 +10,7 @@ import { Mutations, Queries } from '@greeneggs/graphql'
 import { useNavigation } from '@react-navigation/core'
 
 interface RecipeMoreButtonProps {
-  recipeId: string
+  recipeId: string | null
 }
 
 /**

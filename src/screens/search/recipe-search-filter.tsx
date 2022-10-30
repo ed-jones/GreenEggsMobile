@@ -8,6 +8,7 @@ import { FilterControlGroup, CountCircle } from './common'
 import { SearchContext, SearchState } from '@greeneggs/providers/search-state-provider'
 import { View } from 'react-native'
 import { TopNavigation, Background, Icons } from '@greeneggs/ui'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
 /**
  * Helper function that counts the number of active filters being applied based on the search state.
@@ -40,7 +41,12 @@ export function countActiveFilters(searchState: SearchState): number {
 
 interface FilterListItemProps {
   title: string
-  to: string
+  to:
+    | 'FilterIngredientsIncluded'
+    | 'FilterIngredientsExcluded'
+    | 'FilterRecipeCategories'
+    | 'FilterRecipeAllergies'
+    | 'FilterRecipeDiets'
   count: number
 }
 
@@ -48,7 +54,7 @@ interface FilterListItemProps {
  * Screen that shows a list of all available filter options.
  */
 export const RecipeSearchFilter: FC = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
   const { searchState, setSearchState } = useContext(SearchContext)
 
   function applyAllFilters() {
@@ -91,21 +97,23 @@ export const RecipeSearchFilter: FC = () => {
       <TopNavigation title='Filter Search' />
       <List
         data={FilterOptions}
-        renderItem={({ item }) => (
-          <>
-            <ListItem
-              title={item.title}
-              accessoryRight={(props) => (
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  {item.count > 0 && <CountCircle {...props}>{item.count}</CountCircle>}
-                  <Icons.Forward {...props} />
-                </View>
-              )}
-              onPress={() => navigation.navigate(item.to)}
-            />
-            <Divider />
-          </>
-        )}
+        renderItem={({ item: { to, title, count } }) => {
+          return (
+            <>
+              <ListItem
+                title={title}
+                accessoryRight={(props) => (
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    {count > 0 && <CountCircle {...props}>{count}</CountCircle>}
+                    <Icons.Forward {...props} />
+                  </View>
+                )}
+                onPress={() => navigation.navigate(to)}
+              />
+              <Divider />
+            </>
+          )
+        }}
       />
       <FilterControlGroup
         label={`${countActiveFilters(searchState)} CATEGORIES SELECTED`}

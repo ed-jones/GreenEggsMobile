@@ -3,7 +3,7 @@
  */
 import { InputProps, Text, ThemedComponentProps, useTheme } from '@ui-kitten/components'
 import React, { ReactElement } from 'react'
-import { DeepMap, DeepPartial, FieldError, Path, PathValue, UnionLike } from 'react-hook-form'
+import { FieldError, Path, PathValue } from 'react-hook-form'
 import { View } from 'react-native'
 import { Input } from '@greeneggs/ui'
 
@@ -17,7 +17,7 @@ interface ITimeFields {
 interface ITimeInput<FieldValues> {
   value: PathValue<FieldValues, Path<FieldValues>>
   onChange: (...event: unknown[]) => void
-  error?: DeepMap<DeepPartial<UnionLike<PathValue<FieldValues, Path<FieldValues>>>>, FieldError> | undefined
+  error?: FieldError
   inputProps?: InputProps
   onBlur: () => void
 }

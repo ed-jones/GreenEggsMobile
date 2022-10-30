@@ -19,6 +19,7 @@ import { ISearchContext, SearchContext } from '@greeneggs/providers/search-state
 import { Divider, IndexPath, SelectItem, Tab, TabBar } from '@ui-kitten/components'
 import { Select, Background, LazyList, RecipeCardSmall, UserListItem } from '@greeneggs/ui'
 import { createMaterialTopTabNavigator, MaterialTopTabBarProps } from '@react-navigation/material-top-tabs'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
 const { Navigator, Screen } = createMaterialTopTabNavigator()
 
@@ -26,7 +27,7 @@ const { Navigator, Screen } = createMaterialTopTabNavigator()
  * Shows a list of recipes as the result of a search
  */
 export const RecipeSearch: FC = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
   const { searchState } = useContext<ISearchContext>(SearchContext)
   return (
     <Background>

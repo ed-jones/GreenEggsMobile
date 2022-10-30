@@ -10,6 +10,7 @@ import { View } from 'react-native'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/core'
 import { AddRecipeContext } from '@greeneggs/providers'
 import { AddRecipeStyles } from '../add-recipe-styles'
+import { LoggedInNavigationProp, LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-routes'
 
 /**
  * Screen for adding details to a selected ingredient, including
@@ -18,10 +19,10 @@ import { AddRecipeStyles } from '../add-recipe-styles'
 export const AddIngredientDetails = (): ReactElement => {
   const form = useForm<IngredientInput>({ mode: 'all' })
   const { ingredientsFieldArray } = useContext(AddRecipeContext)
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
   const {
     params: { name },
-  } = useRoute<RouteProp<{ params: { name: string } }, 'params'>>()
+  } = useRoute<RouteProp<LoggedInRouteParams, 'AddIngredientDetails'>>()
 
   return (
     <Background>
@@ -96,7 +97,8 @@ export const AddIngredientDetails = (): ReactElement => {
             status='basic'
             onPress={() => {
               ingredientsFieldArray?.append({ name })
-              navigation.navigate('AddRecipe')
+              navigation.goBack()
+              navigation.goBack()
             }}
           >
             SKIP ADD DETAILS
@@ -110,7 +112,8 @@ export const AddIngredientDetails = (): ReactElement => {
                     ...form.getValues(),
                     name,
                   })
-                  navigation.navigate('AddRecipe')
+                  navigation.goBack()
+                  navigation.goBack()
                 }
               })
             }}

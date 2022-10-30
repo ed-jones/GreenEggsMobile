@@ -9,9 +9,10 @@ import {
   MutationResult,
   useMutation,
 } from '@apollo/client'
-import { useForm as useReactHookForm, UseFormProps, UseFormReturn } from 'react-hook-form'
+import { FieldValues, useForm as useReactHookForm, UseFormProps, UseFormReturn } from 'react-hook-form'
 
-export interface IForm<InputType, MutationType, MutationVariables> extends UseFormReturn<InputType> {
+export interface IForm<InputType extends FieldValues, MutationType, MutationVariables>
+  extends UseFormReturn<InputType> {
   formResult: MutationResult<MutationType>
   submitForm: (
     options?: MutationFunctionOptions<MutationType, MutationVariables> | undefined
@@ -22,7 +23,11 @@ export interface IForm<InputType, MutationType, MutationVariables> extends UseFo
  *  Custom hook that combines the functionality of react-hook-form
  *  with type safe apollo mutations
  */
-export function useForm<InputType, MutationType, MutationVariables extends Record<keyof MutationVariables, InputType>>(
+export function useForm<
+  InputType extends FieldValues,
+  MutationType,
+  MutationVariables extends Record<keyof MutationVariables, InputType>
+>(
   Mutation: DocumentNode,
   mutationVariableName: keyof MutationVariables,
   options?: MutationHookOptions<MutationType, MutationVariables>,

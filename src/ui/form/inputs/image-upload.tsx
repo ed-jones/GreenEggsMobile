@@ -8,14 +8,14 @@ import * as ImagePicker from 'expo-image-picker'
 import { ReactNativeFile } from 'apollo-upload-client'
 import { ImageBackground } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
-import { DeepMap, DeepPartial, FieldError, FieldValues, Path, PathValue, UnionLike } from 'react-hook-form'
 import { Icons } from '@greeneggs/ui'
+import { FieldError } from 'react-hook-form'
 
 interface IImageUpload {
   label?: string
   uri?: string
   onChange: (...event: unknown[]) => void
-  error?: DeepMap<DeepPartial<UnionLike<PathValue<FieldValues, Path<FieldValues>>>>, FieldError> | undefined
+  error?: FieldError
 }
 
 /**

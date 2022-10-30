@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC, ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import { CommonVariables, TDataWithData, useLazyList, UseLazyListProps } from './lazy-list'
 import { LoadingScreen } from '../screens/loading-screen'
 import { AlphaList, AlphaListProps, buildAlphaListItems, CategoriseItem } from './alpha-list'
@@ -9,7 +9,7 @@ import { AlphaList, AlphaListProps, buildAlphaListItems, CategoriseItem } from '
 interface LazyListAlphaProps<TData, TVariables, TDataType>
   extends Omit<AlphaListProps<TDataType>, 'items'>,
     UseLazyListProps<TVariables, TData> {
-  renderItem: FC<TDataType>
+  renderItem: (props: TDataType) => ReactElement | null
   categoriseItem: CategoriseItem<TDataType>
 }
 

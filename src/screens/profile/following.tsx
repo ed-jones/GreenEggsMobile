@@ -13,6 +13,7 @@ import {
 } from '@greeneggs/types/graphql'
 import { Queries } from '@greeneggs/graphql'
 import { RouteProp, useRoute } from '@react-navigation/core'
+import { LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-routes'
 
 const styles = StyleSheet.create({
   found: {
@@ -33,7 +34,7 @@ export const Following = (): ReactElement => {
   const [query, setQuery] = useState('')
   const {
     params: { userId },
-  } = useRoute<RouteProp<{ params: { userId: string } }, 'params'>>()
+  } = useRoute<RouteProp<LoggedInRouteParams, 'Following'>>()
 
   return (
     <Background style={{ ...styles.view }}>

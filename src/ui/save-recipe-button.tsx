@@ -7,7 +7,7 @@ import { useMutation } from '@apollo/client'
 import { Mutations, Queries } from '@greeneggs/graphql'
 
 interface SaveRecipeButtonProps {
-  recipeId: string
+  recipeId: string | null
   saved: boolean
 }
 

@@ -3,7 +3,7 @@
  */
 import React, { ReactElement, useContext } from 'react'
 import { View, Alert } from 'react-native'
-import { Button, Divider, Layout, Spinner, withStyles } from '@ui-kitten/components'
+import { Button, Divider, Layout, Spinner, useTheme } from '@ui-kitten/components'
 import { addRecipe, addRecipeVariables, RecipeInput } from '@greeneggs/types/graphql'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Icons, IForm, Background } from '@greeneggs/ui'
@@ -20,9 +20,10 @@ export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>
  * Screen that enables the creation of recipes.
  * Contains the multi-step form.
  */
-export const AddRecipe = withStyles(({ eva }): ReactElement => {
+export const AddRecipe = (): ReactElement => {
   const navigation: StackNavigationProp<Record<string, Record<string, unknown>>, string> = useNavigation()
   const { form, steps } = useContext(AddRecipeContext)
+  const theme = useTheme()
 
   if (form === undefined || steps === undefined) {
     return <LoadingScreen />
@@ -101,7 +102,7 @@ export const AddRecipe = withStyles(({ eva }): ReactElement => {
             <Button
               size='small'
               onPress={steps.previous}
-              accessoryLeft={(props) => <Icons.Back {...props} fill={eva?.theme && eva.theme['color-primary-500']} />}
+              accessoryLeft={(props) => <Icons.Back {...props} fill={theme['color-primary-500']} />}
               status='basic'
             >
               PREVIOUS
@@ -111,4 +112,4 @@ export const AddRecipe = withStyles(({ eva }): ReactElement => {
       </Layout>
     </Background>
   )
-})
+}

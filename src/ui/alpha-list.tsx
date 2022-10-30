@@ -2,7 +2,7 @@
  * Author: Edward Jones
  */
 import { ListItem } from '@ui-kitten/components'
-import React, { FC, ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import { SectionList, SectionListProps } from 'react-native'
 
 export const AlphabetArray = [
@@ -65,7 +65,7 @@ export function buildAlphaListItems<T>({ items, categoriseItem }: BuildAlphaList
 
 export interface AlphaListProps<T> extends Omit<SectionListProps<T, AlphaListItem<T>>, 'renderItem' | 'sections'> {
   items: AlphaListItems<T>
-  renderItem: FC<T>
+  renderItem: (props: T) => ReactElement | null
 }
 
 /**

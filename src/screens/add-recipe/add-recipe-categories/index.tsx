@@ -8,6 +8,7 @@ import { Icons } from '@greeneggs/ui'
 import { AddRecipePartTemplate } from '../add-recipe-part-template'
 import { useNavigation } from '@react-navigation/native'
 import { AddRecipeContext } from '@greeneggs/providers'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
 /**
  * Screen that shows a list of all selected categories that will
@@ -15,7 +16,7 @@ import { AddRecipeContext } from '@greeneggs/providers'
  */
 export const AddRecipeCategories = (): ReactElement => {
   const { categoriesFieldArray } = useContext(AddRecipeContext)
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (
     <AddRecipePartTemplate

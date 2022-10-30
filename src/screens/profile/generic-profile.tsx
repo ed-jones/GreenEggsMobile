@@ -21,6 +21,7 @@ import { Queries } from '@greeneggs/graphql'
 import { profile, RecipeFilter, recipes, recipesVariables, recipes_recipes_data, Sort } from '@greeneggs/types/graphql'
 import { LoadingScreen } from '../loading-screen'
 import { useNavigation } from '@react-navigation/core'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
 const styles = StyleSheet.create({
   avatarContainer: {
@@ -91,7 +92,7 @@ interface MyRecipesProps
  * Abstract screen for displaying a user's profile information.
  */
 const MyRecipes: FC<MyRecipesProps> = ({ query, userId, ...props }) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (
     <LazyList<recipes, recipesVariables, recipes_recipes_data, Sort, RecipeFilter>
@@ -129,7 +130,7 @@ interface GenericProfileProps {
 
 export const GenericProfile = ({ userId, isMe = false }: GenericProfileProps): ReactElement => {
   const insets = useSafeAreaInsets()
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
   const profileResult = useQuery<profile>(Queries.GET_PROFILE, {
     variables: {
       userId,

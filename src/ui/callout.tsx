@@ -1,23 +1,25 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import React, { ReactText } from 'react'
 import { StyleProp, View, ViewStyle } from 'react-native'
 import { Icon, IconProps, Text, TextElement, ThemedComponentProps, withStyles } from '@ui-kitten/components'
+import { alpha } from '@greeneggs/utils'
 
 type AlertType = 'danger' | 'warning' | 'info' | 'success'
 
 interface IAlert {
   type: AlertType
-  message: React.ReactText | TextElement
+  title?: ReactText | TextElement
+  message: ReactText | TextElement
   style?: StyleProp<ViewStyle>
 }
 
 /**
  * Displays an important message that should stand out from the rest of the view.
  */
-export const Callout = withStyles(({ type, message, eva, style }: IAlert & ThemedComponentProps) => {
-  const IconNameFromAlertType: Record<AlertType, IconProps> = {
+export const Callout = withStyles(({ type, message, eva, style, title }: IAlert & ThemedComponentProps) => {
+  const iconNameFromAlertType: Record<AlertType, IconProps> = {
     danger: {
       name: 'alert-triangle',
       fill: eva?.theme?.['color-danger-500'],
@@ -42,15 +44,21 @@ export const Callout = withStyles(({ type, message, eva, style }: IAlert & Theme
         {
           flexDirection: 'row',
           alignItems: 'flex-start',
-          paddingVertical: 24,
-          paddingRight: 16,
+          padding: 16,
+          backgroundColor: alpha(iconNameFromAlertType[type].fill, 0.2),
+          borderRadius: 8,
         },
         style
       )}
     >
-      <Icon style={{ width: 48, height: 48, marginRight: 10 }} {...IconNameFromAlertType[type]} />
+      <Icon style={{ width: 48, height: 48, marginRight: 10 }} {...iconNameFromAlertType[type]} />
       <View style={{ justifyContent: 'center', minHeight: 48, flexShrink: 1 }}>
-        <Text>{message}</Text>
+        {title && (
+          <Text status={type} style={{ fontWeight: 'bold' }}>
+            {title}
+          </Text>
+        )}
+        <Text status={type}>{message}</Text>
       </View>
     </View>
   )

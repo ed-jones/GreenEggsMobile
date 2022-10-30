@@ -12,6 +12,7 @@ import { logo } from '@greeneggs/assets'
 
 import { countActiveFilters } from '../recipe-search-filter'
 import { CountCircle } from './count-circle'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
 const styles = StyleSheet.create({
   topNavigation: {
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
  * Search bar and associated buttons displayed on the home page and search page.
  */
 export const TopBar = withStyles(({ eva }: ThemedComponentProps) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
   const { searchState, setSearchState } = useContext(SearchContext)
   const setQuery = (query: string | undefined) => setSearchState?.({ ...searchState, query })
 

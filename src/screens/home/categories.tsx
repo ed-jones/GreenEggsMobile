@@ -15,6 +15,7 @@ import { Button, Text } from '@ui-kitten/components'
 import { ImageBackground, Pressable, StyleSheet } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useNavigation } from '@react-navigation/core'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
 interface CategoryWithImageProps {
   name: string
@@ -65,7 +66,7 @@ const CategoryWithImage: FC<CategoryWithImageProps> = ({ name, coverImage, onPre
 }
 
 export const Categories: FC = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (
     <Background>

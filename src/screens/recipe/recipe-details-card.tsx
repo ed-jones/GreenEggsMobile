@@ -12,6 +12,7 @@ import { RecipeCategoriesTags } from './recipe-categories-tags'
 import { RecipeLikeCounter } from '@greeneggs/ui'
 import { useNavigateToProfile } from '@greeneggs/navigation'
 import { useNavigation } from '@react-navigation/native'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
 const styles = StyleSheet.create({
   cardSection: {
@@ -42,10 +43,10 @@ export const RecipeDetailsCard = ({
   liked,
   comments,
 }: recipe_recipe_data): ReactElement => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
   const navigateToDescription = () => {
     navigation.navigate('RecipeDescription', {
-      description: description,
+      description: description ?? '',
       createdAt: createdAt,
       title: title,
       submittedBy: submittedBy,

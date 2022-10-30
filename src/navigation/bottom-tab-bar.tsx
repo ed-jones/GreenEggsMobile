@@ -3,7 +3,7 @@
  */
 import React, { ReactElement, useContext } from 'react'
 import { Alert, StyleSheet, View } from 'react-native'
-import { BottomTabBarOptions, BottomTabBarProps } from '@react-navigation/bottom-tabs'
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
 import {
   BottomNavigation,
   BottomNavigationTab,
@@ -122,7 +122,7 @@ const NotificationIcon = withStyles(({ selected, eva, ...props }: NotificationIc
   )
 })
 
-export const BottomTabBar = ({ navigation, state }: BottomTabBarProps<BottomTabBarOptions>): ReactElement => {
+export const BottomTabBar = ({ navigation, state }: BottomTabBarProps): ReactElement => {
   const insets = useSafeAreaInsets()
   const navigationState = navigation.getState()
   const {

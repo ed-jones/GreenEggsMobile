@@ -2,7 +2,7 @@
  * Author: Edward Jones
  */
 import React from 'react'
-import { Text, ThemedComponentProps, withStyles } from '@ui-kitten/components'
+import { Text, ThemedComponentProps, useTheme } from '@ui-kitten/components'
 import { View, StyleSheet } from 'react-native'
 // import ProgressCircle from 'react-native-progress-circle'
 
@@ -28,14 +28,15 @@ const styles = StyleSheet.create({
 /**
  * Stateless component that, when controlled, shows the current state of a multi-step form in a mobile friendly manor.
  */
-export const Stepper = withStyles(
-  ({ currentStep, nextStep, index, length, eva }: IStepperProps & ThemedComponentProps) => (
+export const Stepper = ({ currentStep, nextStep }: IStepperProps & ThemedComponentProps) => {
+  const theme = useTheme()
+  return (
     <View style={styles.row}>
       {/* <ProgressCircle
         percent={(100 * (index + 1)) / length}
         radius={32}
-        color={eva?.theme && eva.theme['color-primary-500']}
-        shadowColor={eva?.theme && eva.theme['color-success-500']}
+        color={theme['color-primary-500']}
+        shadowColor={theme['color-success-500']}
         borderWidth={5}
         bgColor='white'
       >
@@ -49,4 +50,4 @@ export const Stepper = withStyles(
       </View>
     </View>
   )
-)
+}

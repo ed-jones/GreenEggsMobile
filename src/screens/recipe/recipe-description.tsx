@@ -1,13 +1,9 @@
-/**
- * Author: Dimitri Zvolinski
- */
-import React, { ReactElement } from 'react'
+import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Card, Text } from '@ui-kitten/components'
 import { TopNavigation, Background } from '@greeneggs/ui'
 import { RouteProp, useRoute } from '@react-navigation/native'
-import { Users_users_data } from '@greeneggs/types/graphql'
-
+import { LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-routes'
 const styles = StyleSheet.create({
   cardElement: {
     paddingHorizontal: 28,
@@ -15,16 +11,11 @@ const styles = StyleSheet.create({
   },
 })
 
-type RecipeRoute = RouteProp<
-  { params: { description: string; createdAt: string; title: string; submittedBy: Users_users_data } },
-  'params'
->
-
 /**
  * Screen for displaying a recipe's complete description and recipe upload date.
  */
-export const RecipeDescription = (): ReactElement => {
-  const route = useRoute<RecipeRoute>()
+export const RecipeDescription = () => {
+  const route = useRoute<RouteProp<LoggedInRouteParams, 'RecipeDescription'>>()
   const { description, createdAt, title, submittedBy } = route.params
 
   return (

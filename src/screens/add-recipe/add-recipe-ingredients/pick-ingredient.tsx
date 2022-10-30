@@ -15,6 +15,7 @@ import { Button, Divider, ListItem } from '@ui-kitten/components'
 import { Queries } from '@greeneggs/graphql'
 import { toTitleCase } from '@greeneggs/utils'
 import { useNavigation } from '@react-navigation/core'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
 /**
  * Screen that shows an infinite scrolling list of all generic ingredients
@@ -22,7 +23,7 @@ import { useNavigation } from '@react-navigation/core'
  */
 export const PickIngredient: FC = () => {
   const [query, setQuery] = useState('')
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   function pick(ingredient: IngredientInput) {
     navigation.navigate('AddIngredientDetails', { name: ingredient.name })

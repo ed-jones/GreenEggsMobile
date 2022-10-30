@@ -6,7 +6,7 @@ import { View, StyleSheet, ImageBackground, Image, ScrollView } from 'react-nati
 import { Text, withStyles, ThemedComponentProps } from '@ui-kitten/components'
 import { LinearGradient } from 'expo-linear-gradient'
 import { StatusBar } from 'expo-status-bar'
-import { TopNavigation, Background } from '@greeneggs/ui'
+import { TopNavigation, Background, Callout } from '@greeneggs/ui'
 import { logo, banner } from '@greeneggs/assets'
 
 const styles = StyleSheet.create({
@@ -14,11 +14,6 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     margin: 10,
-  },
-  form: {
-    paddingHorizontal: 10,
-    // paddingTop: 664,
-    // height: "100%",
   },
   gradient: {
     position: 'absolute',
@@ -59,6 +54,7 @@ const styles = StyleSheet.create({
 interface IAuthPageTemplateProps {
   message: string
   children: React.ReactNode
+  errorMessage?: string
 }
 
 /**
@@ -66,7 +62,7 @@ interface IAuthPageTemplateProps {
  * Shows the brand logo and background, followed by a form.
  */
 export const AuthPageTemplate = withStyles(
-  ({ message, children, eva }: IAuthPageTemplateProps & ThemedComponentProps) => (
+  ({ message, errorMessage, children, eva }: IAuthPageTemplateProps & ThemedComponentProps) => (
     <Background>
       <StatusBar style='dark' />
       <View style={styles.bannerContainer}>
@@ -84,10 +80,11 @@ export const AuthPageTemplate = withStyles(
       </View>
       <ScrollView
         style={{
-          ...styles.form,
+          paddingHorizontal: 10,
           backgroundColor: eva?.theme && eva.theme['color-basic-200'],
         }}
       >
+        {errorMessage && <Callout message={errorMessage} type='danger' style={{ marginVertical: 16 }} />}
         {children}
       </ScrollView>
     </Background>

@@ -4,6 +4,7 @@
 import { useContext } from 'react'
 import { UserContext } from '@greeneggs/providers'
 import { useNavigation } from '@react-navigation/core'
+import { LoggedInNavigationProp } from './routes/logged-in-routes'
 
 type NavigateToProfile = (userId: string) => void
 
@@ -13,7 +14,7 @@ type NavigateToProfile = (userId: string) => void
  */
 export function useNavigateToProfile(): NavigateToProfile {
   const { me } = useContext(UserContext)
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   function navigateToMyProfile() {
     navigation.reset({

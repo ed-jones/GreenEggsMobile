@@ -8,20 +8,20 @@ import { Icons, Background } from '@greeneggs/ui'
 import { EmptyState } from '@greeneggs/ui/empty-state'
 import { AddRecipeStyles } from './add-recipe-styles'
 
-interface AddRecipePartTemplateProps {
+interface AddRecipePartTemplateProps<T> {
   title: React.ReactText | TextElement
   createButtonTitle: React.ReactText | TextElement
   onPressCreate: () => void
   emptyStateTitle: React.ReactText | TextElement
   emptyStateDescription: React.ReactText | TextElement
   header?: ReactNode
-  listItem: ListRenderItem<unknown> | null | undefined
-  data: readonly unknown[] | null | undefined
+  listItem: ListRenderItem<T> | null | undefined
+  data: readonly T[] | null | undefined
 }
 /**
  * Template for screens that create larger sections of the recipe, i.e. all ingredients.
  */
-export const AddRecipePartTemplate = ({
+export function AddRecipePartTemplate<T>({
   title,
   createButtonTitle,
   onPressCreate,
@@ -30,7 +30,7 @@ export const AddRecipePartTemplate = ({
   header,
   listItem,
   data,
-}: AddRecipePartTemplateProps): ReactElement => {
+}: AddRecipePartTemplateProps<T>): ReactElement {
   return (
     <Background>
       <List

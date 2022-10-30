@@ -13,6 +13,7 @@ import {
 import { Queries } from '@greeneggs/graphql'
 import { useNavigation } from '@react-navigation/core'
 import { Background, LazyList, RecipeCard } from '@greeneggs/ui'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
 const CardVerticalMargin = 20
 const CardHorizontalMargin = 24
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
  * Screen that shows a list of the most popular new recipes within the app.
  */
 export function Trending(): ReactElement {
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
   return (
     <Background>
       <LazyList<TrendingType, TrendingVariables, Trending_trending_data, Sort, RecipeFilter>

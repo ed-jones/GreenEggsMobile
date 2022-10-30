@@ -20,6 +20,7 @@ import { GestureResponderEvent, View } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 import { useMutation } from '@apollo/client'
 import { NotificationContext } from '@greeneggs/providers'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
 type NotificationListItemProps = ListItemProps & notifications_notifications_data
 
@@ -88,7 +89,7 @@ const NotificationListItem = withStyles(
 const CommentLikedNotificationListItem: FC<notifications_notifications_data> = (
   notification: notifications_notifications_data
 ) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
   return (
     <NotificationListItem
       {...notification}
@@ -101,7 +102,7 @@ const CommentLikedNotificationListItem: FC<notifications_notifications_data> = (
 const RecipeLikedNotificationListItem: FC<notifications_notifications_data> = (
   notification: notifications_notifications_data
 ) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
   return (
     <NotificationListItem
       {...notification}
@@ -114,7 +115,7 @@ const RecipeLikedNotificationListItem: FC<notifications_notifications_data> = (
 const RecipeCommentedNotificationListItem: FC<notifications_notifications_data> = (
   notification: notifications_notifications_data
 ) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
   return (
     <NotificationListItem
       {...notification}
@@ -122,6 +123,7 @@ const RecipeCommentedNotificationListItem: FC<notifications_notifications_data> 
       onPress={() =>
         navigation.navigate('RecipeCommentReplies', {
           commentId: notification.linkId,
+          replying: false,
         })
       }
     />
@@ -131,7 +133,9 @@ const RecipeCommentedNotificationListItem: FC<notifications_notifications_data> 
 const CommentRepliedNotificationListItem: FC<notifications_notifications_data> = (
   notification: notifications_notifications_data
 ) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
+  if (!notification.linkId) throw new Error('Notification link ID not found')
+
   return (
     <NotificationListItem
       {...notification}
@@ -139,6 +143,7 @@ const CommentRepliedNotificationListItem: FC<notifications_notifications_data> =
       onPress={() =>
         navigation.navigate('RecipeCommentReplies', {
           commentId: notification.linkId,
+          replying: false,
         })
       }
     />

@@ -16,22 +16,19 @@ interface IIngredientListItem {
  * Component that renders a GraphQL ingredient as a list item.
  */
 export const IngredientListItem = ({ ingredient, remove }: IIngredientListItem): ReactElement => {
-  if (ingredient.name) {
-    return (
-      <ListItem
-        title={toTitleCase(ingredient.name || '')}
-        description={ingredient.description || undefined}
-        accessoryRight={(props) => (
-          <>
-            <Text category='label' style={{ marginRight: 16 }}>
-              {`${ingredient.quantity || ''} ${ingredient.unit || ''}`}
-            </Text>
-            {remove && <Icons.Cross {...props} onPress={remove} />}
-          </>
-        )}
-      />
-    )
-  } else {
-    return null
-  }
+  if (!ingredient.name) throw new Error('Ingredient not found')
+  return (
+    <ListItem
+      title={toTitleCase(ingredient.name || '')}
+      description={ingredient.description || undefined}
+      accessoryRight={(props) => (
+        <>
+          <Text category='label' style={{ marginRight: 16 }}>
+            {`${ingredient.quantity || ''} ${ingredient.unit || ''}`}
+          </Text>
+          {remove && <Icons.Cross {...props} onPress={remove} />}
+        </>
+      )}
+    />
+  )
 }

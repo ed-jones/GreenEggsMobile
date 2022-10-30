@@ -18,6 +18,13 @@
     "@typescript-eslint/restrict-template-expressions": "warn",
     "@typescript-eslint/no-explicit-any": "error",
     "no-console": "warn",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "@typescript-eslint/naming-convention": [
+      "warn",
+      {
+        "selector": "function",
+        "format": ["PascalCase", "camelCase"]
+      }
+    ]
   }
 }

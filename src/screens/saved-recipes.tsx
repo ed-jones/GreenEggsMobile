@@ -3,7 +3,6 @@
  */
 import React, { FC } from 'react'
 import { Queries } from '@greeneggs/graphql'
-import { Text } from '@ui-kitten/components'
 import {
   RecipeFilter,
   savedRecipesVariables,
@@ -14,6 +13,7 @@ import {
 import { View } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 import { TopNavigation, Background, LazyList, RecipeCardSmall } from '@greeneggs/ui'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
 const SavedRecipesHeader = () => <TopNavigation title='Saved Recipes' accessoryLeft={undefined} />
 
@@ -21,7 +21,7 @@ const SavedRecipesHeader = () => <TopNavigation title='Saved Recipes' accessoryL
  * View for displaying recipes a user has saved.
  */
 export const SavedRecipes: FC = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (
     <Background>

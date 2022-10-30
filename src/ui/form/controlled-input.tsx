@@ -2,7 +2,7 @@
  * Author: Edward Jones
  */
 import React, { ReactElement } from 'react'
-import { Controller, ControllerProps, RegisterOptions } from 'react-hook-form'
+import { Controller, ControllerProps, FieldValues, RegisterOptions } from 'react-hook-form'
 import { InputProps } from '@ui-kitten/components'
 import { ErrorFragment } from '@greeneggs/types/graphql'
 import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types'
@@ -26,8 +26,8 @@ export enum InputType {
   TIME = 'Time',
 }
 
-export interface IControlledInput<FieldValues> {
-  controllerProps: Omit<ControllerProps<FieldValues>, 'render'>
+export interface IControlledInput<TFieldValues extends FieldValues> {
+  controllerProps: Omit<ControllerProps<TFieldValues>, 'render'>
   inputProps?: InputProps
   submitError?: ErrorFragment | null
   type: InputType
@@ -43,20 +43,23 @@ export const Rules: Record<string, Omit<RegisterOptions, 'valueAsNumber' | 'valu
 
 // This is the interface for the object for default props for each input type
 // Name and render fields are omitted as they are always already defined
-interface IInputTypeDefaultProps<FieldValues> {
-  controllerProps?: Omit<ControllerProps<FieldValues>, 'name' | 'render'>
+interface IInputTypeDefaultProps<TFieldValues extends FieldValues> {
+  controllerProps?: Omit<ControllerProps<TFieldValues>, 'name' | 'render'>
   inputProps?: InputProps
 }
 
 // This object stores the default props associated with each input type
 // These values can be overwritten
 // Example props include form validation rules for emails and passwords
-const InputTypeDefaultProps = <FieldValues,>(): Record<InputType, IInputTypeDefaultProps<FieldValues>> => ({
+const InputTypeDefaultProps = <TFieldValues extends FieldValues>(): Record<
+  InputType,
+  IInputTypeDefaultProps<TFieldValues>
+> => ({
   Email: {
     inputProps: {
       label: 'EMAIL',
       textContentType: 'emailAddress',
-      autoCompleteType: 'email',
+      autoComplete: 'email',
       autoCapitalize: 'none',
       keyboardType: 'email-address',
       placeholder: 'johnsmith@example.com',
@@ -80,7 +83,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<InputType, IInputTypeDefa
     inputProps: {
       label: 'PASSWORD',
       textContentType: 'password',
-      autoCompleteType: 'password',
+      autoComplete: 'password',
       secureTextEntry: true,
       placeholder: '**********',
     },
@@ -106,7 +109,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<InputType, IInputTypeDefa
     },
     inputProps: {
       textContentType: 'givenName',
-      autoCompleteType: 'name',
+      autoComplete: 'name',
       autoCapitalize: 'words',
       placeholder: 'John',
     },
@@ -120,7 +123,7 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<InputType, IInputTypeDefa
     },
     inputProps: {
       textContentType: 'familyName',
-      autoCompleteType: 'name',
+      autoComplete: 'name',
       autoCapitalize: 'words',
       placeholder: 'Smith',
     },
@@ -141,15 +144,13 @@ const InputTypeDefaultProps = <FieldValues,>(): Record<InputType, IInputTypeDefa
 /**
  * Generic component that renders an input component controlled and validated with react-hook-form
  */
-export const ControlledInput = <
-  FieldValues extends Partial<Record<keyof FieldValues, string | number | Record<string, unknown> | null>>
->({
+export const ControlledInput = <TFieldValues extends FieldValues>({
   controllerProps,
   inputProps,
   type,
   submitError,
-}: IControlledInput<FieldValues>): ReactElement => {
-  const inputTypeDefaultProps = InputTypeDefaultProps<FieldValues>()[type]
+}: IControlledInput<TFieldValues>): ReactElement => {
+  const inputTypeDefaultProps = InputTypeDefaultProps<TFieldValues>()[type]
   const { caption, ...unionInputProps } = {
     ...inputTypeDefaultProps.inputProps,
     ...inputProps,
@@ -160,7 +161,7 @@ export const ControlledInput = <
   }
 
   return (
-    <Controller<FieldValues>
+    <Controller
       render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => {
         if (type === InputType.PHOTO) {
           return (
@@ -196,7 +197,9 @@ export const ControlledInput = <
               textAlignVertical={type === InputType.TEXTAREA ? 'top' : undefined}
               onChangeText={(e) => (type === InputType.NUMERIC ? onChange(stringToNumber(e)) : onChange(e))}
               value={
-                type === InputType.NUMERIC ? (value && numberToString(value)) || '' : (value && String(value)) || ''
+                type === InputType.NUMERIC
+                  ? (value && numberToString(Number(value))) || ''
+                  : (value && String(value)) || ''
               }
               status={error || !!submitError ? 'danger' : undefined}
               caption={submitError ? submitError?.message : error?.message || caption}

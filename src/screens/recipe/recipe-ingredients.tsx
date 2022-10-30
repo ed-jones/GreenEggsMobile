@@ -7,6 +7,7 @@ import { View } from 'react-native'
 import { Divider } from '@ui-kitten/components'
 import { IngredientListItem, ViewMore } from '@greeneggs/ui'
 import { useNavigation } from '@react-navigation/core'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
 interface IRecipeIngredients {
   ingredients: recipe_recipe_data_ingredients[]
@@ -22,7 +23,7 @@ export const RecipeIngredients = ({
   servingCount,
   defaultServingCount,
 }: IRecipeIngredients): ReactElement => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
   let multiplier = 1
   if (servingCount && defaultServingCount) {
     multiplier = servingCount / defaultServingCount

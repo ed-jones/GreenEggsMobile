@@ -7,6 +7,7 @@ import { Icons } from '@greeneggs/ui'
 import { AddRecipePartTemplate } from '../add-recipe-part-template'
 import { useNavigation } from '@react-navigation/native'
 import { AddRecipeContext } from '@greeneggs/providers'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
 /**
  * Screen that shows a list of all allergies that will
@@ -15,7 +16,7 @@ import { AddRecipeContext } from '@greeneggs/providers'
 export const AddRecipeAllergies = (): ReactElement => {
   const { allergiesFieldArray } = useContext(AddRecipeContext)
 
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (
     <AddRecipePartTemplate

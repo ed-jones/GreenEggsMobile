@@ -13,6 +13,7 @@ import * as SecureStore from 'expo-secure-store'
 import { useSignupForm } from './use-sign-up-form'
 import { AuthPageTemplate } from './auth-page-template'
 import { useNavigation } from '@react-navigation/native'
+import { LoggedOutNavigationProp } from '@greeneggs/navigation/routes/logged-out-routes'
 
 const styles = StyleSheet.create({
   input: {
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
  * Screen that enables a user to sign up to Green Eggs.
  */
 export const Signup = (): ReactElement => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedOutNavigationProp>()
   const { formResult, handleSubmit, control, submitForm } = useSignupForm()
   const { setToken } = useContext(AuthContext)
   const [consent, setConsent] = useState(false)

@@ -7,8 +7,7 @@ import { Queries } from '@greeneggs/graphql'
 import { recipes, recipesVariables, recipes_recipes_data, Sort, RecipeFilter } from '@greeneggs/types/graphql'
 import { Background, Icons, Input, LazyList, RecipeCardSmall, TopNavigation } from '@greeneggs/ui'
 import { View } from 'react-native'
-
-type CategoryRoute = RouteProp<{ params: { categoryId: string; categoryName: string } }, 'params'>
+import { LoggedInNavigationProp, LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-routes'
 
 /**
  * Screen that shows an infinite scrolling list of recipes for a given category.
@@ -16,8 +15,8 @@ type CategoryRoute = RouteProp<{ params: { categoryId: string; categoryName: str
 export const Category: FC = () => {
   const {
     params: { categoryId, categoryName },
-  } = useRoute<CategoryRoute>()
-  const navigation = useNavigation()
+  } = useRoute<RouteProp<LoggedInRouteParams, 'Category'>>()
+  const navigation = useNavigation<LoggedInNavigationProp>()
   const [query, setQuery] = useState('')
 
   return (

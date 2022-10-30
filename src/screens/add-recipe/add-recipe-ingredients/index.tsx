@@ -9,6 +9,7 @@ import { AddRecipePartTemplate } from '../add-recipe-part-template'
 import { RecipeForm } from '../add-recipe'
 import { useNavigation } from '@react-navigation/native'
 import { AddRecipeContext } from '@greeneggs/providers'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
 interface ICreateRecipeIngredients {
   form: RecipeForm
@@ -19,7 +20,7 @@ interface ICreateRecipeIngredients {
  */
 export const AddRecipeIngredients = ({ form }: ICreateRecipeIngredients): ReactElement => {
   const { ingredientsFieldArray } = useContext(AddRecipeContext)
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   const ingredientsLength = ingredientsFieldArray?.fields?.length || 0
   useEffect(() => {
@@ -36,12 +37,12 @@ export const AddRecipeIngredients = ({ form }: ICreateRecipeIngredients): ReactE
       emptyStateTitle='No ingredients'
       emptyStateDescription='Make sure to add any ingredients this recipe might need.'
       listItem={({ item, index }) =>
-        item && (
+        item ? (
           <IngredientListItem
             ingredient={{ ...item, __typename: 'Ingredient' }}
             remove={() => ingredientsFieldArray?.remove(index)}
           />
-        )
+        ) : null
       }
       data={ingredientsFieldArray?.fields}
     />

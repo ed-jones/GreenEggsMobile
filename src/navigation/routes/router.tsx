@@ -9,8 +9,8 @@ import { Me } from '@greeneggs/types/graphql'
 import { LoadingScreen } from '@greeneggs/screens'
 
 import { Stack } from '../stack'
-import { LoggedInRoutes } from './logged-in-routes'
-import { LoggedOutRoutes } from './logged-out-routes'
+import { loggedInRoutes } from './logged-in-routes'
+import { loggedOutRoutes } from './logged-out-routes'
 
 enum SessionStates {
   LOADING,
@@ -20,8 +20,8 @@ enum SessionStates {
 
 const SESSION_STATE_ROUTE_MAP: Record<SessionStates, ReactNode> = {
   [SessionStates.LOADING]: <Stack.Screen name='Loading' component={LoadingScreen} />,
-  [SessionStates.LOGGED_IN]: LoggedInRoutes,
-  [SessionStates.LOGGED_OUT]: LoggedOutRoutes,
+  [SessionStates.LOGGED_IN]: loggedInRoutes,
+  [SessionStates.LOGGED_OUT]: loggedOutRoutes,
 }
 
 /**
@@ -37,7 +37,7 @@ export const Router: FC = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode='none'>{SESSION_STATE_ROUTE_MAP[sessionState]}</Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>{SESSION_STATE_ROUTE_MAP[sessionState]}</Stack.Navigator>
     </NavigationContainer>
   )
 }

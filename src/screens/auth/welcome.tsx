@@ -10,6 +10,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { StatusBar } from 'expo-status-bar'
 import { Background } from '@greeneggs/ui'
 import { useNavigation } from '@react-navigation/native'
+import { LoggedOutNavigationProp } from '@greeneggs/navigation/routes/logged-out-routes'
 
 const styles = StyleSheet.create({
   logo: {
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
  * Instructs a user to sign up or log in.
  */
 export const Welcome = (): ReactElement => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedOutNavigationProp>()
   return (
     <Background
       style={{

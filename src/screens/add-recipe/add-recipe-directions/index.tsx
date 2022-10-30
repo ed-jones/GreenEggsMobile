@@ -11,6 +11,7 @@ import { RecipeForm } from '../add-recipe'
 import { AddRecipePartTemplate } from '../add-recipe-part-template'
 import { useNavigation } from '@react-navigation/core'
 import { AddRecipeContext } from '@greeneggs/providers'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
 interface IAddRecipeDirections {
   form: RecipeForm
@@ -21,7 +22,7 @@ interface IAddRecipeDirections {
  */
 export const AddRecipeDirections = ({ form }: IAddRecipeDirections): ReactElement => {
   const { stepsFieldArray } = useContext(AddRecipeContext)
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   const directionsLength = stepsFieldArray?.fields?.length || 0
   useEffect(() => {

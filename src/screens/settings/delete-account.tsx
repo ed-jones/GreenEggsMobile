@@ -75,7 +75,6 @@ export function DeleteAccount(): ReactElement {
               SecureStore.deleteItemAsync('token').then(() => {
                 deleteAccount().then(() => {
                   setToken && setToken(null)
-                  navigation.navigate('Welcome')
                 })
               })
             },

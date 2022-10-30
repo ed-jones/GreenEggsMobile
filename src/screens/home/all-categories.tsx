@@ -13,13 +13,14 @@ import {
 import { AlphabetType, Background, Icons, Input, LazyListAlpha, TopNavigation } from '@greeneggs/ui'
 import { ListItem } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
 /**
  * Displays a searchable infinite scrolling list of all categories within the app, and links to associated category views.
  */
 export const AllCategories: FC = () => {
   const [query, setQuery] = useState('')
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
   return (
     <Background>
       <TopNavigation title='All Categories' />

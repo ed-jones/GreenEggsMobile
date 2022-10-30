@@ -45,8 +45,8 @@ export const CommentLikeCounter: FC<CommentLikeCounterProps> = ({
 
   return (
     <LikeCounter
-      onLike={likeComment}
-      onUnlike={unlikeComment}
+      onLike={async () => void likeComment()}
+      onUnlike={async () => void unlikeComment()}
       disabled={disabled ?? submittedById === me?.id}
       liked={liked}
       likeCount={likeCount}

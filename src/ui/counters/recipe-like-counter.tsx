@@ -43,8 +43,8 @@ export const RecipeLikeCounter: FC<RecipeLikeCounterProps> = ({
 
   return (
     <LikeCounter
-      onLike={likeRecipe}
-      onUnlike={unlikeRecipe}
+      onLike={async () => void likeRecipe()}
+      onUnlike={async () => void unlikeRecipe()}
       disabled={disabled ?? submittedById === me?.id}
       liked={liked}
       likeCount={likeCount}

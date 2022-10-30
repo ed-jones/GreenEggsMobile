@@ -20,7 +20,7 @@ import { TopNavigation, Background, ViewMore, SaveRecipeButton, EmptyState, Sele
 import { RecipeMoreButton } from './recipe-more-button'
 import { UserContext } from '@greeneggs/providers'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
-import { ReactElement } from 'react'
+import { LoggedInNavigationProp, LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-routes'
 
 const styles = StyleSheet.create({
   coverPhoto: {
@@ -55,16 +55,15 @@ const styles = StyleSheet.create({
   },
 })
 
-type RecipeRoute = RouteProp<{ params: { recipeId: string } }, 'params'>
-
 /**
  * Screen to display a recipe, its steps and associated comments.
  */
-export const Recipe = (): ReactElement => {
-  const route = useRoute<RecipeRoute>()
-  const navigation = useNavigation()
+export function Recipe() {
+  const route = useRoute<RouteProp<LoggedInRouteParams, 'Recipe'>>()
+  const navigation = useNavigation<LoggedInNavigationProp>()
   if (!route.params) throw new Error('Could not find route params')
   const { recipeId } = route.params
+  if (!recipeId) throw new Error('Recipe ID not found')
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(new IndexPath(0))
   const { me } = useContext(UserContext)
   const { loading, error, data } = useQuery<recipe, recipeVariables>(Queries.GET_RECIPE, {
@@ -163,6 +162,7 @@ export const Recipe = (): ReactElement => {
                 comments: recipe.comments,
                 commentCount: recipe.commentCount,
                 recipeId: recipe.id,
+                isReply: false,
               })
             }
           />

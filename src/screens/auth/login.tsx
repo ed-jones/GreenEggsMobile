@@ -41,7 +41,10 @@ export const Login = (): ReactElement => {
   }
 
   return (
-    <AuthPageTemplate message='Log in to view and share recipes with your friends'>
+    <AuthPageTemplate
+      errorMessage={formResult.data?.login.error?.message}
+      message='Log in to view and share recipes with your friends'
+    >
       <ControlledInput<LoginInput>
         inputProps={{
           autoFocus: true,
@@ -52,7 +55,6 @@ export const Login = (): ReactElement => {
           defaultValue: '',
           control,
         }}
-        submitError={formResult.data?.login.error}
         type={InputType.EMAIL}
       />
       <ControlledInput<LoginInput>
@@ -64,10 +66,8 @@ export const Login = (): ReactElement => {
           defaultValue: '',
           control,
         }}
-        submitError={formResult.data?.login.error}
         type={InputType.PASSWORD}
       />
-      {/* <Text category="p2" style={styles.forgotPassword}>Forgot Password?</Text> */}
       <Button
         onPress={handleSubmit(onSubmit)}
         disabled={formResult.loading}

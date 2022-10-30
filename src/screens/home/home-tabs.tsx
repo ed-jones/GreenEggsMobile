@@ -26,12 +26,7 @@ const TopTabBar = ({ navigation, state }: MaterialTopTabBarProps) => (
  */
 export function HomeTabs(): ReactElement {
   return (
-    <Navigator
-      tabBar={(props: MaterialTopTabBarProps) => (
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        <TopTabBar {...props} />
-      )}
-    >
+    <Navigator tabBar={(props: MaterialTopTabBarProps) => <TopTabBar {...props} />}>
       <Screen name='TRENDING' component={Trending} />
       <Screen name='NEWS FEED' component={NewsFeed} />
       <Screen name='CATEGORIES' component={Categories} />

@@ -8,7 +8,7 @@ import { addRecipe, addRecipeVariables, RecipeInput } from '@greeneggs/types/gra
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Icons, IForm, Background } from '@greeneggs/ui'
 import { Stepper } from './stepper'
-import { AddRecipeStyles } from './add-recipe-styles'
+import { addRecipeStyles } from './add-recipe-styles'
 import { AddRecipeContext } from '@greeneggs/providers'
 import { LoadingScreen } from '../loading-screen'
 import { useNavigation } from '@react-navigation/native'
@@ -20,7 +20,7 @@ export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>
  * Screen that enables the creation of recipes.
  * Contains the multi-step form.
  */
-export const AddRecipe = (): ReactElement => {
+export function AddRecipe(): ReactElement {
   const navigation: StackNavigationProp<Record<string, Record<string, unknown>>, string> = useNavigation()
   const { form, steps } = useContext(AddRecipeContext)
   const theme = useTheme()
@@ -49,7 +49,7 @@ export const AddRecipe = (): ReactElement => {
           text: 'Cancel',
           style: 'cancel',
         },
-        { text: 'OK', onPress: () => onSubmit() },
+        { text: 'OK', onPress: () => void onSubmit() },
       ],
       { cancelable: false }
     )
@@ -57,7 +57,7 @@ export const AddRecipe = (): ReactElement => {
 
   return (
     <Background>
-      <Layout level='1' style={{ ...AddRecipeStyles.view, marginTop: insets.top }}>
+      <Layout level='1' style={{ ...addRecipeStyles.view, marginTop: insets.top }}>
         <Stepper
           index={steps.index}
           length={steps.length}
@@ -68,13 +68,13 @@ export const AddRecipe = (): ReactElement => {
       <Divider />
       {steps.currentStep.component}
       <Divider />
-      <Layout level='1' style={AddRecipeStyles.view}>
-        <View style={AddRecipeStyles.buttonGroup}>
+      <Layout level='1' style={addRecipeStyles.view}>
+        <View style={addRecipeStyles.buttonGroup}>
           {steps.isEnd ? (
             <Button
               size='small'
               onPress={() => {
-                form.trigger().then((isValid) => {
+                void form.trigger().then((isValid) => {
                   if (isValid) {
                     publish()
                   }
@@ -89,7 +89,7 @@ export const AddRecipe = (): ReactElement => {
             <Button
               size='small'
               onPress={() => {
-                form.trigger().then((isValid) => {
+                void form.trigger().then((isValid) => {
                   if (isValid) steps.next()
                 })
               }}

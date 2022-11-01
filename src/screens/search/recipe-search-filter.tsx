@@ -1,7 +1,7 @@
 /**
  * Author: Victor Ying
  */
-import React, { FC, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Divider, List, ListItem } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
 import { FilterControlGroup, CountCircle } from './common'
@@ -53,7 +53,7 @@ interface FilterListItemProps {
 /**
  * Screen that shows a list of all available filter options.
  */
-export const RecipeSearchFilter: FC = () => {
+export function RecipeSearchFilter() {
   const navigation = useNavigation<LoggedInNavigationProp>()
   const { searchState, setSearchState } = useContext(SearchContext)
 
@@ -62,7 +62,7 @@ export const RecipeSearchFilter: FC = () => {
     navigation.goBack()
   }
 
-  const FilterOptions: FilterListItemProps[] = [
+  const filterOptions: FilterListItemProps[] = [
     {
       title: 'Ingredients (Included)',
       to: 'FilterIngredientsIncluded',
@@ -96,7 +96,7 @@ export const RecipeSearchFilter: FC = () => {
     <Background>
       <TopNavigation title='Filter Search' />
       <List
-        data={FilterOptions}
+        data={filterOptions}
         renderItem={({ item: { to, title, count } }) => {
           return (
             <>

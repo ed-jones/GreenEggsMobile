@@ -1,7 +1,7 @@
 /**
  * Author: Victor Ying
  */
-import React, { FC, useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Queries } from '@greeneggs/graphql'
 import { Divider } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
@@ -23,7 +23,7 @@ import { View } from 'react-native'
 /**
  * Screen for requiring certain allergy requirements in a search
  */
-export const FilterRecipeAllergies: FC = () => {
+export function FilterRecipeAllergies() {
   const navigation = useNavigation()
   const [query, setQuery] = useState('')
   const { searchState, setSearchState } = useContext(SearchContext)
@@ -68,7 +68,7 @@ export const FilterRecipeAllergies: FC = () => {
           </>
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
-        query={Queries.GET_ALLERGIES}
+        query={Queries.getAllergies}
         contentContainerStyle={{ flexGrow: 1 }}
         ListEmptyComponent={
           <View style={{ flexGrow: 1, justifyContent: 'center' }}>

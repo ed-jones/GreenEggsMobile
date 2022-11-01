@@ -2,7 +2,7 @@
  * Author: Victor Ying
  */
 import { Queries } from '@greeneggs/graphql'
-import React, { FC, useContext, useState, ReactElement } from 'react'
+import React, { useContext, useState, ReactElement } from 'react'
 import {
   RecipeFilter,
   recipes,
@@ -21,19 +21,20 @@ import { Select, Background, LazyList, RecipeCardSmall, UserListItem } from '@gr
 import { createMaterialTopTabNavigator, MaterialTopTabBarProps } from '@react-navigation/material-top-tabs'
 import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const { Navigator, Screen } = createMaterialTopTabNavigator()
 
 /**
  * Shows a list of recipes as the result of a search
  */
-export const RecipeSearch: FC = () => {
+export function RecipeSearch() {
   const navigation = useNavigation<LoggedInNavigationProp>()
   const { searchState } = useContext<ISearchContext>(SearchContext)
   return (
     <Background>
       <LazyList<recipes, recipesVariables, recipes_recipes_data, Sort, RecipeFilter>
         style={{ paddingTop: 16 }}
-        query={Queries.GET_RECIPES}
+        query={Queries.getRecipes}
         variables={{
           query: searchState.query,
           sort: searchState.sort ?? Sort.NEW,
@@ -61,13 +62,13 @@ export const RecipeSearch: FC = () => {
 /**
  * Shows a list of users as the result of a search
  */
-const UserSearch: FC = () => {
+function UserSearch() {
   const { searchState } = useContext<ISearchContext>(SearchContext)
   return (
     <Background>
       <LazyList<Users, UsersVariables, Users_users_data, Sort, RecipeFilter>
         style={{ paddingTop: 16 }}
-        query={Queries.GET_USERS}
+        query={Queries.getUsers}
         variables={{
           query: searchState.query,
           sort: searchState.sort ?? Sort.NEW,
@@ -88,17 +89,19 @@ const UserSearch: FC = () => {
 /**
  * Tabs that can be switched between to show search results for recipes or users.
  */
-export const SearchTabBar = ({ navigation, state }: MaterialTopTabBarProps): ReactElement => (
-  <TabBar selectedIndex={state.index} onSelect={(index) => navigation.navigate(state.routeNames[index])}>
-    <Tab title='RECIPES' />
-    <Tab title='USERS' />
-  </TabBar>
-)
+export function SearchTabBar({ navigation, state }: MaterialTopTabBarProps): ReactElement {
+  return (
+    <TabBar selectedIndex={state.index} onSelect={(index) => navigation.navigate(state.routeNames[index])}>
+      <Tab title='RECIPES' />
+      <Tab title='USERS' />
+    </TabBar>
+  )
+}
 
 /**
  * Screen for searching recipes and users.
  */
-export const Search: FC = () => {
+export function Search() {
   const { searchState, setSearchState } = useContext<ISearchContext>(SearchContext)
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(
     new IndexPath(Object.values(Sort).indexOf(searchState.sort))

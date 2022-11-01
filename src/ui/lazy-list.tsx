@@ -2,7 +2,7 @@
  * Author: Edward Jones
  */
 import { ApolloQueryResult, DocumentNode, QueryResult, useQuery } from '@apollo/client'
-import React, { ReactElement, ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import { FlatList, FlatListProps, View } from 'react-native'
 import { Callout } from '@greeneggs/ui'
 import { Spinner, Text } from '@ui-kitten/components'
@@ -77,7 +77,7 @@ export function useLazyList<
       if ((data[dataKey].data?.length ?? limit) < limit) {
         setDone(true)
       } else {
-        queryResult
+        void queryResult
           .fetchMore<TData, TVariables>({
             variables: {
               ...variables,
@@ -158,7 +158,7 @@ export interface LazyListProps<TData, TVariables, TDataType>
 /**
  * Component that renders the result of a GraphQL query as an infinite scrolling list.
  */
-export const LazyList = <
+export function LazyList<
   TData extends TDataWithData<TData, TDataType>,
   TVariables extends Partial<CommonVariables<SortType, FilterType>>,
   TDataType,
@@ -174,7 +174,7 @@ export const LazyList = <
   limit,
   ListFooterComponent,
   ...props
-}: LazyListProps<TData, TVariables, TDataType>): ReactElement => {
+}: LazyListProps<TData, TVariables, TDataType>) {
   const { loading, error, data, refetch, refetching, nextPage, done } = useLazyList<
     TData,
     TVariables,
@@ -213,8 +213,8 @@ export const LazyList = <
       {...props}
       initialNumToRender={limit}
       refreshing={refetching}
-      onRefresh={refetch}
-      onEndReached={() => nextPage()}
+      onRefresh={() => void refetch()}
+      onEndReached={() => void nextPage()}
       onEndReachedThreshold={0.5}
       data={data}
       extraData={data}

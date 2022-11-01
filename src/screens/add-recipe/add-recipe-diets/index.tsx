@@ -14,7 +14,7 @@ import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-r
  * Screen that shows a list of all selected diets that will
  * be added to a recipe.
  */
-export const AddRecipeDiets = (): ReactElement => {
+export function AddRecipeDiets(): ReactElement {
   const { dietsFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation<LoggedInNavigationProp>()
 

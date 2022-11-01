@@ -14,7 +14,7 @@ interface RecipeCommentListProps {
 /**
  * Component that generates a list of comments.
  */
-export const RecipeCommentList = ({ comments }: RecipeCommentListProps): ReactElement => {
+export function RecipeCommentList({ comments }: RecipeCommentListProps): ReactElement {
   return (
     <View style={{ marginHorizontal: -16 }}>
       {(comments as unknown as recipe_recipe_data_comments[]).map((comment) => (

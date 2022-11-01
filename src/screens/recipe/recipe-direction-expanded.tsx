@@ -12,7 +12,7 @@ import { LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-rout
 /**
  * Expanded view for recipe steps. Useful when a step has a long description.
  */
-export const RecipeDirectionExpanded = (): ReactElement => {
+export function RecipeDirectionExpanded(): ReactElement {
   const route = useRoute<RouteProp<LoggedInRouteParams, 'RecipeDirectionExpanded'>>()
   if (!route.params) throw new Error('Could not find route params')
 

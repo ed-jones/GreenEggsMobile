@@ -1,7 +1,7 @@
 /**
  * Author: Victor Ying
  */
-import React, { FC, useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Queries } from '@greeneggs/graphql'
 import { Divider } from '@ui-kitten/components'
 import { Input, Icons, EmptyState } from '@greeneggs/ui'
@@ -22,7 +22,7 @@ import { View } from 'react-native'
 /**
  * Screen for requiring ingredients in a search
  */
-export const FilterIngredientsIncluded: FC = () => {
+export function FilterIngredientsIncluded() {
   const navigation = useNavigation()
   const [query, setQuery] = useState('')
   const { searchState, setSearchState } = useContext(SearchContext)
@@ -72,7 +72,7 @@ export const FilterIngredientsIncluded: FC = () => {
           </>
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
-        query={Queries.GET_INGREDIENTS}
+        query={Queries.getIngredients}
         contentContainerStyle={{ flexGrow: 1 }}
         ListEmptyComponent={
           <View style={{ flexGrow: 1, justifyContent: 'center' }}>

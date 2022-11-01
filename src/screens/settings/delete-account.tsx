@@ -37,11 +37,11 @@ const styles = StyleSheet.create({
  */
 export function DeleteAccount(): ReactElement {
   const navigation = useNavigation()
-  const { loading, error, data } = useQuery<Me>(Queries.ME)
+  const { loading, error, data } = useQuery<Me>(Queries.getMe)
   const { formResult, handleSubmit, control, submitForm, register, setValue } = useLoginForm()
   const { setToken } = useContext(AuthContext)
 
-  const [deleteAccount] = useMutation<deleteUser>(Mutations.DELETE_USER)
+  const [deleteAccount] = useMutation<deleteUser>(Mutations.deleteUser)
 
   useEffect(() => {
     register('email')
@@ -72,8 +72,8 @@ export function DeleteAccount(): ReactElement {
           {
             text: 'OK',
             onPress: () => {
-              SecureStore.deleteItemAsync('token').then(() => {
-                deleteAccount().then(() => {
+              void SecureStore.deleteItemAsync('token').then(() => {
+                void deleteAccount().then(() => {
                   setToken && setToken(null)
                 })
               })
@@ -120,7 +120,7 @@ export function DeleteAccount(): ReactElement {
             accessoryLeft={Icons.Trash}
             status='danger'
             style={{ marginRight: 8 }}
-            onPress={handleSubmit(onSubmit)}
+            onPress={() => void handleSubmit(onSubmit)}
           >
             DELETE MY ACCOUNT
           </Button>

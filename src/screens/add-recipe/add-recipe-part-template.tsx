@@ -6,7 +6,7 @@ import { Button, List, Text, TextElement } from '@ui-kitten/components'
 import { ListRenderItem, View } from 'react-native'
 import { Icons, Background } from '@greeneggs/ui'
 import { EmptyState } from '@greeneggs/ui/empty-state'
-import { AddRecipeStyles } from './add-recipe-styles'
+import { addRecipeStyles } from './add-recipe-styles'
 
 interface AddRecipePartTemplateProps<T> {
   title: React.ReactText | TextElement
@@ -41,8 +41,8 @@ export function AddRecipePartTemplate<T>({
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                ...AddRecipeStyles.heading,
-                ...AddRecipeStyles.view,
+                ...addRecipeStyles.heading,
+                ...addRecipeStyles.view,
               }}
             >
               <Text category='h5'>{title}</Text>

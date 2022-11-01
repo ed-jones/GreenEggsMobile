@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC, createContext } from 'react'
+import React, { createContext, PropsWithChildren } from 'react'
 import { addRecipe, addRecipeVariables, RecipeInput } from '@greeneggs/types/graphql'
 import { IForm } from '@greeneggs/ui'
 import { useRecipeForm } from '@greeneggs/screens/add-recipe/use-recipe-form'
@@ -25,15 +25,16 @@ export interface AddRecipeContextInterface {
   dietsFieldArray?: UseFieldArrayReturn<RecipeInput, 'diets', 'id'>
 }
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export const AddRecipeContext = createContext<AddRecipeContextInterface>({})
 
 /**
  * State provider that lets all child components control the state of a recipe form.
  */
-export const AddRecipeStateProvider: FC = ({ children }) => {
+export function AddRecipeStateProvider({ children }: PropsWithChildren<object>) {
   const form = useRecipeForm()
 
-  const Steps: Step[] = [
+  const steps: Step[] = [
     {
       title: 'Details',
       component: <AddRecipeDetails form={form} />,
@@ -64,8 +65,6 @@ export const AddRecipeStateProvider: FC = ({ children }) => {
     },
   ]
 
-  const steps = useSteps(Steps)
-
   const categoriesFieldArray = useFieldArray({
     control: form.control,
     name: 'categories',
@@ -95,7 +94,7 @@ export const AddRecipeStateProvider: FC = ({ children }) => {
     <AddRecipeContext.Provider
       value={{
         form,
-        steps,
+        steps: useSteps(steps),
         categoriesFieldArray,
         ingredientsFieldArray,
         stepsFieldArray,

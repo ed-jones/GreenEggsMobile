@@ -30,13 +30,13 @@ const styles = StyleSheet.create({
  */
 export function ChangePassword(): ReactElement {
   const form = useForm<ChangePasswordDetails, changePassword, changePasswordVariables>(
-    Mutations.CHANGE_PASSWORD,
+    Mutations.changePassword,
     'changePasswordDetails'
   )
   const navigation = useNavigation()
 
   function onSubmit() {
-    form.submitForm().then((data) => {
+    void form.submitForm().then((data) => {
       if (!data.data?.changePassword.error) {
         navigation.goBack()
       }
@@ -91,7 +91,7 @@ export function ChangePassword(): ReactElement {
         />
         <Button
           accessoryRight={form.formResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Save}
-          onPress={form.handleSubmit(onSubmit)}
+          onPress={() => void form.handleSubmit(onSubmit)}
         >
           SAVE CHANGES
         </Button>

@@ -28,73 +28,75 @@ interface ListItemProps {
 /**
  * List item that links to a setting page.
  */
-const SettingsListItem = ({ onPress, title, rightText, color, icon, key }: ListItemProps) => (
-  <>
-    <ListItem
-      key={key}
-      onPress={onPress}
-      title={title}
-      accessoryRight={(props) => (
-        <>
-          {rightText && <Text category='c2'>{rightText}</Text>}
-          {onPress ? <Icons.Forward {...props} /> : null}
-        </>
-      )}
-      accessoryLeft={(props) => (
-        <>
-          <Svg height='32' width='32' style={{ position: 'absolute', marginLeft: 12 }}>
-            <Circle cx='16' cy='16' r='16' fill={color} />
-          </Svg>
-          <Icon {...props} name={icon} fill='white' />
-        </>
-      )}
-    />
+function SettingsListItem({ onPress, title, rightText, color, icon, key }: ListItemProps) {
+  return (
+    <>
+      <ListItem
+        key={key}
+        onPress={onPress}
+        title={title}
+        accessoryRight={(props) => (
+          <>
+            {rightText && <Text category='c2'>{rightText}</Text>}
+            {onPress ? <Icons.Forward {...props} /> : null}
+          </>
+        )}
+        accessoryLeft={(props) => (
+          <>
+            <Svg height='32' width='32' style={{ position: 'absolute', marginLeft: 12 }}>
+              <Circle cx='16' cy='16' r='16' fill={color} />
+            </Svg>
+            <Icon {...props} name={icon} fill='white' />
+          </>
+        )}
+      />
 
-    <Divider />
-  </>
-)
+      <Divider />
+    </>
+  )
+}
 
 /**
  * Screen that displays a complete list of settings and about details.
  */
-export const Settings = () => {
+export function Settings() {
   const navigation = useNavigation<LoggedInNavigationProp>()
   const { setToken } = useContext(AuthContext)
   const theme = useTheme()
 
-  const Colors = {
+  const colors = {
     blue: theme['color-info-500'],
     yellow: theme['color-warning-500'],
     green: theme['color-primary-400'],
     red: theme['color-danger-500'],
   }
 
-  const AccountSettings: ListItemProps[] = [
+  const accountSettings: ListItemProps[] = [
     {
       title: 'Edit Profile',
       icon: 'edit-outline',
-      color: Colors.blue,
+      color: colors.blue,
       onPress: () => navigation.navigate('EditProfile'),
       key: 'editProfile',
     },
     {
       title: 'Edit Profile Picture',
       icon: 'camera-outline',
-      color: Colors.blue,
+      color: colors.blue,
       onPress: () => navigation.navigate('EditProfilePicture'),
       key: 'editProfilePicture',
     },
     {
       title: 'Change Password',
       icon: 'lock-outline',
-      color: Colors.yellow,
+      color: colors.yellow,
       onPress: () => navigation.navigate('ChangePassword'),
       key: 'changePassword',
     },
     {
       title: 'Sign Out',
       icon: 'log-out-outline',
-      color: Colors.yellow,
+      color: colors.yellow,
       onPress: () => {
         Alert.alert(
           'Sign out',
@@ -107,7 +109,7 @@ export const Settings = () => {
             {
               text: 'Sign Out',
               onPress: () => {
-                SecureStore.deleteItemAsync('token').then(() => {
+                void SecureStore.deleteItemAsync('token').then(() => {
                   setToken && setToken(null)
                 })
               },
@@ -121,41 +123,41 @@ export const Settings = () => {
     {
       title: 'Delete Account',
       icon: 'trash-2-outline',
-      color: Colors.red,
+      color: colors.red,
       onPress: () => navigation.navigate('DeleteAccount'),
       key: 'deleteAccount',
     },
   ]
 
-  const DietaryPreferences: ListItemProps[] = [
+  const dietaryPreferences: ListItemProps[] = [
     {
       title: 'Diets',
       icon: 'heart-outline',
-      color: Colors.green,
+      color: colors.green,
       onPress: () => navigation.navigate('Diets'),
       key: 'diets',
     },
     {
       title: 'Allergies',
       icon: 'slash-outline',
-      color: Colors.green,
+      color: colors.green,
       onPress: () => navigation.navigate('Allergies'),
       key: 'allergies',
     },
   ]
 
-  const About: ListItemProps[] = [
+  const about: ListItemProps[] = [
     {
       title: 'Version',
       icon: 'cube-outline',
-      color: Colors.yellow,
+      color: colors.yellow,
       rightText: process.env.version || 'alpha-0.01',
       key: 'version',
     },
     {
       title: 'Developer',
       icon: 'code-outline',
-      color: Colors.green,
+      color: colors.green,
       rightText: 'Green Eggs',
       key: 'developer',
     },
@@ -168,19 +170,19 @@ export const Settings = () => {
         <Text category='h6' style={styles.header}>
           Account
         </Text>
-        {AccountSettings.map(SettingsListItem)}
+        {accountSettings.map(SettingsListItem)}
         <Text category='h6' style={styles.header}>
           Dietary Preferences
         </Text>
-        {DietaryPreferences.map(SettingsListItem)}
+        {dietaryPreferences.map(SettingsListItem)}
         {/* <Text category="h6" style={styles.header}>
-            Privacy
-          </Text>
-          {PrivacySettings.map(SettingsListItem)} */}
+                Privacy
+              </Text>
+              {PrivacySettings.map(SettingsListItem)} */}
         <Text category='h6' style={styles.header}>
           About
         </Text>
-        {About.map(SettingsListItem)}
+        {about.map(SettingsListItem)}
       </ScrollView>
     </Background>
   )

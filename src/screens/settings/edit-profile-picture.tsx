@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 })
 
 const useEditProfile = () =>
-  useForm<ProfileDetails, editProfile, editProfileVariables>(Mutations.EDIT_PROFILE, 'profileDetails')
+  useForm<ProfileDetails, editProfile, editProfileVariables>(Mutations.editProfile, 'profileDetails')
 
 /**
  * Screen that lets a user edit their profile picture.
@@ -36,7 +36,7 @@ export function EditProfilePicture(): ReactElement {
   const navigation = useNavigation()
 
   function onSubmit() {
-    form.submitForm().then(() => navigation.goBack())
+    void form.submitForm().then(() => navigation.goBack())
   }
 
   return (
@@ -60,7 +60,7 @@ export function EditProfilePicture(): ReactElement {
         />
         <Button
           accessoryRight={form.formResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Save}
-          onPress={form.handleSubmit(onSubmit)}
+          onPress={() => void form.handleSubmit(onSubmit)}
         >
           SAVE CHANGES
         </Button>

@@ -44,7 +44,7 @@ export type IRecipeCardHeaderProps = Pick<
  * Header for the recipe card component.
  * Displays user info.
  */
-export const RecipeCardHeader = ({ avatarURI, firstName, lastName, id }: IRecipeCardHeaderProps): ReactElement => {
+export function RecipeCardHeader({ avatarURI, firstName, lastName, id }: IRecipeCardHeaderProps): ReactElement {
   const navigateToProfile = useNavigateToProfile()
   return (
     <View style={styles.view}>

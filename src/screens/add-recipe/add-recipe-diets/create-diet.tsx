@@ -13,7 +13,7 @@ import { useNavigation } from '@react-navigation/core'
  * Screen that lets a user select a diet from an infinite scrolling alphabetised list
  * to add to a recipe.
  */
-export const CreateDiet = (): ReactElement => {
+export function CreateDiet(): ReactElement {
   const [query, setQuery] = useState('')
   const { dietsFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation()
@@ -47,7 +47,7 @@ export const CreateDiet = (): ReactElement => {
           </>
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
-        query={Queries.GET_DIETS}
+        query={Queries.getDiets}
         variables={{
           query,
         }}

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 /**
  * Screen that enables a user to log into Green Eggs with an email and password.
  */
-export const Login = (): ReactElement => {
+export function Login(): ReactElement {
   const { formResult, handleSubmit, control, submitForm } = useLoginForm()
   const { setToken } = useContext(AuthContext)
 
@@ -35,7 +35,7 @@ export const Login = (): ReactElement => {
     const token = result.data?.login.data?.token
     const error = result.data?.login.error
     if (token && !error) {
-      SecureStore.setItemAsync('token', token)
+      void SecureStore.setItemAsync('token', token)
       setToken && setToken(token)
     }
   }
@@ -69,7 +69,7 @@ export const Login = (): ReactElement => {
         type={InputType.PASSWORD}
       />
       <Button
-        onPress={handleSubmit(onSubmit)}
+        onPress={() => void handleSubmit(onSubmit)}
         disabled={formResult.loading}
         accessoryLeft={formResult.loading ? () => <Spinner size='small' /> : undefined}
       >

@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Text, ThemedComponentProps, withStyles } from '@ui-kitten/components'
+import { Text, useTheme } from '@ui-kitten/components'
 
 const styles = StyleSheet.create({
   tag: {
@@ -30,21 +30,24 @@ interface IRecipeCategoryTags {
 /**
  * Displays a horizontally scrolling list of tags
  */
-export const Tags = withStyles(({ tags, eva }: IRecipeCategoryTags & ThemedComponentProps) => (
-  <View style={styles.tags}>
-    {tags.map((tag: Tag) => (
-      <Text
-        key={tag.name}
-        category='label'
-        appearance='alternative'
-        style={{
-          ...styles.tag,
-          backgroundColor: eva?.theme && eva.theme['color-basic-600'],
-        }}
-        onPress={tag.onPress}
-      >
-        {tag.name}
-      </Text>
-    ))}
-  </View>
-))
+export function Tags({ tags }: IRecipeCategoryTags) {
+  const theme = useTheme()
+  return (
+    <View style={styles.tags}>
+      {tags.map((tag: Tag) => (
+        <Text
+          key={tag.name}
+          category='label'
+          appearance='alternative'
+          style={{
+            ...styles.tag,
+            backgroundColor: theme['color-basic-600'],
+          }}
+          onPress={tag.onPress}
+        >
+          {tag.name}
+        </Text>
+      ))}
+    </View>
+  )
+}

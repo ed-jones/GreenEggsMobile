@@ -8,18 +8,21 @@ import { NewsFeed } from './news-feed'
 import { Trending } from './trending'
 import { Categories } from './categories'
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const { Navigator, Screen } = createMaterialTopTabNavigator()
 
 /**
  * Tab bar that lets a user switch between trending, news feed and categories on the home page.
  */
-const TopTabBar = ({ navigation, state }: MaterialTopTabBarProps) => (
-  <TabBar selectedIndex={state.index} onSelect={(index) => navigation.navigate(state.routeNames[index])}>
-    <Tab title='TRENDING' />
-    <Tab title='NEWS FEED' />
-    <Tab title='CATEGORIES' />
-  </TabBar>
-)
+function TopTabBar({ navigation, state }: MaterialTopTabBarProps) {
+  return (
+    <TabBar selectedIndex={state.index} onSelect={(index) => navigation.navigate(state.routeNames[index])}>
+      <Tab title='TRENDING' />
+      <Tab title='NEWS FEED' />
+      <Tab title='CATEGORIES' />
+    </TabBar>
+  )
+}
 
 /**
  * Provides navigation logic for the rendered tab bar.

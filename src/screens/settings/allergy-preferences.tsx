@@ -17,7 +17,7 @@ import {
   UpdateAllergyPreferencesVariables,
 } from '@greeneggs/types/graphql'
 import { LoadingScreen } from '../loading-screen'
-import { FullUserFragment } from '@greeneggs/graphql/fragments'
+import { fullUserFragment } from '@greeneggs/graphql/fragments'
 
 const styles = StyleSheet.create({
   view: {
@@ -43,8 +43,8 @@ function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
  * Screen that lets a user update their allergy preferences.
  * For instance, a user may want to only see gluten free recipes globally in the app.
  */
-export const AllergyPreferences = () => {
-  const getAllergy = useQuery<Allergies>(Queries.GET_ALLERGIES, {
+export function AllergyPreferences() {
+  const getAllergy = useQuery<Allergies>(Queries.getAllergies, {
     variables: {
       query: '',
       offset: 0,
@@ -52,22 +52,22 @@ export const AllergyPreferences = () => {
     },
   })
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(new IndexPath(0))
-  const getMe = useQuery<Me>(Queries.ME)
+  const getMe = useQuery<Me>(Queries.getMe)
 
   const [removeAllergyPreferences] = useMutation<RemoveAllergyPreferences, RemoveAllergyPreferencesVariables>(
-    Mutations.REMOVE_ALLERGY_PREFERENCES
+    Mutations.removeAllergyPreferences
   )
   const [updateAllergyPreferences, updateAllergyPreferencesResult] = useMutation<
     UpdateAllergyPreferences,
     UpdateAllergyPreferencesVariables
-  >(Mutations.UPDATE_ALLERGY_PREFERENCES)
+  >(Mutations.updateAllergyPreferences)
 
   if (getAllergy.loading || getMe.loading) return <LoadingScreen />
   if (getAllergy.error) {
-    return <Text>Error! {getAllergy.error.message}</Text>
+    return <Text>Error!{getAllergy.error.message}</Text>
   }
   if (getMe.error) {
-    return <Text>Error! {getMe.error.message}</Text>
+    return <Text>Error!{getMe.error.message}</Text>
   }
   const me = getMe.data?.me.data
   const allergies = getAllergy.data?.allergies.data || []
@@ -75,7 +75,7 @@ export const AllergyPreferences = () => {
 
   function handleSubmit() {
     if (me?.allergyPreferences) {
-      updateAllergyPreferences({
+      void updateAllergyPreferences({
         variables: {
           allergyPreferences: {
             allergies: [
@@ -93,7 +93,7 @@ export const AllergyPreferences = () => {
                 ...new Set([...me.allergyPreferences, unselectedAllergies[indexToNumber(selectedIndex)]]),
               ],
             },
-            fragment: FullUserFragment,
+            fragment: fullUserFragment,
             fragmentName: 'FullUserFragment',
           })
         },
@@ -104,7 +104,7 @@ export const AllergyPreferences = () => {
 
   function removeAllergy(allergy: Allergies_allergies_data) {
     if (me?.allergyPreferences) {
-      removeAllergyPreferences({
+      void removeAllergyPreferences({
         variables: {
           allergyPreferences: {
             allergies: [allergy.id],
@@ -117,7 +117,7 @@ export const AllergyPreferences = () => {
               ...me,
               allergyPreferences: me.allergyPreferences.filter((allAllergies) => allAllergies.id !== allergy.id),
             },
-            fragment: FullUserFragment,
+            fragment: fullUserFragment,
             fragmentName: 'FullUserFragment',
           })
         },

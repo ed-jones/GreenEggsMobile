@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC, useState } from 'react'
+import React, { useState } from 'react'
 import { Queries } from '@greeneggs/graphql'
 import {
   Categories,
@@ -18,7 +18,7 @@ import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-r
 /**
  * Displays a searchable infinite scrolling list of all categories within the app, and links to associated category views.
  */
-export const AllCategories: FC = () => {
+export function AllCategories() {
   const [query, setQuery] = useState('')
   const navigation = useNavigation<LoggedInNavigationProp>()
   return (
@@ -45,7 +45,7 @@ export const AllCategories: FC = () => {
           />
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
-        query={Queries.GET_CATEGORIES}
+        query={Queries.getCategories}
         variables={{
           query,
         }}

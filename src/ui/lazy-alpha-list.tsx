@@ -16,7 +16,7 @@ interface LazyListAlphaProps<TData, TVariables, TDataType>
 /**
  * Component that takes the result of a GraphQL query and renders it as an infinite scrolling alphabetised list
  */
-export const LazyListAlpha = <
+export function LazyListAlpha<
   TData extends TDataWithData<TData, TDataType>,
   TVariables extends Partial<CommonVariables<SortType, FilterType>>,
   TDataType,
@@ -30,7 +30,7 @@ export const LazyListAlpha = <
   categoriseItem,
   limit = 15,
   ...props
-}: LazyListAlphaProps<TData, TVariables, TDataType>): ReactElement => {
+}: LazyListAlphaProps<TData, TVariables, TDataType>) {
   const { loading, data, nextPage } = useLazyList<TData, TVariables, TDataType, SortType, FilterType>({
     query,
     variables,
@@ -49,7 +49,7 @@ export const LazyListAlpha = <
   return (
     <AlphaList
       {...props}
-      onEndReached={() => nextPage()}
+      onEndReached={() => void nextPage()}
       onEndReachedThreshold={0.5}
       items={items}
       renderItem={renderItem}

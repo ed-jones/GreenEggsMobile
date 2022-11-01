@@ -29,7 +29,7 @@ export function RecipeCommentReplies(): ReactElement {
   const { commentId, replying } = route.params
   const [visibleCommentCount, setVisibleCommentCount] = useState<number>(3)
 
-  const { data, loading, error } = useQuery<comment>(Queries.GET_COMMENT, {
+  const { data, loading, error } = useQuery<comment>(Queries.getComment, {
     variables: {
       commentId,
     },

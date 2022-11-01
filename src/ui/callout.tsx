@@ -3,7 +3,7 @@
  */
 import React, { ReactText } from 'react'
 import { StyleProp, View, ViewStyle } from 'react-native'
-import { Icon, IconProps, Text, TextElement, ThemedComponentProps, withStyles } from '@ui-kitten/components'
+import { Icon, Text, TextElement, useTheme } from '@ui-kitten/components'
 import { alpha } from '@greeneggs/utils'
 
 type AlertType = 'danger' | 'warning' | 'info' | 'success'
@@ -18,23 +18,24 @@ interface IAlert {
 /**
  * Displays an important message that should stand out from the rest of the view.
  */
-export const Callout = withStyles(({ type, message, eva, style, title }: IAlert & ThemedComponentProps) => {
-  const iconNameFromAlertType: Record<AlertType, IconProps> = {
+export function Callout({ type, message, style, title }: IAlert) {
+  const theme = useTheme()
+  const iconNameFromAlertType: Record<AlertType, { name: string; fill: string }> = {
     danger: {
       name: 'alert-triangle',
-      fill: eva?.theme?.['color-danger-500'],
+      fill: theme['color-danger-500'],
     },
     warning: {
       name: 'alert-triangle',
-      fill: eva?.theme?.['color-warning-500'],
+      fill: theme['color-warning-500'],
     },
     info: {
       name: 'info',
-      fill: eva?.theme?.['color-info-500'],
+      fill: theme['color-info-500'],
     },
     success: {
       name: 'checkmark-circle-2',
-      fill: eva?.theme?.['color-success-500'],
+      fill: theme['color-success-500'],
     },
   }
 
@@ -62,4 +63,4 @@ export const Callout = withStyles(({ type, message, eva, style, title }: IAlert 
       </View>
     </View>
   )
-})
+}

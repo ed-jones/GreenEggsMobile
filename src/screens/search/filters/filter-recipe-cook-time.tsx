@@ -1,7 +1,7 @@
 /**
  * Author: Victor Ying
  */
-import React, { FC } from 'react'
+import React from 'react'
 import { Text } from '@ui-kitten/components'
 import { TopNavigation, Background } from '@greeneggs/ui'
 
@@ -10,9 +10,11 @@ import { TopNavigation, Background } from '@greeneggs/ui'
  *
  * Screen for filtering recipes by cook time.
  */
-export const FilterRecipeCookTime: FC = () => (
-  <Background>
-    <TopNavigation title='Cook Time' />
-    <Text>Work in progress!</Text>
-  </Background>
-)
+export function FilterRecipeCookTime() {
+  return (
+    <Background>
+      <TopNavigation title='Cook Time' />
+      <Text>Work in progress!</Text>
+    </Background>
+  )
+}

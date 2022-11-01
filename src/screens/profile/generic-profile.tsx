@@ -1,7 +1,7 @@
 /**
  * Author: Andrew Wilkie
  */
-import React, { FC, ReactElement, useState } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { View, StyleSheet, Pressable } from 'react-native'
 import { Text, Button, TopNavigation, TopNavigationAction, Avatar } from '@ui-kitten/components'
 import {
@@ -73,14 +73,16 @@ interface IProfileStat {
   onPress?: () => void
 }
 
-const ProfileStat = ({ label, value, onPress }: IProfileStat) => (
-  <Pressable onPress={onPress}>
-    <View style={styles.statBox}>
-      <Text category='label'>{value}</Text>
-      <Text category='c1'>{label}</Text>
-    </View>
-  </Pressable>
-)
+function ProfileStat({ label, value, onPress }: IProfileStat) {
+  return (
+    <Pressable onPress={onPress}>
+      <View style={styles.statBox}>
+        <Text category='label'>{value}</Text>
+        <Text category='c1'>{label}</Text>
+      </View>
+    </Pressable>
+  )
+}
 
 interface MyRecipesProps
   extends Omit<Partial<LazyListProps<recipes, recipesVariables, recipes_recipes_data>>, 'query'> {
@@ -91,13 +93,13 @@ interface MyRecipesProps
 /**
  * Abstract screen for displaying a user's profile information.
  */
-const MyRecipes: FC<MyRecipesProps> = ({ query, userId, ...props }) => {
+function MyRecipes({ query, userId, ...props }: MyRecipesProps) {
   const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (
     <LazyList<recipes, recipesVariables, recipes_recipes_data, Sort, RecipeFilter>
       {...props}
-      query={Queries.GET_RECIPES}
+      query={Queries.getRecipes}
       variables={{
         query: query,
         sort: Sort.NEW,
@@ -128,10 +130,10 @@ interface GenericProfileProps {
   isMe?: boolean
 }
 
-export const GenericProfile = ({ userId, isMe = false }: GenericProfileProps): ReactElement => {
+export function GenericProfile({ userId, isMe = false }: GenericProfileProps): ReactElement {
   const insets = useSafeAreaInsets()
   const navigation = useNavigation<LoggedInNavigationProp>()
-  const profileResult = useQuery<profile>(Queries.GET_PROFILE, {
+  const profileResult = useQuery<profile>(Queries.getProfile, {
     variables: {
       userId,
     },

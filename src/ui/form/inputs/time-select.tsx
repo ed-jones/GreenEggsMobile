@@ -50,12 +50,12 @@ export const hoursAndMinutesToMilliseconds = ({ hours, minutes }: ITimeFields): 
 /**
  * Input component for time fields
  */
-export const TimeInput = <FieldValues,>({
+export function TimeInput<FieldValues>({
   value,
   inputProps,
   error,
   onChange,
-}: ITimeInput<FieldValues> & ThemedComponentProps): ReactElement => {
+}: ITimeInput<FieldValues> & ThemedComponentProps): ReactElement {
   const theme = useTheme()
   const handleChange = ({ hours: newHours, minutes: newMinutes }: ITimeFields) => {
     const { hours: oldHours, minutes: oldMinutes } = millisecondsToHoursAndMinutes(value)
@@ -68,7 +68,7 @@ export const TimeInput = <FieldValues,>({
     onChange(numberToString(milliseconds))
   }
 
-  const TextColor = error ? theme?.['color-danger-500'] : theme?.['color-basic-400']
+  const textColor = error ? theme?.['color-danger-500'] : theme?.['color-basic-400']
 
   return (
     <>
@@ -82,7 +82,7 @@ export const TimeInput = <FieldValues,>({
           borderRadius: 4,
           alignItems: 'center',
           borderWidth: 1,
-          borderColor: TextColor,
+          borderColor: textColor,
         }}
       >
         <Input
@@ -113,7 +113,7 @@ export const TimeInput = <FieldValues,>({
         category='c1'
         style={{
           marginTop: 6,
-          color: TextColor,
+          color: textColor,
           marginBottom: 6,
         }}
       >

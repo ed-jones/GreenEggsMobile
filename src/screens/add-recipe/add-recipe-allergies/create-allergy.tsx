@@ -20,7 +20,7 @@ import { useNavigation } from '@react-navigation/core'
  * Screen with an infinite scrolling alphabetised list of allergies that
  * can be selected and added to a new recipe.
  */
-export const CreateAllergy = (): ReactElement => {
+export function CreateAllergy(): ReactElement {
   const [query, setQuery] = useState('')
   const { allergiesFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation()
@@ -54,7 +54,7 @@ export const CreateAllergy = (): ReactElement => {
           </>
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
-        query={Queries.GET_ALLERGIES}
+        query={Queries.getAllergies}
         variables={{
           query,
         }}

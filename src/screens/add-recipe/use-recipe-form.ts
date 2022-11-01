@@ -10,7 +10,7 @@ import { Mutations } from '@greeneggs/graphql'
  */
 export const useRecipeForm = (): IForm<RecipeInput, addRecipe, addRecipeVariables> =>
   useForm<RecipeInput, addRecipe, addRecipeVariables>(
-    Mutations.ADD_RECIPE,
+    Mutations.addRecipe,
     'recipe',
     {},
     {

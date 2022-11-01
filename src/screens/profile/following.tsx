@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 /**
  * Screen that shows a list of users a user is following.
  */
-export const Following = (): ReactElement => {
+export function Following(): ReactElement {
   const [query, setQuery] = useState('')
   const {
     params: { userId },
@@ -49,7 +49,7 @@ export const Following = (): ReactElement => {
       />
       <LazyList<FollowingUsers, FollowingUsersVariables, FollowingUsers_followingUsers_data, Sort, RecipeFilter>
         limit={15}
-        query={Queries.GET_FOLLOWING_USERS}
+        query={Queries.getFollowingUsers}
         variables={{
           userId,
           query,

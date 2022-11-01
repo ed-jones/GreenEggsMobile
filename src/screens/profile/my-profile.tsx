@@ -15,8 +15,8 @@ import { GenericProfile } from './generic-profile'
  * Lets the user access the settings page, a full list of their upload recipes,
  * and lets the user edit their profile.
  */
-export const MyProfile = (): ReactElement => {
-  const meResult = useQuery<Me>(Queries.ME)
+export function MyProfile(): ReactElement {
+  const meResult = useQuery<Me>(Queries.getMe)
 
   if (meResult.loading) {
     return <LoadingScreen />

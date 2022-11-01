@@ -17,7 +17,7 @@ import {
   UpdateDietaryPreferencesVariables,
 } from '@greeneggs/types/graphql'
 import { LoadingScreen } from '../loading-screen'
-import { FullUserFragment } from '@greeneggs/graphql/fragments'
+import { fullUserFragment } from '@greeneggs/graphql/fragments'
 import { TopNavigation, Select, Background, Callout, Icons } from '@greeneggs/ui'
 
 const styles = StyleSheet.create({
@@ -44,8 +44,8 @@ function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
  * Screen that lets a user edit their dietary preferences.
  * For instance, a user can choose to filter out all non-vegan recipes globally in the app.
  */
-export const DietaryPreferences = (): ReactElement => {
-  const getDiet = useQuery<Diets>(Queries.GET_DIETS, {
+export function DietaryPreferences(): ReactElement {
+  const getDiet = useQuery<Diets>(Queries.getDiets, {
     variables: {
       query: '',
       offset: 0,
@@ -53,22 +53,22 @@ export const DietaryPreferences = (): ReactElement => {
     },
   })
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(new IndexPath(0))
-  const getMe = useQuery<Me>(Queries.ME)
+  const getMe = useQuery<Me>(Queries.getMe)
 
   const [removeDietaryPreferences] = useMutation<RemoveDietaryPreferences, RemoveDietaryPreferencesVariables>(
-    Mutations.REMOVE_DIETARY_PREFERENCES
+    Mutations.removeDietaryPreferences
   )
   const [updateDietaryPreferences, updateDietaryPreferencesResult] = useMutation<
     UpdateDietaryPreferences,
     UpdateDietaryPreferencesVariables
-  >(Mutations.UPDATE_DIETARY_PREFERENCES)
+  >(Mutations.updateDietaryPreferences)
 
   if (getDiet.loading || getMe.loading) return <LoadingScreen />
   if (getDiet.error) {
-    return <Text>Error! {getDiet.error.message}</Text>
+    return <Text>Error!{getDiet.error.message}</Text>
   }
   if (getMe.error) {
-    return <Text>Error! {getMe.error.message}</Text>
+    return <Text>Error!{getMe.error.message}</Text>
   }
   const me = getMe.data?.me.data
   const diets = getDiet.data?.diets.data || []
@@ -76,7 +76,7 @@ export const DietaryPreferences = (): ReactElement => {
 
   function handleSubmit() {
     if (me?.dietaryPreferences) {
-      updateDietaryPreferences({
+      void updateDietaryPreferences({
         variables: {
           dietaryPreferences: {
             diets: [
@@ -94,7 +94,7 @@ export const DietaryPreferences = (): ReactElement => {
                 ...new Set([...me.dietaryPreferences, unselectedDiets[indexToNumber(selectedIndex)]]),
               ],
             },
-            fragment: FullUserFragment,
+            fragment: fullUserFragment,
             fragmentName: 'FullUserFragment',
           })
         },
@@ -105,7 +105,7 @@ export const DietaryPreferences = (): ReactElement => {
 
   function removeDiet(diet: Diets_diets_data) {
     if (me?.dietaryPreferences) {
-      removeDietaryPreferences({
+      void removeDietaryPreferences({
         variables: {
           dietaryPreferences: {
             diets: [diet.id],
@@ -118,7 +118,7 @@ export const DietaryPreferences = (): ReactElement => {
               ...me,
               dietaryPreferences: me.dietaryPreferences.filter((allDiets) => allDiets.id !== diet.id),
             },
-            fragment: FullUserFragment,
+            fragment: fullUserFragment,
             fragmentName: 'FullUserFragment',
           })
         },

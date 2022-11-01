@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import { Platform, View } from 'react-native'
-import { Menu, MenuItem, Modal, Text, ThemedComponentProps, withStyles } from '@ui-kitten/components'
+import { Menu, MenuItem, Modal, Text, ThemedComponentProps, useTheme } from '@ui-kitten/components'
 import * as ImagePicker from 'expo-image-picker'
 import { ReactNativeFile } from 'apollo-upload-client'
 import { ImageBackground } from 'react-native'
@@ -21,7 +21,8 @@ interface IImageUpload {
 /**
  * Input component for uploading images
  */
-export const ImageUpload = withStyles(({ label, uri, onChange, error, eva }: IImageUpload & ThemedComponentProps) => {
+export function ImageUpload({ label, uri, onChange, error, eva }: IImageUpload & ThemedComponentProps) {
+  const theme = useTheme()
   const [modalVisible, setModalVisible] = React.useState(false)
 
   type ImageSource = 'gallery' | 'camera'
@@ -73,7 +74,7 @@ export const ImageUpload = withStyles(({ label, uri, onChange, error, eva }: IIm
     setModalVisible(false)
   }
 
-  const TextColor = error ? eva?.theme?.['color-danger-500'] : eva?.theme?.['color-basic-600']
+  const textColor = error ? theme['color-danger-500'] : theme['color-basic-600']
 
   return (
     <View style={{ marginBottom: 16 }}>
@@ -84,8 +85,8 @@ export const ImageUpload = withStyles(({ label, uri, onChange, error, eva }: IIm
       >
         <View style={{ width: 132 }}>
           <Menu>
-            <MenuItem title='CAMERA' accessoryLeft={Icons.Camera} onPress={() => pickImage('camera', onChange)} />
-            <MenuItem title='GALLERY' accessoryLeft={Icons.Image} onPress={() => pickImage('gallery', onChange)} />
+            <MenuItem title='CAMERA' accessoryLeft={Icons.Camera} onPress={() => void pickImage('camera', onChange)} />
+            <MenuItem title='GALLERY' accessoryLeft={Icons.Image} onPress={() => void pickImage('gallery', onChange)} />
             <MenuItem title='CANCEL' accessoryLeft={Icons.Cross} onPress={cancelModal} />
           </Menu>
         </View>
@@ -102,7 +103,7 @@ export const ImageUpload = withStyles(({ label, uri, onChange, error, eva }: IIm
           borderWidth: 2,
           borderRadius: 4,
           borderStyle: 'dashed',
-          borderColor: TextColor,
+          borderColor: textColor,
           alignItems: 'center',
           justifyContent: 'center',
         }}
@@ -163,11 +164,11 @@ export const ImageUpload = withStyles(({ label, uri, onChange, error, eva }: IIm
         category='c1'
         style={{
           marginTop: 6,
-          color: TextColor,
+          color: textColor,
         }}
       >
         {error?.message}
       </Text>
     </View>
   )
-})
+}

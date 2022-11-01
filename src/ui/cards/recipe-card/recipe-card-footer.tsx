@@ -50,7 +50,7 @@ export type IRecipeCardFooterProps = Pick<
  * Footer component for the main recipe card.
  * Displays meta information such as title, description and statistics.
  */
-export const RecipeCardFooter = ({
+export function RecipeCardFooter({
   title,
   description,
   commentCount,
@@ -61,7 +61,7 @@ export const RecipeCardFooter = ({
   id,
   comments,
   submittedBy,
-}: IRecipeCardFooterProps): ReactElement => {
+}: IRecipeCardFooterProps): ReactElement {
   return (
     <View style={styles.view}>
       <View style={styles.labelledIcons}>
@@ -78,7 +78,7 @@ export const RecipeCardFooter = ({
       <View style={styles.labelledIcons}>
         {timeEstimate && (
           <View style={styles.labelledIconGroup}>
-            <LabelledIcon label={convertTimeEstimate(timeEstimate).toUpperCase()} iconName='clock-outline' />
+            <LabelledIcon label={`${convertTimeEstimate(timeEstimate).toUpperCase()} PREP`} iconName='clock-outline' />
           </View>
         )}
         <View style={styles.labelledIconGroup}>

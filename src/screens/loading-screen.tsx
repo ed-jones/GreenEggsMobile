@@ -17,8 +17,10 @@ const styles = StyleSheet.create({
  * Screen to display when main content is loading.
  * Displays a centered spinning animation.
  */
-export const LoadingScreen = (): ReactElement => (
-  <Background style={styles.container}>
-    <Spinner />
-  </Background>
-)
+export function LoadingScreen(): ReactElement {
+  return (
+    <Background style={styles.container}>
+      <Spinner />
+    </Background>
+  )
+}

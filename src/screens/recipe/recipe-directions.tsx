@@ -16,48 +16,48 @@ interface IRecipeDirections {
  * Carousel for displaying recipe steps.
  */
 // TODO: Replace `react-native-snap-carousel` with another library
-export const RecipeDirections = ({ directions }: IRecipeDirections): ReactElement => {
+export function RecipeDirections({ directions }: IRecipeDirections): ReactElement {
   const navigation = useNavigation()
 
   return (
     <View style={{ marginHorizontal: -16 }}>
       {/* <Carousel
-        sliderWidth={Dimensions.get('window').width}
-        itemWidth={Dimensions.get('window').width * 0.8}
-        data={directions}
-        renderItem={({ item }) => (
-          <Card
-            onPress={() =>
-              navigation.navigate('RecipeDirectionExpanded', {
-                direction: item,
-              })
-            }
-            header={
-              item.image !== null
-                ? () => (
-                    <Image
-                      style={{
-                        height: undefined,
-                        width: '100%',
-                        aspectRatio: 1 / 1,
-                      }}
-                      source={{
-                        uri: item.image,
-                      }}
-                    />
-                  )
-                : undefined
-            }
-            footer={() => (
-              <Text numberOfLines={2} style={{ margin: 16 }}>
-                {item.description}
-              </Text>
-            )}
-          >
-            <Text category='h6'>{item.title}</Text>
-          </Card>
-        )}
-      /> */}
+              sliderWidth={Dimensions.get('window').width}
+              itemWidth={Dimensions.get('window').width * 0.8}
+              data={directions}
+              renderItem={({ item }) => (
+                <Card
+                  onPress={() =>
+                    navigation.navigate('RecipeDirectionExpanded', {
+                      direction: item,
+                    })
+                  }
+                  header={
+                    item.image !== null
+                      ? () => (
+                          <Image
+                            style={{
+                              height: undefined,
+                              width: '100%',
+                              aspectRatio: 1 / 1,
+                            }}
+                            source={{
+                              uri: item.image,
+                            }}
+                          />
+                        )
+                      : undefined
+                  }
+                  footer={() => (
+                    <Text numberOfLines={2} style={{ margin: 16 }}>
+                      {item.description}
+                    </Text>
+                  )}
+                >
+                  <Text category='h6'>{item.title}</Text>
+                </Card>
+              )}
+            /> */}
     </View>
   )
 }

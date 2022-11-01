@@ -13,10 +13,10 @@ import {
   UpdateProfileVisibilityVariables,
 } from '@greeneggs/types/graphql'
 import { useQuery } from '@apollo/client'
-import { FullUserFragment } from '@greeneggs/graphql/fragments'
+import { fullUserFragment } from '@greeneggs/graphql/fragments'
 
 import { LoadingScreen } from '../loading-screen'
-import { TopNavigation, Background, Callout, Icons, ControlledInput, InputType, Rules, useForm } from '@greeneggs/ui'
+import { TopNavigation, Background, Callout, Icons, ControlledInput, InputType, rules, useForm } from '@greeneggs/ui'
 
 const styles = StyleSheet.create({
   view: {
@@ -40,23 +40,23 @@ const styles = StyleSheet.create({
  * Setting screen for profile visibility.
  * Lets the user edit who can see their profile.
  */
-export const ProfileVisibility = (): ReactElement => {
+export function ProfileVisibility(): ReactElement {
   const navigation = useNavigation()
 
-  const { loading, error, data } = useQuery<Me>(Queries.ME)
+  const { loading, error, data } = useQuery<Me>(Queries.getMe)
   const form = useForm<ProfileVisibilityDetails, UpdateProfileVisibility, UpdateProfileVisibilityVariables>(
-    Mutations.UPDATE_PROFILE_VISIBILITY,
+    Mutations.updateProfileVisibility,
     'profileVisibilityDetails'
   )
 
   if (loading) return <LoadingScreen />
   if (error) {
-    return <Text>Error! {error.message}</Text>
+    return <Text>Error!{error.message}</Text>
   }
   const me = data?.me.data
 
   function handleSubmit() {
-    form
+    void form
       .submitForm({
         variables: {
           profileVisibilityDetails: {
@@ -71,7 +71,7 @@ export const ProfileVisibility = (): ReactElement => {
                 ...me,
                 visibility: form.getValues('visibility'),
               },
-              fragment: FullUserFragment,
+              fragment: fullUserFragment,
               fragmentName: 'FullUserFragment',
             })
           }
@@ -103,7 +103,7 @@ export const ProfileVisibility = (): ReactElement => {
             name: 'visibility',
             control: form.control,
             rules: {
-              ...Rules.REQUIRED,
+              ...rules.REQUIRED,
             },
             defaultValue: me?.visibility,
           }}

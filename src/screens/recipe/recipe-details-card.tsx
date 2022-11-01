@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 /**
  * Card for displaying simple recipe details, such as title, abbreviated description and stats.
  */
-export const RecipeDetailsCard = ({
+export function RecipeDetailsCard({
   title,
   timeEstimate,
   description,
@@ -42,7 +42,7 @@ export const RecipeDetailsCard = ({
   id,
   liked,
   comments,
-}: recipe_recipe_data): ReactElement => {
+}: recipe_recipe_data): ReactElement {
   const navigation = useNavigation<LoggedInNavigationProp>()
   const navigateToDescription = () => {
     navigation.navigate('RecipeDescription', {
@@ -62,7 +62,10 @@ export const RecipeDetailsCard = ({
               {title}
             </Text>
             {timeEstimate ? (
-              <LabelledIcon label={convertTimeEstimate(timeEstimate).toUpperCase()} iconName='clock-outline' />
+              <LabelledIcon
+                label={`${convertTimeEstimate(timeEstimate).toUpperCase()} PREP`}
+                iconName='clock-outline'
+              />
             ) : undefined}
           </View>
           <View style={{ ...styles.row, marginTop: 8 }}>

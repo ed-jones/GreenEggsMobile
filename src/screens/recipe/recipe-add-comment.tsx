@@ -51,7 +51,7 @@ interface RecipeAddCommentProps {
 export function RecipeAddComment({ recipeId, commentId, isReply, active }: RecipeAddCommentProps): ReactElement {
   const [comment, setComment] = useState<string>('')
   const client = useApolloClient()
-  const { loading, error, data } = useQuery<Me>(Queries.ME)
+  const { loading, error, data } = useQuery<Me>(Queries.getMe)
   if (loading) return <LoadingScreen />
   if (error) {
     return <Text>Error! {error.message}</Text>
@@ -60,18 +60,18 @@ export function RecipeAddComment({ recipeId, commentId, isReply, active }: Recip
 
   function handleSubmit() {
     if (recipeId) {
-      client
+      void client
         .mutate<AddRecipeComment, AddRecipeCommentVariables>({
-          mutation: Mutations.ADD_RECIPE_COMMENT,
+          mutation: Mutations.addRecipeComment,
           variables: {
             comment,
             recipeId,
           },
-          refetchQueries: [Queries.GET_RECIPE, 'recipe'],
+          refetchQueries: [Queries.getRecipe, 'recipe'],
         })
         .then(() => {
-          client.query<recipe>({
-            query: Queries.GET_RECIPE,
+          void client.query<recipe>({
+            query: Queries.getRecipe,
             variables: {
               recipeId,
             },
@@ -79,13 +79,13 @@ export function RecipeAddComment({ recipeId, commentId, isReply, active }: Recip
         })
     }
     if (commentId) {
-      client.mutate<AddRecipeCommentReply, AddRecipeCommentReplyVariables>({
-        mutation: Mutations.ADD_RECIPE_COMMENT_REPLY,
+      void client.mutate<AddRecipeCommentReply, AddRecipeCommentReplyVariables>({
+        mutation: Mutations.addRecipeCommentReply,
         variables: {
           comment,
           commentId,
         },
-        refetchQueries: [Queries.GET_RECIPE, 'recipe'],
+        refetchQueries: [Queries.getRecipe, 'recipe'],
       })
     }
 

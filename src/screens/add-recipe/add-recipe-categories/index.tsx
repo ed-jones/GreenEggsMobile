@@ -14,7 +14,7 @@ import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-r
  * Screen that shows a list of all selected categories that will
  * be added to a recipe.
  */
-export const AddRecipeCategories = (): ReactElement => {
+export function AddRecipeCategories(): ReactElement {
   const { categoriesFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation<LoggedInNavigationProp>()
 

@@ -1,7 +1,7 @@
 /**
  * Author: Victor Ying
  */
-import React, { FC, useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Queries } from '@greeneggs/graphql'
 import { Divider } from '@ui-kitten/components'
 import {
@@ -23,7 +23,7 @@ import { View } from 'react-native'
 /**
  * Screen for requiring diets in a recipe search
  */
-export const FilterRecipeDiets: FC = () => {
+export function FilterRecipeDiets() {
   const navigation = useNavigation()
   const [query, setQuery] = useState('')
   const { searchState, setSearchState } = useContext(SearchContext)
@@ -66,7 +66,7 @@ export const FilterRecipeDiets: FC = () => {
           </>
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
-        query={Queries.GET_DIETS}
+        query={Queries.getDiets}
         contentContainerStyle={{ flexGrow: 1 }}
         ListEmptyComponent={
           <View style={{ flexGrow: 1, justifyContent: 'center' }}>

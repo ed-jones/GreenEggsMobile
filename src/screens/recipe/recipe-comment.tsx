@@ -34,11 +34,11 @@ export function RecipeComment({ comment, replyButton }: RecipeCommentProps): Rea
   const navigation: StackNavigationProp<Record<string, Record<string, unknown>>, string> = useNavigation()
   const navigateToProfile = useNavigateToProfile()
 
-  const [deleteComment] = useMutation<DeleteComment>(Mutations.DELETE_COMMENT, {
+  const [deleteComment] = useMutation<DeleteComment>(Mutations.deleteComment, {
     variables: {
       commentId: comment.id,
     },
-    refetchQueries: [Queries.GET_RECIPE, 'recipe'],
+    refetchQueries: [Queries.getRecipe, 'recipe'],
   })
 
   const { me } = useContext(UserContext)
@@ -52,7 +52,7 @@ export function RecipeComment({ comment, replyButton }: RecipeCommentProps): Rea
           text: 'Cancel',
           style: 'cancel',
         },
-        { text: 'OK', onPress: () => deleteComment() },
+        { text: 'OK', onPress: () => void deleteComment() },
       ],
       { cancelable: false }
     )

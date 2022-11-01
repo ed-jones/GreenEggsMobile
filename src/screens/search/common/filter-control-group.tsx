@@ -1,7 +1,7 @@
 /**
  * Author: Victor Ying
  */
-import React, { FC } from 'react'
+import React from 'react'
 import { Text, Button, Layout, Divider } from '@ui-kitten/components'
 import { View } from 'react-native'
 
@@ -19,7 +19,7 @@ export interface FilterControlGroupProps {
 /**
  * Generic control group component with a label and 2 buttons.
  */
-export const FilterControlGroup: FC<FilterControlGroupProps> = ({ label, clearButton, applyButton }) => {
+export function FilterControlGroup({ label, clearButton, applyButton }: FilterControlGroupProps) {
   return (
     <>
       <Divider />

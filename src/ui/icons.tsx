@@ -7,42 +7,82 @@
 import React, { ReactElement } from 'react'
 import { Icon, IconProps } from '@ui-kitten/components'
 
-export const Settings = (props: IconProps): ReactElement => <Icon {...props} name='settings-outline' />
+export function Settings(props: IconProps) {
+  return <Icon {...props} name='settings-outline' />
+}
 
-export const Back = (props: IconProps): ReactElement => <Icon {...props} name='chevron-left-outline' />
+export function Back(props: IconProps): ReactElement {
+  return <Icon {...props} name='chevron-left-outline' />
+}
 
-export const Forward = (props: IconProps): ReactElement => <Icon {...props} name='chevron-right-outline' />
+export function Forward(props: IconProps): ReactElement {
+  return <Icon {...props} name='chevron-right-outline' />
+}
 
-export const Down = (props: IconProps): ReactElement => <Icon {...props} name='chevron-down-outline' />
+export function Down(props: IconProps): ReactElement {
+  return <Icon {...props} name='chevron-down-outline' />
+}
 
-export const Warning = (props: IconProps): ReactElement => <Icon {...props} name='alert-triangle' />
+export function Warning(props: IconProps): ReactElement {
+  return <Icon {...props} name='alert-triangle' />
+}
 
-export const Publish = (props: IconProps): ReactElement => <Icon {...props} name='upload-outline' />
+export function Publish(props: IconProps): ReactElement {
+  return <Icon {...props} name='upload-outline' />
+}
 
-export const Add = (props: IconProps): ReactElement => <Icon {...props} name='plus-outline' />
+export function Add(props: IconProps): ReactElement {
+  return <Icon {...props} name='plus-outline' />
+}
 
-export const Edit = (props: IconProps): ReactElement => <Icon {...props} name='edit-outline' />
+export function Edit(props: IconProps): ReactElement {
+  return <Icon {...props} name='edit-outline' />
+}
 
-export const AddPerson = (props: IconProps): ReactElement => <Icon {...props} name='person-add-outline' />
+export function AddPerson(props: IconProps): ReactElement {
+  return <Icon {...props} name='person-add-outline' />
+}
 
-export const More = (props: IconProps): ReactElement => <Icon {...props} name='more-horizontal' />
+export function More(props: IconProps): ReactElement {
+  return <Icon {...props} name='more-horizontal' />
+}
 
-export const Camera = (props: IconProps): ReactElement => <Icon {...props} name='camera-outline' />
+export function Camera(props: IconProps): ReactElement {
+  return <Icon {...props} name='camera-outline' />
+}
 
-export const Image = (props: IconProps): ReactElement => <Icon {...props} name='image-outline' />
+export function Image(props: IconProps): ReactElement {
+  return <Icon {...props} name='image-outline' />
+}
 
-export const Cross = (props: IconProps): ReactElement => <Icon {...props} name='close-outline' />
+export function Cross(props: IconProps): ReactElement {
+  return <Icon {...props} name='close-outline' />
+}
 
-export const Search = (props: IconProps): ReactElement => <Icon {...props} name='search' />
+export function Search(props: IconProps): ReactElement {
+  return <Icon {...props} name='search' />
+}
 
-export const Save = (props: IconProps): ReactElement => <Icon {...props} name='save' />
+export function Save(props: IconProps): ReactElement {
+  return <Icon {...props} name='save' />
+}
 
-export const Trash = (props: IconProps): ReactElement => <Icon {...props} name='trash-2-outline' />
+export function Trash(props: IconProps): ReactElement {
+  return <Icon {...props} name='trash-2-outline' />
+}
 
-export const Comment = (props: IconProps): ReactElement => <Icon {...props} name='message-square-outline' />
+export function Comment(props: IconProps): ReactElement {
+  return <Icon {...props} name='message-square-outline' />
+}
 
-export const Reply = (props: IconProps): ReactElement => <Icon {...props} name='undo-outline' />
+export function Reply(props: IconProps): ReactElement {
+  return <Icon {...props} name='undo-outline' />
+}
 
-export const Bookmark = (props: IconProps): ReactElement => <Icon {...props} name='bookmark-outline' />
+export function Bookmark(props: IconProps): ReactElement {
+  return <Icon {...props} name='bookmark-outline' />
+}
 
-export const Filter = (props: IconProps): ReactElement => <Icon {...props} name='options-2-outline' />
+export function Filter(props: IconProps): ReactElement {
+  return <Icon {...props} name='options-2-outline' />
+}

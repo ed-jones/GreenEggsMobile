@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 /**
  * Screen that enables a user to sign up to Green Eggs.
  */
-export const Signup = (): ReactElement => {
+export function Signup(): ReactElement {
   const navigation = useNavigation<LoggedOutNavigationProp>()
   const { formResult, handleSubmit, control, submitForm } = useSignupForm()
   const { setToken } = useContext(AuthContext)
@@ -35,7 +35,7 @@ export const Signup = (): ReactElement => {
     const token = result.data?.signup.data?.token
     const error = result.data?.signup.error
     if (token && !error) {
-      SecureStore.setItemAsync('token', token)
+      void SecureStore.setItemAsync('token', token)
       setToken && setToken(token)
     }
   }
@@ -121,7 +121,7 @@ export const Signup = (): ReactElement => {
         </Text>
       </CheckBox>
       <Button
-        onPress={handleSubmit(handleSignupFormSubmit)}
+        onPress={() => void handleSubmit(handleSignupFormSubmit)}
         disabled={formResult.loading || !consent}
         accessoryLeft={formResult.loading ? () => <Spinner size='small' /> : undefined}
       >

@@ -5,7 +5,7 @@
  */
 import { gql } from '@apollo/client'
 
-export const UserFragment = gql`
+export const userFragment = gql`
   fragment UserFragment on User {
     id
     firstName
@@ -17,21 +17,21 @@ export const UserFragment = gql`
   }
 `
 
-export const DietFragment = gql`
+export const dietFragment = gql`
   fragment DietFragment on Diet {
     id
     name
   }
 `
 
-export const AllergyFragment = gql`
+export const allergyFragment = gql`
   fragment AllergyFragment on Allergy {
     id
     name
   }
 `
 
-export const FullUserFragment = gql`
+export const fullUserFragment = gql`
   fragment FullUserFragment on FullUser {
     id
     firstName
@@ -53,11 +53,11 @@ export const FullUserFragment = gql`
     }
     visibility
   }
-  ${DietFragment}
-  ${AllergyFragment}
+  ${dietFragment}
+  ${allergyFragment}
 `
 
-export const RecipeCommentFragment = gql`
+export const recipeCommentFragment = gql`
   fragment RecipeCommentFragment on RecipeComment {
     id
     contents
@@ -80,10 +80,10 @@ export const RecipeCommentFragment = gql`
       }
     }
   }
-  ${UserFragment}
+  ${userFragment}
 `
 
-export const RecipeFragment = gql`
+export const recipeFragment = gql`
   fragment RecipeFragment on Recipe {
     id
     title
@@ -124,17 +124,17 @@ export const RecipeFragment = gql`
       ...RecipeCommentFragment
     }
   }
-  ${UserFragment}
-  ${RecipeCommentFragment}
+  ${userFragment}
+  ${recipeCommentFragment}
 `
 
-export const ErrorFragment = gql`
+export const errorFragment = gql`
   fragment ErrorFragment on Error {
     message
   }
 `
 
-export const IngredientFragment = gql`
+export const ingredientFragment = gql`
   fragment IngredientFragment on Ingredient {
     name
     description
@@ -143,14 +143,14 @@ export const IngredientFragment = gql`
   }
 `
 
-export const GenericIngredientFragment = gql`
+export const genericIngredientFragment = gql`
   fragment GenericIngredientFragment on GenericIngredient {
     id
     name
   }
 `
 
-export const CategoryFragment = gql`
+export const categoryFragment = gql`
   fragment CategoryFragment on Category {
     id
     name
@@ -158,7 +158,7 @@ export const CategoryFragment = gql`
   }
 `
 
-export const NotificationFragment = gql`
+export const notificationFragment = gql`
   fragment NotificationFragment on Notification {
     id
     type
@@ -169,5 +169,5 @@ export const NotificationFragment = gql`
     read
     linkId
   }
-  ${UserFragment}
+  ${userFragment}
 `

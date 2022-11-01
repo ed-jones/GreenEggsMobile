@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
  * This is the first screen a user sees upon opening the app.
  * Instructs a user to sign up or log in.
  */
-export const Welcome = (): ReactElement => {
+export function Welcome(): ReactElement {
   const navigation = useNavigation<LoggedOutNavigationProp>()
   return (
     <Background

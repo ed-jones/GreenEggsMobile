@@ -2,7 +2,7 @@
  * Author: Victor Ying
  */
 import React, { useContext } from 'react'
-import { Button, Icon, ThemedComponentProps, TopNavigationAction, withStyles } from '@ui-kitten/components'
+import { Button, Icon, ThemedComponentProps, TopNavigationAction } from '@ui-kitten/components'
 import { Input, Icons } from '@greeneggs/ui'
 import { StyleSheet, View, Image } from 'react-native'
 
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 /**
  * Search bar and associated buttons displayed on the home page and search page.
  */
-export const TopBar = withStyles(({ eva }: ThemedComponentProps) => {
+export function TopBar({ eva }: ThemedComponentProps) {
   const navigation = useNavigation<LoggedInNavigationProp>()
   const { searchState, setSearchState } = useContext(SearchContext)
   const setQuery = (query: string | undefined) => setSearchState?.({ ...searchState, query })
@@ -76,4 +76,4 @@ export const TopBar = withStyles(({ eva }: ThemedComponentProps) => {
       )}
     </View>
   )
-})
+}

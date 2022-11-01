@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC } from 'react'
+import React from 'react'
 import { Queries } from '@greeneggs/graphql'
 import {
   RecipeFilter,
@@ -15,19 +15,21 @@ import { useNavigation } from '@react-navigation/core'
 import { TopNavigation, Background, LazyList, RecipeCardSmall } from '@greeneggs/ui'
 import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
-const SavedRecipesHeader = () => <TopNavigation title='Saved Recipes' accessoryLeft={undefined} />
+function SavedRecipesHeader() {
+  return <TopNavigation title='Saved Recipes' accessoryLeft={undefined} />
+}
 
 /**
  * View for displaying recipes a user has saved.
  */
-export const SavedRecipes: FC = () => {
+export function SavedRecipes() {
   const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (
     <Background>
       <SavedRecipesHeader />
       <LazyList<SavedRecipesType, savedRecipesVariables, savedRecipes_savedRecipes_data, Sort, RecipeFilter>
-        query={Queries.GET_SAVED_RECIPES}
+        query={Queries.getSavedRecipes}
         variables={{}}
         dataKey='savedRecipes'
         emptyMessage="You haven't saved any recipes yet! Save some recipes and they will appear here."

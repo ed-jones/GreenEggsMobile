@@ -6,65 +6,65 @@
 import { gql } from '@apollo/client'
 import * as Fragments from './fragments'
 
-export const ADD_RECIPE = gql`
+export const addRecipe = gql`
   mutation addRecipe($recipe: RecipeInput!) {
     addRecipe(recipe: $recipe) {
       data {
         ...RecipeFragment
       }
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
     }
   }
-  ${Fragments.RecipeFragment}
-  ${Fragments.ErrorFragment}
+  ${Fragments.recipeFragment}
+  ${Fragments.errorFragment}
 `
 
-export const LOGIN = gql`
+export const login = gql`
   mutation login($loginDetails: LoginInput!) {
     login(loginDetails: $loginDetails) {
       data {
         token
       }
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
     }
   }
-  ${Fragments.ErrorFragment}
+  ${Fragments.errorFragment}
 `
 
-export const SIGNUP = gql`
+export const signup = gql`
   mutation signup($signupDetails: SignupInput!) {
     signup(signupDetails: $signupDetails) {
       data {
         token
       }
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
     }
   }
-  ${Fragments.ErrorFragment}
+  ${Fragments.errorFragment}
 `
 
-export const EDIT_PROFILE = gql`
+export const editProfile = gql`
   mutation editProfile($profileDetails: ProfileDetails!) {
     editProfile(profileDetails: $profileDetails) {
       data {
-        ...FullUserFragment
+        ...FulluserFragment
       }
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
     }
   }
-  ${Fragments.ErrorFragment}
-  ${Fragments.FullUserFragment}
+  ${Fragments.errorFragment}
+  ${Fragments.fullUserFragment}
 `
 
-export const CHANGE_PASSWORD = gql`
+export const changePassword = gql`
   mutation changePassword($changePasswordDetails: ChangePasswordDetails!) {
     changePassword(changePasswordDetails: $changePasswordDetails) {
       error {
@@ -74,7 +74,7 @@ export const CHANGE_PASSWORD = gql`
   }
 `
 
-export const DELETE_USER = gql`
+export const deleteUser = gql`
   mutation deleteUser {
     deleteAccount {
       error {
@@ -84,256 +84,256 @@ export const DELETE_USER = gql`
   }
 `
 
-export const UPDATE_DIETARY_PREFERENCES = gql`
+export const updateDietaryPreferences = gql`
   mutation UpdateDietaryPreferences($dietaryPreferences: DietaryPreferenceDetails!) {
     updateDietaryPreferences(dietaryPreferenceDetails: $dietaryPreferences) {
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
       data {
         ...DietFragment
       }
     }
   }
-  ${Fragments.DietFragment}
-  ${Fragments.ErrorFragment}
+  ${Fragments.dietFragment}
+  ${Fragments.errorFragment}
 `
 
-export const REMOVE_DIETARY_PREFERENCES = gql`
+export const removeDietaryPreferences = gql`
   mutation RemoveDietaryPreferences($dietaryPreferences: DietaryPreferenceDetails!) {
     removeDietaryPreferences(dietaryPreferenceDetails: $dietaryPreferences) {
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
       data {
         ...DietFragment
       }
     }
   }
-  ${Fragments.DietFragment}
-  ${Fragments.ErrorFragment}
+  ${Fragments.dietFragment}
+  ${Fragments.errorFragment}
 `
 
-export const UPDATE_ALLERGY_PREFERENCES = gql`
+export const updateAllergyPreferences = gql`
   mutation UpdateAllergyPreferences($allergyPreferences: AllergyPreferenceDetails!) {
     updateAllergyPreferences(allergyPreferenceDetails: $allergyPreferences) {
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
       data {
         ...AllergyFragment
       }
     }
   }
-  ${Fragments.AllergyFragment}
-  ${Fragments.ErrorFragment}
+  ${Fragments.allergyFragment}
+  ${Fragments.errorFragment}
 `
 
-export const REMOVE_ALLERGY_PREFERENCES = gql`
+export const removeAllergyPreferences = gql`
   mutation RemoveAllergyPreferences($allergyPreferences: AllergyPreferenceDetails!) {
     removeAllergyPreferences(allergyPreferenceDetails: $allergyPreferences) {
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
       data {
         ...AllergyFragment
       }
     }
   }
-  ${Fragments.AllergyFragment}
-  ${Fragments.ErrorFragment}
+  ${Fragments.allergyFragment}
+  ${Fragments.errorFragment}
 `
 
-export const UPDATE_PROFILE_VISIBILITY = gql`
+export const updateProfileVisibility = gql`
   mutation UpdateProfileVisibility($profileVisibilityDetails: ProfileVisibilityDetails!) {
     updateProfileVisibility(profileVisibilityDetails: $profileVisibilityDetails) {
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
     }
   }
-  ${Fragments.ErrorFragment}
+  ${Fragments.errorFragment}
 `
 
-export const ADD_RECIPE_COMMENT = gql`
+export const addRecipeComment = gql`
   mutation AddRecipeComment($recipeId: String!, $comment: String!) {
     addComment(recipeId: $recipeId, comment: $comment) {
       data {
         ...RecipeCommentFragment
       }
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
     }
   }
-  ${Fragments.RecipeCommentFragment}
-  ${Fragments.ErrorFragment}
+  ${Fragments.recipeCommentFragment}
+  ${Fragments.errorFragment}
 `
 
-export const ADD_RECIPE_COMMENT_REPLY = gql`
+export const addRecipeCommentReply = gql`
   mutation AddRecipeCommentReply($commentId: String!, $comment: String!) {
     replyToComment(commentId: $commentId, comment: $comment) {
       data {
         ...RecipeCommentFragment
       }
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
     }
   }
-  ${Fragments.RecipeCommentFragment}
-  ${Fragments.ErrorFragment}
+  ${Fragments.recipeCommentFragment}
+  ${Fragments.errorFragment}
 `
 
-export const LIKE_RECIPE = gql`
+export const likeRecipe = gql`
   mutation LikeRecipe($recipeId: String!) {
     likeRecipe(recipeId: $recipeId) {
       data {
         ...RecipeFragment
       }
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
     }
   }
-  ${Fragments.RecipeFragment}
-  ${Fragments.ErrorFragment}
+  ${Fragments.recipeFragment}
+  ${Fragments.errorFragment}
 `
 
-export const UNLIKE_RECIPE = gql`
+export const unlikeRecipe = gql`
   mutation UnlikeRecipe($recipeId: String!) {
     unlikeRecipe(recipeId: $recipeId) {
       data {
         ...RecipeFragment
       }
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
     }
   }
-  ${Fragments.RecipeFragment}
-  ${Fragments.ErrorFragment}
+  ${Fragments.recipeFragment}
+  ${Fragments.errorFragment}
 `
 
-export const LIKE_COMMENT = gql`
+export const likeComment = gql`
   mutation LikeComment($commentId: String!) {
     likeComment(commentId: $commentId) {
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
     }
   }
-  ${Fragments.ErrorFragment}
+  ${Fragments.errorFragment}
 `
 
-export const UNLIKE_COMMENT = gql`
+export const unlikeComment = gql`
   mutation UnlikeComment($commentId: String!) {
     unlikeComment(commentId: $commentId) {
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
     }
   }
-  ${Fragments.ErrorFragment}
+  ${Fragments.errorFragment}
 `
 
-export const DELETE_COMMENT = gql`
+export const deleteComment = gql`
   mutation DeleteComment($commentId: String!) {
     deleteComment(commentId: $commentId) {
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
     }
   }
-  ${Fragments.ErrorFragment}
+  ${Fragments.errorFragment}
 `
 
-export const SAVE_RECIPE = gql`
+export const saveRecipe = gql`
   mutation SaveRecipe($recipeId: String!) {
     saveRecipe(recipeId: $recipeId) {
       data {
         ...RecipeFragment
       }
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
     }
   }
-  ${Fragments.RecipeFragment}
-  ${Fragments.ErrorFragment}
+  ${Fragments.recipeFragment}
+  ${Fragments.errorFragment}
 `
 
-export const UNSAVE_RECIPE = gql`
+export const unsaveRecipe = gql`
   mutation UnsaveRecipe($recipeId: String!) {
     unsaveRecipe(recipeId: $recipeId) {
       data {
         ...RecipeFragment
       }
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
     }
   }
-  ${Fragments.RecipeFragment}
-  ${Fragments.ErrorFragment}
+  ${Fragments.recipeFragment}
+  ${Fragments.errorFragment}
 `
 
-export const FOLLOW_USER = gql`
+export const followUser = gql`
   mutation FollowUser($userId: String!) {
     followUser(userId: $userId) {
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
       data {
-        ...UserFragment
+        ...userFragment
       }
     }
   }
-  ${Fragments.ErrorFragment}
-  ${Fragments.UserFragment}
+  ${Fragments.errorFragment}
+  ${Fragments.userFragment}
 `
 
-export const UNFOLLOW_USER = gql`
+export const unfollowUser = gql`
   mutation UnfollowUser($userId: String!) {
     unfollowUser(userId: $userId) {
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
       data {
-        ...UserFragment
+        ...userFragment
       }
     }
   }
-  ${Fragments.ErrorFragment}
-  ${Fragments.UserFragment}
+  ${Fragments.errorFragment}
+  ${Fragments.userFragment}
 `
 
-export const READ_NOTIFICATIONS = gql`
+export const readNotifications = gql`
   mutation ReadNotification($notificationId: String!) {
     readNotification(notificationId: $notificationId) {
       data {
         ...NotificationFragment
       }
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
     }
   }
-  ${Fragments.NotificationFragment}
-  ${Fragments.ErrorFragment}
+  ${Fragments.notificationFragment}
+  ${Fragments.errorFragment}
 `
 
-export const DELETE_RECIPE = gql`
+export const deleteRecipe = gql`
   mutation DeleteRecipe($recipeId: String!) {
     deleteRecipe(recipeId: $recipeId) {
       data {
         ...RecipeFragment
       }
       error {
-        ...ErrorFragment
+        ...errorFragment
       }
     }
   }
-  ${Fragments.RecipeFragment}
-  ${Fragments.ErrorFragment}
+  ${Fragments.recipeFragment}
+  ${Fragments.errorFragment}
 `

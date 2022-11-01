@@ -35,22 +35,24 @@ interface IRecipeCard {
  * Displays recipe details in a card format with heavy emphasis on the cover image.
  * Used for trending and news feed.
  */
-export const RecipeCard = ({ recipe, onPress }: IRecipeCard): ReactElement => (
-  <Card
-    appearance='filled'
-    style={styles.card}
-    header={() => (
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      <RecipeCardHeader {...recipe.submittedBy} />
-    )}
-    footer={() => (
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      <RecipeCardFooter {...recipe} />
-    )}
-    onPress={onPress}
-  >
-    <View style={styles.imageContainer}>
-      <Image style={styles.image} source={recipe.coverImage ? { uri: recipe.coverImage } : imageNotFound} />
-    </View>
-  </Card>
-)
+export function RecipeCard({ recipe, onPress }: IRecipeCard): ReactElement {
+  return (
+    <Card
+      appearance='filled'
+      style={styles.card}
+      header={() => (
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        <RecipeCardHeader {...recipe.submittedBy} />
+      )}
+      footer={() => (
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        <RecipeCardFooter {...recipe} />
+      )}
+      onPress={onPress}
+    >
+      <View style={styles.imageContainer}>
+        <Image style={styles.image} source={recipe.coverImage ? { uri: recipe.coverImage } : imageNotFound} />
+      </View>
+    </Card>
+  )
+}

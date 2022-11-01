@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 /**
  * Screen that displays a list of all ingredients for a recipe.
  */
-export const RecipeAllIngredients = (): ReactElement => {
+export function RecipeAllIngredients(): ReactElement {
   const route = useRoute<RouteProp<LoggedInRouteParams, 'RecipeAllIngredients'>>()
   const { ingredients, multiplier } = route.params
 

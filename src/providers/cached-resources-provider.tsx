@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /**
  * Author: Edward Jones
  */
-import React, { FC } from 'react'
+import React, { PropsWithChildren, useEffect, useState } from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import * as Font from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
@@ -12,13 +13,13 @@ import { Image, View } from 'react-native'
  * Hook that loads and provides loading state for cached resources, including fonts.
  */
 function useCachedResources() {
-  const [isLoadingComplete, setLoadingComplete] = React.useState(false)
+  const [isLoadingComplete, setLoadingComplete] = useState(false)
 
   // Load any resources or data that we need prior to rendering the app
-  React.useEffect(() => {
+  useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
-        SplashScreen.preventAutoHideAsync()
+        void SplashScreen.preventAutoHideAsync()
 
         // Load fonts
         await Font.loadAsync({
@@ -38,17 +39,17 @@ function useCachedResources() {
         })
       } finally {
         setLoadingComplete(true)
-        SplashScreen.hideAsync()
+        void SplashScreen.hideAsync()
       }
     }
 
-    loadResourcesAndDataAsync()
+    void loadResourcesAndDataAsync()
   }, [])
 
   return isLoadingComplete
 }
 
-export const CachedResourcesProvider: FC = ({ children }) => {
+export function CachedResourcesProvider({ children }: PropsWithChildren<object>) {
   const isLoadingComplete = useCachedResources()
   if (!isLoadingComplete) {
     return (

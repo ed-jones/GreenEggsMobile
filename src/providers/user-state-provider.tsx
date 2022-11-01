@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useState, FC, createContext, useEffect } from 'react'
+import React, { useState, createContext, useEffect, PropsWithChildren } from 'react'
 import { Me as MeQuery, Me_me_data } from '@greeneggs/types/graphql'
 import { useQuery } from '@apollo/client'
 import { Queries } from '@greeneggs/graphql'
@@ -9,6 +9,7 @@ import { Queries } from '@greeneggs/graphql'
 type Me = Me_me_data | undefined
 type SetMe = ((me: Me) => void) | undefined
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export const UserContext = createContext({
   me: undefined as Me,
   setMe: undefined as SetMe,
@@ -17,9 +18,9 @@ export const UserContext = createContext({
 /**
  * Provider that lets all child components access details about the current logged in user.
  */
-export const UserStateProvider: FC = ({ children }) => {
+export function UserStateProvider({ children }: PropsWithChildren<object>) {
   const [me, setMe] = useState<Me>()
-  const { data } = useQuery<MeQuery>(Queries.ME)
+  const { data } = useQuery<MeQuery>(Queries.getMe)
 
   useEffect(() => {
     setMe(data?.me.data ?? undefined)

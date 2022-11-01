@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC, useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { AlphabetType, Background, Icons, Input, LazyListAlpha, TopNavigation } from '@greeneggs/ui'
 import {
   Categories,
@@ -21,7 +21,7 @@ import { toTitleCase } from '@greeneggs/utils'
  * Screen with an infinite scrolling alphabetised list of categories that
  * can be selected and added to a new recipe.
  */
-export const PickCategory: FC = () => {
+export function PickCategory() {
   const [query, setQuery] = useState('')
   const { categoriesFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation()
@@ -55,7 +55,7 @@ export const PickCategory: FC = () => {
           </>
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
-        query={Queries.GET_CATEGORIES}
+        query={Queries.getCategories}
         ListFooterComponent={
           query.length > 0 ? (
             <Button style={{ marginHorizontal: 16, marginTop: 16 }} onPress={() => pick({ name: toTitleCase(query) })}>

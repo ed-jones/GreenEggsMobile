@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC, useContext } from 'react'
+import React, { PropsWithChildren, useContext } from 'react'
 import { ApolloClient, ApolloLink, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { createUploadLink } from 'apollo-upload-client'
@@ -11,7 +11,7 @@ import { AuthContext } from './auth-provider'
 /**
  * Provider that lets all child components use apollo queries and mutations.
  */
-export const GraphQLProvider: FC = ({ children }) => {
+export function GraphQLProvider({ children }: PropsWithChildren<object>) {
   const { token } = useContext(AuthContext)
 
   const authLink = setContext(() => ({

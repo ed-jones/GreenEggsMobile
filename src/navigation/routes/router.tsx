@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC, useState, ReactNode } from 'react'
+import React, { useState, ReactNode } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { useQuery } from '@apollo/client'
 import { Queries } from '@greeneggs/graphql'
@@ -18,7 +18,7 @@ enum SessionStates {
   LOGGED_OUT,
 }
 
-const SESSION_STATE_ROUTE_MAP: Record<SessionStates, ReactNode> = {
+const sessionStateRouteMap: Record<SessionStates, ReactNode> = {
   [SessionStates.LOADING]: <Stack.Screen name='Loading' component={LoadingScreen} />,
   [SessionStates.LOGGED_IN]: loggedInRoutes,
   [SessionStates.LOGGED_OUT]: loggedOutRoutes,
@@ -27,9 +27,9 @@ const SESSION_STATE_ROUTE_MAP: Record<SessionStates, ReactNode> = {
 /**
  * Component that switches the accessible routes based on session state.
  */
-export const Router: FC = () => {
+export function Router() {
   const [sessionState, setSessionState] = useState<SessionStates>(SessionStates.LOADING)
-  useQuery<Me>(Queries.ME, {
+  useQuery<Me>(Queries.getMe, {
     onCompleted: (data) =>
       data?.me.data ? setSessionState(SessionStates.LOGGED_IN) : setSessionState(SessionStates.LOGGED_OUT),
     onError: () => setSessionState(SessionStates.LOGGED_OUT),
@@ -37,7 +37,7 @@ export const Router: FC = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>{SESSION_STATE_ROUTE_MAP[sessionState]}</Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>{sessionStateRouteMap[sessionState]}</Stack.Navigator>
     </NavigationContainer>
   )
 }

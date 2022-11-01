@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { FC, useState } from 'react'
+import React, { useState } from 'react'
 import { Icon, Menu, MenuItem, Popover } from '@ui-kitten/components'
 import { View } from 'react-native'
 import { useMutation } from '@apollo/client'
@@ -17,18 +17,18 @@ interface RecipeMoreButtonProps {
  * More icon that opens a context menu with options for that recipe.
  * Includes delete. In the future could include edit and privacy options.
  */
-export const RecipeMoreButton: FC<RecipeMoreButtonProps> = ({ recipeId }) => {
+export function RecipeMoreButton({ recipeId }: RecipeMoreButtonProps) {
   const [visible, setVisible] = useState(false)
   const navigation = useNavigation()
-  const [deleteRecipe] = useMutation<DeleteRecipe>(Mutations.DELETE_RECIPE, {
+  const [deleteRecipe] = useMutation<DeleteRecipe>(Mutations.deleteRecipe, {
     variables: {
       recipeId,
     },
-    refetchQueries: [Queries.ME, 'me'],
+    refetchQueries: [Queries.getMe, 'me'],
   })
 
   function handleDeleteRecipe() {
-    deleteRecipe()
+    void deleteRecipe()
     navigation.goBack()
   }
 

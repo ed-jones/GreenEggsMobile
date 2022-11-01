@@ -3,7 +3,12 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:@typescript-eslint/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -19,11 +24,16 @@
     "@typescript-eslint/no-explicit-any": "error",
     "no-console": "warn",
     "react/prop-types": "off",
+    "camelcase": "off",
     "@typescript-eslint/naming-convention": [
-      "warn",
+      "error",
       {
         "selector": "function",
         "format": ["PascalCase", "camelCase"]
+      },
+      {
+        "selector": "variable",
+        "format": ["camelCase"]
       }
     ]
   }

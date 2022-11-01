@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 })
 
 const useEditProfile = () =>
-  useForm<ProfileDetails, editProfile, editProfileVariables>(Mutations.EDIT_PROFILE, 'profileDetails')
+  useForm<ProfileDetails, editProfile, editProfileVariables>(Mutations.editProfile, 'profileDetails')
 
 /**
  * Screen that lets a user edit their basic profile details,
@@ -38,7 +38,7 @@ const useEditProfile = () =>
 export function EditProfile(): ReactElement {
   const form = useEditProfile()
   const navigation = useNavigation()
-  const { loading, error, data } = useQuery<Me>(Queries.ME)
+  const { loading, error, data } = useQuery<Me>(Queries.getMe)
 
   if (loading) return <LoadingScreen />
   if (error) {
@@ -46,7 +46,7 @@ export function EditProfile(): ReactElement {
   }
 
   function onSubmit() {
-    form.submitForm().then(() => {
+    void form.submitForm().then(() => {
       navigation.goBack()
     })
   }
@@ -102,7 +102,7 @@ export function EditProfile(): ReactElement {
         />
         <Button
           accessoryRight={form.formResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Save}
-          onPress={form.handleSubmit(onSubmit)}
+          onPress={() => void form.handleSubmit(onSubmit)}
         >
           SAVE CHANGES
         </Button>

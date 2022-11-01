@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC, useState } from 'react'
+import React, { useState } from 'react'
 import { Icon, TopNavigationAction } from '@ui-kitten/components'
 import { useMutation } from '@apollo/client'
 import { Mutations, Queries } from '@greeneggs/graphql'
@@ -14,17 +14,17 @@ interface SaveRecipeButtonProps {
 /**
  * Icon button that when pressed triggers the recipe to be saved. Uses local state to improve responsiveness.
  */
-export const SaveRecipeButton: FC<SaveRecipeButtonProps> = ({ recipeId, saved }) => {
+export function SaveRecipeButton({ recipeId, saved }: SaveRecipeButtonProps) {
   const [savedState, setSavedState] = useState(saved)
 
-  const [saveRecipe] = useMutation(Mutations.SAVE_RECIPE, {
+  const [saveRecipe] = useMutation(Mutations.saveRecipe, {
     variables: { recipeId },
-    refetchQueries: [Queries.GET_RECIPE, 'recipe', Queries.GET_SAVED_RECIPES],
+    refetchQueries: [Queries.getRecipe, 'recipe', Queries.getSavedRecipes],
   })
 
-  const [unsaveRecipe] = useMutation(Mutations.UNSAVE_RECIPE, {
+  const [unsaveRecipe] = useMutation(Mutations.unsaveRecipe, {
     variables: { recipeId },
-    refetchQueries: [Queries.GET_RECIPE, 'recipe', Queries.GET_SAVED_RECIPES],
+    refetchQueries: [Queries.getRecipe, 'recipe', Queries.getSavedRecipes],
   })
 
   function handleSaveRecipe() {

@@ -27,7 +27,7 @@ function stringifyAllergies(allergies: recipe_recipe_data_allergies[]) {
 /**
  * Screen that displays a callout if a recipe might trigger certain allergies.
  */
-export const RecipeAllergies = ({ allergies }: IRecipeAllergies): ReactElement => {
+export function RecipeAllergies({ allergies }: IRecipeAllergies): ReactElement {
   if (allergies.length > 0)
     return (
       <Callout
@@ -38,9 +38,6 @@ export const RecipeAllergies = ({ allergies }: IRecipeAllergies): ReactElement =
             <Text style={{ fontWeight: 'bold' }}>{stringifyAllergies(allergies)}</Text>
           </Text>
         }
-        // message={`This recipe is unsuitable for those with allergies to${allergies.map(
-        //   (allergy) => ` ${allergy.name.toLowerCase()}`
-        // )}.`}
       />
     )
   return <></>

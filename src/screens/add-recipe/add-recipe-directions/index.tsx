@@ -20,7 +20,7 @@ interface IAddRecipeDirections {
 /**
  * Screen that displays a list of all steps that will be added to a recipe.
  */
-export const AddRecipeDirections = ({ form }: IAddRecipeDirections): ReactElement => {
+export function AddRecipeDirections({ form }: IAddRecipeDirections): ReactElement {
   const { stepsFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation<LoggedInNavigationProp>()
 
@@ -47,7 +47,7 @@ export const AddRecipeDirections = ({ form }: IAddRecipeDirections): ReactElemen
               <>
                 <Image
                   source={{
-                    uri: item.image && (item.image as ImageInfo).uri,
+                    uri: (item.image as ImageInfo).uri,
                   }}
                   style={{ width: 48, height: 48 }}
                 />

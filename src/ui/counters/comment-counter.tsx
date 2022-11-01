@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC } from 'react'
+import React from 'react'
 import { recipes_recipes_data_comments } from '@greeneggs/types/graphql'
 import { useNavigation } from '@react-navigation/core'
 import { LabelledIcon } from '../labelled-icon'
@@ -15,7 +15,7 @@ interface CommentCounterProps {
 /**
  * Displays the number of comments on a post, and links to the list of comments
  */
-export const CommentCounter: FC<CommentCounterProps> = ({ commentCount, comments }) => {
+export function CommentCounter({ commentCount, comments }: CommentCounterProps) {
   const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (

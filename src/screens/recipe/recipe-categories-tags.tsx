@@ -14,7 +14,7 @@ interface IRecipeCategoriesTags {
 /**
  * Component that displays a horizontal scrolling list of categories in the form of tags.
  */
-export const RecipeCategoriesTags = ({ categories }: IRecipeCategoriesTags): ReactElement => {
+export function RecipeCategoriesTags({ categories }: IRecipeCategoriesTags): ReactElement {
   const navigation = useNavigation<LoggedInNavigationProp>()
   return (
     <Tags

@@ -1,7 +1,7 @@
 /**
  * Author: Victor Ying
  */
-import React, { FC, useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Queries } from '@greeneggs/graphql'
 import { Divider } from '@ui-kitten/components'
 import {
@@ -30,7 +30,7 @@ import { View } from 'react-native'
 /**
  * Screen for filtering out ingredients from a search
  */
-export const FilterIngredientsExcluded: FC = () => {
+export function FilterIngredientsExcluded() {
   const navigation = useNavigation()
   const [query, setQuery] = useState('')
   const { searchState, setSearchState } = useContext(SearchContext)
@@ -80,7 +80,7 @@ export const FilterIngredientsExcluded: FC = () => {
           </>
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
-        query={Queries.GET_INGREDIENTS}
+        query={Queries.getIngredients}
         contentContainerStyle={{ flexGrow: 1 }}
         ListEmptyComponent={
           <View style={{ flexGrow: 1, justifyContent: 'center' }}>

@@ -19,7 +19,7 @@ export const partialValidate = <InputType extends FieldValues>({
   register,
   onValid,
 }: IValidate<InputType>): void => {
-  form.trigger(validate).then((isValid) => {
+  void form.trigger(validate).then((isValid) => {
     if (isValid) {
       form.register(register, {
         value: form.getValues(register),

@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NotFoundScreen, AddRecipe, Home, MyProfile, SavedRecipes, Notifications } from '../screens'
 import { BottomTabBar } from './bottom-tab-bar'
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const { Navigator, Screen } = createBottomTabNavigator()
 
 export type BottomTabRouteParams = {

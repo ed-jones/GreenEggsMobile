@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 /**
  * Screen for displaying a recipe's complete description and recipe upload date.
  */
-export const RecipeDescription = () => {
+export function RecipeDescription() {
   const route = useRoute<RouteProp<LoggedInRouteParams, 'RecipeDescription'>>()
   const { description, createdAt, title, submittedBy } = route.params
 

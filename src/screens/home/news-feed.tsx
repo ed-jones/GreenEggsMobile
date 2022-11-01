@@ -15,16 +15,16 @@ import { Background, LazyList, RecipeCard } from '@greeneggs/ui'
 import { useNavigation } from '@react-navigation/native'
 import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
-const CardVerticalMargin = 20
-const CardHorizontalMargin = 24
+const cardVerticalMargin = 20
+const cardHorizontalMargin = 24
 
 const styles = StyleSheet.create({
   firstCard: {
-    marginTop: CardVerticalMargin,
+    marginTop: cardVerticalMargin,
   },
   card: {
-    marginBottom: CardVerticalMargin,
-    marginHorizontal: CardHorizontalMargin,
+    marginBottom: cardVerticalMargin,
+    marginHorizontal: cardHorizontalMargin,
   },
 })
 
@@ -37,7 +37,7 @@ export function NewsFeed(): ReactElement {
     <Background>
       <LazyList<NewsFeedType, NewsFeedVariables, NewsFeed_newsFeed_data, Sort, RecipeFilter>
         limit={4}
-        query={Queries.NEWS_FEED}
+        query={Queries.getNewsFeed}
         variables={{}}
         dataKey='newsFeed'
         emptyMessage='Try following some users to see their latest recipes.'

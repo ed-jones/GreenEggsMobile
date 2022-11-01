@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC } from 'react'
+import React from 'react'
 import { Queries } from '@greeneggs/graphql'
 import {
   RecipeFilter,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 /**
  * Displays an infinite scrolling list of categories that are important enough to have an associated image.
  */
-const CategoryWithImage: FC<CategoryWithImageProps> = ({ name, coverImage, onPress }) => {
+function CategoryWithImage({ name, coverImage, onPress }: CategoryWithImageProps) {
   return (
     <Pressable
       onPress={onPress}
@@ -65,7 +65,7 @@ const CategoryWithImage: FC<CategoryWithImageProps> = ({ name, coverImage, onPre
   )
 }
 
-export const Categories: FC = () => {
+export function Categories() {
   const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (
@@ -83,7 +83,7 @@ export const Categories: FC = () => {
             VIEW ALL
           </Button>
         }
-        query={Queries.GET_CATEGORIES_WITH_IMAGES}
+        query={Queries.getCategoriesWithImages}
         variables={{
           query: '',
         }}

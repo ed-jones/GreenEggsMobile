@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useState, FC, createContext, useEffect } from 'react'
+import React, { useState, createContext, useEffect, PropsWithChildren } from 'react'
 import { NotificationCount } from '@greeneggs/types/graphql'
 import { ApolloQueryResult, OperationVariables, useQuery } from '@apollo/client'
 import { Queries } from '@greeneggs/graphql'
@@ -22,6 +22,7 @@ export interface NotificationContextInterface {
   ) => Promise<ApolloQueryResult<NotificationCount>>
 }
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export const NotificationContext = createContext<NotificationContextInterface>({
   notificationState: defaultNotificationState,
   setNotificationState: undefined,
@@ -31,10 +32,10 @@ export const NotificationContext = createContext<NotificationContextInterface>({
 /**
  * Provider that lets all child components access the notification state
  */
-export const NotificationStateProvider: FC = ({ children }) => {
+export function NotificationStateProvider({ children }: PropsWithChildren<object>) {
   const [notificationState, setNotificationState] = useState<NotificationState>(defaultNotificationState)
 
-  const { data, refetch: refetchNotificationState } = useQuery<NotificationCount>(Queries.GET_NOTIFICATION_COUNT, {
+  const { data, refetch: refetchNotificationState } = useQuery<NotificationCount>(Queries.getNotificationCount, {
     pollInterval: 10000,
   })
 

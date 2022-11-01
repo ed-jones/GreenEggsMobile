@@ -8,10 +8,9 @@ import {
   BottomNavigation,
   BottomNavigationTab,
   Icon,
-  ThemedComponentProps,
-  withStyles,
   BottomNavigationTabProps,
   Divider,
+  useTheme,
 } from '@ui-kitten/components'
 import Svg, { Circle } from 'react-native-svg'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -48,56 +47,37 @@ interface IBottonNavigationIcon {
 /**
  * Component for the bottom tab bar. Includes home, saved recipes, create recipe, notifications and profile.
  */
-const BottomNavigationIcon = withStyles(
-  ({ name, iconStyle, eva, selected, ...rest }: IBottonNavigationIcon & ThemedComponentProps) => {
-    const iconName = `${name}${!selected ? '-outline' : ''}`
-    if (iconStyle === IconStyle.Primary) {
-      return (
-        <View style={{ marginTop: -16 }}>
-          <Svg
-            height='72'
-            width='72'
-            style={{
-              position: 'absolute',
-              marginLeft: -4,
-              marginTop: -4,
-            }}
-          >
-            <Circle
-              cx='36'
-              cy='36'
-              r='36'
-              fill={
-                selected ? eva?.theme && eva.theme['color-primary-500'] : eva?.theme && eva.theme['color-success-500']
-              }
-            />
-          </Svg>
-          <Icon
-            {...rest}
-            name={iconName}
-            style={styles.primary}
-            fill={selected ? 'white' : eva?.theme && eva.theme['color-primary-500']}
-          />
-        </View>
-      )
-    } else {
-      return (
-        <Icon
-          {...rest}
-          style={styles[iconStyle]}
-          name={iconName}
-          fill={eva?.theme && eva.theme['text-primary-color']}
-        />
-      )
-    }
+function BottomNavigationIcon({ name, iconStyle, selected, ...rest }: IBottonNavigationIcon) {
+  const theme = useTheme()
+  const iconName = `${name}${!selected ? '-outline' : ''}`
+  if (iconStyle === IconStyle.Primary) {
+    return (
+      <View style={{ marginTop: -16 }}>
+        <Svg
+          height='72'
+          width='72'
+          style={{
+            position: 'absolute',
+            marginLeft: -4,
+            marginTop: -4,
+          }}
+        >
+          <Circle cx='36' cy='36' r='36' fill={selected ? theme['color-primary-500'] : theme['color-success-500']} />
+        </Svg>
+        <Icon {...rest} name={iconName} style={styles.primary} fill={selected ? 'white' : theme['color-primary-500']} />
+      </View>
+    )
+  } else {
+    return <Icon {...rest} style={styles[iconStyle]} name={iconName} fill={theme['text-primary-color']} />
   }
-)
+}
 
 interface NotificationIconProps extends BottomNavigationTabProps {
   selected: boolean
 }
 
-const NotificationIcon = withStyles(({ selected, eva, ...props }: NotificationIconProps & ThemedComponentProps) => {
+function NotificationIcon({ selected, eva, ...props }: NotificationIconProps) {
+  const theme = useTheme()
   const {
     notificationState: { unreadCount },
   } = useContext(NotificationContext)
@@ -114,15 +94,15 @@ const NotificationIcon = withStyles(({ selected, eva, ...props }: NotificationIc
             marginTop: -4,
           }}
         >
-          <Circle cx='4' cy='4' r='4' fill={eva?.theme?.['color-primary-500']} />
+          <Circle cx='4' cy='4' r='4' fill={theme['color-primary-500']} />
         </Svg>
       )}
       <BottomNavigationIcon {...props} name='bell' iconStyle={IconStyle.Secondary} selected={selected} />
     </View>
   )
-})
+}
 
-export const BottomTabBar = ({ navigation, state }: BottomTabBarProps): ReactElement => {
+export function BottomTabBar({ navigation, state }: BottomTabBarProps): ReactElement {
   const insets = useSafeAreaInsets()
   const navigationState = navigation.getState()
   const {

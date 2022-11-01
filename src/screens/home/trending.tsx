@@ -15,16 +15,16 @@ import { useNavigation } from '@react-navigation/core'
 import { Background, LazyList, RecipeCard } from '@greeneggs/ui'
 import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
-const CardVerticalMargin = 20
-const CardHorizontalMargin = 24
+const cardVerticalMargin = 20
+const cardHorizontalMargin = 24
 
 const styles = StyleSheet.create({
   firstCard: {
-    marginTop: CardVerticalMargin,
+    marginTop: cardVerticalMargin,
   },
   card: {
-    marginBottom: CardVerticalMargin,
-    marginHorizontal: CardHorizontalMargin,
+    marginBottom: cardVerticalMargin,
+    marginHorizontal: cardHorizontalMargin,
   },
 })
 
@@ -37,7 +37,7 @@ export function Trending(): ReactElement {
     <Background>
       <LazyList<TrendingType, TrendingVariables, Trending_trending_data, Sort, RecipeFilter>
         limit={4}
-        query={Queries.TRENDING}
+        query={Queries.getTrending}
         variables={{}}
         dataKey='trending'
         emptyMessage='There are no trending recipes! This means nobody has uploaded a recipe for a while.'

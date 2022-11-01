@@ -18,7 +18,7 @@ interface Option {
   title: string
   value: Privacy
 }
-const Options: Option[] = [
+const options: Option[] = [
   { title: 'EVERYONE', value: Privacy.PUBLIC },
   { title: 'FRIENDS', value: Privacy.FRIENDS },
   { title: 'ONLY ME', value: Privacy.PRIVATE },
@@ -27,25 +27,20 @@ const Options: Option[] = [
 /**
  * Input component for selecting a privacy option
  */
-export const PrivacySelect = ({
-  label,
-  caption,
-  value,
-  onChange,
-  placeholder,
-  error,
-}: IPrivacySelect): ReactElement => (
-  <Select
-    status={error ? 'danger' : undefined}
-    value={Options.find((option) => option.value === value)?.title || placeholder || 'SELECT OPTION'}
-    style={{ marginBottom: 16 }}
-    selectedIndex={new IndexPath(Options.findIndex((option) => option.value === value))}
-    onSelect={(index) => (!Array.isArray(index) ? onChange(Options[index.row].value) : undefined)}
-    label={label}
-    caption={error?.message || caption}
-  >
-    {Options.map((option) => (
-      <SelectItem title={option.title} key={option.title} />
-    ))}
-  </Select>
-)
+export function PrivacySelect({ label, caption, value, onChange, placeholder, error }: IPrivacySelect): ReactElement {
+  return (
+    <Select
+      status={error ? 'danger' : undefined}
+      value={options.find((option) => option.value === value)?.title || placeholder || 'SELECT OPTION'}
+      style={{ marginBottom: 16 }}
+      selectedIndex={new IndexPath(options.findIndex((option) => option.value === value))}
+      onSelect={(index) => (!Array.isArray(index) ? onChange(options[index.row].value) : undefined)}
+      label={label}
+      caption={error?.message || caption}
+    >
+      {options.map((option) => (
+        <SelectItem title={option.title} key={option.title} />
+      ))}
+    </Select>
+  )
+}

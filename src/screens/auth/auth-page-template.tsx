@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import { View, StyleSheet, ImageBackground, Image, ScrollView } from 'react-native'
-import { Text, withStyles, ThemedComponentProps } from '@ui-kitten/components'
+import { Text, useTheme } from '@ui-kitten/components'
 import { LinearGradient } from 'expo-linear-gradient'
 import { StatusBar } from 'expo-status-bar'
 import { TopNavigation, Background, Callout } from '@greeneggs/ui'
@@ -61,8 +61,9 @@ interface IAuthPageTemplateProps {
  * Template screen for all authentication screens.
  * Shows the brand logo and background, followed by a form.
  */
-export const AuthPageTemplate = withStyles(
-  ({ message, errorMessage, children, eva }: IAuthPageTemplateProps & ThemedComponentProps) => (
+export function AuthPageTemplate({ message, errorMessage, children }: IAuthPageTemplateProps) {
+  const theme = useTheme()
+  return (
     <Background>
       <StatusBar style='dark' />
       <View style={styles.bannerContainer}>
@@ -81,7 +82,7 @@ export const AuthPageTemplate = withStyles(
       <ScrollView
         style={{
           paddingHorizontal: 10,
-          backgroundColor: eva?.theme && eva.theme['color-basic-200'],
+          backgroundColor: theme['color-basic-200'],
         }}
       >
         {errorMessage && <Callout message={errorMessage} type='danger' style={{ marginVertical: 16 }} />}
@@ -89,4 +90,4 @@ export const AuthPageTemplate = withStyles(
       </ScrollView>
     </Background>
   )
-)
+}

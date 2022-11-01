@@ -36,7 +36,7 @@ export function useForm<
   const reactHookForm = useReactHookForm<InputType>(reactHookFormProps)
 
   const variables = {
-    [mutationVariableName]: reactHookForm.getValues() as InputType,
+    [mutationVariableName]: reactHookForm.getValues() ,
   } as MutationVariables
   const [submitForm, formResult] = useMutation<MutationType, MutationVariables>(Mutation, {
     variables,

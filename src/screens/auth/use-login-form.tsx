@@ -9,4 +9,4 @@ import { Mutations } from '@greeneggs/graphql'
  * Hook that sets up a login form with our custom useForm hook
  */
 export const useLoginForm = (): IForm<LoginInput, login, loginVariables> =>
-  useForm<LoginInput, login, loginVariables>(Mutations.LOGIN, 'loginDetails')
+  useForm<LoginInput, login, loginVariables>(Mutations.login, 'loginDetails')

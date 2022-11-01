@@ -13,7 +13,7 @@ import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-r
  * Screen that shows a list of all allergies that will
  * be added to a recipe.
  */
-export const AddRecipeAllergies = (): ReactElement => {
+export function AddRecipeAllergies(): ReactElement {
   const { allergiesFieldArray } = useContext(AddRecipeContext)
 
   const navigation = useNavigation<LoggedInNavigationProp>()

@@ -66,7 +66,7 @@ export function Recipe() {
   if (!recipeId) throw new Error('Recipe ID not found')
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(new IndexPath(0))
   const { me } = useContext(UserContext)
-  const { loading, error, data } = useQuery<recipe, recipeVariables>(Queries.GET_RECIPE, {
+  const { loading, error, data } = useQuery<recipe, recipeVariables>(Queries.getRecipe, {
     variables: { recipeId },
     onCompleted: (data) => setSelectedIndex(new IndexPath((data.recipe.data?.servingCount ?? 0) - 1)),
   })

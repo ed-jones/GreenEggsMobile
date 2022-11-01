@@ -22,7 +22,7 @@ interface ICreateRecipePartTemplate {
 /**
  * Template for screens that allow for the creation of array elements in a recipe, i.e. single ingredients, categories, allergies, diets.
  */
-export const CreateRecipePartTemplate = ({ title, formComponent }: ICreateRecipePartTemplate): ReactElement => {
+export function CreateRecipePartTemplate({ title, formComponent }: ICreateRecipePartTemplate): ReactElement {
   const navigation = useNavigation()
   const route = useRoute()
   const { append } = route.params as {
@@ -32,7 +32,7 @@ export const CreateRecipePartTemplate = ({ title, formComponent }: ICreateRecipe
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
-        goBack()
+        void goBack()
         return true
       }
 

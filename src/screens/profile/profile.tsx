@@ -9,7 +9,7 @@ import { GenericProfile } from './generic-profile'
 /**
  * Screen for displaying the profile details for a user (not the currently logged in user).
  */
-export const Profile = (): ReactElement => {
+export function Profile(): ReactElement {
   const route = useRoute<RouteProp<LoggedInRouteParams, 'Profile'>>()
   const { userId } = route.params
 

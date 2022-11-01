@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC } from 'react'
+import React from 'react'
 import { recipes_recipes_data } from '@greeneggs/types/graphql'
 import { Card, Text } from '@ui-kitten/components'
 import { View, StyleSheet, Image } from 'react-native'
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
 })
 
-interface IRecipeCardSmall {
+interface RecipeCardSmallProps {
   recipe: recipes_recipes_data
   onPress: () => void
 }
@@ -44,7 +44,7 @@ interface IRecipeCardSmall {
  * Displays recipes in a more compact form.
  * Designed to be used outside of trending and news feed.
  */
-export const RecipeCardSmall: FC<IRecipeCardSmall> = ({ recipe, onPress }) => {
+export function RecipeCardSmall({ recipe, onPress }: RecipeCardSmallProps) {
   return (
     <Card appearance='filled' style={styles.card} onPress={onPress}>
       <View style={styles.cardContents}>

@@ -2,7 +2,7 @@
  * Author: Edward Jones
  * Based on code from the react-navigation bottom tabs library
  */
-import React, { FC, useEffect, useState } from 'react'
+import React, { PropsWithChildren, useEffect, useState } from 'react'
 import { Animated, Platform } from 'react-native'
 import useIsKeyboardShown from '@react-navigation/bottom-tabs/src/utils/useIsKeyboardShown'
 
@@ -12,7 +12,7 @@ const useNativeDriver = Platform.OS !== 'web'
  * Component that forces children to be hidden when the device keyboard is visible.
  * Children will be animated to slide down in order to prevent flashing.
  */
-export const HideOnKeyboard: FC = ({ children }) => {
+export function HideOnKeyboard({ children }: PropsWithChildren<object>) {
   const isKeyboardShown = useIsKeyboardShown()
 
   const shouldShowTabBar = !isKeyboardShown

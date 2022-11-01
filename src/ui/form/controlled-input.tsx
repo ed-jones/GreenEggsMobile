@@ -34,7 +34,7 @@ export interface IControlledInput<TFieldValues extends FieldValues> {
 }
 
 // This object exists in order to reuse common form validation rules
-export const Rules: Record<string, Omit<RegisterOptions, 'valueAsNumber' | 'valueAsDate' | 'setValueAs'>> = {
+export const rules: Record<string, Omit<RegisterOptions, 'valueAsNumber' | 'valueAsDate' | 'setValueAs'>> = {
   REQUIRED: { required: { value: true, message: 'This field is required' } },
   UNDER100CHARS: {
     maxLength: { value: 100, message: 'Must be under 100 characters' },
@@ -51,105 +51,107 @@ interface IInputTypeDefaultProps<TFieldValues extends FieldValues> {
 // This object stores the default props associated with each input type
 // These values can be overwritten
 // Example props include form validation rules for emails and passwords
-const InputTypeDefaultProps = <TFieldValues extends FieldValues>(): Record<
+function InputTypeDefaultProps<TFieldValues extends FieldValues>(): Record<
   InputType,
   IInputTypeDefaultProps<TFieldValues>
-> => ({
-  Email: {
-    inputProps: {
-      label: 'EMAIL',
-      textContentType: 'emailAddress',
-      autoComplete: 'email',
-      autoCapitalize: 'none',
-      keyboardType: 'email-address',
-      placeholder: 'johnsmith@example.com',
-    },
-    controllerProps: {
-      rules: {
-        ...Rules.REQUIRED,
-        ...Rules.UNDER100CHARS,
-        pattern: {
-          value:
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-          message: 'Not an email address',
+> {
+  return {
+    Email: {
+      inputProps: {
+        label: 'EMAIL',
+        textContentType: 'emailAddress',
+        autoComplete: 'email',
+        autoCapitalize: 'none',
+        keyboardType: 'email-address',
+        placeholder: 'johnsmith@example.com',
+      },
+      controllerProps: {
+        rules: {
+          ...rules.REQUIRED,
+          ...rules.UNDER100CHARS,
+          pattern: {
+            value:
+              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            message: 'Not an email address',
+          },
         },
       },
     },
-  },
-  Text: {},
-  TextArea: {},
-  Photo: {},
-  Password: {
-    inputProps: {
-      label: 'PASSWORD',
-      textContentType: 'password',
-      autoComplete: 'password',
-      secureTextEntry: true,
-      placeholder: '**********',
-    },
-    controllerProps: {
-      rules: {
-        ...Rules.REQUIRED,
-        ...Rules.UNDER100CHARS,
-        pattern: {
-          value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
-          message:
-            'Password must contain at least 8 characters, upper and lowercase letters, a number and a special character.',
+    Text: {},
+    TextArea: {},
+    Photo: {},
+    Password: {
+      inputProps: {
+        label: 'PASSWORD',
+        textContentType: 'password',
+        autoComplete: 'password',
+        secureTextEntry: true,
+        placeholder: '**********',
+      },
+      controllerProps: {
+        rules: {
+          ...rules.REQUIRED,
+          ...rules.UNDER100CHARS,
+          pattern: {
+            value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
+            message:
+              'Password must contain at least 8 characters, upper and lowercase letters, a number and a special character.',
+          },
+          minLength: { value: 4, message: 'Must be over 4 characters' },
         },
-        minLength: { value: 4, message: 'Must be over 4 characters' },
       },
     },
-  },
-  FirstName: {
-    controllerProps: {
-      rules: {
-        ...Rules.REQUIRED,
-        ...Rules.UNDER100CHARS,
+    FirstName: {
+      controllerProps: {
+        rules: {
+          ...rules.REQUIRED,
+          ...rules.UNDER100CHARS,
+        },
+      },
+      inputProps: {
+        textContentType: 'givenName',
+        autoComplete: 'name',
+        autoCapitalize: 'words',
+        placeholder: 'John',
       },
     },
-    inputProps: {
-      textContentType: 'givenName',
-      autoComplete: 'name',
-      autoCapitalize: 'words',
-      placeholder: 'John',
-    },
-  },
-  LastName: {
-    controllerProps: {
-      rules: {
-        ...Rules.REQUIRED,
-        ...Rules.UNDER100CHARS,
+    LastName: {
+      controllerProps: {
+        rules: {
+          ...rules.REQUIRED,
+          ...rules.UNDER100CHARS,
+        },
+      },
+      inputProps: {
+        textContentType: 'familyName',
+        autoComplete: 'name',
+        autoCapitalize: 'words',
+        placeholder: 'Smith',
       },
     },
-    inputProps: {
-      textContentType: 'familyName',
-      autoComplete: 'name',
-      autoCapitalize: 'words',
-      placeholder: 'Smith',
+    Numeric: {
+      inputProps: {
+        keyboardType: 'numeric',
+      },
     },
-  },
-  Numeric: {
-    inputProps: {
-      keyboardType: 'numeric',
+    Privacy: {},
+    Time: {
+      inputProps: {
+        keyboardType: 'numeric',
+      },
     },
-  },
-  Privacy: {},
-  Time: {
-    inputProps: {
-      keyboardType: 'numeric',
-    },
-  },
-})
+  }
+}
 
 /**
  * Generic component that renders an input component controlled and validated with react-hook-form
  */
-export const ControlledInput = <TFieldValues extends FieldValues>({
+export function ControlledInput<TFieldValues extends FieldValues>({
   controllerProps,
   inputProps,
   type,
   submitError,
-}: IControlledInput<TFieldValues>): ReactElement => {
+}: IControlledInput<TFieldValues>): ReactElement {
   const inputTypeDefaultProps = InputTypeDefaultProps<TFieldValues>()[type]
   const { caption, ...unionInputProps } = {
     ...inputTypeDefaultProps.inputProps,

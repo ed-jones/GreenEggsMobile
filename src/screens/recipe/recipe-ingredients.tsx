@@ -18,11 +18,11 @@ interface IRecipeIngredients {
 /**
  * Component for displaying an abbreviated list of ingredients, with the option to view more in a new screen.
  */
-export const RecipeIngredients = ({
+export function RecipeIngredients({
   ingredients,
   servingCount,
   defaultServingCount,
-}: IRecipeIngredients): ReactElement => {
+}: IRecipeIngredients): ReactElement {
   const navigation = useNavigation<LoggedInNavigationProp>()
   let multiplier = 1
   if (servingCount && defaultServingCount) {

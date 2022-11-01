@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC, useState } from 'react'
+import React, { useState } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/core'
 import { Queries } from '@greeneggs/graphql'
 import { recipes, recipesVariables, recipes_recipes_data, Sort, RecipeFilter } from '@greeneggs/types/graphql'
@@ -12,7 +12,7 @@ import { LoggedInNavigationProp, LoggedInRouteParams } from '@greeneggs/navigati
 /**
  * Screen that shows an infinite scrolling list of recipes for a given category.
  */
-export const Category: FC = () => {
+export function Category() {
   const {
     params: { categoryId, categoryName },
   } = useRoute<RouteProp<LoggedInRouteParams, 'Category'>>()
@@ -32,7 +32,7 @@ export const Category: FC = () => {
       />
       <LazyList<recipes, recipesVariables, recipes_recipes_data, Sort, RecipeFilter>
         limit={15}
-        query={Queries.GET_RECIPES}
+        query={Queries.getRecipes}
         variables={{
           query,
           sort: Sort.RELEVANT,

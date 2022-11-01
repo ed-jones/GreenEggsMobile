@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC, useState } from 'react'
+import React, { useState } from 'react'
 import { LabelledIcon, LabelledIconProps } from '../labelled-icon'
 
 interface LikeCounterProps {
@@ -22,7 +22,7 @@ enum LikeCounterStates {
  * Abstract component that displays number of likes and allows for liking of something.
  * Uses local state for better responsiveness.
  */
-export const LikeCounter: FC<LikeCounterProps> = ({ likeCount, liked, onLike, onUnlike, disabled }) => {
+export function LikeCounter({ likeCount, liked, onLike, onUnlike, disabled }: LikeCounterProps) {
   // Use local state for instant feedback on slow networks
   const [likeCounterState, setLikeCounterState] = useState(
     disabled ? LikeCounterStates.DISABLED : liked ? LikeCounterStates.LIKED : LikeCounterStates.NOT_LIKED
@@ -49,10 +49,7 @@ export const LikeCounter: FC<LikeCounterProps> = ({ likeCount, liked, onLike, on
     })
   }
 
-  const LIKE_COUNTER_STATE_PROP_MAP: Record<
-    LikeCounterStates,
-    Pick<LabelledIconProps, 'iconName' | 'fill' | 'onPress'>
-  > = {
+  const likeCounterStatePropMap: Record<LikeCounterStates, Pick<LabelledIconProps, 'iconName' | 'fill' | 'onPress'>> = {
     [LikeCounterStates.LIKED]: {
       iconName: 'heart',
       fill: 'red',
@@ -69,5 +66,5 @@ export const LikeCounter: FC<LikeCounterProps> = ({ likeCount, liked, onLike, on
     },
   }
 
-  return <LabelledIcon label={String(likeCountState)} {...LIKE_COUNTER_STATE_PROP_MAP[likeCounterState]} />
+  return <LabelledIcon label={String(likeCountState)} {...likeCounterStatePropMap[likeCounterState]} />
 }

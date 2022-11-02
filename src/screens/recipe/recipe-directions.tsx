@@ -3,10 +3,11 @@
  */
 import React, { ReactElement } from 'react'
 import { recipe_recipe_data_steps } from '@greeneggs/types/graphql'
-import { Card, Text } from '@ui-kitten/components'
-import { Dimensions, View, Image } from 'react-native'
-// import Carousel from 'react-native-snap-carousel'
+import { ListItem } from '@ui-kitten/components'
+import { Image, Text, View } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { Forward } from '@greeneggs/ui/icons'
 
 interface IRecipeDirections {
   directions: recipe_recipe_data_steps[]
@@ -15,49 +16,27 @@ interface IRecipeDirections {
 /**
  * Carousel for displaying recipe steps.
  */
-// TODO: Replace `react-native-snap-carousel` with another library
 export function RecipeDirections({ directions }: IRecipeDirections): ReactElement {
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (
     <View style={{ marginHorizontal: -16 }}>
-      {/* <Carousel
-              sliderWidth={Dimensions.get('window').width}
-              itemWidth={Dimensions.get('window').width * 0.8}
-              data={directions}
-              renderItem={({ item }) => (
-                <Card
-                  onPress={() =>
-                    navigation.navigate('RecipeDirectionExpanded', {
-                      direction: item,
-                    })
-                  }
-                  header={
-                    item.image !== null
-                      ? () => (
-                          <Image
-                            style={{
-                              height: undefined,
-                              width: '100%',
-                              aspectRatio: 1 / 1,
-                            }}
-                            source={{
-                              uri: item.image,
-                            }}
-                          />
-                        )
-                      : undefined
-                  }
-                  footer={() => (
-                    <Text numberOfLines={2} style={{ margin: 16 }}>
-                      {item.description}
-                    </Text>
-                  )}
-                >
-                  <Text category='h6'>{item.title}</Text>
-                </Card>
-              )}
-            /> */}
+      {directions.map((direction) => (
+        <ListItem
+          key={direction.title}
+          onPress={() => navigation.navigate('RecipeDirectionExpanded', { direction })}
+          title={direction.title}
+          description={<Text numberOfLines={1}>{direction.description}</Text>}
+          accessoryRight={Forward}
+          accessoryLeft={() => {
+            return direction.image ? (
+              <Image source={{ uri: direction.image }} style={{ width: 48, height: 48, marginHorizontal: 8 }} />
+            ) : (
+              <></>
+            )
+          }}
+        />
+      ))}
     </View>
   )
 }

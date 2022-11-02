@@ -2,9 +2,8 @@
  * Author: Dimitri Zvolinski
  */
 import React, { ReactElement } from 'react'
-import { Text } from '@ui-kitten/components'
-import { ScrollView, Image } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { Card, Text } from '@ui-kitten/components'
+import { Image, Dimensions, View } from 'react-native'
 import { TopNavigation, Background } from '@greeneggs/ui'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-routes'
@@ -17,26 +16,36 @@ export function RecipeDirectionExpanded(): ReactElement {
   if (!route.params) throw new Error('Could not find route params')
 
   const direction = route.params.direction
-  const insets = useSafeAreaInsets()
+  const { width } = Dimensions.get('window')
 
   return (
     <Background>
-      <ScrollView style={{ paddingTop: insets.top }}>
-        <TopNavigation title={direction.title} />
-        {direction.image && (
+      <TopNavigation title={direction.title} />
+      <Card
+        style={{ marginHorizontal: 16 }}
+        footer={() => (
+          <View style={{ margin: 16 }}>
+            <Text category='h6' style={{ marginBottom: 8 }}>
+              {direction.title}
+            </Text>
+            <Text numberOfLines={2}>{direction.description}</Text>
+          </View>
+        )}
+      >
+        {direction.image ? (
           <Image
             style={{
-              height: undefined,
-              width: '100%',
+              width,
               aspectRatio: 1 / 1,
+              marginHorizontal: -24,
+              marginVertical: -16,
             }}
             source={{
               uri: direction.image,
             }}
           />
-        )}
-        <Text style={{ margin: 16 }}>{direction.description}</Text>
-      </ScrollView>
+        ) : undefined}
+      </Card>
     </Background>
   )
 }

@@ -4,7 +4,7 @@
 import React from 'react'
 import { Text, useTheme } from '@ui-kitten/components'
 import { View, StyleSheet } from 'react-native'
-// import ProgressCircle from 'react-native-progress-circle'
+import { ProgressCircle } from '@greeneggs/ui'
 
 interface IStepperProps {
   currentStep: string
@@ -28,20 +28,20 @@ const styles = StyleSheet.create({
 /**
  * Stateless component that, when controlled, shows the current state of a multi-step form in a mobile friendly manor.
  */
-export function Stepper({ currentStep, nextStep }: IStepperProps) {
+export function Stepper({ currentStep, nextStep, index, length }: IStepperProps) {
   const theme = useTheme()
   return (
     <View style={styles.row}>
-      {/* <ProgressCircle
-              percent={(100 * (index + 1)) / length}
-              radius={32}
-              color={theme['color-primary-500']}
-              shadowColor={theme['color-success-500']}
-              borderWidth={5}
-              bgColor='white'
-            >
-              <Text category='label' style={{ fontWeight: 'bold' }}>{`${index + 1} OF ${length}`}</Text>
-            </ProgressCircle> */}
+      <ProgressCircle
+        percent={(100 * (index + 1)) / length}
+        radius={32}
+        color={theme['color-primary-500']}
+        shadowColor={theme['color-success-500']}
+        borderWidth={5}
+        bgColor='white'
+      >
+        <Text category='label' style={{ fontWeight: 'bold' }}>{`${index + 1} OF ${length}`}</Text>
+      </ProgressCircle>
       <View>
         <Text style={styles.text} category='h6'>
           {currentStep}

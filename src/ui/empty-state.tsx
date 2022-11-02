@@ -15,7 +15,7 @@ const color = '#6B7280'
 /**
  * Component to display during the absence of content. Takes an optional title and description.
  */
-export function EmptyState({ title = 'Nothing here!', description }: EmptyStateProps) {
+export function EmptyState({ title = 'Nothing here', description }: EmptyStateProps) {
   return (
     <View
       style={{

@@ -206,7 +206,7 @@ export function LazyList<
               <Spinner />
             </View>
           ) : (
-            <EmptyState title='Nothing here!' description={emptyMessage} />
+            <EmptyState description={emptyMessage} />
           )}
         </View>
       }

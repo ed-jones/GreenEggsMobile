@@ -4,10 +4,7 @@
 import React, { ReactElement } from 'react'
 import { recipe_recipe_data_ingredients } from '@greeneggs/types/graphql'
 import { View } from 'react-native'
-import { Divider } from '@ui-kitten/components'
-import { IngredientListItem, ViewMore } from '@greeneggs/ui'
-import { useNavigation } from '@react-navigation/core'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { IngredientListItem } from '@greeneggs/ui'
 
 interface IRecipeIngredients {
   ingredients: recipe_recipe_data_ingredients[]
@@ -23,14 +20,13 @@ export function RecipeIngredients({
   servingCount,
   defaultServingCount,
 }: IRecipeIngredients): ReactElement {
-  const navigation = useNavigation<LoggedInNavigationProp>()
   let multiplier = 1
   if (servingCount && defaultServingCount) {
     multiplier = servingCount / defaultServingCount
   }
   return (
     <View style={{ marginHorizontal: -16 }}>
-      {ingredients.slice(0, 5).map((ingredient: recipe_recipe_data_ingredients, index) => (
+      {ingredients.map((ingredient: recipe_recipe_data_ingredients, index) => (
         <IngredientListItem
           ingredient={{
             ...ingredient,
@@ -39,15 +35,6 @@ export function RecipeIngredients({
           key={index.toString()}
         />
       ))}
-      <Divider />
-      <ViewMore
-        onPress={() =>
-          navigation.navigate('RecipeAllIngredients', {
-            ingredients,
-            multiplier,
-          })
-        }
-      />
     </View>
   )
 }

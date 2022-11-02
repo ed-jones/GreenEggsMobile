@@ -21,7 +21,7 @@ export function AddRecipeDetails({ form }: ICreateRecipeDetails): ReactElement {
   return (
     <ScrollView style={{ paddingHorizontal: 16 }}>
       <Text category='h5' style={addRecipeStyles.heading}>
-        Create New Recipe
+        New Recipe
       </Text>
       <ControlledInput<RecipeInput>
         controllerProps={{

@@ -77,7 +77,7 @@ export type LoggedInRouteParams = Omit<
   LoggedInRouteParamsOverride
 
 const routes = [
-  { name: 'Home', component: Navigation },
+  { name: 'Navigation', component: Navigation },
   { name: 'Recipe', component: Screens.Recipe },
   { name: 'RecipeDescription', component: Screens.RecipeDescription },
   { name: 'CreateStep', component: Screens.CreateStep },

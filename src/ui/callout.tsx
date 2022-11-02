@@ -52,7 +52,7 @@ export function Callout({ type, message, style, title }: IAlert) {
         style
       )}
     >
-      <Icon style={{ width: 48, height: 48, marginRight: 10 }} {...iconNameFromAlertType[type]} />
+      <Icon style={{ width: 48, height: 48, marginRight: 16 }} {...iconNameFromAlertType[type]} />
       <View style={{ justifyContent: 'center', minHeight: 48, flexShrink: 1 }}>
         {title && (
           <Text status={type} style={{ fontWeight: 'bold' }}>

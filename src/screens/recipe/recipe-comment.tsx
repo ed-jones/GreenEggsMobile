@@ -94,7 +94,7 @@ export function RecipeComment({ comment, replyButton }: RecipeCommentProps): Rea
                   submittedById={comment.submittedBy.id}
                 />
                 <LabelledIcon
-                  label='Reply'
+                  label='REPLY'
                   iconName='message-square-outline'
                   onPress={() =>
                     navigation.navigate('RecipeCommentReplies', {
@@ -132,7 +132,8 @@ export function RecipeComment({ comment, replyButton }: RecipeCommentProps): Rea
                 }
                 size='small'
                 status='basic'
-              >{`SHOW ALL REPLIES (${comment.replyCount.toString()})`}</Button>
+                appearance='ghost'
+              >{`REPLIES (${comment.replyCount.toString()})`}</Button>
             </View>
           )}
         </View>

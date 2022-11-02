@@ -5,7 +5,7 @@ import React, { useContext, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { ImageBackground, View, StyleSheet } from 'react-native'
 import { Queries } from '@greeneggs/graphql'
-import { IndexPath, SelectItem, Text } from '@ui-kitten/components'
+import { Button, IndexPath, SelectItem, Text } from '@ui-kitten/components'
 import { recipe, recipeVariables } from '@greeneggs/types/graphql'
 import ParallaxHeader from '@fabfit/react-native-parallax-header'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -99,7 +99,9 @@ export function Recipe() {
     >
       <Background style={styles.content}>
         <RecipeDetailsCard {...recipe} />
-        <RecipeAllergies allergies={recipe.allergies} />
+        <View style={{ marginVertical: 16 }}>
+          <RecipeAllergies allergies={recipe.allergies} />
+        </View>
         <View
           style={{
             flexDirection: 'row',
@@ -150,13 +152,20 @@ export function Recipe() {
             <EmptyState description='This recipe has no steps.' />
           </View>
         )}
-        <Text category='h5' style={styles.heading}>
-          {`Comments (${recipe.commentCount.toString()})`}
-        </Text>
-        <RecipeCommentList comments={recipe.comments.slice(0, 3)} />
-        {recipe.comments.length >= 3 && (
-          <ViewMore
-            style={{ marginHorizontal: -16 }}
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Text category='h5' style={styles.heading}>
+            {`Comments`}
+          </Text>
+          <Button
+            size='small'
+            status='basic'
+            appearance='ghost'
             onPress={() =>
               navigation.navigate('RecipeAllComments', {
                 comments: recipe.comments,
@@ -165,8 +174,11 @@ export function Recipe() {
                 isReply: false,
               })
             }
-          />
-        )}
+          >
+            {`VIEW ALL (${recipe.commentCount.toString()})`}
+          </Button>
+        </View>
+        <RecipeCommentList comments={recipe.comments.slice(0, 3)} />
         <View style={{ marginTop: 24 }}>
           <RecipeAddComment recipeId={recipe.id} />
         </View>

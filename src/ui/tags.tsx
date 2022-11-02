@@ -7,11 +7,12 @@ import { Text, useTheme } from '@ui-kitten/components'
 
 const styles = StyleSheet.create({
   tag: {
-    borderRadius: 16,
+    borderRadius: 10,
     marginRight: 6,
     marginVertical: 4,
     paddingVertical: 4,
     paddingHorizontal: 8,
+    overflow: 'hidden',
   },
   tags: {
     flexDirection: 'row',

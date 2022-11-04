@@ -8,9 +8,9 @@ import { IngredientInput } from '@greeneggs/types/graphql'
 import { useForm } from 'react-hook-form'
 import { View } from 'react-native'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/core'
-import { AddRecipeContext } from '@greeneggs/providers'
 import { addRecipeStyles } from '../add-recipe-styles'
 import { LoggedInNavigationProp, LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-routes'
+import { AddRecipeContext } from '@greeneggs/providers/add-recipe-state-provider'
 
 /**
  * Screen for adding details to a selected ingredient, including

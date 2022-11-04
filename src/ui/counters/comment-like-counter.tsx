@@ -5,8 +5,8 @@ import React, { useContext } from 'react'
 import { useMutation } from '@apollo/client'
 import { Mutations } from '@greeneggs/graphql'
 import { LikeRecipe, UnlikeRecipe } from '@greeneggs/types/graphql'
-import { UserContext } from '@greeneggs/providers'
 import { LikeCounter } from './like-counter'
+import { UserContext } from '@greeneggs/providers/user-state-provider'
 
 interface CommentLikeCounterProps {
   likeCount: number

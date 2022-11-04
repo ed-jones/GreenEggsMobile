@@ -9,10 +9,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Icons, IForm, Background } from '@greeneggs/ui'
 import { Stepper } from './stepper'
 import { addRecipeStyles } from './add-recipe-styles'
-import { AddRecipeContext } from '@greeneggs/providers'
 import { LoadingScreen } from '../loading-screen'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { AddRecipeContext } from '@greeneggs/providers/add-recipe-state-provider'
 
 export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>
 

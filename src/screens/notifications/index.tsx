@@ -19,8 +19,8 @@ import Svg, { Circle } from 'react-native-svg'
 import { GestureResponderEvent, View } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 import { useMutation } from '@apollo/client'
-import { NotificationContext } from '@greeneggs/providers'
 import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { NotificationContext } from '@greeneggs/providers/notification-state-provider'
 
 type NotificationListItemProps = ListItemProps & notifications_notifications_data
 

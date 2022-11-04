@@ -6,13 +6,13 @@ import { Button, Icon, ThemedComponentProps, TopNavigationAction } from '@ui-kit
 import { Input, Icons } from '@greeneggs/ui'
 import { StyleSheet, View, Image } from 'react-native'
 
-import { SearchContext } from '@greeneggs/providers'
 import { useNavigation } from '@react-navigation/native'
 import { logo } from '@greeneggs/assets'
 
 import { countActiveFilters } from '../recipe-search-filter'
 import { CountCircle } from './count-circle'
 import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { SearchContext } from '@greeneggs/providers/search-state-provider'
 
 const styles = StyleSheet.create({
   topNavigation: {

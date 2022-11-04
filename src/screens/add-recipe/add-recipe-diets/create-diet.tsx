@@ -6,8 +6,8 @@ import { Divider, ListItem } from '@ui-kitten/components'
 import { AlphabetType, Background, Icons, Input, LazyListAlpha, TopNavigation } from '@greeneggs/ui'
 import { DietInput, Diets, DietsVariables, Diets_diets_data, RecipeFilter, Sort } from '@greeneggs/types/graphql'
 import { Queries } from '@greeneggs/graphql'
-import { AddRecipeContext } from '@greeneggs/providers'
 import { useNavigation } from '@react-navigation/core'
+import { AddRecipeContext } from '@greeneggs/providers/add-recipe-state-provider'
 
 /**
  * Screen that lets a user select a diet from an infinite scrolling alphabetised list

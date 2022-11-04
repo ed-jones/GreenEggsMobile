@@ -10,8 +10,8 @@ import { Icons } from '@greeneggs/ui'
 import { RecipeForm } from '../add-recipe'
 import { AddRecipePartTemplate } from '../add-recipe-part-template'
 import { useNavigation } from '@react-navigation/core'
-import { AddRecipeContext } from '@greeneggs/providers'
 import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { AddRecipeContext } from '@greeneggs/providers/add-recipe-state-provider'
 
 interface IAddRecipeDirections {
   form: RecipeForm

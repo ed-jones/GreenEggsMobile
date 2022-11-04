@@ -16,11 +16,11 @@ import { RecipeDirections } from './recipe-directions'
 import { RecipeCommentList } from './recipe-comment-list'
 import { LoadingScreen } from '../loading-screen'
 import { RecipeAddComment } from './recipe-add-comment'
-import { TopNavigation, Background, ViewMore, SaveRecipeButton, EmptyState, Select } from '@greeneggs/ui'
+import { TopNavigation, Background, SaveRecipeButton, EmptyState, Select } from '@greeneggs/ui'
 import { RecipeMoreButton } from './recipe-more-button'
-import { UserContext } from '@greeneggs/providers'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { LoggedInNavigationProp, LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-routes'
+import { UserContext } from '@greeneggs/providers/user-state-provider'
 
 const styles = StyleSheet.create({
   coverPhoto: {

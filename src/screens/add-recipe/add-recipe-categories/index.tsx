@@ -7,8 +7,8 @@ import { Icons } from '@greeneggs/ui'
 
 import { AddRecipePartTemplate } from '../add-recipe-part-template'
 import { useNavigation } from '@react-navigation/native'
-import { AddRecipeContext } from '@greeneggs/providers'
 import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { AddRecipeContext } from '@greeneggs/providers/add-recipe-state-provider'
 
 /**
  * Screen that shows a list of all selected categories that will

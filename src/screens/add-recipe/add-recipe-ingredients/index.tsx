@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 import { AddRecipePartTemplate } from '../add-recipe-part-template'
 import { RecipeForm } from '../add-recipe'
 import { useNavigation } from '@react-navigation/native'
-import { AddRecipeContext } from '@greeneggs/providers'
+import { AddRecipeContext } from '@greeneggs/providers/add-recipe-state-provider'
 import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
 
 interface ICreateRecipeIngredients {

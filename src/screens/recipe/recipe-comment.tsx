@@ -13,8 +13,8 @@ import { useNavigation } from '@react-navigation/core'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { useMutation } from '@apollo/client'
 
-import { UserContext } from '@greeneggs/providers'
 import { useNavigateToProfile } from '@greeneggs/navigation'
+import { UserContext } from '@greeneggs/providers/user-state-provider'
 
 const styles = StyleSheet.create({
   avatar: {

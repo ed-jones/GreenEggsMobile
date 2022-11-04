@@ -13,8 +13,8 @@ import {
   Sort,
 } from '@greeneggs/types/graphql'
 import { Queries } from '@greeneggs/graphql'
-import { AddRecipeContext } from '@greeneggs/providers'
 import { useNavigation } from '@react-navigation/core'
+import { AddRecipeContext } from '@greeneggs/providers/add-recipe-state-provider'
 
 /**
  * Screen with an infinite scrolling alphabetised list of allergies that

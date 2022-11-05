@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.1-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.0-beta...v0.3.1-beta) (2022-11-05)
+
+
+### Bug Fixes
+
+* :bug: update expo build to node 16 ([247c401](https://github.com/ed-jones/green-eggs-mobile/commit/247c40112ddc7024bcf7b60926812f6aafe30e97))
+* :fire: remove package lock ([55ea283](https://github.com/ed-jones/green-eggs-mobile/commit/55ea2838bef2aa7812b07b6aa4c2a9618fb1754f))
+* typo in package.json ([5e00903](https://github.com/ed-jones/green-eggs-mobile/commit/5e009036672584682a31425acdc24b6b4e25a016))
+
 ## [0.3.0-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.2.0-beta...v0.3.0-beta) (2022-11-05)
 
 

@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC, useState } from 'react'
+import { useState } from 'react';
 import { Queries } from '@greeneggs/graphql'
 import {
   Categories,
@@ -10,16 +10,22 @@ import {
   RecipeFilter,
   Sort,
 } from '@greeneggs/types/graphql'
-import { AlphabetType, Background, Icons, Input, LazyListAlpha, TopNavigation } from '@greeneggs/ui'
 import { ListItem } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { Input } from '@greeneggs/ui/input'
+import * as Icons from '@greeneggs/ui/icons'
+import { LazyListAlpha } from '@greeneggs/ui/lazy-alpha-list'
+import { AlphabetType } from '@greeneggs/ui/alpha-list'
 
 /**
  * Displays a searchable infinite scrolling list of all categories within the app, and links to associated category views.
  */
-export const AllCategories: FC = () => {
+export function AllCategories() {
   const [query, setQuery] = useState('')
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
   return (
     <Background>
       <TopNavigation title='All Categories' />
@@ -31,13 +37,7 @@ export const AllCategories: FC = () => {
         onChangeText={setQuery}
         style={{ padding: 16 }}
       />
-      <LazyListAlpha<
-        Categories,
-        CategoriesVariables,
-        Categories_categories_data,
-        Sort,
-        RecipeFilter
-      >
+      <LazyListAlpha<Categories, CategoriesVariables, Categories_categories_data, Sort, RecipeFilter>
         renderItem={(item) => (
           <ListItem
             title={item.name}
@@ -50,7 +50,7 @@ export const AllCategories: FC = () => {
           />
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
-        query={Queries.GET_CATEGORIES}
+        query={Queries.getCategories}
         variables={{
           query,
         }}

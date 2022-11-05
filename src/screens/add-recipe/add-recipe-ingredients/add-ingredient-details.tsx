@@ -1,27 +1,30 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from 'react'
-import { Button, Text } from '@ui-kitten/components'
-import { Background, ControlledInput, Icons, InputType, Rules, TopNavigation } from '@greeneggs/ui'
+import { ReactElement, useContext } from 'react';
+import { Button, Text, TopNavigation } from '@ui-kitten/components'
 import { IngredientInput } from '@greeneggs/types/graphql'
 import { useForm } from 'react-hook-form'
 import { View } from 'react-native'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/core'
-import { AddRecipeContext } from '@greeneggs/providers'
-import { AddRecipeStyles } from '../add-recipe-styles'
+import { addRecipeStyles } from '../add-recipe-styles'
+import { LoggedInRouteParams, LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { AddRecipeContext } from '@greeneggs/context'
+import { Background } from '@greeneggs/ui/background'
+import { ControlledInput, InputType, rules } from '@greeneggs/ui/form'
+import * as Icons from '@greeneggs/ui/icons'
 
 /**
  * Screen for adding details to a selected ingredient, including
  * a description, quantity and unit (for the quantity).
  */
-export const AddIngredientDetails = () => {
+export function AddIngredientDetails(): ReactElement {
   const form = useForm<IngredientInput>({ mode: 'all' })
   const { ingredientsFieldArray } = useContext(AddRecipeContext)
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
   const {
     params: { name },
-  } = useRoute<RouteProp<{ params: { name: string } }, 'params'>>()
+  } = useRoute<RouteProp<LoggedInRouteParams, 'AddIngredientDetails'>>()
 
   return (
     <Background>
@@ -36,14 +39,14 @@ export const AddIngredientDetails = () => {
             name: `description`,
             control: form.control,
             rules: {
-              ...Rules.UNDER100CHARS,
+              ...rules.UNDER100CHARS,
             },
           }}
           inputProps={{
             label: 'DESCRIPTION',
             placeholder: 'Finely chopped',
             defaultValue: '',
-            style: AddRecipeStyles.input,
+            style: addRecipeStyles.input,
           }}
           type={InputType.TEXT}
         />
@@ -64,7 +67,7 @@ export const AddIngredientDetails = () => {
               label: 'QUANTITY',
               placeholder: '5',
               defaultValue: '',
-              style: { width: '25%', ...AddRecipeStyles.input },
+              style: { width: '25%', ...addRecipeStyles.input },
             }}
             type={InputType.NUMERIC}
           />
@@ -74,7 +77,7 @@ export const AddIngredientDetails = () => {
               name: `unit`,
               control: form.control,
               rules: {
-                ...Rules.UNDER100CHARS,
+                ...rules.UNDER100CHARS,
               },
             }}
             inputProps={{
@@ -85,7 +88,7 @@ export const AddIngredientDetails = () => {
                 width: '75%',
                 marginLeft: 16,
                 flex: 1,
-                ...AddRecipeStyles.input,
+                ...addRecipeStyles.input,
               },
             }}
             type={InputType.TEXT}
@@ -96,7 +99,8 @@ export const AddIngredientDetails = () => {
             status='basic'
             onPress={() => {
               ingredientsFieldArray?.append({ name })
-              navigation.navigate('AddRecipe')
+              navigation.goBack()
+              navigation.goBack()
             }}
           >
             SKIP ADD DETAILS
@@ -104,13 +108,14 @@ export const AddIngredientDetails = () => {
           <Button
             accessoryLeft={Icons.Add}
             onPress={() => {
-              form.trigger([`description`, `quantity`, `unit`]).then((isValid) => {
+              void form.trigger([`description`, `quantity`, `unit`]).then((isValid) => {
                 if (isValid) {
                   ingredientsFieldArray?.append({
                     ...form.getValues(),
                     name,
                   })
-                  navigation.navigate('AddRecipe')
+                  navigation.goBack()
+                  navigation.goBack()
                 }
               })
             }}

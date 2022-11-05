@@ -1,12 +1,11 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
-import { Divider, ListItem, Text, ThemedComponentProps, withStyles } from '@ui-kitten/components'
-import { Icons } from '@greeneggs/ui'
+import { Divider, ListItem, Text, useTheme } from '@ui-kitten/components'
 import { FieldError } from 'react-hook-form'
+import * as Icons from '../icons'
 
-interface IAddListItem {
+interface Props {
   label: string
   onPress: () => void
   error?: FieldError | undefined
@@ -15,14 +14,15 @@ interface IAddListItem {
 /**
  * List item for creating a new list item when pressed.
  */
-export const AddListItem = withStyles(
-  ({ label, onPress, eva, error }: IAddListItem & ThemedComponentProps) => (
+export function AddListItem({ label, onPress, error }: Props) {
+  const theme = useTheme()
+  return (
     <>
       <Divider />
       <ListItem
         style={{
           justifyContent: 'center',
-          borderColor: eva?.theme?.['text-danger-color'],
+          borderColor: theme['text-danger-color'],
           borderTopWidth: error ? 1 : undefined,
           borderBottomWidth: error ? 1 : undefined,
         }}
@@ -30,7 +30,7 @@ export const AddListItem = withStyles(
       >
         <Icons.Add
           style={{ width: 24, height: 24, marginRight: 8, marginLeft: -32 }}
-          fill={error ? eva?.theme?.['text-danger-color'] : eva?.theme?.['text-primary-color']}
+          fill={error ? theme['text-danger-color'] : theme['text-primary-color']}
         />
         <Text category='label' status={error ? 'danger' : undefined}>
           {label}
@@ -43,4 +43,4 @@ export const AddListItem = withStyles(
       ) : undefined}
     </>
   )
-)
+}

@@ -1,41 +1,15 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC } from 'react'
-import { recipes_recipes_data } from '@greeneggs/types/graphql'
+import { recipes_recipes_data } from '@greeneggs/types/graphql';
 import { Card, Text } from '@ui-kitten/components'
-import { View, StyleSheet, Image } from 'react-native'
-import { convertTimeEstimate, convertSubmittedAt } from '@greeneggs/utils'
+import { View, Image } from 'react-native'
+import { convertSubmittedAt } from '@greeneggs/utils'
 import { imageNotFound } from '@greeneggs/assets'
-import { CommentCounter, LabelledIcon, RecipeLikeCounter } from '@greeneggs/ui'
+import { RecipeLikeCounter } from '../counters/recipe-like-counter'
+import { CommentCounter } from '../counters/comment-counter'
 
-const styles = StyleSheet.create({
-  card: {
-    borderRadius: 12,
-  },
-  cardContents: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  imageContainer: {
-    marginHorizontal: -24,
-    marginVertical: -16,
-  },
-  image: {
-    width: undefined,
-    height: 128,
-    aspectRatio: 1,
-    marginLeft: 16,
-  },
-  labelledIcons: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-  },
-})
-
-interface IRecipeCardSmall {
+interface RecipeCardSmallProps {
   recipe: recipes_recipes_data
   onPress: () => void
 }
@@ -44,10 +18,10 @@ interface IRecipeCardSmall {
  * Displays recipes in a more compact form.
  * Designed to be used outside of trending and news feed.
  */
-export const RecipeCardSmall: FC<IRecipeCardSmall> = ({ recipe, onPress }) => {
+export function RecipeCardSmall({ recipe, onPress }: RecipeCardSmallProps) {
   return (
-    <Card appearance='filled' style={styles.card} onPress={onPress}>
-      <View style={styles.cardContents}>
+    <Card appearance='filled' style={{ borderRadius: 12 }} onPress={onPress}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <View
           style={{
             flexDirection: 'column',
@@ -73,8 +47,23 @@ export const RecipeCardSmall: FC<IRecipeCardSmall> = ({ recipe, onPress }) => {
             >{`${recipe.submittedBy.firstName} ${recipe.submittedBy.lastName}`}</Text>
             <Text style={{ marginLeft: 8 }}>{`${convertSubmittedAt(recipe.createdAt)} ago`}</Text>
           </View>
-          <View style={{ ...styles.labelledIcons, justifyContent: 'space-between' }}>
-            <View style={{ ...styles.labelledIcons, marginBottom: 8 }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'flex-start',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                marginBottom: 8,
+              }}
+            >
               <RecipeLikeCounter
                 likeCount={recipe.likeCount}
                 liked={recipe.liked}
@@ -85,9 +74,9 @@ export const RecipeCardSmall: FC<IRecipeCardSmall> = ({ recipe, onPress }) => {
             </View>
           </View>
         </View>
-        <View style={styles.imageContainer}>
+        <View style={{ marginHorizontal: -24, marginVertical: -16 }}>
           <Image
-            style={styles.image}
+            style={{ width: undefined, height: 128, aspectRatio: 1, marginLeft: 16 }}
             source={recipe.coverImage ? { uri: recipe.coverImage } : imageNotFound}
           />
         </View>

@@ -1,18 +1,20 @@
 /**
  * Author: Victor Ying
  */
-import React, { FC } from 'react'
-import { Text } from '@ui-kitten/components'
-import { TopNavigation, Background } from '@greeneggs/ui'
+import { Text } from '@ui-kitten/components';
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
 
 /**
  * Note: This feature was not built in time so is disabled
  *
  * Screen for filtering recipes by cook time.
  */
-export const FilterRecipeCookTime: FC = () => (
-  <Background>
-    <TopNavigation title='Cook Time' />
-    <Text>Work in progress!</Text>
-  </Background>
-)
+export function FilterRecipeCookTime() {
+  return (
+    <Background>
+      <TopNavigation title='Cook Time' />
+      <Text>Work in progress!</Text>
+    </Background>
+  )
+}

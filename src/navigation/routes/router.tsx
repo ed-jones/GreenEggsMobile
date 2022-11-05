@@ -1,16 +1,16 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC, useState, ReactNode } from 'react'
+import { useState, ReactNode } from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { useQuery } from '@apollo/client'
 import { Queries } from '@greeneggs/graphql'
 import { Me } from '@greeneggs/types/graphql'
-import { LoadingScreen } from '@greeneggs/screens'
 
 import { Stack } from '../stack'
-import { LoggedInRoutes } from './logged-in-routes'
-import { LoggedOutRoutes } from './logged-out-routes'
+import { loggedInRoutes } from './logged-in-routes'
+import { loggedOutRoutes } from './logged-out-routes'
+import { LoadingScreen } from '@greeneggs/ui/loading-screen'
 
 enum SessionStates {
   LOADING,
@@ -18,28 +18,26 @@ enum SessionStates {
   LOGGED_OUT,
 }
 
-const SESSION_STATE_ROUTE_MAP: Record<SessionStates, ReactNode> = {
+const sessionStateRouteMap: Record<SessionStates, ReactNode> = {
   [SessionStates.LOADING]: <Stack.Screen name='Loading' component={LoadingScreen} />,
-  [SessionStates.LOGGED_IN]: LoggedInRoutes,
-  [SessionStates.LOGGED_OUT]: LoggedOutRoutes,
+  [SessionStates.LOGGED_IN]: loggedInRoutes,
+  [SessionStates.LOGGED_OUT]: loggedOutRoutes,
 }
 
 /**
  * Component that switches the accessible routes based on session state.
  */
-export const Router: FC = () => {
+export function Router() {
   const [sessionState, setSessionState] = useState<SessionStates>(SessionStates.LOADING)
-  useQuery<Me>(Queries.ME, {
+  useQuery<Me>(Queries.getMe, {
     onCompleted: (data) =>
-      Boolean(data?.me.data)
-        ? setSessionState(SessionStates.LOGGED_IN)
-        : setSessionState(SessionStates.LOGGED_OUT),
+      data?.me.data ? setSessionState(SessionStates.LOGGED_IN) : setSessionState(SessionStates.LOGGED_OUT),
     onError: () => setSessionState(SessionStates.LOGGED_OUT),
   })
 
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode='none'>{SESSION_STATE_ROUTE_MAP[sessionState]}</Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>{sessionStateRouteMap[sessionState]}</Stack.Navigator>
     </NavigationContainer>
   )
 }

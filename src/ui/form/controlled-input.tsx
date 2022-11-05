@@ -1,15 +1,15 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
-import { Controller, ControllerProps, RegisterOptions } from 'react-hook-form'
+import { ReactElement } from 'react'
+import { Controller, ControllerProps, FieldValues, RegisterOptions } from 'react-hook-form'
 import { InputProps } from '@ui-kitten/components'
 import { ErrorFragment } from '@greeneggs/types/graphql'
 import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types'
-import { Input } from '@greeneggs/ui'
 
 import { ImageUpload, PrivacySelect, TimeInput } from './inputs'
 import { numberToString, stringToNumber } from './inputs/utils'
+import { Input } from '../input'
 
 // Data types that can be used by this component
 // Includes form validation, styling and other behaviour
@@ -26,18 +26,15 @@ export enum InputType {
   TIME = 'Time',
 }
 
-export interface IControlledInput<FieldValues> {
-  controllerProps: Omit<ControllerProps<FieldValues>, 'render'>
+export interface Props<TFieldValues extends FieldValues> {
+  controllerProps: Omit<ControllerProps<TFieldValues>, 'render'>
   inputProps?: InputProps
   submitError?: ErrorFragment | null
   type: InputType
 }
 
 // This object exists in order to reuse common form validation rules
-export const Rules: Record<
-  string,
-  Omit<RegisterOptions, 'valueAsNumber' | 'valueAsDate' | 'setValueAs'>
-> = {
+export const rules: Record<string, Omit<RegisterOptions, 'valueAsNumber' | 'valueAsDate' | 'setValueAs'>> = {
   REQUIRED: { required: { value: true, message: 'This field is required' } },
   UNDER100CHARS: {
     maxLength: { value: 100, message: 'Must be under 100 characters' },
@@ -46,116 +43,116 @@ export const Rules: Record<
 
 // This is the interface for the object for default props for each input type
 // Name and render fields are omitted as they are always already defined
-interface IInputTypeDefaultProps<FieldValues> {
-  controllerProps?: Omit<ControllerProps<FieldValues>, 'name' | 'render'>
+interface TInputTypeDefaultProps<TFieldValues extends FieldValues> {
+  controllerProps?: Omit<ControllerProps<TFieldValues>, 'name' | 'render'>
   inputProps?: InputProps
 }
 
 // This object stores the default props associated with each input type
 // These values can be overwritten
 // Example props include form validation rules for emails and passwords
-const InputTypeDefaultProps = <FieldValues,>(): Record<
+function InputTypeDefaultProps<TFieldValues extends FieldValues>(): Record<
   InputType,
-  IInputTypeDefaultProps<FieldValues>
-> => ({
-  Email: {
-    inputProps: {
-      label: 'EMAIL',
-      textContentType: 'emailAddress',
-      autoCompleteType: 'email',
-      autoCapitalize: 'none',
-      keyboardType: 'email-address',
-      placeholder: 'johnsmith@example.com',
-    },
-    controllerProps: {
-      rules: {
-        ...Rules.REQUIRED,
-        ...Rules.UNDER100CHARS,
-        pattern: {
-          value:
-            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-          message: 'Not an email address',
+  TInputTypeDefaultProps<TFieldValues>
+> {
+  return {
+    Email: {
+      inputProps: {
+        label: 'EMAIL',
+        textContentType: 'emailAddress',
+        autoComplete: 'email',
+        autoCapitalize: 'none',
+        keyboardType: 'email-address',
+        placeholder: 'johnsmith@example.com',
+      },
+      controllerProps: {
+        rules: {
+          ...rules.REQUIRED,
+          ...rules.UNDER100CHARS,
+          pattern: {
+            value:
+              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            message: 'Not an email address',
+          },
         },
       },
     },
-  },
-  Text: {},
-  TextArea: {},
-  Photo: {},
-  Password: {
-    inputProps: {
-      label: 'PASSWORD',
-      textContentType: 'password',
-      autoCompleteType: 'password',
-      secureTextEntry: true,
-      placeholder: '**********',
-    },
-    controllerProps: {
-      rules: {
-        ...Rules.REQUIRED,
-        ...Rules.UNDER100CHARS,
-        pattern: {
-          value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
-          message:
-            'Password must contain at least 8 characters, upper and lowercase letters, a number and a special character.',
+    Text: {},
+    TextArea: {},
+    Photo: {},
+    Password: {
+      inputProps: {
+        label: 'PASSWORD',
+        textContentType: 'password',
+        autoComplete: 'password',
+        secureTextEntry: true,
+        placeholder: '**********',
+      },
+      controllerProps: {
+        rules: {
+          ...rules.REQUIRED,
+          ...rules.UNDER100CHARS,
+          pattern: {
+            value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
+            message:
+              'Password must contain at least 8 characters, upper and lowercase letters, a number and a special character.',
+          },
+          minLength: { value: 4, message: 'Must be over 4 characters' },
         },
-        minLength: { value: 4, message: 'Must be over 4 characters' },
       },
     },
-  },
-  FirstName: {
-    controllerProps: {
-      rules: {
-        ...Rules.REQUIRED,
-        ...Rules.UNDER100CHARS,
+    FirstName: {
+      controllerProps: {
+        rules: {
+          ...rules.REQUIRED,
+          ...rules.UNDER100CHARS,
+        },
+      },
+      inputProps: {
+        textContentType: 'givenName',
+        autoComplete: 'name',
+        autoCapitalize: 'words',
+        placeholder: 'John',
       },
     },
-    inputProps: {
-      textContentType: 'givenName',
-      autoCompleteType: 'name',
-      autoCapitalize: 'words',
-      placeholder: 'John',
-    },
-  },
-  LastName: {
-    controllerProps: {
-      rules: {
-        ...Rules.REQUIRED,
-        ...Rules.UNDER100CHARS,
+    LastName: {
+      controllerProps: {
+        rules: {
+          ...rules.REQUIRED,
+          ...rules.UNDER100CHARS,
+        },
+      },
+      inputProps: {
+        textContentType: 'familyName',
+        autoComplete: 'name',
+        autoCapitalize: 'words',
+        placeholder: 'Smith',
       },
     },
-    inputProps: {
-      textContentType: 'familyName',
-      autoCompleteType: 'name',
-      autoCapitalize: 'words',
-      placeholder: 'Smith',
+    Numeric: {
+      inputProps: {
+        keyboardType: 'numeric',
+      },
     },
-  },
-  Numeric: {
-    inputProps: {
-      keyboardType: 'numeric',
+    Privacy: {},
+    Time: {
+      inputProps: {
+        keyboardType: 'numeric',
+      },
     },
-  },
-  Privacy: {},
-  Time: {
-    inputProps: {
-      keyboardType: 'numeric',
-    },
-  },
-})
+  }
+}
 
 /**
  * Generic component that renders an input component controlled and validated with react-hook-form
  */
-export const ControlledInput = <
-  FieldValues extends Partial<Record<keyof FieldValues, string | number | object | null>>
->({
+export function ControlledInput<TFieldValues extends FieldValues>({
   controllerProps,
   inputProps,
   type,
   submitError,
-}: IControlledInput<FieldValues>) => {
-  const inputTypeDefaultProps = InputTypeDefaultProps<FieldValues>()[type]
+}: Props<TFieldValues>): ReactElement {
+  const inputTypeDefaultProps = InputTypeDefaultProps<TFieldValues>()[type]
   const { caption, ...unionInputProps } = {
     ...inputTypeDefaultProps.inputProps,
     ...inputProps,
@@ -166,7 +163,7 @@ export const ControlledInput = <
   }
 
   return (
-    <Controller<FieldValues>
+    <Controller
       render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => {
         if (type === InputType.PHOTO) {
           return (
@@ -179,13 +176,7 @@ export const ControlledInput = <
           )
         } else if (type === InputType.TIME) {
           return (
-            <TimeInput
-              inputProps={unionInputProps}
-              onChange={onChange}
-              onBlur={onBlur}
-              error={error}
-              value={value}
-            />
+            <TimeInput inputProps={unionInputProps} onChange={onChange} onBlur={onBlur} error={error} value={value} />
           )
         } else if (type === InputType.PRIVACY) {
           return (
@@ -206,12 +197,10 @@ export const ControlledInput = <
               multiline={type === InputType.TEXTAREA}
               onBlur={onBlur}
               textAlignVertical={type === InputType.TEXTAREA ? 'top' : undefined}
-              onChangeText={(e) =>
-                type === InputType.NUMERIC ? onChange(stringToNumber(e)) : onChange(e)
-              }
+              onChangeText={(e) => (type === InputType.NUMERIC ? onChange(stringToNumber(e)) : onChange(e))}
               value={
                 type === InputType.NUMERIC
-                  ? (value && numberToString(value)) || ''
+                  ? (value && numberToString(Number(value))) || ''
                   : (value && String(value)) || ''
               }
               status={error || !!submitError ? 'danger' : undefined}

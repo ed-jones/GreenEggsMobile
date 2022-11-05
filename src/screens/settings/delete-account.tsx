@@ -1,60 +1,41 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React, { useContext, useEffect } from 'react'
+import { useContext, useEffect, ReactElement } from 'react'
 import { Mutations, Queries } from '@greeneggs/graphql'
-import { ScrollView, StyleSheet, View, Alert as RNAlert } from 'react-native'
+import { ScrollView, View, Alert as NativeAlert } from 'react-native'
 import { deleteUser, LoginInput } from '@greeneggs/types/graphql'
 import { Button, Text } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
 import { useMutation, useQuery } from '@apollo/client'
 import { Me } from '@greeneggs/types/graphql'
-import { LoadingScreen } from '../loading-screen'
+import { LoadingScreen } from '../../ui/loading-screen'
 import { useLoginForm } from '../auth/use-login-form'
-import { AuthContext } from '@greeneggs/providers/auth-provider'
+import { AuthContext } from '@greeneggs/context'
 import * as SecureStore from 'expo-secure-store'
-import {
-  TopNavigation,
-  Background,
-  Callout,
-  Icons,
-  ControlledInput,
-  InputType,
-} from '@greeneggs/ui'
-
-const styles = StyleSheet.create({
-  view: {
-    padding: 16,
-  },
-  buttonGroup: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-  },
-  heading: {
-    paddingVertical: 16,
-  },
-  input: {
-    marginBottom: 10,
-  },
-})
+import { Background } from '@greeneggs/ui/background'
+import { Callout } from '@greeneggs/ui/callout'
+import { ControlledInput, InputType } from '@greeneggs/ui/form'
+import * as Icons from '@greeneggs/ui/icons'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
 
 /**
  * Screen that lets a user delete their account.
  * Requires the user to to re-enter their password.
  */
-export function DeleteAccount() {
+export function DeleteAccount(): ReactElement {
   const navigation = useNavigation()
-  const { loading, error, data } = useQuery<Me>(Queries.ME)
+  const { loading: isLoading, error, data } = useQuery<Me>(Queries.getMe)
   const { formResult, handleSubmit, control, submitForm, register, setValue } = useLoginForm()
   const { setToken } = useContext(AuthContext)
 
-  const [deleteAccount] = useMutation<deleteUser>(Mutations.DELETE_USER)
+  const [deleteAccount] = useMutation<deleteUser>(Mutations.deleteUser)
 
   useEffect(() => {
     register('email')
   }, [register, setValue])
 
-  if (loading) return <LoadingScreen />
+  if (isLoading) return <LoadingScreen />
   if (error) {
     return <Text>Error! {error.message}</Text>
   }
@@ -67,7 +48,7 @@ export function DeleteAccount() {
     const token = result.data?.login.data?.token
     const error = result.data?.login.error
     if (token && !error) {
-      RNAlert.alert(
+      NativeAlert.alert(
         'Delete your account',
         'This action is permanent',
         [
@@ -79,10 +60,9 @@ export function DeleteAccount() {
           {
             text: 'OK',
             onPress: () => {
-              SecureStore.deleteItemAsync('token').then(() => {
-                deleteAccount().then(() => {
+              void SecureStore.deleteItemAsync('token').then(() => {
+                void deleteAccount().then(() => {
                   setToken && setToken(null)
-                  navigation.navigate('Welcome')
                 })
               })
             },
@@ -96,12 +76,12 @@ export function DeleteAccount() {
   return (
     <Background>
       <TopNavigation title='Delete Account' />
-      <ScrollView style={styles.view}>
+      <ScrollView style={{ padding: 16 }}>
         <Callout
           message={
             <Text>
               If you delete your account you will lose all
-              <Text style={{ fontWeight: 'bold' }}>{` ${me?.recipeCount}\u00a0recipes `}</Text>
+              <Text style={{ fontWeight: 'bold' }}>{` ${me?.recipeCount ?? 0}\u00a0recipes `}</Text>
               all other personal data. This action cannot be undone.
               {'\n'}
               {'\n'}
@@ -109,10 +89,11 @@ export function DeleteAccount() {
             </Text>
           }
           type='danger'
+          style={{ marginBottom: 24 }}
         />
         <ControlledInput<LoginInput>
           inputProps={{
-            style: styles.input,
+            style: { marginBottom: 10 },
             label: 'CONFIRM PASSWORD',
           }}
           controllerProps={{
@@ -128,7 +109,7 @@ export function DeleteAccount() {
             accessoryLeft={Icons.Trash}
             status='danger'
             style={{ marginRight: 8 }}
-            onPress={handleSubmit(onSubmit)}
+            onPress={() => void handleSubmit(onSubmit)}
           >
             DELETE MY ACCOUNT
           </Button>

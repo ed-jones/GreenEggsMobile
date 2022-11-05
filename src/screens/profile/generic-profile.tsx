@@ -1,95 +1,43 @@
 /**
  * Author: Andrew Wilkie
  */
-import React, { FC, useState } from 'react'
-import { View, StyleSheet, Pressable } from 'react-native'
+import { ReactElement, useState } from 'react'
+import { View, Pressable } from 'react-native'
 import { Text, Button, TopNavigation, TopNavigationAction, Avatar } from '@ui-kitten/components'
-import {
-  Input,
-  Background,
-  LazyList,
-  RecipeCardSmall,
-  Callout,
-  Icons,
-  LazyListProps,
-  FollowButton,
-} from '@greeneggs/ui'
 import { useQuery } from '@apollo/client'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { noAvatar } from '@greeneggs/assets'
 import { Queries } from '@greeneggs/graphql'
-import {
-  profile,
-  RecipeFilter,
-  recipes,
-  recipesVariables,
-  recipes_recipes_data,
-  Sort,
-} from '@greeneggs/types/graphql'
-import { LoadingScreen } from '../loading-screen'
+import { profile, RecipeFilter, recipes, recipesVariables, recipes_recipes_data, Sort } from '@greeneggs/types/graphql'
+import { LoadingScreen } from '../../ui/loading-screen'
 import { useNavigation } from '@react-navigation/core'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { LazyList, LazyListProps } from '@greeneggs/ui/lazy-list'
+import { RecipeCardSmall } from '@greeneggs/ui/cards'
+import { Callout } from '@greeneggs/ui/callout'
+import { Background } from '@greeneggs/ui/background'
+import { FollowButton } from '@greeneggs/ui/follow-button'
+import { Input } from '@greeneggs/ui/input'
+import * as Icons from '@greeneggs/ui/icons'
 
-const styles = StyleSheet.create({
-  avatarContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  avatar: {
-    margin: 8,
-    width: 120,
-    height: 120,
-  },
-  view: {
-    height: '100%',
-  },
-  description: {
-    paddingHorizontal: 16,
-    paddingBottom: 16,
-  },
-  button: {},
-  topButton: {
-    width: 24,
-    height: 24,
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-  },
-  profileContainer: {
-    padding: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  statContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    padding: 16,
-  },
-  statBox: {
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  search: {
-    backgroundColor: 'white',
-    margin: 16,
-  },
-})
-
-interface IProfileStat {
+interface ProfileStatProps {
   label: string
   value: string
   onPress?: () => void
 }
 
-const ProfileStat = ({ label, value, onPress }: IProfileStat) => (
-  <Pressable onPress={onPress}>
-    <View style={styles.statBox}>
-      <Text category='label'>{value}</Text>
-      <Text category='c1'>{label}</Text>
-    </View>
-  </Pressable>
-)
+function ProfileStat({ label, value, onPress }: ProfileStatProps) {
+  return (
+    <Pressable onPress={onPress}>
+      <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+        <Text category='label'>{value}</Text>
+        <Text category='c1'>{label}</Text>
+      </View>
+    </Pressable>
+  )
+}
 
-interface MyRecipesProps
-  extends Omit<Partial<LazyListProps<recipes, recipesVariables, recipes_recipes_data>>, 'query'> {
+interface Props extends Omit<Partial<LazyListProps<recipes, recipesVariables, recipes_recipes_data>>, 'query'> {
   query: string
   userId: string
 }
@@ -97,13 +45,13 @@ interface MyRecipesProps
 /**
  * Abstract screen for displaying a user's profile information.
  */
-const MyRecipes: FC<MyRecipesProps> = ({ query, userId, ...props }) => {
-  const navigation = useNavigation()
+function MyRecipes({ query, userId, ...props }: Props) {
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (
     <LazyList<recipes, recipesVariables, recipes_recipes_data, Sort, RecipeFilter>
       {...props}
-      query={Queries.GET_RECIPES}
+      query={Queries.getRecipes}
       variables={{
         query: query,
         sort: Sort.NEW,
@@ -134,10 +82,10 @@ interface GenericProfileProps {
   isMe?: boolean
 }
 
-export const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) => {
+export function GenericProfile({ userId, isMe = false }: GenericProfileProps): ReactElement {
   const insets = useSafeAreaInsets()
-  const navigation = useNavigation()
-  const profileResult = useQuery<profile>(Queries.GET_PROFILE, {
+  const navigation = useNavigation<LoggedInNavigationProp>()
+  const profileResult = useQuery<profile>(Queries.getProfile, {
     variables: {
       userId,
     },
@@ -164,15 +112,12 @@ export const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) =>
   }
 
   return (
-    <Background style={{ ...styles.view }}>
+    <Background style={{ height: '100%' }}>
       <TopNavigation
         style={{ backgroundColor: 'transparent', paddingTop: insets.top }}
         accessoryLeft={() => {
           return isMe ? (
-            <TopNavigationAction
-              icon={Icons.Settings}
-              onPress={() => navigation.navigate('Settings')}
-            />
+            <TopNavigationAction icon={Icons.Settings} onPress={() => navigation.navigate('Settings')} />
           ) : (
             <TopNavigationAction icon={Icons.Back} onPress={() => navigation.goBack()} />
           )
@@ -184,25 +129,20 @@ export const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) =>
         extraData={myRecipeQuery}
         ListHeaderComponent={
           <>
-            <View style={styles.avatarContainer}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
               <Pressable onPress={() => isMe && navigation.navigate('EditProfilePicture')}>
                 <Avatar
-                  style={styles.avatar}
+                  style={{ margin: 8, width: 120, height: 120 }}
                   shape='round'
                   size='giant'
                   source={profile.avatarURI ? { uri: profile.avatarURI } : noAvatar}
                 />
               </Pressable>
             </View>
-            <View style={styles.profileContainer}>
+            <View style={{ padding: 16, flexDirection: 'row', justifyContent: 'space-between' }}>
               <Text category='h5'>{`${profile.firstName} ${profile.lastName}`}</Text>
               {isMe ? (
-                <Button
-                  size='small'
-                  style={styles.button}
-                  accessoryLeft={Icons.Edit}
-                  onPress={() => navigation.navigate('EditProfile')}
-                >
+                <Button size='small' accessoryLeft={Icons.Edit} onPress={() => navigation.navigate('EditProfile')}>
                   EDIT
                 </Button>
               ) : (
@@ -210,11 +150,11 @@ export const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) =>
               )}
             </View>
             {profile.bio ? (
-              <Text style={styles.description} numberOfLines={2}>
+              <Text style={{ paddingHorizontal: 16, paddingBottom: 16 }} numberOfLines={2}>
                 {optional(profile.bio)}
               </Text>
             ) : undefined}
-            <View style={styles.statContainer}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', padding: 16 }}>
               <ProfileStat
                 label='Following'
                 value={profile.followingCount.toString()}
@@ -231,7 +171,7 @@ export const GenericProfile = ({ userId, isMe = false }: GenericProfileProps) =>
             <Input
               placeholder='Search recipes'
               size='large'
-              style={styles.search}
+              style={{ backgroundColor: 'white', margin: 16 }}
               accessoryLeft={Icons.Search}
               value={myRecipeQuery}
               onChangeText={(newText) => setMyRecipeQuery(newText)}

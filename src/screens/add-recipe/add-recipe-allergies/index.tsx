@@ -1,26 +1,22 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from 'react'
+import { ReactElement, useContext } from 'react';
 import { ListItem } from '@ui-kitten/components'
-import { RecipeForm } from '../add-recipe'
-import { Icons } from '@greeneggs/ui'
+import * as Icons from '@greeneggs/ui/icons'
 import { AddRecipePartTemplate } from '../add-recipe-part-template'
 import { useNavigation } from '@react-navigation/native'
-import { AddRecipeContext } from '@greeneggs/providers'
-
-interface IAddRecipeAllergies {
-  form: RecipeForm
-}
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { AddRecipeContext } from '@greeneggs/context'
 
 /**
  * Screen that shows a list of all allergies that will
  * be added to a recipe.
  */
-export const AddRecipeAllergies = ({ form }: IAddRecipeAllergies) => {
+export function AddRecipeAllergies(): ReactElement {
   const { allergiesFieldArray } = useContext(AddRecipeContext)
 
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (
     <AddRecipePartTemplate
@@ -33,9 +29,7 @@ export const AddRecipeAllergies = ({ form }: IAddRecipeAllergies) => {
         <>
           <ListItem
             title={item.name}
-            accessoryRight={(props) => (
-              <Icons.Cross {...props} onPress={() => allergiesFieldArray?.remove(index)} />
-            )}
+            accessoryRight={(props) => <Icons.Cross {...props} onPress={() => allergiesFieldArray?.remove(index)} />}
           />
         </>
       )}

@@ -1,26 +1,21 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from 'react'
+import { ReactElement, useContext } from 'react';
 import { Divider, ListItem } from '@ui-kitten/components'
-import { Icons } from '@greeneggs/ui'
-
-import { RecipeForm } from '../add-recipe'
+import * as Icons from '@greeneggs/ui/icons'
 import { AddRecipePartTemplate } from '../add-recipe-part-template'
 import { useNavigation } from '@react-navigation/native'
-import { AddRecipeContext } from '@greeneggs/providers'
-
-interface IAddRecipeCategories {
-  form: RecipeForm
-}
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { AddRecipeContext } from '@greeneggs/context'
 
 /**
  * Screen that shows a list of all selected categories that will
  * be added to a recipe.
  */
-export const AddRecipeCategories = ({ form }: IAddRecipeCategories) => {
+export function AddRecipeCategories(): ReactElement {
   const { categoriesFieldArray } = useContext(AddRecipeContext)
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (
     <AddRecipePartTemplate
@@ -33,9 +28,7 @@ export const AddRecipeCategories = ({ form }: IAddRecipeCategories) => {
         <>
           <ListItem
             title={item.name}
-            accessoryRight={(props) => (
-              <Icons.Cross {...props} onPress={() => categoriesFieldArray?.remove(index)} />
-            )}
+            accessoryRight={(props) => <Icons.Cross {...props} onPress={() => categoriesFieldArray?.remove(index)} />}
           />
           <Divider />
         </>

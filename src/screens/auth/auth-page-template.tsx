@@ -1,99 +1,57 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
-import { View, StyleSheet, ImageBackground, Image, ScrollView } from 'react-native'
-import { Text, withStyles, ThemedComponentProps } from '@ui-kitten/components'
+import * as React from 'react'
+import { View, ImageBackground, Image, ScrollView } from 'react-native'
+import { Text, useTheme } from '@ui-kitten/components'
 import { LinearGradient } from 'expo-linear-gradient'
 import { StatusBar } from 'expo-status-bar'
-import { TopNavigation, Background } from '@greeneggs/ui'
 import { logo, banner } from '@greeneggs/assets'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { Callout } from '@greeneggs/ui/callout'
 
-const styles = StyleSheet.create({
-  logo: {
-    width: 48,
-    height: 48,
-    margin: 10,
-  },
-  form: {
-    paddingHorizontal: 10,
-    // paddingTop: 664,
-    // height: "100%",
-  },
-  gradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    height: '100%',
-  },
-  bannerContainer: {
-    height: 200,
-    justifyContent: 'center',
-  },
-  bannerContent: {
-    alignItems: 'center',
-    paddingBottom: 64,
-  },
-  banner: {
-    resizeMode: 'cover',
-    height: '100%',
-    justifyContent: 'flex-start',
-  },
-  logoText: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  centerText: {
-    textAlign: 'center',
-  },
-  forgotPassword: {
-    fontWeight: 'bold',
-    textAlign: 'right',
-    paddingTop: 8,
-    paddingBottom: 10,
-  },
-})
-
-interface IAuthPageTemplateProps {
-  navigation: any
-  message: string
+interface AuthPageTemplateProps {
+  subtitle: string
   children: React.ReactNode
+  errorMessage?: string
 }
 
 /**
  * Template screen for all authentication screens.
  * Shows the brand logo and background, followed by a form.
  */
-export const AuthPageTemplate = withStyles(
-  ({ message, children, eva }: IAuthPageTemplateProps & ThemedComponentProps) => (
+export function AuthPageTemplate({ subtitle, errorMessage, children }: AuthPageTemplateProps) {
+  const theme = useTheme()
+  return (
     <Background>
       <StatusBar style='dark' />
-      <View style={styles.bannerContainer}>
-        <ImageBackground source={banner} style={styles.banner}>
+      <View style={{ height: 200, justifyContent: 'center' }}>
+        <ImageBackground source={banner} style={{ height: '100%', justifyContent: 'flex-start' }}>
           <LinearGradient
             colors={['rgba(247, 249, 252,0.5)', 'rgba(247, 249, 252,1)']}
-            style={styles.gradient}
+            style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '100%' }}
           />
           <TopNavigation />
-          <View style={styles.logoText}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
             <Text category='h1'>Green Eggs</Text>
-            <Image source={logo} style={styles.logo} />
+            <Image source={logo} style={{ width: 48, height: 48, margin: 10 }} />
           </View>
-          <Text style={styles.centerText} category='s1'>
-            {message}
+          <Text style={{ textAlign: 'center' }} category='s1'>
+            {subtitle}
           </Text>
         </ImageBackground>
       </View>
       <ScrollView
         style={{
-          ...styles.form,
-          backgroundColor: eva?.theme && eva.theme['color-basic-200'],
+          marginTop: 24,
+          paddingHorizontal: 10,
+          backgroundColor: theme['color-basic-200'],
         }}
       >
+        {errorMessage && <Callout message={errorMessage} type='danger' style={{ marginVertical: 16 }} />}
         {children}
       </ScrollView>
     </Background>
   )
-)
+}

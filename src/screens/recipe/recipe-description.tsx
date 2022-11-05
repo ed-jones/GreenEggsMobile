@@ -1,22 +1,15 @@
-/**
- * Author: Dimitri Zvolinski
- */
-import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import { Card, Text } from '@ui-kitten/components'
-import { TopNavigation, Background } from '@greeneggs/ui'
-
-const styles = StyleSheet.create({
-  cardElement: {
-    paddingHorizontal: 28,
-    paddingVertical: 16,
-  },
-})
+import { RouteProp, useRoute } from '@react-navigation/native'
+import { LoggedInRouteParams } from '@greeneggs/navigation/types'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
 
 /**
  * Screen for displaying a recipe's complete description and recipe upload date.
  */
-export const RecipeDescription = ({ route }: any) => {
+export function RecipeDescription() {
+  const route = useRoute<RouteProp<LoggedInRouteParams, 'RecipeDescription'>>()
   const { description, createdAt, title, submittedBy } = route.params
 
   return (
@@ -24,13 +17,15 @@ export const RecipeDescription = ({ route }: any) => {
       <TopNavigation title='Description' />
       <Card
         header={() => (
-          <View style={styles.cardElement}>
+          <View style={{ paddingHorizontal: 28, paddingVertical: 16 }}>
             <Text category='h6'>{title}</Text>
             <Text category='s1'>{`Created by ${submittedBy.firstName} ${submittedBy.lastName}`}</Text>
           </View>
         )}
         footer={() => (
-          <Text style={styles.cardElement}>{new Date(Number(createdAt)).toDateString()}</Text>
+          <Text style={{ paddingHorizontal: 28, paddingVertical: 16 }}>
+            {new Date(Number(createdAt)).toDateString()}
+          </Text>
         )}
       >
         <Text>{description}</Text>

@@ -2,7 +2,7 @@
  * Author: Victor Ying
  */
 import { Queries } from '@greeneggs/graphql'
-import React, { FC, useContext, useState } from 'react'
+import { useContext, useState, ReactElement } from 'react';
 import {
   RecipeFilter,
   recipes,
@@ -15,27 +15,30 @@ import {
 } from '@greeneggs/types/graphql'
 import { useNavigation } from '@react-navigation/core'
 import { View } from 'react-native'
-import { ISearchContext, SearchContext } from '@greeneggs/providers/search-state-provider'
+import { SearchContext, ISearchContext } from '@greeneggs/context'
 import { Divider, IndexPath, SelectItem, Tab, TabBar } from '@ui-kitten/components'
-import { Select, Background, LazyList, RecipeCardSmall, UserListItem } from '@greeneggs/ui'
-import {
-  createMaterialTopTabNavigator,
-  MaterialTopTabBarProps,
-} from '@react-navigation/material-top-tabs'
+import { createMaterialTopTabNavigator, MaterialTopTabBarProps } from '@react-navigation/material-top-tabs'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { Background } from '@greeneggs/ui/background'
+import { LazyList } from '@greeneggs/ui/lazy-list'
+import { RecipeCardSmall } from '@greeneggs/ui/cards'
+import { UserListItem } from '../profile/user-list-item'
+import { Select } from '@greeneggs/ui/select'
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const { Navigator, Screen } = createMaterialTopTabNavigator()
 
 /**
  * Shows a list of recipes as the result of a search
  */
-export const RecipeSearch: FC = () => {
-  const navigation = useNavigation()
+export function RecipeSearch() {
+  const navigation = useNavigation<LoggedInNavigationProp>()
   const { searchState } = useContext<ISearchContext>(SearchContext)
   return (
     <Background>
       <LazyList<recipes, recipesVariables, recipes_recipes_data, Sort, RecipeFilter>
         style={{ paddingTop: 16 }}
-        query={Queries.GET_RECIPES}
+        query={Queries.getRecipes}
         variables={{
           query: searchState.query,
           sort: searchState.sort ?? Sort.NEW,
@@ -63,13 +66,13 @@ export const RecipeSearch: FC = () => {
 /**
  * Shows a list of users as the result of a search
  */
-const UserSearch: FC = () => {
+function UserSearch() {
   const { searchState } = useContext<ISearchContext>(SearchContext)
   return (
     <Background>
       <LazyList<Users, UsersVariables, Users_users_data, Sort, RecipeFilter>
         style={{ paddingTop: 16 }}
-        query={Queries.GET_USERS}
+        query={Queries.getUsers}
         variables={{
           query: searchState.query,
           sort: searchState.sort ?? Sort.NEW,
@@ -90,20 +93,19 @@ const UserSearch: FC = () => {
 /**
  * Tabs that can be switched between to show search results for recipes or users.
  */
-export const SearchTabBar = ({ navigation, state }: MaterialTopTabBarProps) => (
-  <TabBar
-    selectedIndex={state.index}
-    onSelect={(index) => navigation.navigate(state.routeNames[index])}
-  >
-    <Tab title='RECIPES' />
-    <Tab title='USERS' />
-  </TabBar>
-)
+export function SearchTabBar({ navigation, state }: MaterialTopTabBarProps): ReactElement {
+  return (
+    <TabBar selectedIndex={state.index} onSelect={(index) => navigation.navigate(state.routeNames[index])}>
+      <Tab title='RECIPES' />
+      <Tab title='USERS' />
+    </TabBar>
+  )
+}
 
 /**
  * Screen for searching recipes and users.
  */
-export const Search: FC = () => {
+export function Search() {
   const { searchState, setSearchState } = useContext<ISearchContext>(SearchContext)
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(
     new IndexPath(Object.values(Sort).indexOf(searchState.sort))
@@ -137,7 +139,7 @@ export const Search: FC = () => {
             value={getSortFromIndex(selectedIndex)}
           >
             {Object.values(Sort).map((sortType) => (
-              <SelectItem title={sortType} />
+              <SelectItem title={sortType} key={sortType} />
             ))}
           </Select>
         </View>

@@ -1,62 +1,42 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React from 'react'
+import { ReactElement } from 'react'
 import { Mutations, Queries } from '@greeneggs/graphql'
-import { ScrollView, StyleSheet } from 'react-native'
+import { ScrollView } from 'react-native'
 import { editProfile, editProfileVariables, ProfileDetails } from '@greeneggs/types/graphql'
 import { Button, Text, Spinner } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
 import { useQuery } from '@apollo/client'
 import { Me } from '@greeneggs/types/graphql'
-import { LoadingScreen } from '../loading-screen'
-import {
-  TopNavigation,
-  Background,
-  Icons,
-  ControlledInput,
-  InputType,
-  useForm,
-} from '@greeneggs/ui'
-
-const styles = StyleSheet.create({
-  view: {
-    padding: 16,
-  },
-  buttonGroup: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-  },
-  heading: {
-    paddingVertical: 16,
-  },
-  input: {
-    marginBottom: 10,
-  },
-})
+import { LoadingScreen } from '../../ui/loading-screen'
+import { ControlledInput, InputType, useForm } from '@greeneggs/ui/form'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import * as Icons from '@greeneggs/ui/icons'
 
 const useEditProfile = () =>
-  useForm<ProfileDetails, editProfile, editProfileVariables>(
-    Mutations.EDIT_PROFILE,
-    'profileDetails'
-  )
+  useForm<ProfileDetails, editProfile, editProfileVariables>({
+    Mutation: Mutations.editProfile,
+    mutationVariableName: 'profileDetails',
+  })
 
 /**
  * Screen that lets a user edit their basic profile details,
  * including First Name, Last Name and Bio.
  */
-export function EditProfile() {
+export function EditProfile(): ReactElement {
   const form = useEditProfile()
   const navigation = useNavigation()
-  const { loading, error, data } = useQuery<Me>(Queries.ME)
+  const { loading: isLoading, error, data } = useQuery<Me>(Queries.getMe)
 
-  if (loading) return <LoadingScreen />
+  if (isLoading) return <LoadingScreen />
   if (error) {
     return <Text>Error! {error.message}</Text>
   }
 
   function onSubmit() {
-    form.submitForm().then(() => {
+    void form.submitForm().then(() => {
       navigation.goBack()
     })
   }
@@ -64,7 +44,7 @@ export function EditProfile() {
   return (
     <Background>
       <TopNavigation title='Edit Profile' />
-      <ScrollView style={styles.view}>
+      <ScrollView style={{ padding: 16 }}>
         <ControlledInput<ProfileDetails>
           controllerProps={{
             name: 'firstName',
@@ -74,7 +54,7 @@ export function EditProfile() {
           inputProps={{
             label: 'FIRST NAME',
             style: {
-              ...styles.input,
+              marginBottom: 10,
             },
           }}
           submitError={form.formResult.data?.editProfile.error}
@@ -89,7 +69,7 @@ export function EditProfile() {
           inputProps={{
             label: 'LAST NAME',
             style: {
-              ...styles.input,
+              marginBottom: 10,
             },
           }}
           submitError={form.formResult.data?.editProfile.error}
@@ -104,17 +84,15 @@ export function EditProfile() {
           inputProps={{
             label: 'BIO',
             style: {
-              ...styles.input,
+              marginBottom: 10,
             },
           }}
           submitError={form.formResult.data?.editProfile.error}
           type={InputType.TEXTAREA}
         />
         <Button
-          accessoryRight={
-            form.formResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Save
-          }
-          onPress={form.handleSubmit(onSubmit)}
+          accessoryRight={form.formResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Save}
+          onPress={() => void form.handleSubmit(onSubmit)}
         >
           SAVE CHANGES
         </Button>

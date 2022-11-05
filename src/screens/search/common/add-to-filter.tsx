@@ -1,8 +1,7 @@
 /**
  * Author: Victor Ying
  */
-import React, { FC } from 'react'
-import { FilterControlGroup } from '../common'
+import { FilterControlGroup } from './filter-control-group';
 
 export interface AddToFilterProps {
   filterCount: number
@@ -13,7 +12,7 @@ export interface AddToFilterProps {
 /**
  * Control group component for adding and clearing recipes from an overall filter.
  */
-export const AddToFilter: FC<AddToFilterProps> = ({ filterCount, clearFilters, addToFilter }) => {
+export function AddToFilter({ filterCount, clearFilters, addToFilter }: AddToFilterProps) {
   return (
     <FilterControlGroup
       label={`${filterCount.toString()} FILTERS SELECTED`}

@@ -1,26 +1,21 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { useContext } from 'react'
-import { CommentLikeCounter, LabelledIcon } from '@greeneggs/ui'
+import { ReactElement, useContext } from 'react';
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { noAvatar } from '@greeneggs/assets'
 import { convertSubmittedAt } from '@greeneggs/utils'
 import { ListItem, Button, Divider, Avatar, Icon } from '@ui-kitten/components'
-import { View, Text, StyleSheet, Alert, Pressable } from 'react-native'
+import { View, Text, Alert, Pressable } from 'react-native'
 import { DeleteComment, recipe_recipe_data_comments } from '@greeneggs/types/graphql'
 import { useNavigation } from '@react-navigation/core'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { useMutation } from '@apollo/client'
 
-import { UserContext } from '@greeneggs/providers'
-import { useNavigateToProfile } from '@greeneggs/navigation'
-
-const styles = StyleSheet.create({
-  avatar: {
-    marginRight: 10,
-  },
-})
+import { UserContext } from '@greeneggs/context'
+import { useNavigateToProfile } from '@greeneggs/navigation/utils'
+import { CommentLikeCounter } from '@greeneggs/ui/counters/comment-like-counter'
+import { LabelledIcon } from '@greeneggs/ui/labelled-icon'
 
 interface RecipeCommentProps {
   comment: recipe_recipe_data_comments
@@ -30,15 +25,15 @@ interface RecipeCommentProps {
 /**
  * Component for displaying an individual recipe comment
  */
-export function RecipeComment({ comment, replyButton }: RecipeCommentProps) {
-  const navigation: StackNavigationProp<any, any> = useNavigation()
+export function RecipeComment({ comment, replyButton }: RecipeCommentProps): ReactElement {
+  const navigation: StackNavigationProp<Record<string, Record<string, unknown>>, string> = useNavigation()
   const navigateToProfile = useNavigateToProfile()
 
-  const [deleteComment] = useMutation<DeleteComment>(Mutations.DELETE_COMMENT, {
+  const [deleteComment] = useMutation<DeleteComment>(Mutations.deleteComment, {
     variables: {
       commentId: comment.id,
     },
-    refetchQueries: [Queries.GET_RECIPE, 'recipe'],
+    refetchQueries: [Queries.getRecipe, 'recipe'],
   })
 
   const { me } = useContext(UserContext)
@@ -52,7 +47,7 @@ export function RecipeComment({ comment, replyButton }: RecipeCommentProps) {
           text: 'Cancel',
           style: 'cancel',
         },
-        { text: 'OK', onPress: () => deleteComment() },
+        { text: 'OK', onPress: () => void deleteComment() },
       ],
       { cancelable: false }
     )
@@ -76,12 +71,8 @@ export function RecipeComment({ comment, replyButton }: RecipeCommentProps) {
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Avatar
                       size='small'
-                      source={
-                        comment.submittedBy.avatarURI
-                          ? { uri: comment.submittedBy.avatarURI }
-                          : noAvatar
-                      }
-                      style={styles.avatar}
+                      source={comment.submittedBy.avatarURI ? { uri: comment.submittedBy.avatarURI } : noAvatar}
+                      style={{ marginRight: 10 }}
                     />
                     <Text
                       style={{ fontWeight: 'bold' }}
@@ -98,7 +89,7 @@ export function RecipeComment({ comment, replyButton }: RecipeCommentProps) {
                   submittedById={comment.submittedBy.id}
                 />
                 <LabelledIcon
-                  label='Reply'
+                  label='REPLY'
                   iconName='message-square-outline'
                   onPress={() =>
                     navigation.navigate('RecipeCommentReplies', {
@@ -136,7 +127,8 @@ export function RecipeComment({ comment, replyButton }: RecipeCommentProps) {
                 }
                 size='small'
                 status='basic'
-              >{`SHOW ALL REPLIES (${comment.replyCount.toString()})`}</Button>
+                appearance='ghost'
+              >{`REPLIES (${comment.replyCount.toString()})`}</Button>
             </View>
           )}
         </View>

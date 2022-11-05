@@ -1,25 +1,26 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from 'react'
-import { IngredientListItem } from '@greeneggs/ui'
+import { ReactElement, useContext } from 'react'
+import { IngredientListItem } from '@greeneggs/ui/list-items'
 import { useEffect } from 'react'
 
 import { AddRecipePartTemplate } from '../add-recipe-part-template'
 import { RecipeForm } from '../add-recipe'
 import { useNavigation } from '@react-navigation/native'
-import { AddRecipeContext } from '@greeneggs/providers'
+import { AddRecipeContext } from '@greeneggs/context'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
 
-interface ICreateRecipeIngredients {
+interface Props {
   form: RecipeForm
 }
 
 /**
  * Screen that shows a list of all ingredients that will be added to a recipe.
  */
-export const AddRecipeIngredients = ({ form }: ICreateRecipeIngredients) => {
+export function AddRecipeIngredients({ form }: Props): ReactElement {
   const { ingredientsFieldArray } = useContext(AddRecipeContext)
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   const ingredientsLength = ingredientsFieldArray?.fields?.length || 0
   useEffect(() => {
@@ -36,12 +37,12 @@ export const AddRecipeIngredients = ({ form }: ICreateRecipeIngredients) => {
       emptyStateTitle='No ingredients'
       emptyStateDescription='Make sure to add any ingredients this recipe might need.'
       listItem={({ item, index }) =>
-        item && (
+        item ? (
           <IngredientListItem
             ingredient={{ ...item, __typename: 'Ingredient' }}
             remove={() => ingredientsFieldArray?.remove(index)}
           />
-        )
+        ) : null
       }
       data={ingredientsFieldArray?.fields}
     />

@@ -39,18 +39,6 @@
     "text-label-font-family": "Lato-Bold"
   },
   "components": {
-    "Select": {
-      "meta": { "parameters": { "backgroundColor": "white" } },
-      "appearances": {
-        "default": {
-          "variantGroups": {
-            "status": {
-              "basic": { "backgroundColor": "white", "borderColor": "white" }
-            }
-          }
-        }
-      }
-    },
     "TabBar": {
       "meta": {
         "scope": "all",

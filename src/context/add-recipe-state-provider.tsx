@@ -1,9 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useState, FC, createContext } from 'react'
-import { addRecipe, addRecipeVariables, RecipeInput } from '@greeneggs/types/graphql'
-import { IForm } from '@greeneggs/ui'
+import { PropsWithChildren } from 'react';
 import { useRecipeForm } from '@greeneggs/screens/add-recipe/use-recipe-form'
 import { AddRecipeAllergies } from '@greeneggs/screens/add-recipe/add-recipe-allergies'
 import { AddRecipeCategories } from '@greeneggs/screens/add-recipe/add-recipe-categories'
@@ -12,28 +10,16 @@ import { AddRecipeDiets } from '@greeneggs/screens/add-recipe/add-recipe-diets'
 import { AddRecipeDirections } from '@greeneggs/screens/add-recipe/add-recipe-directions'
 import { AddRecipeIngredients } from '@greeneggs/screens/add-recipe/add-recipe-ingredients'
 import { PublishRecipe } from '@greeneggs/screens/add-recipe/publish-recipe'
-import { ISteps, Step, useSteps } from '@greeneggs/screens/add-recipe/use-steps'
-import { useFieldArray, UseFieldArrayReturn } from 'react-hook-form'
-
-export interface AddRecipeContextInterface {
-  form?: IForm<RecipeInput, addRecipe, addRecipeVariables>
-  steps?: ISteps
-  categoriesFieldArray?: UseFieldArrayReturn<RecipeInput, 'categories', 'id'>
-  ingredientsFieldArray?: UseFieldArrayReturn<RecipeInput, 'ingredients', 'id'>
-  stepsFieldArray?: UseFieldArrayReturn<RecipeInput, 'steps', 'id'>
-  allergiesFieldArray?: UseFieldArrayReturn<RecipeInput, 'allergies', 'id'>
-  dietsFieldArray?: UseFieldArrayReturn<RecipeInput, 'diets', 'id'>
-}
-
-export const AddRecipeContext = createContext<AddRecipeContextInterface>({})
-
+import { Step, useSteps } from '@greeneggs/screens/add-recipe/use-steps'
+import { useFieldArray } from 'react-hook-form'
+import { AddRecipeContext } from './index'
 /**
  * State provider that lets all child components control the state of a recipe form.
  */
-export const AddRecipeStateProvider: FC = ({ children }) => {
+export function AddRecipeStateProvider({ children }: PropsWithChildren<object>) {
   const form = useRecipeForm()
 
-  const Steps: Step[] = [
+  const steps: Step[] = [
     {
       title: 'Details',
       component: <AddRecipeDetails form={form} />,
@@ -48,23 +34,21 @@ export const AddRecipeStateProvider: FC = ({ children }) => {
     },
     {
       title: 'Categories',
-      component: <AddRecipeCategories form={form} />,
+      component: <AddRecipeCategories />,
     },
     {
       title: 'Allergies',
-      component: <AddRecipeAllergies form={form} />,
+      component: <AddRecipeAllergies />,
     },
     {
       title: 'Diets',
-      component: <AddRecipeDiets form={form} />,
+      component: <AddRecipeDiets />,
     },
     {
       title: 'Cover Image',
       component: <PublishRecipe form={form} />,
     },
   ]
-
-  const steps = useSteps(Steps)
 
   const categoriesFieldArray = useFieldArray({
     control: form.control,
@@ -95,7 +79,7 @@ export const AddRecipeStateProvider: FC = ({ children }) => {
     <AddRecipeContext.Provider
       value={{
         form,
-        steps,
+        steps: useSteps(steps),
         categoriesFieldArray,
         ingredientsFieldArray,
         stepsFieldArray,

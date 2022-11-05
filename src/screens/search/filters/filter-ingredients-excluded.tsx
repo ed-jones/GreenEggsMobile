@@ -1,19 +1,9 @@
 /**
  * Author: Victor Ying
  */
-import React, { FC, useContext, useState } from 'react'
+import { useContext, useState } from 'react';
 import { Queries } from '@greeneggs/graphql'
 import { Divider } from '@ui-kitten/components'
-import {
-  Input,
-  TopNavigation,
-  Background,
-  Icons,
-  LazyListAlpha,
-  AlphabetType,
-  SelectableListItem,
-  EmptyState,
-} from '@greeneggs/ui'
 import { useNavigation } from '@react-navigation/core'
 import {
   Ingredients,
@@ -22,15 +12,23 @@ import {
   RecipeFilter,
   Sort,
 } from '@greeneggs/types/graphql'
-import { SearchContext } from '@greeneggs/providers/search-state-provider'
+import { SearchContext } from '@greeneggs/context'
 
-import { AddToFilter } from '../common'
 import { View } from 'react-native'
+import { AddToFilter } from '../common/add-to-filter'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { Input } from '@greeneggs/ui/input'
+import { LazyListAlpha } from '@greeneggs/ui/lazy-alpha-list'
+import { SelectableListItem } from '@greeneggs/ui/list-items'
+import { AlphabetType } from '@greeneggs/ui/alpha-list'
+import { EmptyState } from '@greeneggs/ui/empty-state'
+import * as Icons from '@greeneggs/ui/icons'
 
 /**
  * Screen for filtering out ingredients from a search
  */
-export const FilterIngredientsExcluded: FC = () => {
+export function FilterIngredientsExcluded() {
   const navigation = useNavigation()
   const [query, setQuery] = useState('')
   const { searchState, setSearchState } = useContext(SearchContext)
@@ -40,9 +38,7 @@ export const FilterIngredientsExcluded: FC = () => {
 
   const setSelected = (selected: boolean, id: string) => {
     setSelectedIngredients(
-      selected
-        ? [...selectedIngredients, id]
-        : [...selectedIngredients.filter((excludes) => excludes !== id)]
+      selected ? [...selectedIngredients, id] : [...selectedIngredients.filter((excludes) => excludes !== id)]
     )
   }
 
@@ -70,13 +66,7 @@ export const FilterIngredientsExcluded: FC = () => {
         onChangeText={setQuery}
         value={query}
       />
-      <LazyListAlpha<
-        Ingredients,
-        IngredientsVariables,
-        Ingredients_ingredients_data,
-        Sort,
-        RecipeFilter
-      >
+      <LazyListAlpha<Ingredients, IngredientsVariables, Ingredients_ingredients_data, Sort, RecipeFilter>
         renderItem={(item) => (
           <>
             <SelectableListItem
@@ -88,7 +78,7 @@ export const FilterIngredientsExcluded: FC = () => {
           </>
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
-        query={Queries.GET_INGREDIENTS}
+        query={Queries.getIngredients}
         contentContainerStyle={{ flexGrow: 1 }}
         ListEmptyComponent={
           <View style={{ flexGrow: 1, justifyContent: 'center' }}>

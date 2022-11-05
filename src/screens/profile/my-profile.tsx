@@ -1,22 +1,22 @@
 /**
  * Author: Andrew Wilkie
  */
-import React from 'react'
+import { ReactElement } from 'react';
 import { Text } from '@ui-kitten/components'
 import { useQuery } from '@apollo/client'
-import { Callout } from '@greeneggs/ui'
 import { Queries } from '@greeneggs/graphql'
 import { Me } from '@greeneggs/types/graphql'
-import { LoadingScreen } from '../loading-screen'
+import { LoadingScreen } from '../../ui/loading-screen'
 import { GenericProfile } from './generic-profile'
+import { Callout } from '@greeneggs/ui/callout'
 
 /**
  * Screen for displaying the profile details for the logged in user.
  * Lets the user access the settings page, a full list of their upload recipes,
  * and lets the user edit their profile.
  */
-export const MyProfile = () => {
-  const meResult = useQuery<Me>(Queries.ME)
+export function MyProfile(): ReactElement {
+  const meResult = useQuery<Me>(Queries.getMe)
 
   if (meResult.loading) {
     return <LoadingScreen />

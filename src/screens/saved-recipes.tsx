@@ -1,14 +1,9 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC } from 'react'
-import { useQuery } from '@apollo/client'
-import { Queries } from '@greeneggs/graphql'
-import { LoadingScreen } from './loading-screen'
-import { Text } from '@ui-kitten/components'
+import { Queries } from '@greeneggs/graphql';
 import {
   RecipeFilter,
-  savedRecipes,
   savedRecipesVariables,
   savedRecipes_savedRecipes_data,
   Sort,
@@ -16,54 +11,27 @@ import {
 } from '@greeneggs/types/graphql'
 import { View } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
-import {
-  TopNavigation,
-  Background,
-  Callout,
-  LazyList,
-  RecipeCardSmall,
-  EmptyState,
-} from '@greeneggs/ui'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { Background } from '@greeneggs/ui/background'
+import { LazyList } from '@greeneggs/ui/lazy-list'
+import { RecipeCardSmall } from '@greeneggs/ui/cards/recipe-card-small'
 
-const SavedRecipesHeader = () => <TopNavigation title='Saved Recipes' accessoryLeft={undefined} />
+function SavedRecipesHeader() {
+  return <TopNavigation title='Saved Recipes' accessoryLeft={undefined} />
+}
 
 /**
  * View for displaying recipes a user has saved.
  */
-export const SavedRecipes: FC = () => {
-  const navigation = useNavigation()
-  const { data, loading, error } = useQuery<savedRecipes, savedRecipesVariables>(
-    Queries.GET_SAVED_RECIPES,
-    {
-      variables: {
-        offset: 0,
-        limit: 10,
-      },
-    }
-  )
-  if (loading) {
-    return <LoadingScreen />
-  }
-  if (error) {
-    return (
-      <Background>
-        <Text>Error! {error.message}</Text>
-      </Background>
-    )
-  }
-  const recipes = data?.savedRecipes.data
+export function SavedRecipes() {
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (
     <Background>
       <SavedRecipesHeader />
-      <LazyList<
-        SavedRecipesType,
-        savedRecipesVariables,
-        savedRecipes_savedRecipes_data,
-        Sort,
-        RecipeFilter
-      >
-        query={Queries.GET_SAVED_RECIPES}
+      <LazyList<SavedRecipesType, savedRecipesVariables, savedRecipes_savedRecipes_data, Sort, RecipeFilter>
+        query={Queries.getSavedRecipes}
         variables={{}}
         dataKey='savedRecipes'
         emptyMessage="You haven't saved any recipes yet! Save some recipes and they will appear here."

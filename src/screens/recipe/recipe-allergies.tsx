@@ -1,12 +1,12 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React from 'react'
+import { ReactElement } from 'react'
 import { recipe_recipe_data_allergies } from '@greeneggs/types/graphql'
 import { Text } from '@ui-kitten/components'
-import { Callout } from '@greeneggs/ui'
+import { Callout } from '@greeneggs/ui/callout'
 
-interface IRecipeAllergies {
+interface Props {
   allergies: recipe_recipe_data_allergies[]
 }
 
@@ -27,7 +27,7 @@ function stringifyAllergies(allergies: recipe_recipe_data_allergies[]) {
 /**
  * Screen that displays a callout if a recipe might trigger certain allergies.
  */
-export const RecipeAllergies = ({ allergies }: IRecipeAllergies) => {
+export function RecipeAllergies({ allergies }: Props): ReactElement {
   if (allergies.length > 0)
     return (
       <Callout
@@ -38,10 +38,7 @@ export const RecipeAllergies = ({ allergies }: IRecipeAllergies) => {
             <Text style={{ fontWeight: 'bold' }}>{stringifyAllergies(allergies)}</Text>
           </Text>
         }
-        // message={`This recipe is unsuitable for those with allergies to${allergies.map(
-        //   (allergy) => ` ${allergy.name.toLowerCase()}`
-        // )}.`}
       />
     )
-  return null
+  return <></>
 }

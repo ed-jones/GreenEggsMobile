@@ -1,8 +1,8 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { ReactElement, useState } from 'react'
+import { View } from 'react-native'
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { noAvatar } from '@greeneggs/assets'
 import {
@@ -14,29 +14,9 @@ import {
   recipe,
 } from '@greeneggs/types/graphql'
 import { Avatar, Button, Text } from '@ui-kitten/components'
-import { Input } from '@greeneggs/ui'
+import { Input } from '@greeneggs/ui/input'
 import { useApolloClient, useQuery } from '@apollo/client'
-import { LoadingScreen } from '../loading-screen'
-
-const styles = StyleSheet.create({
-  view: {
-    padding: 16,
-  },
-  buttonGroup: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-  },
-  heading: {
-    paddingVertical: 16,
-  },
-  input: {
-    marginBottom: 10,
-    flex: 1,
-  },
-  avatar: {
-    marginRight: 10,
-  },
-})
+import { LoadingScreen } from '../../ui/loading-screen'
 
 interface RecipeAddCommentProps {
   recipeId?: string
@@ -48,11 +28,11 @@ interface RecipeAddCommentProps {
 /**
  * Input component for adding a recipe comment.
  */
-export function RecipeAddComment({ recipeId, commentId, isReply, active }: RecipeAddCommentProps) {
+export function RecipeAddComment({ recipeId, commentId, isReply, active }: RecipeAddCommentProps): ReactElement {
   const [comment, setComment] = useState<string>('')
   const client = useApolloClient()
-  const { loading, error, data } = useQuery<Me>(Queries.ME)
-  if (loading) return <LoadingScreen />
+  const { loading: isLoading, error, data } = useQuery<Me>(Queries.getMe)
+  if (isLoading) return <LoadingScreen />
   if (error) {
     return <Text>Error! {error.message}</Text>
   }
@@ -60,18 +40,18 @@ export function RecipeAddComment({ recipeId, commentId, isReply, active }: Recip
 
   function handleSubmit() {
     if (recipeId) {
-      client
+      void client
         .mutate<AddRecipeComment, AddRecipeCommentVariables>({
-          mutation: Mutations.ADD_RECIPE_COMMENT,
+          mutation: Mutations.addRecipeComment,
           variables: {
             comment,
             recipeId,
           },
-          refetchQueries: [Queries.GET_RECIPE, 'recipe'],
+          refetchQueries: [Queries.getRecipe, 'recipe'],
         })
         .then(() => {
-          client.query<recipe>({
-            query: Queries.GET_RECIPE,
+          void client.query<recipe>({
+            query: Queries.getRecipe,
             variables: {
               recipeId,
             },
@@ -79,13 +59,13 @@ export function RecipeAddComment({ recipeId, commentId, isReply, active }: Recip
         })
     }
     if (commentId) {
-      client.mutate<AddRecipeCommentReply, AddRecipeCommentReplyVariables>({
-        mutation: Mutations.ADD_RECIPE_COMMENT_REPLY,
+      void client.mutate<AddRecipeCommentReply, AddRecipeCommentReplyVariables>({
+        mutation: Mutations.addRecipeCommentReply,
         variables: {
           comment,
           commentId,
         },
-        refetchQueries: [Queries.GET_RECIPE, 'recipe'],
+        refetchQueries: [Queries.getRecipe, 'recipe'],
       })
     }
 
@@ -108,15 +88,11 @@ export function RecipeAddComment({ recipeId, commentId, isReply, active }: Recip
             height: '100%',
           }}
         >
-          <Avatar
-            size='small'
-            source={me?.avatarURI ? { uri: me?.avatarURI } : noAvatar}
-            style={styles.avatar}
-          />
+          <Avatar size='small' source={me?.avatarURI ? { uri: me?.avatarURI } : noAvatar} style={{ marginRight: 10 }} />
         </View>
         <Input
           autoFocus={active}
-          style={styles.input}
+          style={{ marginBottom: 10, flex: 1 }}
           numberOfLines={3}
           multiline
           textAlignVertical='top'

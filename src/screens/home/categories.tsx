@@ -1,23 +1,21 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC } from 'react'
-import { Queries } from '@greeneggs/graphql'
+import { Queries } from '@greeneggs/graphql';
 import {
-  CategoriesVariables,
-  Categories_categories_data,
   RecipeFilter,
   Sort,
-  Categories as CategoriesType,
   CategoriesWithImages,
   CategoriesWithImagesVariables,
   CategoriesWithImages_categoriesWithImages_data,
 } from '@greeneggs/types/graphql'
-import { Background, Icons, LazyList } from '@greeneggs/ui'
-import { Button, ListItem, Text, TopNavigation } from '@ui-kitten/components'
-import { ImageBackground, Pressable, StyleSheet, View } from 'react-native'
+import { Button, Text } from '@ui-kitten/components'
+import { ImageBackground, Pressable } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useNavigation } from '@react-navigation/core'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { Background } from '@greeneggs/ui/background'
+import { LazyList } from '@greeneggs/ui/lazy-list'
 
 interface CategoryWithImageProps {
   name: string
@@ -25,28 +23,10 @@ interface CategoryWithImageProps {
   onPress: () => void
 }
 
-const styles = StyleSheet.create({
-  categoryCard: {
-    width: '100%',
-    height: 75,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 12,
-    overflow: 'hidden',
-  },
-  gradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    height: '100%',
-  },
-})
-
 /**
  * Displays an infinite scrolling list of categories that are important enough to have an associated image.
  */
-const CategoryWithImage: FC<CategoryWithImageProps> = ({ name, coverImage, onPress }) => {
+function CategoryWithImage({ name, coverImage, onPress }: CategoryWithImageProps) {
   return (
     <Pressable
       onPress={onPress}
@@ -57,8 +37,21 @@ const CategoryWithImage: FC<CategoryWithImageProps> = ({ name, coverImage, onPre
         width: '50%',
       }}
     >
-      <ImageBackground source={{ uri: coverImage }} style={styles.categoryCard}>
-        <LinearGradient colors={['transparent', 'rgba(0, 0, 0, 0.8)']} style={styles.gradient} />
+      <ImageBackground
+        source={{ uri: coverImage }}
+        style={{
+          width: '100%',
+          height: 75,
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: 12,
+          overflow: 'hidden',
+        }}
+      >
+        <LinearGradient
+          colors={['transparent', 'rgba(0, 0, 0, 0.8)']}
+          style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '100%' }}
+        />
         <Text category='h5' style={{ color: 'white' }}>
           {name.toUpperCase()}
         </Text>
@@ -67,8 +60,8 @@ const CategoryWithImage: FC<CategoryWithImageProps> = ({ name, coverImage, onPre
   )
 }
 
-export const Categories: FC = () => {
-  const navigation = useNavigation()
+export function Categories() {
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (
     <Background>
@@ -81,14 +74,11 @@ export const Categories: FC = () => {
       >
         limit={20}
         ListFooterComponent={
-          <Button
-            style={{ margin: 24, alignItems: 'flex-start' }}
-            onPress={() => navigation.navigate('AllCategories')}
-          >
+          <Button style={{ margin: 24, alignItems: 'flex-start' }} onPress={() => navigation.navigate('AllCategories')}>
             VIEW ALL
           </Button>
         }
-        query={Queries.GET_CATEGORIES_WITH_IMAGES}
+        query={Queries.getCategoriesWithImages}
         variables={{
           query: '',
         }}

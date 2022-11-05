@@ -2,9 +2,9 @@
  * Author: Edward Jones
  */
 import { useContext } from 'react'
-import { UserContext } from '@greeneggs/providers'
 import { useNavigation } from '@react-navigation/core'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { UserContext } from '@greeneggs/context'
 
 type NavigateToProfile = (userId: string) => void
 
@@ -14,11 +14,11 @@ type NavigateToProfile = (userId: string) => void
  */
 export function useNavigateToProfile(): NavigateToProfile {
   const { me } = useContext(UserContext)
-  const navigation: StackNavigationProp<any, any> = useNavigation()
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   function navigateToMyProfile() {
     navigation.reset({
-      routes: [{ name: 'Home' }],
+      routes: [{ name: 'Navigation' }],
     })
     navigation.navigate('MyProfile', { index: 4 })
   }

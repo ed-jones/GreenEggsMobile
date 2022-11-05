@@ -1,47 +1,35 @@
 /**
  * Author: Victor Ying
  */
-import React, { FC, useContext, useState } from 'react'
+import { useContext, useState } from 'react';
 import { Queries } from '@greeneggs/graphql'
 import { Divider } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
-import {
-  Allergies,
-  AllergiesVariables,
-  Allergies_allergies_data,
-  RecipeFilter,
-  Sort,
-} from '@greeneggs/types/graphql'
-import { SearchContext } from '@greeneggs/providers/search-state-provider'
-import {
-  Input,
-  TopNavigation,
-  Background,
-  Icons,
-  SelectableListItem,
-  AlphabetType,
-  LazyListAlpha,
-  EmptyState,
-} from '@greeneggs/ui'
-import { AddToFilter } from '../common'
+import { Allergies, AllergiesVariables, Allergies_allergies_data, RecipeFilter, Sort } from '@greeneggs/types/graphql'
+import { SearchContext } from '@greeneggs/context'
 import { View } from 'react-native'
+import { AddToFilter } from '../common/add-to-filter'
+import { LazyListAlpha } from '@greeneggs/ui/lazy-alpha-list'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { Input } from '@greeneggs/ui/input'
+import { SelectableListItem } from '@greeneggs/ui/list-items'
+import { AlphabetType } from '@greeneggs/ui/alpha-list'
+import { EmptyState } from '@greeneggs/ui/empty-state'
+import * as Icons from '@greeneggs/ui/icons'
 
 /**
  * Screen for requiring certain allergy requirements in a search
  */
-export const FilterRecipeAllergies: FC = () => {
+export function FilterRecipeAllergies() {
   const navigation = useNavigation()
   const [query, setQuery] = useState('')
   const { searchState, setSearchState } = useContext(SearchContext)
-  const [selectedAllergies, setSelectedAllergies] = useState<string[]>(
-    searchState.filter.allergies ?? []
-  )
+  const [selectedAllergies, setSelectedAllergies] = useState<string[]>(searchState.filter.allergies ?? [])
 
   const setSelected = (selected: boolean, id: string) => {
     setSelectedAllergies(
-      selected
-        ? [...selectedAllergies, id]
-        : [...selectedAllergies.filter((allergies) => allergies !== id)]
+      selected ? [...selectedAllergies, id] : [...selectedAllergies.filter((allergies) => allergies !== id)]
     )
   }
 
@@ -78,7 +66,7 @@ export const FilterRecipeAllergies: FC = () => {
           </>
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
-        query={Queries.GET_ALLERGIES}
+        query={Queries.getAllergies}
         contentContainerStyle={{ flexGrow: 1 }}
         ListEmptyComponent={
           <View style={{ flexGrow: 1, justifyContent: 'center' }}>

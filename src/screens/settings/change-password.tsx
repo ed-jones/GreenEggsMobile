@@ -1,53 +1,29 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React from 'react'
+import { ReactElement } from 'react';
 import { Mutations } from '@greeneggs/graphql'
-import { ScrollView, StyleSheet } from 'react-native'
-import {
-  ChangePasswordDetails,
-  changePasswordVariables,
-  changePassword,
-} from '@greeneggs/types/graphql'
+import { ScrollView } from 'react-native'
+import { ChangePasswordDetails, changePasswordVariables, changePassword } from '@greeneggs/types/graphql'
 import { Button, Spinner } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
-import {
-  TopNavigation,
-  Background,
-  Icons,
-  ControlledInput,
-  InputType,
-  useForm,
-} from '@greeneggs/ui'
-
-const styles = StyleSheet.create({
-  view: {
-    padding: 16,
-  },
-  buttonGroup: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-  },
-  heading: {
-    paddingVertical: 16,
-  },
-  input: {
-    marginBottom: 10,
-  },
-})
+import { ControlledInput, InputType, useForm } from '@greeneggs/ui/form'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import * as Icons from '@greeneggs/ui/icons'
 
 /**
  * Screen that lets a user change their password.
  */
-export function ChangePassword() {
-  const form = useForm<ChangePasswordDetails, changePassword, changePasswordVariables>(
-    Mutations.CHANGE_PASSWORD,
-    'changePasswordDetails'
-  )
+export function ChangePassword(): ReactElement {
+  const form = useForm<ChangePasswordDetails, changePassword, changePasswordVariables>({
+    Mutation: Mutations.changePassword,
+    mutationVariableName: 'changePasswordDetails',
+  })
   const navigation = useNavigation()
 
   function onSubmit() {
-    form.submitForm().then((data) => {
+    void form.submitForm().then((data) => {
       if (!data.data?.changePassword.error) {
         navigation.goBack()
       }
@@ -57,7 +33,7 @@ export function ChangePassword() {
   return (
     <Background>
       <TopNavigation title='Change Password' />
-      <ScrollView style={styles.view}>
+      <ScrollView style={{ padding: 16 }}>
         <ControlledInput
           controllerProps={{
             name: 'oldPassword',
@@ -66,7 +42,7 @@ export function ChangePassword() {
           inputProps={{
             label: 'OLD PASSWORD',
             style: {
-              ...styles.input,
+              marginBottom: 10,
             },
           }}
           submitError={form.formResult.data?.changePassword.error}
@@ -80,7 +56,7 @@ export function ChangePassword() {
           inputProps={{
             label: 'NEW PASSWORD',
             style: {
-              ...styles.input,
+              marginBottom: 10,
             },
           }}
           submitError={form.formResult.data?.changePassword.error}
@@ -94,17 +70,15 @@ export function ChangePassword() {
           inputProps={{
             label: 'CONFIRM NEW PASSWORD',
             style: {
-              ...styles.input,
+              marginBottom: 10,
             },
           }}
           submitError={form.formResult.data?.changePassword.error}
           type={InputType.PASSWORD}
         />
         <Button
-          accessoryRight={
-            form.formResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Save
-          }
-          onPress={form.handleSubmit(onSubmit)}
+          accessoryRight={form.formResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Save}
+          onPress={() => void form.handleSubmit(onSubmit)}
         >
           SAVE CHANGES
         </Button>

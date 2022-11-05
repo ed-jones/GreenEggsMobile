@@ -1,12 +1,12 @@
 /**
  * Author: Edward Jones
  */
-import { ApolloQueryResult, DocumentNode, useQuery } from '@apollo/client'
-import React, { ReactNode, useEffect, useState } from 'react'
+import { ApolloQueryResult, DocumentNode, QueryResult, useQuery } from '@apollo/client'
+import { ReactNode, useEffect, useState } from 'react'
 import { FlatList, FlatListProps, View } from 'react-native'
-import { Callout } from '@greeneggs/ui'
 import { Spinner, Text } from '@ui-kitten/components'
 import { EmptyState } from './empty-state'
+import { Callout } from './callout'
 
 export interface UseLazyListProps<TVariables, TData> {
   query: DocumentNode
@@ -15,24 +15,36 @@ export interface UseLazyListProps<TVariables, TData> {
   limit?: number
 }
 
+interface UseListRefetchResult {
+  isRefetching: boolean
+  refetch: () => Promise<void>
+}
+
 /**
  * Hook that manages refreshing state for lists
  */
 export function useListRefetch<TData, TVariables>(
-  refetchFunction: (
-    variables?: Partial<TVariables> | undefined
-  ) => Promise<ApolloQueryResult<TData>>
-) {
-  const [refetching, setRefetching] = useState(false)
+  refetchFunction: (variables?: Partial<TVariables> | undefined) => Promise<ApolloQueryResult<TData>>
+): UseListRefetchResult {
+  const [isRefetching, setIsRefetching] = useState(false)
   const refetch = async () => {
-    setRefetching(true)
+    setIsRefetching(true)
     const { data } = await refetchFunction()
     if (data) {
-      setRefetching(false)
+      setIsRefetching(false)
     }
   }
 
-  return { refetching, refetch }
+  return { isRefetching, refetch }
+}
+
+interface UseLazyListResult<TData, TVariables, TDataType>
+  extends Omit<QueryResult<TData, TVariables>, 'refetch' | 'data'>,
+    UseListRefetchResult {
+  data: TDataType[]
+  nextPage: () => Promise<void>
+  isDone: boolean
+  isLoading: boolean
 }
 
 /**
@@ -40,15 +52,20 @@ export function useListRefetch<TData, TVariables>(
  */
 export function useLazyList<
   TData extends TDataWithData<TData, TDataType>,
-  TVariables extends Partial<CommonVariables<SortType, FilterType>>,
+  TVariables extends Partial<CommonVariables<TSortType, TFilterType>>,
   TDataType,
-  SortType,
-  FilterType
->({ query, variables, dataKey, limit = 10 }: UseLazyListProps<TVariables, TData>) {
-  const [done, setDone] = useState(false)
+  TSortType,
+  TFilterType
+>({
+  query,
+  variables,
+  dataKey,
+  limit = 10,
+}: UseLazyListProps<TVariables, TData>): UseLazyListResult<TData, TVariables, TDataType> {
+  const [isDone, setIsDone] = useState(false)
 
   useEffect(() => {
-    setDone(false)
+    setIsDone(false)
   }, [variables])
 
   const queryResult = useQuery<TData, TVariables>(query, {
@@ -59,9 +76,9 @@ export function useLazyList<
     } as TVariables,
     onCompleted: (data) => {
       if ((data[dataKey].data?.length ?? limit) < limit) {
-        setDone(true)
+        setIsDone(true)
       } else {
-        queryResult
+        void queryResult
           .fetchMore<TData, TVariables>({
             variables: {
               ...variables,
@@ -71,7 +88,7 @@ export function useLazyList<
           })
           .then((data) => {
             if (data.data[dataKey].data?.length === 0) {
-              setDone(true)
+              setIsDone(true)
             }
           })
       }
@@ -79,7 +96,7 @@ export function useLazyList<
   })
 
   async function nextPage() {
-    if (!done) {
+    if (!isDone) {
       const result = await queryResult.fetchMore<TData, TVariables>({
         variables: {
           ...variables,
@@ -100,21 +117,22 @@ export function useLazyList<
       const d = result.data[dataKey]?.data
       if (d) {
         if (d.length === 0) {
-          setDone(true)
+          setIsDone(true)
         }
       }
     }
   }
 
-  const { refetch, refetching } = useListRefetch(queryResult.refetch)
+  const { refetch, isRefetching } = useListRefetch(queryResult.refetch)
 
   return {
     ...queryResult,
+    isLoading: queryResult.loading,
     refetch,
-    refetching,
+    isRefetching,
     data: queryResult?.data?.[dataKey]?.data ?? [],
     nextPage,
-    done,
+    isDone,
   }
 }
 
@@ -124,12 +142,12 @@ export type TDataWithData<TData, TDataType> = {
   }
 }
 
-export interface CommonVariables<SortType, FilterType> {
+export interface CommonVariables<TSortType, TFilterType> {
   offset: number
   limit: number
   query: string
-  sort: SortType
-  filter: FilterType
+  sort: TSortType
+  filter: TFilterType
 }
 
 export interface LazyListProps<TData, TVariables, TDataType>
@@ -142,12 +160,12 @@ export interface LazyListProps<TData, TVariables, TDataType>
 /**
  * Component that renders the result of a GraphQL query as an infinite scrolling list.
  */
-export const LazyList = <
+export function LazyList<
   TData extends TDataWithData<TData, TDataType>,
-  TVariables extends Partial<CommonVariables<SortType, FilterType>>,
+  TVariables extends Partial<CommonVariables<TSortType, TFilterType>>,
   TDataType,
-  SortType,
-  FilterType
+  TSortType,
+  TFilterType
 >({
   query,
   variables,
@@ -158,13 +176,13 @@ export const LazyList = <
   limit,
   ListFooterComponent,
   ...props
-}: LazyListProps<TData, TVariables, TDataType>) => {
-  const { loading, error, data, refetch, refetching, nextPage, done } = useLazyList<
+}: LazyListProps<TData, TVariables, TDataType>) {
+  const { isLoading, error, data, refetch, isRefetching, nextPage, isDone } = useLazyList<
     TData,
     TVariables,
     TDataType,
-    SortType,
-    FilterType
+    TSortType,
+    TFilterType
   >({
     query,
     variables,
@@ -185,20 +203,20 @@ export const LazyList = <
     <FlatList
       ListEmptyComponent={
         <View style={{ flexGrow: 1, justifyContent: 'center' }}>
-          {loading ? (
+          {isLoading ? (
             <View style={{ alignItems: 'center' }}>
               <Spinner />
             </View>
           ) : (
-            <EmptyState title='Nothing here!' description={emptyMessage} />
+            <EmptyState description={emptyMessage} />
           )}
         </View>
       }
       {...props}
       initialNumToRender={limit}
-      refreshing={refetching}
-      onRefresh={refetch}
-      onEndReached={() => nextPage()}
+      refreshing={isRefetching}
+      onRefresh={() => void refetch()}
+      onEndReached={() => void nextPage()}
       onEndReachedThreshold={0.5}
       data={data}
       extraData={data}
@@ -215,11 +233,7 @@ export const LazyList = <
               marginVertical: 16,
             }}
           >
-            {!done ? (
-              <Spinner />
-            ) : (
-              <Text style={{ marginVertical: 16 }}>Found {data.length} items.</Text>
-            )}
+            {!isDone ? <Spinner /> : <Text style={{ marginVertical: 16 }}>Found {data.length} items.</Text>}
           </View>
         ) : undefined)
       }

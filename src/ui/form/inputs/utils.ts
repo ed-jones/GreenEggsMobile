@@ -6,10 +6,10 @@ import { Path, PathValue } from 'react-hook-form'
 
 // Function that converts JS numbers to strings in a way
 // that avoids NaN, undefined, etc.
-export function numberToString<FieldValues>(
-  number: PathValue<FieldValues, Path<FieldValues>> | number | null
+export function numberToString<TFieldValues>(
+  number: PathValue<TFieldValues, Path<TFieldValues>> | number | null
 ): string {
-  if (number === NaN) {
+  if (Number.isNaN(number)) {
     return ''
   }
   if (number === 0) {
@@ -18,7 +18,7 @@ export function numberToString<FieldValues>(
   if (number === null) {
     return ''
   }
-  if (String(number) === 'NaN') {
+  if (Number.isNaN(number)) {
     return ''
   }
   return String(number)
@@ -30,7 +30,7 @@ export function stringToNumber(string: string): number | null {
   if (string === '') {
     return null
   }
-  if (Number(string) == NaN) {
+  if (Number.isNaN(Number(string))) {
     return 0
   }
   return Number(string)

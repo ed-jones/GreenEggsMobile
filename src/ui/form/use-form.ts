@@ -9,14 +9,26 @@ import {
   MutationResult,
   useMutation,
 } from '@apollo/client'
-import { useForm as useReactHookForm, UseFormProps, UseFormReturn } from 'react-hook-form'
+import {
+  FieldValues,
+  useForm as useReactHookForm,
+  UseFormProps as UseReactHookFormProps,
+  UseFormReturn as UseReactHookFormReturn,
+} from 'react-hook-form'
 
-export interface IForm<InputType, MutationType, MutationVariables>
-  extends UseFormReturn<InputType> {
-  formResult: MutationResult<MutationType>
+export interface UseFormReturn<TInputType extends FieldValues, TMutationType, TMutationVariables>
+  extends UseReactHookFormReturn<TInputType> {
+  formResult: MutationResult<TMutationType>
   submitForm: (
-    options?: MutationFunctionOptions<MutationType, MutationVariables> | undefined
-  ) => Promise<FetchResult<MutationType>>
+    options?: MutationFunctionOptions<TMutationType, TMutationVariables> | undefined
+  ) => Promise<FetchResult<TMutationType>>
+}
+
+interface UseFormProps<TInputType extends FieldValues, TMutationType, TMutationVariables> {
+  Mutation: DocumentNode
+  mutationVariableName: keyof TMutationVariables
+  options?: MutationHookOptions<TMutationType, TMutationVariables>
+  reactHookFormProps?: UseReactHookFormProps<TInputType>
 }
 
 /*
@@ -24,21 +36,26 @@ export interface IForm<InputType, MutationType, MutationVariables>
  *  with type safe apollo mutations
  */
 export function useForm<
-  InputType,
-  MutationType,
-  MutationVariables extends Record<keyof MutationVariables, InputType>
->(
-  Mutation: DocumentNode,
-  mutationVariableName: keyof MutationVariables,
-  options?: MutationHookOptions<MutationType, MutationVariables>,
-  reactHookFormProps?: UseFormProps<InputType>
-): IForm<InputType, MutationType, MutationVariables> {
-  const reactHookForm = useReactHookForm<InputType>(reactHookFormProps)
+  TInputType extends FieldValues,
+  TMutationType,
+  TMutationVariables extends Record<keyof TMutationVariables, TInputType>
+>({
+  Mutation,
+  mutationVariableName,
+  options,
+  reactHookFormProps,
+}: UseFormProps<TInputType, TMutationType, TMutationVariables>): UseFormReturn<
+  TInputType,
+  TMutationType,
+  TMutationVariables
+> {
+  const reactHookForm = useReactHookForm<TInputType>(reactHookFormProps)
 
   const variables = {
-    [mutationVariableName]: reactHookForm.getValues() as InputType,
-  } as MutationVariables
-  const [submitForm, formResult] = useMutation<MutationType, MutationVariables>(Mutation, {
+    [mutationVariableName]: reactHookForm.getValues(),
+  } as TMutationVariables
+
+  const [submitForm, formResult] = useMutation<TMutationType, TMutationVariables>(Mutation, {
     variables,
     ...options,
   })

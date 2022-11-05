@@ -1,10 +1,10 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC } from 'react'
-import { recipes_recipes_data_comments } from '@greeneggs/types/graphql'
+import { recipes_recipes_data_comments } from '@greeneggs/types/graphql';
 import { useNavigation } from '@react-navigation/core'
 import { LabelledIcon } from '../labelled-icon'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
 
 interface CommentCounterProps {
   commentCount: number
@@ -14,8 +14,8 @@ interface CommentCounterProps {
 /**
  * Displays the number of comments on a post, and links to the list of comments
  */
-export const CommentCounter: FC<CommentCounterProps> = ({ commentCount, comments }) => {
-  const navigation = useNavigation()
+export function CommentCounter({ commentCount, comments }: CommentCounterProps) {
+  const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (
     <LabelledIcon
@@ -25,6 +25,8 @@ export const CommentCounter: FC<CommentCounterProps> = ({ commentCount, comments
         navigation.navigate('RecipeAllComments', {
           comments,
           commentCount,
+          isReply: false,
+          recipeId: '',
         })
       }
     />

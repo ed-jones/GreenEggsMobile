@@ -1,16 +1,8 @@
 /**
  * Author: Xiaoyao Zhang
  */
-import React, { FC, useContext } from 'react'
-import {
-  Avatar,
-  Divider,
-  ListItem,
-  ListItemProps,
-  ThemedComponentProps,
-  withStyles,
-  Text,
-} from '@ui-kitten/components'
+import { FC, useContext } from 'react';
+import { Avatar, Divider, ListItem, ListItemProps, ThemedComponentProps, Text } from '@ui-kitten/components'
 import {
   notifications as notificationsType,
   notificationsVariables,
@@ -20,81 +12,83 @@ import {
   Sort,
 } from '@greeneggs/types/graphql'
 import { Mutations, Queries } from '@greeneggs/graphql'
-import { Background, Callout, Icons, LazyList, TopNavigation } from '@greeneggs/ui'
 import { noAvatar } from '@greeneggs/assets'
-import { convertSubmittedAt, convertUserToFullname } from '@greeneggs/utils'
+import { convertSubmittedAt, convertUserToFullName } from '@greeneggs/utils'
 import Svg, { Circle } from 'react-native-svg'
 import { GestureResponderEvent, View } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 import { useMutation } from '@apollo/client'
-import { NotificationContext } from '@greeneggs/providers'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { NotificationContext } from '@greeneggs/context'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { LazyList } from '@greeneggs/ui/lazy-list'
+import * as Icons from '@greeneggs/ui/icons'
 
 type NotificationListItemProps = ListItemProps & notifications_notifications_data
 
 /**
  * Screen for displaying a list of all notifications a user has received.
  */
-const NotificationListItem = withStyles(
-  ({
-    eva,
-    concerns,
-    createdAt,
-    read,
-    title,
-    onPress,
-    id,
-    ...props
-  }: NotificationListItemProps & ThemedComponentProps) => {
-    const { refetchNotificationState } = useContext(NotificationContext)
-    const [markRead] = useMutation(Mutations.READ_NOTIFICATIONS, {
-      variables: {
-        notificationId: id,
-      },
-      refetchQueries: [Queries.GET_NOTIFICATIONS, 'notifications'],
-    })
+function NotificationListItem({
+  eva,
+  concerns,
+  createdAt,
+  read,
+  title,
+  onPress,
+  id,
+  ...props
+}: NotificationListItemProps & ThemedComponentProps) {
+  const { refetchNotificationState } = useContext(NotificationContext)
+  const [markRead] = useMutation(Mutations.readNotifications, {
+    variables: {
+      notificationId: id,
+    },
+    refetchQueries: [Queries.getNotifications, 'notifications'],
+  })
 
-    function handlePress(event: GestureResponderEvent) {
-      markRead()
-      onPress?.(event)
-      refetchNotificationState?.()
-    }
-
-    return (
-      <ListItem
-        {...props}
-        onPress={handlePress}
-        title={
-          <Text category='p1'>
-            <Text category='p1' style={{ fontWeight: 'bold' }}>
-              {convertUserToFullname(concerns)}
-            </Text>
-            {` ${title}`}
-          </Text>
-        }
-        description={`${convertSubmittedAt(createdAt)} ago`}
-        accessoryRight={Icons.Forward}
-        accessoryLeft={() => (
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            {!read && (
-              <Svg height='8' width='8'>
-                <Circle cx='4' cy='4' r='4' fill={eva?.theme?.['color-primary-500']} />
-              </Svg>
-            )}
-            <Avatar
-              source={concerns.avatarURI ? { uri: concerns.avatarURI } : noAvatar}
-              style={{ marginLeft: read ? 16 : 8 }}
-            />
-          </View>
-        )}
-      />
-    )
+  function handlePress(event: GestureResponderEvent) {
+    void markRead()
+    onPress?.(event)
+    void refetchNotificationState?.()
   }
-)
 
-const CommentLikedNotificationListItem: FC<notifications_notifications_data> = (
-  notification: notifications_notifications_data
-) => {
-  const navigation = useNavigation()
+  return (
+    <ListItem
+      {...props}
+      onPress={handlePress}
+      title={
+        <Text category='p1'>
+          <>
+            <Text category='p1' style={{ fontWeight: 'bold' }}>
+              {convertUserToFullName(concerns)}
+            </Text>
+            {typeof title === 'number' || typeof title === 'string' ? ` ${title}` : title}
+          </>
+        </Text>
+      }
+      description={`${convertSubmittedAt(createdAt)} ago`}
+      accessoryRight={Icons.Forward}
+      accessoryLeft={() => (
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          {!read && (
+            <Svg height='8' width='8'>
+              <Circle cx='4' cy='4' r='4' fill={eva?.theme?.['color-primary-500']} />
+            </Svg>
+          )}
+          <Avatar
+            source={concerns.avatarURI ? { uri: concerns.avatarURI } : noAvatar}
+            style={{ marginLeft: read ? 16 : 8 }}
+          />
+        </View>
+      )}
+    />
+  )
+}
+
+function CommentLikedNotificationListItem(notification: notifications_notifications_data) {
+  const navigation = useNavigation<LoggedInNavigationProp>()
   return (
     <NotificationListItem
       {...notification}
@@ -104,10 +98,8 @@ const CommentLikedNotificationListItem: FC<notifications_notifications_data> = (
   )
 }
 
-const RecipeLikedNotificationListItem: FC<notifications_notifications_data> = (
-  notification: notifications_notifications_data
-) => {
-  const navigation = useNavigation()
+function RecipeLikedNotificationListItem(notification: notifications_notifications_data) {
+  const navigation = useNavigation<LoggedInNavigationProp>()
   return (
     <NotificationListItem
       {...notification}
@@ -117,10 +109,8 @@ const RecipeLikedNotificationListItem: FC<notifications_notifications_data> = (
   )
 }
 
-const RecipeCommentedNotificationListItem: FC<notifications_notifications_data> = (
-  notification: notifications_notifications_data
-) => {
-  const navigation = useNavigation()
+function RecipeCommentedNotificationListItem(notification: notifications_notifications_data) {
+  const navigation = useNavigation<LoggedInNavigationProp>()
   return (
     <NotificationListItem
       {...notification}
@@ -128,16 +118,17 @@ const RecipeCommentedNotificationListItem: FC<notifications_notifications_data> 
       onPress={() =>
         navigation.navigate('RecipeCommentReplies', {
           commentId: notification.linkId,
+          replying: false,
         })
       }
     />
   )
 }
 
-const CommentRepliedNotificationListItem: FC<notifications_notifications_data> = (
-  notification: notifications_notifications_data
-) => {
-  const navigation = useNavigation()
+function CommentRepliedNotificationListItem(notification: notifications_notifications_data) {
+  const navigation = useNavigation<LoggedInNavigationProp>()
+  if (!notification.linkId) throw new Error('Notification link ID not found')
+
   return (
     <NotificationListItem
       {...notification}
@@ -145,40 +136,33 @@ const CommentRepliedNotificationListItem: FC<notifications_notifications_data> =
       onPress={() =>
         navigation.navigate('RecipeCommentReplies', {
           commentId: notification.linkId,
+          replying: false,
         })
       }
     />
   )
 }
 
-const NOTIFICATION_LIST_ITEM_MAP: Record<
-  NotificationTypeEnum,
-  FC<notifications_notifications_data>
-> = {
+const notificationListItemMap: Record<NotificationTypeEnum, FC<notifications_notifications_data>> = {
   COMMENT_LIKED: CommentLikedNotificationListItem,
   RECIPE_LIKED: RecipeLikedNotificationListItem,
   RECIPE_COMMENTED: RecipeCommentedNotificationListItem,
   COMMENT_REPLIED: CommentRepliedNotificationListItem,
 }
 
-export const Notifications: FC = () => {
+export function Notifications() {
   return (
     <Background>
       <TopNavigation title='Notifications' accessoryLeft={undefined} />
-      <LazyList<
-        notificationsType,
-        notificationsVariables,
-        notifications_notifications_data,
-        Sort,
-        RecipeFilter
-      >
-        query={Queries.GET_NOTIFICATIONS}
+      <LazyList<notificationsType, notificationsVariables, notifications_notifications_data, Sort, RecipeFilter>
+        query={Queries.getNotifications}
         limit={15}
         variables={{}}
         dataKey='notifications'
         emptyMessage="You don't have any notifications."
         renderItem={({ item: notification, index }) => {
-          const NotificationListItem = NOTIFICATION_LIST_ITEM_MAP[notification.type]
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          const NotificationListItem = notificationListItemMap[notification.type]
           return (
             <View key={index.toString()}>
               <NotificationListItem {...notification} />

@@ -1,8 +1,8 @@
 /**
  * Author: Edward Jones
  */
-import * as React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { ReactElement } from 'react';
+import { View } from 'react-native'
 import {
   NewsFeed as NewsFeedType,
   NewsFeedVariables,
@@ -11,44 +11,42 @@ import {
   Sort,
 } from '@greeneggs/types/graphql'
 import { Queries } from '@greeneggs/graphql'
-import { Background, LazyList, RecipeCard } from '@greeneggs/ui'
 import { useNavigation } from '@react-navigation/native'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { Background } from '@greeneggs/ui/background'
+import { LazyList } from '@greeneggs/ui/lazy-list'
+import { RecipeCard } from '@greeneggs/ui/cards'
 
-const CardVerticalMargin = 20
-const CardHorizontalMargin = 24
-
-const styles = StyleSheet.create({
-  firstCard: {
-    marginTop: CardVerticalMargin,
-  },
-  card: {
-    marginBottom: CardVerticalMargin,
-    marginHorizontal: CardHorizontalMargin,
-  },
-})
+const cardVerticalMargin = 20
+const cardHorizontalMargin = 24
 
 /**
  * Screen that shows an infinite scrolling list of recipes from users that the logged in user follows.
  */
-export function NewsFeed() {
-  const navigation = useNavigation()
+export function NewsFeed(): ReactElement {
+  const navigation = useNavigation<LoggedInNavigationProp>()
   return (
     <Background>
       <LazyList<NewsFeedType, NewsFeedVariables, NewsFeed_newsFeed_data, Sort, RecipeFilter>
         limit={4}
-        query={Queries.NEWS_FEED}
+        query={Queries.getNewsFeed}
         variables={{}}
         dataKey='newsFeed'
         emptyMessage='Try following some users to see their latest recipes.'
         renderItem={({ item: recipe, index }) => (
           <View
             key={recipe?.id}
-            style={index === 0 ? { ...styles.firstCard, ...styles.card } : styles.card}
+            style={
+              index === 0
+                ? {
+                    marginTop: cardVerticalMargin,
+                    marginBottom: cardVerticalMargin,
+                    marginHorizontal: cardHorizontalMargin,
+                  }
+                : { marginBottom: cardVerticalMargin, marginHorizontal: cardHorizontalMargin }
+            }
           >
-            <RecipeCard
-              recipe={recipe}
-              onPress={() => navigation.navigate('Recipe', { recipeId: recipe?.id })}
-            />
+            <RecipeCard recipe={recipe} onPress={() => navigation.navigate('Recipe', { recipeId: recipe?.id })} />
           </View>
         )}
       />

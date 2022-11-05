@@ -37,7 +37,7 @@ function convertTimeInMilliseconds(timeInMilliseconds: number): string {
   const month = 30 * day
   const year = 365.25 * day
 
-  if (timeInMilliseconds === NaN) {
+  if (Number.isNaN(timeInMilliseconds)) {
     return '0 sec'
   }
   if (timeInMilliseconds < hour) {
@@ -64,6 +64,42 @@ function convertTimeInMilliseconds(timeInMilliseconds: number): string {
 /**
  * Takes a user fragment and returns a concatenated full name (first name + last name)
  */
-export function convertUserToFullname(user: UserFragment) {
+export function convertUserToFullName(user: UserFragment): string {
   return `${user.firstName} ${user.lastName}`
+}
+
+// export const AlphabetArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',  'Z'] as const
+// export type Alphabet = typeof AlphabetArray[number]
+
+interface RGBAValues {
+  red: number
+  green: number
+  blue: number
+  alpha: number
+}
+
+function getRBBAValues(color: string): RGBAValues {
+  const isHex = color.startsWith('#') && color.length === 7
+  const isRGBA = color.startsWith('rgba')
+
+  if (isHex) {
+    const red = parseInt(color.slice(1, 3), 16)
+    const green = parseInt(color.slice(3, 5), 16)
+    const blue = parseInt(color.slice(5, 7), 16)
+    return { red, green, blue, alpha: 1 }
+  }
+
+  if (isRGBA) {
+    const [red, green, blue, alpha] = color
+      .slice(5, color.length - 1)
+      .split(',')
+      .map(Number)
+    return { red, green, blue, alpha }
+  }
+  throw new Error('Could not convert input into hex or rgba')
+}
+
+export function alpha(color: string, opacity: number) {
+  const { red, green, blue } = getRBBAValues(color)
+  return `rgba(${red}, ${green}, ${blue}, ${opacity})`
 }

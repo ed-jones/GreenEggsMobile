@@ -1,11 +1,10 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React, { useState } from 'react'
+import { useState, ReactElement } from 'react'
 import { Button, IndexPath, List, ListItem, Spinner, Text, SelectItem } from '@ui-kitten/components'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { Mutations, Queries } from '@greeneggs/graphql'
-import {} from '@ui-kitten/components'
 import { useMutation, useQuery } from '@apollo/client'
 import {
   Diets,
@@ -16,25 +15,13 @@ import {
   UpdateDietaryPreferences,
   UpdateDietaryPreferencesVariables,
 } from '@greeneggs/types/graphql'
-import { LoadingScreen } from '../loading-screen'
-import { FullUserFragment } from '@greeneggs/graphql/fragments'
-import { TopNavigation, Select, Background, Callout, Icons } from '@greeneggs/ui'
-
-const styles = StyleSheet.create({
-  view: {
-    padding: 16,
-  },
-  buttonGroup: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-  },
-  heading: {
-    paddingVertical: 16,
-  },
-  input: {
-    marginBottom: 10,
-  },
-})
+import { LoadingScreen } from '../../ui/loading-screen'
+import { fullUserFragment } from '@greeneggs/graphql/fragments'
+import { Background } from '@greeneggs/ui/background'
+import { Callout } from '@greeneggs/ui/callout'
+import { Select } from '@greeneggs/ui/select'
+import * as Icons from '@greeneggs/ui/icons'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
 
 function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
   return Number(selectedIndex.toString()) - 1
@@ -44,8 +31,8 @@ function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
  * Screen that lets a user edit their dietary preferences.
  * For instance, a user can choose to filter out all non-vegan recipes globally in the app.
  */
-export const DietaryPreferences = () => {
-  const getDiet = useQuery<Diets>(Queries.GET_DIETS, {
+export function DietaryPreferences(): ReactElement {
+  const getDiet = useQuery<Diets>(Queries.getDiets, {
     variables: {
       query: '',
       offset: 0,
@@ -53,23 +40,22 @@ export const DietaryPreferences = () => {
     },
   })
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(new IndexPath(0))
-  const getMe = useQuery<Me>(Queries.ME)
+  const getMe = useQuery<Me>(Queries.getMe)
 
-  const [removeDietaryPreferences] = useMutation<
-    RemoveDietaryPreferences,
-    RemoveDietaryPreferencesVariables
-  >(Mutations.REMOVE_DIETARY_PREFERENCES)
+  const [removeDietaryPreferences] = useMutation<RemoveDietaryPreferences, RemoveDietaryPreferencesVariables>(
+    Mutations.removeDietaryPreferences
+  )
   const [updateDietaryPreferences, updateDietaryPreferencesResult] = useMutation<
     UpdateDietaryPreferences,
     UpdateDietaryPreferencesVariables
-  >(Mutations.UPDATE_DIETARY_PREFERENCES)
+  >(Mutations.updateDietaryPreferences)
 
   if (getDiet.loading || getMe.loading) return <LoadingScreen />
   if (getDiet.error) {
-    return <Text>Error! {getDiet.error.message}</Text>
+    return <Text>Error!{getDiet.error.message}</Text>
   }
   if (getMe.error) {
-    return <Text>Error! {getMe.error.message}</Text>
+    return <Text>Error!{getMe.error.message}</Text>
   }
   const me = getMe.data?.me.data
   const diets = getDiet.data?.diets.data || []
@@ -77,7 +63,7 @@ export const DietaryPreferences = () => {
 
   function handleSubmit() {
     if (me?.dietaryPreferences) {
-      updateDietaryPreferences({
+      void updateDietaryPreferences({
         variables: {
           dietaryPreferences: {
             diets: [
@@ -92,13 +78,10 @@ export const DietaryPreferences = () => {
             data: {
               ...me,
               dietaryPreferences: [
-                ...new Set([
-                  ...me.dietaryPreferences,
-                  unselectedDiets[indexToNumber(selectedIndex)],
-                ]),
+                ...new Set([...me.dietaryPreferences, unselectedDiets[indexToNumber(selectedIndex)]]),
               ],
             },
-            fragment: FullUserFragment,
+            fragment: fullUserFragment,
             fragmentName: 'FullUserFragment',
           })
         },
@@ -109,7 +92,7 @@ export const DietaryPreferences = () => {
 
   function removeDiet(diet: Diets_diets_data) {
     if (me?.dietaryPreferences) {
-      removeDietaryPreferences({
+      void removeDietaryPreferences({
         variables: {
           dietaryPreferences: {
             diets: [diet.id],
@@ -120,11 +103,9 @@ export const DietaryPreferences = () => {
             id: `FullUser:${me.id}`,
             data: {
               ...me,
-              dietaryPreferences: me.dietaryPreferences.filter(
-                (allDiets) => allDiets.id !== diet.id
-              ),
+              dietaryPreferences: me.dietaryPreferences.filter((allDiets) => allDiets.id !== diet.id),
             },
-            fragment: FullUserFragment,
+            fragment: fullUserFragment,
             fragmentName: 'FullUserFragment',
           })
         },
@@ -136,10 +117,11 @@ export const DietaryPreferences = () => {
     <Background>
       <TopNavigation title='Dietary Preferences' />
       <View>
-        <View style={styles.view}>
+        <View style={{ padding: 16 }}>
           <Callout
             message='Here you can tell us your dietary preferences so that we can better show you recipes relevant to you.'
             type='info'
+            style={{ marginBottom: 24 }}
           />
           <View style={{ flexDirection: 'row' }}>
             <Select
@@ -158,9 +140,7 @@ export const DietaryPreferences = () => {
               onPress={handleSubmit}
               disabled={unselectedDiets.length === 0}
               accessoryLeft={
-                updateDietaryPreferencesResult.loading
-                  ? () => <Spinner size='small' status='control' />
-                  : Icons.Add
+                updateDietaryPreferencesResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Add
               }
             >
               Add
@@ -172,9 +152,7 @@ export const DietaryPreferences = () => {
           renderItem={({ item }: { item: Diets_diets_data }) => (
             <ListItem
               title={item.name}
-              accessoryRight={(props) => (
-                <Icons.Cross {...props} onPress={() => removeDiet(item)} />
-              )}
+              accessoryRight={(props) => <Icons.Cross {...props} onPress={() => removeDiet(item)} />}
             />
           )}
         />

@@ -1,38 +1,39 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { useState } from 'react'
+import { ReactElement, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { Queries } from '@greeneggs/graphql'
-import { TopNavigation, ViewMore } from '@greeneggs/ui'
 import { comment } from '@greeneggs/types/graphql'
-import { Text } from '@ui-kitten/components'
-import { View, StyleSheet, ScrollView } from 'react-native'
-import { LoadingScreen } from '../loading-screen'
+import { Text, TopNavigation } from '@ui-kitten/components'
+import { View, ScrollView } from 'react-native'
+import { LoadingScreen } from '../../ui/loading-screen'
 import { RecipeAddComment } from './recipe-add-comment'
 import { RecipeComment } from './recipe-comment'
 import { RecipeCommentList } from './recipe-comment-list'
-
-const styles = StyleSheet.create({
-  content: {
-    padding: 16,
-  },
-})
+import { RouteProp, useRoute } from '@react-navigation/native'
+import { LoggedInRouteParams } from '@greeneggs/navigation/types'
+import { ViewMore } from '@greeneggs/ui/list-items'
 
 /**
  * Screen for showing a recipe comment and all of its replies.
  */
-export function RecipeCommentReplies({ route }: any) {
-  const { commentId, replying } = route.params
+export function RecipeCommentReplies(): ReactElement {
+  const route = useRoute<RouteProp<LoggedInRouteParams, 'RecipeCommentReplies'>>()
+  const { commentId, replying: isReplying } = route.params
   const [visibleCommentCount, setVisibleCommentCount] = useState<number>(3)
 
-  const { data, loading, error } = useQuery<comment>(Queries.GET_COMMENT, {
+  const {
+    data,
+    loading: isLoading,
+    error,
+  } = useQuery<comment>(Queries.getComment, {
     variables: {
       commentId,
     },
   })
 
-  if (loading || !data?.comment.data) {
+  if (isLoading || !data?.comment.data) {
     return <LoadingScreen />
   }
 
@@ -47,8 +48,8 @@ export function RecipeCommentReplies({ route }: any) {
       <TopNavigation title='Comment Thread' />
       <ScrollView>
         <RecipeComment comment={comment} />
-        <View style={styles.content}>
-          {replying && (
+        <View style={{ padding: 16 }}>
+          {isReplying && (
             <View style={{ marginBottom: 16 }}>
               <RecipeAddComment commentId={comment.id} isReply active />
             </View>

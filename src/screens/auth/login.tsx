@@ -1,79 +1,72 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext } from 'react'
-import { StyleSheet } from 'react-native'
+import { ReactElement, useContext, useState } from 'react'
 import { Button, Spinner } from '@ui-kitten/components'
 import { useLoginForm } from './use-login-form'
 import { AuthPageTemplate } from './auth-page-template'
-import { ControlledInput, InputType } from '@greeneggs/ui'
-import { LoginInput } from '@greeneggs/types/graphql'
 import * as SecureStore from 'expo-secure-store'
-import { AuthContext } from '@greeneggs/providers/auth-provider'
-
-const styles = StyleSheet.create({
-  forgotPassword: {
-    fontWeight: 'bold',
-    textAlign: 'right',
-    paddingTop: 8,
-    paddingBottom: 10,
-  },
-  input: {
-    marginBottom: 10,
-  },
-})
+import { AuthContext } from '@greeneggs/context'
+import { ControlledInput, InputType } from '@greeneggs/ui/form'
 
 /**
  * Screen that enables a user to log into Green Eggs with an email and password.
  */
-export const Login = ({ navigation }: any) => {
-  const { formResult, handleSubmit, control, submitForm } = useLoginForm()
+export function Login(): ReactElement {
+  const {
+    formResult,
+    handleSubmit,
+    control,
+    submitForm,
+    formState: { isValid },
+  } = useLoginForm({ mode: 'onChange' })
   const { setToken } = useContext(AuthContext)
+  const [errorMessage, setErrorMessage] = useState<string | undefined>()
 
-  async function onSubmit() {
-    const result = await submitForm()
-    const token = result.data?.login.data?.token
-    const error = result.data?.login.error
-    if (token && !error) {
-      SecureStore.setItemAsync('token', token)
-      setToken && setToken(token)
+  function submitLoginForm(): void {
+    async function handle() {
+      const result = await submitForm()
+      const token = result.data?.login.data?.token
+      const error = result.data?.login.error?.message
+      if (error) {
+        throw new Error(error)
+      }
+      if (token) {
+        void SecureStore.setItemAsync('token', token)
+        setToken && setToken(token)
+      }
     }
+    handle().catch((e: Error) => setErrorMessage(e.message))
   }
 
   return (
-    <AuthPageTemplate
-      navigation={navigation}
-      message='Log in to view and share recipes with your friends'
-    >
-      <ControlledInput<LoginInput>
+    <AuthPageTemplate errorMessage={errorMessage} subtitle='Log in to view and share recipes with your friends'>
+      <ControlledInput
         inputProps={{
           autoFocus: true,
-          style: styles.input,
+          style: { marginBottom: 10 },
         }}
         controllerProps={{
           name: 'email',
           defaultValue: '',
           control,
         }}
-        submitError={formResult.data?.login.error}
         type={InputType.EMAIL}
       />
-      <ControlledInput<LoginInput>
+      <ControlledInput
         inputProps={{
-          style: styles.input,
+          style: { marginBottom: 10 },
         }}
         controllerProps={{
           name: 'password',
           defaultValue: '',
           control,
         }}
-        submitError={formResult.data?.login.error}
         type={InputType.PASSWORD}
       />
-      {/* <Text category="p2" style={styles.forgotPassword}>Forgot Password?</Text> */}
       <Button
-        onPress={handleSubmit(onSubmit)}
-        disabled={formResult.loading}
+        onPress={(e) => void handleSubmit(submitLoginForm)(e)}
+        disabled={formResult.loading || !isValid}
         accessoryLeft={formResult.loading ? () => <Spinner size='small' /> : undefined}
       >
         LOGIN

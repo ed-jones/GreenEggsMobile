@@ -1,49 +1,52 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext, useState } from 'react'
-
-import { StyleSheet } from 'react-native'
+import { ReactElement, useContext, useState } from 'react'
 import { Button, CheckBox, Spinner, Text } from '@ui-kitten/components'
-import { ControlledInput, InputType } from '@greeneggs/ui'
-import { SignupInput } from '@greeneggs/types/graphql'
-import { AuthContext } from '@greeneggs/providers/auth-provider'
+import { AuthContext } from '@greeneggs/context'
 import * as SecureStore from 'expo-secure-store'
-
 import { useSignupForm } from './use-sign-up-form'
 import { AuthPageTemplate } from './auth-page-template'
-
-const styles = StyleSheet.create({
-  input: {
-    marginBottom: 10,
-  },
-})
+import { useNavigation } from '@react-navigation/native'
+import { LoggedOutNavigationProp } from '@greeneggs/navigation/types'
+import { ControlledInput, InputType } from '@greeneggs/ui/form'
 
 /**
  * Screen that enables a user to sign up to Green Eggs.
  */
-export const Signup = ({ navigation }: any) => {
-  const { formResult, handleSubmit, control, submitForm } = useSignupForm()
+export function Signup(): ReactElement {
+  const navigation = useNavigation<LoggedOutNavigationProp>()
+  const {
+    formResult,
+    handleSubmit,
+    control,
+    submitForm,
+    formState: { isValid },
+  } = useSignupForm({ mode: 'onChange' })
   const { setToken } = useContext(AuthContext)
-  const [consent, setConsent] = useState(false)
+  const [hasConsent, setHasConsent] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | undefined>()
 
-  async function handleSignupFormSubmit() {
-    const result = await submitForm()
-    const token = result.data?.signup.data?.token
-    const error = result.data?.signup.error
-    if (token && !error) {
-      SecureStore.setItemAsync('token', token)
-      setToken && setToken(token)
+  function handleSignupFormSubmit() {
+    async function handle() {
+      const result = await submitForm()
+      const token = result.data?.signup.data?.token
+      const error = result.data?.signup.error?.message
+      if (error) {
+        throw new Error(error)
+      }
+      if (token) {
+        void SecureStore.setItemAsync('token', token)
+        setToken && setToken(token)
+      }
     }
+    handle().catch((e: Error) => setErrorMessage(e.message))
   }
 
   return (
-    <AuthPageTemplate
-      navigation={navigation}
-      message='Sign up to view and share recipes with your friends'
-    >
+    <AuthPageTemplate errorMessage={errorMessage} subtitle='Sign up to view and share recipes with your friends'>
       {/* FIRST NAME */}
-      <ControlledInput<SignupInput>
+      <ControlledInput
         controllerProps={{
           control,
           name: 'firstName',
@@ -51,14 +54,14 @@ export const Signup = ({ navigation }: any) => {
         inputProps={{
           label: 'FIRST NAME',
           defaultValue: '',
-          style: styles.input,
+          style: { marginBottom: 10 },
           autoFocus: true,
         }}
         submitError={formResult.data?.signup.error}
         type={InputType.FIRSTNAME}
       />
       {/* LAST NAME */}
-      <ControlledInput<SignupInput>
+      <ControlledInput
         controllerProps={{
           control,
           name: 'lastName',
@@ -66,15 +69,15 @@ export const Signup = ({ navigation }: any) => {
         inputProps={{
           label: 'LAST NAME',
           defaultValue: '',
-          style: styles.input,
+          style: { marginBottom: 10 },
         }}
         submitError={formResult.data?.signup.error}
         type={InputType.LASTNAME}
       />
       {/* EMAIL */}
-      <ControlledInput<SignupInput>
+      <ControlledInput
         inputProps={{
-          style: styles.input,
+          style: { marginBottom: 10 },
         }}
         controllerProps={{
           name: 'email',
@@ -85,9 +88,9 @@ export const Signup = ({ navigation }: any) => {
         type={InputType.EMAIL}
       />
       {/* PASSWORD */}
-      <ControlledInput<SignupInput>
+      <ControlledInput
         inputProps={{
-          style: styles.input,
+          style: { marginBottom: 10 },
           label: 'PASSWORD',
         }}
         controllerProps={{
@@ -99,9 +102,9 @@ export const Signup = ({ navigation }: any) => {
         type={InputType.PASSWORD}
       />
       {/* CONFIRM PASSWORD */}
-      <ControlledInput<SignupInput>
+      <ControlledInput
         inputProps={{
-          style: styles.input,
+          style: { marginBottom: 10 },
           label: 'CONFIRM PASSWORD',
         }}
         controllerProps={{
@@ -113,9 +116,9 @@ export const Signup = ({ navigation }: any) => {
         type={InputType.PASSWORD}
       />
       <CheckBox
-        checked={consent}
+        checked={hasConsent}
         style={{ paddingVertical: 16 }}
-        onChange={(nextChecked) => setConsent(nextChecked)}
+        onChange={(nextChecked) => setHasConsent(nextChecked)}
       >
         <Text>
           I have read and agreed to the{' '}
@@ -125,8 +128,8 @@ export const Signup = ({ navigation }: any) => {
         </Text>
       </CheckBox>
       <Button
-        onPress={handleSubmit(handleSignupFormSubmit)}
-        disabled={formResult.loading || !consent}
+        onPress={(e) => void handleSubmit(handleSignupFormSubmit)(e)}
+        disabled={formResult.loading || !hasConsent || !isValid}
         accessoryLeft={formResult.loading ? () => <Spinner size='small' /> : undefined}
       >
         SIGN UP

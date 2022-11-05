@@ -1,8 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { FC, useContext, useState } from 'react'
-import { AlphabetType, Background, Icons, Input, LazyListAlpha, TopNavigation } from '@greeneggs/ui'
+import { useContext, useState } from 'react';
 import {
   Categories,
   CategoriesVariables,
@@ -13,15 +12,21 @@ import {
 } from '@greeneggs/types/graphql'
 import { Button, Divider, ListItem } from '@ui-kitten/components'
 import { Queries } from '@greeneggs/graphql'
-import { AddRecipeContext } from '@greeneggs/providers'
 import { useNavigation } from '@react-navigation/core'
 import { toTitleCase } from '@greeneggs/utils'
+import { AddRecipeContext } from '@greeneggs/context'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { Input } from '@greeneggs/ui/input'
+import { LazyListAlpha } from '@greeneggs/ui/lazy-alpha-list'
+import * as Icons from '@greeneggs/ui/icons'
+import { AlphabetType } from '@greeneggs/ui/alpha-list'
 
 /**
  * Screen with an infinite scrolling alphabetised list of categories that
  * can be selected and added to a new recipe.
  */
-export const PickCategory: FC = () => {
+export function PickCategory() {
   const [query, setQuery] = useState('')
   const { categoriesFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation()
@@ -42,13 +47,7 @@ export const PickCategory: FC = () => {
         value={query}
         autoFocus
       />
-      <LazyListAlpha<
-        Categories,
-        CategoriesVariables,
-        Categories_categories_data,
-        Sort,
-        RecipeFilter
-      >
+      <LazyListAlpha<Categories, CategoriesVariables, Categories_categories_data, Sort, RecipeFilter>
         renderItem={(item) => (
           <>
             <ListItem
@@ -61,13 +60,10 @@ export const PickCategory: FC = () => {
           </>
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
-        query={Queries.GET_CATEGORIES}
+        query={Queries.getCategories}
         ListFooterComponent={
           query.length > 0 ? (
-            <Button
-              style={{ marginHorizontal: 16, marginTop: 16 }}
-              onPress={() => pick({ name: toTitleCase(query) })}
-            >
+            <Button style={{ marginHorizontal: 16, marginTop: 16 }} onPress={() => pick({ name: toTitleCase(query) })}>
               {`CREATE "${query.toUpperCase()}"`}
             </Button>
           ) : undefined

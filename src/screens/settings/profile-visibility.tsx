@@ -1,9 +1,9 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React from 'react'
+import { ReactElement } from 'react'
 import { Button, Spinner, Text } from '@ui-kitten/components'
-import { ScrollView, StyleSheet } from 'react-native'
+import { ScrollView } from 'react-native'
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { useNavigation } from '@react-navigation/core'
 import {
@@ -13,35 +13,14 @@ import {
   UpdateProfileVisibilityVariables,
 } from '@greeneggs/types/graphql'
 import { useQuery } from '@apollo/client'
-import { FullUserFragment } from '@greeneggs/graphql/fragments'
+import { fullUserFragment } from '@greeneggs/graphql/fragments'
 
-import { LoadingScreen } from '../loading-screen'
-import {
-  TopNavigation,
-  Background,
-  Callout,
-  Icons,
-  ControlledInput,
-  InputType,
-  Rules,
-  useForm,
-} from '@greeneggs/ui'
-
-const styles = StyleSheet.create({
-  view: {
-    padding: 16,
-  },
-  buttonGroup: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-  },
-  heading: {
-    paddingVertical: 16,
-  },
-  input: {
-    marginBottom: 10,
-  },
-})
+import { LoadingScreen } from '../../ui/loading-screen'
+import { ControlledInput, InputType, rules, useForm } from '@greeneggs/ui/form'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { Callout } from '@greeneggs/ui/callout'
+import * as Icons from '@greeneggs/ui/icons'
 
 /**
  * Note: Privacy features are not currently all implemented, so this screen is disabled.
@@ -49,24 +28,23 @@ const styles = StyleSheet.create({
  * Setting screen for profile visibility.
  * Lets the user edit who can see their profile.
  */
-export const ProfileVisibility = () => {
+export function ProfileVisibility(): ReactElement {
   const navigation = useNavigation()
 
-  const { loading, error, data } = useQuery<Me>(Queries.ME)
-  const form = useForm<
-    ProfileVisibilityDetails,
-    UpdateProfileVisibility,
-    UpdateProfileVisibilityVariables
-  >(Mutations.UPDATE_PROFILE_VISIBILITY, 'profileVisibilityDetails')
+  const { loading: isLoading, error, data } = useQuery<Me>(Queries.getMe)
+  const form = useForm<ProfileVisibilityDetails, UpdateProfileVisibility, UpdateProfileVisibilityVariables>({
+    Mutation: Mutations.updateProfileVisibility,
+    mutationVariableName: 'profileVisibilityDetails',
+  })
 
-  if (loading) return <LoadingScreen />
+  if (isLoading) return <LoadingScreen />
   if (error) {
-    return <Text>Error! {error.message}</Text>
+    return <Text>Error!{error.message}</Text>
   }
   const me = data?.me.data
 
   function handleSubmit() {
-    form
+    void form
       .submitForm({
         variables: {
           profileVisibilityDetails: {
@@ -81,40 +59,40 @@ export const ProfileVisibility = () => {
                 ...me,
                 visibility: form.getValues('visibility'),
               },
-              fragment: FullUserFragment,
+              fragment: fullUserFragment,
               fragmentName: 'FullUserFragment',
             })
           }
         },
       })
       .then(() => navigation.goBack())
-      .catch((error) => console.error(error))
   }
 
   return (
     <Background>
       <TopNavigation title='Profile Visibility' />
-      <ScrollView style={styles.view}>
+      <ScrollView style={{ padding: 16 }}>
         <Callout
           message={
             <Text>
               Here you can control which users are able to follow you.{'\n\n'}
-              <Text style={{ fontWeight: 'bold' }}>EVERYONE</Text> means your profile is public and
-              anyone can follow you.{'\n\n'}
-              <Text style={{ fontWeight: 'bold' }}>FRIENDS</Text> means your profile is only visible
-              to friends and you have to approve follow requests.{'\n\n'}
-              <Text style={{ fontWeight: 'bold' }}>ONLY ME</Text> means nobody can follow you. Your
-              profile is hidden and you won't appear in any searches.{'\n\n'}
+              <Text style={{ fontWeight: 'bold' }}>EVERYONE</Text> means your profile is public and anyone can follow
+              you.{'\n\n'}
+              <Text style={{ fontWeight: 'bold' }}>FRIENDS</Text> means your profile is only visible to friends and you
+              have to approve follow requests.{'\n\n'}
+              <Text style={{ fontWeight: 'bold' }}>ONLY ME</Text> means nobody can follow you. Your profile is hidden
+              and you won{"'"}t appear in any searches.{'\n\n'}
             </Text>
           }
           type='info'
+          style={{ marginBottom: 24 }}
         />
         <ControlledInput<ProfileVisibilityDetails>
           controllerProps={{
             name: 'visibility',
             control: form.control,
             rules: {
-              ...Rules.REQUIRED,
+              ...rules.REQUIRED,
             },
             defaultValue: me?.visibility,
           }}
@@ -123,9 +101,7 @@ export const ProfileVisibility = () => {
         />
         <Button
           onPress={handleSubmit}
-          accessoryRight={
-            form.formResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Save
-          }
+          accessoryRight={form.formResult.loading ? () => <Spinner size='small' status='control' /> : Icons.Save}
         >
           SAVE CHANGES
         </Button>

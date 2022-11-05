@@ -1,26 +1,22 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext, useState } from 'react'
-import { Divider, ListItem } from '@ui-kitten/components'
-import { AlphabetType, Background, Icons, Input, LazyListAlpha, TopNavigation } from '@greeneggs/ui'
-import {
-  DietInput,
-  Diets,
-  DietsVariables,
-  Diets_diets_data,
-  RecipeFilter,
-  Sort,
-} from '@greeneggs/types/graphql'
+import { ReactElement, useContext, useState } from 'react';
+import { Divider, Input, ListItem, TopNavigation } from '@ui-kitten/components'
+import { DietInput, Diets, DietsVariables, Diets_diets_data, RecipeFilter, Sort } from '@greeneggs/types/graphql'
 import { Queries } from '@greeneggs/graphql'
-import { AddRecipeContext } from '@greeneggs/providers'
 import { useNavigation } from '@react-navigation/core'
+import { AddRecipeContext } from '@greeneggs/context'
+import { AlphabetType } from '@greeneggs/ui/alpha-list'
+import { Background } from '@greeneggs/ui/background'
+import { LazyListAlpha } from '@greeneggs/ui/lazy-alpha-list'
+import * as Icons from '@greeneggs/ui/icons'
 
 /**
  * Screen that lets a user select a diet from an infinite scrolling alphabetised list
  * to add to a recipe.
  */
-export const CreateDiet = () => {
+export function CreateDiet(): ReactElement {
   const [query, setQuery] = useState('')
   const { dietsFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation()
@@ -54,7 +50,7 @@ export const CreateDiet = () => {
           </>
         )}
         categoriseItem={(item) => item.name[0].toLowerCase() as AlphabetType}
-        query={Queries.GET_DIETS}
+        query={Queries.getDiets}
         variables={{
           query,
         }}

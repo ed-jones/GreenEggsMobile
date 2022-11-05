@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { FC, useState } from 'react'
+import { useState } from 'react'
 import { Icon, Menu, MenuItem, Popover } from '@ui-kitten/components'
 import { View } from 'react-native'
 import { useMutation } from '@apollo/client'
@@ -10,40 +10,40 @@ import { Mutations, Queries } from '@greeneggs/graphql'
 import { useNavigation } from '@react-navigation/core'
 
 interface RecipeMoreButtonProps {
-  recipeId: string
+  recipeId: string | null
 }
 
 /**
  * More icon that opens a context menu with options for that recipe.
  * Includes delete. In the future could include edit and privacy options.
  */
-export const RecipeMoreButton: FC<RecipeMoreButtonProps> = ({ recipeId }) => {
-  const [visible, setVisible] = useState(false)
+export function RecipeMoreButton({ recipeId }: RecipeMoreButtonProps) {
+  const [isVisible, setIsVisible] = useState(false)
   const navigation = useNavigation()
-  const [deleteRecipe] = useMutation<DeleteRecipe>(Mutations.DELETE_RECIPE, {
+  const [deleteRecipe] = useMutation<DeleteRecipe>(Mutations.deleteRecipe, {
     variables: {
       recipeId,
     },
-    refetchQueries: [Queries.ME, 'me'],
+    refetchQueries: [Queries.getMe, 'me'],
   })
 
   function handleDeleteRecipe() {
-    deleteRecipe()
+    void deleteRecipe()
     navigation.goBack()
   }
 
   return (
     <Popover
-      visible={visible}
+      visible={isVisible}
       anchor={() => (
         <Icon
           name='more-vertical-outline'
           fill='black'
           style={{ width: 24, height: 24 }}
-          onPress={() => setVisible(true)}
+          onPress={() => setIsVisible(true)}
         />
       )}
-      onBackdropPress={() => setVisible(false)}
+      onBackdropPress={() => setIsVisible(false)}
     >
       <View style={{ width: 132 }}>
         <Menu>

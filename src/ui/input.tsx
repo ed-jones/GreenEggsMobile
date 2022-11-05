@@ -1,8 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
-import { Input as UIKittenInput, InputProps } from '@ui-kitten/components'
+import { Input as UIKittenInput, InputProps } from '@ui-kitten/components';
 
 /**
  * Simple wrapper for the UI Kitten Input component that styles it with a white background

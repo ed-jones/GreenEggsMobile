@@ -1,8 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
-import { Layout, LayoutProps } from '@ui-kitten/components'
+import { Layout, LayoutProps } from '@ui-kitten/components';
 
 /**
  * Component to be used as a base for all views.

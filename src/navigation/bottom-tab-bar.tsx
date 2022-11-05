@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement, useContext } from 'react'
+import { ReactElement, useContext } from 'react';
 import { Alert, StyleSheet, View } from 'react-native'
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
 import {

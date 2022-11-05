@@ -2,7 +2,7 @@
  * Author: Edward Jones
  */
 import { ListItem } from '@ui-kitten/components'
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { SectionList, SectionListProps } from 'react-native'
 
 export const alphabetArray = [

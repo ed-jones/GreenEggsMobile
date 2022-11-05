@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement, useContext } from 'react'
+import { ReactElement, useContext } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { View } from 'react-native'
 import { SearchContext } from '@greeneggs/context'

@@ -1,8 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
-import { Text, Icon } from '@ui-kitten/components'
+import { Text, Icon } from '@ui-kitten/components';
 import { View, Pressable } from 'react-native'
 
 export interface LabelledIconProps {

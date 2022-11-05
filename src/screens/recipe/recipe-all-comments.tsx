@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { RecipeCommentList } from './recipe-comment-list'
 import { View, ScrollView } from 'react-native'
 import { Text } from '@ui-kitten/components'

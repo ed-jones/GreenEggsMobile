@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useState } from 'react'
+import { useState } from 'react';
 import { Queries } from '@greeneggs/graphql'
 import {
   Categories,

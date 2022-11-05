@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { View } from 'react-native'
 import { Divider, List } from '@ui-kitten/components'
 import { RouteProp, useRoute } from '@react-navigation/native'

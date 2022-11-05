@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native'
 
 /**

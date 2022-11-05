@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { recipe_recipe_data_ingredients } from '@greeneggs/types/graphql'
 import { View } from 'react-native'
 import { IngredientListItem } from '@greeneggs/ui/list-items'

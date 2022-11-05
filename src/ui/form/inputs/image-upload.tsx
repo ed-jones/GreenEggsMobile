@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import { useState } from 'react';
 import { Platform, View } from 'react-native'
 import { Menu, MenuItem, Modal, Text, ThemedComponentProps, useTheme } from '@ui-kitten/components'
 import * as ImagePicker from 'expo-image-picker'
@@ -23,7 +23,7 @@ interface IImageUpload {
  */
 export function ImageUpload({ label, uri, onChange, error, eva }: IImageUpload & ThemedComponentProps) {
   const theme = useTheme()
-  const [modalVisible, setModalVisible] = React.useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
 
   type ImageSource = 'gallery' | 'camera'
 

@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement, useContext, useState } from 'react'
+import { ReactElement, useContext, useState } from 'react';
 
 import { Button, CheckBox, Spinner, Text } from '@ui-kitten/components'
 import { SignupInput } from '@greeneggs/types/graphql'

@@ -1,8 +1,8 @@
 /**
  * Author: Andrew Wilkie
  */
-import React, { ReactElement, useState } from 'react'
-import { View, StyleSheet, Pressable } from 'react-native'
+import { ReactElement, useState } from 'react'
+import { View, Pressable } from 'react-native'
 import { Text, Button, TopNavigation, TopNavigationAction, Avatar } from '@ui-kitten/components'
 import { useQuery } from '@apollo/client'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'

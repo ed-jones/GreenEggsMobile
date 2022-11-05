@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useState, PropsWithChildren } from 'react'
+import { useState, PropsWithChildren } from 'react';
 import * as SecureStore from 'expo-secure-store'
 import { AuthContext, Token } from './index'
 

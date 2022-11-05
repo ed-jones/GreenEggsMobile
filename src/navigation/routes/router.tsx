@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useState, ReactNode } from 'react'
+import { useState, ReactNode } from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { useQuery } from '@apollo/client'
 import { Queries } from '@greeneggs/graphql'

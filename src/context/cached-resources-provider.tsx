@@ -2,7 +2,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { PropsWithChildren, useEffect, useState } from 'react'
+import { PropsWithChildren, useEffect, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons'
 import * as Font from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'

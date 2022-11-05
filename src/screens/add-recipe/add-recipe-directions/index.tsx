@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement, useContext, useEffect } from 'react'
+import { ReactElement, useContext, useEffect } from 'react';
 import { ListItem } from '@ui-kitten/components'
 import { Image } from 'react-native'
 import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types'

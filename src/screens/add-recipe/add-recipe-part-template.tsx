@@ -1,7 +1,9 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode } from 'react';
+
+import * as React from 'react';
 import { Button, List, Text, TextElement } from '@ui-kitten/components'
 import { ListRenderItem, View } from 'react-native'
 import { EmptyState } from '@greeneggs/ui/empty-state'

@@ -1,7 +1,7 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React, { useState, ReactElement } from 'react'
+import { useState, ReactElement } from 'react';
 import { Button, IndexPath, List, ListItem, Spinner, Text, SelectItem, TopNavigation } from '@ui-kitten/components'
 import { View } from 'react-native'
 import { Mutations, Queries } from '@greeneggs/graphql'

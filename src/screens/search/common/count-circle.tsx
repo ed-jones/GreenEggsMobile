@@ -2,7 +2,6 @@
  * Author: Victor Ying
  */
 import { useTheme } from '@ui-kitten/components'
-import React from 'react'
 import Svg, { Circle, SvgProps, Text } from 'react-native-svg'
 
 export interface CountCircleProps extends Omit<SvgProps, 'children'> {

@@ -1,8 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
-import { Divider, ListItem, Text, useTheme } from '@ui-kitten/components'
+import { Divider, ListItem, Text, useTheme } from '@ui-kitten/components';
 import { FieldError } from 'react-hook-form'
 import * as Icons from '../icons'
 

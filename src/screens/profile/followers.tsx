@@ -1,7 +1,7 @@
 /**
  * Author: Andrew Wilkie
  */
-import React, { ReactElement, useState } from 'react'
+import { ReactElement, useState } from 'react';
 import {
   FollowedUsers,
   FollowedUsersVariables,

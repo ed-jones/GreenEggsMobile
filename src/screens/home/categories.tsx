@@ -1,8 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
-import { Queries } from '@greeneggs/graphql'
+import { Queries } from '@greeneggs/graphql';
 import {
   RecipeFilter,
   Sort,

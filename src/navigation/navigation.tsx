@@ -1,8 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { BottomTabBar } from './bottom-tab-bar'
 import { AddRecipe } from '@greeneggs/screens/add-recipe/add-recipe'

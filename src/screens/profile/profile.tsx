@@ -3,7 +3,7 @@
  */
 import { LoggedInRouteParams } from '@greeneggs/navigation/types'
 import { RouteProp, useRoute } from '@react-navigation/native'
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { GenericProfile } from './generic-profile'
 
 /**

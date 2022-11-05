@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { createMaterialTopTabNavigator, MaterialTopTabBarProps } from '@react-navigation/material-top-tabs'
 import { TabBar, Tab } from '@ui-kitten/components'
 import { NewsFeed } from './news-feed'

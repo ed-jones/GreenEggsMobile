@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement, useContext } from 'react'
+import { ReactElement, useContext } from 'react';
 import { Button, Text, TopNavigation } from '@ui-kitten/components'
 import { IngredientInput } from '@greeneggs/types/graphql'
 import { useForm } from 'react-hook-form'

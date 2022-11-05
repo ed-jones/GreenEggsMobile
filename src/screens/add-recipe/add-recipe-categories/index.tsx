@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement, useContext } from 'react'
+import { ReactElement, useContext } from 'react';
 import { Divider, ListItem } from '@ui-kitten/components'
 import * as Icons from '@greeneggs/ui/icons'
 import { AddRecipePartTemplate } from '../add-recipe-part-template'

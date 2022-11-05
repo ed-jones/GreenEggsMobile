@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { View, Image, ImageBackground } from 'react-native'
 import { Text, Button } from '@ui-kitten/components'
 import Logo from '../../assets/images/icon.png'

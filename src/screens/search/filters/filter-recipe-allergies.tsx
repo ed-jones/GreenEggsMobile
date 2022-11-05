@@ -1,7 +1,7 @@
 /**
  * Author: Victor Ying
  */
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react';
 import { Queries } from '@greeneggs/graphql'
 import { Divider } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'

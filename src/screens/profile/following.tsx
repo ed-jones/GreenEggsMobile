@@ -1,8 +1,7 @@
 /**
  * Author: Andrew Wilkie
  */
-import React, { ReactElement, useState } from 'react'
-import { StyleSheet } from 'react-native'
+import { ReactElement, useState } from 'react'
 import {
   FollowingUsers,
   FollowingUsersVariables,

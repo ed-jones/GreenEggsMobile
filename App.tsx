@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import 'react-native-gesture-handler'
 import { AddRecipeStateProvider } from '@greeneggs/context/add-recipe-state-provider'
 import { AuthProvider } from '@greeneggs/context/auth-provider'

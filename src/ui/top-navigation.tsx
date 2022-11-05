@@ -1,8 +1,11 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
-import { TopNavigation as UIKittenTopNavigation, TopNavigationAction, TopNavigationProps } from '@ui-kitten/components'
+import {
+  TopNavigation as UIKittenTopNavigation,
+  TopNavigationAction,
+  TopNavigationProps,
+} from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/core'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 

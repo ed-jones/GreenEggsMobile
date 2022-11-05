@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useState, PropsWithChildren } from 'react'
+import { useState, PropsWithChildren } from 'react';
 import { defaultSearchState, SearchContext, SearchState } from './index'
 /**
  * Provider that lets all child components access the search state, including query, sorting and filtering.

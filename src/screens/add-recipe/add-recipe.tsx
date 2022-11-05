@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement, useContext } from 'react'
+import { ReactElement, useContext } from 'react';
 import { View, Alert } from 'react-native'
 import { Button, Divider, Layout, Spinner, useTheme } from '@ui-kitten/components'
 import { addRecipe, addRecipeVariables, RecipeInput } from '@greeneggs/types/graphql'

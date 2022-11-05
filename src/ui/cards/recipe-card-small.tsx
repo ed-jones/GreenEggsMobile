@@ -1,8 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
-import { recipes_recipes_data } from '@greeneggs/types/graphql'
+import { recipes_recipes_data } from '@greeneggs/types/graphql';
 import { Card, Text } from '@ui-kitten/components'
 import { View, Image } from 'react-native'
 import { convertSubmittedAt } from '@greeneggs/utils'

@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { Text } from '@ui-kitten/components'
 import { ScrollView } from 'react-native'
 import { RecipeInput } from '@greeneggs/types/graphql'

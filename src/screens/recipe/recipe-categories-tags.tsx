@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { Tags } from '@greeneggs/ui/tags'
 import { recipe_recipe_data_categories } from '@greeneggs/types/graphql'
 import { useNavigation } from '@react-navigation/core'

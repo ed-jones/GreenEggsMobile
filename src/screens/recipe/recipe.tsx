@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react';
 import { useQuery } from '@apollo/client'
 import { ImageBackground, View } from 'react-native'
 import { Queries } from '@greeneggs/graphql'

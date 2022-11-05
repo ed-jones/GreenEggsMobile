@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { noAvatar } from '@greeneggs/assets'
 import { convertTimeEstimate } from '@greeneggs/utils'
 import { View, Pressable } from 'react-native'

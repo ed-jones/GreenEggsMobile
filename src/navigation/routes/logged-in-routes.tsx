@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement, ReactNode } from 'react'
+import { ReactElement } from 'react'
 import { Stack } from '../stack'
 
 import { Navigation } from '../navigation'

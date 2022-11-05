@@ -1,8 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
-import { Avatar, ListItem } from '@ui-kitten/components'
+import { Avatar, ListItem } from '@ui-kitten/components';
 import { Users_users_data } from '@greeneggs/types/graphql'
 import { noAvatar } from '@greeneggs/assets'
 import { useNavigateToProfile } from '@greeneggs/navigation/utils'

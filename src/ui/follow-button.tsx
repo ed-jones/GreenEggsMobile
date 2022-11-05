@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useState } from 'react'
+import { useState } from 'react';
 import { Button } from '@ui-kitten/components'
 import { useMutation } from '@apollo/client'
 import { FollowUser, UnfollowUser } from '@greeneggs/types/graphql'

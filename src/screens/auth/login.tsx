@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement, useContext } from 'react'
+import { ReactElement, useContext } from 'react';
 import { Button, Spinner } from '@ui-kitten/components'
 import { useLoginForm } from './use-login-form'
 import { AuthPageTemplate } from './auth-page-template'

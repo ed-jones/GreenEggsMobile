@@ -1,8 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
-import { View } from 'react-native'
+import { View } from 'react-native';
 import { Text, useTheme } from '@ui-kitten/components'
 
 export interface Tag {

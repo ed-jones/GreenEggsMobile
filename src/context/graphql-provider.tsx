@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { PropsWithChildren, useContext } from 'react'
+import { PropsWithChildren, useContext } from 'react';
 import { ApolloClient, ApolloLink, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { createUploadLink } from 'apollo-upload-client'

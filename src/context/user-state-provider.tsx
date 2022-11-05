@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useState, useEffect, PropsWithChildren } from 'react'
+import { useState, useEffect, PropsWithChildren } from 'react';
 import { Me as MeQuery } from '@greeneggs/types/graphql'
 import { useQuery } from '@apollo/client'
 import { Queries } from '@greeneggs/graphql'

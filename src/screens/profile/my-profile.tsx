@@ -1,7 +1,7 @@
 /**
  * Author: Andrew Wilkie
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { Text } from '@ui-kitten/components'
 import { useQuery } from '@apollo/client'
 import { Queries } from '@greeneggs/graphql'

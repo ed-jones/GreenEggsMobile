@@ -1,7 +1,7 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React, { Key, useContext } from 'react'
+import { Key, useContext } from 'react';
 import { Text, ListItem, Icon, Divider, useTheme } from '@ui-kitten/components'
 import { Alert, ScrollView } from 'react-native'
 import Svg, { Circle } from 'react-native-svg'

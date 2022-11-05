@@ -1,8 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
-import { ListItem, ListItemProps, Icon, Text } from '@ui-kitten/components'
+import { ListItem, ListItemProps, Icon, Text } from '@ui-kitten/components';
 import { ViewProps } from 'react-native'
 import Svg, { Circle } from 'react-native-svg'
 

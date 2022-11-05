@@ -3,7 +3,7 @@
  */
 import { Input } from '@greeneggs/ui/input'
 import { InputProps, Text, ThemedComponentProps, useTheme } from '@ui-kitten/components'
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { FieldError, Path, PathValue } from 'react-hook-form'
 import { View } from 'react-native'
 

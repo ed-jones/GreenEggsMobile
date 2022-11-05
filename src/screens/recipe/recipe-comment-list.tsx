@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { Divider } from '@ui-kitten/components'
 import { View } from 'react-native'
 import { recipe_recipe_data_comments, recipe_recipe_data_comments_replies } from '@greeneggs/types/graphql'

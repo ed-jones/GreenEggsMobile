@@ -1,8 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
-import { ListItem, Text } from '@ui-kitten/components'
+import { ListItem, Text } from '@ui-kitten/components';
 import { recipe_recipe_data_ingredients } from '@greeneggs/types/graphql'
 import * as Icons from '../icons'
 import { toTitleCase } from '@greeneggs/utils'

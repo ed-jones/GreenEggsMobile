@@ -1,7 +1,7 @@
 /**
  * Author: Victor Ying
  */
-import React, { useContext } from 'react'
+import { useContext } from 'react';
 import { Divider, List, ListItem } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
 import { SearchContext, SearchState } from '@greeneggs/context'

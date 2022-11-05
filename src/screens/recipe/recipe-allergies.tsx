@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { recipe_recipe_data_allergies } from '@greeneggs/types/graphql'
 import { Text } from '@ui-kitten/components'
 import { Callout } from '@greeneggs/ui/callout'

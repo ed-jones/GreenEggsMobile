@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { ReactElement, useState } from 'react'
+import { ReactElement, useState } from 'react';
 import { useQuery } from '@apollo/client'
 import { Queries } from '@greeneggs/graphql'
 import { comment } from '@greeneggs/types/graphql'

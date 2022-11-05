@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement, useContext } from 'react'
+import { ReactElement, useContext } from 'react';
 import { IngredientListItem } from '@greeneggs/ui/list-items'
 import { useEffect } from 'react'
 

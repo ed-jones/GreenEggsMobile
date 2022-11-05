@@ -1,7 +1,7 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { Button, Spinner, Text } from '@ui-kitten/components'
 import { ScrollView } from 'react-native'
 import { Mutations, Queries } from '@greeneggs/graphql'

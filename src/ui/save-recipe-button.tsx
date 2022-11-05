@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useState } from 'react'
+import { useState } from 'react';
 import { Icon, TopNavigationAction } from '@ui-kitten/components'
 import { useMutation } from '@apollo/client'
 import { Mutations, Queries } from '@greeneggs/graphql'

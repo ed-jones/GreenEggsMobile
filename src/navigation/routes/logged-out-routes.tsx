@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { Stack } from '../stack'
 import { Welcome } from '@greeneggs/screens/auth/welcome'
 import { Login } from '@greeneggs/screens/auth/login'

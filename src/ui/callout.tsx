@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactText } from 'react'
+import { ReactText } from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native'
 import { Icon, Text, TextElement, useTheme } from '@ui-kitten/components'
 import { alpha } from '@greeneggs/utils'

@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { ReactElement, useState } from 'react'
+import { ReactElement, useState } from 'react';
 import { View } from 'react-native'
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { noAvatar } from '@greeneggs/assets'

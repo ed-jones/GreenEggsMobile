@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement, useContext, useState } from 'react'
+import { ReactElement, useContext, useState } from 'react';
 import { Divider, Input, ListItem, TopNavigation } from '@ui-kitten/components'
 import { DietInput, Diets, DietsVariables, Diets_diets_data, RecipeFilter, Sort } from '@greeneggs/types/graphql'
 import { Queries } from '@greeneggs/graphql'

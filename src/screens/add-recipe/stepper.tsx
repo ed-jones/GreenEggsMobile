@@ -1,8 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
-import { Text, useTheme } from '@ui-kitten/components'
+import { Text, useTheme } from '@ui-kitten/components';
 import { View } from 'react-native'
 import { ProgressCircle } from '@greeneggs/ui/progress-circle'
 

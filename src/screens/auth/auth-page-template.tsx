@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import * as React from 'react';
 import { View, ImageBackground, Image, ScrollView } from 'react-native'
 import { Text, useTheme } from '@ui-kitten/components'
 import { LinearGradient } from 'expo-linear-gradient'

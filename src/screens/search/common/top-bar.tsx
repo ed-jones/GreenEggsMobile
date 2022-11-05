@@ -1,7 +1,7 @@
 /**
  * Author: Victor Ying
  */
-import React, { useContext } from 'react'
+import { useContext } from 'react';
 import { Button, Icon, ThemedComponentProps, TopNavigationAction } from '@ui-kitten/components'
 import { Input } from '@greeneggs/ui/input'
 import * as Icons from '@greeneggs/ui/icons'

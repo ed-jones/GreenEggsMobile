@@ -1,8 +1,7 @@
 /**
  * Author: Victor Ying
  */
-import React from 'react'
-import { Text } from '@ui-kitten/components'
+import { Text } from '@ui-kitten/components';
 import { Background } from '@greeneggs/ui/background'
 import { TopNavigation } from '@greeneggs/ui/top-navigation'
 

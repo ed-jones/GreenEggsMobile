@@ -2,7 +2,9 @@
  * Author: Edward Jones
  * Based on code from the react-navigation bottom tabs library
  */
-import React, { PropsWithChildren, useEffect, useState } from 'react'
+import { PropsWithChildren, useEffect, useState } from 'react';
+
+import * as React from 'react';
 import { Animated, Platform } from 'react-native'
 import useIsKeyboardShown from '@react-navigation/bottom-tabs/src/utils/useIsKeyboardShown'
 

@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { useState } from 'react'
+import { useState } from 'react';
 import { Icon, Menu, MenuItem, Popover } from '@ui-kitten/components'
 import { View } from 'react-native'
 import { useMutation } from '@apollo/client'

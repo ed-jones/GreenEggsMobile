@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { Card, Text } from '@ui-kitten/components'
 import { Image, Dimensions, View } from 'react-native'
 import { RouteProp, useRoute } from '@react-navigation/native'

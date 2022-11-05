@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react';
 import {
   Categories,
   CategoriesVariables,

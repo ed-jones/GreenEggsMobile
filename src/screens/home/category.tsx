@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { useState } from 'react'
+import { useState } from 'react';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/core'
 import { Queries } from '@greeneggs/graphql'
 import { recipes, recipesVariables, recipes_recipes_data, Sort, RecipeFilter } from '@greeneggs/types/graphql'

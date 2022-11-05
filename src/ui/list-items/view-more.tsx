@@ -1,8 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
-import { ListItem, ListItemProps, Text } from '@ui-kitten/components'
+import { ListItem, ListItemProps, Text } from '@ui-kitten/components';
 import * as Icons from '@greeneggs/ui/icons'
 
 /**

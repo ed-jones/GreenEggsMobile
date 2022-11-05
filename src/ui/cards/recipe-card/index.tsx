@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { Image, View } from 'react-native'
 import { Card } from '@ui-kitten/components'
 import { recipes_recipes_data } from '@greeneggs/types/graphql'

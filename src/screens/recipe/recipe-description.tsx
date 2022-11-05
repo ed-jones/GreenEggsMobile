@@ -1,4 +1,3 @@
-import React from 'react'
 import { View } from 'react-native'
 import { Card, Text, TopNavigation } from '@ui-kitten/components'
 import { RouteProp, useRoute } from '@react-navigation/native'

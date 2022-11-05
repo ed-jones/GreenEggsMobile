@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { Controller, ControllerProps, FieldValues, RegisterOptions } from 'react-hook-form'
 import { InputProps } from '@ui-kitten/components'
 import { ErrorFragment } from '@greeneggs/types/graphql'
@@ -140,7 +140,7 @@ function InputTypeDefaultProps<TFieldValues extends FieldValues>(): Record<
         keyboardType: 'numeric',
       },
     },
-  }
+  };
 }
 
 /**

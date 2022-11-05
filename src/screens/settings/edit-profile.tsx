@@ -1,7 +1,7 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { ScrollView } from 'react-native'
 import { editProfile, editProfileVariables, ProfileDetails } from '@greeneggs/types/graphql'

@@ -2,7 +2,7 @@
  * Author: Edward Jones
  */
 import { ApolloQueryResult, DocumentNode, QueryResult, useQuery } from '@apollo/client'
-import React, { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react';
 import { FlatList, FlatListProps, View } from 'react-native'
 import { Spinner, Text } from '@ui-kitten/components'
 import { EmptyState } from './empty-state'

@@ -1,7 +1,7 @@
 /**
  * Author: Xiaoyao Zhang
  */
-import React, { FC, useContext } from 'react'
+import { FC, useContext } from 'react';
 import { Avatar, Divider, ListItem, ListItemProps, ThemedComponentProps, Text } from '@ui-kitten/components'
 import {
   notifications as notificationsType,

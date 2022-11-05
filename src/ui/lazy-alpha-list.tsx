@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { CommonVariables, TDataWithData, useLazyList, UseLazyListProps } from './lazy-list'
 import { LoadingScreen } from './loading-screen'
 import { AlphaList, AlphaListProps, buildAlphaListItems, CategoriseItem } from './alpha-list'

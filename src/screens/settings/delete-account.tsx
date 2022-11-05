@@ -1,7 +1,7 @@
 /**
  * Author: Wambugu Mutahi
  */
-import React, { useContext, useEffect, ReactElement } from 'react'
+import { useContext, useEffect, ReactElement } from 'react';
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { ScrollView, View, Alert as NativeAlert } from 'react-native'
 import { deleteUser, LoginInput } from '@greeneggs/types/graphql'

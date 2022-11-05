@@ -1,7 +1,9 @@
 /**
  * Author: Edward Jones
  */
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
+
+import * as React from 'react';
 
 import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { FieldArrayMethodProps } from 'react-hook-form'

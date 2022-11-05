@@ -2,7 +2,7 @@
  * Author: Victor Ying
  */
 import { Queries } from '@greeneggs/graphql'
-import React, { useContext, useState, ReactElement } from 'react'
+import { useContext, useState, ReactElement } from 'react';
 import {
   RecipeFilter,
   recipes,

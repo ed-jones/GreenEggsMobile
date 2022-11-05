@@ -1,10 +1,10 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import { ReactElement } from 'react';
+import { ReactElement } from 'react'
 import { noAvatar } from '@greeneggs/assets'
 import { convertTimeEstimate } from '@greeneggs/utils'
-import { View, Pressable } from 'react-native'
+import { View, Pressable, Image } from 'react-native'
 import { recipe_recipe_data } from '@greeneggs/types/graphql'
 import { Text, Card, Avatar } from '@ui-kitten/components'
 import { RecipeCategoriesTags } from './recipe-categories-tags'
@@ -31,6 +31,7 @@ export function RecipeDetailsCard({
   id,
   liked,
   comments,
+  coverImage,
 }: recipe_recipe_data): ReactElement {
   const navigation = useNavigation<LoggedInNavigationProp>()
   const navigateToDescription = () => {
@@ -45,22 +46,25 @@ export function RecipeDetailsCard({
   return (
     <Card
       header={() => (
-        <View style={{ padding: 16 }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Text category='h5' style={{ flexShrink: 1 }}>
-              {title}
-            </Text>
-            {timeEstimate ? (
-              <LabelledIcon
-                label={`${convertTimeEstimate(timeEstimate).toUpperCase()} PREP`}
-                iconName='clock-outline'
-              />
-            ) : undefined}
+        <>
+          <Image source={{ uri: coverImage }} style={{ width: '100%', height: undefined, aspectRatio: 1 / 1 }} />
+          <View style={{ padding: 16 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Text category='h5' style={{ flexShrink: 1 }}>
+                {title}
+              </Text>
+              {timeEstimate ? (
+                <LabelledIcon
+                  label={`${convertTimeEstimate(timeEstimate).toUpperCase()} PREP`}
+                  iconName='clock-outline'
+                />
+              ) : undefined}
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
+              <RecipeCategoriesTags categories={categories} />
+            </View>
           </View>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
-            <RecipeCategoriesTags categories={categories} />
-          </View>
-        </View>
+        </>
       )}
       footer={() => (
         <View style={{ padding: 16 }}>

@@ -3,12 +3,10 @@
  */
 import { useContext, useState } from 'react'
 import { useQuery } from '@apollo/client'
-import { ImageBackground, View } from 'react-native'
+import { ImageBackground, ScrollView, View } from 'react-native'
 import { Queries } from '@greeneggs/graphql'
 import { Button, IndexPath, SelectItem, Text } from '@ui-kitten/components'
 import { recipe, recipeVariables } from '@greeneggs/types/graphql'
-import ParallaxHeader from '@fabfit/react-native-parallax-header'
-import { LinearGradient } from 'expo-linear-gradient'
 import { RecipeDetailsCard } from './recipe-details-card'
 import { RecipeAllergies } from './recipe-allergies'
 import { RecipeIngredients } from './recipe-ingredients'
@@ -52,34 +50,16 @@ export function Recipe() {
   const { data: recipe } = data.recipe
 
   return (
-    <ParallaxHeader
-      maxHeight={300}
-      minHeight={128}
-      renderOverlay={() => (
-        <TopNavigation
-          style={{ height: 64, alignItems: 'flex-start' }}
-          accessoryRight={() => (
-            <>
-              <SaveRecipeButton recipeId={recipeId} saved={recipe.saved} />
-              {me?.id === recipe.submittedBy.id ? <RecipeMoreButton recipeId={recipeId} /> : undefined}
-            </>
-          )}
-        />
-      )}
-      renderHeader={() => (
-        <>
-          <ImageBackground
-            source={{ uri: recipe.coverImage }}
-            style={{ width: '100%', height: undefined, aspectRatio: 1 / 1 }}
-          />
-          <LinearGradient
-            colors={['rgba(255, 255, 255,1)', 'transparent']}
-            style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '100%' }}
-          />
-        </>
-      )}
-    >
-      <Background style={{ padding: 16 }}>
+    <Background style={{ paddingBottom: 24 }}>
+      <TopNavigation
+        accessoryRight={() => (
+          <>
+            <SaveRecipeButton recipeId={recipeId} saved={recipe.saved} />
+            {me?.id === recipe.submittedBy.id ? <RecipeMoreButton recipeId={recipeId} /> : undefined}
+          </>
+        )}
+      />
+      <ScrollView style={{ paddingHorizontal: 16 }}>
         <RecipeDetailsCard {...recipe} />
         <View style={{ marginVertical: 16 }}>
           <RecipeAllergies allergies={recipe.allergies} />
@@ -164,7 +144,7 @@ export function Recipe() {
         <View style={{ marginTop: 24 }}>
           <RecipeAddComment recipeId={recipe.id} />
         </View>
-      </Background>
-    </ParallaxHeader>
+      </ScrollView>
+    </Background>
   )
 }

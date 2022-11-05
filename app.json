@@ -15,7 +15,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "app.greeneggs.mobile"
@@ -29,6 +31,11 @@
     },
     "web": {
       "favicon": "./src/assets/images/icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "bb23947f-78b9-45d6-bae0-4a8c4045caa6"
+      }
     }
   }
 }

@@ -19,7 +19,6 @@
     "@apollo/client": "^3.7.0",
     "@eva-design/eva": "^2.0.0",
     "@expo/vector-icons": "^13.0.0",
-    "@fabfit/react-native-parallax-header": "^0.4.0",
     "@react-navigation/bottom-tabs": "6.4.0",
     "@react-navigation/material-top-tabs": "^6.3.0",
     "@react-navigation/native": "~6.0.13",

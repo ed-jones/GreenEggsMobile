@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  NODE_VERSION: '15.14.0'
+  NODE_VERSION: '16.18.0'
   EXPO_VERSION: '4.x'
   API_URI: ${{ secrets.API_URI }}
 

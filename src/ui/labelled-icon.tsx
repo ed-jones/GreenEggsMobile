@@ -3,23 +3,7 @@
  */
 import React from 'react'
 import { Text, Icon } from '@ui-kitten/components'
-import { View, StyleSheet, Pressable } from 'react-native'
-
-const styles = StyleSheet.create({
-  view: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 8,
-  },
-  icon: {
-    width: 24,
-    height: 24,
-    marginRight: 8,
-  },
-  label: {
-    fontWeight: 'bold',
-  },
-})
+import { View, Pressable } from 'react-native'
 
 export interface LabelledIconProps {
   iconName: string
@@ -34,9 +18,9 @@ export interface LabelledIconProps {
 export function LabelledIcon({ iconName, label, onPress, fill }: LabelledIconProps) {
   return (
     <Pressable onPress={onPress}>
-      <View style={styles.view}>
-        <Icon style={styles.icon} name={iconName} fill={fill || 'black'} />
-        <Text style={styles.label}>{label}</Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 8 }}>
+        <Icon style={{ width: 24, height: 24, marginRight: 8 }} name={iconName} fill={fill || 'black'} />
+        <Text style={{ fontWeight: 'bold' }}>{label}</Text>
       </View>
     </Pressable>
   )

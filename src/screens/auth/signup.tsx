@@ -3,7 +3,6 @@
  */
 import React, { ReactElement, useContext, useState } from 'react'
 
-import { StyleSheet } from 'react-native'
 import { Button, CheckBox, Spinner, Text } from '@ui-kitten/components'
 import { SignupInput } from '@greeneggs/types/graphql'
 import { AuthContext } from '@greeneggs/context'
@@ -14,12 +13,6 @@ import { AuthPageTemplate } from './auth-page-template'
 import { useNavigation } from '@react-navigation/native'
 import { LoggedOutNavigationProp } from '@greeneggs/navigation/types'
 import { ControlledInput, InputType } from '@greeneggs/ui/form'
-
-const styles = StyleSheet.create({
-  input: {
-    marginBottom: 10,
-  },
-})
 
 /**
  * Screen that enables a user to sign up to Green Eggs.
@@ -51,7 +44,7 @@ export function Signup(): ReactElement {
         inputProps={{
           label: 'FIRST NAME',
           defaultValue: '',
-          style: styles.input,
+          style: { marginBottom: 10 },
           autoFocus: true,
         }}
         submitError={formResult.data?.signup.error}
@@ -66,7 +59,7 @@ export function Signup(): ReactElement {
         inputProps={{
           label: 'LAST NAME',
           defaultValue: '',
-          style: styles.input,
+          style: { marginBottom: 10 },
         }}
         submitError={formResult.data?.signup.error}
         type={InputType.LASTNAME}
@@ -74,7 +67,7 @@ export function Signup(): ReactElement {
       {/* EMAIL */}
       <ControlledInput<SignupInput>
         inputProps={{
-          style: styles.input,
+          style: { marginBottom: 10 },
         }}
         controllerProps={{
           name: 'email',
@@ -87,7 +80,7 @@ export function Signup(): ReactElement {
       {/* PASSWORD */}
       <ControlledInput<SignupInput>
         inputProps={{
-          style: styles.input,
+          style: { marginBottom: 10 },
           label: 'PASSWORD',
         }}
         controllerProps={{
@@ -101,7 +94,7 @@ export function Signup(): ReactElement {
       {/* CONFIRM PASSWORD */}
       <ControlledInput<SignupInput>
         inputProps={{
-          style: styles.input,
+          style: { marginBottom: 10 },
           label: 'CONFIRM PASSWORD',
         }}
         controllerProps={{

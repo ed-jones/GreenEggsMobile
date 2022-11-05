@@ -2,7 +2,6 @@
  * Author: Andrew Wilkie
  */
 import React, { ReactElement, useState } from 'react'
-import { StyleSheet } from 'react-native'
 import {
   FollowedUsers,
   FollowedUsersVariables,
@@ -20,18 +19,6 @@ import { LazyList } from '@greeneggs/ui/lazy-list'
 import { UserListItem } from './user-list-item'
 import * as Icons from '@greeneggs/ui/icons'
 
-const styles = StyleSheet.create({
-  found: {
-    padding: 16,
-  },
-  search: {
-    margin: 16,
-  },
-  view: {
-    height: '100%',
-  },
-})
-
 /**
  * Screen that shows a list of followers for a user.
  */
@@ -42,12 +29,12 @@ export function Followers(): ReactElement {
   } = useRoute<RouteProp<LoggedInRouteParams, 'Followers'>>()
 
   return (
-    <Background style={{ ...styles.view }}>
+    <Background style={{ height: '100%' }}>
       <TopNavigation title='Followers' />
       <Input
         placeholder='Search users'
         size='medium'
-        style={styles.search}
+        style={{ margin: 16 }}
         accessoryLeft={Icons.Search}
         value={query}
         onChangeText={(newText) => setQuery(newText)}

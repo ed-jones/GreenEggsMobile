@@ -2,7 +2,7 @@
  * Author: Edward Jones
  */
 import React from 'react'
-import { View, StyleSheet, ImageBackground, Image, ScrollView } from 'react-native'
+import { View, ImageBackground, Image, ScrollView } from 'react-native'
 import { Text, useTheme } from '@ui-kitten/components'
 import { LinearGradient } from 'expo-linear-gradient'
 import { StatusBar } from 'expo-status-bar'
@@ -10,48 +10,6 @@ import { logo, banner } from '@greeneggs/assets'
 import { Background } from '@greeneggs/ui/background'
 import { TopNavigation } from '@greeneggs/ui/top-navigation'
 import { Callout } from '@greeneggs/ui/callout'
-
-const styles = StyleSheet.create({
-  logo: {
-    width: 48,
-    height: 48,
-    margin: 10,
-  },
-  gradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    height: '100%',
-  },
-  bannerContainer: {
-    height: 200,
-    justifyContent: 'center',
-  },
-  bannerContent: {
-    alignItems: 'center',
-    paddingBottom: 64,
-  },
-  banner: {
-    resizeMode: 'cover',
-    height: '100%',
-    justifyContent: 'flex-start',
-  },
-  logoText: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  centerText: {
-    textAlign: 'center',
-  },
-  forgotPassword: {
-    fontWeight: 'bold',
-    textAlign: 'right',
-    paddingTop: 8,
-    paddingBottom: 10,
-  },
-})
 
 interface IAuthPageTemplateProps {
   message: string
@@ -68,15 +26,18 @@ export function AuthPageTemplate({ message, errorMessage, children }: IAuthPageT
   return (
     <Background>
       <StatusBar style='dark' />
-      <View style={styles.bannerContainer}>
-        <ImageBackground source={banner} style={styles.banner}>
-          <LinearGradient colors={['rgba(247, 249, 252,0.5)', 'rgba(247, 249, 252,1)']} style={styles.gradient} />
+      <View style={{ height: 200, justifyContent: 'center' }}>
+        <ImageBackground source={banner} style={{ height: '100%', justifyContent: 'flex-start' }}>
+          <LinearGradient
+            colors={['rgba(247, 249, 252,0.5)', 'rgba(247, 249, 252,1)']}
+            style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '100%' }}
+          />
           <TopNavigation />
-          <View style={styles.logoText}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
             <Text category='h1'>Green Eggs</Text>
-            <Image source={logo} style={styles.logo} />
+            <Image source={logo} style={{ width: 48, height: 48, margin: 10 }} />
           </View>
-          <Text style={styles.centerText} category='s1'>
+          <Text style={{ textAlign: 'center' }} category='s1'>
             {message}
           </Text>
         </ImageBackground>

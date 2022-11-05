@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import { Text, useTheme } from '@ui-kitten/components'
-import { View, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import { ProgressCircle } from '@greeneggs/ui/progress-circle'
 
 interface IStepperProps {
@@ -13,25 +13,13 @@ interface IStepperProps {
   length: number
 }
 
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  text: {
-    textAlign: 'right',
-    marginBottom: 4,
-  },
-})
-
 /**
  * Stateless component that, when controlled, shows the current state of a multi-step form in a mobile friendly manor.
  */
 export function Stepper({ currentStep, nextStep, index, length }: IStepperProps) {
   const theme = useTheme()
   return (
-    <View style={styles.row}>
+    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
       <ProgressCircle
         percent={(100 * (index + 1)) / length}
         radius={32}
@@ -43,10 +31,10 @@ export function Stepper({ currentStep, nextStep, index, length }: IStepperProps)
         <Text category='label' style={{ fontWeight: 'bold' }}>{`${index + 1} OF ${length}`}</Text>
       </ProgressCircle>
       <View>
-        <Text style={styles.text} category='h6'>
+        <Text style={{ textAlign: 'right', marginBottom: 4 }} category='h6'>
           {currentStep}
         </Text>
-        <Text style={styles.text}>{nextStep ? `Next: ${nextStep}` : 'Next: Publish'}</Text>
+        <Text style={{ textAlign: 'right', marginBottom: 4 }}>{nextStep ? `Next: ${nextStep}` : 'Next: Publish'}</Text>
       </View>
     </View>
   )

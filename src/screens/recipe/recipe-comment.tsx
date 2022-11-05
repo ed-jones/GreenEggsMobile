@@ -6,7 +6,7 @@ import { Mutations, Queries } from '@greeneggs/graphql'
 import { noAvatar } from '@greeneggs/assets'
 import { convertSubmittedAt } from '@greeneggs/utils'
 import { ListItem, Button, Divider, Avatar, Icon } from '@ui-kitten/components'
-import { View, Text, StyleSheet, Alert, Pressable } from 'react-native'
+import { View, Text, Alert, Pressable } from 'react-native'
 import { DeleteComment, recipe_recipe_data_comments } from '@greeneggs/types/graphql'
 import { useNavigation } from '@react-navigation/core'
 import { StackNavigationProp } from '@react-navigation/stack'
@@ -16,12 +16,6 @@ import { UserContext } from '@greeneggs/context'
 import { useNavigateToProfile } from '@greeneggs/navigation/utils'
 import { CommentLikeCounter } from '@greeneggs/ui/counters/comment-like-counter'
 import { LabelledIcon } from '@greeneggs/ui/labelled-icon'
-
-const styles = StyleSheet.create({
-  avatar: {
-    marginRight: 10,
-  },
-})
 
 interface RecipeCommentProps {
   comment: recipe_recipe_data_comments
@@ -78,7 +72,7 @@ export function RecipeComment({ comment, replyButton }: RecipeCommentProps): Rea
                     <Avatar
                       size='small'
                       source={comment.submittedBy.avatarURI ? { uri: comment.submittedBy.avatarURI } : noAvatar}
-                      style={styles.avatar}
+                      style={{ marginRight: 10 }}
                     />
                     <Text
                       style={{ fontWeight: 'bold' }}

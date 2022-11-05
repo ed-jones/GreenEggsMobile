@@ -9,7 +9,12 @@ import {
   MutationResult,
   useMutation,
 } from '@apollo/client'
-import { FieldValues, useForm as useReactHookForm, UseFormProps, UseFormReturn } from 'react-hook-form'
+import {
+  FieldValues,
+  useForm as useReactHookForm,
+  UseFormProps as UseReactHookFormProps,
+  UseFormReturn,
+} from 'react-hook-form'
 
 export interface IForm<InputType extends FieldValues, MutationType, MutationVariables>
   extends UseFormReturn<InputType> {
@@ -17,6 +22,13 @@ export interface IForm<InputType extends FieldValues, MutationType, MutationVari
   submitForm: (
     options?: MutationFunctionOptions<MutationType, MutationVariables> | undefined
   ) => Promise<FetchResult<MutationType>>
+}
+
+interface UseFormProps<InputType extends FieldValues, MutationType, MutationVariables> {
+  Mutation: DocumentNode
+  mutationVariableName: keyof MutationVariables
+  options?: MutationHookOptions<MutationType, MutationVariables>
+  reactHookFormProps?: UseReactHookFormProps<InputType>
 }
 
 /*
@@ -27,16 +39,16 @@ export function useForm<
   InputType extends FieldValues,
   MutationType,
   MutationVariables extends Record<keyof MutationVariables, InputType>
->(
-  Mutation: DocumentNode,
-  mutationVariableName: keyof MutationVariables,
-  options?: MutationHookOptions<MutationType, MutationVariables>,
-  reactHookFormProps?: UseFormProps<InputType>
-): IForm<InputType, MutationType, MutationVariables> {
+>({
+  Mutation,
+  mutationVariableName,
+  options,
+  reactHookFormProps,
+}: UseFormProps<InputType, MutationType, MutationVariables>): IForm<InputType, MutationType, MutationVariables> {
   const reactHookForm = useReactHookForm<InputType>(reactHookFormProps)
 
   const variables = {
-    [mutationVariableName]: reactHookForm.getValues() ,
+    [mutationVariableName]: reactHookForm.getValues(),
   } as MutationVariables
   const [submitForm, formResult] = useMutation<MutationType, MutationVariables>(Mutation, {
     variables,

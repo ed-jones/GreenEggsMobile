@@ -2,36 +2,13 @@
  * Author: Edward Jones
  */
 import React, { ReactElement } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import { Text } from '@ui-kitten/components'
 import { recipes_recipes_data } from '@greeneggs/types/graphql'
 import { convertTimeEstimate, convertSubmittedAt } from '@greeneggs/utils'
 import { LabelledIcon } from '@greeneggs/ui/labelled-icon'
 import { RecipeLikeCounter } from '@greeneggs/ui/counters/recipe-like-counter'
 import { CommentCounter } from '@greeneggs/ui/counters/comment-counter'
-
-const styles = StyleSheet.create({
-  view: {
-    padding: 14,
-  },
-  recipeTitle: {
-    fontWeight: 'bold',
-    fontSize: 18,
-    flexShrink: 1,
-  },
-  recipeDescription: {
-    marginBottom: 16,
-    marginTop: 8,
-  },
-  labelledIcons: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  labelledIconGroup: {
-    flexDirection: 'row',
-  },
-})
 
 export type IRecipeCardFooterProps = Pick<
   recipes_recipes_data,
@@ -65,25 +42,25 @@ export function RecipeCardFooter({
   submittedBy,
 }: IRecipeCardFooterProps): ReactElement {
   return (
-    <View style={styles.view}>
-      <View style={styles.labelledIcons}>
-        <Text category='h1' style={styles.recipeTitle}>
+    <View style={{ padding: 14 }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Text category='h1' style={{ fontWeight: 'bold', fontSize: 18, flexShrink: 1 }}>
           {title}
         </Text>
         <Text style={{ marginLeft: 8 }}>{`${convertSubmittedAt(createdAt)} ago`}</Text>
       </View>
       {description ? (
-        <Text category='s1' numberOfLines={2} style={styles.recipeDescription}>
+        <Text category='s1' numberOfLines={2} style={{ marginBottom: 16, marginTop: 8 }}>
           {description}
         </Text>
       ) : undefined}
-      <View style={styles.labelledIcons}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
         {timeEstimate && (
-          <View style={styles.labelledIconGroup}>
+          <View style={{ flexDirection: 'row' }}>
             <LabelledIcon label={`${convertTimeEstimate(timeEstimate).toUpperCase()} PREP`} iconName='clock-outline' />
           </View>
         )}
-        <View style={styles.labelledIconGroup}>
+        <View style={{ flexDirection: 'row' }}>
           <RecipeLikeCounter likeCount={likeCount} liked={liked} recipeId={id} submittedById={submittedBy.id} />
           <CommentCounter commentCount={commentCount} comments={comments} />
         </View>

@@ -9,5 +9,9 @@ import { UseFormProps } from 'react-hook-form'
 /**
  * Hook that sets up a login form with our custom useForm hook
  */
-export const useLoginForm = (args?: UseFormProps<LoginInput>): IForm<LoginInput, login, loginVariables> =>
-  useForm<LoginInput, login, loginVariables>(Mutations.login, 'loginDetails', undefined, args)
+export const useLoginForm = (reactHookFormProps?: UseFormProps<LoginInput>): IForm<LoginInput, login, loginVariables> =>
+  useForm<LoginInput, login, loginVariables>({
+    Mutation: Mutations.login,
+    mutationVariableName: 'loginDetails',
+    reactHookFormProps,
+  })

@@ -15,8 +15,7 @@ import {
 import Svg, { Circle } from 'react-native-svg'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { HideOnKeyboard } from '@greeneggs/ui/hide-on-keyboard'
-import { NotificationContext } from '@greeneggs/context'
-import { AddRecipeContext } from '@greeneggs/context'
+import { NotificationContext, AddRecipeContext } from '@greeneggs/context'
 
 const styles = StyleSheet.create({
   primary: {
@@ -28,9 +27,6 @@ const styles = StyleSheet.create({
   secondary: {
     height: 32,
     width: 32,
-  },
-  navbar: {
-    paddingTop: 12,
   },
 })
 
@@ -172,7 +168,7 @@ export function BottomTabBar({ navigation, state }: BottomTabBarProps): ReactEle
           })
         }}
         appearance='noIndicator'
-        style={{ ...styles.navbar, paddingBottom: 24 + insets.bottom }}
+        style={{ paddingTop: 12, paddingBottom: 24 + insets.bottom }}
       >
         <BottomNavigationTab
           icon={(props) => (

@@ -3,7 +3,7 @@
  */
 import React, { ReactElement } from 'react'
 import { Mutations } from '@greeneggs/graphql'
-import { ScrollView, StyleSheet } from 'react-native'
+import { ScrollView } from 'react-native'
 import { ChangePasswordDetails, changePasswordVariables, changePassword } from '@greeneggs/types/graphql'
 import { Button, Spinner } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
@@ -12,30 +12,14 @@ import { Background } from '@greeneggs/ui/background'
 import { TopNavigation } from '@greeneggs/ui/top-navigation'
 import * as Icons from '@greeneggs/ui/icons'
 
-const styles = StyleSheet.create({
-  view: {
-    padding: 16,
-  },
-  buttonGroup: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-  },
-  heading: {
-    paddingVertical: 16,
-  },
-  input: {
-    marginBottom: 10,
-  },
-})
-
 /**
  * Screen that lets a user change their password.
  */
 export function ChangePassword(): ReactElement {
-  const form = useForm<ChangePasswordDetails, changePassword, changePasswordVariables>(
-    Mutations.changePassword,
-    'changePasswordDetails'
-  )
+  const form = useForm<ChangePasswordDetails, changePassword, changePasswordVariables>({
+    Mutation: Mutations.changePassword,
+    mutationVariableName: 'changePasswordDetails',
+  })
   const navigation = useNavigation()
 
   function onSubmit() {
@@ -49,7 +33,7 @@ export function ChangePassword(): ReactElement {
   return (
     <Background>
       <TopNavigation title='Change Password' />
-      <ScrollView style={styles.view}>
+      <ScrollView style={{ padding: 16 }}>
         <ControlledInput
           controllerProps={{
             name: 'oldPassword',
@@ -58,7 +42,7 @@ export function ChangePassword(): ReactElement {
           inputProps={{
             label: 'OLD PASSWORD',
             style: {
-              ...styles.input,
+              marginBottom: 10,
             },
           }}
           submitError={form.formResult.data?.changePassword.error}
@@ -72,7 +56,7 @@ export function ChangePassword(): ReactElement {
           inputProps={{
             label: 'NEW PASSWORD',
             style: {
-              ...styles.input,
+              marginBottom: 10,
             },
           }}
           submitError={form.formResult.data?.changePassword.error}
@@ -86,7 +70,7 @@ export function ChangePassword(): ReactElement {
           inputProps={{
             label: 'CONFIRM NEW PASSWORD',
             style: {
-              ...styles.input,
+              marginBottom: 10,
             },
           }}
           submitError={form.formResult.data?.changePassword.error}

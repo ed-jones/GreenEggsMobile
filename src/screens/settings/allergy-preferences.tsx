@@ -3,7 +3,7 @@
  */
 import React, { useState } from 'react'
 import { Button, IndexPath, List, ListItem, SelectItem, Spinner, Text } from '@ui-kitten/components'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { useMutation, useQuery } from '@apollo/client'
 import {
@@ -22,22 +22,6 @@ import { TopNavigation } from '@greeneggs/ui/top-navigation'
 import { Callout } from '@greeneggs/ui/callout'
 import { Select } from '@greeneggs/ui/select'
 import * as Icons from '@greeneggs/ui/icons'
-
-const styles = StyleSheet.create({
-  view: {
-    padding: 16,
-  },
-  buttonGroup: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-  },
-  heading: {
-    paddingVertical: 16,
-  },
-  input: {
-    marginBottom: 10,
-  },
-})
 
 function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
   return Number(selectedIndex.toString()) - 1
@@ -132,7 +116,7 @@ export function AllergyPreferences() {
     <Background>
       <TopNavigation title='Allergy Preferences' />
       <View>
-        <View style={styles.view}>
+        <View style={{ padding: 16 }}>
           <Callout
             message='Here you can tell us if you have any allergies so that we can better show you recipes relevant to you.'
             type='info'

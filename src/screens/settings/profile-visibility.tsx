@@ -3,7 +3,7 @@
  */
 import React, { ReactElement } from 'react'
 import { Button, Spinner, Text } from '@ui-kitten/components'
-import { ScrollView, StyleSheet } from 'react-native'
+import { ScrollView } from 'react-native'
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { useNavigation } from '@react-navigation/core'
 import {
@@ -22,22 +22,6 @@ import { TopNavigation } from '@greeneggs/ui/top-navigation'
 import { Callout } from '@greeneggs/ui/callout'
 import * as Icons from '@greeneggs/ui/icons'
 
-const styles = StyleSheet.create({
-  view: {
-    padding: 16,
-  },
-  buttonGroup: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-  },
-  heading: {
-    paddingVertical: 16,
-  },
-  input: {
-    marginBottom: 10,
-  },
-})
-
 /**
  * Note: Privacy features are not currently all implemented, so this screen is disabled.
  *
@@ -48,10 +32,10 @@ export function ProfileVisibility(): ReactElement {
   const navigation = useNavigation()
 
   const { loading, error, data } = useQuery<Me>(Queries.getMe)
-  const form = useForm<ProfileVisibilityDetails, UpdateProfileVisibility, UpdateProfileVisibilityVariables>(
-    Mutations.updateProfileVisibility,
-    'profileVisibilityDetails'
-  )
+  const form = useForm<ProfileVisibilityDetails, UpdateProfileVisibility, UpdateProfileVisibilityVariables>({
+    Mutation: Mutations.updateProfileVisibility,
+    mutationVariableName: 'profileVisibilityDetails',
+  })
 
   if (loading) return <LoadingScreen />
   if (error) {
@@ -87,7 +71,7 @@ export function ProfileVisibility(): ReactElement {
   return (
     <Background>
       <TopNavigation title='Profile Visibility' />
-      <ScrollView style={styles.view}>
+      <ScrollView style={{ padding: 16 }}>
         <Callout
           message={
             <Text>

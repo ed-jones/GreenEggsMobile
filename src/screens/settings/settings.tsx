@@ -3,7 +3,7 @@
  */
 import React, { Key, useContext } from 'react'
 import { Text, ListItem, Icon, Divider, useTheme } from '@ui-kitten/components'
-import { Alert, ScrollView, StyleSheet } from 'react-native'
+import { Alert, ScrollView } from 'react-native'
 import Svg, { Circle } from 'react-native-svg'
 import * as SecureStore from 'expo-secure-store'
 import { AuthContext } from '@greeneggs/context'
@@ -12,10 +12,6 @@ import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
 import { Background } from '@greeneggs/ui/background'
 import { TopNavigation } from '@greeneggs/ui/top-navigation'
 import * as Icons from '@greeneggs/ui/icons'
-
-const styles = StyleSheet.create({
-  header: { padding: 16 },
-})
 
 interface ListItemProps {
   title: string
@@ -168,19 +164,15 @@ export function Settings() {
     <Background>
       <TopNavigation />
       <ScrollView>
-        <Text category='h6' style={styles.header}>
+        <Text category='h6' style={{ padding: 16 }}>
           Account
         </Text>
         {accountSettings.map(SettingsListItem)}
-        <Text category='h6' style={styles.header}>
+        <Text category='h6' style={{ padding: 16 }}>
           Dietary Preferences
         </Text>
         {dietaryPreferences.map(SettingsListItem)}
-        {/* <Text category="h6" style={styles.header}>
-                Privacy
-              </Text>
-              {PrivacySettings.map(SettingsListItem)} */}
-        <Text category='h6' style={styles.header}>
+        <Text category='h6' style={{ padding: 16 }}>
           About
         </Text>
         {about.map(SettingsListItem)}

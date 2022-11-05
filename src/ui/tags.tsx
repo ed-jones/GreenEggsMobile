@@ -2,22 +2,8 @@
  * Author: Edward Jones
  */
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import { Text, useTheme } from '@ui-kitten/components'
-
-const styles = StyleSheet.create({
-  tag: {
-    borderRadius: 10,
-    marginRight: 6,
-    marginVertical: 4,
-    paddingVertical: 4,
-    paddingHorizontal: 8,
-    overflow: 'hidden',
-  },
-  tags: {
-    flexDirection: 'row',
-  },
-})
 
 export interface Tag {
   name: string
@@ -34,14 +20,19 @@ interface IRecipeCategoryTags {
 export function Tags({ tags }: IRecipeCategoryTags) {
   const theme = useTheme()
   return (
-    <View style={styles.tags}>
+    <View style={{ flexDirection: 'row' }}>
       {tags.map((tag: Tag) => (
         <Text
           key={tag.name}
           category='label'
           appearance='alternative'
           style={{
-            ...styles.tag,
+            borderRadius: 10,
+            marginRight: 6,
+            marginVertical: 4,
+            paddingVertical: 4,
+            paddingHorizontal: 8,
+            overflow: 'hidden',
             backgroundColor: theme['color-basic-600'],
           }}
           onPress={tag.onPress}

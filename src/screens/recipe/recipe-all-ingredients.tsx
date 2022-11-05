@@ -2,19 +2,13 @@
  * Author: Dimitri Zvolinski
  */
 import React, { ReactElement } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import { Divider, List } from '@ui-kitten/components'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { LoggedInRouteParams } from '@greeneggs/navigation/types'
 import { Background } from '@greeneggs/ui/background'
 import { TopNavigation } from '@greeneggs/ui/top-navigation'
 import { IngredientListItem } from '@greeneggs/ui/list-items'
-
-const styles = StyleSheet.create({
-  content: {
-    padding: 16,
-  },
-})
 
 /**
  * Screen that displays a list of all ingredients for a recipe.
@@ -26,7 +20,7 @@ export function RecipeAllIngredients(): ReactElement {
   return (
     <Background>
       <TopNavigation title='All Ingredients' />
-      <View style={{ ...styles.content, marginHorizontal: -16 }}>
+      <View style={{ padding: 16, marginHorizontal: -16 }}>
         <List
           data={ingredients}
           renderItem={({ item }) => (

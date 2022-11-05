@@ -1,15 +1,9 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import { Card, Text, TopNavigation } from '@ui-kitten/components'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { LoggedInRouteParams } from '@greeneggs/navigation/types'
 import { Background } from '@greeneggs/ui/background'
-const styles = StyleSheet.create({
-  cardElement: {
-    paddingHorizontal: 28,
-    paddingVertical: 16,
-  },
-})
 
 /**
  * Screen for displaying a recipe's complete description and recipe upload date.
@@ -23,12 +17,16 @@ export function RecipeDescription() {
       <TopNavigation title='Description' />
       <Card
         header={() => (
-          <View style={styles.cardElement}>
+          <View style={{ paddingHorizontal: 28, paddingVertical: 16 }}>
             <Text category='h6'>{title}</Text>
             <Text category='s1'>{`Created by ${submittedBy.firstName} ${submittedBy.lastName}`}</Text>
           </View>
         )}
-        footer={() => <Text style={styles.cardElement}>{new Date(Number(createdAt)).toDateString()}</Text>}
+        footer={() => (
+          <Text style={{ paddingHorizontal: 28, paddingVertical: 16 }}>
+            {new Date(Number(createdAt)).toDateString()}
+          </Text>
+        )}
       >
         <Text>{description}</Text>
       </Card>

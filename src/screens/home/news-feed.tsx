@@ -2,7 +2,7 @@
  * Author: Edward Jones
  */
 import React, { ReactElement } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import {
   NewsFeed as NewsFeedType,
   NewsFeedVariables,
@@ -20,16 +20,6 @@ import { RecipeCard } from '@greeneggs/ui/cards'
 const cardVerticalMargin = 20
 const cardHorizontalMargin = 24
 
-const styles = StyleSheet.create({
-  firstCard: {
-    marginTop: cardVerticalMargin,
-  },
-  card: {
-    marginBottom: cardVerticalMargin,
-    marginHorizontal: cardHorizontalMargin,
-  },
-})
-
 /**
  * Screen that shows an infinite scrolling list of recipes from users that the logged in user follows.
  */
@@ -44,7 +34,18 @@ export function NewsFeed(): ReactElement {
         dataKey='newsFeed'
         emptyMessage='Try following some users to see their latest recipes.'
         renderItem={({ item: recipe, index }) => (
-          <View key={recipe?.id} style={index === 0 ? { ...styles.firstCard, ...styles.card } : styles.card}>
+          <View
+            key={recipe?.id}
+            style={
+              index === 0
+                ? {
+                    marginTop: cardVerticalMargin,
+                    marginBottom: cardVerticalMargin,
+                    marginHorizontal: cardHorizontalMargin,
+                  }
+                : { marginBottom: cardVerticalMargin, marginHorizontal: cardHorizontalMargin }
+            }
+          >
             <RecipeCard recipe={recipe} onPress={() => navigation.navigate('Recipe', { recipeId: recipe?.id })} />
           </View>
         )}

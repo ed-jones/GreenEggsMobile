@@ -20,50 +20,6 @@ import { FollowButton } from '@greeneggs/ui/follow-button'
 import { Input } from '@greeneggs/ui/input'
 import * as Icons from '@greeneggs/ui/icons'
 
-const styles = StyleSheet.create({
-  avatarContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  avatar: {
-    margin: 8,
-    width: 120,
-    height: 120,
-  },
-  view: {
-    height: '100%',
-  },
-  description: {
-    paddingHorizontal: 16,
-    paddingBottom: 16,
-  },
-  button: {},
-  topButton: {
-    width: 24,
-    height: 24,
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-  },
-  profileContainer: {
-    padding: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  statContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    padding: 16,
-  },
-  statBox: {
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  search: {
-    backgroundColor: 'white',
-    margin: 16,
-  },
-})
-
 interface IProfileStat {
   label: string
   value: string
@@ -73,7 +29,7 @@ interface IProfileStat {
 function ProfileStat({ label, value, onPress }: IProfileStat) {
   return (
     <Pressable onPress={onPress}>
-      <View style={styles.statBox}>
+      <View style={{ flexDirection: 'column', alignItems: 'center' }}>
         <Text category='label'>{value}</Text>
         <Text category='c1'>{label}</Text>
       </View>
@@ -157,7 +113,7 @@ export function GenericProfile({ userId, isMe = false }: GenericProfileProps): R
   }
 
   return (
-    <Background style={{ ...styles.view }}>
+    <Background style={{ height: '100%' }}>
       <TopNavigation
         style={{ backgroundColor: 'transparent', paddingTop: insets.top }}
         accessoryLeft={() => {
@@ -174,25 +130,20 @@ export function GenericProfile({ userId, isMe = false }: GenericProfileProps): R
         extraData={myRecipeQuery}
         ListHeaderComponent={
           <>
-            <View style={styles.avatarContainer}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
               <Pressable onPress={() => isMe && navigation.navigate('EditProfilePicture')}>
                 <Avatar
-                  style={styles.avatar}
+                  style={{ margin: 8, width: 120, height: 120 }}
                   shape='round'
                   size='giant'
                   source={profile.avatarURI ? { uri: profile.avatarURI } : noAvatar}
                 />
               </Pressable>
             </View>
-            <View style={styles.profileContainer}>
+            <View style={{ padding: 16, flexDirection: 'row', justifyContent: 'space-between' }}>
               <Text category='h5'>{`${profile.firstName} ${profile.lastName}`}</Text>
               {isMe ? (
-                <Button
-                  size='small'
-                  style={styles.button}
-                  accessoryLeft={Icons.Edit}
-                  onPress={() => navigation.navigate('EditProfile')}
-                >
+                <Button size='small' accessoryLeft={Icons.Edit} onPress={() => navigation.navigate('EditProfile')}>
                   EDIT
                 </Button>
               ) : (
@@ -200,11 +151,11 @@ export function GenericProfile({ userId, isMe = false }: GenericProfileProps): R
               )}
             </View>
             {profile.bio ? (
-              <Text style={styles.description} numberOfLines={2}>
+              <Text style={{ paddingHorizontal: 16, paddingBottom: 16 }} numberOfLines={2}>
                 {optional(profile.bio)}
               </Text>
             ) : undefined}
-            <View style={styles.statContainer}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', padding: 16 }}>
               <ProfileStat
                 label='Following'
                 value={profile.followingCount.toString()}
@@ -221,7 +172,7 @@ export function GenericProfile({ userId, isMe = false }: GenericProfileProps): R
             <Input
               placeholder='Search recipes'
               size='large'
-              style={styles.search}
+              style={{ backgroundColor: 'white', margin: 16 }}
               accessoryLeft={Icons.Search}
               value={myRecipeQuery}
               onChangeText={(newText) => setMyRecipeQuery(newText)}

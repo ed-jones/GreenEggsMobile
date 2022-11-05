@@ -2,7 +2,7 @@
  * Author: Dimitri Zvolinski
  */
 import React, { ReactElement, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { noAvatar } from '@greeneggs/assets'
 import {
@@ -17,26 +17,6 @@ import { Avatar, Button, Text } from '@ui-kitten/components'
 import { Input } from '@greeneggs/ui/input'
 import { useApolloClient, useQuery } from '@apollo/client'
 import { LoadingScreen } from '../../ui/loading-screen'
-
-const styles = StyleSheet.create({
-  view: {
-    padding: 16,
-  },
-  buttonGroup: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-  },
-  heading: {
-    paddingVertical: 16,
-  },
-  input: {
-    marginBottom: 10,
-    flex: 1,
-  },
-  avatar: {
-    marginRight: 10,
-  },
-})
 
 interface RecipeAddCommentProps {
   recipeId?: string
@@ -108,11 +88,11 @@ export function RecipeAddComment({ recipeId, commentId, isReply, active }: Recip
             height: '100%',
           }}
         >
-          <Avatar size='small' source={me?.avatarURI ? { uri: me?.avatarURI } : noAvatar} style={styles.avatar} />
+          <Avatar size='small' source={me?.avatarURI ? { uri: me?.avatarURI } : noAvatar} style={{ marginRight: 10 }} />
         </View>
         <Input
           autoFocus={active}
-          style={styles.input}
+          style={{ marginBottom: 10, flex: 1 }}
           numberOfLines={3}
           multiline
           textAlignVertical='top'

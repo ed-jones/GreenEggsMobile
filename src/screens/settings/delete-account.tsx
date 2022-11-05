@@ -3,7 +3,7 @@
  */
 import React, { useContext, useEffect, ReactElement } from 'react'
 import { Mutations, Queries } from '@greeneggs/graphql'
-import { ScrollView, StyleSheet, View, Alert as RNAlert } from 'react-native'
+import { ScrollView, View, Alert as NativeAlert } from 'react-native'
 import { deleteUser, LoginInput } from '@greeneggs/types/graphql'
 import { Button, Text } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
@@ -18,22 +18,6 @@ import { Callout } from '@greeneggs/ui/callout'
 import { ControlledInput, InputType } from '@greeneggs/ui/form'
 import * as Icons from '@greeneggs/ui/icons'
 import { TopNavigation } from '@greeneggs/ui/top-navigation'
-
-const styles = StyleSheet.create({
-  view: {
-    padding: 16,
-  },
-  buttonGroup: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-  },
-  heading: {
-    paddingVertical: 16,
-  },
-  input: {
-    marginBottom: 10,
-  },
-})
 
 /**
  * Screen that lets a user delete their account.
@@ -64,7 +48,7 @@ export function DeleteAccount(): ReactElement {
     const token = result.data?.login.data?.token
     const error = result.data?.login.error
     if (token && !error) {
-      RNAlert.alert(
+      NativeAlert.alert(
         'Delete your account',
         'This action is permanent',
         [
@@ -92,7 +76,7 @@ export function DeleteAccount(): ReactElement {
   return (
     <Background>
       <TopNavigation title='Delete Account' />
-      <ScrollView style={styles.view}>
+      <ScrollView style={{ padding: 16 }}>
         <Callout
           message={
             <Text>
@@ -108,7 +92,7 @@ export function DeleteAccount(): ReactElement {
         />
         <ControlledInput<LoginInput>
           inputProps={{
-            style: styles.input,
+            style: { marginBottom: 10 },
             label: 'CONFIRM PASSWORD',
           }}
           controllerProps={{

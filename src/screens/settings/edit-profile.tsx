@@ -3,7 +3,7 @@
  */
 import React, { ReactElement } from 'react'
 import { Mutations, Queries } from '@greeneggs/graphql'
-import { ScrollView, StyleSheet } from 'react-native'
+import { ScrollView } from 'react-native'
 import { editProfile, editProfileVariables, ProfileDetails } from '@greeneggs/types/graphql'
 import { Button, Text, Spinner } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
@@ -15,24 +15,11 @@ import { Background } from '@greeneggs/ui/background'
 import { TopNavigation } from '@greeneggs/ui/top-navigation'
 import * as Icons from '@greeneggs/ui/icons'
 
-const styles = StyleSheet.create({
-  view: {
-    padding: 16,
-  },
-  buttonGroup: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-  },
-  heading: {
-    paddingVertical: 16,
-  },
-  input: {
-    marginBottom: 10,
-  },
-})
-
 const useEditProfile = () =>
-  useForm<ProfileDetails, editProfile, editProfileVariables>(Mutations.editProfile, 'profileDetails')
+  useForm<ProfileDetails, editProfile, editProfileVariables>({
+    Mutation: Mutations.editProfile,
+    mutationVariableName: 'profileDetails',
+  })
 
 /**
  * Screen that lets a user edit their basic profile details,
@@ -57,7 +44,7 @@ export function EditProfile(): ReactElement {
   return (
     <Background>
       <TopNavigation title='Edit Profile' />
-      <ScrollView style={styles.view}>
+      <ScrollView style={{ padding: 16 }}>
         <ControlledInput<ProfileDetails>
           controllerProps={{
             name: 'firstName',
@@ -67,7 +54,7 @@ export function EditProfile(): ReactElement {
           inputProps={{
             label: 'FIRST NAME',
             style: {
-              ...styles.input,
+              marginBottom: 10,
             },
           }}
           submitError={form.formResult.data?.editProfile.error}
@@ -82,7 +69,7 @@ export function EditProfile(): ReactElement {
           inputProps={{
             label: 'LAST NAME',
             style: {
-              ...styles.input,
+              marginBottom: 10,
             },
           }}
           submitError={form.formResult.data?.editProfile.error}
@@ -97,7 +84,7 @@ export function EditProfile(): ReactElement {
           inputProps={{
             label: 'BIO',
             style: {
-              ...styles.input,
+              marginBottom: 10,
             },
           }}
           submitError={form.formResult.data?.editProfile.error}

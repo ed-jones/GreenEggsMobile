@@ -3,7 +3,7 @@
  */
 import React, { useContext, useState } from 'react'
 import { useQuery } from '@apollo/client'
-import { ImageBackground, View, StyleSheet } from 'react-native'
+import { ImageBackground, View } from 'react-native'
 import { Queries } from '@greeneggs/graphql'
 import { Button, IndexPath, SelectItem, Text } from '@ui-kitten/components'
 import { recipe, recipeVariables } from '@greeneggs/types/graphql'
@@ -25,39 +25,6 @@ import { SaveRecipeButton } from '@greeneggs/ui/save-recipe-button'
 import { Background } from '@greeneggs/ui/background'
 import { Select } from '@greeneggs/ui/select'
 import { EmptyState } from '@greeneggs/ui/empty-state'
-
-const styles = StyleSheet.create({
-  coverPhoto: {
-    width: '100%',
-    height: undefined,
-    aspectRatio: 1 / 1,
-    resizeMode: 'cover',
-  },
-  content: {
-    padding: 16,
-  },
-  cardSection: {
-    padding: 16,
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  avatar: {
-    marginRight: 10,
-  },
-  heading: {
-    marginVertical: 24,
-  },
-  gradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    height: '100%',
-  },
-})
 
 /**
  * Screen to display a recipe, its steps and associated comments.
@@ -96,12 +63,18 @@ export function Recipe() {
         />
       )}
       renderHeader={() => (
-        <ImageBackground source={{ uri: recipe.coverImage }} style={styles.coverPhoto}>
-          <LinearGradient colors={['rgba(247, 249, 252,0.4)', 'rgba(247, 249, 252,0)']} style={styles.gradient} />
+        <ImageBackground
+          source={{ uri: recipe.coverImage }}
+          style={{ width: '100%', height: undefined, aspectRatio: 1 / 1 }}
+        >
+          <LinearGradient
+            colors={['rgba(247, 249, 252,0.4)', 'rgba(247, 249, 252,0)']}
+            style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '100%' }}
+          />
         </ImageBackground>
       )}
     >
-      <Background style={styles.content}>
+      <Background style={{ padding: 16 }}>
         <RecipeDetailsCard {...recipe} />
         <View style={{ marginVertical: 16 }}>
           <RecipeAllergies allergies={recipe.allergies} />
@@ -113,7 +86,7 @@ export function Recipe() {
             justifyContent: 'space-between',
           }}
         >
-          <Text category='h5' style={styles.heading}>
+          <Text category='h5' style={{ marginVertical: 24 }}>
             Ingredients
           </Text>
           {recipe.servingCount ? (
@@ -146,7 +119,7 @@ export function Recipe() {
             <EmptyState description='This recipe has no ingredients.' />
           </View>
         )}
-        <Text category='h5' style={styles.heading}>
+        <Text category='h5' style={{ marginVertical: 24 }}>
           Steps
         </Text>
         {recipe.steps.length > 0 ? (
@@ -163,7 +136,7 @@ export function Recipe() {
             justifyContent: 'space-between',
           }}
         >
-          <Text category='h5' style={styles.heading}>
+          <Text category='h5' style={{ marginVertical: 24 }}>
             {`Comments`}
           </Text>
           <Button

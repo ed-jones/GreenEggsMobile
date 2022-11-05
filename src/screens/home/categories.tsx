@@ -11,7 +11,7 @@ import {
   CategoriesWithImages_categoriesWithImages_data,
 } from '@greeneggs/types/graphql'
 import { Button, Text } from '@ui-kitten/components'
-import { ImageBackground, Pressable, StyleSheet } from 'react-native'
+import { ImageBackground, Pressable } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useNavigation } from '@react-navigation/core'
 import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
@@ -23,24 +23,6 @@ interface CategoryWithImageProps {
   coverImage: string
   onPress: () => void
 }
-
-const styles = StyleSheet.create({
-  categoryCard: {
-    width: '100%',
-    height: 75,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 12,
-    overflow: 'hidden',
-  },
-  gradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    height: '100%',
-  },
-})
 
 /**
  * Displays an infinite scrolling list of categories that are important enough to have an associated image.
@@ -56,8 +38,21 @@ function CategoryWithImage({ name, coverImage, onPress }: CategoryWithImageProps
         width: '50%',
       }}
     >
-      <ImageBackground source={{ uri: coverImage }} style={styles.categoryCard}>
-        <LinearGradient colors={['transparent', 'rgba(0, 0, 0, 0.8)']} style={styles.gradient} />
+      <ImageBackground
+        source={{ uri: coverImage }}
+        style={{
+          width: '100%',
+          height: 75,
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: 12,
+          overflow: 'hidden',
+        }}
+      >
+        <LinearGradient
+          colors={['transparent', 'rgba(0, 0, 0, 0.8)']}
+          style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '100%' }}
+        />
         <Text category='h5' style={{ color: 'white' }}>
           {name.toUpperCase()}
         </Text>

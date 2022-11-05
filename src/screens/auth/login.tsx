@@ -2,7 +2,6 @@
  * Author: Edward Jones
  */
 import React, { ReactElement, useContext } from 'react'
-import { StyleSheet } from 'react-native'
 import { Button, Spinner } from '@ui-kitten/components'
 import { useLoginForm } from './use-login-form'
 import { AuthPageTemplate } from './auth-page-template'
@@ -10,18 +9,6 @@ import { LoginInput } from '@greeneggs/types/graphql'
 import * as SecureStore from 'expo-secure-store'
 import { AuthContext } from '@greeneggs/context'
 import { ControlledInput, InputType } from '@greeneggs/ui/form'
-
-const styles = StyleSheet.create({
-  forgotPassword: {
-    fontWeight: 'bold',
-    textAlign: 'right',
-    paddingTop: 8,
-    paddingBottom: 10,
-  },
-  input: {
-    marginBottom: 10,
-  },
-})
 
 /**
  * Screen that enables a user to log into Green Eggs with an email and password.
@@ -39,10 +26,6 @@ export function Login(): ReactElement {
   async function submitLoginForm() {
     const result = await submitForm()
     const token = result.data?.login.data?.token
-    const error = result.data?.login.error
-    if (error) {
-      throw new Error(error.message)
-    }
     if (token) {
       void SecureStore.setItemAsync('token', token)
       setToken && setToken(token)
@@ -57,7 +40,7 @@ export function Login(): ReactElement {
       <ControlledInput<LoginInput>
         inputProps={{
           autoFocus: true,
-          style: styles.input,
+          style: { marginBottom: 10 },
         }}
         controllerProps={{
           name: 'email',
@@ -68,7 +51,7 @@ export function Login(): ReactElement {
       />
       <ControlledInput<LoginInput>
         inputProps={{
-          style: styles.input,
+          style: { marginBottom: 10 },
         }}
         controllerProps={{
           name: 'password',

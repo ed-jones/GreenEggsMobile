@@ -1,11 +1,10 @@
 /**
  * Author: Wambugu Mutahi
  */
-import { useState, ReactElement } from 'react';
-import { Button, IndexPath, List, ListItem, Spinner, Text, SelectItem, TopNavigation } from '@ui-kitten/components'
+import { useState, ReactElement } from 'react'
+import { Button, IndexPath, List, ListItem, Spinner, Text, SelectItem } from '@ui-kitten/components'
 import { View } from 'react-native'
 import { Mutations, Queries } from '@greeneggs/graphql'
-import {} from '@ui-kitten/components'
 import { useMutation, useQuery } from '@apollo/client'
 import {
   Diets,
@@ -22,6 +21,7 @@ import { Background } from '@greeneggs/ui/background'
 import { Callout } from '@greeneggs/ui/callout'
 import { Select } from '@greeneggs/ui/select'
 import * as Icons from '@greeneggs/ui/icons'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
 
 function indexToNumber(selectedIndex: IndexPath | IndexPath[]) {
   return Number(selectedIndex.toString()) - 1
@@ -121,6 +121,7 @@ export function DietaryPreferences(): ReactElement {
           <Callout
             message='Here you can tell us your dietary preferences so that we can better show you recipes relevant to you.'
             type='info'
+            style={{ marginBottom: 24 }}
           />
           <View style={{ flexDirection: 'row' }}>
             <Select

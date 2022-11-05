@@ -1,7 +1,7 @@
 /**
  * Author: Wambugu Mutahi
  */
-import { Key, useContext } from 'react';
+import { Key, useContext } from 'react'
 import { Text, ListItem, Icon, Divider, useTheme } from '@ui-kitten/components'
 import { Alert, ScrollView } from 'react-native'
 import Svg, { Circle } from 'react-native-svg'
@@ -12,6 +12,7 @@ import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
 import { Background } from '@greeneggs/ui/background'
 import { TopNavigation } from '@greeneggs/ui/top-navigation'
 import * as Icons from '@greeneggs/ui/icons'
+import { version } from '../../../package.json'
 
 interface ListItemProps {
   title: string
@@ -148,7 +149,7 @@ export function Settings() {
       title: 'Version',
       icon: 'cube-outline',
       color: colors.yellow,
-      rightText: process.env.version || 'alpha-0.01',
+      rightText: version,
       key: 'version',
     },
     {

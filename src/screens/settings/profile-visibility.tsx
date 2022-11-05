@@ -85,6 +85,7 @@ export function ProfileVisibility(): ReactElement {
             </Text>
           }
           type='info'
+          style={{ marginBottom: 24 }}
         />
         <ControlledInput<ProfileVisibilityDetails>
           controllerProps={{

@@ -1,7 +1,7 @@
 /**
  * Author: Wambugu Mutahi
  */
-import { useState } from 'react';
+import { useState } from 'react'
 import { Button, IndexPath, List, ListItem, SelectItem, Spinner, Text } from '@ui-kitten/components'
 import { View } from 'react-native'
 import { Mutations, Queries } from '@greeneggs/graphql'
@@ -120,6 +120,7 @@ export function AllergyPreferences() {
           <Callout
             message='Here you can tell us if you have any allergies so that we can better show you recipes relevant to you.'
             type='info'
+            style={{ marginBottom: 24 }}
           />
           <View style={{ flexDirection: 'row' }}>
             <Select

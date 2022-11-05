@@ -89,6 +89,7 @@ export function DeleteAccount(): ReactElement {
             </Text>
           }
           type='danger'
+          style={{ marginBottom: 24 }}
         />
         <ControlledInput<LoginInput>
           inputProps={{

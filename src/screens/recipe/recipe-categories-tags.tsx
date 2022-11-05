@@ -2,10 +2,10 @@
  * Author: Dimitri Zvolinski
  */
 import React, { ReactElement } from 'react'
-import { Tags } from '@greeneggs/ui'
+import { Tags } from '@greeneggs/ui/tags'
 import { recipe_recipe_data_categories } from '@greeneggs/types/graphql'
 import { useNavigation } from '@react-navigation/core'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
 
 interface IRecipeCategoriesTags {
   categories: recipe_recipe_data_categories[]

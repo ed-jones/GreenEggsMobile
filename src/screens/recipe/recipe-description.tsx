@@ -1,9 +1,9 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Card, Text } from '@ui-kitten/components'
-import { TopNavigation, Background } from '@greeneggs/ui'
+import { Card, Text, TopNavigation } from '@ui-kitten/components'
 import { RouteProp, useRoute } from '@react-navigation/native'
-import { LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-routes'
+import { LoggedInRouteParams } from '@greeneggs/navigation/types'
+import { Background } from '@greeneggs/ui/background'
 const styles = StyleSheet.create({
   cardElement: {
     paddingHorizontal: 28,

@@ -1,33 +1,11 @@
 /**
  * Author: Edward Jones
  */
-import React, { useState, createContext, useEffect, PropsWithChildren } from 'react'
+import React, { useState, useEffect, PropsWithChildren } from 'react'
 import { NotificationCount } from '@greeneggs/types/graphql'
-import { ApolloQueryResult, OperationVariables, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { Queries } from '@greeneggs/graphql'
-
-export interface NotificationState {
-  unreadCount: number
-}
-
-export const defaultNotificationState: NotificationState = {
-  unreadCount: 0,
-}
-
-export interface NotificationContextInterface {
-  notificationState: NotificationState
-  setNotificationState?: (notificationState: NotificationState) => void
-  refetchNotificationState?: (
-    variables?: Partial<OperationVariables> | undefined
-  ) => Promise<ApolloQueryResult<NotificationCount>>
-}
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-export const NotificationContext = createContext<NotificationContextInterface>({
-  notificationState: defaultNotificationState,
-  setNotificationState: undefined,
-  refetchNotificationState: undefined,
-})
+import { defaultNotificationState, NotificationContext, NotificationState } from './index'
 
 /**
  * Provider that lets all child components access the notification state

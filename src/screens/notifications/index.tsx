@@ -12,15 +12,18 @@ import {
   Sort,
 } from '@greeneggs/types/graphql'
 import { Mutations, Queries } from '@greeneggs/graphql'
-import { Background, Icons, LazyList, TopNavigation } from '@greeneggs/ui'
 import { noAvatar } from '@greeneggs/assets'
 import { convertSubmittedAt, convertUserToFullName } from '@greeneggs/utils'
 import Svg, { Circle } from 'react-native-svg'
 import { GestureResponderEvent, View } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 import { useMutation } from '@apollo/client'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
-import { NotificationContext } from '@greeneggs/providers/notification-state-provider'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { NotificationContext } from '@greeneggs/context'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { LazyList } from '@greeneggs/ui/lazy-list'
+import * as Icons from '@greeneggs/ui/icons'
 
 type NotificationListItemProps = ListItemProps & notifications_notifications_data
 

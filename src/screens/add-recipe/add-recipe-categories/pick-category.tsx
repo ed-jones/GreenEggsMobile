@@ -2,7 +2,6 @@
  * Author: Edward Jones
  */
 import React, { useContext, useState } from 'react'
-import { AlphabetType, Background, Icons, Input, LazyListAlpha, TopNavigation } from '@greeneggs/ui'
 import {
   Categories,
   CategoriesVariables,
@@ -15,7 +14,13 @@ import { Button, Divider, ListItem } from '@ui-kitten/components'
 import { Queries } from '@greeneggs/graphql'
 import { useNavigation } from '@react-navigation/core'
 import { toTitleCase } from '@greeneggs/utils'
-import { AddRecipeContext } from '@greeneggs/providers/add-recipe-state-provider'
+import { AddRecipeContext } from '@greeneggs/context'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { Input } from '@greeneggs/ui/input'
+import { LazyListAlpha } from '@greeneggs/ui/lazy-alpha-list'
+import * as Icons from '@greeneggs/ui/icons'
+import { AlphabetType } from '@greeneggs/ui/alpha-list'
 
 /**
  * Screen with an infinite scrolling alphabetised list of categories that

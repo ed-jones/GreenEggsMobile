@@ -5,8 +5,7 @@ import React, { PropsWithChildren, useContext } from 'react'
 import { ApolloClient, ApolloLink, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { createUploadLink } from 'apollo-upload-client'
-
-import { AuthContext } from './auth-provider'
+import { AuthContext } from './index'
 
 /**
  * Provider that lets all child components use apollo queries and mutations.

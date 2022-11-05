@@ -7,7 +7,10 @@ import { ScrollView, StyleSheet } from 'react-native'
 import { ChangePasswordDetails, changePasswordVariables, changePassword } from '@greeneggs/types/graphql'
 import { Button, Spinner } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
-import { TopNavigation, Background, Icons, ControlledInput, InputType, useForm } from '@greeneggs/ui'
+import { ControlledInput, InputType, useForm } from '@greeneggs/ui/form'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import * as Icons from '@greeneggs/ui/icons'
 
 const styles = StyleSheet.create({
   view: {

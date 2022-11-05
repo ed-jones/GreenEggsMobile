@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import { IForm, useForm } from '@greeneggs/ui'
+import { IForm, useForm } from '@greeneggs/ui/form'
 import { Mutations } from '@greeneggs/graphql'
 import { signup, signupVariables, SignupInput } from '@greeneggs/types/graphql'
 /**

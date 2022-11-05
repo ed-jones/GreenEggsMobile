@@ -5,9 +5,14 @@ import React, { useState } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/core'
 import { Queries } from '@greeneggs/graphql'
 import { recipes, recipesVariables, recipes_recipes_data, Sort, RecipeFilter } from '@greeneggs/types/graphql'
-import { Background, Icons, Input, LazyList, RecipeCardSmall, TopNavigation } from '@greeneggs/ui'
 import { View } from 'react-native'
-import { LoggedInNavigationProp, LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-routes'
+import { LoggedInRouteParams, LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { Input } from '@greeneggs/ui/input'
+import * as Icons from '@greeneggs/ui/icons'
+import { LazyList } from '@greeneggs/ui/lazy-list'
+import { RecipeCardSmall } from '@greeneggs/ui/cards'
 
 /**
  * Screen that shows an infinite scrolling list of recipes for a given category.

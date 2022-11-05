@@ -14,9 +14,9 @@ import {
 } from '@ui-kitten/components'
 import Svg, { Circle } from 'react-native-svg'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { HideOnKeyboard } from '@greeneggs/ui'
-import { NotificationContext } from '@greeneggs/providers/notification-state-provider'
-import { AddRecipeContext } from '@greeneggs/providers/add-recipe-state-provider'
+import { HideOnKeyboard } from '@greeneggs/ui/hide-on-keyboard'
+import { NotificationContext } from '@greeneggs/context'
+import { AddRecipeContext } from '@greeneggs/context'
 
 const styles = StyleSheet.create({
   primary: {

@@ -3,8 +3,8 @@
  */
 import { useContext } from 'react'
 import { useNavigation } from '@react-navigation/core'
-import { LoggedInNavigationProp } from './routes/logged-in-routes'
-import { UserContext } from '@greeneggs/providers/user-state-provider'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { UserContext } from '@greeneggs/context'
 
 type NavigateToProfile = (userId: string) => void
 

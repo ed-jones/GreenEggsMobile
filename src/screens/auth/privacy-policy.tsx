@@ -1,7 +1,8 @@
 /**
  * Author: Edward Jones
  */
-import { Background, TopNavigation } from '@greeneggs/ui'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
 import React from 'react'
 import { WebView } from 'react-native-webview'
 

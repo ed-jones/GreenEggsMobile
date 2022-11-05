@@ -4,9 +4,11 @@
 import React, { ReactElement } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Text } from '@ui-kitten/components'
-import { CommentCounter, LabelledIcon, RecipeLikeCounter } from '@greeneggs/ui'
 import { recipes_recipes_data } from '@greeneggs/types/graphql'
 import { convertTimeEstimate, convertSubmittedAt } from '@greeneggs/utils'
+import { LabelledIcon } from '@greeneggs/ui/labelled-icon'
+import { RecipeLikeCounter } from '@greeneggs/ui/counters/recipe-like-counter'
+import { CommentCounter } from '@greeneggs/ui/counters/comment-counter'
 
 const styles = StyleSheet.create({
   view: {

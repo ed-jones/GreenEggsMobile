@@ -5,7 +5,7 @@ import React from 'react'
 import { recipes_recipes_data_comments } from '@greeneggs/types/graphql'
 import { useNavigation } from '@react-navigation/core'
 import { LabelledIcon } from '../labelled-icon'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
 
 interface CommentCounterProps {
   commentCount: number

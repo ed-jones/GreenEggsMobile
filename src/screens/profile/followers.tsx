@@ -3,7 +3,6 @@
  */
 import React, { ReactElement, useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { Background, Icons, LazyList, TopNavigation, UserListItem, Input } from '@greeneggs/ui'
 import {
   FollowedUsers,
   FollowedUsersVariables,
@@ -13,7 +12,13 @@ import {
 } from '@greeneggs/types/graphql'
 import { Queries } from '@greeneggs/graphql'
 import { RouteProp, useRoute } from '@react-navigation/core'
-import { LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-routes'
+import { LoggedInRouteParams } from '@greeneggs/navigation/types'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { Input } from '@greeneggs/ui/input'
+import { LazyList } from '@greeneggs/ui/lazy-list'
+import { UserListItem } from './user-list-item'
+import * as Icons from '@greeneggs/ui/icons'
 
 const styles = StyleSheet.create({
   found: {

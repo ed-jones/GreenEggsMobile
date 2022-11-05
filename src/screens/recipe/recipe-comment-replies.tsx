@@ -4,16 +4,16 @@
 import React, { ReactElement, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { Queries } from '@greeneggs/graphql'
-import { TopNavigation, ViewMore } from '@greeneggs/ui'
 import { comment } from '@greeneggs/types/graphql'
-import { Text } from '@ui-kitten/components'
+import { Text, TopNavigation } from '@ui-kitten/components'
 import { View, StyleSheet, ScrollView } from 'react-native'
-import { LoadingScreen } from '../loading-screen'
+import { LoadingScreen } from '../../ui/loading-screen'
 import { RecipeAddComment } from './recipe-add-comment'
 import { RecipeComment } from './recipe-comment'
 import { RecipeCommentList } from './recipe-comment-list'
 import { RouteProp, useRoute } from '@react-navigation/native'
-import { LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-routes'
+import { LoggedInRouteParams } from '@greeneggs/navigation/types'
+import { ViewMore } from '@greeneggs/ui/list-items'
 
 const styles = StyleSheet.create({
   content: {

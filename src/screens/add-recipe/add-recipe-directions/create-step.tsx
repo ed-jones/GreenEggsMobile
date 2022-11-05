@@ -3,13 +3,15 @@
  */
 import React, { ReactElement, useContext } from 'react'
 import { Button } from '@ui-kitten/components'
-import { Background, ControlledInput, InputType, rules, TopNavigation } from '@greeneggs/ui'
 import { RecipeStepInput } from '@greeneggs/types/graphql'
 import { useForm } from 'react-hook-form'
 import { addRecipeStyles } from '../add-recipe-styles'
 import { useNavigation } from '@react-navigation/core'
 import { ScrollView } from 'react-native'
-import { AddRecipeContext } from '@greeneggs/providers/add-recipe-state-provider'
+import { AddRecipeContext } from '@greeneggs/context'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { ControlledInput, InputType, rules } from '@greeneggs/ui/form'
 
 /**
  * Screen that lets a user create a new step. Includes an image and a description.

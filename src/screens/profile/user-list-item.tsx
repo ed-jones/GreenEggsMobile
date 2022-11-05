@@ -4,9 +4,9 @@
 import React from 'react'
 import { Avatar, ListItem } from '@ui-kitten/components'
 import { Users_users_data } from '@greeneggs/types/graphql'
-import { Icons } from '@greeneggs/ui'
 import { noAvatar } from '@greeneggs/assets'
-import { useNavigateToProfile } from '@greeneggs/navigation'
+import { useNavigateToProfile } from '@greeneggs/navigation/utils'
+import * as Icons from '@greeneggs/ui/icons'
 
 interface UserListItemProps {
   user: Users_users_data

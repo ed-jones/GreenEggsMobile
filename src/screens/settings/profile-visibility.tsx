@@ -15,8 +15,12 @@ import {
 import { useQuery } from '@apollo/client'
 import { fullUserFragment } from '@greeneggs/graphql/fragments'
 
-import { LoadingScreen } from '../loading-screen'
-import { TopNavigation, Background, Callout, Icons, ControlledInput, InputType, rules, useForm } from '@greeneggs/ui'
+import { LoadingScreen } from '../../ui/loading-screen'
+import { ControlledInput, InputType, rules, useForm } from '@greeneggs/ui/form'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { Callout } from '@greeneggs/ui/callout'
+import * as Icons from '@greeneggs/ui/icons'
 
 const styles = StyleSheet.create({
   view: {

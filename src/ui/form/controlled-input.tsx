@@ -6,10 +6,10 @@ import { Controller, ControllerProps, FieldValues, RegisterOptions } from 'react
 import { InputProps } from '@ui-kitten/components'
 import { ErrorFragment } from '@greeneggs/types/graphql'
 import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types'
-import { Input } from '@greeneggs/ui'
 
 import { ImageUpload, PrivacySelect, TimeInput } from './inputs'
 import { numberToString, stringToNumber } from './inputs/utils'
+import { Input } from '../input'
 
 // Data types that can be used by this component
 // Includes form validation, styling and other behaviour

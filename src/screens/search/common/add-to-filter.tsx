@@ -2,7 +2,7 @@
  * Author: Victor Ying
  */
 import React from 'react'
-import { FilterControlGroup } from '../common'
+import { FilterControlGroup } from './filter-control-group'
 
 export interface AddToFilterProps {
   filterCount: number

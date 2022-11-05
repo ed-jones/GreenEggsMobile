@@ -4,11 +4,14 @@
 import React, { useContext } from 'react'
 import { Divider, List, ListItem } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
-import { FilterControlGroup, CountCircle } from './common'
-import { SearchContext, SearchState } from '@greeneggs/providers/search-state-provider'
+import { SearchContext, SearchState } from '@greeneggs/context'
 import { View } from 'react-native'
-import { TopNavigation, Background, Icons } from '@greeneggs/ui'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { CountCircle } from './common/count-circle'
+import { FilterControlGroup } from './common/filter-control-group'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import * as Icons from '@greeneggs/ui/icons'
 
 /**
  * Helper function that counts the number of active filters being applied based on the search state.

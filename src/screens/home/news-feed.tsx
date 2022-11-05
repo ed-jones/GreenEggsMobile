@@ -11,9 +11,11 @@ import {
   Sort,
 } from '@greeneggs/types/graphql'
 import { Queries } from '@greeneggs/graphql'
-import { Background, LazyList, RecipeCard } from '@greeneggs/ui'
 import { useNavigation } from '@react-navigation/native'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { Background } from '@greeneggs/ui/background'
+import { LazyList } from '@greeneggs/ui/lazy-list'
+import { RecipeCard } from '@greeneggs/ui/cards'
 
 const cardVerticalMargin = 20
 const cardHorizontalMargin = 24

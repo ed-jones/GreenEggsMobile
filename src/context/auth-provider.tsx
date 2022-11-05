@@ -1,17 +1,9 @@
 /**
  * Author: Edward Jones
  */
-import React, { useState, Dispatch, SetStateAction, createContext, PropsWithChildren } from 'react'
+import React, { useState, PropsWithChildren } from 'react'
 import * as SecureStore from 'expo-secure-store'
-
-export type Token = string | undefined | null
-export type SetToken = Dispatch<SetStateAction<Token>> | undefined
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-export const AuthContext = createContext({
-  token: undefined as Token,
-  setToken: undefined as SetToken,
-})
+import { AuthContext, Token } from './index'
 
 /**
  * State provider that lets all child components control the

@@ -3,7 +3,8 @@
  */
 import React from 'react'
 import { Text } from '@ui-kitten/components'
-import { TopNavigation, Background } from '@greeneggs/ui'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
 
 /**
  * Note: This feature was not built in time so is disabled

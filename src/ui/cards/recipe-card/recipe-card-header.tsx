@@ -6,7 +6,7 @@ import { View, StyleSheet, Pressable } from 'react-native'
 import { Avatar, Text } from '@ui-kitten/components'
 import { recipes_recipes_data_submittedBy } from '@greeneggs/types/graphql'
 import { noAvatar } from '@greeneggs/assets'
-import { useNavigateToProfile } from '@greeneggs/navigation'
+import { useNavigateToProfile } from '@greeneggs/navigation/utils'
 
 const styles = StyleSheet.create({
   view: {

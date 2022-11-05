@@ -5,7 +5,8 @@ import { IndexPath, SelectItem } from '@ui-kitten/components'
 import React, { ReactElement } from 'react'
 import { FieldError, FieldValues, Path, PathValue } from 'react-hook-form'
 import { Privacy } from '@greeneggs/types/graphql'
-import { Select } from '@greeneggs/ui'
+import { Select } from '@greeneggs/ui/select'
+
 interface IPrivacySelect {
   label?: string
   caption?: string

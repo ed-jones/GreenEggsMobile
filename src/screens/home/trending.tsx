@@ -12,8 +12,10 @@ import {
 } from '@greeneggs/types/graphql'
 import { Queries } from '@greeneggs/graphql'
 import { useNavigation } from '@react-navigation/core'
-import { Background, LazyList, RecipeCard } from '@greeneggs/ui'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import {  LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { Background } from '@greeneggs/ui/background'
+import { LazyList } from '@greeneggs/ui/lazy-list'
+import { RecipeCard } from '@greeneggs/ui/cards'
 
 const cardVerticalMargin = 20
 const cardHorizontalMargin = 24

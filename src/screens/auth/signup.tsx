@@ -5,15 +5,15 @@ import React, { ReactElement, useContext, useState } from 'react'
 
 import { StyleSheet } from 'react-native'
 import { Button, CheckBox, Spinner, Text } from '@ui-kitten/components'
-import { ControlledInput, InputType } from '@greeneggs/ui'
 import { SignupInput } from '@greeneggs/types/graphql'
-import { AuthContext } from '@greeneggs/providers/auth-provider'
+import { AuthContext } from '@greeneggs/context'
 import * as SecureStore from 'expo-secure-store'
 
 import { useSignupForm } from './use-sign-up-form'
 import { AuthPageTemplate } from './auth-page-template'
 import { useNavigation } from '@react-navigation/native'
-import { LoggedOutNavigationProp } from '@greeneggs/navigation/routes/logged-out-routes'
+import { LoggedOutNavigationProp } from '@greeneggs/navigation/types'
+import { ControlledInput, InputType } from '@greeneggs/ui/form'
 
 const styles = StyleSheet.create({
   input: {

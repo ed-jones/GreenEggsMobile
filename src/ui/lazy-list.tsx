@@ -4,9 +4,9 @@
 import { ApolloQueryResult, DocumentNode, QueryResult, useQuery } from '@apollo/client'
 import React, { ReactNode, useEffect, useState } from 'react'
 import { FlatList, FlatListProps, View } from 'react-native'
-import { Callout } from '@greeneggs/ui'
 import { Spinner, Text } from '@ui-kitten/components'
 import { EmptyState } from './empty-state'
+import { Callout } from './callout'
 
 export interface UseLazyListProps<TVariables, TData> {
   query: DocumentNode

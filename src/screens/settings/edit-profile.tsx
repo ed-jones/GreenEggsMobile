@@ -9,8 +9,11 @@ import { Button, Text, Spinner } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
 import { useQuery } from '@apollo/client'
 import { Me } from '@greeneggs/types/graphql'
-import { LoadingScreen } from '../loading-screen'
-import { TopNavigation, Background, Icons, ControlledInput, InputType, useForm } from '@greeneggs/ui'
+import { LoadingScreen } from '../../ui/loading-screen'
+import { ControlledInput, InputType, useForm } from '@greeneggs/ui/form'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import * as Icons from '@greeneggs/ui/icons'
 
 const styles = StyleSheet.create({
   view: {

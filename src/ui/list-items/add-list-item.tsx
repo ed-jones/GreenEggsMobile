@@ -3,8 +3,8 @@
  */
 import React from 'react'
 import { Divider, ListItem, Text, useTheme } from '@ui-kitten/components'
-import { Icons } from '@greeneggs/ui'
 import { FieldError } from 'react-hook-form'
+import * as Icons from '../icons'
 
 interface IAddListItem {
   label: string

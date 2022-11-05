@@ -10,12 +10,13 @@ import {
   CategoriesWithImagesVariables,
   CategoriesWithImages_categoriesWithImages_data,
 } from '@greeneggs/types/graphql'
-import { Background, LazyList } from '@greeneggs/ui'
 import { Button, Text } from '@ui-kitten/components'
 import { ImageBackground, Pressable, StyleSheet } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useNavigation } from '@react-navigation/core'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { Background } from '@greeneggs/ui/background'
+import { LazyList } from '@greeneggs/ui/lazy-list'
 
 interface CategoryWithImageProps {
   name: string

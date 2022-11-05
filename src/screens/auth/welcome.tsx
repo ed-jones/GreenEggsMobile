@@ -8,9 +8,9 @@ import Logo from '../../assets/images/icon.png'
 import Banner from '../../assets/images/banner.jpg'
 import { LinearGradient } from 'expo-linear-gradient'
 import { StatusBar } from 'expo-status-bar'
-import { Background } from '@greeneggs/ui'
+import { Background } from '@greeneggs/ui/background'
 import { useNavigation } from '@react-navigation/native'
-import { LoggedOutNavigationProp } from '@greeneggs/navigation/routes/logged-out-routes'
+import { LoggedOutNavigationProp } from '@greeneggs/navigation/types'
 
 const styles = StyleSheet.create({
   logo: {

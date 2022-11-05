@@ -4,9 +4,10 @@
 import React, { ReactElement, ReactNode } from 'react'
 import { Button, List, Text, TextElement } from '@ui-kitten/components'
 import { ListRenderItem, View } from 'react-native'
-import { Icons, Background } from '@greeneggs/ui'
 import { EmptyState } from '@greeneggs/ui/empty-state'
 import { addRecipeStyles } from './add-recipe-styles'
+import { Background } from '@greeneggs/ui/background'
+import * as Icons from '@greeneggs/ui/icons'
 
 interface AddRecipePartTemplateProps<T> {
   title: React.ReactText | TextElement

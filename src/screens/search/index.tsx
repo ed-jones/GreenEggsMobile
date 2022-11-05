@@ -15,11 +15,15 @@ import {
 } from '@greeneggs/types/graphql'
 import { useNavigation } from '@react-navigation/core'
 import { View } from 'react-native'
-import { ISearchContext, SearchContext } from '@greeneggs/providers/search-state-provider'
+import { SearchContext, ISearchContext } from '@greeneggs/context'
 import { Divider, IndexPath, SelectItem, Tab, TabBar } from '@ui-kitten/components'
-import { Select, Background, LazyList, RecipeCardSmall, UserListItem } from '@greeneggs/ui'
 import { createMaterialTopTabNavigator, MaterialTopTabBarProps } from '@react-navigation/material-top-tabs'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { Background } from '@greeneggs/ui/background'
+import { LazyList } from '@greeneggs/ui/lazy-list'
+import { RecipeCardSmall } from '@greeneggs/ui/cards'
+import { UserListItem } from '../profile/user-list-item'
+import { Select } from '@greeneggs/ui/select'
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const { Navigator, Screen } = createMaterialTopTabNavigator()

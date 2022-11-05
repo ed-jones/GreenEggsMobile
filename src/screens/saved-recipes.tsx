@@ -12,8 +12,11 @@ import {
 } from '@greeneggs/types/graphql'
 import { View } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
-import { TopNavigation, Background, LazyList, RecipeCardSmall } from '@greeneggs/ui'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { Background } from '@greeneggs/ui/background'
+import { LazyList } from '@greeneggs/ui/lazy-list'
+import { RecipeCardSmall } from '@greeneggs/ui/cards/recipe-card-small'
 
 function SavedRecipesHeader() {
   return <TopNavigation title='Saved Recipes' accessoryLeft={undefined} />

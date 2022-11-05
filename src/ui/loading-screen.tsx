@@ -4,7 +4,7 @@
 import React, { ReactElement } from 'react'
 import { Spinner } from '@ui-kitten/components'
 import { StyleSheet } from 'react-native'
-import { Background } from '@greeneggs/ui'
+import { Background } from './background'
 
 const styles = StyleSheet.create({
   container: {

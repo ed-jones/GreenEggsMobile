@@ -4,9 +4,10 @@
 import React, { ReactElement } from 'react'
 import { Card, Text } from '@ui-kitten/components'
 import { Image, Dimensions, View } from 'react-native'
-import { TopNavigation, Background } from '@greeneggs/ui'
 import { RouteProp, useRoute } from '@react-navigation/native'
-import { LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-routes'
+import { LoggedInRouteParams } from '@greeneggs/navigation/types'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
 
 /**
  * Expanded view for recipe steps. Useful when a step has a long description.

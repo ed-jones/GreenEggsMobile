@@ -2,15 +2,17 @@
  * Author: Edward Jones
  */
 import React, { ReactElement, useContext } from 'react'
-import { Button, Text } from '@ui-kitten/components'
-import { Background, ControlledInput, Icons, InputType, rules, TopNavigation } from '@greeneggs/ui'
+import { Button, Text, TopNavigation } from '@ui-kitten/components'
 import { IngredientInput } from '@greeneggs/types/graphql'
 import { useForm } from 'react-hook-form'
 import { View } from 'react-native'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/core'
 import { addRecipeStyles } from '../add-recipe-styles'
-import { LoggedInNavigationProp, LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-routes'
-import { AddRecipeContext } from '@greeneggs/providers/add-recipe-state-provider'
+import { LoggedInRouteParams, LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { AddRecipeContext } from '@greeneggs/context'
+import { Background } from '@greeneggs/ui/background'
+import { ControlledInput, InputType, rules } from '@greeneggs/ui/form'
+import * as Icons from '@greeneggs/ui/icons'
 
 /**
  * Screen for adding details to a selected ingredient, including

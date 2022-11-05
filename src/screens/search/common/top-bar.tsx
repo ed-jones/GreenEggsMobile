@@ -3,7 +3,8 @@
  */
 import React, { useContext } from 'react'
 import { Button, Icon, ThemedComponentProps, TopNavigationAction } from '@ui-kitten/components'
-import { Input, Icons } from '@greeneggs/ui'
+import { Input } from '@greeneggs/ui/input'
+import * as Icons from '@greeneggs/ui/icons'
 import { StyleSheet, View, Image } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
@@ -11,8 +12,8 @@ import { logo } from '@greeneggs/assets'
 
 import { countActiveFilters } from '../recipe-search-filter'
 import { CountCircle } from './count-circle'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
-import { SearchContext } from '@greeneggs/providers/search-state-provider'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { SearchContext } from '@greeneggs/context'
 
 const styles = StyleSheet.create({
   topNavigation: {

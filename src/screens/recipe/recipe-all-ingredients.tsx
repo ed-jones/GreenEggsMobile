@@ -4,9 +4,11 @@
 import React, { ReactElement } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Divider, List } from '@ui-kitten/components'
-import { TopNavigation, Background, IngredientListItem } from '@greeneggs/ui'
 import { RouteProp, useRoute } from '@react-navigation/native'
-import { LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-routes'
+import { LoggedInRouteParams } from '@greeneggs/navigation/types'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { IngredientListItem } from '@greeneggs/ui/list-items'
 
 const styles = StyleSheet.create({
   content: {

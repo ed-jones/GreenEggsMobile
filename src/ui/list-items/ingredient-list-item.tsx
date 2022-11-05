@@ -4,7 +4,7 @@
 import React from 'react'
 import { ListItem, Text } from '@ui-kitten/components'
 import { recipe_recipe_data_ingredients } from '@greeneggs/types/graphql'
-import { Icons } from '@greeneggs/ui'
+import * as Icons from '../icons'
 import { toTitleCase } from '@greeneggs/utils'
 
 interface IIngredientListItem {

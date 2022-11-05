@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import { ListItem, ListItemProps, Text } from '@ui-kitten/components'
-import { Icons } from '@greeneggs/ui'
+import * as Icons from '@greeneggs/ui/icons'
 
 /**
  * Simple list item component that contains the text READ MORE and down icon

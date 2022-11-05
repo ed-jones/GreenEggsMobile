@@ -6,8 +6,10 @@ import { View, StyleSheet, ImageBackground, Image, ScrollView } from 'react-nati
 import { Text, useTheme } from '@ui-kitten/components'
 import { LinearGradient } from 'expo-linear-gradient'
 import { StatusBar } from 'expo-status-bar'
-import { TopNavigation, Background, Callout } from '@greeneggs/ui'
 import { logo, banner } from '@greeneggs/assets'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { Callout } from '@greeneggs/ui/callout'
 
 const styles = StyleSheet.create({
   logo: {

@@ -4,7 +4,7 @@
 import React from 'react'
 import { Text, useTheme } from '@ui-kitten/components'
 import { View, StyleSheet } from 'react-native'
-import { ProgressCircle } from '@greeneggs/ui'
+import { ProgressCircle } from '@greeneggs/ui/progress-circle'
 
 interface IStepperProps {
   currentStep: string

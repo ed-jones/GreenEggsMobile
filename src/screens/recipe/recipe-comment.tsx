@@ -2,7 +2,6 @@
  * Author: Dimitri Zvolinski
  */
 import React, { ReactElement, useContext } from 'react'
-import { CommentLikeCounter, LabelledIcon } from '@greeneggs/ui'
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { noAvatar } from '@greeneggs/assets'
 import { convertSubmittedAt } from '@greeneggs/utils'
@@ -13,8 +12,10 @@ import { useNavigation } from '@react-navigation/core'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { useMutation } from '@apollo/client'
 
-import { useNavigateToProfile } from '@greeneggs/navigation'
-import { UserContext } from '@greeneggs/providers/user-state-provider'
+import { UserContext } from '@greeneggs/context'
+import { useNavigateToProfile } from '@greeneggs/navigation/utils'
+import { CommentLikeCounter } from '@greeneggs/ui/counters/comment-like-counter'
+import { LabelledIcon } from '@greeneggs/ui/labelled-icon'
 
 const styles = StyleSheet.create({
   avatar: {

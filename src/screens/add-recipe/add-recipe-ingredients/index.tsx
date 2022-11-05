@@ -2,14 +2,14 @@
  * Author: Edward Jones
  */
 import React, { ReactElement, useContext } from 'react'
-import { IngredientListItem } from '@greeneggs/ui'
+import { IngredientListItem } from '@greeneggs/ui/list-items'
 import { useEffect } from 'react'
 
 import { AddRecipePartTemplate } from '../add-recipe-part-template'
 import { RecipeForm } from '../add-recipe'
 import { useNavigation } from '@react-navigation/native'
-import { AddRecipeContext } from '@greeneggs/providers/add-recipe-state-provider'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { AddRecipeContext } from '@greeneggs/context'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
 
 interface ICreateRecipeIngredients {
   form: RecipeForm

@@ -3,7 +3,6 @@
  */
 import React, { useState } from 'react'
 import { Button, IndexPath, List, ListItem, SelectItem, Spinner, Text } from '@ui-kitten/components'
-import { Select, TopNavigation, Background, Callout, Icons } from '@greeneggs/ui'
 import { StyleSheet, View } from 'react-native'
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { useMutation, useQuery } from '@apollo/client'
@@ -16,8 +15,13 @@ import {
   UpdateAllergyPreferences,
   UpdateAllergyPreferencesVariables,
 } from '@greeneggs/types/graphql'
-import { LoadingScreen } from '../loading-screen'
+import { LoadingScreen } from '../../ui/loading-screen'
 import { fullUserFragment } from '@greeneggs/graphql/fragments'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { Callout } from '@greeneggs/ui/callout'
+import { Select } from '@greeneggs/ui/select'
+import * as Icons from '@greeneggs/ui/icons'
 
 const styles = StyleSheet.create({
   view: {

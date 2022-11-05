@@ -3,9 +3,9 @@
  */
 import React, { ReactElement } from 'react'
 import { ScrollView } from 'react-native'
-import { InputType, rules, ControlledInput } from '@greeneggs/ui'
 import { RecipeInput } from '@greeneggs/types/graphql'
 import { RecipeForm } from './add-recipe'
+import { ControlledInput, InputType, rules } from '@greeneggs/ui/form'
 
 interface ICreateRecipeDetails {
   form: RecipeForm

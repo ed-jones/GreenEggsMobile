@@ -8,8 +8,8 @@ import * as ImagePicker from 'expo-image-picker'
 import { ReactNativeFile } from 'apollo-upload-client'
 import { ImageBackground } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
-import { Icons } from '@greeneggs/ui'
 import { FieldError } from 'react-hook-form'
+import * as Icons from '@greeneggs/ui/icons'
 
 interface IImageUpload {
   label?: string

@@ -5,13 +5,13 @@ import React, { ReactElement, useContext, useEffect } from 'react'
 import { ListItem } from '@ui-kitten/components'
 import { Image } from 'react-native'
 import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types'
-import { Icons } from '@greeneggs/ui'
+import * as Icons from '@greeneggs/ui/icons'
 
 import { RecipeForm } from '../add-recipe'
 import { AddRecipePartTemplate } from '../add-recipe-part-template'
 import { useNavigation } from '@react-navigation/core'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
-import { AddRecipeContext } from '@greeneggs/providers/add-recipe-state-provider'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { AddRecipeContext } from '@greeneggs/context'
 
 interface IAddRecipeDirections {
   form: RecipeForm

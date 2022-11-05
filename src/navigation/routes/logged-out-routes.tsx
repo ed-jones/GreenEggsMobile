@@ -1,25 +1,20 @@
 /**
  * Author: Edward Jones
  */
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Stack } from '../stack'
-import * as Screens from '../../screens'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { Welcome } from '@greeneggs/screens/auth/welcome'
+import { Login } from '@greeneggs/screens/auth/login'
+import { Signup } from '@greeneggs/screens/auth/signup'
+import { PrivacyPolicy } from '@greeneggs/screens/auth/privacy-policy'
+import { LoggedOutRoute } from '../types'
 
-export type LoggedOutRoute = typeof routes[number]['name']
-
-export type LoggedOutNavigationProp = StackNavigationProp<LoggedOutRouteParams>
-
-export type LoggedOutRouteParams = {
-  [key in LoggedOutRoute]: undefined
-}
-
-const routes = [
-  { name: 'Welcome', component: Screens.Welcome },
-  { name: 'Login', component: Screens.Login },
-  { name: 'Signup', component: Screens.Signup },
-  { name: 'Privacy', component: Screens.PrivacyPolicy },
-] as const
+const routes: Array<{ name: LoggedOutRoute; component: () => ReactElement }> = [
+  { name: 'Welcome', component: Welcome },
+  { name: 'Login', component: Login },
+  { name: 'Signup', component: Signup },
+  { name: 'Privacy', component: PrivacyPolicy },
+]
 
 /**
  * Array containing a list of all routes accessible to logged out users.

@@ -1,9 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import React, { createContext, PropsWithChildren } from 'react'
-import { addRecipe, addRecipeVariables, RecipeInput } from '@greeneggs/types/graphql'
-import { IForm } from '@greeneggs/ui'
+import React, { PropsWithChildren } from 'react'
 import { useRecipeForm } from '@greeneggs/screens/add-recipe/use-recipe-form'
 import { AddRecipeAllergies } from '@greeneggs/screens/add-recipe/add-recipe-allergies'
 import { AddRecipeCategories } from '@greeneggs/screens/add-recipe/add-recipe-categories'
@@ -12,22 +10,9 @@ import { AddRecipeDiets } from '@greeneggs/screens/add-recipe/add-recipe-diets'
 import { AddRecipeDirections } from '@greeneggs/screens/add-recipe/add-recipe-directions'
 import { AddRecipeIngredients } from '@greeneggs/screens/add-recipe/add-recipe-ingredients'
 import { PublishRecipe } from '@greeneggs/screens/add-recipe/publish-recipe'
-import { ISteps, Step, useSteps } from '@greeneggs/screens/add-recipe/use-steps'
-import { useFieldArray, UseFieldArrayReturn } from 'react-hook-form'
-
-export interface AddRecipeContextInterface {
-  form?: IForm<RecipeInput, addRecipe, addRecipeVariables>
-  steps?: ISteps
-  categoriesFieldArray?: UseFieldArrayReturn<RecipeInput, 'categories', 'id'>
-  ingredientsFieldArray?: UseFieldArrayReturn<RecipeInput, 'ingredients', 'id'>
-  stepsFieldArray?: UseFieldArrayReturn<RecipeInput, 'steps', 'id'>
-  allergiesFieldArray?: UseFieldArrayReturn<RecipeInput, 'allergies', 'id'>
-  dietsFieldArray?: UseFieldArrayReturn<RecipeInput, 'diets', 'id'>
-}
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-export const AddRecipeContext = createContext<AddRecipeContextInterface>({})
-
+import { Step, useSteps } from '@greeneggs/screens/add-recipe/use-steps'
+import { useFieldArray } from 'react-hook-form'
+import { AddRecipeContext } from './index'
 /**
  * State provider that lets all child components control the state of a recipe form.
  */

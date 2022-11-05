@@ -4,24 +4,21 @@
 import React, { ReactElement, useState } from 'react'
 import { View, StyleSheet, Pressable } from 'react-native'
 import { Text, Button, TopNavigation, TopNavigationAction, Avatar } from '@ui-kitten/components'
-import {
-  Input,
-  Background,
-  LazyList,
-  RecipeCardSmall,
-  Callout,
-  Icons,
-  LazyListProps,
-  FollowButton,
-} from '@greeneggs/ui'
 import { useQuery } from '@apollo/client'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { noAvatar } from '@greeneggs/assets'
 import { Queries } from '@greeneggs/graphql'
 import { profile, RecipeFilter, recipes, recipesVariables, recipes_recipes_data, Sort } from '@greeneggs/types/graphql'
-import { LoadingScreen } from '../loading-screen'
+import { LoadingScreen } from '../../ui/loading-screen'
 import { useNavigation } from '@react-navigation/core'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { LazyList, LazyListProps } from '@greeneggs/ui/lazy-list'
+import { RecipeCardSmall } from '@greeneggs/ui/cards'
+import { Callout } from '@greeneggs/ui/callout'
+import { Background } from '@greeneggs/ui/background'
+import { FollowButton } from '@greeneggs/ui/follow-button'
+import { Input } from '@greeneggs/ui/input'
+import * as Icons from '@greeneggs/ui/icons'
 
 const styles = StyleSheet.create({
   avatarContainer: {

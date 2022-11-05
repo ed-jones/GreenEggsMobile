@@ -5,10 +5,9 @@ import React, { ReactElement } from 'react'
 import { RecipeCommentList } from './recipe-comment-list'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { Text } from '@ui-kitten/components'
-import { TopNavigation } from '@greeneggs/ui'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
 import { RouteProp, useRoute } from '@react-navigation/native'
-import { LoggedInRouteParams } from '@greeneggs/navigation/routes/logged-in-routes'
-
+import { LoggedInRouteParams } from '@greeneggs/navigation/types'
 const styles = StyleSheet.create({
   content: {
     padding: 16,

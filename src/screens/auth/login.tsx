@@ -6,10 +6,10 @@ import { StyleSheet } from 'react-native'
 import { Button, Spinner } from '@ui-kitten/components'
 import { useLoginForm } from './use-login-form'
 import { AuthPageTemplate } from './auth-page-template'
-import { ControlledInput, InputType } from '@greeneggs/ui'
 import { LoginInput } from '@greeneggs/types/graphql'
 import * as SecureStore from 'expo-secure-store'
-import { AuthContext } from '@greeneggs/providers/auth-provider'
+import { AuthContext } from '@greeneggs/context'
+import { ControlledInput, InputType } from '@greeneggs/ui/form'
 
 const styles = StyleSheet.create({
   forgotPassword: {
@@ -32,7 +32,7 @@ export function Login(): ReactElement {
     handleSubmit,
     control,
     submitForm,
-    formState: { isValid, errors },
+    formState: { isValid },
   } = useLoginForm({ reValidateMode: 'onChange' })
   const { setToken } = useContext(AuthContext)
 
@@ -48,8 +48,6 @@ export function Login(): ReactElement {
       setToken && setToken(token)
     }
   }
-
-  console.log(errors)
 
   return (
     <AuthPageTemplate

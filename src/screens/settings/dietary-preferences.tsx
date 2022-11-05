@@ -2,7 +2,7 @@
  * Author: Wambugu Mutahi
  */
 import React, { useState, ReactElement } from 'react'
-import { Button, IndexPath, List, ListItem, Spinner, Text, SelectItem } from '@ui-kitten/components'
+import { Button, IndexPath, List, ListItem, Spinner, Text, SelectItem, TopNavigation } from '@ui-kitten/components'
 import { StyleSheet, View } from 'react-native'
 import { Mutations, Queries } from '@greeneggs/graphql'
 import {} from '@ui-kitten/components'
@@ -16,9 +16,12 @@ import {
   UpdateDietaryPreferences,
   UpdateDietaryPreferencesVariables,
 } from '@greeneggs/types/graphql'
-import { LoadingScreen } from '../loading-screen'
+import { LoadingScreen } from '../../ui/loading-screen'
 import { fullUserFragment } from '@greeneggs/graphql/fragments'
-import { TopNavigation, Select, Background, Callout, Icons } from '@greeneggs/ui'
+import { Background } from '@greeneggs/ui/background'
+import { Callout } from '@greeneggs/ui/callout'
+import { Select } from '@greeneggs/ui/select'
+import * as Icons from '@greeneggs/ui/icons'
 
 const styles = StyleSheet.create({
   view: {

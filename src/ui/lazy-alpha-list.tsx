@@ -3,7 +3,7 @@
  */
 import React, { ReactElement } from 'react'
 import { CommonVariables, TDataWithData, useLazyList, UseLazyListProps } from './lazy-list'
-import { LoadingScreen } from '../screens/loading-screen'
+import { LoadingScreen } from './loading-screen'
 import { AlphaList, AlphaListProps, buildAlphaListItems, CategoriseItem } from './alpha-list'
 
 interface LazyListAlphaProps<TData, TVariables, TDataType>

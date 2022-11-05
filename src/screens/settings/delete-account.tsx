@@ -9,11 +9,15 @@ import { Button, Text } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/core'
 import { useMutation, useQuery } from '@apollo/client'
 import { Me } from '@greeneggs/types/graphql'
-import { LoadingScreen } from '../loading-screen'
+import { LoadingScreen } from '../../ui/loading-screen'
 import { useLoginForm } from '../auth/use-login-form'
-import { AuthContext } from '@greeneggs/providers/auth-provider'
+import { AuthContext } from '@greeneggs/context'
 import * as SecureStore from 'expo-secure-store'
-import { TopNavigation, Background, Callout, Icons, ControlledInput, InputType } from '@greeneggs/ui'
+import { Background } from '@greeneggs/ui/background'
+import { Callout } from '@greeneggs/ui/callout'
+import { ControlledInput, InputType } from '@greeneggs/ui/form'
+import * as Icons from '@greeneggs/ui/icons'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
 
 const styles = StyleSheet.create({
   view: {

@@ -6,7 +6,7 @@ import { recipe_recipe_data_steps } from '@greeneggs/types/graphql'
 import { ListItem } from '@ui-kitten/components'
 import { Image, Text, View } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
 import { Forward } from '@greeneggs/ui/icons'
 
 interface IRecipeDirections {

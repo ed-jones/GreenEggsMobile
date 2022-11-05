@@ -3,16 +3,18 @@
  */
 import React, { ReactElement } from 'react'
 import { noAvatar } from '@greeneggs/assets'
-import { CommentCounter, LabelledIcon, ViewMore } from '@greeneggs/ui'
 import { convertTimeEstimate } from '@greeneggs/utils'
 import { View, StyleSheet, Pressable } from 'react-native'
 import { recipe_recipe_data } from '@greeneggs/types/graphql'
 import { Text, Card, Avatar } from '@ui-kitten/components'
 import { RecipeCategoriesTags } from './recipe-categories-tags'
-import { RecipeLikeCounter } from '@greeneggs/ui'
-import { useNavigateToProfile } from '@greeneggs/navigation'
 import { useNavigation } from '@react-navigation/native'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { useNavigateToProfile } from '@greeneggs/navigation/utils'
+import { LabelledIcon } from '@greeneggs/ui/labelled-icon'
+import { ViewMore } from '@greeneggs/ui/list-items'
+import { RecipeLikeCounter } from '@greeneggs/ui/counters/recipe-like-counter'
+import { CommentCounter } from '@greeneggs/ui/counters/comment-counter'
 
 const styles = StyleSheet.create({
   cardSection: {

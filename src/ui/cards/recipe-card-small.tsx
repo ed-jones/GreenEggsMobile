@@ -7,7 +7,8 @@ import { Card, Text } from '@ui-kitten/components'
 import { View, StyleSheet, Image } from 'react-native'
 import { convertSubmittedAt } from '@greeneggs/utils'
 import { imageNotFound } from '@greeneggs/assets'
-import { CommentCounter, RecipeLikeCounter } from '@greeneggs/ui'
+import { RecipeLikeCounter } from '../counters/recipe-like-counter'
+import { CommentCounter } from '../counters/comment-counter'
 
 const styles = StyleSheet.create({
   card: {

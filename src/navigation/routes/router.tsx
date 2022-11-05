@@ -6,11 +6,11 @@ import { NavigationContainer } from '@react-navigation/native'
 import { useQuery } from '@apollo/client'
 import { Queries } from '@greeneggs/graphql'
 import { Me } from '@greeneggs/types/graphql'
-import { LoadingScreen } from '@greeneggs/screens'
 
 import { Stack } from '../stack'
 import { loggedInRoutes } from './logged-in-routes'
 import { loggedOutRoutes } from './logged-out-routes'
+import { LoadingScreen } from '@greeneggs/ui/loading-screen'
 
 enum SessionStates {
   LOADING,

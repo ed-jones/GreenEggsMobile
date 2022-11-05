@@ -6,13 +6,15 @@ import { View, Alert } from 'react-native'
 import { Button, Divider, Layout, Spinner, useTheme } from '@ui-kitten/components'
 import { addRecipe, addRecipeVariables, RecipeInput } from '@greeneggs/types/graphql'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { Icons, IForm, Background } from '@greeneggs/ui'
+import { IForm } from '@greeneggs/ui/form'
+import * as Icons from '@greeneggs/ui/icons'
 import { Stepper } from './stepper'
 import { addRecipeStyles } from './add-recipe-styles'
-import { LoadingScreen } from '../loading-screen'
+import { LoadingScreen } from '../../ui/loading-screen'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { AddRecipeContext } from '@greeneggs/providers/add-recipe-state-provider'
+import { AddRecipeContext } from '@greeneggs/context'
+import { Background } from '@greeneggs/ui/background'
 
 export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>
 

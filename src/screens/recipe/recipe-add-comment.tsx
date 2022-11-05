@@ -14,9 +14,9 @@ import {
   recipe,
 } from '@greeneggs/types/graphql'
 import { Avatar, Button, Text } from '@ui-kitten/components'
-import { Input } from '@greeneggs/ui'
+import { Input } from '@greeneggs/ui/input'
 import { useApolloClient, useQuery } from '@apollo/client'
-import { LoadingScreen } from '../loading-screen'
+import { LoadingScreen } from '../../ui/loading-screen'
 
 const styles = StyleSheet.create({
   view: {

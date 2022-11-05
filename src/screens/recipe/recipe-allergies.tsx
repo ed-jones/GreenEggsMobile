@@ -4,7 +4,7 @@
 import React, { ReactElement } from 'react'
 import { recipe_recipe_data_allergies } from '@greeneggs/types/graphql'
 import { Text } from '@ui-kitten/components'
-import { Callout } from '@greeneggs/ui'
+import { Callout } from '@greeneggs/ui/callout'
 
 interface IRecipeAllergies {
   allergies: recipe_recipe_data_allergies[]

@@ -3,12 +3,12 @@
  */
 import React, { ReactElement, useContext } from 'react'
 import { ListItem } from '@ui-kitten/components'
-import { Icons } from '@greeneggs/ui'
+import * as Icons from '@greeneggs/ui/icons'
 
 import { AddRecipePartTemplate } from '../add-recipe-part-template'
 import { useNavigation } from '@react-navigation/native'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
-import { AddRecipeContext } from '@greeneggs/providers/add-recipe-state-provider'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { AddRecipeContext } from '@greeneggs/context'
 
 /**
  * Screen that shows a list of all selected diets that will

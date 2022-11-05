@@ -4,13 +4,14 @@
 import React, { Key, useContext } from 'react'
 import { Text, ListItem, Icon, Divider, useTheme } from '@ui-kitten/components'
 import { Alert, ScrollView, StyleSheet } from 'react-native'
-import { Icons } from '@greeneggs/ui'
 import Svg, { Circle } from 'react-native-svg'
 import * as SecureStore from 'expo-secure-store'
-import { AuthContext } from '@greeneggs/providers/auth-provider'
-import { TopNavigation, Background } from '@greeneggs/ui'
+import { AuthContext } from '@greeneggs/context'
 import { useNavigation } from '@react-navigation/native'
-import { LoggedInNavigationProp } from '@greeneggs/navigation/routes/logged-in-routes'
+import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import * as Icons from '@greeneggs/ui/icons'
 
 const styles = StyleSheet.create({
   header: { padding: 16 },

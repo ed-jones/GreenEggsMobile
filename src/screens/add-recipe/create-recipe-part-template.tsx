@@ -3,10 +3,11 @@
  */
 import React, { ReactElement } from 'react'
 
-import { TopNavigation, Background } from '@greeneggs/ui'
 import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { FieldArrayMethodProps } from 'react-hook-form'
 import { Alert, BackHandler, ScrollView } from 'react-native'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
 
 type AppendType = (value: Partial<unknown> | Partial<unknown>[], options?: FieldArrayMethodProps | undefined) => void
 

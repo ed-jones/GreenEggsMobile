@@ -4,11 +4,11 @@
 import React, { ReactElement } from 'react'
 import { Text } from '@ui-kitten/components'
 import { useQuery } from '@apollo/client'
-import { Callout } from '@greeneggs/ui'
 import { Queries } from '@greeneggs/graphql'
 import { Me } from '@greeneggs/types/graphql'
-import { LoadingScreen } from '../loading-screen'
+import { LoadingScreen } from '../../ui/loading-screen'
 import { GenericProfile } from './generic-profile'
+import { Callout } from '@greeneggs/ui/callout'
 
 /**
  * Screen for displaying the profile details for the logged in user.

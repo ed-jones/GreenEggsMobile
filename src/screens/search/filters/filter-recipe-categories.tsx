@@ -4,16 +4,6 @@
 import React, { useContext, useState } from 'react'
 import { Queries } from '@greeneggs/graphql'
 import { Divider } from '@ui-kitten/components'
-import {
-  Input,
-  TopNavigation,
-  Background,
-  Icons,
-  LazyListAlpha,
-  AlphabetType,
-  SelectableListItem,
-  EmptyState,
-} from '@greeneggs/ui'
 import { useNavigation } from '@react-navigation/core'
 import {
   Categories,
@@ -22,10 +12,17 @@ import {
   RecipeFilter,
   Sort,
 } from '@greeneggs/types/graphql'
-import { SearchContext } from '@greeneggs/providers/search-state-provider'
-
-import { AddToFilter } from '../common'
+import { SearchContext } from '@greeneggs/context'
 import { View } from 'react-native'
+import { AddToFilter } from '../common/add-to-filter'
+import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
+import { Input } from '@greeneggs/ui/input'
+import { LazyListAlpha } from '@greeneggs/ui/lazy-alpha-list'
+import { SelectableListItem } from '@greeneggs/ui/list-items'
+import { AlphabetType } from '@greeneggs/ui/alpha-list'
+import { EmptyState } from '@greeneggs/ui/empty-state'
+import * as Icons from '@greeneggs/ui/icons'
 
 /**
  * Screen for requiring certain categories in a recipe search.

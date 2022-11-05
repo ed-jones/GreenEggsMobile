@@ -4,8 +4,13 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import { NotFoundScreen, AddRecipe, Home, MyProfile, SavedRecipes, Notifications } from '../screens'
 import { BottomTabBar } from './bottom-tab-bar'
+import { AddRecipe } from '@greeneggs/screens/add-recipe/add-recipe'
+import { Home } from '@greeneggs/screens/home/home'
+import { NotFoundScreen } from '@greeneggs/screens/not-found-screen'
+import { Notifications } from '@greeneggs/screens/notifications'
+import { MyProfile } from '@greeneggs/screens/profile/my-profile'
+import { SavedRecipes } from '@greeneggs/screens/saved-recipes'
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const { Navigator, Screen } = createBottomTabNavigator()

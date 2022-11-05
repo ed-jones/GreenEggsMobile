@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.1-beta...v0.3.2-beta) (2022-11-05)
+
+
+### Bug Fixes
+
+* :fire: remove parallax header ([16eb8fe](https://github.com/ed-jones/green-eggs-mobile/commit/16eb8fedb19a4ad716d12e99f782b3abdfb8a8dd))
+
 ## [0.3.1-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.0-beta...v0.3.1-beta) (2022-11-05)
 
 

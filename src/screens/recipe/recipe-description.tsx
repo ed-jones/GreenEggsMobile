@@ -1,8 +1,9 @@
 import { View } from 'react-native'
-import { Card, Text, TopNavigation } from '@ui-kitten/components'
+import { Card, Text } from '@ui-kitten/components'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { LoggedInRouteParams } from '@greeneggs/navigation/types'
 import { Background } from '@greeneggs/ui/background'
+import { TopNavigation } from '@greeneggs/ui/top-navigation'
 
 /**
  * Screen for displaying a recipe's complete description and recipe upload date.

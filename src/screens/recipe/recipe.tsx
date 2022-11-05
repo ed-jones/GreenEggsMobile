@@ -54,7 +54,7 @@ export function Recipe() {
   return (
     <ParallaxHeader
       maxHeight={300}
-      minHeight={64}
+      minHeight={128}
       renderOverlay={() => (
         <TopNavigation
           style={{ height: 64, alignItems: 'flex-start' }}
@@ -67,15 +67,16 @@ export function Recipe() {
         />
       )}
       renderHeader={() => (
-        <ImageBackground
-          source={{ uri: recipe.coverImage }}
-          style={{ width: '100%', height: undefined, aspectRatio: 1 / 1 }}
-        >
+        <>
+          <ImageBackground
+            source={{ uri: recipe.coverImage }}
+            style={{ width: '100%', height: undefined, aspectRatio: 1 / 1 }}
+          />
           <LinearGradient
-            colors={['rgba(247, 249, 252,0.4)', 'rgba(247, 249, 252,0)']}
+            colors={['rgba(255, 255, 255,1)', 'transparent']}
             style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '100%' }}
           />
-        </ImageBackground>
+        </>
       )}
     >
       <Background style={{ padding: 16 }}>

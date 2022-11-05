@@ -48,6 +48,12 @@
         "selector": "typeParameter",
         "format": ["PascalCase"],
         "prefix": ["T"]
+      },
+      {
+        "selector": "variable",
+        "types": ["boolean"],
+        "format": ["PascalCase"],
+        "prefix": ["is", "should", "has", "can", "did", "will"]
       }
     ]
   }

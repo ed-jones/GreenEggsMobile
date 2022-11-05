@@ -1,7 +1,7 @@
 /**
  * Author: Wambugu Mutahi
  */
-import { ReactElement } from 'react';
+import { ReactElement } from 'react'
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { ScrollView } from 'react-native'
 import { editProfile, editProfileVariables, ProfileDetails } from '@greeneggs/types/graphql'
@@ -28,9 +28,9 @@ const useEditProfile = () =>
 export function EditProfile(): ReactElement {
   const form = useEditProfile()
   const navigation = useNavigation()
-  const { loading, error, data } = useQuery<Me>(Queries.getMe)
+  const { loading: isLoading, error, data } = useQuery<Me>(Queries.getMe)
 
-  if (loading) return <LoadingScreen />
+  if (isLoading) return <LoadingScreen />
   if (error) {
     return <Text>Error! {error.message}</Text>
   }

@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import { useContext, useState } from 'react';
+import { useContext, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { ImageBackground, View } from 'react-native'
 import { Queries } from '@greeneggs/graphql'
@@ -37,12 +37,16 @@ export function Recipe() {
   if (!recipeId) throw new Error('Recipe ID not found')
   const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(new IndexPath(0))
   const { me } = useContext(UserContext)
-  const { loading, error, data } = useQuery<recipe, recipeVariables>(Queries.getRecipe, {
+  const {
+    loading: isLoading,
+    error,
+    data,
+  } = useQuery<recipe, recipeVariables>(Queries.getRecipe, {
     variables: { recipeId },
     onCompleted: (data) => setSelectedIndex(new IndexPath((data.recipe.data?.servingCount ?? 0) - 1)),
   })
 
-  if (loading || !data || !data.recipe.data) return <LoadingScreen />
+  if (isLoading || !data || !data.recipe.data) return <LoadingScreen />
   if (error || data.recipe.error) return <Text>{error?.message || data.recipe.error?.message}</Text>
 
   const { data: recipe } = data.recipe

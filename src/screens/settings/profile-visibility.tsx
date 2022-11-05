@@ -1,7 +1,7 @@
 /**
  * Author: Wambugu Mutahi
  */
-import { ReactElement } from 'react';
+import { ReactElement } from 'react'
 import { Button, Spinner, Text } from '@ui-kitten/components'
 import { ScrollView } from 'react-native'
 import { Mutations, Queries } from '@greeneggs/graphql'
@@ -31,13 +31,13 @@ import * as Icons from '@greeneggs/ui/icons'
 export function ProfileVisibility(): ReactElement {
   const navigation = useNavigation()
 
-  const { loading, error, data } = useQuery<Me>(Queries.getMe)
+  const { loading: isLoading, error, data } = useQuery<Me>(Queries.getMe)
   const form = useForm<ProfileVisibilityDetails, UpdateProfileVisibility, UpdateProfileVisibilityVariables>({
     Mutation: Mutations.updateProfileVisibility,
     mutationVariableName: 'profileVisibilityDetails',
   })
 
-  if (loading) return <LoadingScreen />
+  if (isLoading) return <LoadingScreen />
   if (error) {
     return <Text>Error!{error.message}</Text>
   }

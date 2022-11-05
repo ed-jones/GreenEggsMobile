@@ -31,14 +31,14 @@ export function LazyListAlpha<
   limit = 15,
   ...props
 }: LazyListAlphaProps<TData, TVariables, TDataType>) {
-  const { loading, data, nextPage } = useLazyList<TData, TVariables, TDataType, TSortType, TFilterType>({
+  const { isLoading, data, nextPage } = useLazyList<TData, TVariables, TDataType, TSortType, TFilterType>({
     query,
     variables,
     dataKey,
     limit,
   })
 
-  if (loading) {
+  if (isLoading) {
     return <LoadingScreen />
   }
   const items = buildAlphaListItems({

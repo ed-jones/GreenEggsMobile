@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import { ReactElement, useState } from 'react';
+import { ReactElement, useState } from 'react'
 import { View } from 'react-native'
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { noAvatar } from '@greeneggs/assets'
@@ -31,8 +31,8 @@ interface RecipeAddCommentProps {
 export function RecipeAddComment({ recipeId, commentId, isReply, active }: RecipeAddCommentProps): ReactElement {
   const [comment, setComment] = useState<string>('')
   const client = useApolloClient()
-  const { loading, error, data } = useQuery<Me>(Queries.getMe)
-  if (loading) return <LoadingScreen />
+  const { loading: isLoading, error, data } = useQuery<Me>(Queries.getMe)
+  if (isLoading) return <LoadingScreen />
   if (error) {
     return <Text>Error! {error.message}</Text>
   }

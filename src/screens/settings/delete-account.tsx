@@ -1,7 +1,7 @@
 /**
  * Author: Wambugu Mutahi
  */
-import { useContext, useEffect, ReactElement } from 'react';
+import { useContext, useEffect, ReactElement } from 'react'
 import { Mutations, Queries } from '@greeneggs/graphql'
 import { ScrollView, View, Alert as NativeAlert } from 'react-native'
 import { deleteUser, LoginInput } from '@greeneggs/types/graphql'
@@ -25,7 +25,7 @@ import { TopNavigation } from '@greeneggs/ui/top-navigation'
  */
 export function DeleteAccount(): ReactElement {
   const navigation = useNavigation()
-  const { loading, error, data } = useQuery<Me>(Queries.getMe)
+  const { loading: isLoading, error, data } = useQuery<Me>(Queries.getMe)
   const { formResult, handleSubmit, control, submitForm, register, setValue } = useLoginForm()
   const { setToken } = useContext(AuthContext)
 
@@ -35,7 +35,7 @@ export function DeleteAccount(): ReactElement {
     register('email')
   }, [register, setValue])
 
-  if (loading) return <LoadingScreen />
+  if (isLoading) return <LoadingScreen />
   if (error) {
     return <Text>Error! {error.message}</Text>
   }

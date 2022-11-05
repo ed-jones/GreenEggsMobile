@@ -16,7 +16,7 @@ export interface UseLazyListProps<TVariables, TData> {
 }
 
 interface UseListRefetchResult {
-  refetching: boolean
+  isRefetching: boolean
   refetch: () => Promise<void>
 }
 
@@ -26,16 +26,16 @@ interface UseListRefetchResult {
 export function useListRefetch<TData, TVariables>(
   refetchFunction: (variables?: Partial<TVariables> | undefined) => Promise<ApolloQueryResult<TData>>
 ): UseListRefetchResult {
-  const [refetching, setRefetching] = useState(false)
+  const [isRefetching, setIsRefetching] = useState(false)
   const refetch = async () => {
-    setRefetching(true)
+    setIsRefetching(true)
     const { data } = await refetchFunction()
     if (data) {
-      setRefetching(false)
+      setIsRefetching(false)
     }
   }
 
-  return { refetching, refetch }
+  return { isRefetching, refetch }
 }
 
 interface UseLazyListResult<TData, TVariables, TDataType>
@@ -43,7 +43,8 @@ interface UseLazyListResult<TData, TVariables, TDataType>
     UseListRefetchResult {
   data: TDataType[]
   nextPage: () => Promise<void>
-  done: boolean
+  isDone: boolean
+  isLoading: boolean
 }
 
 /**
@@ -61,10 +62,10 @@ export function useLazyList<
   dataKey,
   limit = 10,
 }: UseLazyListProps<TVariables, TData>): UseLazyListResult<TData, TVariables, TDataType> {
-  const [done, setDone] = useState(false)
+  const [isDone, setIsDone] = useState(false)
 
   useEffect(() => {
-    setDone(false)
+    setIsDone(false)
   }, [variables])
 
   const queryResult = useQuery<TData, TVariables>(query, {
@@ -75,7 +76,7 @@ export function useLazyList<
     } as TVariables,
     onCompleted: (data) => {
       if ((data[dataKey].data?.length ?? limit) < limit) {
-        setDone(true)
+        setIsDone(true)
       } else {
         void queryResult
           .fetchMore<TData, TVariables>({
@@ -87,7 +88,7 @@ export function useLazyList<
           })
           .then((data) => {
             if (data.data[dataKey].data?.length === 0) {
-              setDone(true)
+              setIsDone(true)
             }
           })
       }
@@ -95,7 +96,7 @@ export function useLazyList<
   })
 
   async function nextPage() {
-    if (!done) {
+    if (!isDone) {
       const result = await queryResult.fetchMore<TData, TVariables>({
         variables: {
           ...variables,
@@ -116,21 +117,22 @@ export function useLazyList<
       const d = result.data[dataKey]?.data
       if (d) {
         if (d.length === 0) {
-          setDone(true)
+          setIsDone(true)
         }
       }
     }
   }
 
-  const { refetch, refetching } = useListRefetch(queryResult.refetch)
+  const { refetch, isRefetching } = useListRefetch(queryResult.refetch)
 
   return {
     ...queryResult,
+    isLoading: queryResult.loading,
     refetch,
-    refetching,
+    isRefetching,
     data: queryResult?.data?.[dataKey]?.data ?? [],
     nextPage,
-    done,
+    isDone,
   }
 }
 
@@ -175,7 +177,7 @@ export function LazyList<
   ListFooterComponent,
   ...props
 }: LazyListProps<TData, TVariables, TDataType>) {
-  const { loading, error, data, refetch, refetching, nextPage, done } = useLazyList<
+  const { isLoading, error, data, refetch, isRefetching, nextPage, isDone } = useLazyList<
     TData,
     TVariables,
     TDataType,
@@ -201,7 +203,7 @@ export function LazyList<
     <FlatList
       ListEmptyComponent={
         <View style={{ flexGrow: 1, justifyContent: 'center' }}>
-          {loading ? (
+          {isLoading ? (
             <View style={{ alignItems: 'center' }}>
               <Spinner />
             </View>
@@ -212,7 +214,7 @@ export function LazyList<
       }
       {...props}
       initialNumToRender={limit}
-      refreshing={refetching}
+      refreshing={isRefetching}
       onRefresh={() => void refetch()}
       onEndReached={() => void nextPage()}
       onEndReachedThreshold={0.5}
@@ -231,7 +233,7 @@ export function LazyList<
               marginVertical: 16,
             }}
           >
-            {!done ? <Spinner /> : <Text style={{ marginVertical: 16 }}>Found {data.length} items.</Text>}
+            {!isDone ? <Spinner /> : <Text style={{ marginVertical: 16 }}>Found {data.length} items.</Text>}
           </View>
         ) : undefined)
       }

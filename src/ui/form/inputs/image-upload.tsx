@@ -23,7 +23,7 @@ interface Props {
  */
 export function ImageUpload({ label, uri, onChange, error }: Props) {
   const theme = useTheme()
-  const [modalVisible, setModalVisible] = useState(false)
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
   type ImageSource = 'gallery' | 'camera'
 
@@ -71,7 +71,7 @@ export function ImageUpload({ label, uri, onChange, error }: Props) {
   }
 
   const cancelModal = () => {
-    setModalVisible(false)
+    setIsModalVisible(false)
   }
 
   const textColor = error ? theme['color-danger-500'] : theme['color-basic-600']
@@ -79,7 +79,7 @@ export function ImageUpload({ label, uri, onChange, error }: Props) {
   return (
     <View style={{ marginBottom: 16 }}>
       <Modal
-        visible={modalVisible}
+        visible={isModalVisible}
         onBackdropPress={cancelModal}
         backdropStyle={{ backgroundColor: 'rgba(0, 0, 0,0.4)' }}
       >
@@ -149,7 +149,7 @@ export function ImageUpload({ label, uri, onChange, error }: Props) {
         ) : (
           <>
             <Icons.Camera
-              onPress={() => setModalVisible(true)}
+              onPress={() => setIsModalVisible(true)}
               style={{
                 width: 64,
                 height: 64,

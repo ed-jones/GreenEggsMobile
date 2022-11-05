@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import { useState } from 'react';
+import { useState } from 'react'
 import { Icon, TopNavigationAction } from '@ui-kitten/components'
 import { useMutation } from '@apollo/client'
 import { Mutations, Queries } from '@greeneggs/graphql'
@@ -15,7 +15,7 @@ interface SaveRecipeButtonProps {
  * Icon button that when pressed triggers the recipe to be saved. Uses local state to improve responsiveness.
  */
 export function SaveRecipeButton({ recipeId, saved }: SaveRecipeButtonProps) {
-  const [savedState, setSavedState] = useState(saved)
+  const [isOptimisticSaved, setIsOptimisticSaved] = useState(saved)
 
   const [saveRecipe] = useMutation(Mutations.saveRecipe, {
     variables: { recipeId },
@@ -28,21 +28,21 @@ export function SaveRecipeButton({ recipeId, saved }: SaveRecipeButtonProps) {
   })
 
   function handleSaveRecipe() {
-    setSavedState(true)
-    saveRecipe().catch(() => setSavedState(false))
+    setIsOptimisticSaved(true)
+    saveRecipe().catch(() => setIsOptimisticSaved(false))
   }
 
   function handleUnsaveRecipe() {
-    setSavedState(false)
-    unsaveRecipe().catch(() => setSavedState(true))
+    setIsOptimisticSaved(false)
+    unsaveRecipe().catch(() => setIsOptimisticSaved(true))
   }
 
   return (
     <TopNavigationAction
       icon={(iconProps) =>
-        savedState ? <Icon {...iconProps} name='bookmark' /> : <Icon {...iconProps} name='bookmark-outline' />
+        isOptimisticSaved ? <Icon {...iconProps} name='bookmark' /> : <Icon {...iconProps} name='bookmark-outline' />
       }
-      onPress={() => (savedState ? handleUnsaveRecipe() : handleSaveRecipe())}
+      onPress={() => (isOptimisticSaved ? handleUnsaveRecipe() : handleSaveRecipe())}
     />
   )
 }

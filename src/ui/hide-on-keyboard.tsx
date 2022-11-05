@@ -2,13 +2,13 @@
  * Author: Edward Jones
  * Based on code from the react-navigation bottom tabs library
  */
-import { PropsWithChildren, useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react'
 
-import * as React from 'react';
+import * as React from 'react'
 import { Animated, Platform } from 'react-native'
 import useIsKeyboardShown from '@react-navigation/bottom-tabs/src/utils/useIsKeyboardShown'
 
-const useNativeDriver = Platform.OS !== 'web'
+const isNative = Platform.OS !== 'web'
 
 /**
  * Component that forces children to be hidden when the device keyboard is visible.
@@ -29,7 +29,7 @@ export function HideOnKeyboard({ children }: PropsWithChildren<object>) {
 
       animation(visible, {
         toValue: 1,
-        useNativeDriver,
+        useNativeDriver: isNative,
         duration: 250,
       }).start(({ finished }) => {
         if (finished) {
@@ -43,7 +43,7 @@ export function HideOnKeyboard({ children }: PropsWithChildren<object>) {
 
       animation(visible, {
         toValue: 0,
-        useNativeDriver,
+        useNativeDriver: isNative,
         duration: 200,
       }).start()
     }

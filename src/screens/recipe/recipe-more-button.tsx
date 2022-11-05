@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import { useState } from 'react';
+import { useState } from 'react'
 import { Icon, Menu, MenuItem, Popover } from '@ui-kitten/components'
 import { View } from 'react-native'
 import { useMutation } from '@apollo/client'
@@ -18,7 +18,7 @@ interface RecipeMoreButtonProps {
  * Includes delete. In the future could include edit and privacy options.
  */
 export function RecipeMoreButton({ recipeId }: RecipeMoreButtonProps) {
-  const [visible, setVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
   const navigation = useNavigation()
   const [deleteRecipe] = useMutation<DeleteRecipe>(Mutations.deleteRecipe, {
     variables: {
@@ -34,16 +34,16 @@ export function RecipeMoreButton({ recipeId }: RecipeMoreButtonProps) {
 
   return (
     <Popover
-      visible={visible}
+      visible={isVisible}
       anchor={() => (
         <Icon
           name='more-vertical-outline'
           fill='black'
           style={{ width: 24, height: 24 }}
-          onPress={() => setVisible(true)}
+          onPress={() => setIsVisible(true)}
         />
       )}
-      onBackdropPress={() => setVisible(false)}
+      onBackdropPress={() => setIsVisible(false)}
     >
       <View style={{ width: 132 }}>
         <Menu>

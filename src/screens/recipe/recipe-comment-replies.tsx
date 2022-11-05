@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import { ReactElement, useState } from 'react';
+import { ReactElement, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { Queries } from '@greeneggs/graphql'
 import { comment } from '@greeneggs/types/graphql'
@@ -20,16 +20,20 @@ import { ViewMore } from '@greeneggs/ui/list-items'
  */
 export function RecipeCommentReplies(): ReactElement {
   const route = useRoute<RouteProp<LoggedInRouteParams, 'RecipeCommentReplies'>>()
-  const { commentId, replying } = route.params
+  const { commentId, replying: isReplying } = route.params
   const [visibleCommentCount, setVisibleCommentCount] = useState<number>(3)
 
-  const { data, loading, error } = useQuery<comment>(Queries.getComment, {
+  const {
+    data,
+    loading: isLoading,
+    error,
+  } = useQuery<comment>(Queries.getComment, {
     variables: {
       commentId,
     },
   })
 
-  if (loading || !data?.comment.data) {
+  if (isLoading || !data?.comment.data) {
     return <LoadingScreen />
   }
 
@@ -45,7 +49,7 @@ export function RecipeCommentReplies(): ReactElement {
       <ScrollView>
         <RecipeComment comment={comment} />
         <View style={{ padding: 16 }}>
-          {replying && (
+          {isReplying && (
             <View style={{ marginBottom: 16 }}>
               <RecipeAddComment commentId={comment.id} isReply active />
             </View>

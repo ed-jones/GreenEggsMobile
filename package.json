@@ -3,6 +3,7 @@
   "engines": {
     "node": "16.18.0"
   },
+  "version": "0.2.0-beta",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -12,13 +13,12 @@
     "test": "echo \"No tests yet...\"",
     "codegen": "./scripts/updategraphql.sh",
     "lint": "eslint . --ext .ts,.tsx",
-    "pretty": "prettier --write .",
-    "postinstall": "rndebugger-open"
+    "pretty": "prettier --write ."
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",
     "@eva-design/eva": "^2.0.0",
-    "@expo/vector-icons": "^13.0.0",
+    "@expo/`ve`ctor-icons": "^13.0.0",
     "@fabfit/react-native-parallax-header": "^0.4.0",
     "@react-navigation/bottom-tabs": "6.4.0",
     "@react-navigation/material-top-tabs": "^6.3.0",

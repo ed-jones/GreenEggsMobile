@@ -1,9 +1,9 @@
 /**
  * Author: Edward Jones
  */
-import { ReactElement } from 'react';
+import { ReactElement } from 'react'
 
-import * as React from 'react';
+import * as React from 'react'
 
 import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { FieldArrayMethodProps } from 'react-hook-form'
@@ -17,7 +17,7 @@ export interface RecipeFormPart {
   append: AppendType
 }
 
-interface ICreateRecipePartTemplate {
+interface Props {
   title: string
   formComponent: (props: RecipeFormPart) => React.ReactElement
 }
@@ -25,7 +25,7 @@ interface ICreateRecipePartTemplate {
 /**
  * Template for screens that allow for the creation of array elements in a recipe, i.e. single ingredients, categories, allergies, diets.
  */
-export function CreateRecipePartTemplate({ title, formComponent }: ICreateRecipePartTemplate): ReactElement {
+export function CreateRecipePartTemplate({ title, formComponent }: Props): ReactElement {
   const navigation = useNavigation()
   const route = useRoute()
   const { append } = route.params as {

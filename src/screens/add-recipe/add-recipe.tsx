@@ -1,12 +1,12 @@
 /**
  * Author: Edward Jones
  */
-import { ReactElement, useContext } from 'react';
+import { ReactElement, useContext } from 'react'
 import { View, Alert } from 'react-native'
 import { Button, Divider, Layout, Spinner, useTheme } from '@ui-kitten/components'
 import { addRecipe, addRecipeVariables, RecipeInput } from '@greeneggs/types/graphql'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { IForm } from '@greeneggs/ui/form'
+import { UseFormReturn } from '@greeneggs/ui/form'
 import * as Icons from '@greeneggs/ui/icons'
 import { Stepper } from './stepper'
 import { addRecipeStyles } from './add-recipe-styles'
@@ -16,7 +16,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { AddRecipeContext } from '@greeneggs/context'
 import { Background } from '@greeneggs/ui/background'
 
-export type RecipeForm = IForm<RecipeInput, addRecipe, addRecipeVariables>
+export type RecipeForm = UseFormReturn<RecipeInput, addRecipe, addRecipeVariables>
 
 /**
  * Screen that enables the creation of recipes.

@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import { ReactElement, useContext, useEffect } from 'react';
+import { ReactElement, useContext, useEffect } from 'react'
 import { ListItem } from '@ui-kitten/components'
 import { Image } from 'react-native'
 import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types'
@@ -13,14 +13,14 @@ import { useNavigation } from '@react-navigation/core'
 import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
 import { AddRecipeContext } from '@greeneggs/context'
 
-interface IAddRecipeDirections {
+interface Props {
   form: RecipeForm
 }
 
 /**
  * Screen that displays a list of all steps that will be added to a recipe.
  */
-export function AddRecipeDirections({ form }: IAddRecipeDirections): ReactElement {
+export function AddRecipeDirections({ form }: Props): ReactElement {
   const { stepsFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation<LoggedInNavigationProp>()
 

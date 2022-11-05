@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import { ReactElement } from 'react';
+import { ReactElement } from 'react'
 import { Image, View } from 'react-native'
 import { Card } from '@ui-kitten/components'
 import { recipes_recipes_data } from '@greeneggs/types/graphql'
@@ -10,7 +10,7 @@ import { imageNotFound } from '@greeneggs/assets'
 import { RecipeCardHeader } from './recipe-card-header'
 import { RecipeCardFooter } from './recipe-card-footer'
 
-interface IRecipeCard {
+interface Props {
   recipe: recipes_recipes_data
   onPress: () => void
 }
@@ -19,7 +19,7 @@ interface IRecipeCard {
  * Displays recipe details in a card format with heavy emphasis on the cover image.
  * Used for trending and news feed.
  */
-export function RecipeCard({ recipe, onPress }: IRecipeCard): ReactElement {
+export function RecipeCard({ recipe, onPress }: Props): ReactElement {
   return (
     <Card
       appearance='filled'

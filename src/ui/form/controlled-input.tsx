@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import { ReactElement } from 'react';
+import { ReactElement } from 'react'
 import { Controller, ControllerProps, FieldValues, RegisterOptions } from 'react-hook-form'
 import { InputProps } from '@ui-kitten/components'
 import { ErrorFragment } from '@greeneggs/types/graphql'
@@ -26,7 +26,7 @@ export enum InputType {
   TIME = 'Time',
 }
 
-export interface IControlledInput<TFieldValues extends FieldValues> {
+export interface Props<TFieldValues extends FieldValues> {
   controllerProps: Omit<ControllerProps<TFieldValues>, 'render'>
   inputProps?: InputProps
   submitError?: ErrorFragment | null
@@ -43,7 +43,7 @@ export const rules: Record<string, Omit<RegisterOptions, 'valueAsNumber' | 'valu
 
 // This is the interface for the object for default props for each input type
 // Name and render fields are omitted as they are always already defined
-interface IInputTypeDefaultProps<TFieldValues extends FieldValues> {
+interface TInputTypeDefaultProps<TFieldValues extends FieldValues> {
   controllerProps?: Omit<ControllerProps<TFieldValues>, 'name' | 'render'>
   inputProps?: InputProps
 }
@@ -53,7 +53,7 @@ interface IInputTypeDefaultProps<TFieldValues extends FieldValues> {
 // Example props include form validation rules for emails and passwords
 function InputTypeDefaultProps<TFieldValues extends FieldValues>(): Record<
   InputType,
-  IInputTypeDefaultProps<TFieldValues>
+  TInputTypeDefaultProps<TFieldValues>
 > {
   return {
     Email: {
@@ -140,7 +140,7 @@ function InputTypeDefaultProps<TFieldValues extends FieldValues>(): Record<
         keyboardType: 'numeric',
       },
     },
-  };
+  }
 }
 
 /**
@@ -151,7 +151,7 @@ export function ControlledInput<TFieldValues extends FieldValues>({
   inputProps,
   type,
   submitError,
-}: IControlledInput<TFieldValues>): ReactElement {
+}: Props<TFieldValues>): ReactElement {
   const inputTypeDefaultProps = InputTypeDefaultProps<TFieldValues>()[type]
   const { caption, ...unionInputProps } = {
     ...inputTypeDefaultProps.inputProps,

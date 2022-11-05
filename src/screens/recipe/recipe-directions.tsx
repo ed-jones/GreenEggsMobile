@@ -1,7 +1,7 @@
 /**
  * Author: Dimitri Zvolinski
  */
-import { ReactElement } from 'react';
+import { ReactElement } from 'react'
 import { recipe_recipe_data_steps } from '@greeneggs/types/graphql'
 import { ListItem } from '@ui-kitten/components'
 import { Image, Text, View } from 'react-native'
@@ -9,14 +9,14 @@ import { useNavigation } from '@react-navigation/core'
 import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
 import { Forward } from '@greeneggs/ui/icons'
 
-interface IRecipeDirections {
+interface Props {
   directions: recipe_recipe_data_steps[]
 }
 
 /**
  * Carousel for displaying recipe steps.
  */
-export function RecipeDirections({ directions }: IRecipeDirections): ReactElement {
+export function RecipeDirections({ directions }: Props): ReactElement {
   const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (

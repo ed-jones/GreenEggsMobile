@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import { View } from 'react-native';
+import { View } from 'react-native'
 import { Text, useTheme } from '@ui-kitten/components'
 
 export interface Tag {
@@ -9,14 +9,14 @@ export interface Tag {
   onPress: () => void
 }
 
-interface IRecipeCategoryTags {
+interface Props {
   tags: Tag[]
 }
 
 /**
  * Displays a horizontally scrolling list of tags
  */
-export function Tags({ tags }: IRecipeCategoryTags) {
+export function Tags({ tags }: Props) {
   const theme = useTheme()
   return (
     <View style={{ flexDirection: 'row' }}>

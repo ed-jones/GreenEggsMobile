@@ -10,14 +10,14 @@ import {
   Me_me_data,
 } from '@greeneggs/types/graphql'
 import { ISteps } from '@greeneggs/screens/add-recipe/use-steps'
-import { IForm } from '@greeneggs/ui/form'
+import { UseFormReturn } from '@greeneggs/ui/form'
 import { UseFieldArrayReturn } from 'react-hook-form'
 import { ApolloQueryResult, OperationVariables } from '@apollo/client'
 
 export type Token = string | undefined | null
 export type SetToken = Dispatch<SetStateAction<Token>> | undefined
 export interface AddRecipeContextInterface {
-  form?: IForm<RecipeInput, addRecipe, addRecipeVariables>
+  form?: UseFormReturn<RecipeInput, addRecipe, addRecipeVariables>
   steps?: ISteps
   categoriesFieldArray?: UseFieldArrayReturn<RecipeInput, 'categories', 'id'>
   ingredientsFieldArray?: UseFieldArrayReturn<RecipeInput, 'ingredients', 'id'>

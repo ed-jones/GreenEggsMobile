@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import { ReactElement } from 'react';
+import { ReactElement } from 'react'
 import { CommonVariables, TDataWithData, useLazyList, UseLazyListProps } from './lazy-list'
 import { LoadingScreen } from './loading-screen'
 import { AlphaList, AlphaListProps, buildAlphaListItems, CategoriseItem } from './alpha-list'
@@ -18,10 +18,10 @@ interface LazyListAlphaProps<TData, TVariables, TDataType>
  */
 export function LazyListAlpha<
   TData extends TDataWithData<TData, TDataType>,
-  TVariables extends Partial<CommonVariables<SortType, FilterType>>,
+  TVariables extends Partial<CommonVariables<TSortType, TFilterType>>,
   TDataType,
-  SortType,
-  FilterType
+  TSortType,
+  TFilterType
 >({
   query,
   variables,
@@ -31,7 +31,7 @@ export function LazyListAlpha<
   limit = 15,
   ...props
 }: LazyListAlphaProps<TData, TVariables, TDataType>) {
-  const { loading, data, nextPage } = useLazyList<TData, TVariables, TDataType, SortType, FilterType>({
+  const { loading, data, nextPage } = useLazyList<TData, TVariables, TDataType, TSortType, TFilterType>({
     query,
     variables,
     dataKey,

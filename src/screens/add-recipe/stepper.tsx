@@ -1,11 +1,11 @@
 /**
  * Author: Edward Jones
  */
-import { Text, useTheme } from '@ui-kitten/components';
+import { Text, useTheme } from '@ui-kitten/components'
 import { View } from 'react-native'
 import { ProgressCircle } from '@greeneggs/ui/progress-circle'
 
-interface IStepperProps {
+interface Props {
   currentStep: string
   nextStep: string | undefined
   index: number
@@ -15,7 +15,7 @@ interface IStepperProps {
 /**
  * Stateless component that, when controlled, shows the current state of a multi-step form in a mobile friendly manor.
  */
-export function Stepper({ currentStep, nextStep, index, length }: IStepperProps) {
+export function Stepper({ currentStep, nextStep, index, length }: Props) {
   const theme = useTheme()
   return (
     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>

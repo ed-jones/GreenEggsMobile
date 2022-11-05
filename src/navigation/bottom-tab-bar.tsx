@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import { ReactElement, useContext } from 'react';
+import { ReactElement, useContext } from 'react'
 import { Alert, StyleSheet, View } from 'react-native'
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
 import {
@@ -35,7 +35,7 @@ enum IconStyle {
   Secondary = 'secondary',
 }
 
-interface IBottonNavigationIcon {
+interface Props {
   name: string
   iconStyle: IconStyle
   selected: boolean
@@ -44,7 +44,7 @@ interface IBottonNavigationIcon {
 /**
  * Component for the bottom tab bar. Includes home, saved recipes, create recipe, notifications and profile.
  */
-function BottomNavigationIcon({ name, iconStyle, selected, ...rest }: IBottonNavigationIcon) {
+function BottomNavigationIcon({ name, iconStyle, selected, ...rest }: Props) {
   const theme = useTheme()
   const iconName = `${name}${!selected ? '-outline' : ''}`
   if (iconStyle === IconStyle.Primary) {

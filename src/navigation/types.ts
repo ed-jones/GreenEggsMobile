@@ -97,15 +97,15 @@ export type LoggedInRouteParams = RouteParams<LoggedInRoute, LoggedInRouteParams
 
 export type LoggedInNavigationProp = NavigationProp<LoggedInRoute, LoggedInRouteParamsOverride>
 
-export type NavigationProp<Route extends string, Params> = StackNavigationProp<RouteParams<Route, Params>>
+export type NavigationProp<TRoute extends string, TParams> = StackNavigationProp<RouteParams<TRoute, TParams>>
 
-export type RouteParams<Route extends string, Params> = Omit<
+export type RouteParams<TRoute extends string, TParams> = Omit<
   {
-    [key in Route]: undefined
+    [key in TRoute]: undefined
   },
-  keyof Params
+  keyof TParams
 > &
-  Params
+  TParams
 
 export type LoggedOutRoute = 'Welcome' | 'Login' | 'Signup' | 'Privacy'
 

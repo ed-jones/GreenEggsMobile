@@ -1,12 +1,12 @@
 /**
  * Author: Edward Jones
  */
-import { ListItem, Text } from '@ui-kitten/components';
+import { ListItem, Text } from '@ui-kitten/components'
 import { recipe_recipe_data_ingredients } from '@greeneggs/types/graphql'
 import * as Icons from '../icons'
 import { toTitleCase } from '@greeneggs/utils'
 
-interface IIngredientListItem {
+interface Props {
   ingredient: Partial<recipe_recipe_data_ingredients>
   remove?: () => void
 }
@@ -14,7 +14,7 @@ interface IIngredientListItem {
 /**
  * Component that renders a GraphQL ingredient as a list item.
  */
-export function IngredientListItem({ ingredient, remove }: IIngredientListItem) {
+export function IngredientListItem({ ingredient, remove }: Props) {
   if (!ingredient.name) throw new Error('Ingredient not found')
   return (
     <ListItem

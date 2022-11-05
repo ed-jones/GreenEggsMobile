@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import * as React from 'react';
+import * as React from 'react'
 import { View, ImageBackground, Image, ScrollView } from 'react-native'
 import { Text, useTheme } from '@ui-kitten/components'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -11,7 +11,7 @@ import { Background } from '@greeneggs/ui/background'
 import { TopNavigation } from '@greeneggs/ui/top-navigation'
 import { Callout } from '@greeneggs/ui/callout'
 
-interface IAuthPageTemplateProps {
+interface AuthPageTemplateProps {
   message: string
   children: React.ReactNode
   errorMessage?: string
@@ -21,7 +21,7 @@ interface IAuthPageTemplateProps {
  * Template screen for all authentication screens.
  * Shows the brand logo and background, followed by a form.
  */
-export function AuthPageTemplate({ message, errorMessage, children }: IAuthPageTemplateProps) {
+export function AuthPageTemplate({ message, errorMessage, children }: AuthPageTemplateProps) {
   const theme = useTheme()
   return (
     <Background>
@@ -44,6 +44,7 @@ export function AuthPageTemplate({ message, errorMessage, children }: IAuthPageT
       </View>
       <ScrollView
         style={{
+          marginTop: 24,
           paddingHorizontal: 10,
           backgroundColor: theme['color-basic-200'],
         }}

@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import { ReactElement } from 'react';
+import { ReactElement } from 'react'
 import { Text } from '@ui-kitten/components'
 import { ScrollView } from 'react-native'
 import { RecipeInput } from '@greeneggs/types/graphql'
@@ -9,7 +9,7 @@ import { RecipeForm } from './add-recipe'
 import { addRecipeStyles } from './add-recipe-styles'
 import { ControlledInput, InputType, rules } from '@greeneggs/ui/form'
 
-interface ICreateRecipeDetails {
+interface Props {
   form: RecipeForm
 }
 
@@ -17,7 +17,7 @@ interface ICreateRecipeDetails {
  * Screen for adding all recipe details, including name, description, serving count
  * and time estimate.
  */
-export function AddRecipeDetails({ form }: ICreateRecipeDetails): ReactElement {
+export function AddRecipeDetails({ form }: Props): ReactElement {
   return (
     <ScrollView style={{ paddingHorizontal: 16 }}>
       <Text category='h5' style={addRecipeStyles.heading}>

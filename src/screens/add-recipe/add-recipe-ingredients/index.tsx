@@ -1,7 +1,7 @@
 /**
  * Author: Edward Jones
  */
-import { ReactElement, useContext } from 'react';
+import { ReactElement, useContext } from 'react'
 import { IngredientListItem } from '@greeneggs/ui/list-items'
 import { useEffect } from 'react'
 
@@ -11,14 +11,14 @@ import { useNavigation } from '@react-navigation/native'
 import { AddRecipeContext } from '@greeneggs/context'
 import { LoggedInNavigationProp } from '@greeneggs/navigation/types'
 
-interface ICreateRecipeIngredients {
+interface Props {
   form: RecipeForm
 }
 
 /**
  * Screen that shows a list of all ingredients that will be added to a recipe.
  */
-export function AddRecipeIngredients({ form }: ICreateRecipeIngredients): ReactElement {
+export function AddRecipeIngredients({ form }: Props): ReactElement {
   const { ingredientsFieldArray } = useContext(AddRecipeContext)
   const navigation = useNavigation<LoggedInNavigationProp>()
 

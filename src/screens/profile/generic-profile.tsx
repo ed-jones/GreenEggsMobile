@@ -20,13 +20,13 @@ import { FollowButton } from '@greeneggs/ui/follow-button'
 import { Input } from '@greeneggs/ui/input'
 import * as Icons from '@greeneggs/ui/icons'
 
-interface IProfileStat {
+interface ProfileStatProps {
   label: string
   value: string
   onPress?: () => void
 }
 
-function ProfileStat({ label, value, onPress }: IProfileStat) {
+function ProfileStat({ label, value, onPress }: ProfileStatProps) {
   return (
     <Pressable onPress={onPress}>
       <View style={{ flexDirection: 'column', alignItems: 'center' }}>
@@ -37,8 +37,7 @@ function ProfileStat({ label, value, onPress }: IProfileStat) {
   )
 }
 
-interface MyRecipesProps
-  extends Omit<Partial<LazyListProps<recipes, recipesVariables, recipes_recipes_data>>, 'query'> {
+interface Props extends Omit<Partial<LazyListProps<recipes, recipesVariables, recipes_recipes_data>>, 'query'> {
   query: string
   userId: string
 }
@@ -46,7 +45,7 @@ interface MyRecipesProps
 /**
  * Abstract screen for displaying a user's profile information.
  */
-function MyRecipes({ query, userId, ...props }: MyRecipesProps) {
+function MyRecipes({ query, userId, ...props }: Props) {
   const navigation = useNavigation<LoggedInNavigationProp>()
 
   return (

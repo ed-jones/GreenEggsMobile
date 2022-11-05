@@ -2,7 +2,7 @@
  * Author: Edward Jones
  */
 import { ApolloQueryResult, DocumentNode, QueryResult, useQuery } from '@apollo/client'
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react'
 import { FlatList, FlatListProps, View } from 'react-native'
 import { Spinner, Text } from '@ui-kitten/components'
 import { EmptyState } from './empty-state'
@@ -51,10 +51,10 @@ interface UseLazyListResult<TData, TVariables, TDataType>
  */
 export function useLazyList<
   TData extends TDataWithData<TData, TDataType>,
-  TVariables extends Partial<CommonVariables<SortType, FilterType>>,
+  TVariables extends Partial<CommonVariables<TSortType, TFilterType>>,
   TDataType,
-  SortType,
-  FilterType
+  TSortType,
+  TFilterType
 >({
   query,
   variables,
@@ -140,12 +140,12 @@ export type TDataWithData<TData, TDataType> = {
   }
 }
 
-export interface CommonVariables<SortType, FilterType> {
+export interface CommonVariables<TSortType, TFilterType> {
   offset: number
   limit: number
   query: string
-  sort: SortType
-  filter: FilterType
+  sort: TSortType
+  filter: TFilterType
 }
 
 export interface LazyListProps<TData, TVariables, TDataType>
@@ -160,10 +160,10 @@ export interface LazyListProps<TData, TVariables, TDataType>
  */
 export function LazyList<
   TData extends TDataWithData<TData, TDataType>,
-  TVariables extends Partial<CommonVariables<SortType, FilterType>>,
+  TVariables extends Partial<CommonVariables<TSortType, TFilterType>>,
   TDataType,
-  SortType,
-  FilterType
+  TSortType,
+  TFilterType
 >({
   query,
   variables,
@@ -179,8 +179,8 @@ export function LazyList<
     TData,
     TVariables,
     TDataType,
-    SortType,
-    FilterType
+    TSortType,
+    TFilterType
   >({
     query,
     variables,

@@ -2,12 +2,12 @@
  * Author: Edward Jones
  */
 import { IndexPath, SelectItem } from '@ui-kitten/components'
-import { ReactElement } from 'react';
+import { ReactElement } from 'react'
 import { FieldError, FieldValues, Path, PathValue } from 'react-hook-form'
 import { Privacy } from '@greeneggs/types/graphql'
 import { Select } from '@greeneggs/ui/select'
 
-interface IPrivacySelect {
+interface Props {
   label?: string
   caption?: string
   value: PathValue<FieldValues, Path<FieldValues>>
@@ -28,7 +28,7 @@ const options: Option[] = [
 /**
  * Input component for selecting a privacy option
  */
-export function PrivacySelect({ label, caption, value, onChange, placeholder, error }: IPrivacySelect): ReactElement {
+export function PrivacySelect({ label, caption, value, onChange, placeholder, error }: Props): ReactElement {
   return (
     <Select
       status={error ? 'danger' : undefined}

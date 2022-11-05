@@ -3,28 +3,28 @@
  */
 import { Input } from '@greeneggs/ui/input'
 import { InputProps, Text, ThemedComponentProps, useTheme } from '@ui-kitten/components'
-import { ReactElement } from 'react';
+import { ReactElement } from 'react'
 import { FieldError, Path, PathValue } from 'react-hook-form'
 import { View } from 'react-native'
 
 import { numberToString, stringToNumber } from './utils'
 
-interface ITimeFields {
+interface TimeFields {
   hours?: number | null
   minutes?: number | null
 }
 
-interface ITimeInput<FieldValues> {
-  value: PathValue<FieldValues, Path<FieldValues>>
+interface Props<TFieldValues> {
+  value: PathValue<TFieldValues, Path<TFieldValues>>
   onChange: (...event: unknown[]) => void
   error?: FieldError
   inputProps?: InputProps
   onBlur: () => void
 }
 
-export const millisecondsToHoursAndMinutes = <FieldValues,>(
-  milliseconds: PathValue<FieldValues, Path<FieldValues>>
-): ITimeFields => {
+export const millisecondsToHoursAndMinutes = <TFieldValues,>(
+  milliseconds: PathValue<TFieldValues, Path<TFieldValues>>
+): TimeFields => {
   if (milliseconds === null) {
     return {
       hours: null,
@@ -38,7 +38,7 @@ export const millisecondsToHoursAndMinutes = <FieldValues,>(
   }
 }
 
-export const hoursAndMinutesToMilliseconds = ({ hours, minutes }: ITimeFields): number | null => {
+export const hoursAndMinutesToMilliseconds = ({ hours, minutes }: TimeFields): number | null => {
   if (hours === null && minutes === null) {
     return null
   }
@@ -50,14 +50,14 @@ export const hoursAndMinutesToMilliseconds = ({ hours, minutes }: ITimeFields): 
 /**
  * Input component for time fields
  */
-export function TimeInput<FieldValues>({
+export function TimeInput<TFieldValues>({
   value,
   inputProps,
   error,
   onChange,
-}: ITimeInput<FieldValues> & ThemedComponentProps): ReactElement {
+}: Props<TFieldValues> & ThemedComponentProps): ReactElement {
   const theme = useTheme()
-  const handleChange = ({ hours: newHours, minutes: newMinutes }: ITimeFields) => {
+  const handleChange = ({ hours: newHours, minutes: newMinutes }: TimeFields) => {
     const { hours: oldHours, minutes: oldMinutes } = millisecondsToHoursAndMinutes(value)
 
     const milliseconds = hoursAndMinutesToMilliseconds({
@@ -92,7 +92,7 @@ export function TimeInput<FieldValues>({
             style: { borderWidth: 0 },
             placeholder: '0',
             status: error ? 'danger' : undefined,
-            value: numberToString<FieldValues>(millisecondsToHoursAndMinutes(value).hours || null),
+            value: numberToString<TFieldValues>(millisecondsToHoursAndMinutes(value).hours || null),
             onChangeText: (hours) => handleChange({ hours: stringToNumber(hours) }),
           }}
         />
@@ -104,7 +104,7 @@ export function TimeInput<FieldValues>({
             placeholder: '00',
             status: error ? 'danger' : undefined,
             style: { borderWidth: 0, flexGrow: 1 },
-            value: numberToString<FieldValues>(millisecondsToHoursAndMinutes(value).minutes || null),
+            value: numberToString<TFieldValues>(millisecondsToHoursAndMinutes(value).minutes || null),
             onChangeText: (minutes) => handleChange({ minutes: stringToNumber(minutes) }),
           }}
         />

@@ -1,9 +1,9 @@
 /**
  * Author: Edward Jones
  */
-import { useState } from 'react';
+import { useState } from 'react'
 import { Platform, View } from 'react-native'
-import { Menu, MenuItem, Modal, Text, ThemedComponentProps, useTheme } from '@ui-kitten/components'
+import { Menu, MenuItem, Modal, Text, useTheme } from '@ui-kitten/components'
 import * as ImagePicker from 'expo-image-picker'
 import { ReactNativeFile } from 'apollo-upload-client'
 import { ImageBackground } from 'react-native'
@@ -11,7 +11,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { FieldError } from 'react-hook-form'
 import * as Icons from '@greeneggs/ui/icons'
 
-interface IImageUpload {
+interface Props {
   label?: string
   uri?: string
   onChange: (...event: unknown[]) => void
@@ -21,7 +21,7 @@ interface IImageUpload {
 /**
  * Input component for uploading images
  */
-export function ImageUpload({ label, uri, onChange, error, eva }: IImageUpload & ThemedComponentProps) {
+export function ImageUpload({ label, uri, onChange, error }: Props) {
   const theme = useTheme()
   const [modalVisible, setModalVisible] = useState(false)
 
@@ -154,7 +154,7 @@ export function ImageUpload({ label, uri, onChange, error, eva }: IImageUpload &
                 width: 64,
                 height: 64,
               }}
-              fill={eva?.theme && eva.theme['color-basic-600']}
+              fill={theme['color-basic-600']}
             />
             <Text appearance='hint'>Upload an image</Text>
           </>

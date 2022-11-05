@@ -1,11 +1,11 @@
 /**
  * Author: Edward Jones
  */
-import { Divider, ListItem, Text, useTheme } from '@ui-kitten/components';
+import { Divider, ListItem, Text, useTheme } from '@ui-kitten/components'
 import { FieldError } from 'react-hook-form'
 import * as Icons from '../icons'
 
-interface IAddListItem {
+interface Props {
   label: string
   onPress: () => void
   error?: FieldError | undefined
@@ -14,7 +14,7 @@ interface IAddListItem {
 /**
  * List item for creating a new list item when pressed.
  */
-export function AddListItem({ label, onPress, error }: IAddListItem) {
+export function AddListItem({ label, onPress, error }: Props) {
   const theme = useTheme()
   return (
     <>

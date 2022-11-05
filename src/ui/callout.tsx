@@ -1,14 +1,14 @@
 /**
  * Author: Edward Jones
  */
-import { ReactText } from 'react';
+import { ReactText } from 'react'
 import { StyleProp, View, ViewStyle } from 'react-native'
 import { Icon, Text, TextElement, useTheme } from '@ui-kitten/components'
 import { alpha } from '@greeneggs/utils'
 
 type AlertType = 'danger' | 'warning' | 'info' | 'success'
 
-interface IAlert {
+interface Props {
   type: AlertType
   title?: ReactText | TextElement
   message: ReactText | TextElement
@@ -18,7 +18,7 @@ interface IAlert {
 /**
  * Displays an important message that should stand out from the rest of the view.
  */
-export function Callout({ type, message, style, title }: IAlert) {
+export function Callout({ type, message, style, title }: Props) {
   const theme = useTheme()
   const iconNameFromAlertType: Record<AlertType, { name: string; fill: string }> = {
     danger: {

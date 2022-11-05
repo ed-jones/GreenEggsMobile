@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.3.0-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.2.0-beta...v0.3.0-beta) (2022-11-05)
+
+
+### Features
+
+* :sparkles: change callout styles ([a8ca1c8](https://github.com/ed-jones/green-eggs-mobile/commit/a8ca1c8541fc12f9e17075891b8589507adf4c82))
+* :sparkles: display version number in settings ([19f8148](https://github.com/ed-jones/green-eggs-mobile/commit/19f8148c1197b0cd37e291b34d4dcd81f8998531))
+* :sparkles: fix all tsc errors ([a1082fb](https://github.com/ed-jones/green-eggs-mobile/commit/a1082fb12d56e6fe09c8b4960c90b579acac27f5))
+* :sparkles: show all ingredients on the recipe page ([94e9de3](https://github.com/ed-jones/green-eggs-mobile/commit/94e9de306804fbc27c8b9e3117d18bd3e5cabebe))
+* :sparkles: tweak empty state title ([c0fc469](https://github.com/ed-jones/green-eggs-mobile/commit/c0fc469360b21e689b30bd52623eed4162811c44))
+* :sparkles: update comment styles ([3ce67e5](https://github.com/ed-jones/green-eggs-mobile/commit/3ce67e5d7a631278ce833a47538406a0d05b6401))
+* :sparkles: update recipe direction styles ([f6c80b1](https://github.com/ed-jones/green-eggs-mobile/commit/f6c80b172ef92233228a3d98d43a229b0b2416c0))
+
+
+### Bug Fixes
+
+* :bug: apollo ([fcb5608](https://github.com/ed-jones/green-eggs-mobile/commit/fcb560842b3392f1b502fdf0cb13cf14979f7e22))
+* :bug: duplicate `Home` route name ([7d1d5f3](https://github.com/ed-jones/green-eggs-mobile/commit/7d1d5f3e0a74bcf98df454c4ac5f4b370a269277))
+* :bug: fix warnings ([610de48](https://github.com/ed-jones/green-eggs-mobile/commit/610de4888cb3d0d6bf280b6c139c5b59a87aa707))
+* :bug: parallax header not tall enough ([1f27244](https://github.com/ed-jones/green-eggs-mobile/commit/1f27244017ebb043a4840804b3cf9489c0ab5ab6))
+* :bug: remove circular dependencies ([8d3ea71](https://github.com/ed-jones/green-eggs-mobile/commit/8d3ea7129a4bf99b55a177daf5b23516192fdee6))
+* :bug: spacing after callouts in settings ([bedb588](https://github.com/ed-jones/green-eggs-mobile/commit/bedb588648fc68a6bd5de5af0dfdff625258044c))
+* :bug: tag rounded corners on iOS ([8ff875b](https://github.com/ed-jones/green-eggs-mobile/commit/8ff875bb64c88b3b7552bde58467867b152b63a7))
+* :bug: top navigation ([58301ab](https://github.com/ed-jones/green-eggs-mobile/commit/58301ab9132681b65b42aac9a92460b0a754209b))
+
 ## [0.2.0-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.1.0-beta...v0.2.0-beta) (2022-10-22)
 
 

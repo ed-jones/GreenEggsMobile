@@ -12,7 +12,7 @@ import { TopNavigation } from '@greeneggs/ui/top-navigation'
 import { Callout } from '@greeneggs/ui/callout'
 
 interface AuthPageTemplateProps {
-  message: string
+  subtitle: string
   children: React.ReactNode
   errorMessage?: string
 }
@@ -21,7 +21,7 @@ interface AuthPageTemplateProps {
  * Template screen for all authentication screens.
  * Shows the brand logo and background, followed by a form.
  */
-export function AuthPageTemplate({ message, errorMessage, children }: AuthPageTemplateProps) {
+export function AuthPageTemplate({ subtitle, errorMessage, children }: AuthPageTemplateProps) {
   const theme = useTheme()
   return (
     <Background>
@@ -38,7 +38,7 @@ export function AuthPageTemplate({ message, errorMessage, children }: AuthPageTe
             <Image source={logo} style={{ width: 48, height: 48, margin: 10 }} />
           </View>
           <Text style={{ textAlign: 'center' }} category='s1'>
-            {message}
+            {subtitle}
           </Text>
         </ImageBackground>
       </View>

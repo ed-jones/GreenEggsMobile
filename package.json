@@ -12,7 +12,8 @@
     "test": "echo \"No tests yet...\"",
     "codegen": "./scripts/updategraphql.sh",
     "lint": "eslint . --ext .ts,.tsx",
-    "pretty": "prettier --write ."
+    "pretty": "prettier --write .",
+    "postinstall": "rndebugger-open"
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",

@@ -1,13 +1,10 @@
 /**
  * Author: Edward Jones
  */
-import { ReactElement, useContext, useState } from 'react';
-
+import { ReactElement, useContext, useState } from 'react'
 import { Button, CheckBox, Spinner, Text } from '@ui-kitten/components'
-import { SignupInput } from '@greeneggs/types/graphql'
 import { AuthContext } from '@greeneggs/context'
 import * as SecureStore from 'expo-secure-store'
-
 import { useSignupForm } from './use-sign-up-form'
 import { AuthPageTemplate } from './auth-page-template'
 import { useNavigation } from '@react-navigation/native'
@@ -19,24 +16,37 @@ import { ControlledInput, InputType } from '@greeneggs/ui/form'
  */
 export function Signup(): ReactElement {
   const navigation = useNavigation<LoggedOutNavigationProp>()
-  const { formResult, handleSubmit, control, submitForm } = useSignupForm()
+  const {
+    formResult,
+    handleSubmit,
+    control,
+    submitForm,
+    formState: { isValid },
+  } = useSignupForm({ mode: 'onChange' })
   const { setToken } = useContext(AuthContext)
-  const [consent, setConsent] = useState(false)
+  const [hasConsent, setHasConsent] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | undefined>()
 
-  async function handleSignupFormSubmit() {
-    const result = await submitForm()
-    const token = result.data?.signup.data?.token
-    const error = result.data?.signup.error
-    if (token && !error) {
-      void SecureStore.setItemAsync('token', token)
-      setToken && setToken(token)
+  function handleSignupFormSubmit() {
+    async function handle() {
+      const result = await submitForm()
+      const token = result.data?.signup.data?.token
+      const error = result.data?.signup.error?.message
+      if (error) {
+        throw new Error(error)
+      }
+      if (token) {
+        void SecureStore.setItemAsync('token', token)
+        setToken && setToken(token)
+      }
     }
+    handle().catch((e: Error) => setErrorMessage(e.message))
   }
 
   return (
-    <AuthPageTemplate message='Sign up to view and share recipes with your friends'>
+    <AuthPageTemplate errorMessage={errorMessage} subtitle='Sign up to view and share recipes with your friends'>
       {/* FIRST NAME */}
-      <ControlledInput<SignupInput>
+      <ControlledInput
         controllerProps={{
           control,
           name: 'firstName',
@@ -51,7 +61,7 @@ export function Signup(): ReactElement {
         type={InputType.FIRSTNAME}
       />
       {/* LAST NAME */}
-      <ControlledInput<SignupInput>
+      <ControlledInput
         controllerProps={{
           control,
           name: 'lastName',
@@ -65,7 +75,7 @@ export function Signup(): ReactElement {
         type={InputType.LASTNAME}
       />
       {/* EMAIL */}
-      <ControlledInput<SignupInput>
+      <ControlledInput
         inputProps={{
           style: { marginBottom: 10 },
         }}
@@ -78,7 +88,7 @@ export function Signup(): ReactElement {
         type={InputType.EMAIL}
       />
       {/* PASSWORD */}
-      <ControlledInput<SignupInput>
+      <ControlledInput
         inputProps={{
           style: { marginBottom: 10 },
           label: 'PASSWORD',
@@ -92,7 +102,7 @@ export function Signup(): ReactElement {
         type={InputType.PASSWORD}
       />
       {/* CONFIRM PASSWORD */}
-      <ControlledInput<SignupInput>
+      <ControlledInput
         inputProps={{
           style: { marginBottom: 10 },
           label: 'CONFIRM PASSWORD',
@@ -105,7 +115,11 @@ export function Signup(): ReactElement {
         submitError={formResult.data?.signup.error}
         type={InputType.PASSWORD}
       />
-      <CheckBox checked={consent} style={{ paddingVertical: 16 }} onChange={(nextChecked) => setConsent(nextChecked)}>
+      <CheckBox
+        checked={hasConsent}
+        style={{ paddingVertical: 16 }}
+        onChange={(nextChecked) => setHasConsent(nextChecked)}
+      >
         <Text>
           I have read and agreed to the{' '}
           <Text style={{ fontWeight: 'bold' }} onPress={() => navigation.navigate('Privacy')}>
@@ -114,8 +128,8 @@ export function Signup(): ReactElement {
         </Text>
       </CheckBox>
       <Button
-        onPress={() => void handleSubmit(handleSignupFormSubmit)}
-        disabled={formResult.loading || !consent}
+        onPress={(e) => void handleSubmit(handleSignupFormSubmit)(e)}
+        disabled={formResult.loading || !hasConsent || !isValid}
         accessoryLeft={formResult.loading ? () => <Spinner size='small' /> : undefined}
       >
         SIGN UP

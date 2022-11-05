@@ -13,7 +13,7 @@ export const addRecipe = gql`
         ...RecipeFragment
       }
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
     }
   }
@@ -28,7 +28,7 @@ export const login = gql`
         token
       }
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
     }
   }
@@ -42,7 +42,7 @@ export const signup = gql`
         token
       }
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
     }
   }
@@ -56,7 +56,7 @@ export const editProfile = gql`
         ...FulluserFragment
       }
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
     }
   }
@@ -88,7 +88,7 @@ export const updateDietaryPreferences = gql`
   mutation UpdateDietaryPreferences($dietaryPreferences: DietaryPreferenceDetails!) {
     updateDietaryPreferences(dietaryPreferenceDetails: $dietaryPreferences) {
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
       data {
         ...DietFragment
@@ -103,7 +103,7 @@ export const removeDietaryPreferences = gql`
   mutation RemoveDietaryPreferences($dietaryPreferences: DietaryPreferenceDetails!) {
     removeDietaryPreferences(dietaryPreferenceDetails: $dietaryPreferences) {
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
       data {
         ...DietFragment
@@ -118,7 +118,7 @@ export const updateAllergyPreferences = gql`
   mutation UpdateAllergyPreferences($allergyPreferences: AllergyPreferenceDetails!) {
     updateAllergyPreferences(allergyPreferenceDetails: $allergyPreferences) {
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
       data {
         ...AllergyFragment
@@ -133,7 +133,7 @@ export const removeAllergyPreferences = gql`
   mutation RemoveAllergyPreferences($allergyPreferences: AllergyPreferenceDetails!) {
     removeAllergyPreferences(allergyPreferenceDetails: $allergyPreferences) {
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
       data {
         ...AllergyFragment
@@ -148,7 +148,7 @@ export const updateProfileVisibility = gql`
   mutation UpdateProfileVisibility($profileVisibilityDetails: ProfileVisibilityDetails!) {
     updateProfileVisibility(profileVisibilityDetails: $profileVisibilityDetails) {
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
     }
   }
@@ -162,7 +162,7 @@ export const addRecipeComment = gql`
         ...RecipeCommentFragment
       }
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
     }
   }
@@ -177,7 +177,7 @@ export const addRecipeCommentReply = gql`
         ...RecipeCommentFragment
       }
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
     }
   }
@@ -192,7 +192,7 @@ export const likeRecipe = gql`
         ...RecipeFragment
       }
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
     }
   }
@@ -207,7 +207,7 @@ export const unlikeRecipe = gql`
         ...RecipeFragment
       }
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
     }
   }
@@ -219,7 +219,7 @@ export const likeComment = gql`
   mutation LikeComment($commentId: String!) {
     likeComment(commentId: $commentId) {
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
     }
   }
@@ -230,7 +230,7 @@ export const unlikeComment = gql`
   mutation UnlikeComment($commentId: String!) {
     unlikeComment(commentId: $commentId) {
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
     }
   }
@@ -241,7 +241,7 @@ export const deleteComment = gql`
   mutation DeleteComment($commentId: String!) {
     deleteComment(commentId: $commentId) {
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
     }
   }
@@ -255,7 +255,7 @@ export const saveRecipe = gql`
         ...RecipeFragment
       }
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
     }
   }
@@ -270,7 +270,7 @@ export const unsaveRecipe = gql`
         ...RecipeFragment
       }
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
     }
   }
@@ -282,7 +282,7 @@ export const followUser = gql`
   mutation FollowUser($userId: String!) {
     followUser(userId: $userId) {
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
       data {
         ...userFragment
@@ -297,7 +297,7 @@ export const unfollowUser = gql`
   mutation UnfollowUser($userId: String!) {
     unfollowUser(userId: $userId) {
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
       data {
         ...userFragment
@@ -315,7 +315,7 @@ export const readNotifications = gql`
         ...NotificationFragment
       }
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
     }
   }
@@ -330,7 +330,7 @@ export const deleteRecipe = gql`
         ...RecipeFragment
       }
       error {
-        ...errorFragment
+        ...ErrorFragment
       }
     }
   }

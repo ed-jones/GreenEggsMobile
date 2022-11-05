@@ -54,6 +54,7 @@ export function useForm<
   const variables = {
     [mutationVariableName]: reactHookForm.getValues(),
   } as TMutationVariables
+
   const [submitForm, formResult] = useMutation<TMutationType, TMutationVariables>(Mutation, {
     variables,
     ...options,

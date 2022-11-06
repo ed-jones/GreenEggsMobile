@@ -1,7 +1,7 @@
 name: Expo Publish
-on:  
+on:
   release:
-    types: [published]
+    types: [tagged]
 
 env:
   NODE_VERSION: '16.18.0'

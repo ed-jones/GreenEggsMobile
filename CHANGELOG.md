@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.7-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.6-beta...v0.3.7-beta) (2022-11-06)
+
+
+### Bug Fixes
+
+* :bug: submit app on tag not release ([73e61cc](https://github.com/ed-jones/green-eggs-mobile/commit/73e61ccfb55dd67f8a12300edb8126aff71dea06))
+
 ## [0.3.6-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.5-beta...v0.3.6-beta) (2022-11-06)
 
 

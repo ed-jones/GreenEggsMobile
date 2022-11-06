@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.8-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.7-beta...v0.3.8-beta) (2022-11-06)
+
+
+### Bug Fixes
+
+* :bug: release on workflow completion ([c82dc4b](https://github.com/ed-jones/green-eggs-mobile/commit/c82dc4bc3d604353e21ce34bf2ac25b457e498b7))
+
 ## [0.3.7-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.6-beta...v0.3.7-beta) (2022-11-06)
 
 

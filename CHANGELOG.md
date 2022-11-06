@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.5-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.4-beta...v0.3.5-beta) (2022-11-06)
+
+
+### Bug Fixes
+
+* :bug: eas cli not found ([8f65592](https://github.com/ed-jones/green-eggs-mobile/commit/8f6559259a8af237bef4e693bd1dd7d643e41f95))
+
 ## [0.3.4-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.3-beta...v0.3.4-beta) (2022-11-06)
 
 

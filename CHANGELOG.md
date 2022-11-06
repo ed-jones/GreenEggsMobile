@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.3-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.2-beta...v0.3.3-beta) (2022-11-06)
+
+
+### Bug Fixes
+
+* :bug: api key ([68f58c5](https://github.com/ed-jones/green-eggs-mobile/commit/68f58c57967766c857d790e874a8e347e4fc4ffa))
+
 ## [0.3.2-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.1-beta...v0.3.2-beta) (2022-11-05)
 
 

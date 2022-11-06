@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.11-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.10-beta...v0.3.11-beta) (2022-11-06)
+
+
+### Bug Fixes
+
+* :bug: only submit on new release ([ef481ca](https://github.com/ed-jones/green-eggs-mobile/commit/ef481caf8336802ee97ac54667bbf08752e1773d))
+
 ## [0.3.10-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.9-beta...v0.3.10-beta) (2022-11-06)
 
 

@@ -1,14 +1,11 @@
 name: Expo Publish
 on:
   push:
-    branches:
-      - main
     tags: 
     - '*'
 
 env:
   NODE_VERSION: '16.18.0'
-  EXPO_VERSION: '4.x'
   API_URI: ${{ secrets.API_URI }}
 
 jobs:
@@ -38,10 +35,11 @@ jobs:
           yarn test
           popd
 
-      - name: :Setup Expo ${{ env.EXPO_VERSION }}
+      - name: :Setup Expo
         uses: expo/expo-github-action@v7
         with:
-          expo-version: ${{ env.EXPO_VERSION }}
+          expo-version: latest
+          eas-version: latest
           expo-username: ${{ secrets.EXPO_CLI_USERNAME }}
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
 

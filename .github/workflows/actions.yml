@@ -2,8 +2,9 @@ name: Expo Publish
 on:
   push:
     branches:
-      - staging
       - main
+    tags: 
+    - '*'
 
 env:
   NODE_VERSION: '16.18.0'

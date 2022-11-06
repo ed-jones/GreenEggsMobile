@@ -1,8 +1,7 @@
 name: Expo Publish
 on:
-  workflow_run:
-    workflows: ["release-please"]
-    types: [completed]
+  release:
+    types: [created]
 
 env:
   NODE_VERSION: '16.18.0'
@@ -44,7 +43,7 @@ jobs:
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
 
       - name: Build app
-        run: eas build --non-interactive
+        run: eas build --platform android --non-interactive
 
       - name: Submit app
-        run: eas submit -p android --latest
+        run: eas submit --platform android --latest

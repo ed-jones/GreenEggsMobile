@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.9-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.8-beta...v0.3.9-beta) (2022-11-06)
+
+
+### Bug Fixes
+
+* :bug: eas build command ([61a0afc](https://github.com/ed-jones/green-eggs-mobile/commit/61a0afced1bcb5d90d04b4f24745087ce2dc3457))
+
 ## [0.3.8-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.7-beta...v0.3.8-beta) (2022-11-06)
 
 

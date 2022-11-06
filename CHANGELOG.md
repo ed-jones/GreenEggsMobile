@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.4-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.3-beta...v0.3.4-beta) (2022-11-06)
+
+
+### Bug Fixes
+
+* :bug: problems with github action ([00bee24](https://github.com/ed-jones/green-eggs-mobile/commit/00bee24f26858ea21a2baca9a84c66069f4661da))
+
 ## [0.3.3-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.2-beta...v0.3.3-beta) (2022-11-06)
 
 

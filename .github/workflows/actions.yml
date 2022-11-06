@@ -18,9 +18,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Node ${{ env.NODE_VERSION }} Environment
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ env.NODE_VERSION }}
+          cache: yarn
 
       - name: 'Resolve Project Dependencies Using Yarn'
         shell: bash
@@ -37,7 +38,7 @@ jobs:
           popd
 
       - name: :Setup Expo ${{ env.EXPO_VERSION }}
-        uses: expo/expo-github-action@v5
+        uses: expo/expo-github-action@v7
         with:
           expo-version: ${{ env.EXPO_VERSION }}
           expo-username: ${{ secrets.EXPO_CLI_USERNAME }}

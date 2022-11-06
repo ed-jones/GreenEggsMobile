@@ -43,6 +43,7 @@ jobs:
           eas-version: latest
           expo-username: ${{ secrets.EXPO_CLI_USERNAME }}
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
+          token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Build app
         run: eas build --platform android --non-interactive

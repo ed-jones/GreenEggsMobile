@@ -1,7 +1,8 @@
 name: Expo Publish
 on:
-  release:
-    types: [tagged]
+  workflow_run:
+    workflows: ["release-please"]
+    types: [completed]
 
 env:
   NODE_VERSION: '16.18.0'

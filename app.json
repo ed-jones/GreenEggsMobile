@@ -2,7 +2,6 @@
   "expo": {
     "name": "Green Eggs",
     "slug": "greenEggsMobile",
-    "version": "0.3.3-beta",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon-white-bg.png",
     "scheme": "myapp",

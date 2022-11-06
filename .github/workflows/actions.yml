@@ -36,11 +36,15 @@ jobs:
           yarn test
           popd
 
-      - name: Setup Expo ${{ env.EXPO_VERSION }}
+      - name: :Setup Expo ${{ env.EXPO_VERSION }}
         uses: expo/expo-github-action@v5
         with:
           expo-version: ${{ env.EXPO_VERSION }}
           expo-username: ${{ secrets.EXPO_CLI_USERNAME }}
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
-      - name: Publish to Expo
-        run: expo publish
+
+      - name: Build app
+        run: eas build --non-interactive
+
+      - name: Submit app
+        run: eas submit -p android --latest

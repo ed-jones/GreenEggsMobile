@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.6-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.5-beta...v0.3.6-beta) (2022-11-06)
+
+
+### Bug Fixes
+
+* :bug: only submit on new release ([fe3b7cd](https://github.com/ed-jones/green-eggs-mobile/commit/fe3b7cdf5d6df4747688c46b5333866a644856be))
+* :bug: yml formatting ([5a45d39](https://github.com/ed-jones/green-eggs-mobile/commit/5a45d396768c8bfbfdee4da7edf6bc6614e82873))
+
 ## [0.3.5-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.4-beta...v0.3.5-beta) (2022-11-06)
 
 

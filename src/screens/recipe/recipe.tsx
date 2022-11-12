@@ -3,7 +3,7 @@
  */
 import { useContext, useState } from 'react'
 import { useQuery } from '@apollo/client'
-import { ImageBackground, ScrollView, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { Queries } from '@greeneggs/graphql'
 import { Button, IndexPath, SelectItem, Text } from '@ui-kitten/components'
 import { recipe, recipeVariables } from '@greeneggs/types/graphql'

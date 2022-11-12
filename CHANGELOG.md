@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.4.0-beta...v0.4.1-beta) (2022-11-12)
+
+
+### Bug Fixes
+
+* :bug: increase version code for android ([2a6a44d](https://github.com/ed-jones/green-eggs-mobile/commit/2a6a44dc424be819958e355014c32a11500183a0))
+
 ## [0.4.0-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.11-beta...v0.4.0-beta) (2022-11-12)
 
 

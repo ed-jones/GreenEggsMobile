@@ -27,7 +27,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "app.greeneggs.mobile",
-      "versionCode": 3
+      "versionCode": 4
     },
     "web": {
       "favicon": "./src/assets/images/icon.png"

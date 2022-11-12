@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.11-beta...v0.4.0-beta) (2022-11-12)
+
+
+### Features
+
+* :sparkles: add email verification ([0522d23](https://github.com/ed-jones/green-eggs-mobile/commit/0522d2331f80c098b6345212e167602f9d4427e7))
+
 ## [0.3.11-beta](https://github.com/ed-jones/green-eggs-mobile/compare/v0.3.10-beta...v0.3.11-beta) (2022-11-06)
 
 
